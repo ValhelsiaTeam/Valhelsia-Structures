@@ -94,7 +94,7 @@ public class SmallCastlePiece {
         public boolean addComponentParts(@Nonnull IWorld world, @Nonnull Random random, @Nonnull MutableBoundingBox bounds, ChunkPos chunkPos) {
 
             // Use the lowest height of the four corners of the structure.
-            int height = Math.min(62, StructureUtils.getLowestHeight(world,
+            int height = Math.max(60, StructureUtils.getLowestHeight(world,
                     this.templatePosition.getX(),
                     this.templatePosition.getZ(),
                     bounds.getXSize(),
