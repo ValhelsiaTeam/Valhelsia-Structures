@@ -14,8 +14,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 version = '1.0'
-group = 'com.stal111.valhelsia_structures' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'valhelsia_structures'
+group = 'com.stal111.valhelsia_structure' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'valhelsia_structure'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
