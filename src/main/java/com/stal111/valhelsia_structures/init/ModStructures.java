@@ -1,7 +1,7 @@
-package com.stal111.valhelsia_structure.init;
+package com.stal111.valhelsia_structures.init;
 
-import com.stal111.valhelsia_structure.ValhelsiaStructure;
-import com.stal111.valhelsia_structure.world.structures.SmallCastleStructure;
+import com.stal111.valhelsia_structures.ValhelsiaStructure;
+import com.stal111.valhelsia_structures.world.structures.SmallCastleStructure;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;

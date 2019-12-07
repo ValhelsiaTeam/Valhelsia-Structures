@@ -1,7 +1,7 @@
-package com.stal111.valhelsia_structure.init;
+package com.stal111.valhelsia_structures.init;
 
-import com.stal111.valhelsia_structure.ValhelsiaStructure;
-import com.stal111.valhelsia_structure.world.structures.SmallCastlePiece;
+import com.stal111.valhelsia_structures.ValhelsiaStructure;
+import com.stal111.valhelsia_structures.world.structures.SmallCastlePiece;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;

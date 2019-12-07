@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structure.world.template;
+package com.stal111.valhelsia_structures.world.template;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.block.Blocks;

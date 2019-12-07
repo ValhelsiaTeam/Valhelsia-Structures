@@ -1,6 +1,6 @@
-package com.stal111.valhelsia_structure.world;
+package com.stal111.valhelsia_structures.world;
 
-import com.stal111.valhelsia_structure.init.ModStructures;
+import com.stal111.valhelsia_structures.init.ModStructures;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStage;
