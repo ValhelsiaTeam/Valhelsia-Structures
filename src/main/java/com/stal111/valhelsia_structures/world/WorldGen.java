@@ -36,6 +36,7 @@ public class WorldGen {
             if (biome.getCategory() == Biome.Category.PLAINS || biome.getCategory() == Biome.Category.FOREST) {
                 if (biome.getTempCategory() == Biome.TempCategory.MEDIUM && biome.getPrecipitation() == Biome.RainType.RAIN) {
                     addStructure(biome, ModStructures.SMALL_CASTLE);
+                    addStructure(biome, ModStructures.TOWER_RUIN);
                 }
             }
         }

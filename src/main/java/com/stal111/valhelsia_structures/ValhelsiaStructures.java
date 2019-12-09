@@ -8,14 +8,14 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(ValhelsiaStructure.MOD_ID)
-public class ValhelsiaStructure {
-    public static final String MOD_ID = "valhelsia_structure";
+@Mod(ValhelsiaStructures.MOD_ID)
+public class ValhelsiaStructures {
+    public static final String MOD_ID = "valhelsia_structures";
 
     private static final Logger LOGGER = LogManager.getLogger();
 
 
-    public ValhelsiaStructure() {
+    public ValhelsiaStructures() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
         MinecraftForge.EVENT_BUS.register(this);

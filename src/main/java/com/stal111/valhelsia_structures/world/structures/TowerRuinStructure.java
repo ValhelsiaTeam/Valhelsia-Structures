@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.datafixers.Dynamic;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.init.ModStructures;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -21,7 +22,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
-
 import java.util.Random;
 import java.util.function.Function;
 
@@ -35,19 +35,19 @@ import java.util.function.Function;
  * @since 2019-10-31
  */
 
-public class SmallCastleStructure extends ScatteredStructure<NoFeatureConfig> {
+public class TowerRuinStructure extends ScatteredStructure<NoFeatureConfig> {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     @SuppressWarnings("WeakerAccess")
-    public static final String NAME = ValhelsiaStructures.MOD_ID +  ":small_castle";
-    private static final int CHUNK_RADIUS = 2;
-    private static final int FEATURE_DISTANCE = 13;
+    public static final String NAME = ValhelsiaStructures.MOD_ID + ":tower_ruin";
+    private static final int CHUNK_RADIUS = 1;
+    private static final int FEATURE_DISTANCE = 12;
     private static final int FEATURE_SEPARATION = 8;
     private static int sizeX = 5;
     private static int sizeZ = 5;
 
-    public SmallCastleStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {
+    public TowerRuinStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {
         super(deserialize);
     }
 
@@ -105,10 +105,8 @@ public class SmallCastleStructure extends ScatteredStructure<NoFeatureConfig> {
             BiomeProvider biomeProvider = generator.getBiomeProvider();
             int lvt_7_1_ = (chunkX << 4) + 7;
             int lvt_8_1_ = (chunkZ << 4) + 7;
-            int height1 = generator.func_222529_a(lvt_7_1_, lvt_8_1_, Heightmap.Type.WORLD_SURFACE_WG);
-            int height2 = generator.func_222529_a(lvt_7_1_, lvt_8_1_ + sizeZ, Heightmap.Type.WORLD_SURFACE_WG);
-            int height3 = generator.func_222529_a(lvt_7_1_ + sizeX, lvt_8_1_, Heightmap.Type.WORLD_SURFACE_WG);
-            int height4 = generator.func_222529_a(lvt_7_1_ + sizeX, lvt_8_1_ + sizeZ, Heightmap.Type.WORLD_SURFACE_WG);
+            int height1 = generator.func_222531_c(lvt_7_1_, lvt_8_1_, Heightmap.Type.WORLD_SURFACE_WG);
+            int height2 = generator.func_222531_c(lvt_7_1_ + 18, lvt_8_1_ + 14, Heightmap.Type.WORLD_SURFACE_WG);
             for(int k = chunkX - 10; k <= chunkX + 10; ++k) {
                 for(int l = chunkZ - 10; l <= chunkZ + 10; ++l) {
                     if (Feature.VILLAGE.hasStartAt(generator, random, k, l)) {
@@ -116,11 +114,16 @@ public class SmallCastleStructure extends ScatteredStructure<NoFeatureConfig> {
                     }
                 }
             }
-            int difference = Math.max(Math.max(height1, height2), Math.max(height3, height4)) - Math.min(Math.min(height1, height2), Math.min(height3, height4));
-            if (difference <= 4 && difference >= -4) {
+            if (height1 - height2 <= 4 && height1 - height2 >= -4) {
                 return biomeProvider.getBiomesInSquare((chunkX << 4) + 9, (chunkZ << 4) + 9, CHUNK_RADIUS * 16)
                         .stream()
-                        .allMatch(biome -> generator.hasStructure(biome, this));
+                        .allMatch(biome -> {
+                            if (!generator.hasStructure(biome, ModStructures.SMALL_CASTLE)) {
+                                return generator.hasStructure(biome, this);
+                            } else {
+                                return false;
+                            }
+                        });
             }
         }
         return false;
@@ -157,7 +160,7 @@ public class SmallCastleStructure extends ScatteredStructure<NoFeatureConfig> {
         public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biome) {
             BlockPos blockpos = new BlockPos(chunkX * 16 + 8, getYPosForStructure(chunkX, chunkZ, generator), chunkZ * 16 + 8);
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-            SmallCastlePiece.addCastlePieces(generator, templateManager, blockpos, rotation, this.components);
+            TowerRuinPiece.addPieces(generator, templateManager, blockpos, rotation, this.components);
             this.recalculateStructureSize();
         }
     }

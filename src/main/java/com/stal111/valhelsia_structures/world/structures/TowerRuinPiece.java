@@ -1,16 +1,9 @@
 package com.stal111.valhelsia_structures.world.structures;
 
-import java.util.List;
-import java.util.Random;
-
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.init.ModLootTables;
 import com.stal111.valhelsia_structures.init.ModStructurePieces;
 import com.stal111.valhelsia_structures.world.template.Processors;
-import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ChestTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -21,9 +14,13 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.structure.TemplateStructurePiece;
-import net.minecraft.world.gen.feature.template.*;
+import net.minecraft.world.gen.feature.template.PlacementSettings;
+import net.minecraft.world.gen.feature.template.Template;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 
 import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Small Castle Piece
@@ -33,13 +30,13 @@ import javax.annotation.Nonnull;
  * @version 0.1
  * @since 2019-10-31
  */
-public class SmallCastlePiece {
+public class TowerRuinPiece {
 
     private static final BlockPos STRUCTURE_OFFSET = new BlockPos(0, 0, 0);
-    private static final ResourceLocation LOCATION = new ResourceLocation(ValhelsiaStructures.MOD_ID, "small_castle");
+    private static final ResourceLocation LOCATION = new ResourceLocation(ValhelsiaStructures.MOD_ID, "tower_ruin");
 
-    public static void addCastlePieces(ChunkGenerator<?> generator, TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> pieces) {
-        SmallCastlePiece.Piece piece = new SmallCastlePiece.Piece(templateManager, LOCATION, pos, rotation);
+    public static void addPieces(ChunkGenerator<?> generator, TemplateManager templateManager, BlockPos pos, Rotation rotation, List<StructurePiece> pieces) {
+        TowerRuinPiece.Piece piece = new TowerRuinPiece.Piece(templateManager, LOCATION, pos, rotation);
         pieces.add(piece);
     }
 
@@ -48,7 +45,7 @@ public class SmallCastlePiece {
         private final Rotation rotation;
 
         public Piece(TemplateManager templateManager, ResourceLocation templateLocation, BlockPos pos, Rotation rotation) {
-            super(ModStructurePieces.SMALL_CASTLE, 0);
+            super(ModStructurePieces.TOWER_RUIN, 0);
             this.templateLocation = templateLocation;
             this.templatePosition = pos;
             this.rotation = rotation;
@@ -56,7 +53,7 @@ public class SmallCastlePiece {
         }
 
         public Piece(TemplateManager templateManager, CompoundNBT compound) {
-            super(ModStructurePieces.SMALL_CASTLE, compound);
+            super(ModStructurePieces.TOWER_RUIN, compound);
             this.templateLocation = new ResourceLocation(compound.getString("Template"));
             this.rotation = Rotation.valueOf(compound.getString("Rot"));
             this.setup(templateManager);
@@ -83,13 +80,6 @@ public class SmallCastlePiece {
 
         @Override
         protected void handleDataMarker(@Nonnull String function, @Nonnull BlockPos position, @Nonnull IWorld world, @Nonnull Random rand, @Nonnull MutableBoundingBox sbb) {
-            if ("chest".equals(function)) {
-                world.setBlockState(position, Blocks.AIR.getDefaultState(), 3);
-                TileEntity tileentity = world.getTileEntity(position.down());
-                if (tileentity instanceof ChestTileEntity) {
-                    ((ChestTileEntity) tileentity).setLootTable(ModLootTables.CHESTS_SMALL_CASTLE, rand.nextLong());
-                }
-            }
         }
 
         @Override
