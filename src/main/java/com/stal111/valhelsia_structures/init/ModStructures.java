@@ -24,6 +24,7 @@ import net.minecraftforge.registries.ObjectHolder;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 @ObjectHolder(ValhelsiaStructures.MOD_ID)
 public class ModStructures {
+
     // Structures
     public static final Structure<NoFeatureConfig> SMALL_CASTLE = create("small_castle", new SmallCastleStructure(NoFeatureConfig::deserialize));
     public static final Structure<NoFeatureConfig> TOWER_RUIN = create("tower_ruin", new TowerRuinStructure(NoFeatureConfig::deserialize));

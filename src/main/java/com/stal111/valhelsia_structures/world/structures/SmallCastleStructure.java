@@ -7,15 +7,14 @@ import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.ScatteredStructure;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,20 +39,13 @@ public class SmallCastleStructure extends ScatteredStructure<NoFeatureConfig> {
     private static final Logger LOGGER = LogManager.getLogger();
 
     @SuppressWarnings("WeakerAccess")
-    public static final String NAME = ValhelsiaStructures.MOD_ID +  ":small_castle";
-    private static final int CHUNK_RADIUS = 2;
+    public static final String NAME = ValhelsiaStructures.MOD_ID +  ":Small_Castle";
+    private static final int CHUNK_RADIUS = 3;
     private static final int FEATURE_DISTANCE = 13;
-    private static final int FEATURE_SEPARATION = 8;
-    private static int sizeX = 5;
-    private static int sizeZ = 5;
+    private static final int FEATURE_SEPARATION = 9;
 
     public SmallCastleStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {
         super(deserialize);
-    }
-
-    @Override
-    protected int getSeedModifier() {
-        return 23183018;
     }
 
     @Override @Nonnull
@@ -72,16 +64,6 @@ public class SmallCastleStructure extends ScatteredStructure<NoFeatureConfig> {
     }
 
     @Override
-    protected int getBiomeFeatureDistance(ChunkGenerator<?> generator) {
-        return FEATURE_DISTANCE;
-    }
-
-    @Override
-    protected int getBiomeFeatureSeparation(ChunkGenerator<?> generator) {
-        return FEATURE_SEPARATION;
-    }
-
-    @Override
     protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> p_211744_1_, Random p_211744_2_, int p_211744_3_, int p_211744_4_, int p_211744_5_, int p_211744_6_) {
         int lvt_9_1_ = p_211744_3_ + FEATURE_DISTANCE * p_211744_5_;
         int lvt_10_1_ = p_211744_4_ + FEATURE_DISTANCE * p_211744_6_;
@@ -89,76 +71,63 @@ public class SmallCastleStructure extends ScatteredStructure<NoFeatureConfig> {
         int lvt_12_1_ = lvt_10_1_ < 0 ? lvt_10_1_ - FEATURE_DISTANCE + 1 : lvt_10_1_;
         int lvt_13_1_ = lvt_11_1_ / FEATURE_DISTANCE;
         int lvt_14_1_ = lvt_12_1_ / FEATURE_DISTANCE;
-        ((SharedSeedRandom)p_211744_2_).setLargeFeatureSeedWithSalt(p_211744_1_.getSeed(), lvt_13_1_, lvt_14_1_, 10387313);
+        ((SharedSeedRandom)p_211744_2_).setLargeFeatureSeedWithSalt(p_211744_1_.getSeed(), lvt_13_1_, lvt_14_1_, 10387312);
         lvt_13_1_ *= FEATURE_DISTANCE;
         lvt_14_1_ *= FEATURE_DISTANCE;
-        lvt_13_1_ += (p_211744_2_.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION) + p_211744_2_.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION)) / 2;
-        lvt_14_1_ += (p_211744_2_.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION) + p_211744_2_.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION)) / 2;
+        lvt_13_1_ += p_211744_2_.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION);
+        lvt_14_1_ += p_211744_2_.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION);
         return new ChunkPos(lvt_13_1_, lvt_14_1_);
     }
 
     @Override
-    public boolean hasStartAt(@Nonnull ChunkGenerator<?> generator, @Nonnull Random random, int chunkX, int chunkZ) {
-        ChunkPos startPos = this.getStartPositionForPosition(generator, random, chunkX, chunkZ, 0, 0);
-
-        if (chunkX == startPos.x && chunkZ == startPos.z) {
-            BiomeProvider biomeProvider = generator.getBiomeProvider();
-            int lvt_7_1_ = (chunkX << 4) + 7;
-            int lvt_8_1_ = (chunkZ << 4) + 7;
-            int height1 = generator.func_222529_a(lvt_7_1_, lvt_8_1_, Heightmap.Type.WORLD_SURFACE_WG);
-            int height2 = generator.func_222529_a(lvt_7_1_, lvt_8_1_ + sizeZ, Heightmap.Type.WORLD_SURFACE_WG);
-            int height3 = generator.func_222529_a(lvt_7_1_ + sizeX, lvt_8_1_, Heightmap.Type.WORLD_SURFACE_WG);
-            int height4 = generator.func_222529_a(lvt_7_1_ + sizeX, lvt_8_1_ + sizeZ, Heightmap.Type.WORLD_SURFACE_WG);
-            for(int k = chunkX - 10; k <= chunkX + 10; ++k) {
-                for(int l = chunkZ - 10; l <= chunkZ + 10; ++l) {
-                    if (Feature.VILLAGE.hasStartAt(generator, random, k, l)) {
-                        return false;
-                    }
-                }
-            }
-            int difference = Math.max(Math.max(height1, height2), Math.max(height3, height4)) - Math.min(Math.min(height1, height2), Math.min(height3, height4));
-            if (difference <= 4 && difference >= -4) {
-                return biomeProvider.getBiomesInSquare((chunkX << 4) + 9, (chunkZ << 4) + 9, CHUNK_RADIUS * 16)
-                        .stream()
-                        .allMatch(biome -> generator.hasStructure(biome, this));
-            }
+    public boolean hasStartAt(ChunkGenerator<?> generator, Random random, int chunkX, int chunkZ) {
+        ChunkPos chunkPos = this.getStartPositionForPosition(generator, random, chunkX, chunkZ, 0, 0);
+        if (chunkX == chunkPos.x && chunkZ == chunkPos.z) {
+            return generator.getBiomeProvider().getBiomesInSquare((chunkX << 4) + 9, (chunkZ << 4) + 9, CHUNK_RADIUS * 16)
+                    .stream()
+                    .allMatch(biome -> generator.hasStructure(biome, this));
+        } else {
+            return false;
         }
-        return false;
     }
 
-    private static int getYPosForStructure(int chunkX, int chunkZ, ChunkGenerator<?> generator) {
-        Random lvt_3_1_ = new Random((chunkX + chunkZ * 10387313));
-        Rotation lvt_4_1_ = Rotation.values()[lvt_3_1_.nextInt(Rotation.values().length)];
-        if (lvt_4_1_ == Rotation.CLOCKWISE_90) {
-            sizeX = -5;
-        } else if (lvt_4_1_ == Rotation.CLOCKWISE_180) {
-            sizeX = -5;
-            sizeZ = -5;
-        } else if (lvt_4_1_ == Rotation.COUNTERCLOCKWISE_90) {
-            sizeZ = -5;
-        }
-        int lvt_7_1_ = (chunkX << 4) + 7;
-        int lvt_8_1_ = (chunkZ << 4) + 7;
-        int lvt_9_1_ = generator.func_222531_c(lvt_7_1_, lvt_8_1_, Heightmap.Type.WORLD_SURFACE_WG);
-        int lvt_10_1_ = generator.func_222531_c(lvt_7_1_, lvt_8_1_ + sizeZ, Heightmap.Type.WORLD_SURFACE_WG);
-        int lvt_11_1_ = generator.func_222531_c(lvt_7_1_ + sizeX, lvt_8_1_, Heightmap.Type.WORLD_SURFACE_WG);
-        int lvt_12_1_ = generator.func_222531_c(lvt_7_1_ + sizeX, lvt_8_1_ + sizeZ, Heightmap.Type.WORLD_SURFACE_WG);
-        return Math.min(Math.min(lvt_9_1_, lvt_10_1_), Math.min(lvt_11_1_, lvt_12_1_));
+    @Override
+    protected int getSeedModifier() {
+        return 14357618;
     }
 
-    public static class Start extends StructureStart {
+    public static class Start extends MarginedStructureStart {
 
-        @SuppressWarnings("WeakerAccess")
-        public Start(Structure<?> structure, int chunkX, int chunkZ, Biome biome, MutableBoundingBox bounds, int reference, long seed) {
-            super(structure, chunkX, chunkZ, biome, bounds, reference, seed);
+        public Start(Structure<?> p_i50497_1_, int p_i50497_2_, int p_i50497_3_, Biome p_i50497_4_, MutableBoundingBox p_i50497_5_, int p_i50497_6_, long p_i50497_7_) {
+            super(p_i50497_1_, p_i50497_2_, p_i50497_3_, p_i50497_4_, p_i50497_5_, p_i50497_6_, p_i50497_7_);
         }
 
-        @Override
-        public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biome) {
-            BlockPos blockpos = new BlockPos(chunkX * 16 + 8, getYPosForStructure(chunkX, chunkZ, generator), chunkZ * 16 + 8);
+        public void init(ChunkGenerator<?> generator, TemplateManager templateManagerIn, int chunkX, int chunkZ, Biome biomeIn) {
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-            SmallCastlePiece.addCastlePieces(generator, templateManager, blockpos, rotation, this.components);
-            this.recalculateStructureSize();
+            int i = 5;
+            int j = 5;
+            if (rotation == Rotation.CLOCKWISE_90) {
+                i = -5;
+            } else if (rotation == Rotation.CLOCKWISE_180) {
+                i = -5;
+                j = -5;
+            } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
+                j = -5;
+            }
+
+            int k = (chunkX << 4) + 7;
+            int l = (chunkZ << 4) + 7;
+            int i1 = generator.func_222531_c(k, l, Heightmap.Type.WORLD_SURFACE_WG);
+            int j1 = generator.func_222531_c(k, l + j, Heightmap.Type.WORLD_SURFACE_WG);
+            int k1 = generator.func_222531_c(k + i, l, Heightmap.Type.WORLD_SURFACE_WG);
+            int l1 = generator.func_222531_c(k + i, l + j, Heightmap.Type.WORLD_SURFACE_WG);
+            int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
+            int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
+            if (maxHeight - minHeight < 2) {
+                BlockPos blockpos = new BlockPos(chunkX * 16, 90, chunkZ * 16);
+                SmallCastlePieces.func_215139_a(generator, templateManagerIn, blockpos, this.components, this.rand);
+                this.recalculateStructureSize();
+            }
         }
     }
 }
