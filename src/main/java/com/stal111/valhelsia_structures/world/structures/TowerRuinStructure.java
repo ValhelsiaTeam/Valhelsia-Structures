@@ -43,7 +43,7 @@ public class TowerRuinStructure extends ScatteredStructure<NoFeatureConfig> {
     @SuppressWarnings("WeakerAccess")
     public static final String NAME = ValhelsiaStructures.MOD_ID + ":Tower_Ruin";
     private static final int CHUNK_RADIUS = 1;
-    private static final int FEATURE_DISTANCE = 15;
+    private static final int FEATURE_DISTANCE = 25;
     private static final int FEATURE_SEPARATION = 8;
 
     public TowerRuinStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {

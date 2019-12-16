@@ -41,8 +41,8 @@ public class SmallCastleStructure extends ScatteredStructure<NoFeatureConfig> {
     @SuppressWarnings("WeakerAccess")
     public static final String NAME = ValhelsiaStructures.MOD_ID +  ":Small_Castle";
     private static final int CHUNK_RADIUS = 3;
-    private static final int FEATURE_DISTANCE = 13;
-    private static final int FEATURE_SEPARATION = 9;
+    private static final int FEATURE_DISTANCE = 35;
+    private static final int FEATURE_SEPARATION = 8;
 
     public SmallCastleStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {
         super(deserialize);
@@ -64,18 +64,18 @@ public class SmallCastleStructure extends ScatteredStructure<NoFeatureConfig> {
     }
 
     @Override
-    protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> p_211744_1_, Random p_211744_2_, int p_211744_3_, int p_211744_4_, int p_211744_5_, int p_211744_6_) {
-        int lvt_9_1_ = p_211744_3_ + FEATURE_DISTANCE * p_211744_5_;
-        int lvt_10_1_ = p_211744_4_ + FEATURE_DISTANCE * p_211744_6_;
+    protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> generator, Random random, int chunkX, int chunkZ, int offsetX, int offsetZ) {
+        int lvt_9_1_ = chunkX + FEATURE_DISTANCE * offsetX;
+        int lvt_10_1_ = chunkZ + FEATURE_DISTANCE * offsetZ;
         int lvt_11_1_ = lvt_9_1_ < 0 ? lvt_9_1_ - FEATURE_DISTANCE + 1 : lvt_9_1_;
         int lvt_12_1_ = lvt_10_1_ < 0 ? lvt_10_1_ - FEATURE_DISTANCE + 1 : lvt_10_1_;
         int lvt_13_1_ = lvt_11_1_ / FEATURE_DISTANCE;
         int lvt_14_1_ = lvt_12_1_ / FEATURE_DISTANCE;
-        ((SharedSeedRandom)p_211744_2_).setLargeFeatureSeedWithSalt(p_211744_1_.getSeed(), lvt_13_1_, lvt_14_1_, 10387312);
+        ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(generator.getSeed(), lvt_13_1_, lvt_14_1_, 10387312);
         lvt_13_1_ *= FEATURE_DISTANCE;
         lvt_14_1_ *= FEATURE_DISTANCE;
-        lvt_13_1_ += p_211744_2_.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION);
-        lvt_14_1_ += p_211744_2_.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION);
+        lvt_13_1_ += random.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION);
+        lvt_14_1_ += random.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION);
         return new ChunkPos(lvt_13_1_, lvt_14_1_);
     }
 
