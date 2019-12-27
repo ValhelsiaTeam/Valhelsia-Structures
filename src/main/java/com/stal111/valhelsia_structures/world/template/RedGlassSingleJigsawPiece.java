@@ -102,6 +102,7 @@ public class RedGlassSingleJigsawPiece extends JigsawPiece {
         placementsettings.func_215223_c(true);
         placementsettings.addProcessor(JigsawReplacementStructureProcessor.INSTANCE);
         placementsettings.addProcessor(Processors.RED_GLASS_AND_STRUCTURE_BLOCK);
+        placementsettings.setIgnoreEntities(false);
         return placementsettings.addProcessor(Processors.RED_GLASS_AND_STRUCTURE_BLOCK);
     }
 

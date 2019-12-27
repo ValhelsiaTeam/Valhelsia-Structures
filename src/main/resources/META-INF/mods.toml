@@ -8,7 +8,7 @@ modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
 loaderVersion="[28,)" #mandatory (28 is current forge version)
 # A URL to refer people to when problems occur with this mod
-issueTrackerURL="http://my.issue.tracker/" #optional
+issueTrackerURL="https://github.com/stal111/Valhelsia-Structures/issues" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
@@ -17,35 +17,15 @@ modId="valhelsia_structures" #mandatory
 version="${file.jarVersion}" #mandatory
  # A display name for the mod
 displayName="Valhelsia Structures" #mandatory
-# A URL to query for updates for this mod. See the JSON update specification <here>
-updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="http://example.com/" #optional
+displayURL="https://www.curseforge.com/minecraft/mc-mods/valhelsiastructures" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-logoFile="examplemod.png" #optional
+logoFile="logo.png" #optional
 # A text field displayed in the mod UI
-credits="stal111, Khytwel, Vaelzan" #optional
+credits="stal111, Vaelzan" #optional
 # A text field displayed in the mod UI
-authors="stal111, Khytwel, Vaelzan" #optional
+authors="Valhelsia Team" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
+Valhelsia Structures is mod that generates new structures such as abandoned buildings and dungeons.
 '''
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.examplemod]] #optional
-    # the modid of the dependency
-    modId="forge" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
-    mandatory=true #mandatory
-    # The version range of the dependency
-    versionRange="[28,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
-    ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
-    side="BOTH"
-# Here's another dependency
-[[dependencies.examplemod]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.14.4]"
-    ordering="NONE"
-    side="BOTH"

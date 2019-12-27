@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
+version = '1.14.4-0.0.2a'
 group = 'com.stal111.valhelsia_structures' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'valhelsia_structures'
 

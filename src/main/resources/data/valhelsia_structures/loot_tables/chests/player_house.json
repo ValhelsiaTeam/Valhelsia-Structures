@@ -12,94 +12,14 @@
       "entries": [
         {
           "type": "item",
-          "name": "minecraft:bone",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 8
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.6
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "minecraft:gunpowder",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 8
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.6
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "minecraft:rotten_flesh",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 8
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.6
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "minecraft:string",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 8
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.6
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "item",
           "name": "minecraft:wheat",
-          "weight": 15,
+          "weight": 20,
           "functions": [
             {
               "function": "set_count",
               "count": {
-                "min": 1,
-                "max": 4
+                "min": 4,
+                "max": 8
               },
               "conditions": [
                 {
@@ -112,22 +32,37 @@
         },
         {
           "type": "item",
+          "name": "minecraft:arrow",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 4,
+                "max": 12
+              },
+              "conditions": [
+                {
+                  "condition": "random_chance",
+                  "chance": 0.6
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "minecraft:leather_horse_armor",
           "weight": 10
         },
         {
           "type": "item",
-          "name": "minecraft:name_tag",
-          "weight": 10
+          "name": "minecraft:lead",
+          "weight": 15
         },
         {
           "type": "item",
           "name": "minecraft:saddle",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "minecraft:lead",
           "weight": 10
         },
         {
@@ -152,13 +87,8 @@
         },
         {
           "type": "item",
-          "name": "minecraft:bucket",
-          "weight": 15
-        },
-        {
-          "type": "item",
           "name": "minecraft:beetroot_seeds",
-          "weight": 20,
+          "weight": 25,
           "functions": [
             {
               "function": "set_count",
@@ -178,7 +108,7 @@
         {
           "type": "item",
           "name": "minecraft:melon_seeds",
-          "weight": 20,
+          "weight": 25,
           "functions": [
             {
               "function": "set_count",
@@ -198,7 +128,7 @@
         {
           "type": "item",
           "name": "minecraft:pumpkin_seeds",
-          "weight": 20,
+          "weight": 25,
           "functions": [
             {
               "function": "set_count",
@@ -217,28 +147,73 @@
         },
         {
           "type": "item",
+          "name": "minecraft:bow",
+          "weight": 15
+        },
+        {
+          "type": "item",
+          "name": "minecraft:fishing_rod",
+          "weight": 15
+        },
+        {
+          "type": "item",
+          "name": "minecraft:compass",
+          "weight": 15
+        },
+        {
+          "type": "item",
+          "name": "minecraft:clock",
+          "weight": 15
+        },
+        {
+          "type": "item",
+          "name": "minecraft:cooked_chicken",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 4
+              },
+              "conditions": [
+                {
+                  "condition": "random_chance",
+                  "chance": 0.2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:cooked_beef",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 4
+              },
+              "conditions": [
+                {
+                  "condition": "random_chance",
+                  "chance": 0.25
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "item",
           "name": "minecraft:iron_horse_armor",
           "weight": 15
         },
         {
           "type": "item",
-          "name": "minecraft:chainmail_helmet",
-          "weight": 20
-        },
-        {
-          "type": "item",
-          "name": "minecraft:chainmail_chestplate",
-          "weight": 20
-        },
-        {
-          "type": "item",
-          "name": "minecraft:chainmail_leggings",
-          "weight": 20
-        },
-        {
-          "type": "item",
-          "name": "minecraft:chainmail_boots",
-          "weight": 20
+          "name": "minecraft:golden_apple",
+          "weight": 10
         },
         {
           "type": "item",
@@ -272,36 +247,6 @@
         },
         {
           "type": "item",
-          "name": "minecraft:golden_horse_armor",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "minecraft:golden_apple",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "minecraft:iron_helmet",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "minecraft:iron_chestplate",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "minecraft:iron_leggings",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "minecraft:iron_boots",
-          "weight": 10
-        },
-        {
-          "type": "item",
           "name": "minecraft:enchanted_book",
           "weight": 10,
           "functions": [
@@ -309,6 +254,11 @@
               "function": "enchant_randomly"
             }
           ]
+        },
+        {
+          "type": "item",
+          "name": "minecraft:golden_horse_armor",
+          "weight": 10
         },
         {
           "type": "item",
@@ -332,8 +282,23 @@
         },
         {
           "type": "item",
-          "name": "minecraft:diamond_horse_armor",
-          "weight": 5
+          "name": "minecraft:diamond",
+          "weight": 5,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              },
+              "conditions": [
+                {
+                  "condition": "random_chance",
+                  "chance": 0.15
+                }
+              ]
+            }
+          ]
         }
       ]
     }

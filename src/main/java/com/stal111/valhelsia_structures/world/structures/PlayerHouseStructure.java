@@ -2,57 +2,41 @@ package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.datafixers.Dynamic;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.init.ModStructures;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
-import net.minecraft.world.gen.feature.structure.ScatteredStructure;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureStart;
+import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
+
 import java.util.Random;
 import java.util.function.Function;
 
-
-/**
- * Small Castle Structure
- * ValhelsiaStructure - com.stal111.valhelsia_structure.world.structures.SmallCastleStructure
- *
- * @author Valhelsia Team
- * @version 0.1
- * @since 2019-10-31
- */
-
-public class TowerRuinStructure extends ScatteredStructure<NoFeatureConfig> {
+public class PlayerHouseStructure extends ScatteredStructure<NoFeatureConfig> {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    @SuppressWarnings("WeakerAccess")
-    public static final String NAME = ValhelsiaStructures.MOD_ID + ":Tower_Ruin";
-    private static final int CHUNK_RADIUS = 1;
-    private static final int FEATURE_DISTANCE = 25;
+    public static final String NAME = ValhelsiaStructures.MOD_ID +  ":Player_House";
+    private static final int CHUNK_RADIUS = 2;
+    private static final int FEATURE_DISTANCE = 30;
     private static final int FEATURE_SEPARATION = 8;
 
-    public TowerRuinStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {
+    public PlayerHouseStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {
         super(deserialize);
     }
 
     @Override @Nonnull
     public IStartFactory getStartFactory() {
-        return TowerRuinStructure.Start::new;
+        return Start::new;
     }
 
     @Override @Nonnull
@@ -66,18 +50,18 @@ public class TowerRuinStructure extends ScatteredStructure<NoFeatureConfig> {
     }
 
     @Override
-    protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> p_211744_1_, Random p_211744_2_, int p_211744_3_, int p_211744_4_, int p_211744_5_, int p_211744_6_) {
-        int lvt_9_1_ = p_211744_3_ + FEATURE_DISTANCE * p_211744_5_;
-        int lvt_10_1_ = p_211744_4_ + FEATURE_DISTANCE * p_211744_6_;
+    protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> generator, Random random, int chunkX, int chunkZ, int offsetX, int offsetZ) {
+        int lvt_9_1_ = chunkX + FEATURE_DISTANCE * offsetX;
+        int lvt_10_1_ = chunkZ + FEATURE_DISTANCE * offsetZ;
         int lvt_11_1_ = lvt_9_1_ < 0 ? lvt_9_1_ - FEATURE_DISTANCE + 1 : lvt_9_1_;
         int lvt_12_1_ = lvt_10_1_ < 0 ? lvt_10_1_ - FEATURE_DISTANCE + 1 : lvt_10_1_;
         int lvt_13_1_ = lvt_11_1_ / FEATURE_DISTANCE;
         int lvt_14_1_ = lvt_12_1_ / FEATURE_DISTANCE;
-        ((SharedSeedRandom)p_211744_2_).setLargeFeatureSeedWithSalt(p_211744_1_.getSeed(), lvt_13_1_, lvt_14_1_, 10387312);
+        ((SharedSeedRandom)random).setLargeFeatureSeedWithSalt(generator.getSeed(), lvt_13_1_, lvt_14_1_, 10387312);
         lvt_13_1_ *= FEATURE_DISTANCE;
         lvt_14_1_ *= FEATURE_DISTANCE;
-        lvt_13_1_ += p_211744_2_.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION);
-        lvt_14_1_ += p_211744_2_.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION);
+        lvt_13_1_ += random.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION);
+        lvt_14_1_ += random.nextInt(FEATURE_DISTANCE - FEATURE_SEPARATION);
         return new ChunkPos(lvt_13_1_, lvt_14_1_);
     }
 
@@ -95,7 +79,7 @@ public class TowerRuinStructure extends ScatteredStructure<NoFeatureConfig> {
 
     @Override
     protected int getSeedModifier() {
-        return 14357670;
+        return 17357645;
     }
 
     public static class Start extends MarginedStructureStart {
@@ -121,13 +105,13 @@ public class TowerRuinStructure extends ScatteredStructure<NoFeatureConfig> {
             int l = (chunkZ << 4) + 7;
             int i1 = generator.func_222531_c(k, l, Heightmap.Type.WORLD_SURFACE_WG);
             int j1 = generator.func_222531_c(k, l + j, Heightmap.Type.WORLD_SURFACE_WG);
-            int k1 = generator.func_222531_c(k + i, l, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES);
+            int k1 = generator.func_222531_c(k + i, l, Heightmap.Type.WORLD_SURFACE_WG);
             int l1 = generator.func_222531_c(k + i, l + j, Heightmap.Type.WORLD_SURFACE_WG);
             int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
             int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
             if (maxHeight - minHeight < 2 && maxHeight - minHeight > -2) {
-                BlockPos blockpos = new BlockPos(chunkX * 16, minHeight + 2, chunkZ * 16);
-                TowerRuinPieces.func_215139_a(generator, templateManagerIn, blockpos, this.components, this.rand);
+                BlockPos blockpos = new BlockPos(chunkX * 16, minHeight - 1, chunkZ * 16);
+                PlayerHousePieces.func_215139_a(generator, templateManagerIn, blockpos, this.components, this.rand);
                 this.recalculateStructureSize();
             }
         }

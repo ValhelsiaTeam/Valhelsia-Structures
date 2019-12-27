@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.init;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.world.structures.PlayerHouseStructure;
 import com.stal111.valhelsia_structures.world.structures.SmallCastleStructure;
 import com.stal111.valhelsia_structures.world.structures.TowerRuinStructure;
 import net.minecraft.world.gen.feature.Feature;
@@ -28,6 +29,7 @@ public class ModStructures {
     // Structures
     public static final Structure<NoFeatureConfig> SMALL_CASTLE = create("small_castle", new SmallCastleStructure(NoFeatureConfig::deserialize));
     public static final Structure<NoFeatureConfig> TOWER_RUIN = create("tower_ruin", new TowerRuinStructure(NoFeatureConfig::deserialize));
+    public static final Structure<NoFeatureConfig> PLAYER_HOUSE = create("player_house", new PlayerHouseStructure(NoFeatureConfig::deserialize));
 
     @SubscribeEvent
     public static void registerStructures(RegistryEvent.Register<Feature<?>> event) {
@@ -35,6 +37,7 @@ public class ModStructures {
 
         registry.register(SMALL_CASTLE);
         registry.register(TOWER_RUIN);
+        registry.register(PLAYER_HOUSE);
     }
 
     private static <T extends Feature<?>> T create(String name, T feature) {

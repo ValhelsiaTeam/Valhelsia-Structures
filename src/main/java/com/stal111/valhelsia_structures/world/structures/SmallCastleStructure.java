@@ -123,8 +123,8 @@ public class SmallCastleStructure extends ScatteredStructure<NoFeatureConfig> {
             int l1 = generator.func_222531_c(k + i, l + j, Heightmap.Type.WORLD_SURFACE_WG);
             int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
             int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
-            if (maxHeight - minHeight < 2) {
-                BlockPos blockpos = new BlockPos(chunkX * 16, 90, chunkZ * 16);
+            if (maxHeight - minHeight < 2 && maxHeight - minHeight > -2) {
+                BlockPos blockpos = new BlockPos(chunkX * 16, minHeight, chunkZ * 16);
                 SmallCastlePieces.func_215139_a(generator, templateManagerIn, blockpos, this.components, this.rand);
                 this.recalculateStructureSize();
             }
