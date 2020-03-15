@@ -20,7 +20,7 @@ public class ClientProxy implements IProxy {
     @Override
     public void init() {
         ClientRegistry.bindTileEntityRenderer((TileEntityType<SpecialMobSpawnerTileEntity>) ModTileEntities.SPECIAL_SPAWNER.getTileEntity(), SpecialMobSpawnerTileEntityRenderer::new);
-        RenderTypeLookup.setRenderLayer(ModBlocks.SPECIAL_SPAWNER.getBlock(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SPECIAL_SPAWNER.getBlock(), RenderType.getCutout());
     }
 
     @Override
