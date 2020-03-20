@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": { "model": "block/spawner" }
+    "": { "model": "valhelsia_structures:block/special_spawner" }
   }
 }
