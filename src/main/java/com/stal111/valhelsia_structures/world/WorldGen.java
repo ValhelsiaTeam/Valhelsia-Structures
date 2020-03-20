@@ -43,7 +43,9 @@ public class WorldGen {
                     addSurfaceStructure(biome, ModStructures.FORGE);
                 }
             }
-            addUndergroundStructure(biome, ModStructures.SMALL_DUNGEON);
+            if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
+                addUndergroundStructure(biome, ModStructures.SMALL_DUNGEON);
+            }
         }
     }
 
