@@ -44,7 +44,13 @@ public class SmallDungeonPieces {
                             JigsawPattern.PlacementBehaviour.RIGID));
 
             JigsawManager.REGISTRY.register(
-                    new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/main_rooms"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room"), 1), Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room1"), 1), Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room2"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
+                    new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/main_rooms"),
+                            new ResourceLocation("empty"),
+                            ImmutableList.of(
+                                    Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room"), 1),
+                                    Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room1"), 1),
+                                    Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room2"), 1)),
+                            JigsawPattern.PlacementBehaviour.RIGID));
 
             JigsawManager.REGISTRY.register(
                     new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/side_rooms"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/side_room"), 1), Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/side_room1"), 1)), JigsawPattern.PlacementBehaviour.RIGID));

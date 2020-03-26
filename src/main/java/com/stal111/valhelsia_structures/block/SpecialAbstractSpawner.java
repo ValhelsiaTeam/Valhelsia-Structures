@@ -5,7 +5,10 @@ import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.WeightedSpecialSpawnerEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -39,13 +42,14 @@ public abstract class SpecialAbstractSpawner {
     private WeightedSpecialSpawnerEntity spawnData = new WeightedSpecialSpawnerEntity();
     private double mobRotation;
     private double prevMobRotation;
-    private int minSpawnDelay = 200;
-    private int maxSpawnDelay = 800;
-    private int spawnCount = 4;
+    private int minSpawnDelay = 80;
+    private int maxSpawnDelay = 100;
+    private int spawnCount = 5;
     private Entity cachedEntity;
-    private int maxNearbyEntities = 6;
-    private int activatingRangeFromPlayer = 16;
+    private int maxNearbyEntities = 7;
+    private int activatingRangeFromPlayer = 8;
     private int spawnRange = 4;
+    private int waveCount = 0;
 
     @Nullable
     private ResourceLocation getEntityId() {
@@ -133,11 +137,12 @@ public abstract class SpecialAbstractSpawner {
                     double d0 = j >= 1 ? listnbt.getDouble(0) : (double)blockpos.getX() + (world.rand.nextDouble() - world.rand.nextDouble()) * (double)this.spawnRange + 0.5D;
                     double d1 = j >= 2 ? listnbt.getDouble(1) : (double)(blockpos.getY() + world.rand.nextInt(3) - 1);
                     double d2 = j >= 3 ? listnbt.getDouble(2) : (double)blockpos.getZ() + (world.rand.nextDouble() - world.rand.nextDouble()) * (double)this.spawnRange + 0.5D;
-                    if (world.areCollisionShapesEmpty(optional.get().func_220328_a(d0, d1, d2)) && EntitySpawnPlacementRegistry.func_223515_a(optional.get(), world.getWorld(), SpawnReason.SPAWNER, new BlockPos(d0, d1, d2), world.getRandom())) {
+                    if (world.areCollisionShapesEmpty(optional.get().func_220328_a(d0, d1, d2))) { // && EntitySpawnPlacementRegistry.func_223515_a(optional.get(), world.getWorld(), SpawnReason.SPAWNER, new BlockPos(d0, d1, d2), world.getRandom())) {
                         Entity entity = EntityType.func_220335_a(compoundnbt, world, (p_221408_6_) -> {
                             p_221408_6_.setLocationAndAngles(d0, d1, d2, p_221408_6_.rotationYaw, p_221408_6_.rotationPitch);
                             return p_221408_6_;
                         });
+
                         if (entity == null) {
                             this.resetTimer();
                             return;
@@ -151,7 +156,6 @@ public abstract class SpecialAbstractSpawner {
 
                         entity.setLocationAndAngles(entity.posX, entity.posY, entity.posZ, world.rand.nextFloat() * 360.0F, 0.0F);
                         if (entity instanceof MobEntity) {
-
                             if (this.spawnData.getNbt().size() == 1 && this.spawnData.getNbt().contains("id", 8)) {
                                 ((MobEntity)entity).onInitialSpawn(world, world.getDifficultyForLocation(new BlockPos(entity)), SpawnReason.SPAWNER, null, null);
                             }
@@ -164,7 +168,7 @@ public abstract class SpecialAbstractSpawner {
                         }
 
                         flag = true;
-                        if (new Random().nextDouble() <= 0.25) {
+                        if ((new Random().nextDouble() <= 0.15 && this.waveCount >= 1) || this.waveCount >= 3) {
                             world.playEvent(null, 2001, getSpawnerPosition(), Block.getStateId(world.getBlockState(getSpawnerPosition())));
                             world.setBlockState(getSpawnerPosition(), Blocks.AIR.getDefaultState());
                         }
@@ -172,6 +176,7 @@ public abstract class SpecialAbstractSpawner {
                 }
 
                 if (flag) {
+                    this.waveCount++;
                     this.resetTimer();
                 }
             }
@@ -239,6 +244,8 @@ public abstract class SpecialAbstractSpawner {
             this.cachedEntity = null;
         }
 
+        this.waveCount = nbt.getInt("WaveCount");
+
     }
 
     public CompoundNBT write(CompoundNBT compound) {
@@ -252,6 +259,7 @@ public abstract class SpecialAbstractSpawner {
             compound.putShort("RequiredPlayerRange", (short) this.activatingRangeFromPlayer);
             compound.putShort("SpawnRange", (short) this.spawnRange);
             compound.put("SpawnData", this.spawnData.getNbt().copy());
+            compound.putInt("WaveCount", this.waveCount);
             ListNBT listnbt = new ListNBT();
             if (this.potentialSpawns.isEmpty()) {
                 listnbt.add(this.spawnData.toCompoundTag());
@@ -310,8 +318,7 @@ public abstract class SpecialAbstractSpawner {
         return this.prevMobRotation;
     }
 
-    @Nullable
-    public Entity getSpawnerEntity() {
+    public @Nullable Entity getSpawnerEntity() {
         return null;
     }
 }
