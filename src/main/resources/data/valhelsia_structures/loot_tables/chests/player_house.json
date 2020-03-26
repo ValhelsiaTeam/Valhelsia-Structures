@@ -1,304 +1,311 @@
 {
+  "type": "minecraft:chest",
   "pools": [
     {
       "rolls": {
-        "min": 4,
-        "max": 14
-      },
-      "bonus_rolls": {
-        "min": 3.0,
-        "max": 9.0
+        "min": 2.0,
+        "max": 3.0,
+        "type": "minecraft:uniform"
       },
       "entries": [
         {
-          "type": "item",
-          "name": "minecraft:wheat",
+          "type": "minecraft:item",
+          "weight": 25,
+          "name": "minecraft:lead"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "minecraft:saddle"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:golden_apple"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:leather_horse_armor"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "name": "minecraft:golden_horse_armor"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "minecraft:diamond_horse_armor"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 3.0,
+        "max": 6.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:iron_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:gold_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "name": "minecraft:diamond"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 20,
           "functions": [
             {
-              "function": "set_count",
+              "function": "minecraft:set_count",
               "count": {
-                "min": 4,
-                "max": 8
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.5
-                }
-              ]
+                "min": 2.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
             }
-          ]
+          ],
+          "name": "minecraft:apple"
         },
         {
-          "type": "item",
-          "name": "minecraft:arrow",
+          "type": "minecraft:item",
           "weight": 20,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 4,
-                "max": 12
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.6
-                }
-              ]
-            }
-          ]
+          "name": "minecraft:cooked_beef"
         },
         {
-          "type": "item",
-          "name": "minecraft:leather_horse_armor",
-          "weight": 10
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "minecraft:cooked_chicken"
         },
         {
-          "type": "item",
-          "name": "minecraft:lead",
-          "weight": 15
+          "type": "minecraft:item",
+          "weight": 5,
+          "name": "minecraft:water_bucket"
         },
         {
-          "type": "item",
-          "name": "minecraft:saddle",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "minecraft:coal",
+          "type": "minecraft:item",
           "weight": 10,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 6
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.3
-                }
-              ]
-            }
-          ]
+          "name": "minecraft:compass"
         },
         {
-          "type": "item",
-          "name": "minecraft:beetroot_seeds",
-          "weight": 25,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 4
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.2
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "minecraft:melon_seeds",
-          "weight": 25,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 4
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.2
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "minecraft:pumpkin_seeds",
-          "weight": 25,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 2,
-                "max": 4
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.2
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "minecraft:bow",
-          "weight": 15
-        },
-        {
-          "type": "item",
-          "name": "minecraft:fishing_rod",
-          "weight": 15
-        },
-        {
-          "type": "item",
-          "name": "minecraft:compass",
-          "weight": 15
-        },
-        {
-          "type": "item",
-          "name": "minecraft:clock",
-          "weight": 15
-        },
-        {
-          "type": "item",
-          "name": "minecraft:cooked_chicken",
+          "type": "minecraft:item",
           "weight": 10,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.2
-                }
-              ]
-            }
-          ]
+          "name": "minecraft:clock"
         },
         {
-          "type": "item",
-          "name": "minecraft:cooked_beef",
-          "weight": 10,
-          "functions": [
-            {
-              "function": "set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.25
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "item",
-          "name": "minecraft:iron_horse_armor",
-          "weight": 15
-        },
-        {
-          "type": "item",
-          "name": "minecraft:golden_apple",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "minecraft:iron_ingot",
+          "type": "minecraft:item",
           "weight": 15,
           "functions": [
             {
-              "function": "set_count",
+              "function": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 4
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.3
-                }
-              ]
+                "min": 2.0,
+                "max": 6.0,
+                "type": "minecraft:uniform"
+              }
             }
-          ]
+          ],
+          "name": "minecraft:coal"
         },
         {
-          "type": "item",
-          "name": "minecraft:iron_sword",
-          "weight": 15
-        },
-        {
-          "type": "item",
-          "name": "minecraft:iron_pickaxe",
-          "weight": 15
-        },
-        {
-          "type": "item",
-          "name": "minecraft:enchanted_book",
+          "type": "minecraft:item",
           "weight": 10,
           "functions": [
             {
-              "function": "enchant_randomly"
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
             }
-          ]
+          ],
+          "name": "minecraft:melon_seeds"
         },
         {
-          "type": "item",
-          "name": "minecraft:golden_horse_armor",
-          "weight": 10
-        },
-        {
-          "type": "item",
-          "name": "minecraft:gold_ingot",
+          "type": "minecraft:item",
           "weight": 10,
           "functions": [
             {
-              "function": "set_count",
+              "function": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 4
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.15
-                }
-              ]
+                "min": 2.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
             }
-          ]
+          ],
+          "name": "minecraft:pumpkin_seeds"
         },
         {
-          "type": "item",
-          "name": "minecraft:diamond",
-          "weight": 5,
+          "type": "minecraft:item",
+          "weight": 10,
           "functions": [
             {
-              "function": "set_count",
+              "function": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 2
-              },
-              "conditions": [
-                {
-                  "condition": "random_chance",
-                  "chance": 0.15
-                }
-              ]
+                "min": 2.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
             }
-          ]
+          ],
+          "name": "minecraft:beetroot_seeds"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4.0,
+                "max": 6.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:wheat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:arrow"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 5.0,
+                "max": 10.0,
+                "type": "minecraft:uniform"
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:iron_sword"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 5.0,
+                "max": 10.0,
+                "type": "minecraft:uniform"
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:iron_pickaxe"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 10.0,
+                "max": 15.0,
+                "type": "minecraft:uniform"
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:bow"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 10.0,
+                "max": 15.0,
+                "type": "minecraft:uniform"
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:fishing_rod"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 5.0,
+                "max": 10.0,
+                "type": "minecraft:uniform"
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:diamond_hoe"
         }
       ]
     }

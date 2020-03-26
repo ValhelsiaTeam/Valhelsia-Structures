@@ -1,43 +1,42 @@
 package com.stal111.valhelsia_structures.block;
 
 import com.google.common.collect.Lists;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
-import java.util.function.Function;
-import javax.annotation.Nullable;
-
+import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.utils.WeightedSpecialSpawnerEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
-import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.*;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.ResourceLocationException;
-import net.minecraft.util.StringUtils;
-import net.minecraft.util.WeightedRandom;
-import net.minecraft.util.WeightedSpawnerEntity;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Random;
+import java.util.function.Function;
+
+/**
+ * Special Abstract Spawner
+ * Valhelsia Structures - com.stal111.valhelsia_structures.block.SpecialAbstractSpawner
+ *
+ * @author Valhelsia Team
+ * @version 14.0.3
+ * @since 2019-10-31
+ */
 public abstract class SpecialAbstractSpawner {
-    private static final Logger LOGGER = LogManager.getLogger();
     private int spawnDelay = 20;
-    private final List<WeightedSpawnerEntity> potentialSpawns = Lists.newArrayList();
-    private WeightedSpawnerEntity spawnData = new WeightedSpawnerEntity();
+    private final List<WeightedSpecialSpawnerEntity> potentialSpawns = Lists.newArrayList();
+    private WeightedSpecialSpawnerEntity spawnData = new WeightedSpecialSpawnerEntity();
     private double mobRotation;
     private double prevMobRotation;
     private int minSpawnDelay = 200;
@@ -56,13 +55,20 @@ public abstract class SpecialAbstractSpawner {
             return StringUtils.isNullOrEmpty(s) ? null : new ResourceLocation(s);
         } catch (ResourceLocationException var4) {
             BlockPos blockpos = this.getSpawnerPosition();
-            LOGGER.warn("Invalid entity id '{}' at spawner {}:[{},{},{}]", s, this.getWorld().dimension.getType(), blockpos.getX(), blockpos.getY(), blockpos.getZ());
+
+            ValhelsiaStructures.LOGGER.warn("Invalid entity id '{}' at spawner {}:[{},{},{}]",
+                    s,
+                    this.getWorld().dimension.getType(),
+                    blockpos.getX(),
+                    blockpos.getY(),
+                    blockpos.getZ());
+
             return null;
         }
     }
 
     public void setEntityType(EntityType<?> type) {
-        this.spawnData.getNbt().putString("id", ForgeRegistries.ENTITIES.getKey(type).toString());
+        this.spawnData.getNbt().putString("id", Objects.requireNonNull(ForgeRegistries.ENTITIES.getKey(type)).toString());
     }
 
     /**
@@ -70,7 +76,18 @@ public abstract class SpecialAbstractSpawner {
      */
     private boolean isActivated() {
         BlockPos blockpos = this.getSpawnerPosition();
-        return this.getWorld().isPlayerWithin((double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.5D, (double)blockpos.getZ() + 0.5D, (double)this.activatingRangeFromPlayer);
+
+        for(PlayerEntity playerentity : this.getWorld().getPlayers()) {
+            if (EntityPredicates.NOT_SPECTATING.test(playerentity) && EntityPredicates.IS_LIVING_ALIVE.test(playerentity)) {
+                double d0 = playerentity.getDistanceSq((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.5D, (double) blockpos.getZ() + 0.5D);
+                if (this.activatingRangeFromPlayer < 0.0D || d0 < this.activatingRangeFromPlayer * this.activatingRangeFromPlayer) {
+                    if (playerentity.getPosition().getY() >= blockpos.getY()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public void tick() {
@@ -126,7 +143,7 @@ public abstract class SpecialAbstractSpawner {
                             return;
                         }
 
-                        int k = world.getEntitiesWithinAABB(entity.getClass(), (new AxisAlignedBB((double)blockpos.getX(), (double)blockpos.getY(), (double)blockpos.getZ(), (double)(blockpos.getX() + 1), (double)(blockpos.getY() + 1), (double)(blockpos.getZ() + 1))).grow((double)this.spawnRange)).size();
+                        int k = world.getEntitiesWithinAABB(entity.getClass(), (new AxisAlignedBB(blockpos.getX(), blockpos.getY(), blockpos.getZ(), blockpos.getX() + 1, blockpos.getY() + 1, blockpos.getZ() + 1)).grow(this.spawnRange)).size();
                         if (k >= this.maxNearbyEntities) {
                             this.resetTimer();
                             return;
@@ -193,12 +210,12 @@ public abstract class SpecialAbstractSpawner {
             ListNBT listnbt = nbt.getList("SpawnPotentials", 10);
 
             for(int i = 0; i < listnbt.size(); ++i) {
-                this.potentialSpawns.add(new WeightedSpawnerEntity(listnbt.getCompound(i)));
+                this.potentialSpawns.add(new WeightedSpecialSpawnerEntity(listnbt.getCompound(i)));
             }
         }
 
         if (nbt.contains("SpawnData", 10)) {
-            this.setNextSpawnData(new WeightedSpawnerEntity(1, nbt.getCompound("SpawnData")));
+            this.setNextSpawnData(new WeightedSpecialSpawnerEntity(1, nbt.getCompound("SpawnData")));
         } else if (!this.potentialSpawns.isEmpty()) {
             this.setNextSpawnData(WeightedRandom.getRandomItem(this.getWorld().rand, this.potentialSpawns));
         }
@@ -239,7 +256,7 @@ public abstract class SpecialAbstractSpawner {
             if (this.potentialSpawns.isEmpty()) {
                 listnbt.add(this.spawnData.toCompoundTag());
             } else {
-                for (WeightedSpawnerEntity weightedspawnerentity : this.potentialSpawns) {
+                for (WeightedSpecialSpawnerEntity weightedspawnerentity : this.potentialSpawns) {
                     listnbt.add(weightedspawnerentity.toCompoundTag());
                 }
             }
@@ -254,7 +271,7 @@ public abstract class SpecialAbstractSpawner {
         if (this.cachedEntity == null) {
             this.cachedEntity = EntityType.func_220335_a(this.spawnData.getNbt(), this.getWorld(), Function.identity());
             if (this.spawnData.getNbt().size() == 1 && this.spawnData.getNbt().contains("id", 8) && this.cachedEntity instanceof MobEntity) {
-                ((MobEntity)this.cachedEntity).onInitialSpawn(this.getWorld(), this.getWorld().getDifficultyForLocation(new BlockPos(this.cachedEntity)), SpawnReason.SPAWNER, (ILivingEntityData)null, (CompoundNBT)null);
+                ((MobEntity)this.cachedEntity).onInitialSpawn(this.getWorld(), this.getWorld().getDifficultyForLocation(new BlockPos(this.cachedEntity)), SpawnReason.SPAWNER, null, null);
             }
         }
 
@@ -273,7 +290,7 @@ public abstract class SpecialAbstractSpawner {
         }
     }
 
-    public void setNextSpawnData(WeightedSpawnerEntity nextSpawnData) {
+    public void setNextSpawnData(WeightedSpecialSpawnerEntity nextSpawnData) {
         this.spawnData = nextSpawnData;
     }
 

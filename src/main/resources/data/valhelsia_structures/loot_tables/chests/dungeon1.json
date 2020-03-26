@@ -10,11 +10,6 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 25,
-          "name": "minecraft:lead"
-        },
-        {
-          "type": "minecraft:item",
           "weight": 20,
           "name": "minecraft:saddle"
         },
@@ -25,13 +20,23 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 20,
-          "name": "minecraft:name_tag"
+          "weight": 2,
+          "name": "minecraft:enchanted_golden_apple"
         },
         {
           "type": "minecraft:item",
           "weight": 15,
-          "name": "minecraft:iron_horse_armor"
+          "name": "minecraft:music_disc_13"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "name": "minecraft:music_disc_cat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "minecraft:name_tag"
         },
         {
           "type": "minecraft:item",
@@ -45,7 +50,12 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 3,
+          "name": "minecraft:skull_banner_pattern"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 12,
           "functions": [
             {
               "function": "minecraft:enchant_randomly"
@@ -57,7 +67,7 @@
     },
     {
       "rolls": {
-        "min": 3.0,
+        "min": 2.0,
         "max": 5.0,
         "type": "minecraft:uniform"
       },
@@ -70,7 +80,7 @@
               "function": "minecraft:set_count",
               "count": {
                 "min": 2.0,
-                "max": 4.0,
+                "max": 6.0,
                 "type": "minecraft:uniform"
               }
             }
@@ -79,18 +89,33 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 20,
+          "weight": 6,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2.0,
-                "max": 3.0,
+                "min": 1.0,
+                "max": 4.0,
                 "type": "minecraft:uniform"
               }
             }
           ],
-          "name": "minecraft:apple"
+          "name": "minecraft:gold_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 2.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:diamond"
         },
         {
           "type": "minecraft:item",
@@ -99,8 +124,23 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 15,
-          "name": "minecraft:rabbit_stew"
+          "weight": 20,
+          "name": "minecraft:apple"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:wheat"
         },
         {
           "type": "minecraft:item",
@@ -114,8 +154,23 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2.0,
-                "max": 6.0,
+                "min": 1.0,
+                "max": 4.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:redstone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 4.0,
                 "type": "minecraft:uniform"
               }
             }
@@ -166,21 +221,6 @@
             }
           ],
           "name": "minecraft:beetroot_seeds"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 4.0,
-                "max": 6.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:wheat"
         }
       ]
     },
@@ -269,45 +309,29 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "min": 10.0,
-                "max": 15.0,
+                "max": 20.0,
                 "type": "minecraft:uniform"
               },
               "treasure": true
             }
           ],
-          "name": "minecraft:iron_sword"
+          "name": "minecraft:iron_helmet"
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
-              },
-              "treasure": true
-            }
-          ],
-          "name": "minecraft:iron_axe"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 3,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "min": 5.0,
-                "max": 10.0,
+                "min": 10.0,
+                "max": 20.0,
                 "type": "minecraft:uniform"
               },
               "treasure": true
@@ -317,19 +341,35 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 2,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "min": 10.0,
-                "max": 15.0,
+                "max": 20.0,
                 "type": "minecraft:uniform"
               },
               "treasure": true
             }
           ],
-          "name": "minecraft:chainmail_helmet"
+          "name": "minecraft:iron_leggings"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 10.0,
+                "max": 20.0,
+                "type": "minecraft:uniform"
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:iron_boots"
         },
         {
           "type": "minecraft:item",
@@ -339,13 +379,13 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "min": 10.0,
-                "max": 15.0,
+                "max": 20.0,
                 "type": "minecraft:uniform"
               },
               "treasure": true
             }
           ],
-          "name": "minecraft:chainmail_chestplate"
+          "name": "minecraft:iron_sword"
         },
         {
           "type": "minecraft:item",
@@ -355,29 +395,13 @@
               "function": "minecraft:enchant_with_levels",
               "levels": {
                 "min": 10.0,
-                "max": 15.0,
+                "max": 20.0,
                 "type": "minecraft:uniform"
               },
               "treasure": true
             }
           ],
-          "name": "minecraft:chainmail_leggings"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 4,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
-              },
-              "treasure": true
-            }
-          ],
-          "name": "minecraft:chainmail_boots"
+          "name": "minecraft:bow"
         }
       ]
     }

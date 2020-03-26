@@ -22,35 +22,35 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import java.util.List;
 
 /**
- * Player House Pieces
- * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.PlayerHousePieces
+ * Forge Pieces
+ * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.ForgePieces
  *
  * @author Valhelsia Team
  * @version 14.0.3
  * @since 2020-03-22
  */
-public class PlayerHousePieces {
+public class ForgePieces {
     private static boolean isRegistered = false;
 
     public static void register() {
         if (!isRegistered) {
-            JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "player_houses"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":player_house"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
+            JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "forges"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":forge"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
             isRegistered = true;
         }
     }
 
     public static void generate(ChunkGenerator<?> generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
         register();
-        JigsawManager.func_214889_a(new ResourceLocation(ValhelsiaStructures.MOD_ID, "player_houses"), 7, PlayerHousePiece::new, generator, templateManager, position, pieces, random);
+        JigsawManager.func_214889_a(new ResourceLocation(ValhelsiaStructures.MOD_ID, "forges"), 7, ForgePiece::new, generator, templateManager, position, pieces, random);
     }
 
-    public static class PlayerHousePiece extends AbstractVillagePiece {
-        public PlayerHousePiece(TemplateManager templateManager, JigsawPiece jigsawPiece, BlockPos position, int groundLevelDelta, Rotation rotation, MutableBoundingBox bounds) {
-            super(ModStructurePieces.PLAYER_HOUSE, templateManager, jigsawPiece, position, groundLevelDelta, rotation, bounds);
+    public static class ForgePiece extends AbstractVillagePiece {
+        public ForgePiece(TemplateManager templateManager, JigsawPiece jigsawPiece, BlockPos position, int groundLevelDelta, Rotation rotation, MutableBoundingBox bounds) {
+            super(ModStructurePieces.FORGE, templateManager, jigsawPiece, position, groundLevelDelta, rotation, bounds);
         }
 
-        public PlayerHousePiece(TemplateManager templateManager, CompoundNBT compoundNBT) {
-            super(templateManager, compoundNBT, ModStructurePieces.PLAYER_HOUSE);
+        public ForgePiece(TemplateManager templateManager, CompoundNBT compoundNBT) {
+            super(templateManager, compoundNBT, ModStructurePieces.FORGE);
         }
     }
 }

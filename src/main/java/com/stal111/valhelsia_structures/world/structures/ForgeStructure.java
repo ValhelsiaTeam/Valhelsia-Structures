@@ -16,32 +16,30 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import javax.annotation.Nonnull;
 import java.util.function.Function;
 
-
 /**
- * Tower Ruin Structure
- * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.TowerRuinStructure
+ * Forge Structure
+ * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.ForgeStructure
  *
  * @author Valhelsia Team
  * @version 14.0.3
- * @since 2019-10-31
+ * @since 2020-03-22
  */
-
-public class TowerRuinStructure extends AbstractValhelsiaStructure {
-    public static final String SHORT_NAME = "tower_ruin";
+public class ForgeStructure extends AbstractValhelsiaStructure {
+    public static final String SHORT_NAME = "forge";
     public static final String FULL_NAME = ValhelsiaStructures.MOD_ID + ":" + SHORT_NAME;
 
-    private static final int CHUNK_RADIUS = 1;
-    private static final int FEATURE_DISTANCE = 25;
+    private static final int CHUNK_RADIUS = 2;
+    private static final int FEATURE_DISTANCE = 31;
     private static final int FEATURE_SEPARATION = 8;
-    private static final int SEED_MODIFIER = 14357670;
+    private static final int SEED_MODIFIER = 12857691;
 
-    public TowerRuinStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {
+    public ForgeStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {
         super(deserialize);
     }
 
     @Override
     protected int getSeedModifier() {
-        return SEED_MODIFIER;
+        return 0;
     }
 
     @Override
@@ -74,6 +72,7 @@ public class TowerRuinStructure extends AbstractValhelsiaStructure {
             super(structure, chunkX, chunkY, biome, bounds, reference, seed);
         }
 
+        @Override
         public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biome) {
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
             int xOffset = 16;
@@ -98,9 +97,10 @@ public class TowerRuinStructure extends AbstractValhelsiaStructure {
             //int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
             //if (Math.abs(maxHeight - minHeight) <= 2 && minHeight >= 60) {
                 BlockPos blockpos = new BlockPos(chunkX * 16, minHeight - 1, chunkZ * 16);
-                TowerRuinPieces.generate(generator, templateManager, blockpos, this.components, this.rand);
+                ForgePieces.generate(generator, templateManager, blockpos, this.components, this.rand);
                 this.recalculateStructureSize();
             //}
         }
     }
+
 }

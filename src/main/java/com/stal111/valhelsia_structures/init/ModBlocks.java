@@ -7,7 +7,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 
 public enum ModBlocks {
-    SPECIAL_SPAWNER(new SpecialSpawnerBlock(Block.Properties.from(Blocks.SPAWNER)));
+    SPECIAL_SPAWNER(new SpecialSpawnerBlock(Block.Properties.from(Blocks.SPAWNER).hardnessAndResistance(-1.0F, 3600000.0F).noDrops()));
 
     private final Block block;
 

@@ -2,40 +2,38 @@ package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.datafixers.Dynamic;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
 import javax.annotation.Nonnull;
+import java.util.Random;
 import java.util.function.Function;
 
-
 /**
- * Small Castle Structure
- * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.SmallCastleStructure
+ * Small Dungeon Structure
+ * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.SmallDungeonStructure
  *
  * @author Valhelsia Team
  * @version 14.0.3
- * @since 2019-10-31
+ * @since 2020-03-22
  */
-
-public class SmallCastleStructure extends AbstractValhelsiaStructure {
-    public static final String SHORT_NAME = "small_castle";
+public class SmallDungeonStructure extends AbstractValhelsiaStructure {
+    public static final String SHORT_NAME = "small_dungeon";
     public static final String FULL_NAME = ValhelsiaStructures.MOD_ID + ":" + SHORT_NAME;
 
     private static final int CHUNK_RADIUS = 3;
     private static final int FEATURE_DISTANCE = 35;
     private static final int FEATURE_SEPARATION = 8;
-    private static final int SEED_MODIFIER = 14357618;
+    private static final int SEED_MODIFIER = 14357670;
 
-    public SmallCastleStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {
+    public SmallDungeonStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> deserialize) {
         super(deserialize);
     }
 
@@ -69,6 +67,19 @@ public class SmallCastleStructure extends AbstractValhelsiaStructure {
         return FEATURE_SEPARATION;
     }
 
+    @Override
+    public boolean hasStartAt(@Nonnull ChunkGenerator<?> generator, @Nonnull Random random, int chunkX, int chunkZ) {
+        // The dungeon only cares that biomes match, not that the surface is level.
+        ChunkPos chunkPos = this.getStartPositionForPosition(generator, random, chunkX, chunkZ, 0, 0);
+        if (chunkX == chunkPos.x && chunkZ == chunkPos.z) {
+            return generator.getBiomeProvider().getBiomesInSquare((chunkX << 4) + 9, (chunkZ << 4) + 9, getSize() * 16)
+                    .stream()
+                    .allMatch(biome -> generator.hasStructure(biome, this));
+        }
+
+        return false;
+    }
+
     public static class Start extends MarginedStructureStart {
         public Start(Structure<?> structure, int chunkX, int chunkY, Biome biome, MutableBoundingBox bounds, int reference, long seed) {
             super(structure, chunkX, chunkY, biome, bounds, reference, seed);
@@ -76,32 +87,10 @@ public class SmallCastleStructure extends AbstractValhelsiaStructure {
 
         @Override
         public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biome) {
-            Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-            int xOffset = 32;
-            int zOffset = 32;
-            if (rotation == Rotation.CLOCKWISE_90) {
-                xOffset *= -1;
-            } else if (rotation == Rotation.CLOCKWISE_180) {
-                xOffset *= -1;
-                zOffset *= -1;
-            } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
-                zOffset *= -1;
-            }
-
-            int xCenter = (chunkX << 4) + 7;
-            int zCenter = (chunkZ << 4) + 7;
-
-            int i1 = generator.func_222531_c(xCenter, zCenter, Heightmap.Type.WORLD_SURFACE_WG);
-            int j1 = generator.func_222531_c(xCenter, zCenter + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
-            int k1 = generator.func_222531_c(xCenter + xOffset, zCenter, Heightmap.Type.WORLD_SURFACE_WG);
-            int l1 = generator.func_222531_c(xCenter + xOffset, zCenter + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
-            int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
-            //int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
-            //if (Math.abs(maxHeight - minHeight) <= 2 && minHeight >= 60) {
-                BlockPos blockpos = new BlockPos(chunkX * 16, minHeight - 1, chunkZ * 16);
-                SmallCastlePieces.generate(generator, templateManager, blockpos, this.components, this.rand);
-                this.recalculateStructureSize();
-            //}
+            BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
+            SmallDungeonPieces.generate(generator, templateManager, blockpos, this.components, this.rand);
+            this.recalculateStructureSize();
+            this.func_214628_a(generator.getSeaLevel(), this.rand, 10);
         }
     }
 }

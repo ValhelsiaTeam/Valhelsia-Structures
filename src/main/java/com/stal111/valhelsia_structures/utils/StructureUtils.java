@@ -8,20 +8,20 @@ import java.util.Random;
 
 /**
  * ValhelsiaStructure Utils
- * ValhelsiaStructure - com.stal111.valhelsia_structure.utils.StructureUtils
+ * ValhelsiaStructure - com.stal111.valhelsia_structures.utils.StructureUtils
  *
  * @author Valhelsia Team
- * @version 0.1
+ * @version 14.0.3
  * @since 2019-10-31
  */
 public class StructureUtils {
     /**
      * Get Random Direction
-     * @param rand Instance of Random to use.
+     * @param random Instance of Random to use.
      * @return A random cardinal direction, of N/S/E/W.
      */
-    public static Direction getRandomDir(final Random rand) {
-        return Direction.byHorizontalIndex(rand.nextInt(4));
+    public static Direction getRandomDir(final Random random) {
+        return Direction.byHorizontalIndex(random.nextInt(4));
     }
 
     /**
@@ -35,9 +35,9 @@ public class StructureUtils {
      */
     public static int getLowestHeight(IWorld world, int x, int z, int xSize, int zSize) {
         int h0 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x, z);
-        int h1 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, xSize, z);
-        int h2 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x, zSize);
-        int h3 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, xSize, zSize);
+        int h1 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x + xSize, z);
+        int h2 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x, z + zSize);
+        int h3 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x + xSize, z + zSize);
         return Math.min(Math.min(h0, h1), Math.min(h2, h3));
     }
 }

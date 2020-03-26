@@ -1,23 +1,25 @@
 package com.stal111.valhelsia_structures.tileentity;
 
-import javax.annotation.Nullable;
-
 import com.stal111.valhelsia_structures.block.SpecialAbstractSpawner;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
+import com.stal111.valhelsia_structures.utils.WeightedSpecialSpawnerEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.WeightedSpawnerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickableTileEntity {
 
     private final SpecialAbstractSpawner spawnerLogic = new SpecialAbstractSpawner() {
         public void broadcastEvent(int id) {
+            assert SpecialMobSpawnerTileEntity.this.world != null;
             SpecialMobSpawnerTileEntity.this.world.addBlockEvent(SpecialMobSpawnerTileEntity.this.pos, ModBlocks.SPECIAL_SPAWNER.getBlock(), id, 0);
         }
 
@@ -32,7 +34,7 @@ public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickable
         }
 
         @Override
-        public void setNextSpawnData(WeightedSpawnerEntity nextSpawnData) {
+        public void setNextSpawnData(WeightedSpecialSpawnerEntity nextSpawnData) {
             super.setNextSpawnData(nextSpawnData);
             if (this.getWorld() != null) {
                 BlockState blockstate = this.getWorld().getBlockState(this.getSpawnerPosition());
@@ -53,7 +55,7 @@ public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickable
     }
 
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public @Nonnull CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
         this.spawnerLogic.write(compound);
         return compound;
@@ -74,7 +76,7 @@ public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickable
     }
 
     @Override
-    public CompoundNBT getUpdateTag() {
+    public @Nonnull CompoundNBT getUpdateTag() {
         CompoundNBT compoundnbt = this.write(new CompoundNBT());
         compoundnbt.remove("SpawnPotentials");
         return compoundnbt;
