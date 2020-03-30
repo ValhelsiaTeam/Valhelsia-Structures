@@ -1,6 +1,8 @@
 package com.stal111.valhelsia_structures;
 
 import com.stal111.valhelsia_structures.init.ModBlocks;
+import com.stal111.valhelsia_structures.init.ModItems;
+import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
 import com.stal111.valhelsia_structures.proxy.ClientProxy;
 import com.stal111.valhelsia_structures.proxy.IProxy;
@@ -12,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -29,6 +32,13 @@ public class ValhelsiaStructures {
     public static IProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
     public ValhelsiaStructures() {
+        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+        ModBlocks.BLOCKS.register(eventBus);
+        ModItems.ITEMS.register(eventBus);
+        ModTileEntities.TILE_ENTITIES.register(eventBus);
+        ModStructures.FEATURES.register(eventBus);
+
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -37,32 +47,5 @@ public class ValhelsiaStructures {
     private void setup(final FMLCommonSetupEvent event) {
         proxy.init();
         WorldGen.setupWorldGen();
-    }
-
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            for (ModBlocks block : ModBlocks.values()) {
-                blockRegistryEvent.getRegistry().register(block.getBlock());
-            }
-        }
-
-        @SubscribeEvent
-        public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent) {
-            for (ModBlocks block : ModBlocks.values()) {
-                BlockItem item = new BlockItem(block.getBlock(), new Item.Properties());
-                item.setRegistryName(block.getName());
-                itemRegistryEvent.getRegistry().register(item);
-            }
-        }
-
-        @SubscribeEvent
-        public static void onTileEntitiesRegistry(final RegistryEvent.Register<TileEntityType<?>> tileEntityRegistryEvent) {
-            for (ModTileEntities tileEntity : ModTileEntities.values()) {
-                tileEntityRegistryEvent.getRegistry().register(tileEntity.getTileEntity());
-            }
-        }
     }
 }

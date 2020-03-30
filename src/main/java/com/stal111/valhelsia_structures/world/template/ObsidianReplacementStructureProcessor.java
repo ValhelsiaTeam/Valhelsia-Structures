@@ -23,7 +23,7 @@ public class ObsidianReplacementStructureProcessor extends StructureProcessor {
         if (block != Blocks.OBSIDIAN) {
             return p_215194_4_;
         } else {
-            return new Template.BlockInfo(p_215194_4_.pos, ModBlocks.SPECIAL_SPAWNER.getBlock().getDefaultState(), null);
+            return new Template.BlockInfo(p_215194_4_.pos, ModBlocks.SPECIAL_SPAWNER.get().getDefaultState(), null);
         }
     }
 
