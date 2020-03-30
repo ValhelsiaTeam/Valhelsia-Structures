@@ -39,7 +39,7 @@ public class ForgeStructure extends AbstractValhelsiaStructure {
 
     @Override
     protected int getSeedModifier() {
-        return 0;
+        return SEED_MODIFIER;
     }
 
     @Override
