@@ -1,5 +1,9 @@
 ------------------------------
 
+<p align="center">
+  <img width="300" height="300" src="https://zupimages.net/up/20/08/shxm.png">
+</p>
+
 ![center](https://zupimages.net/up/20/08/shxm.png)
 
 
