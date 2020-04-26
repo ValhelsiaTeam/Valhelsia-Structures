@@ -1,7 +1,7 @@
 ------------------------------
 
 <p align="center">
-  <img width="200" height="200" src="https://zupimages.net/up/20/08/shxm.png">
+  <img width="250" height="250" src="https://zupimages.net/up/20/08/shxm.png">
 </p>
 
 <p align="center">
