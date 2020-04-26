@@ -18,4 +18,5 @@ Valhelsia Structures is licensed under a [Creative Commons Attribution-NonCommer
 
 We partner with mTxServ. If you're interested in hosting a server for your adventure, click the animation below!
 [![partner](https://zupimages.net/up/19/43/2bem.gif)](https://mtxserv.com/)
->**The game must stay widely accessible, and buying its server at mTxServ offers a quick, simple and quality solution at an affordable price.**
+
+**The game must stay widely accessible, and buying its server at mTxServ offers a quick, simple and quality solution at an affordable price.**
