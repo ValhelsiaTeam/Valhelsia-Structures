@@ -13,8 +13,7 @@
   </a>
 </p>
 
-## About
-
+# About
 **Valhelsia Structures** is a mod that generates new structures such as abandoned buildings and dungeons.
 We are in **beta** phase and will receive new structures and features as updates are made. 
 
