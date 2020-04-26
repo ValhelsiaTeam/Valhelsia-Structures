@@ -1,6 +1,6 @@
 ------------------------------
 
-![center](https://zupimages.net/up/20/08/shxm.png)
+<p align="center">![center](https://zupimages.net/up/20/08/shxm.png)</p>
 
 
 [![100% center](https://img.shields.io/discord/396333981601234944?color=463F32&label=Discord&logo=discord&style=flat-square)](https://discordapp.com/invite/reQZEXu) [![100% center](https://img.shields.io/twitter/follow/valhelsia?color=463F32&label=Twitter&logo=twitter&style=flat-square)](https://twitter.com/valhelsia)
