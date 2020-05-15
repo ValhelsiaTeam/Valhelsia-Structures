@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=y": { "model": "valhelsia_structures:block/oak_post" },
+    "axis=z": { "model": "valhelsia_structures:block/oak_post", "x": 90 },
+    "axis=x": { "model": "valhelsia_structures:block/oak_post", "x": 90, "y": 90 }
+  }
+}

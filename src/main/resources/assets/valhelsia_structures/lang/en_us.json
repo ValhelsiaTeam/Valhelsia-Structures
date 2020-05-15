@@ -1,4 +1,5 @@
 {
     "comment": "Blocks",
-    "block.valhelsia_structures.special_spawner": "Special Spawner"
+    "block.valhelsia_structures.special_spawner": "Special Spawner",
+    "block.valhelsia_structures.brazier": "Brazier"
 }

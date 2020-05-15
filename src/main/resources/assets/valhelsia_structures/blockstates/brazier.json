@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=true": { "model": "valhelsia_structures:block/brazier" },
+    "lit=false": { "model": "valhelsia_structures:block/brazier_off" }
+  }
+}
