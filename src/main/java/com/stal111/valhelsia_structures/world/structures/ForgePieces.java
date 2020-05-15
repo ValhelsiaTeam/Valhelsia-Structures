@@ -27,7 +27,7 @@ public class ForgePieces {
 
     public static void func_215139_a(ChunkGenerator<?> p_215139_0_, TemplateManager p_215139_1_, BlockPos pos, List<StructurePiece> p_215139_3_, SharedSeedRandom p_215139_4_) {
         JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "forge"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new RedGlassSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":forge", Collections.singletonList(Processors.RED_GLASS_AND_STRUCTURE_BLOCK)), 1)), JigsawPattern.PlacementBehaviour.RIGID));
-        JigsawManager.func_214889_a(new ResourceLocation(ValhelsiaStructures.MOD_ID, "forge"), 7, ForgePiece::new, p_215139_0_, p_215139_1_, pos, p_215139_3_, p_215139_4_);
+        JigsawManager.addPieces(new ResourceLocation(ValhelsiaStructures.MOD_ID, "forge"), 7, ForgePiece::new, p_215139_0_, p_215139_1_, pos, p_215139_3_, p_215139_4_);
     }
 
     public static class ForgePiece extends AbstractVillagePiece {

@@ -87,14 +87,15 @@ public class RedGlassSingleJigsawPiece extends JigsawPiece {
         return template.getMutableBoundingBox((new PlacementSettings()).setRotation(p_214852_3_), p_214852_2_);
     }
 
-    public boolean func_225575_a_(TemplateManager p_225575_1_, IWorld p_225575_2_, ChunkGenerator<?> p_225575_3_, BlockPos p_225575_4_, Rotation p_225575_5_, MutableBoundingBox p_225575_6_, Random p_225575_7_) {
+    @Override
+    public boolean place(TemplateManager p_225575_1_, IWorld p_225575_2_, ChunkGenerator<?> p_225575_3_, BlockPos p_225575_4_, Rotation p_225575_5_, MutableBoundingBox p_225575_6_, Random p_225575_7_) {
         Template template = p_225575_1_.getTemplateDefaulted(this.location);
         PlacementSettings placementsettings = this.func_214860_a(p_225575_5_, p_225575_6_);
         if (!template.addBlocksToWorld(p_225575_2_, p_225575_4_, placementsettings, 18)) {
             return false;
         } else {
             for(Template.BlockInfo template$blockinfo : Template.processBlockInfos(template, p_225575_2_, p_225575_4_, placementsettings, this.func_214857_a(p_225575_1_, p_225575_4_, p_225575_5_, false))) {
-                this.func_214846_a(p_225575_2_, template$blockinfo, p_225575_4_, p_225575_5_, p_225575_7_, p_225575_6_);
+                this.handleDataMarker(p_225575_2_, template$blockinfo, p_225575_4_, p_225575_5_, p_225575_7_, p_225575_6_);
             }
 
             return true;

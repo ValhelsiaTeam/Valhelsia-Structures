@@ -83,10 +83,10 @@ public class TowerRuinStructure extends ScatteredStructure<NoFeatureConfig> {
     }
 
     @Override
-    public boolean func_225558_a_(BiomeManager manager, ChunkGenerator<?> generator, Random random, int chunkX, int chunkZ, Biome biome) {
+    public boolean canBeGenerated(BiomeManager manager, ChunkGenerator<?> generator, Random random, int chunkX, int chunkZ, Biome biome) {
         ChunkPos chunkpos = this.getStartPositionForPosition(generator, random, chunkX, chunkZ, 0, 0);
         if (chunkX == chunkpos.x && chunkZ == chunkpos.z) {
-            for(Biome biome1 : generator.getBiomeProvider().func_225530_a_(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, 32)) {
+            for(Biome biome1 : generator.getBiomeProvider().getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, 32)) {
                 if (!generator.hasStructure(biome1, this)) {
                     return false;
                 }
