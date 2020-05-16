@@ -25,7 +25,7 @@ Valhelsia Structures is licensed under a [Creative Commons Attribution-NonCommer
 
 ------------------------------
 
-**If you're interested in hosting for your adventure, click the image below!**                                           
+**If you're interested in hosting a server for your adventure, click the image below!**                                           
 [![partner](https://zupimages.net/up/20/20/zp4u.png)](https://bisecthosting.com/Valhelsia)
 
 Valhelsia Team partnered with BisectHosting!                                                                                                                                                     
