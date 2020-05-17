@@ -20,6 +20,11 @@ public class ModBlocks {
     public static final RegistryObject<SpecialSpawnerBlock> SPECIAL_SPAWNER = register("special_spawner", new SpecialSpawnerBlock(Block.Properties.from(Blocks.SPAWNER).hardnessAndResistance(-1.0F, 3600000.0F).noDrops()));
     public static final RegistryObject<BrazierBlock> BRAZIER = register("brazier", new BrazierBlock(Block.Properties.from(Blocks.IRON_BARS).lightValue(15).notSolid()));
     public static final RegistryObject<PostBlock> OAK_POST = register("oak_post", new PostBlock(Block.Properties.from(Blocks.OAK_LOG).notSolid()));
+    public static final RegistryObject<PostBlock> SPRUCE_POST = register("spruce_post", new PostBlock(Block.Properties.from(Blocks.SPRUCE_LOG).notSolid()));
+    public static final RegistryObject<PostBlock> BIRCH_POST = register("birch_post", new PostBlock(Block.Properties.from(Blocks.BIRCH_LOG).notSolid()));
+    public static final RegistryObject<PostBlock> JUNGLE_POST = register("jungle_post", new PostBlock(Block.Properties.from(Blocks.JUNGLE_LOG).notSolid()));
+    public static final RegistryObject<PostBlock> ACACIA_POST = register("acacia_post", new PostBlock(Block.Properties.from(Blocks.ACACIA_LOG).notSolid()));
+    public static final RegistryObject<PostBlock> DARK_OAK_POST = register("dark_oak_post", new PostBlock(Block.Properties.from(Blocks.DARK_OAK_LOG).notSolid()));
 
     private static <T extends Block> RegistryObject<T> register(String name, T block) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block, new Item.Properties().group(ItemGroup.MISC)));

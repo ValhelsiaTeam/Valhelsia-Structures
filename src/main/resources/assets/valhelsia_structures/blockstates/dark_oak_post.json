@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=y,attached=false": { "model": "valhelsia_structures:block/dark_oak_post" },
+    "axis=z,attached=false": { "model": "valhelsia_structures:block/dark_oak_post", "x": 90 },
+    "axis=x,attached=false": { "model": "valhelsia_structures:block/dark_oak_post", "x": 90, "y": 90 },
+    "axis=y,attached=true": { "model": "valhelsia_structures:block/dark_oak_post_attached" },
+    "axis=z,attached=true": { "model": "valhelsia_structures:block/dark_oak_post_attached", "x": 90 },
+    "axis=x,attached=true": { "model": "valhelsia_structures:block/dark_oak_post_attached", "x": 90, "y": 90 }
+  }
+}
