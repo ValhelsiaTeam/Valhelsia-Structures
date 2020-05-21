@@ -26,7 +26,7 @@ import java.util.List;
 
 public class SmallDungeonPieces {
 
-    public static void func_215139_a(ChunkGenerator<?> p_215139_0_, TemplateManager p_215139_1_, BlockPos p_215139_2_, List<StructurePiece> p_215139_3_, SharedSeedRandom p_215139_4_) {
+    public static void generate(ChunkGenerator<?> p_215139_0_, TemplateManager p_215139_1_, BlockPos p_215139_2_, List<StructurePiece> p_215139_3_, SharedSeedRandom p_215139_4_) {
         JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/entrances"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new RedGlassSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/entrance"), 1), Pair.of(new RedGlassSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/entrance1"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
         JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/main_rooms"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new RedGlassSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room"), 1), Pair.of(new RedGlassSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room1"), 1), Pair.of(new RedGlassSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room2"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
         JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/side_rooms"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new RedGlassSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/side_room"), 1), Pair.of(new RedGlassSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/side_room1"), 1)), JigsawPattern.PlacementBehaviour.RIGID));

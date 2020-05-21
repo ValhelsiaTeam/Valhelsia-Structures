@@ -14,15 +14,15 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 
 import java.util.function.Function;
 
-public class PlayerHouseStructure extends AbstractValhelsiaStructure {
+public class CastleRuinStructure extends AbstractValhelsiaStructure {
 
-    public PlayerHouseStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-        super(configFactoryIn, "player_house");
+    public CastleRuinStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+        super(configFactoryIn, "castle_ruin");
     }
 
     @Override
     protected int getFeatureDistance(ChunkGenerator<?> generator) {
-        return 30;
+        return 35;
     }
 
     @Override
@@ -32,7 +32,7 @@ public class PlayerHouseStructure extends AbstractValhelsiaStructure {
 
     @Override
     protected int getSeedModifier() {
-        return 17357645;
+        return 14357618;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class PlayerHouseStructure extends AbstractValhelsiaStructure {
         }
 
         @Override
-        public void init(ChunkGenerator<?> generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biomeIn) {
+        public void init(ChunkGenerator<?> generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome) {
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
             int xOffset = 32;
             int zOffset = 32;
@@ -70,7 +70,7 @@ public class PlayerHouseStructure extends AbstractValhelsiaStructure {
             int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
 
             BlockPos blockpos = new BlockPos(chunkX * 16, minHeight - 1, chunkZ * 16);
-            PlayerHousePieces.generate(generator, templateManager, blockpos, this.components, this.rand);
+            CastleRuinPieces.generate(generator, templateManager, blockpos, this.components, this.rand);
             this.recalculateStructureSize();
         }
     }

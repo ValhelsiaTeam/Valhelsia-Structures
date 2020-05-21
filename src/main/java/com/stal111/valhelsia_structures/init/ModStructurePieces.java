@@ -16,7 +16,7 @@ import net.minecraft.world.gen.feature.structure.IStructurePieceType;
  */
 public class ModStructurePieces {
     // Structure Pieces
-    public static final IStructurePieceType SMALL_CASTLE = register("small_castle", SmallCastlePieces.SmallCastlePiece::new);
+    public static final IStructurePieceType CASTLE_RUIN = register("castle_ruin", CastleRuinPieces.SmallCastlePiece::new);
     public static final IStructurePieceType TOWER_RUIN = register("tower_ruin", TowerRuinPieces.Piece::new);
     public static final IStructurePieceType PLAYER_HOUSE = register("player_house", PlayerHousePieces.PlayerHousePiece::new);
     public static final IStructurePieceType FORGE = register("forge", ForgePieces.ForgePiece::new);

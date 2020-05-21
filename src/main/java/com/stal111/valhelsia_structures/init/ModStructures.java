@@ -13,7 +13,7 @@ public class ModStructures {
 
     public static final DeferredRegister<Feature<?>> FEATURES = new DeferredRegister<>(ForgeRegistries.FEATURES, ValhelsiaStructures.MOD_ID);
 
-    public static final RegistryObject<Structure<NoFeatureConfig>> SMALL_CASTLE = register("small_castle", new SmallCastleStructure(NoFeatureConfig::deserialize));
+    public static final RegistryObject<Structure<NoFeatureConfig>> CASTLE_RUIN = register("castle_ruin", new CastleRuinStructure(NoFeatureConfig::deserialize));
     public static final RegistryObject<Structure<NoFeatureConfig>> TOWER_RUIN = register("tower_ruin", new TowerRuinStructure(NoFeatureConfig::deserialize));
     public static final RegistryObject<Structure<NoFeatureConfig>> PLAYER_HOUSE = register("player_house", new PlayerHouseStructure(NoFeatureConfig::deserialize));
     public static final RegistryObject<Structure<NoFeatureConfig>> FORGE = register("forge", new ForgeStructure(NoFeatureConfig::deserialize));
