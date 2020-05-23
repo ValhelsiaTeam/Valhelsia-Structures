@@ -1,0 +1,29 @@
+{
+  "multipart": [
+    {   "apply": { "model": "valhelsia_structures:block/paper_wall_post" }},
+    {   "when": { "north": true },
+      "apply": { "model": "valhelsia_structures:block/paper_wall_side" }
+    },
+    {   "when": { "east": true },
+      "apply": { "model": "valhelsia_structures:block/paper_wall_side", "y": 90 }
+    },
+    {   "when": { "south": true },
+      "apply": { "model": "valhelsia_structures:block/paper_wall_side_alt" }
+    },
+    {   "when": { "west": true },
+      "apply": { "model": "valhelsia_structures:block/paper_wall_side_alt", "y": 90 }
+    },
+    {   "when": { "north": false },
+      "apply": { "model": "valhelsia_structures:block/paper_wall_noside" }
+    },
+    {   "when": { "east": false },
+      "apply": { "model": "valhelsia_structures:block/paper_wall_noside_alt" }
+    },
+    {   "when": { "south": false },
+      "apply": { "model": "valhelsia_structures:block/paper_wall_noside_alt", "y": 90 }
+    },
+    {   "when": { "west": false },
+      "apply": { "model": "valhelsia_structures:block/paper_wall_noside", "y": 270 }
+    }
+  ]
+}

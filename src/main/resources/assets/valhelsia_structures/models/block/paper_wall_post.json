@@ -1,0 +1,7 @@
+{
+    "parent": "block/template_glass_pane_post",
+    "textures": {
+        "edge": "valhelsia_structures:block/paper_wall_top",
+        "pane": "valhelsia_structures:block/paper_wall"
+    }
+}

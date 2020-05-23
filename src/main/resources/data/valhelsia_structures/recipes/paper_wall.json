@@ -1,0 +1,20 @@
+{
+  "type": "crafting_shaped",
+  "pattern": [
+    "#X#",
+    "#X#",
+    "#X#"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:bamboo"
+    },
+    "X": {
+      "item": "minecraft:paper"
+    }
+  },
+  "result": {
+    "item": "valhelsia_structures:paper_wall",
+    "count": 2
+  }
+}
