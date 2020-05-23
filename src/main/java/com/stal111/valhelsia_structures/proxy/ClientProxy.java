@@ -22,6 +22,8 @@ public class ClientProxy implements IProxy {
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.SPECIAL_SPAWNER.get(), SpecialMobSpawnerTileEntityRenderer::new);
         RenderTypeLookup.setRenderLayer(ModBlocks.SPECIAL_SPAWNER.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.BRAZIER.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.METAL_FRAMED_GLASS.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.METAL_FRAMED_GLASS_PANE.get(), RenderType.getCutout());
     }
 
     @Override
