@@ -6,10 +6,10 @@
 
 <p align="center">
   <a href="https://discordapp.com/invite/reQZEXu">
-    <img src="https://img.shields.io/discord/396333981601234944?color=463F32&label=Discord&logo=discord&style=flat-square">
+    <img src="https://img.shields.io/discord/396333981601234944?color=1b1b1b&label=Discord&logo=Discord&style=plastic">
   </a>
   <a href="https://twitter.com/valhelsia">
-    <img src="https://img.shields.io/twitter/follow/valhelsia?color=463F32&label=Twitter&logo=twitter&style=flat-square">
+    <img src="https://img.shields.io/twitter/follow/valhelsia?color=1b1b1b&label=Twitter&logo=twitter&style=plastic">
   </a>
 </p>
 
@@ -25,7 +25,10 @@ Valhelsia Structures is licensed under a [Creative Commons Attribution-NonCommer
 
 ------------------------------
 
-We partner with mTxServ. If you're interested in hosting a server for your adventure, click the animation below!
-[![partner](https://zupimages.net/up/19/43/2bem.gif)](https://mtxserv.com/)
+**If you're interested in hosting a server for your adventure, click the image below!**                                           
+[![partner](https://zupimages.net/up/20/20/zp4u.png)](https://bisecthosting.com/Valhelsia)
 
-**The game must stay widely accessible, and buying its server at mTxServ offers a quick, simple and quality solution at an affordable price.**
+Valhelsia Team partnered with BisectHosting!                                                                                                                                                     
+
+BisectHosting offers a quick, simple and quality solution. After your purchase, the server is already configured and ready to use.                 
+Use the code "**Valhelsia**" to get **25%** off your first month as a new client for any of their gaming servers.                                                                         
