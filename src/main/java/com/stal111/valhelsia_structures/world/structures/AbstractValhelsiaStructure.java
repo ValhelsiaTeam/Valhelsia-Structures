@@ -48,11 +48,13 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
     protected abstract int getFeatureSeparation(ChunkGenerator<?> generator);
 
     @Override
+    @Nonnull
     public String getStructureName() {
         return new ResourceLocation(ValhelsiaStructures.MOD_ID, name).toString();
     }
 
     @Override
+    @Nonnull
     protected ChunkPos getStartPositionForPosition(ChunkGenerator<?> chunkGenerator, Random random, int x, int z, int spacingOffsetsX, int spacingOffsetsZ) {
         int featureDistance = getFeatureDistance(chunkGenerator);
         int featureSeparation = getFeatureSeparation(chunkGenerator);
@@ -70,7 +72,7 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
     }
 
     @Override
-    public boolean canBeGenerated(BiomeManager biomeManager, ChunkGenerator<?> generator, Random randIn, int chunkX, int chunkZ, Biome biomeIn) {
+    public boolean canBeGenerated(BiomeManager biomeManager, @Nonnull ChunkGenerator<?> generator, @Nonnull Random randIn, int chunkX, int chunkZ, @Nonnull Biome biome) {
         ChunkPos chunkpos = this.getStartPositionForPosition(generator, randIn, chunkX, chunkZ, 0, 0);
         if (chunkX == chunkpos.x && chunkZ == chunkpos.z) {
             if (isSurfaceFlat(generator, chunkX, chunkZ)) {
@@ -82,7 +84,7 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
                     return false;
                 }
 
-                if (generator.hasStructure(biomeIn, this)) {
+                if (generator.hasStructure(biome, this)) {
                     for (int k = chunkX - 10; k <= chunkX + 10; ++k) {
                         for (int l = chunkZ - 10; l <= chunkZ + 10; ++l) {
                             if (Feature.VILLAGE.canBeGenerated(biomeManager, generator, randIn, k, l, biomeManager.getBiome(new BlockPos((k << 4) + 9, 0, (l << 4) + 9)))) {
@@ -101,7 +103,7 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
 
     protected boolean isSurfaceFlat(@Nonnull ChunkGenerator<?> generator, int chunkX, int chunkZ) {
         // Size of the area to check.
-        int offset = 16;
+        int offset = 32;
 
         int xStart = (chunkX << 4) + (7 - (offset / 2));
         int zStart = (chunkZ << 4) + (7 - (offset / 2));

@@ -1,9 +1,6 @@
 package com.stal111.valhelsia_structures;
 
-import com.stal111.valhelsia_structures.init.ModBlocks;
-import com.stal111.valhelsia_structures.init.ModItems;
-import com.stal111.valhelsia_structures.init.ModStructures;
-import com.stal111.valhelsia_structures.init.ModTileEntities;
+import com.stal111.valhelsia_structures.init.*;
 import com.stal111.valhelsia_structures.proxy.ClientProxy;
 import com.stal111.valhelsia_structures.proxy.IProxy;
 import com.stal111.valhelsia_structures.proxy.ServerProxy;
@@ -46,6 +43,7 @@ public class ValhelsiaStructures {
 
     private void setup(final FMLCommonSetupEvent event) {
         proxy.init();
+        ModStructurePieces.registerPieces();
         WorldGen.setupWorldGen();
     }
 }

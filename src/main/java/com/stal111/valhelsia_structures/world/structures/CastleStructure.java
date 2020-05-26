@@ -1,7 +1,6 @@
 package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.datafixers.Dynamic;
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -12,32 +11,29 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import java.util.function.Function;
 
-
 /**
- * Tower Ruin Structure
- * Valhelsia-Structures - com.stal111.valhelsia_structure.world.structures.TowerRuinStructure
+ * Castle Structure
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.CastleStructure
  *
  * @author Valhelsia Team
  * @version 15.0.3
- * @since 2019-10-31
+ * @since 2020-05-27
  */
 
-public class TowerRuinStructure extends AbstractValhelsiaStructure {
-    public static final String SHORT_NAME = "tower_ruin";
+public class CastleStructure extends AbstractValhelsiaStructure {
+    public static final String SHORT_NAME = "castle";
 
-    public TowerRuinStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
+    public CastleStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
         super(configFactoryIn, SHORT_NAME);
     }
 
     @Override
     protected int getFeatureDistance(ChunkGenerator<?> generator) {
-        return 25;
+        return 35;
     }
 
     @Override
@@ -46,16 +42,12 @@ public class TowerRuinStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public int getSize() {
-        return 1;
-    }
-
-    @Override
     protected int getSeedModifier() {
-        return 24357670;
+        return 16987356;
     }
 
     @Override
+    @Nonnull
     public IStartFactory getStartFactory() {
         return Start::new;
     }
@@ -67,10 +59,10 @@ public class TowerRuinStructure extends AbstractValhelsiaStructure {
         }
 
         @Override
-        public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biomeIn) {
+        public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biome) {
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-            int xOffset = 16;
-            int zOffset = 16;
+            int xOffset = 32;
+            int zOffset = 32;
             if (rotation == Rotation.CLOCKWISE_90) {
                 xOffset *= -1;
             } else if (rotation == Rotation.CLOCKWISE_180) {
@@ -90,7 +82,7 @@ public class TowerRuinStructure extends AbstractValhelsiaStructure {
             int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
 
             BlockPos blockpos = new BlockPos(chunkX * 16, minHeight - 2, chunkZ * 16);
-            TowerRuinPieces.generate(generator, templateManager, blockpos, this.components, this.rand);
+            CastlePieces.generate(generator, templateManager, blockpos, this.components, this.rand);
             this.recalculateStructureSize();
         }
     }

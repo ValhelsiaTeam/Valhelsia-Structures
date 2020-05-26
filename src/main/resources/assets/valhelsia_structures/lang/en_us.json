@@ -10,5 +10,9 @@
     "block.valhelsia_structures.dark_oak_post": "Dark Oak Post",
     "block.valhelsia_structures.metal_framed_glass": "Metal Framed Glass",
     "block.valhelsia_structures.metal_framed_glass_pane": "Metal Framed Glass Pane",
-    "block.valhelsia_structures.paper_wall": "Paper Wall"
+    "block.valhelsia_structures.paper_wall": "Paper Wall",
+    "block.valhelsia_structures.stone": "Stone",
+    "block.valhelsia_structures.granite": "Granite",
+    "block.valhelsia_structures.diorite": "Diorite",
+    "block.valhelsia_structures.andesite": "Andesite"
 }

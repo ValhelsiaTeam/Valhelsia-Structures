@@ -15,9 +15,10 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import java.util.function.Function;
 
 public class PlayerHouseStructure extends AbstractValhelsiaStructure {
+    public static final String SHORT_NAME = "player_house";
 
     public PlayerHouseStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-        super(configFactoryIn, "player_house");
+        super(configFactoryIn, SHORT_NAME);
     }
 
     @Override
@@ -42,8 +43,8 @@ public class PlayerHouseStructure extends AbstractValhelsiaStructure {
 
     public static class Start extends MarginedStructureStart {
 
-        public Start(Structure<?> p_i225874_1_, int p_i225874_2_, int p_i225874_3_, MutableBoundingBox p_i225874_4_, int p_i225874_5_, long p_i225874_6_) {
-            super(p_i225874_1_, p_i225874_2_, p_i225874_3_, p_i225874_4_, p_i225874_5_, p_i225874_6_);
+        public Start(Structure<?> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
+            super(structure, chunkX, chunkZ, bounds, reference, seed);
         }
 
         @Override
@@ -69,7 +70,7 @@ public class PlayerHouseStructure extends AbstractValhelsiaStructure {
             int l1 = generator.func_222531_c(xCenter + xOffset, zCenter + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
             int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
 
-            BlockPos blockpos = new BlockPos(chunkX * 16, minHeight - 1, chunkZ * 16);
+            BlockPos blockpos = new BlockPos(chunkX * 16, minHeight - 2, chunkZ * 16);
             PlayerHousePieces.generate(generator, templateManager, blockpos, this.components, this.rand);
             this.recalculateStructureSize();
         }

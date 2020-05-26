@@ -6,6 +6,13 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Set;
 
+/**
+ * Loot Tables
+ * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModLootTables
+ *
+ * @author Valhelsia Team
+ * @version 15.0.3
+ */
 public class ModLootTables {
 
     private static final Set<ResourceLocation> LOOT_TABLES = Sets.newHashSet();

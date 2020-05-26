@@ -21,22 +21,32 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 
 import java.util.List;
 
-public class CastleRuinPieces {
+/**
+ * Castle Pieces
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.CastlePieces
+ *
+ * @author Valhelsia Team
+ * @version 15.0.3
+ * @since 2020-05-27
+ */
+
+public class CastlePieces {
+
     public static void register() {
-        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "castle_ruins"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":castle_ruin"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
+        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "castles"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":castle"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
     }
 
     public static void generate(ChunkGenerator<?> generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
-        JigsawManager.addPieces(new ResourceLocation(ValhelsiaStructures.MOD_ID, "castle_ruins"), 7, CastleRuinPiece::new, generator, templateManager, position, pieces, random);
+        JigsawManager.addPieces(new ResourceLocation(ValhelsiaStructures.MOD_ID, "castles"), 7, CastlePiece::new, generator, templateManager, position, pieces, random);
     }
 
-    public static class CastleRuinPiece extends AbstractVillagePiece {
-        public CastleRuinPiece(TemplateManager templateManager, JigsawPiece jigsawPiece, BlockPos position, int groundLevelDelta, Rotation rotation, MutableBoundingBox bounds) {
-            super(ModStructurePieces.CASTLE_RUIN, templateManager, jigsawPiece, position, groundLevelDelta, rotation, bounds);
+    public static class CastlePiece extends AbstractVillagePiece {
+        public CastlePiece(TemplateManager templateManager, JigsawPiece jigsawPiece, BlockPos position, int groundLevelDelta, Rotation rotation, MutableBoundingBox bounds) {
+            super(ModStructurePieces.CASTLE, templateManager, jigsawPiece, position, groundLevelDelta, rotation, bounds);
         }
 
-        public CastleRuinPiece(TemplateManager templateManager, CompoundNBT compoundNBT) {
-            super(templateManager, compoundNBT, ModStructurePieces.CASTLE_RUIN);
+        public CastlePiece(TemplateManager templateManager, CompoundNBT compoundNBT) {
+            super(templateManager, compoundNBT, ModStructurePieces.CASTLE);
         }
     }
 }

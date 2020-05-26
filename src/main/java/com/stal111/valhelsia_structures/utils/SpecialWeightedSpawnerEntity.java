@@ -13,26 +13,26 @@ public class SpecialWeightedSpawnerEntity extends WeightedRandom.Item {
         this.nbt.putString("id", "minecraft:zombie");
     }
 
-    public SpecialWeightedSpawnerEntity(CompoundNBT p_i46715_1_) {
-        this(p_i46715_1_.contains("Weight", 99) ? p_i46715_1_.getInt("Weight") : 1, p_i46715_1_.getCompound("Entity"));
+    public SpecialWeightedSpawnerEntity(CompoundNBT compoundNBT) {
+        this(compoundNBT.contains("Weight", 99) ? compoundNBT.getInt("Weight") : 1, compoundNBT.getCompound("Entity"));
     }
 
-    public SpecialWeightedSpawnerEntity(int p_i46716_1_, CompoundNBT p_i46716_2_) {
-        super(p_i46716_1_);
-        this.nbt = p_i46716_2_;
+    public SpecialWeightedSpawnerEntity(int weight, CompoundNBT compoundNBT) {
+        super(weight);
+        this.nbt = compoundNBT;
     }
 
     public CompoundNBT toCompoundTag() {
-        CompoundNBT lvt_1_1_ = new CompoundNBT();
+        CompoundNBT compoundNBT = new CompoundNBT();
         if (!this.nbt.contains("id", 8)) {
             this.nbt.putString("id", "minecraft:zombie");
         } else if (!this.nbt.getString("id").contains(":")) {
             this.nbt.putString("id", (new ResourceLocation(this.nbt.getString("id"))).toString());
         }
 
-        lvt_1_1_.put("Entity", this.nbt);
-        lvt_1_1_.putInt("Weight", this.itemWeight);
-        return lvt_1_1_;
+        compoundNBT.put("Entity", this.nbt);
+        compoundNBT.putInt("Weight", this.itemWeight);
+        return compoundNBT;
     }
 
     public CompoundNBT getNbt() {

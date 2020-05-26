@@ -27,9 +27,9 @@ public class PlayerInteractBlockListener {
                 if (stack.getItem() instanceof SpawnEggItem) {
                     TileEntity tileentity = world.getTileEntity(pos);
                     if (tileentity instanceof SpecialMobSpawnerTileEntity) {
-                        SpecialAbstractSpawner abstractspawner = ((SpecialMobSpawnerTileEntity)tileentity).getSpawnerBaseLogic();
+                        SpecialAbstractSpawner abstractSpawner = ((SpecialMobSpawnerTileEntity)tileentity).getSpawnerBaseLogic();
                         EntityType<?> entity = ((SpawnEggItem) stack.getItem()).getType(stack.getTag());
-                        abstractspawner.setEntityType(entity);
+                        abstractSpawner.setEntityType(entity);
                         tileentity.markDirty();
                         world.notifyBlockUpdate(pos, state, state, 3);
                         stack.shrink(1);

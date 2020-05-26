@@ -9,15 +9,23 @@ import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
+/**
+ * Structures
+ * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModStructures
+ *
+ * @author Valhelsia Team
+ * @version 15.0.3
+ */
 public class ModStructures {
-
     public static final DeferredRegister<Feature<?>> FEATURES = new DeferredRegister<>(ForgeRegistries.FEATURES, ValhelsiaStructures.MOD_ID);
 
-    public static final RegistryObject<Structure<NoFeatureConfig>> CASTLE_RUIN = register("castle_ruin", new CastleRuinStructure(NoFeatureConfig::deserialize));
-    public static final RegistryObject<Structure<NoFeatureConfig>> TOWER_RUIN = register("tower_ruin", new TowerRuinStructure(NoFeatureConfig::deserialize));
-    public static final RegistryObject<Structure<NoFeatureConfig>> PLAYER_HOUSE = register("player_house", new PlayerHouseStructure(NoFeatureConfig::deserialize));
-    public static final RegistryObject<Structure<NoFeatureConfig>> FORGE = register("forge", new ForgeStructure(NoFeatureConfig::deserialize));
-    public static final RegistryObject<Structure<NoFeatureConfig>> SMALL_DUNGEON = register("small_dungeon", new SmallDungeonStructure(NoFeatureConfig::deserialize));
+    public static final RegistryObject<Structure<NoFeatureConfig>> CASTLE = register(CastleStructure.SHORT_NAME, new CastleStructure(NoFeatureConfig::deserialize));
+    public static final RegistryObject<Structure<NoFeatureConfig>> CASTLE_RUIN = register(CastleRuinStructure.SHORT_NAME, new CastleRuinStructure(NoFeatureConfig::deserialize));
+    public static final RegistryObject<Structure<NoFeatureConfig>> DESERT_HOUSE = register(DesertHouseStructure.SHORT_NAME, new DesertHouseStructure(NoFeatureConfig::deserialize));
+    public static final RegistryObject<Structure<NoFeatureConfig>> FORGE = register(ForgeStructure.SHORT_NAME, new ForgeStructure(NoFeatureConfig::deserialize));
+    public static final RegistryObject<Structure<NoFeatureConfig>> PLAYER_HOUSE = register(PlayerHouseStructure.SHORT_NAME, new PlayerHouseStructure(NoFeatureConfig::deserialize));
+    public static final RegistryObject<Structure<NoFeatureConfig>> SMALL_DUNGEON = register(SmallDungeonStructure.SHORT_NAME, new SmallDungeonStructure(NoFeatureConfig::deserialize));
+    public static final RegistryObject<Structure<NoFeatureConfig>> TOWER_RUIN = register(TowerRuinStructure.SHORT_NAME, new TowerRuinStructure(NoFeatureConfig::deserialize));
 
     private static <T extends Feature<?>> RegistryObject<T> register(String name, T feature) {
         return FEATURES.register(name, () -> feature);

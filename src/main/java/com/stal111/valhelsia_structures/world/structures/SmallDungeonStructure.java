@@ -13,9 +13,10 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 import java.util.function.Function;
 
 public class SmallDungeonStructure extends AbstractValhelsiaStructure {
+    public static final String SHORT_NAME = "small_dungeon";
 
     public SmallDungeonStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-        super(configFactoryIn, "small_dungeon");
+        super(configFactoryIn, SHORT_NAME);
     }
 
     @Override
@@ -35,7 +36,7 @@ public class SmallDungeonStructure extends AbstractValhelsiaStructure {
 
     @Override
     protected int getSeedModifier() {
-        return 14357618;
+        return 23498567;
     }
 
     @Override
@@ -45,8 +46,8 @@ public class SmallDungeonStructure extends AbstractValhelsiaStructure {
 
     public static class Start extends MarginedStructureStart {
 
-        public Start(Structure<?> p_i225874_1_, int p_i225874_2_, int p_i225874_3_, MutableBoundingBox p_i225874_4_, int p_i225874_5_, long p_i225874_6_) {
-            super(p_i225874_1_, p_i225874_2_, p_i225874_3_, p_i225874_4_, p_i225874_5_, p_i225874_6_);
+        public Start(Structure<?> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
+            super(structure, chunkX, chunkZ, bounds, reference, seed);
         }
 
         @Override

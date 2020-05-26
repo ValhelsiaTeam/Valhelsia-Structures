@@ -7,12 +7,11 @@ import net.minecraft.world.gen.Heightmap;
 import java.util.Random;
 
 /**
- * ValhelsiaStructure Utils
- * ValhelsiaStructure - com.stal111.valhelsia_structure.utils.StructureUtils
+ * Structure Utils
+ * Valhelsia Structure - com.stal111.valhelsia_structures.utils.StructureUtils
  *
  * @author Valhelsia Team
- * @version 0.1
- * @since 2019-10-31
+ * @version 15.0.3
  */
 public class StructureUtils {
     /**
@@ -35,9 +34,9 @@ public class StructureUtils {
      */
     public static int getLowestHeight(IWorld world, int x, int z, int xSize, int zSize) {
         int h0 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x, z);
-        int h1 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, xSize, z);
-        int h2 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x, zSize);
-        int h3 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, xSize, zSize);
+        int h1 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x + xSize, z);
+        int h2 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x, z + zSize);
+        int h3 = world.getHeight(Heightmap.Type.WORLD_SURFACE_WG, x + xSize, z + zSize);
         return Math.min(Math.min(h0, h1), Math.min(h2, h3));
     }
 }

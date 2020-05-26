@@ -34,15 +34,23 @@ public class WorldGen {
                 continue;
             }
 
-            // Use categories to allow compatibility with biome mods such as Biomes O' Plenty.
+            // Plains / Forest Structures
             if (biome.getCategory() == Biome.Category.PLAINS || biome.getCategory() == Biome.Category.FOREST) {
                 if (biome.getTempCategory() == Biome.TempCategory.MEDIUM && biome.getPrecipitation() == Biome.RainType.RAIN) {
                     addSurfaceStructure(biome, ModStructures.CASTLE_RUIN.get());
+                    addSurfaceStructure(biome, ModStructures.CASTLE.get());
                     addSurfaceStructure(biome, ModStructures.TOWER_RUIN.get());
                     addSurfaceStructure(biome, ModStructures.PLAYER_HOUSE.get());
                     addSurfaceStructure(biome, ModStructures.FORGE.get());
                 }
             }
+
+            // Desert Structures
+            if (biome.getCategory() == Biome.Category.DESERT && biome.getPrecipitation() == Biome.RainType.NONE) {
+                addSurfaceStructure(biome, ModStructures.DESERT_HOUSE.get());
+            }
+
+            // Dungeons
             if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
                 addUndergroundStructure(biome, ModStructures.SMALL_DUNGEON.get());
             }

@@ -12,12 +12,14 @@ import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
+import javax.annotation.Nonnull;
 import java.util.function.Function;
 
 public class ForgeStructure extends AbstractValhelsiaStructure {
+    public static final String SHORT_NAME = "forge";
 
     public ForgeStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-        super(configFactoryIn, "forge");
+        super(configFactoryIn, SHORT_NAME);
     }
 
     @Override
@@ -36,18 +38,19 @@ public class ForgeStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
+    @Nonnull
     public IStartFactory getStartFactory() {
         return Start::new;
     }
 
     public static class Start extends MarginedStructureStart {
 
-        public Start(Structure<?> p_i225874_1_, int p_i225874_2_, int p_i225874_3_, MutableBoundingBox p_i225874_4_, int p_i225874_5_, long p_i225874_6_) {
-            super(p_i225874_1_, p_i225874_2_, p_i225874_3_, p_i225874_4_, p_i225874_5_, p_i225874_6_);
+        public Start(Structure<?> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
+            super(structure, chunkX, chunkZ, bounds, reference, seed);
         }
 
         @Override
-        public void init(ChunkGenerator<?> generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biomeIn) {
+        public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biome) {
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
             int xOffset = 32;
             int zOffset = 32;
@@ -69,7 +72,7 @@ public class ForgeStructure extends AbstractValhelsiaStructure {
             int l1 = generator.func_222531_c(xCenter + xOffset, zCenter + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
             int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
 
-            BlockPos blockpos = new BlockPos(chunkX * 16, minHeight - 1, chunkZ * 16);
+            BlockPos blockpos = new BlockPos(chunkX * 16, minHeight - 2, chunkZ * 16);
             ForgePieces.generate(generator, templateManager, blockpos, this.components, this.rand);
             this.recalculateStructureSize();
         }
