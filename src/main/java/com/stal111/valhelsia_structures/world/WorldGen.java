@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.world;
 
+import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -37,22 +38,41 @@ public class WorldGen {
             // Plains / Forest Structures
             if (biome.getCategory() == Biome.Category.PLAINS || biome.getCategory() == Biome.Category.FOREST) {
                 if (biome.getTempCategory() == Biome.TempCategory.MEDIUM && biome.getPrecipitation() == Biome.RainType.RAIN) {
-                    addSurfaceStructure(biome, ModStructures.CASTLE_RUIN.get());
-                    addSurfaceStructure(biome, ModStructures.CASTLE.get());
-                    addSurfaceStructure(biome, ModStructures.TOWER_RUIN.get());
-                    addSurfaceStructure(biome, ModStructures.PLAYER_HOUSE.get());
-                    addSurfaceStructure(biome, ModStructures.FORGE.get());
+
+                    if (StructureGenConfig.GENERATE_CASTLES.get()) {
+                        addSurfaceStructure(biome, ModStructures.CASTLE.get());
+                    }
+
+                    if (StructureGenConfig.GENERATE_CASTLE_RUINS.get()) {
+                        addSurfaceStructure(biome, ModStructures.CASTLE_RUIN.get());
+                    }
+
+                    if (StructureGenConfig.GENERATE_FORGES.get()) {
+                        addSurfaceStructure(biome, ModStructures.FORGE.get());
+                    }
+
+                    if (StructureGenConfig.GENERATE_PLAYER_HOUSES.get()) {
+                        addSurfaceStructure(biome, ModStructures.PLAYER_HOUSE.get());
+                    }
+
+                    if (StructureGenConfig.GENERATE_TOWER_RUINS.get()) {
+                        addSurfaceStructure(biome, ModStructures.TOWER_RUIN.get());
+                    }
                 }
             }
 
             // Desert Structures
             if (biome.getCategory() == Biome.Category.DESERT && biome.getPrecipitation() == Biome.RainType.NONE) {
-                addSurfaceStructure(biome, ModStructures.DESERT_HOUSE.get());
+                if (StructureGenConfig.GENERATE_DESERT_HOUSES.get()) {
+                    addSurfaceStructure(biome, ModStructures.DESERT_HOUSE.get());
+                }
             }
 
             // Dungeons
             if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
-                addUndergroundStructure(biome, ModStructures.SMALL_DUNGEON.get());
+                if (StructureGenConfig.GENERATE_SMALL_DUNGEONS.get()) {
+                    addUndergroundStructure(biome, ModStructures.SMALL_DUNGEON.get());
+                }
             }
         }
     }

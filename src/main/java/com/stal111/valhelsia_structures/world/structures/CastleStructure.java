@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.datafixers.Dynamic;
+import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -33,12 +34,17 @@ public class CastleStructure extends AbstractValhelsiaStructure {
 
     @Override
     protected int getFeatureDistance(ChunkGenerator<?> generator) {
-        return 35;
+        return StructureGenConfig.CASTLE_DISTANCE.get();
     }
 
     @Override
     protected int getFeatureSeparation(ChunkGenerator<?> generator) {
-        return 8;
+        return StructureGenConfig.CASTLE_SEPARATION.get();
+    }
+
+    @Override
+    protected double getSpawnChance() {
+        return StructureGenConfig.CASTLE_SPAWN_CHANCE.get();
     }
 
     @Override

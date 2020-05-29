@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.datafixers.Dynamic;
+import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -24,12 +25,17 @@ public class ForgeStructure extends AbstractValhelsiaStructure {
 
     @Override
     protected int getFeatureDistance(ChunkGenerator<?> generator) {
-        return 31;
+        return StructureGenConfig.FORGE_DISTANCE.get();
     }
 
     @Override
     protected int getFeatureSeparation(ChunkGenerator<?> generator) {
-        return 8;
+        return StructureGenConfig.FORGE_SEPARATION.get();
+    }
+
+    @Override
+    protected double getSpawnChance() {
+        return StructureGenConfig.FORGE_SPAWN_CHANCE.get();
     }
 
     @Override

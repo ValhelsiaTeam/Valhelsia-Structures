@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.datafixers.Dynamic;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -37,12 +38,17 @@ public class TowerRuinStructure extends AbstractValhelsiaStructure {
 
     @Override
     protected int getFeatureDistance(ChunkGenerator<?> generator) {
-        return 25;
+        return StructureGenConfig.TOWER_RUIN_DISTANCE.get();
     }
 
     @Override
     protected int getFeatureSeparation(ChunkGenerator<?> generator) {
-        return 8;
+        return StructureGenConfig.TOWER_RUIN_SEPARATION.get();
+    }
+
+    @Override
+    protected double getSpawnChance() {
+        return StructureGenConfig.TOWER_RUIN_SPAWN_CHANCE.get();
     }
 
     @Override
@@ -56,6 +62,7 @@ public class TowerRuinStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
+    @Nonnull
     public IStartFactory getStartFactory() {
         return Start::new;
     }
@@ -67,7 +74,7 @@ public class TowerRuinStructure extends AbstractValhelsiaStructure {
         }
 
         @Override
-        public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biomeIn) {
+        public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biome) {
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
             int xOffset = 16;
             int zOffset = 16;
