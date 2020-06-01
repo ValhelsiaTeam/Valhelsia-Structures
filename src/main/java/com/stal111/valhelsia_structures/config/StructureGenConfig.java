@@ -51,12 +51,12 @@ public class StructureGenConfig {
         SERVER_BUILDER.comment("Structure Generation Config");
 
         GENERATE_CASTLES = SERVER_BUILDER.comment("Generate Castles?").define("structures.castle.generate", true);
-        CASTLE_SPAWN_CHANCE = SERVER_BUILDER.comment("Castle Spawn Chance [default: 0.7]").defineInRange("structures.castle.spawn_chance",0.7, 0.0, 1.0);
-        CASTLE_DISTANCE = SERVER_BUILDER.comment("Castle Distance (in chunks) [default: 35]").defineInRange("structures.castle.distance", 35, 1, 500);
+        CASTLE_SPAWN_CHANCE = SERVER_BUILDER.comment("Castle Spawn Chance [default: 0.5]").defineInRange("structures.castle.spawn_chance",0.5, 0.0, 1.0);
+        CASTLE_DISTANCE = SERVER_BUILDER.comment("Castle Distance (in chunks) [default: 40]").defineInRange("structures.castle.distance", 40, 1, 500);
         CASTLE_SEPARATION = SERVER_BUILDER.comment("Castle Minimum Separation (in chunks) [default: 8]").defineInRange("structures.castle.separation", 8, 1, 500);
 
         GENERATE_CASTLE_RUINS = SERVER_BUILDER.comment("Generate Castle Ruins?").define("structures.castle_ruin.generate", true);
-        CASTLE_RUIN_SPAWN_CHANCE = SERVER_BUILDER.comment("Castle Ruin Spawn Chance [default: 0.7]").defineInRange("structures.castle_ruin.spawn_chance",0.7, 0.0, 1.0);
+        CASTLE_RUIN_SPAWN_CHANCE = SERVER_BUILDER.comment("Castle Ruin Spawn Chance [default: 0.6]").defineInRange("structures.castle_ruin.spawn_chance",0.6, 0.0, 1.0);
         CASTLE_RUIN_DISTANCE = SERVER_BUILDER.comment("Castle Ruin Distance (in chunks) [default: 35]").defineInRange("structures.castle_ruin.distance", 35, 1, 500);
         CASTLE_RUIN_SEPARATION = SERVER_BUILDER.comment("Castle Ruin Minimum Separation (in chunks) [default: 8]").defineInRange("structures.castle_ruin.separation", 8, 1, 500);
 
@@ -81,7 +81,7 @@ public class StructureGenConfig {
         SMALL_DUNGEON_SEPARATION = SERVER_BUILDER.comment("Small Dungeon Minimum Separation (in chunks) [default: 8]").defineInRange("structures.small_dungeon.separation", 8, 1, 500);
 
         GENERATE_TOWER_RUINS = SERVER_BUILDER.comment("Generate Tower Ruins?").define("structures.tower_ruin.generate", true);
-        TOWER_RUIN_SPAWN_CHANCE = SERVER_BUILDER.comment("Tower Ruin Spawn Chance [default: 0.7]").defineInRange("structures.tower_ruin.spawn_chance",0.7, 0.0, 1.0);
+        TOWER_RUIN_SPAWN_CHANCE = SERVER_BUILDER.comment("Tower Ruin Spawn Chance [default: 0.8]").defineInRange("structures.tower_ruin.spawn_chance",0.8, 0.0, 1.0);
         TOWER_RUIN_DISTANCE = SERVER_BUILDER.comment("Tower Ruin Distance (in chunks) [default: 25]").defineInRange("structures.tower_ruin.distance", 25, 1, 500);
         TOWER_RUIN_SEPARATION = SERVER_BUILDER.comment("Tower Ruin Minimum Separation (in chunks) [default: 8]").defineInRange("structures.tower_ruin.separation", 8, 1, 500);
     }

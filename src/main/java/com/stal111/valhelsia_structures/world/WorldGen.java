@@ -13,9 +13,11 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -34,63 +36,64 @@ public class WorldGen {
      * Setup World Generation
      */
     public static void setupWorldGen() {
-        // Add Structures
-        for (Biome biome : ForgeRegistries.BIOMES) {
 
-            // Blacklisted Biomes
-            if (biome.getCategory() == Biome.Category.RIVER || biome.getCategory() == Biome.Category.OCEAN) {
-                // Don't put any of our current structures in rivers or oceans - even dungeons might clip through
-                // the ocean floor.
-                continue;
-            }
+        // This is apparently deprecated but the replacement isn't in yet?
+        // Regardless, this makes the structure additions thread-safe.
+        //noinspection deprecation
+        DeferredWorkQueue.runLater(() -> {
+            Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
+            biomes.forEachRemaining((biome) -> {
+                // Check Blacklist
+                if (!(biome.getCategory() == Biome.Category.RIVER || biome.getCategory() == Biome.Category.OCEAN)) {
+                    // Plains / Forest Structures
+                    if (biome.getCategory() == Biome.Category.PLAINS || biome.getCategory() == Biome.Category.FOREST) {
+                        if (biome.getTempCategory() == Biome.TempCategory.MEDIUM && biome.getPrecipitation() == Biome.RainType.RAIN) {
 
-            // Plains / Forest Structures
-            if (biome.getCategory() == Biome.Category.PLAINS || biome.getCategory() == Biome.Category.FOREST) {
-                if (biome.getTempCategory() == Biome.TempCategory.MEDIUM && biome.getPrecipitation() == Biome.RainType.RAIN) {
+                            if (StructureGenConfig.GENERATE_CASTLES.get()) {
+                                addSurfaceStructure(biome, ModStructures.CASTLE.get());
+                                structures.add(ModStructures.CASTLE.get());
+                            }
 
-                    if (StructureGenConfig.GENERATE_CASTLES.get()) {
-                        addSurfaceStructure(biome, ModStructures.CASTLE.get());
-                        structures.add(ModStructures.CASTLE.get());
+                            if (StructureGenConfig.GENERATE_CASTLE_RUINS.get()) {
+                                addSurfaceStructure(biome, ModStructures.CASTLE_RUIN.get());
+                                structures.add(ModStructures.CASTLE_RUIN.get());
+                            }
+
+                            if (StructureGenConfig.GENERATE_FORGES.get()) {
+                                addSurfaceStructure(biome, ModStructures.FORGE.get());
+                                structures.add(ModStructures.FORGE.get());
+                            }
+
+                            if (StructureGenConfig.GENERATE_PLAYER_HOUSES.get()) {
+                                addSurfaceStructure(biome, ModStructures.PLAYER_HOUSE.get());
+                                structures.add(ModStructures.PLAYER_HOUSE.get());
+                            }
+
+                            if (StructureGenConfig.GENERATE_TOWER_RUINS.get()) {
+                                addSurfaceStructure(biome, ModStructures.TOWER_RUIN.get());
+                                structures.add(ModStructures.TOWER_RUIN.get());
+                            }
+                        }
                     }
 
-                    if (StructureGenConfig.GENERATE_CASTLE_RUINS.get()) {
-                        addSurfaceStructure(biome, ModStructures.CASTLE_RUIN.get());
-                        structures.add(ModStructures.CASTLE_RUIN.get());
+                    // Desert Structures
+                    if (biome.getCategory() == Biome.Category.DESERT && biome.getPrecipitation() == Biome.RainType.NONE) {
+                        if (StructureGenConfig.GENERATE_DESERT_HOUSES.get()) {
+                            addSurfaceStructure(biome, ModStructures.DESERT_HOUSE.get());
+                            structures.add(ModStructures.DESERT_HOUSE.get());
+                        }
                     }
 
-                    if (StructureGenConfig.GENERATE_FORGES.get()) {
-                        addSurfaceStructure(biome, ModStructures.FORGE.get());
-                        structures.add(ModStructures.FORGE.get());
-                    }
-
-                    if (StructureGenConfig.GENERATE_PLAYER_HOUSES.get()) {
-                        addSurfaceStructure(biome, ModStructures.PLAYER_HOUSE.get());
-                        structures.add(ModStructures.PLAYER_HOUSE.get());
-                    }
-
-                    if (StructureGenConfig.GENERATE_TOWER_RUINS.get()) {
-                        addSurfaceStructure(biome, ModStructures.TOWER_RUIN.get());
-                        structures.add(ModStructures.TOWER_RUIN.get());
+                    // Dungeons
+                    if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
+                        if (StructureGenConfig.GENERATE_SMALL_DUNGEONS.get()) {
+                            addUndergroundStructure(biome, ModStructures.SMALL_DUNGEON.get());
+                            structures.add(ModStructures.SMALL_DUNGEON.get());
+                        }
                     }
                 }
-            }
-
-            // Desert Structures
-            if (biome.getCategory() == Biome.Category.DESERT && biome.getPrecipitation() == Biome.RainType.NONE) {
-                if (StructureGenConfig.GENERATE_DESERT_HOUSES.get()) {
-                    addSurfaceStructure(biome, ModStructures.DESERT_HOUSE.get());
-                    structures.add(ModStructures.DESERT_HOUSE.get());
-                }
-            }
-
-            // Dungeons
-            if (biome.getCategory() != Biome.Category.NETHER && biome.getCategory() != Biome.Category.THEEND) {
-                if (StructureGenConfig.GENERATE_SMALL_DUNGEONS.get()) {
-                    addUndergroundStructure(biome, ModStructures.SMALL_DUNGEON.get());
-                    structures.add(ModStructures.SMALL_DUNGEON.get());
-                }
-            }
-        }
+            });
+        });
     }
 
     /**

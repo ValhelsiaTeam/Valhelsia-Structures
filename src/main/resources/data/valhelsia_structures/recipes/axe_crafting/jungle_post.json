@@ -1,0 +1,12 @@
+{
+  "type": "valhelsia_structures:axe_crafting",
+  "ingredients": [
+    {
+      "item": "minecraft:jungle_log"
+    }
+  ],
+  "result": {
+    "item": "valhelsia_structures:jungle_post",
+    "count": 2
+  }
+}

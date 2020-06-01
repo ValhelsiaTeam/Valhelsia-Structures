@@ -1,0 +1,12 @@
+{
+  "type": "valhelsia_structures:axe_crafting",
+  "ingredients": [
+    {
+      "item": "minecraft:acacia_log"
+    }
+  ],
+  "result": {
+    "item": "valhelsia_structures:acacia_post",
+    "count": 2
+  }
+}
