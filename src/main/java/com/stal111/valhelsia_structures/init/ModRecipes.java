@@ -2,13 +2,8 @@ package com.stal111.valhelsia_structures.init;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.recipe.AxeCraftingRecipe;
-import net.minecraft.block.Block;
-import net.minecraft.block.PaneBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.item.crafting.SpecialRecipeSerializer;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -27,11 +22,11 @@ public class ModRecipes {
 
     public static final DeferredRegister<IRecipeSerializer<?>> SERIALIZERS = new DeferredRegister<>(ForgeRegistries.RECIPE_SERIALIZERS, ValhelsiaStructures.MOD_ID);
 
-    public static final RegistryObject<AxeCraftingRecipe.Serializer> AXE_CRAFTING_SERIALIZER = register("axe_crafting", AxeCraftingRecipe.SERIALIZER);
+    public static final RegistryObject<IRecipeSerializer<?>> AXE_CRAFTING_SERIALIZER = register("axe_crafting", new SpecialRecipeSerializer<>(AxeCraftingRecipe::new));
 
     @SuppressWarnings("SameParameterValue")
     @Nonnull
-    private static <T extends IRecipeSerializer<?>> RegistryObject<T> register(@Nonnull String name, @Nonnull T serializer) {
+    private static RegistryObject<IRecipeSerializer<?>> register(@Nonnull String name, @Nonnull IRecipeSerializer<?> serializer) {
         return SERIALIZERS.register(name, () -> serializer);
     }
 }
