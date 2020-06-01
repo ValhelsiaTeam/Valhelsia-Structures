@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.datafixers.Dynamic;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.world.WorldGen;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -15,6 +16,7 @@ import net.minecraft.world.gen.OverworldChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.ScatteredStructure;
+import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import javax.annotation.Nonnull;
@@ -68,7 +70,7 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
         int zTemp = z + featureDistance * spacingOffsetsZ;
         int validChunkX = (xTemp < 0 ? xTemp - featureDistance + 1 : xTemp) / featureDistance;
         int validChunkZ = (zTemp < 0 ? zTemp - featureDistance + 1 : zTemp) / featureDistance;
-        ((SharedSeedRandom) random).setLargeFeatureSeedWithSalt(generator.getSeed(), validChunkX, validChunkZ, this.getSeedModifier());
+        ((SharedSeedRandom) random).setLargeFeatureSeedWithSalt(generator.getSeed(), validChunkX, validChunkZ, getSeedModifier());
         validChunkX *= featureDistance;
         validChunkZ *= featureDistance;
         validChunkX += random.nextInt(featureDistance - featureSeparation);
@@ -88,23 +90,32 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
         ChunkPos chunkpos = this.getStartPositionForPosition(generator, randIn, chunkX, chunkZ, 0, 0);
         if (chunkX == chunkpos.x && chunkZ == chunkpos.z) {
             if (isSurfaceFlat(generator, chunkX, chunkZ)) {
-                if (generator.hasStructure(biome, this)) {
-                    // Note: This was checking a larger radius (10), but I don't think we need to be that far away from a village - Vael.
-                    for (int k = chunkX - 5; k <= chunkX + 5; ++k) {
-                        for (int l = chunkZ - 5; l <= chunkZ + 5; ++l) {
-                            if (Feature.VILLAGE.canBeGenerated(biomeManager, generator, randIn, k, l, biomeManager.getBiome(new BlockPos((k << 4) + 9, 0, (l << 4) + 9)))) {
-                                return false;
-                            }
-                            // TODO: Check all of the other structures in this mod so we avoid overlapping with other structures too.
+
+                // Check the entire size of the structure to see if it's all a viable biome:
+                for (int x = chunkX - getSize(); x <= chunkX + getSize(); x++) {
+                    for (int z = chunkZ - getSize(); z <= chunkZ + getSize(); z++) {
+                        if (!generator.hasStructure(biomeManager.getBiome(new BlockPos((x << 4) + 9, 0, (z << 4) + 9)), this)) {
+                            return false;
                         }
                     }
-
-                    int i = chunkX >> 4;
-                    int j = chunkZ >> 4;
-                    randIn.setSeed((long) (i ^ j << 4) ^ generator.getSeed());
-                    randIn.nextInt();
-                    return randIn.nextDouble() < getSpawnChance();
                 }
+
+                // Note: This was checking a larger radius (10), but I don't think we need to be that far away from a village - Vael.
+                for (int k = chunkX - 5; k <= chunkX + 5; ++k) {
+                    for (int l = chunkZ - 5; l <= chunkZ + 5; ++l) {
+                        BlockPos position = new BlockPos((k << 4) + 9, 0, (l << 4) + 9);
+                        if (Feature.VILLAGE.canBeGenerated(biomeManager, generator, randIn, k, l, biomeManager.getBiome(position))) {
+                            return false;
+                        }
+                    }
+                }
+
+                int i = chunkX >> 4;
+                int j = chunkZ >> 4;
+                randIn.setSeed((long) (i ^ j << 4) ^ generator.getSeed());
+                randIn.nextInt();
+                return randIn.nextDouble() < getSpawnChance();
+
             }
         }
 
@@ -113,10 +124,10 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
 
     protected boolean isSurfaceFlat(@Nonnull ChunkGenerator<?> generator, int chunkX, int chunkZ) {
         // Size of the area to check.
-        int offset = 32;
+        int offset = getSize() * 16;
 
-        int xStart = (chunkX << 4) + (7 - (offset / 2));
-        int zStart = (chunkZ << 4) + (7 - (offset / 2));
+        int xStart = (chunkX << 4);
+        int zStart = (chunkZ << 4);
 
         int i1 = generator.func_222531_c(xStart, zStart, Heightmap.Type.WORLD_SURFACE_WG);
         int j1 = generator.func_222531_c(xStart, zStart + offset, Heightmap.Type.WORLD_SURFACE_WG);
@@ -125,7 +136,6 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
         int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
         int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
 
-        // Considering a difference of two or less to be flat enough.
-        return Math.abs(maxHeight - minHeight) <= 2;
+        return Math.abs(maxHeight - minHeight) <= 3;
     }
 }

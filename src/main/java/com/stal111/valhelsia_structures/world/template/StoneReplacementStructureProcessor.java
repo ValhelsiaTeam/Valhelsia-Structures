@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
 
 /**
  * Stone Replacement Structure Processor
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.template.StoneReplacementStructureProcessor
+ * Valhelsia Structures - com.stal111.valhelsia_structures.world.template.StoneReplacementStructureProcessor
  *
  * Processor to replace vanilla stone with a replacement that is identical to vanilla stone with one exception -
  * it won't get replaced in later stages of world generation / decoration. The loot table matches vanilla stone types

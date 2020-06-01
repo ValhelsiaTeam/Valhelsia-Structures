@@ -6,8 +6,8 @@ import net.minecraft.world.gen.feature.template.BlockIgnoreStructureProcessor;
 import net.minecraft.world.gen.feature.template.JigsawReplacementStructureProcessor;
 
 /**
- * Additional Processors for ValhelsiaStructure
- * ValhelsiaStructure - com.stal111.valhelsia_structure.world.template.Processors
+ * Additional Processors for Valhelsia Structures
+ * Valhelsia Structures - com.stal111.valhelsia_structures.world.template.Processors
  *
  * @author Valhelsia Team
  * @version 15.0.3

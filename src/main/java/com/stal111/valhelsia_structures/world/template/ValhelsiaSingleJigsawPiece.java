@@ -18,7 +18,7 @@ import java.util.Random;
 
 /**
  * Valhelsia Single Jigsaw Piece
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.template.ValhelsiaSingleJigsawPiece
+ * Valhelsia Structures - com.stal111.valhelsia_structures.world.template.ValhelsiaSingleJigsawPiece
  *
  * @author Valhelsia Team
  * @version 15.0.3

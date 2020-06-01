@@ -25,8 +25,8 @@ public class PlayerHousePieces {
         JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "player_houses"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":player_house"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
     }
 
-    public static void generate(ChunkGenerator<?> p_215139_0_, TemplateManager p_215139_1_, BlockPos pos, List<StructurePiece> p_215139_3_, SharedSeedRandom p_215139_4_) {
-        JigsawManager.addPieces(new ResourceLocation(ValhelsiaStructures.MOD_ID, "player_houses"), 7, PlayerHousePiece::new, p_215139_0_, p_215139_1_, pos, p_215139_3_, p_215139_4_);
+    public static void generate(ChunkGenerator<?> generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
+        JigsawManager.addPieces(new ResourceLocation(ValhelsiaStructures.MOD_ID, "player_houses"), 7, PlayerHousePiece::new, generator, templateManager, position, pieces, random);
     }
 
     public static class PlayerHousePiece extends AbstractVillagePiece {

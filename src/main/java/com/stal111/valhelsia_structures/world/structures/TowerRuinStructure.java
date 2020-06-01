@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.world.structures;
 import com.mojang.datafixers.Dynamic;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.config.StructureGenConfig;
+import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -76,28 +77,8 @@ public class TowerRuinStructure extends AbstractValhelsiaStructure {
         @Override
         public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biome) {
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-            int xOffset = 16;
-            int zOffset = 16;
-            if (rotation == Rotation.CLOCKWISE_90) {
-                xOffset *= -1;
-            } else if (rotation == Rotation.CLOCKWISE_180) {
-                xOffset *= -1;
-                zOffset *= -1;
-            } else if (rotation == Rotation.COUNTERCLOCKWISE_90) {
-                zOffset *= -1;
-            }
-
-            int xCenter = (chunkX << 4) + 7;
-            int zCenter = (chunkZ << 4) + 7;
-
-            int i1 = generator.func_222531_c(xCenter, zCenter, Heightmap.Type.WORLD_SURFACE_WG);
-            int j1 = generator.func_222531_c(xCenter, zCenter + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
-            int k1 = generator.func_222531_c(xCenter + xOffset, zCenter, Heightmap.Type.WORLD_SURFACE_WG);
-            int l1 = generator.func_222531_c(xCenter + xOffset, zCenter + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
-            int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
-
-            BlockPos blockpos = new BlockPos(chunkX * 16, minHeight - 2, chunkZ * 16);
-            TowerRuinPieces.generate(generator, templateManager, blockpos, this.components, this.rand);
+            BlockPos position = StructureUtils.getSurfaceStructurePosition(generator, 1, rotation, chunkX, chunkZ);
+            TowerRuinPieces.generate(generator, templateManager, position, this.components, this.rand);
             this.recalculateStructureSize();
         }
     }

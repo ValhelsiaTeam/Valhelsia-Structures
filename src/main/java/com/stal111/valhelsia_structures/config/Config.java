@@ -10,7 +10,7 @@ import java.io.File;
 
 /**
  * Config
- * Valhelsia-Structures - com.stal111.valhelsia_structures.config.Config
+ * Valhelsia Structures - com.stal111.valhelsia_structures.config.Config
  *
  * @author Valhelsia Team
  * @version 15.0.3
@@ -32,7 +32,7 @@ public class Config {
     }
 
     public static void loadConfig(ForgeConfigSpec config, String path) {
-        final CommentedFileConfig file = CommentedFileConfig.builder(new File(path)).sync().autosave().writingMode(WritingMode.REPLACE).build();
+        final CommentedFileConfig file = CommentedFileConfig.builder(new File(path)).preserveInsertionOrder().sync().autosave().writingMode(WritingMode.REPLACE).build();
         file.load();
         config.setConfig(file);
     }

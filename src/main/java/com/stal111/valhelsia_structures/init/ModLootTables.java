@@ -17,8 +17,12 @@ public class ModLootTables {
 
     private static final Set<ResourceLocation> LOOT_TABLES = Sets.newHashSet();
 
-    public static final ResourceLocation CHESTS_SMALL_CASTLE = register(new ResourceLocation(ValhelsiaStructures.MOD_ID, "chests/small_castle"));
-
+    public static final ResourceLocation CHESTS_CASTLE = register(new ResourceLocation(ValhelsiaStructures.MOD_ID, "chests/castle"));
+    public static final ResourceLocation CHESTS_CASTLE_RUIN = register(new ResourceLocation(ValhelsiaStructures.MOD_ID, "chests/castle_ruin"));
+    public static final ResourceLocation CHESTS_DESERT_HOUSE = register(new ResourceLocation(ValhelsiaStructures.MOD_ID, "chests/desert_house"));
+    public static final ResourceLocation CHESTS_SMALL_DUNGEON = register(new ResourceLocation(ValhelsiaStructures.MOD_ID, "chests/dungeon1"));
+    public static final ResourceLocation CHESTS_FORGE = register(new ResourceLocation(ValhelsiaStructures.MOD_ID, "chests/forge"));
+    public static final ResourceLocation CHESTS_PLAYER_HOUSE = register(new ResourceLocation(ValhelsiaStructures.MOD_ID, "chests/player_house"));
 
     private static ResourceLocation register(String id) {
         return register(new ResourceLocation(id));

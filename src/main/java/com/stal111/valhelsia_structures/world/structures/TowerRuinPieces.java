@@ -25,18 +25,18 @@ public class TowerRuinPieces {
         JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "tower_ruins"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":tower_ruin"), 1), Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":tower_ruin1"), 1), Pair.of(new ValhelsiaSingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":tower_ruin2"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
     }
 
-    public static void generate(ChunkGenerator<?> p_215139_0_, TemplateManager p_215139_1_, BlockPos p_215139_2_, List<StructurePiece> p_215139_3_, SharedSeedRandom p_215139_4_) {
-        JigsawManager.addPieces(new ResourceLocation(ValhelsiaStructures.MOD_ID, "tower_ruins"), 7, TowerRuinPiece::new, p_215139_0_, p_215139_1_, p_215139_2_, p_215139_3_, p_215139_4_);
+    public static void generate(ChunkGenerator<?> generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
+        JigsawManager.addPieces(new ResourceLocation(ValhelsiaStructures.MOD_ID, "tower_ruins"), 7, TowerRuinPiece::new, generator, templateManager, position, pieces, random);
     }
 
     public static class TowerRuinPiece extends AbstractVillagePiece {
 
-        public TowerRuinPiece(TemplateManager p_i50560_1_, JigsawPiece p_i50560_2_, BlockPos p_i50560_3_, int p_i50560_4_, Rotation p_i50560_5_, MutableBoundingBox p_i50560_6_) {
-            super(ModStructurePieces.TOWER_RUIN, p_i50560_1_, p_i50560_2_, p_i50560_3_, p_i50560_4_, p_i50560_5_, p_i50560_6_);
+        public TowerRuinPiece(TemplateManager templateManager, JigsawPiece p_i50560_2_, BlockPos p_i50560_3_, int p_i50560_4_, Rotation p_i50560_5_, MutableBoundingBox p_i50560_6_) {
+            super(ModStructurePieces.TOWER_RUIN, templateManager, p_i50560_2_, p_i50560_3_, p_i50560_4_, p_i50560_5_, p_i50560_6_);
         }
 
-        public TowerRuinPiece(TemplateManager p_i50561_1_, CompoundNBT p_i50561_2_) {
-            super(p_i50561_1_, p_i50561_2_, ModStructurePieces.TOWER_RUIN);
+        public TowerRuinPiece(TemplateManager templateManager, CompoundNBT compoundNBT) {
+            super(templateManager, compoundNBT, ModStructurePieces.TOWER_RUIN);
         }
     }
 }

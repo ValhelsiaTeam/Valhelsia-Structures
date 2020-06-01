@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.init;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.ValhelsiaStructuresItemGroups;
 import com.stal111.valhelsia_structures.block.BrazierBlock;
 import com.stal111.valhelsia_structures.block.PostBlock;
 import com.stal111.valhelsia_structures.block.SpecialSpawnerBlock;
@@ -45,7 +46,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> ANDESITE = register("andesite", new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).hardnessAndResistance(1.5F, 6.0F)));
 
     private static <T extends Block> RegistryObject<T> register(String name, T block) {
-        ModItems.ITEMS.register(name, () -> new BlockItem(block, new Item.Properties().group(ItemGroup.MISC)));
+        ModItems.ITEMS.register(name, () -> new BlockItem(block, new Item.Properties().group(ValhelsiaStructuresItemGroups.MAIN)));
         return BLOCKS.register(name, () -> block);
     }
 
