@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.ValhelsiaStructuresItemGroups;
 import com.stal111.valhelsia_structures.block.BrazierBlock;
 import com.stal111.valhelsia_structures.block.PostBlock;
 import com.stal111.valhelsia_structures.block.SpecialSpawnerBlock;
+import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
@@ -40,14 +41,13 @@ public class ModBlocks {
     public static final RegistryObject<PaneBlock> PAPER_WALL = register("paper_wall", new PaneBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.3F).harvestTool(ToolType.AXE).sound(SoundType.CLOTH).notSolid()));
 
     // Workaround for structures - stone that can't be replaced during later generation steps:
-    public static final RegistryObject<Block> STONE = register("stone", new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).hardnessAndResistance(1.5F, 6.0F)));
-    public static final RegistryObject<Block> GRANITE = register("granite", new Block(Block.Properties.create(Material.ROCK, MaterialColor.DIRT).harvestTool(ToolType.PICKAXE).hardnessAndResistance(1.5F, 6.0F)));
-    public static final RegistryObject<Block> DIORITE = register("diorite", new Block(Block.Properties.create(Material.ROCK, MaterialColor.QUARTZ).harvestTool(ToolType.PICKAXE).hardnessAndResistance(1.5F, 6.0F)));
-    public static final RegistryObject<Block> ANDESITE = register("andesite", new Block(Block.Properties.create(Material.ROCK, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).hardnessAndResistance(1.5F, 6.0F)));
+    public static final RegistryObject<Block> STONE = register("stone", new ValhelsiaStoneBlock(() -> Blocks.STONE, Block.Properties.create(Material.ROCK, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).hardnessAndResistance(1.5F, 6.0F)));
+    public static final RegistryObject<Block> GRANITE = register("granite", new ValhelsiaStoneBlock(() -> Blocks.GRANITE, Block.Properties.create(Material.ROCK, MaterialColor.DIRT).harvestTool(ToolType.PICKAXE).hardnessAndResistance(1.5F, 6.0F)));
+    public static final RegistryObject<Block> DIORITE = register("diorite", new ValhelsiaStoneBlock(() -> Blocks.DIORITE, Block.Properties.create(Material.ROCK, MaterialColor.QUARTZ).harvestTool(ToolType.PICKAXE).hardnessAndResistance(1.5F, 6.0F)));
+    public static final RegistryObject<Block> ANDESITE = register("andesite", new ValhelsiaStoneBlock(() -> Blocks.ANDESITE, Block.Properties.create(Material.ROCK, MaterialColor.STONE).harvestTool(ToolType.PICKAXE).hardnessAndResistance(1.5F, 6.0F)));
 
     private static <T extends Block> RegistryObject<T> register(String name, T block) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block, new Item.Properties().group(ValhelsiaStructuresItemGroups.MAIN)));
         return BLOCKS.register(name, () -> block);
     }
-
 }
