@@ -46,7 +46,8 @@ public class WorldGen {
                 // Check Blacklist
                 if (!(biome.getCategory() == Biome.Category.RIVER || biome.getCategory() == Biome.Category.OCEAN)) {
                     // Plains / Forest Structures
-                    if (biome.getCategory() == Biome.Category.PLAINS || biome.getCategory() == Biome.Category.FOREST) {
+                    if (biome.getCategory() == Biome.Category.PLAINS || biome.getCategory() == Biome.Category.FOREST
+                            || biome.getCategory() == Biome.Category.EXTREME_HILLS || biome.getCategory() == Biome.Category.TAIGA) {
                         if (biome.getTempCategory() == Biome.TempCategory.MEDIUM && biome.getPrecipitation() == Biome.RainType.RAIN) {
 
                             if (StructureGenConfig.GENERATE_CASTLES.get()) {

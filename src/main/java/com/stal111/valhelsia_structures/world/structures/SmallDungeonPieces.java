@@ -30,15 +30,15 @@ public class SmallDungeonPieces {
     }
 
     public static void generate(ChunkGenerator<?> p_215139_0_, TemplateManager p_215139_1_, BlockPos p_215139_2_, List<StructurePiece> p_215139_3_, SharedSeedRandom p_215139_4_) {
-        JigsawManager.addPieces(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/entrances"), 7, Piece::new, p_215139_0_, p_215139_1_, p_215139_2_, p_215139_3_, p_215139_4_);
+        JigsawManager.addPieces(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/entrances"), 7, SmallDungeonPiece::new, p_215139_0_, p_215139_1_, p_215139_2_, p_215139_3_, p_215139_4_);
     }
 
-    public static class Piece extends AbstractVillagePiece {
-        public Piece(TemplateManager p_i50560_1_, JigsawPiece p_i50560_2_, BlockPos p_i50560_3_, int p_i50560_4_, Rotation p_i50560_5_, MutableBoundingBox p_i50560_6_) {
+    public static class SmallDungeonPiece extends AbstractVillagePiece {
+        public SmallDungeonPiece(TemplateManager p_i50560_1_, JigsawPiece p_i50560_2_, BlockPos p_i50560_3_, int p_i50560_4_, Rotation p_i50560_5_, MutableBoundingBox p_i50560_6_) {
             super(ModStructurePieces.SMALL_DUNGEON, p_i50560_1_, p_i50560_2_, p_i50560_3_, p_i50560_4_, p_i50560_5_, p_i50560_6_);
         }
 
-        public Piece(TemplateManager p_i50561_1_, CompoundNBT p_i50561_2_) {
+        public SmallDungeonPiece(TemplateManager p_i50561_1_, CompoundNBT p_i50561_2_) {
             super(p_i50561_1_, p_i50561_2_, ModStructurePieces.SMALL_DUNGEON);
         }
     }

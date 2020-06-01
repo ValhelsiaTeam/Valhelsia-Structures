@@ -20,8 +20,8 @@ import java.util.function.Function;
 public class ForgeStructure extends AbstractValhelsiaStructure {
     public static final String SHORT_NAME = "forge";
 
-    public ForgeStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-        super(configFactoryIn, SHORT_NAME);
+    public ForgeStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+        super(configFactory, SHORT_NAME);
     }
 
     @Override

@@ -17,8 +17,8 @@ import java.util.function.Function;
 public class SmallDungeonStructure extends AbstractValhelsiaStructure {
     public static final String SHORT_NAME = "small_dungeon";
 
-    public SmallDungeonStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-        super(configFactoryIn, SHORT_NAME);
+    public SmallDungeonStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+        super(configFactory, SHORT_NAME);
     }
 
     @Override

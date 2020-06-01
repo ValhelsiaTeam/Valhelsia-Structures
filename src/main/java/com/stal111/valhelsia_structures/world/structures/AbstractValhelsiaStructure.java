@@ -73,8 +73,8 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
         ((SharedSeedRandom) random).setLargeFeatureSeedWithSalt(generator.getSeed(), validChunkX, validChunkZ, getSeedModifier());
         validChunkX *= featureDistance;
         validChunkZ *= featureDistance;
-        validChunkX += random.nextInt(featureDistance - featureSeparation);
-        validChunkZ += random.nextInt(featureDistance - featureSeparation);
+        validChunkX += random.nextInt(featureDistance - featureSeparation) + random.nextInt(featureDistance - featureSeparation) / 2;
+        validChunkZ += random.nextInt(featureDistance - featureSeparation) + random.nextInt(featureDistance - featureSeparation) / 2;
         return new ChunkPos(validChunkX, validChunkZ);
     }
 
@@ -87,7 +87,7 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
             return false;
         }
 
-        ChunkPos chunkpos = this.getStartPositionForPosition(generator, randIn, chunkX, chunkZ, 0, 0);
+        ChunkPos chunkpos = getStartPositionForPosition(generator, randIn, chunkX, chunkZ, 0, 0);
         if (chunkX == chunkpos.x && chunkZ == chunkpos.z) {
             if (isSurfaceFlat(generator, chunkX, chunkZ)) {
 

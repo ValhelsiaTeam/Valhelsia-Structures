@@ -20,8 +20,8 @@ import java.util.function.Function;
 public class PlayerHouseStructure extends AbstractValhelsiaStructure {
     public static final String SHORT_NAME = "player_house";
 
-    public PlayerHouseStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-        super(configFactoryIn, SHORT_NAME);
+    public PlayerHouseStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+        super(configFactory, SHORT_NAME);
     }
 
     @Override

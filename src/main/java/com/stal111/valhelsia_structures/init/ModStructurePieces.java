@@ -26,7 +26,7 @@ public class ModStructurePieces {
     public static final IStructurePieceType DESERT_HOUSE = DesertHousePieces.DesertHousePiece::new;
     public static final IStructurePieceType FORGE = ForgePieces.ForgePiece::new;
     public static final IStructurePieceType PLAYER_HOUSE = PlayerHousePieces.PlayerHousePiece::new;
-    public static final IStructurePieceType SMALL_DUNGEON = SmallDungeonPieces.Piece::new;
+    public static final IStructurePieceType SMALL_DUNGEON = SmallDungeonPieces.SmallDungeonPiece::new;
     public static final IStructurePieceType TOWER_RUIN = TowerRuinPieces.TowerRuinPiece::new;
 
     public static void registerPieces() {
