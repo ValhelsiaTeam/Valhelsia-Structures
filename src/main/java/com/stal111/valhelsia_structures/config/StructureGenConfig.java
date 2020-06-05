@@ -7,10 +7,12 @@ import net.minecraftforge.common.ForgeConfigSpec;
  * Valhelsia Structures - com.stal111.valhelsia_structures.config.StructureGenConfig
  *
  * @author Valhelsia Team
- * @version 15.0.3
+ * @version 15.0.3a
  * @since 2020-05-29
  */
 public class StructureGenConfig {
+
+    public static ForgeConfigSpec.IntValue FLATNESS_DELTA;
 
     public static ForgeConfigSpec.BooleanValue GENERATE_CASTLES;
     public static ForgeConfigSpec.DoubleValue CASTLE_SPAWN_CHANCE;
@@ -49,6 +51,8 @@ public class StructureGenConfig {
 
     public static void init(ForgeConfigSpec.Builder SERVER_BUILDER, ForgeConfigSpec.Builder CLIENT_BUILDER) {
         SERVER_BUILDER.comment("Structure Generation Config");
+
+        FLATNESS_DELTA = SERVER_BUILDER.comment("How flat does terrain need to be for surface structures to spawn? (in blocks) [default: 3]").defineInRange("structures.global.flatness_delta", 3, 0, 64);
 
         GENERATE_CASTLES = SERVER_BUILDER.comment("Generate Castles?").define("structures.castle.generate", true);
         CASTLE_SPAWN_CHANCE = SERVER_BUILDER.comment("Castle Spawn Chance [default: 0.5]").defineInRange("structures.castle.spawn_chance",0.5, 0.0, 1.0);

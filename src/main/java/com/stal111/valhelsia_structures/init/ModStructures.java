@@ -27,6 +27,9 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> SMALL_DUNGEON = register(SmallDungeonStructure.SHORT_NAME, new SmallDungeonStructure(NoFeatureConfig::deserialize));
     public static final RegistryObject<Structure<NoFeatureConfig>> TOWER_RUIN = register(TowerRuinStructure.SHORT_NAME, new TowerRuinStructure(NoFeatureConfig::deserialize));
 
+    // Removed Structures - these prevent crashes related to a vanilla bug.
+    public static final RegistryObject<Structure<NoFeatureConfig>> SMALL_CASTLE = register("small_castle", new RemovedStructure(NoFeatureConfig::deserialize, "small_castle"));
+
     private static <T extends Feature<?>> RegistryObject<T> register(String name, T feature) {
         return FEATURES.register(name, () -> feature);
     }

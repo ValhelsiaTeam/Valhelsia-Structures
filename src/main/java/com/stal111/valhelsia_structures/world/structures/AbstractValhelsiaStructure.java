@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.datafixers.Dynamic;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.world.WorldGen;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
@@ -10,6 +11,7 @@ import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeManager;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.OverworldChunkGenerator;
@@ -23,6 +25,18 @@ import javax.annotation.Nonnull;
 import java.util.Random;
 import java.util.function.Function;
 
+
+/**
+ * Abstract Overworld Structure
+ * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.AbstractOverworldStructure
+ *
+ * Serves as a way to reduce duplicate code in structures - this has sensible defaults for most surface structures
+ * but can be overridden if needed.
+ *
+ * @author Valhelsia Team
+ * @version 15.0.3a
+ * @since 2020-03-22
+ */
 public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFeatureConfig> {
 
     public static final int DEFAULT_CHUNK_RADIUS = 2;
@@ -81,9 +95,11 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
     @Override
     public boolean canBeGenerated(BiomeManager biomeManager, @Nonnull ChunkGenerator<?> generator, @Nonnull Random randIn, int chunkX, int chunkZ, @Nonnull Biome biome) {
 
-        // This will need to be changed if we introduce structures for other dimensions, but for now this blacklists anything
-        // that isn't the Overworld:
-        if (!(generator instanceof OverworldChunkGenerator)) {
+        // Janky way of getting the world, but ¯\_(ツ)_/¯
+        IWorld world = ObfuscationReflectionHelper.getPrivateValue(ChunkGenerator.class, generator, "field_222540_a");
+        if (world == null || !(world.getDimension().getType() == DimensionType.OVERWORLD)) {
+            // Whitelist only the Overworld.
+            // TODO (VZ): Change this if we introduce structures that should spawn in any other dimension.
             return false;
         }
 
@@ -136,6 +152,6 @@ public abstract class AbstractValhelsiaStructure extends ScatteredStructure<NoFe
         int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
         int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
 
-        return Math.abs(maxHeight - minHeight) <= 3;
+        return Math.abs(maxHeight - minHeight) <= StructureGenConfig.FLATNESS_DELTA.get();
     }
 }

@@ -6,7 +6,7 @@
 # The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[28,)" #mandatory (28 is current forge version)
+loaderVersion="[31,)" #mandatory (31 is current forge version)
 # A URL to refer people to when problems occur with this mod
 issueTrackerURL="https://github.com/stal111/Valhelsia-Structures/issues" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
@@ -22,7 +22,7 @@ displayURL="https://www.curseforge.com/minecraft/mc-mods/valhelsiastructures" #o
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="logo.png" #optional
 # A text field displayed in the mod UI
-credits="stal111, Vaelzan" #optional
+credits="Khytwel, stal111, Vaelzan" #optional
 # A text field displayed in the mod UI
 authors="Valhelsia Team" #optional
 # The description text for the mod (multi line!) (#mandatory)
