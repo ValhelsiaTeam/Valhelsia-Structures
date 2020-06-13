@@ -25,7 +25,7 @@ import java.util.List;
  * Valhelsia Structures - com.stal111.valhelsia_structures.world.WorldGen
  *
  * @author Valhelsia Team
- * @version 15.0.3a
+ * @version 15.0.3b
  * @since 2019-10-31
  */
 public class WorldGen {
@@ -37,13 +37,10 @@ public class WorldGen {
 
     /**
      * Setup World Generation
+     *
+     * Note: This should only ever be called from the main thread, since adding features to biomes is not thread-safe.
      */
     public static void setupWorldGen() {
-
-        // This is apparently deprecated but the replacement isn't in yet?
-        // Regardless, this makes the structure additions thread-safe.
-        //noinspection deprecation
-        DeferredWorkQueue.runLater(() -> {
             Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
             biomes.forEachRemaining((biome) -> {
                 // Check Blacklist
@@ -90,7 +87,6 @@ public class WorldGen {
                     }
                 }
             });
-        });
     }
 
     /**

@@ -19,6 +19,7 @@ import javax.annotation.Nonnull;
  * @since 2020-06-01
  */
 public class ModRecipes {
+    // TODO: Add JEI compatibility for our custom crafting.
 
     public static final DeferredRegister<IRecipeSerializer<?>> SERIALIZERS = new DeferredRegister<>(ForgeRegistries.RECIPE_SERIALIZERS, ValhelsiaStructures.MOD_ID);
 

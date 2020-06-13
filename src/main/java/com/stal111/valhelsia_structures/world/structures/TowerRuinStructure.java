@@ -33,8 +33,8 @@ import java.util.function.Function;
 public class TowerRuinStructure extends AbstractValhelsiaStructure {
     public static final String SHORT_NAME = "tower_ruin";
 
-    public TowerRuinStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactoryIn) {
-        super(configFactoryIn, SHORT_NAME);
+    public TowerRuinStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
+        super(configFactory, SHORT_NAME);
     }
 
     @Override
