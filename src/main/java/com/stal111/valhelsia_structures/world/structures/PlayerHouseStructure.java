@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.world.structures;
 
-import com.mojang.datafixers.Dynamic;
+import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.util.Rotation;
@@ -8,40 +8,18 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.MarginedStructureStart;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
 import javax.annotation.Nonnull;
-import java.util.function.Function;
 
 public class PlayerHouseStructure extends AbstractValhelsiaStructure {
     public static final String SHORT_NAME = "player_house";
 
-    public PlayerHouseStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory) {
-        super(configFactory, SHORT_NAME);
-    }
-
-    @Override
-    protected int getFeatureDistance(ChunkGenerator<?> generator) {
-        return StructureGenConfig.PLAYER_HOUSE_DISTANCE.get();
-    }
-
-    @Override
-    protected int getFeatureSeparation(ChunkGenerator<?> generator) {
-        return StructureGenConfig.PLAYER_HOUSE_SEPARATION.get();
-    }
-
-    @Override
-    protected double getSpawnChance() {
-        return StructureGenConfig.PLAYER_HOUSE_SPAWN_CHANCE.get();
-    }
-
-    @Override
-    protected int getSeedModifier() {
-        return 17357645;
+    public PlayerHouseStructure(Codec<NoFeatureConfig> noFeatureConfigCodec) {
+        super(noFeatureConfigCodec, SHORT_NAME);
     }
 
     @Override
@@ -50,17 +28,17 @@ public class PlayerHouseStructure extends AbstractValhelsiaStructure {
         return Start::new;
     }
 
-    public static class Start extends MarginedStructureStart {
+    public static class Start extends MarginedStructureStart<NoFeatureConfig> {
 
-        public Start(Structure<?> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
+        public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
             super(structure, chunkX, chunkZ, bounds, reference, seed);
         }
 
         @Override
-        public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biome) {
+        public void func_230364_a_(ChunkGenerator generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, NoFeatureConfig noFeatureConfig) {
             Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-            BlockPos position = StructureUtils.getSurfaceStructurePosition(generator, 2, rotation, chunkX, chunkZ);
-            PlayerHousePieces.generate(generator, templateManager, position, this.components, this.rand);
+            BlockPos pos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
+            PlayerHousePieces.generate(generator, templateManager, pos, this.components, this.rand);
             this.recalculateStructureSize();
         }
     }

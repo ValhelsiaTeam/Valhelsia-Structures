@@ -21,7 +21,7 @@ import javax.annotation.Nonnull;
 public class ModRecipes {
     // TODO: Add JEI compatibility for our custom crafting.
 
-    public static final DeferredRegister<IRecipeSerializer<?>> SERIALIZERS = new DeferredRegister<>(ForgeRegistries.RECIPE_SERIALIZERS, ValhelsiaStructures.MOD_ID);
+    public static final DeferredRegister<IRecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ValhelsiaStructures.MOD_ID);
 
     public static final RegistryObject<IRecipeSerializer<?>> AXE_CRAFTING_SERIALIZER = register("axe_crafting", new SpecialRecipeSerializer<>(AxeCraftingRecipe::new));
 

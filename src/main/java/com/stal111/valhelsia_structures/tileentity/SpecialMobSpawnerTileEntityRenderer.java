@@ -4,15 +4,11 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.stal111.valhelsia_structures.block.SpecialAbstractSpawner;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.MobSpawnerTileEntity;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.spawner.AbstractSpawner;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.util.math.vector.Vector3f;
 
 public class SpecialMobSpawnerTileEntityRenderer extends TileEntityRenderer<SpecialMobSpawnerTileEntity> {
 

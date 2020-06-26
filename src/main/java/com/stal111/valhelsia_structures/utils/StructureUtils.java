@@ -46,7 +46,7 @@ public class StructureUtils {
         return Math.min(Math.min(h0, h1), Math.min(h2, h3));
     }
 
-    public static BlockPos getSurfaceStructurePosition(@Nonnull ChunkGenerator<?> generator, int size, Rotation rotation, int chunkX, int chunkZ) {
+    public static BlockPos getSurfaceStructurePosition(@Nonnull ChunkGenerator generator, int size, Rotation rotation, int chunkX, int chunkZ) {
         int xOffset = size * 16;
         int zOffset = size * 16;
 

@@ -1,8 +1,6 @@
 package com.stal111.valhelsia_structures.world.structures;
 
-import com.mojang.datafixers.Dynamic;
-import com.stal111.valhelsia_structures.config.StructureGenConfig;
-import com.stal111.valhelsia_structures.utils.StructureUtils;
+import com.mojang.serialization.Codec;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -14,7 +12,6 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
 import javax.annotation.Nonnull;
-import java.util.function.Function;
 
 /**
  * Removed Structure
@@ -29,45 +26,23 @@ import java.util.function.Function;
  */
 public class RemovedStructure extends AbstractValhelsiaStructure {
 
-    public RemovedStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory, String name) {
-        super(configFactory, name);
+    public RemovedStructure(Codec<NoFeatureConfig> noFeatureConfigCodec, String name) {
+        super(noFeatureConfigCodec, name);
     }
-
-    @Override
-    protected int getFeatureDistance(ChunkGenerator<?> generator) {
-        return 35;
-    }
-
-    @Override
-    protected int getFeatureSeparation(ChunkGenerator<?> generator) {
-        return 8;
-    }
-
-    @Override
-    protected double getSpawnChance() {
-        return 0;
-    }
-
-    @Override
-    protected int getSeedModifier() {
-        return 1666666;
-    }
-
     @Override
     @Nonnull
     public IStartFactory getStartFactory() {
         return Start::new;
     }
 
-    public static class Start extends MarginedStructureStart {
+    public static class Start extends MarginedStructureStart<NoFeatureConfig> {
 
-        public Start(Structure<?> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
+        public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
             super(structure, chunkX, chunkZ, bounds, reference, seed);
         }
 
         @Override
-        public void init(@Nonnull ChunkGenerator<?> generator, @Nonnull TemplateManager templateManager, int chunkX, int chunkZ, @Nonnull Biome biome) {
-            // NO-OP
+        public void func_230364_a_(ChunkGenerator generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, NoFeatureConfig noFeatureConfig) {
         }
     }
 }

@@ -20,7 +20,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 public class ModItems {
 
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, ValhelsiaStructures.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ValhelsiaStructures.MOD_ID);
 
     private static <T extends Item> RegistryObject<T> register(String name, T item) {
         return ITEMS.register(name, () -> item);

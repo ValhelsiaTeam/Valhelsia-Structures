@@ -52,7 +52,7 @@ public class ValhelsiaStructures {
         ModBlocks.BLOCKS.register(eventBus);
         ModItems.ITEMS.register(eventBus);
         ModTileEntities.TILE_ENTITIES.register(eventBus);
-        ModStructures.FEATURES.register(eventBus);
+        ModStructures.STRUCTURES.register(eventBus);
 
         // Event Listeners
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);

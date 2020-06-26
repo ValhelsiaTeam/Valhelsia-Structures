@@ -95,8 +95,8 @@ public class WorldGen {
      * @param structure The structure to add.
      */
     private static void addSurfaceStructure(Biome biome, Structure<NoFeatureConfig> structure) {
-        biome.addStructure(structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-        biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
+        biome.func_235063_a_(structure.func_236391_a_(NoFeatureConfig.field_236559_b_));
+        //biome.addFeature(GenerationStage.Decoration.SURFACE_STRUCTURES, structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.NOPE.configure(IPlacementConfig.NO_PLACEMENT_CONFIG)));
         structures.add(structure);
     }
 
@@ -106,8 +106,8 @@ public class WorldGen {
      * @param structure The structure to add.
      */
     private static void addUndergroundStructure(Biome biome, Structure<NoFeatureConfig> structure) {
-        biome.addStructure(structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG));
-        biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.DUNGEONS.configure(new ChanceConfig(8))));
+        biome.func_235063_a_(structure.func_236391_a_(NoFeatureConfig.field_236559_b_));
+        //biome.addFeature(GenerationStage.Decoration.UNDERGROUND_STRUCTURES, structure.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.DUNGEONS.configure(new ChanceConfig(8))));
         structures.add(structure);
     }
 }

@@ -17,7 +17,7 @@ import java.util.function.Supplier;
  * @version 15.0.3
  */
 public class ModTileEntities {
-    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = new DeferredRegister<>(ForgeRegistries.TILE_ENTITIES, ValhelsiaStructures.MOD_ID);
+    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ValhelsiaStructures.MOD_ID);
 
     public static final RegistryObject<TileEntityType<SpecialMobSpawnerTileEntity>> SPECIAL_SPAWNER = register("special_spawner", () -> TileEntityType.Builder.create(SpecialMobSpawnerTileEntity::new, ModBlocks.SPECIAL_SPAWNER.get()).build(null));
 

@@ -10,14 +10,16 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.entity.projectile.AbstractFireballEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tileentity.CampfireTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
@@ -54,7 +56,7 @@ public class BrazierBlock extends Block implements IWaterLoggable {
 
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
-        if (!entity.isImmuneToFire() && state.get(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
+        if (!entity.func_230279_az_() && state.get(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
             if (entity.getPosX() >= pos.getX() + 0.1 && entity.getPosZ() >= pos.getZ() + 0.1 && entity.getPosX() <= pos.getX() + 0.9 && entity.getPosZ() <= pos.getZ() + 0.9) {
                 entity.attackEntityFrom(DamageSource.IN_FIRE, 1.0F);
             }
@@ -79,11 +81,6 @@ public class BrazierBlock extends Block implements IWaterLoggable {
         }
 
         return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-    }
-
-    @Override
-    public int getLightValue(BlockState state) {
-        return state.get(LIT) ? super.getLightValue(state) : 0;
     }
 
     @Override
@@ -113,7 +110,7 @@ public class BrazierBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public boolean receiveFluid(IWorld world, BlockPos pos, BlockState state, IFluidState fluidState) {
+    public boolean receiveFluid(IWorld world, BlockPos pos, BlockState state, FluidState fluidState) {
         if (!state.get(BlockStateProperties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
             boolean flag = state.get(LIT);
             if (flag) {
@@ -135,33 +132,21 @@ public class BrazierBlock extends Block implements IWaterLoggable {
         }
     }
 
-    @Nullable
-    private Entity func_226913_a_(Entity entity) {
-        if (entity instanceof AbstractFireballEntity) {
-            return ((AbstractFireballEntity) entity).shootingEntity;
-        } else {
-            return entity instanceof AbstractArrowEntity ? ((AbstractArrowEntity) entity).getShooter() : null;
-        }
-    }
-
     @Override
-    public void onProjectileCollision(World world, BlockState state, BlockRayTraceResult hit, Entity projectile) {
-        if (!world.isRemote()) {
-            boolean flag = projectile instanceof AbstractFireballEntity || projectile instanceof AbstractArrowEntity && projectile.isBurning();
-            if (flag) {
-                Entity entity = this.func_226913_a_(projectile);
-                boolean flag1 = entity == null || entity instanceof PlayerEntity || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(world, entity);
-                if (flag1 && !state.get(LIT) && !state.get(WATERLOGGED)) {
-                    BlockPos blockpos = hit.getPos();
-                    world.setBlockState(blockpos, state.with(BlockStateProperties.LIT, Boolean.TRUE), 11);
-                }
+    public void onProjectileCollision(World world, BlockState state, BlockRayTraceResult hit, ProjectileEntity projectile) {
+        if (!world.isRemote() && projectile.isBurning()) {
+            Entity entity = projectile.func_234616_v_();
+            boolean flag = entity == null || entity instanceof PlayerEntity || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(world, entity);
+            if (flag && !state.get(LIT) && !state.get(WATERLOGGED)) {
+                BlockPos blockpos = hit.getPos();
+                world.setBlockState(blockpos, state.with(BlockStateProperties.LIT, true), 11);
             }
         }
 
     }
 
     @Override
-    public IFluidState getFluidState(BlockState state) {
+    public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
     }
 
