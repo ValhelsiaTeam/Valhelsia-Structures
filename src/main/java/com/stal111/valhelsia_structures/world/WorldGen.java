@@ -13,6 +13,8 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.IPlacementConfig;
 import net.minecraft.world.gen.placement.Placement;
+import net.minecraft.world.gen.settings.DimensionStructuresSettings;
+import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -41,7 +43,7 @@ public class WorldGen {
      * Note: This should only ever be called from the main thread, since adding features to biomes is not thread-safe.
      */
     public static void setupWorldGen() {
-            Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
+        Iterator<Biome> biomes = ForgeRegistries.BIOMES.iterator();
             biomes.forEachRemaining((biome) -> {
                 // Check Blacklist
                 if (!(biome.getCategory() == Biome.Category.RIVER || biome.getCategory() == Biome.Category.OCEAN)) {

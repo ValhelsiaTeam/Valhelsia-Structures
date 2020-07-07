@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.serialization.Codec;
+import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -27,8 +28,29 @@ import javax.annotation.Nonnull;
 public class RemovedStructure extends AbstractValhelsiaStructure {
 
     public RemovedStructure(Codec<NoFeatureConfig> noFeatureConfigCodec, String name) {
-        super(noFeatureConfigCodec, name);
+        super(noFeatureConfigCodec, name, 2);
     }
+
+    @Override
+    public int getSeparation() {
+        return 8;
+    }
+
+    @Override
+    public int getDistance() {
+        return 35;
+    }
+
+    @Override
+    public int getSeedModifier() {
+        return 1666666;
+    }
+
+    @Override
+    public double getSpawnChance() {
+        return 0;
+    }
+
     @Override
     @Nonnull
     public IStartFactory getStartFactory() {

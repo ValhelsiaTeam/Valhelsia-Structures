@@ -2,14 +2,10 @@ package com.stal111.valhelsia_structures.init;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.world.structures.*;
+import com.stal111.valhelsia_structures.world.structures.pieces.*;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.structure.IStructurePieceType;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ObjectHolder;
 
 /**
  * Structure Pieces

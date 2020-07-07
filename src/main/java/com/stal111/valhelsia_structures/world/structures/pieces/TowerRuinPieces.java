@@ -1,9 +1,10 @@
-package com.stal111.valhelsia_structures.world.structures;
+package com.stal111.valhelsia_structures.world.structures.pieces;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.init.ModStructurePieces;
+import com.stal111.valhelsia_structures.utils.JigsawHelper;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -21,7 +22,7 @@ import java.util.List;
 public class TowerRuinPieces {
 
     public static void register() {
-        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "tower_ruins"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":tower_ruin"), 1), Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":tower_ruin1"), 1), Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":tower_ruin2"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
+        JigsawHelper.register("tower_ruins", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("tower_ruin", 1), Pair.of("tower_ruin1", 1), Pair.of("tower_ruin2", 1)), true);
     }
 
     public static void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {

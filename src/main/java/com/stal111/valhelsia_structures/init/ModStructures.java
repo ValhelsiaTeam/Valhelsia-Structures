@@ -35,7 +35,7 @@ public class ModStructures {
     public static final RegistryObject<Structure<NoFeatureConfig>> SMALL_CASTLE = register("small_castle", new RemovedStructure(NoFeatureConfig.field_236558_a_, "small_castle"), GenerationStage.Decoration.SURFACE_STRUCTURES);
 
     private static <T extends Structure<?>> RegistryObject<T> register(String name, T structure, GenerationStage.Decoration decoration) {
-        Structure.field_236365_a_.put(name.toLowerCase(Locale.ROOT), structure);
+        Structure.field_236365_a_.put(ValhelsiaStructures.MOD_ID + ":" + name, structure);
         Structure.field_236385_u_.put(structure, decoration);
         return STRUCTURES.register(name, () -> structure);
     }

@@ -63,12 +63,12 @@ public class StructureUtils {
         int x = (chunkX << 4);
         int z = (chunkZ << 4);
 
-        int i1 = generator.func_222531_c(x, z, Heightmap.Type.WORLD_SURFACE_WG);
-        int j1 = generator.func_222531_c(x, z + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
-        int k1 = generator.func_222531_c(x + xOffset, z, Heightmap.Type.WORLD_SURFACE_WG);
-        int l1 = generator.func_222531_c(x + xOffset, z + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
-        int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
+//        int i1 = generator.func_222531_c(x, z, Heightmap.Type.WORLD_SURFACE_WG);
+//        int j1 = generator.func_222531_c(x, z + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
+//        int k1 = generator.func_222531_c(x + xOffset, z, Heightmap.Type.WORLD_SURFACE_WG);
+//        int l1 = generator.func_222531_c(x + xOffset, z + zOffset, Heightmap.Type.WORLD_SURFACE_WG);
+//        int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
 
-        return new BlockPos(x + (xOffset / 2), minHeight - 2, z + (zOffset / 2));
+        return new BlockPos(x + (xOffset / 2), 0, z + (zOffset / 2));
     }
 }

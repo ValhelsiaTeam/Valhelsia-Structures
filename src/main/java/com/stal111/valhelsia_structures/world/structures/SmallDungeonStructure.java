@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.config.StructureGenConfig;
-import net.minecraft.util.Rotation;
+import com.stal111.valhelsia_structures.world.structures.pieces.SmallDungeonPieces;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
@@ -18,7 +18,27 @@ public class SmallDungeonStructure extends AbstractValhelsiaStructure {
     public static final String SHORT_NAME = "small_dungeon";
 
     public SmallDungeonStructure(Codec<NoFeatureConfig> noFeatureConfigCodec) {
-        super(noFeatureConfigCodec, SHORT_NAME);
+        super(noFeatureConfigCodec, SHORT_NAME, 3);
+    }
+
+    @Override
+    public int getSeparation() {
+        return StructureGenConfig.SMALL_DUNGEON_SEPARATION.get();
+    }
+
+    @Override
+    public int getDistance() {
+        return StructureGenConfig.SMALL_DUNGEON_DISTANCE.get();
+    }
+
+    @Override
+    public int getSeedModifier() {
+        return 23498567;
+    }
+
+    @Override
+    public double getSpawnChance() {
+        return StructureGenConfig.SMALL_DUNGEON_SPAWN_CHANCE.get();
     }
 
     @Override
@@ -35,10 +55,10 @@ public class SmallDungeonStructure extends AbstractValhelsiaStructure {
 
         @Override
         public void func_230364_a_(ChunkGenerator generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, NoFeatureConfig noFeatureConfig) {
-            Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-            BlockPos pos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
-            SmallDungeonPieces.generate(generator, templateManager, pos, this.components, this.rand);
+            BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
+            SmallDungeonPieces.generate(generator, templateManager, blockpos, this.components, this.rand);
             this.recalculateStructureSize();
+            this.func_214628_a(generator.func_230356_f_(), this.rand, 15);
         }
     }
 }

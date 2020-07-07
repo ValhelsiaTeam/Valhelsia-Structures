@@ -1,9 +1,11 @@
-package com.stal111.valhelsia_structures.world.structures;
+package com.stal111.valhelsia_structures.world.structures.pieces;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.init.ModStructurePieces;
+import com.stal111.valhelsia_structures.utils.JigsawHelper;
+import com.stal111.valhelsia_structures.world.template.Processors;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -14,7 +16,6 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
-import net.minecraft.world.gen.feature.jigsaw.SingleJigsawPiece;
 import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
 import net.minecraft.world.gen.feature.template.TemplateManager;
@@ -24,9 +25,9 @@ import java.util.List;
 public class SmallDungeonPieces {
 
     public static void register() {
-        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/entrances"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/entrance"), 1), Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/entrance1"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
-        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/main_rooms"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room"), 1), Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room1"), 1), Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/main_room2"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
-        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon1/side_rooms"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/side_room"), 1), Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":dungeon1/side_room1"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
+        JigsawHelper.register("dungeon1/entrances", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("dungeon1/entrance", 1), Pair.of("dungeon1/entrance1", 1)), true);
+        JigsawHelper.register("dungeon1/main_rooms", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("dungeon1/main_room", 1), Pair.of("dungeon1/main_room1", 1), Pair.of("dungeon1/main_room2", 1)), true, Processors.OBSIDIAN_REPLACEMENT_PROCESSOR);
+        JigsawHelper.register("dungeon1/side_rooms", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("dungeon1/side_room", 1), Pair.of("dungeon1/side_room1", 1)), true, Processors.OBSIDIAN_REPLACEMENT_PROCESSOR);
     }
 
     public static void generate(ChunkGenerator p_215139_0_, TemplateManager p_215139_1_, BlockPos p_215139_2_, List<StructurePiece> p_215139_3_, SharedSeedRandom p_215139_4_) {

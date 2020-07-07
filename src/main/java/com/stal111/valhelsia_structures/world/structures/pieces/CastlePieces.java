@@ -1,9 +1,13 @@
-package com.stal111.valhelsia_structures.world.structures;
+package com.stal111.valhelsia_structures.world.structures.pieces;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.init.ModStructurePieces;
+import com.stal111.valhelsia_structures.utils.JigsawHelper;
+import com.stal111.valhelsia_structures.world.template.Processors;
+import net.minecraft.block.Blocks;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -17,13 +21,15 @@ import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
 import net.minecraft.world.gen.feature.jigsaw.SingleJigsawPiece;
 import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
 import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.feature.template.*;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Castle Pieces
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.CastlePieces
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.pieces.CastlePieces
  *
  * @author Valhelsia Team
  * @version 15.0.3
@@ -33,7 +39,7 @@ import java.util.List;
 public class CastlePieces {
 
     public static void register() {
-        JigsawManager.REGISTRY.register(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, "castles"), new ResourceLocation("empty"), ImmutableList.of(Pair.of(new SingleJigsawPiece(ValhelsiaStructures.MOD_ID + ":castle"), 1)), JigsawPattern.PlacementBehaviour.RIGID));
+        JigsawHelper.register("castles", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("castle", 1)), true);
     }
 
     public static void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
