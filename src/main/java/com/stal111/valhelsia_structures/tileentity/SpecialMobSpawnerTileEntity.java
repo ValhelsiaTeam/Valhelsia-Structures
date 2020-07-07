@@ -48,8 +48,8 @@ public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickable
     }
 
     @Override
-    public void func_230337_a_(BlockState state ,CompoundNBT compound) {
-        super.func_230337_a_(state, compound);
+    public void read(BlockState state ,CompoundNBT compound) {
+        super.read(state, compound);
         this.spawnerLogic.read(compound);
     }
 
