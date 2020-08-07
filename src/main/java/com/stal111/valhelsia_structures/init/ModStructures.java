@@ -24,7 +24,7 @@ import java.util.Map;
  */
 public class ModStructures {
 
-    public static final Map<StructureType, List<Structure<?>>> STRUCTURES_MAP = new HashMap<>();
+    public static final Map<StructureType, List<AbstractValhelsiaStructure<?>>> STRUCTURES_MAP = new HashMap<>();
 
     public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, ValhelsiaStructures.MOD_ID);
 

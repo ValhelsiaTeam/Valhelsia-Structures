@@ -6,12 +6,16 @@ import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -90,5 +94,19 @@ public class StructureUtils {
         }
 
         return true;
+    }
+
+    public static List<String> getAllBiomesForCategory(Biome.Category... categories) {
+        List<String> biomes = new ArrayList<>();
+
+        for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
+            for (Biome.Category category : categories) {
+                if (biome.getCategory() == category) {
+                    biomes.add(Objects.requireNonNull(biome.getRegistryName()).toString());
+                }
+            }
+        }
+
+        return biomes;
     }
 }

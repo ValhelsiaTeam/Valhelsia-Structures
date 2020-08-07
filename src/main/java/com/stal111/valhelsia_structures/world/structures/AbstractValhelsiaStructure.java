@@ -25,6 +25,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Abstract Overworld Structure
@@ -60,12 +61,14 @@ public abstract class AbstractValhelsiaStructure<C extends IFeatureConfig> exten
                 }
             }
 
+            // Check the entire size of the structure for Blacklisted Biomes
             for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
-                if (biome1.getCategory() == Biome.Category.OCEAN || biome1.getCategory() == Biome.Category.RIVER) {
+                if (StructureGenConfig.BLACKLISTED_BIOMES.get().contains(Objects.requireNonNull(biome1.getRegistryName()).toString())) {
                     return false;
                 }
             }
 
+            // Check for other structures
             List<Structure<?>> structures = new ArrayList<>(ModStructures.STRUCTURES_MAP.get(getStructureType()));
 
             if (getStructureType() == StructureType.SURFACE) {
