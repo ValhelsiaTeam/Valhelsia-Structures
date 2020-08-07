@@ -3,88 +3,87 @@ package com.stal111.valhelsia_structures.world.structures;
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.config.StructureGenConfig;
+import com.stal111.valhelsia_structures.init.ModStructures;
+import com.stal111.valhelsia_structures.utils.StructureType;
+import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.SectionPos;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeManager;
 import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.chunk.ChunkStatus;
-import net.minecraft.world.chunk.IChunk;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.StructureManager;
-import net.minecraft.world.gen.feature.structure.StructureStart;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Abstract Overworld Structure
  * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.AbstractOverworldStructure
- *
+ * <p>
  * Serves as a way to reduce duplicate code in structures - this has sensible defaults for most surface structures
  * but can be overridden if needed.
  *
  * @author Valhelsia Team
- * @version 15.0.3a
+ * @version 16.0.2
  * @since 2020-03-22
  */
 
-public abstract class AbstractValhelsiaStructure extends Structure<NoFeatureConfig> {
+public abstract class AbstractValhelsiaStructure<C extends IFeatureConfig> extends Structure<C> {
 
     private final String name;
     private final int size;
 
-    public AbstractValhelsiaStructure(Codec<NoFeatureConfig> noFeatureConfigCodec, String name, int size) {
-        super(noFeatureConfigCodec);
+    public AbstractValhelsiaStructure(Codec<C> configCoded, String name, int size) {
+        super(configCoded);
         this.name = name;
         this.size = size;
     }
 
     @Override
-    protected boolean func_230363_a_(ChunkGenerator generator, BiomeProvider provider, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, Biome biome, ChunkPos pos, NoFeatureConfig noFeatureConfig) {
+    protected boolean func_230363_a_(ChunkGenerator generator, BiomeProvider provider, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, Biome biome, ChunkPos pos, IFeatureConfig config) {
         if (isSurfaceFlat(generator, chunkX, chunkZ)) {
 
-                // Check the entire size of the structure to see if it's all a viable biome:
-                for (int x = chunkX - getSize(); x <= chunkX + getSize(); x++) {
-                    for (int z = chunkZ - getSize(); z <= chunkZ + getSize(); z++) {
-                        if (!biome.hasStructure(this)) {
-                            return false;
-                        }
-                    }
+            // Check the entire size of the structure to see if it's all a viable biome:
+            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
+                if (!biome1.hasStructure(this)) {
+                    return false;
                 }
-
-                // Note: This was checking a larger radius (10), but I don't think we need to be that far away from a village - Vael.
-                for (int k = chunkX - 5; k <= chunkX + 5; ++k) {
-                    for (int l = chunkZ - 5; l <= chunkZ + 5; ++l) {
-                        BlockPos position = new BlockPos((k << 4) + 9, 0, (l << 4) + 9);
-
-                        ChunkPos villagePos = Structure.field_236381_q_.func_236392_a_(generator.func_235957_b_().func_236197_a_(Structure.field_236381_q_), seed, rand, k, l);
-
-                        if (k == villagePos.x && l == villagePos.z) {
-                            return false;
-                        }
-                    }
-                }
-
-                int i = chunkX >> 4;
-                int j = chunkZ >> 4;
-                rand.setSeed((long) (i ^ j << 4) ^ seed);
-                rand.nextInt();
-                return rand.nextDouble() < 0.5;
-
             }
+
+            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
+                if (biome1.getCategory() == Biome.Category.OCEAN || biome1.getCategory() == Biome.Category.RIVER) {
+                    return false;
+                }
+            }
+
+            List<Structure<?>> structures = new ArrayList<>(ModStructures.STRUCTURES_MAP.get(getStructureType()));
+
+            if (getStructureType() == StructureType.SURFACE) {
+                structures.add(Structure.field_236381_q_);
+            } else if (getStructureType() == StructureType.UNDERGROUND) {
+                structures.addAll(Arrays.asList(Structure.field_236367_c_, Structure.field_236375_k_));
+            }
+
+            if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkX, chunkZ, structures)) {
+                return false;
+            }
+
+            int i = chunkX >> 4;
+            int j = chunkZ >> 4;
+            rand.setSeed((long) (i ^ j << 4) ^ seed);
+            rand.nextInt();
+            return rand.nextDouble() < getSpawnChance();
+        }
 
         return false;
     }
@@ -117,6 +116,10 @@ public abstract class AbstractValhelsiaStructure extends Structure<NoFeatureConf
         return Math.abs(maxHeight - minHeight) <= StructureGenConfig.FLATNESS_DELTA.get();
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getSize() {
         return size;
     }
@@ -128,6 +131,10 @@ public abstract class AbstractValhelsiaStructure extends Structure<NoFeatureConf
     public abstract int getSeedModifier();
 
     public abstract double getSpawnChance();
+
+    public StructureType getStructureType() {
+        return StructureType.SURFACE;
+    }
 
     @Nullable
     @Override

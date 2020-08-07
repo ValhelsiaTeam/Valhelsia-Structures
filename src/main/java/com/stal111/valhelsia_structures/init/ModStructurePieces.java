@@ -12,7 +12,7 @@ import net.minecraft.world.gen.feature.structure.IStructurePieceType;
  * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModStructurePieces
  *
  * @author Valhelsia Team
- * @version 15.0.3
+ * @version 16.0.2
  */
 public class ModStructurePieces {
 
@@ -36,17 +36,17 @@ public class ModStructurePieces {
         TowerRuinPieces.register();
 
         // Register Structure Pieces
-        register(CastleStructure.SHORT_NAME, CASTLE);
-        register(CastleRuinStructure.SHORT_NAME, CASTLE_RUIN);
-        register(DesertHouseStructure.SHORT_NAME, DESERT_HOUSE);
-        register(ForgeStructure.SHORT_NAME, FORGE);
-        register(PlayerHouseStructure.SHORT_NAME, PLAYER_HOUSE);
-        register(SmallDungeonStructure.SHORT_NAME, SMALL_DUNGEON);
-        register(TowerRuinStructure.SHORT_NAME, TOWER_RUIN);
+        register(ModStructures.CASTLE.get(), CASTLE);
+        register(ModStructures.CASTLE_RUIN.get(), CASTLE_RUIN);
+        register(ModStructures.DESERT_HOUSE.get(), DESERT_HOUSE);
+        register(ModStructures.FORGE.get(), FORGE);
+        register(ModStructures.PLAYER_HOUSE.get(), PLAYER_HOUSE);
+        register(ModStructures.SMALL_DUNGEON.get(), SMALL_DUNGEON);
+        register(ModStructures.TOWER_RUIN.get(), TOWER_RUIN);
 
     }
 
-    private static void register(String key, IStructurePieceType type) {
-        Registry.register(Registry.STRUCTURE_PIECE, new ResourceLocation(ValhelsiaStructures.MOD_ID, key), type);
+    private static void register(AbstractValhelsiaStructure<?> structure, IStructurePieceType type) {
+        Registry.register(Registry.STRUCTURE_PIECE, new ResourceLocation(ValhelsiaStructures.MOD_ID, structure.getName()), type);
     }
 }

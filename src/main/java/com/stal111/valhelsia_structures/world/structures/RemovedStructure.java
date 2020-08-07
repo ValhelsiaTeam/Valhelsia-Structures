@@ -22,10 +22,10 @@ import javax.annotation.Nonnull;
  * to directly modify vanilla code.
  *
  * @author Valhelsia Team
- * @version 15.0.3a
+ * @version 16.0.2
  * @since 2020-06-05
  */
-public class RemovedStructure extends AbstractValhelsiaStructure {
+public class RemovedStructure extends AbstractValhelsiaStructure<NoFeatureConfig> {
 
     public RemovedStructure(Codec<NoFeatureConfig> noFeatureConfigCodec, String name) {
         super(noFeatureConfigCodec, name, 2);
@@ -53,7 +53,7 @@ public class RemovedStructure extends AbstractValhelsiaStructure {
 
     @Override
     @Nonnull
-    public IStartFactory getStartFactory() {
+    public IStartFactory<NoFeatureConfig> getStartFactory() {
         return Start::new;
     }
 

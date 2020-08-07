@@ -2,14 +2,16 @@ package com.stal111.valhelsia_structures.utils;
 
 import net.minecraft.util.Direction;
 import net.minecraft.util.Rotation;
+import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.feature.structure.Structure;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,7 +19,7 @@ import java.util.Random;
  * Valhelsia Structure - com.stal111.valhelsia_structures.utils.StructureUtils
  *
  * @author Valhelsia Team
- * @version 15.0.3
+ * @version 16.0.2
  */
 public class StructureUtils {
     /**
@@ -70,5 +72,23 @@ public class StructureUtils {
 //        int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
 
         return new BlockPos(x + (xOffset / 2), 0, z + (zOffset / 2));
+    }
+
+    public static boolean checkForOtherStructures(Structure<?> structure, ChunkGenerator generator, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, List<Structure<?>> structures) {
+        for (int k = chunkX - 5; k <= chunkX + 5; ++k) {
+            for (int l = chunkZ - 5; l <= chunkZ + 5; ++l) {
+                for (Structure<?> structure1 : structures) {
+                    if (structure != structure1) {
+                        ChunkPos structurePos = structure1.func_236392_a_(generator.func_235957_b_().func_236197_a_(structure1), seed, rand, k, l);
+
+                        if (k == structurePos.x && l == structurePos.z) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }

@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.config.StructureGenConfig;
+import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.world.structures.pieces.SmallDungeonPieces;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -14,11 +15,19 @@ import net.minecraft.world.gen.feature.template.TemplateManager;
 
 import javax.annotation.Nonnull;
 
-public class SmallDungeonStructure extends AbstractValhelsiaStructure {
-    public static final String SHORT_NAME = "small_dungeon";
+/**
+ * Small Dungeon Structure
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.SmallDungeonStructure
+ *
+ * @author Valhelsia Team
+ * @version 16.0.2
+ * @since 2020-05-27
+ */
+
+public class SmallDungeonStructure extends AbstractValhelsiaStructure<NoFeatureConfig> {
 
     public SmallDungeonStructure(Codec<NoFeatureConfig> noFeatureConfigCodec) {
-        super(noFeatureConfigCodec, SHORT_NAME, 3);
+        super(noFeatureConfigCodec, "small_dungeon", 3);
     }
 
     @Override
@@ -42,8 +51,13 @@ public class SmallDungeonStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
+    public StructureType getStructureType() {
+        return StructureType.UNDERGROUND;
+    }
+
+    @Override
     @Nonnull
-    public IStartFactory getStartFactory() {
+    public IStartFactory<NoFeatureConfig> getStartFactory() {
         return Start::new;
     }
 
