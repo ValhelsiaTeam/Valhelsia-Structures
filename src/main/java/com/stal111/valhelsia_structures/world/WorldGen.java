@@ -35,31 +35,31 @@ public class WorldGen {
             }
 
             // Add Structures
-            if (StructureGenConfig.GENERATE_CASTLES.get() && checkBiome(StructureGenConfig.CASTLE_BIOMES.get(), biome)) {
+            if (StructureGenConfig.GENERATE_CASTLES.get() && checkBiome(StructureGenConfig.CASTLE_BIOME_CATEGORIES.get(), StructureGenConfig.CASTLE_BIOME_BLACKLIST.get(), biome)) {
                 addStructure(biome, ModStructures.CASTLE.get());
             }
 
-            if (StructureGenConfig.GENERATE_CASTLE_RUINS.get() && checkBiome(StructureGenConfig.CASTLE_RUIN_BIOMES.get(), biome)) {
+            if (StructureGenConfig.GENERATE_CASTLE_RUINS.get() && checkBiome(StructureGenConfig.CASTLE_RUIN_BIOME_CATEGORIES.get(), StructureGenConfig.CASTLE_RUIN_BIOME_BLACKLIST.get(), biome)) {
                 addStructure(biome, ModStructures.CASTLE_RUIN.get());
             }
 
-            if (StructureGenConfig.GENERATE_FORGES.get() && checkBiome(StructureGenConfig.FORGE_BIOMES.get(), biome)) {
-                addStructure(biome, ModStructures.CASTLE_RUIN.get());
+            if (StructureGenConfig.GENERATE_FORGES.get() && checkBiome(StructureGenConfig.FORGE_BIOME_CATEGORIES.get(), StructureGenConfig.FORGE_BIOME_BLACKLISTS.get(), biome)) {
+                addStructure(biome, ModStructures.FORGE.get());
             }
 
-            if (StructureGenConfig.GENERATE_PLAYER_HOUSES.get() && checkBiome(StructureGenConfig.PLAYER_HOUSE_BIOMES.get(), biome)) {
+            if (StructureGenConfig.GENERATE_PLAYER_HOUSES.get() && checkBiome(StructureGenConfig.PLAYER_HOUSE_BIOME_CATEGORIES.get(), StructureGenConfig.PLAYER_HOUSE_BIOME_BLACKLIST.get(), biome)) {
                 addStructure(biome, ModStructures.PLAYER_HOUSE.get());
             }
 
-            if (StructureGenConfig.GENERATE_TOWER_RUINS.get() && checkBiome(StructureGenConfig.TOWER_RUIN_BIOMES.get(), biome)) {
+            if (StructureGenConfig.GENERATE_TOWER_RUINS.get() && checkBiome(StructureGenConfig.TOWER_RUIN_BIOME_CATEGORIES.get(), StructureGenConfig.TOWER_RUIN_BIOME_BLACKLIST.get(), biome)) {
                 addStructure(biome, ModStructures.TOWER_RUIN.get());
             }
 
-            if (StructureGenConfig.GENERATE_DESERT_HOUSES.get() && checkBiome(StructureGenConfig.DESERT_HOUSE_BIOMES.get(), biome)) {
+            if (StructureGenConfig.GENERATE_DESERT_HOUSES.get() && checkBiome(StructureGenConfig.DESERT_HOUSE_BIOME_CATEGORIES.get(), StructureGenConfig.DESERT_HOUSE_BIOME_BLACKLIST.get(), biome)) {
                 addStructure(biome, ModStructures.DESERT_HOUSE.get());
             }
 
-            if (StructureGenConfig.GENERATE_SMALL_DUNGEONS.get() && checkBiome(StructureGenConfig.SMALL_DUNGEON_BIOMES.get(), biome)) {
+            if (StructureGenConfig.GENERATE_SMALL_DUNGEONS.get() && checkBiome(StructureGenConfig.SMALL_DUNGEON_BIOME_CATEGORIES.get(), StructureGenConfig.DESERT_HOUSE_BIOME_BLACKLIST.get(), biome)) {
                 addStructure(biome, ModStructures.SMALL_DUNGEON.get());
             }
         });
@@ -74,7 +74,13 @@ public class WorldGen {
         biome.func_235063_a_(structure.func_236391_a_(NoFeatureConfig.field_236559_b_));
     }
 
-    private static boolean checkBiome(List<? extends String> list, Biome biome) {
-        return list.contains(Objects.requireNonNull(biome.getRegistryName()).toString());
+    private static boolean checkBiome(List<? extends Biome.Category> allowedBiomeCategories, List<? extends String> blacklistedBiomes, Biome biome) {
+        boolean flag = allowedBiomeCategories.contains(biome.getCategory().toString());
+
+        if (!blacklistedBiomes.isEmpty() && flag) {
+            flag = !blacklistedBiomes.contains(Objects.requireNonNull(biome.getRegistryName()).toString());
+        }
+
+        return flag;
     }
 }
