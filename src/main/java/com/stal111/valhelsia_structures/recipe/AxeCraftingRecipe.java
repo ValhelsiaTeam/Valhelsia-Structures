@@ -29,9 +29,10 @@ import java.util.Map;
  * @version 15.0.3
  * @since 2020-06-01
  */
+
 public class AxeCraftingRecipe extends SpecialRecipe {
 
-    protected static Map<Block, Block> LOG_POST_MAP = null;
+    public static Map<Block, Block> LOG_POST_MAP = null;
 
     public static final IRecipeType<AxeCraftingRecipe> RECIPE_TYPE = new IRecipeType<AxeCraftingRecipe>() {
         @Override
