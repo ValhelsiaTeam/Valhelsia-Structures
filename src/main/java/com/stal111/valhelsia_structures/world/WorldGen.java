@@ -75,7 +75,7 @@ public class WorldGen {
     }
 
     private static boolean checkBiome(List<? extends Biome.Category> allowedBiomeCategories, List<? extends String> blacklistedBiomes, Biome biome) {
-        boolean flag = allowedBiomeCategories.contains(biome.getCategory().toString());
+        boolean flag = allowedBiomeCategories.contains(biome.getCategory().toString()) || allowedBiomeCategories.contains(biome.getCategory());
 
         if (!blacklistedBiomes.isEmpty() && flag) {
             flag = !blacklistedBiomes.contains(Objects.requireNonNull(biome.getRegistryName()).toString());
