@@ -15,5 +15,6 @@
     "block.valhelsia_structures.stone": "Stone",
     "block.valhelsia_structures.granite": "Granite",
     "block.valhelsia_structures.diorite": "Diorite",
-    "block.valhelsia_structures.andesite": "Andesite"
+    "block.valhelsia_structures.andesite": "Andesite",
+    "block.valhelsia_structures.dirt": "Dirt"
 }
