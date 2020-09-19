@@ -36,23 +36,21 @@ import java.util.List;
  * @since 2020-05-27
  */
 
-public class CastlePieces {
+public class CastlePools {
 
-    public static void register() {
-        JigsawHelper.register("castles", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("castle", 1)), true);
-    }
+    public static final JigsawPattern PATTERN = JigsawHelper.register("castles", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("castle", 1)), true);
 
-    public static void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
-        JigsawManager.func_236823_a_(new ResourceLocation(ValhelsiaStructures.MOD_ID, "castles"), 7, CastlePiece::new, generator, templateManager, position, pieces, random, true, true);
-    }
+//    public static void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
+//        JigsawManager.func_236823_a_(new ResourceLocation(ValhelsiaStructures.MOD_ID, "castles"), 7, CastlePiece::new, generator, templateManager, position, pieces, random, true, true);
+//    }
 
-    public static class CastlePiece extends AbstractVillagePiece {
-        public CastlePiece(TemplateManager templateManager, JigsawPiece jigsawPiece, BlockPos position, int groundLevelDelta, Rotation rotation, MutableBoundingBox bounds) {
-            super(ModStructurePieces.CASTLE, templateManager, jigsawPiece, position, groundLevelDelta, rotation, bounds);
-        }
-
-        public CastlePiece(TemplateManager templateManager, CompoundNBT compoundNBT) {
-            super(templateManager, compoundNBT, ModStructurePieces.CASTLE);
-        }
-    }
+//    public static class CastlePiece extends AbstractVillagePiece {
+//        public CastlePiece(TemplateManager templateManager, JigsawPiece jigsawPiece, BlockPos position, int groundLevelDelta, Rotation rotation, MutableBoundingBox bounds) {
+//            super(ModStructurePieces.CASTLE, templateManager, jigsawPiece, position, groundLevelDelta, rotation, bounds);
+//        }
+//
+//        public CastlePiece(TemplateManager templateManager, CompoundNBT compoundNBT) {
+//            super(templateManager, compoundNBT, ModStructurePieces.CASTLE);
+//        }
+//    }
 }

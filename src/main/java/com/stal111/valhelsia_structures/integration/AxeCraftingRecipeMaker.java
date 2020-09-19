@@ -19,13 +19,13 @@ import java.util.*;
  * Valhelsia Structures - com.stal111.valhelsia_structures.integration.AxeCraftingRecipeMaker
  *
  * @author Valhelsia Team
- * @version 16.0.2
+ * @version 16.0.3
  * @since 2020.08.12
  */
 
 public class AxeCraftingRecipeMaker {
 
-    public static List<ShapelessRecipe> createTippedArrowRecipes() {
+    public static List<ShapelessRecipe> createAxeCraftingRecipes() {
         List<ShapelessRecipe> recipes = new ArrayList<>();
         String group = ValhelsiaStructures.MOD_ID + ".post";
 

@@ -23,8 +23,9 @@ import java.util.Random;
  * Valhelsia Structure - com.stal111.valhelsia_structures.utils.StructureUtils
  *
  * @author Valhelsia Team
- * @version 16.0.2
+ * @version 16.0.3
  */
+
 public class StructureUtils {
     /**
      * Get Random Direction
@@ -83,7 +84,7 @@ public class StructureUtils {
             for (int l = chunkZ - 5; l <= chunkZ + 5; ++l) {
                 for (Structure<?> structure1 : structures) {
                     if (structure != structure1) {
-                        ChunkPos structurePos = structure1.func_236392_a_(generator.func_235957_b_().func_236197_a_(structure1), seed, rand, k, l);
+                        ChunkPos structurePos = structure1.func_236392_a_(Objects.requireNonNull(generator.func_235957_b_().func_236197_a_(structure1)), seed, rand, k, l);
 
                         if (k == structurePos.x && l == structurePos.z) {
                             return false;

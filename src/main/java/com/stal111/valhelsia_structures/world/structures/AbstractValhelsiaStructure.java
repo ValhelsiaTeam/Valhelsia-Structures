@@ -6,18 +6,23 @@ import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
+import com.stal111.valhelsia_structures.world.structures.pieces.SmallDungeonPools;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
+import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureManager;
+import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
+import net.minecraft.world.gen.feature.jigsaw.JigsawPatternRegistry;
+import net.minecraft.world.gen.feature.structure.*;
+import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 
 import javax.annotation.Nonnull;
@@ -28,43 +33,45 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Abstract Overworld Structure
- * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.AbstractOverworldStructure
+ * Abstract Valhelsia Structure
+ * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure
  * <p>
  * Serves as a way to reduce duplicate code in structures - this has sensible defaults for most surface structures
  * but can be overridden if needed.
  *
  * @author Valhelsia Team
- * @version 16.0.2
+ * @version 16.0.3
  * @since 2020-03-22
  */
 
-public abstract class AbstractValhelsiaStructure<C extends IFeatureConfig> extends Structure<C> {
+public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
     private final String name;
     private final int size;
 
-    public AbstractValhelsiaStructure(Codec<C> configCoded, String name, int size) {
-        super(configCoded);
+    public AbstractValhelsiaStructure(Codec<VillageConfig> configCoded, String name, int size) {
+        super(configCoded, 0, true, true);
         this.name = name;
         this.size = size;
     }
 
     @Override
-    protected boolean func_230363_a_(ChunkGenerator generator, BiomeProvider provider, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, Biome biome, ChunkPos pos, IFeatureConfig config) {
+    protected boolean func_230363_a_(ChunkGenerator generator, BiomeProvider provider, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, Biome biome, ChunkPos pos, VillageConfig config) {
         if (isSurfaceFlat(generator, chunkX, chunkZ)) {
 
             // Check the entire size of the structure to see if it's all a viable biome:
-            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
-                if (!biome1.hasStructure(this)) {
-                    return false;
-                }
-            }
+//            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
+//                if (!biome1.hasStructure(this)) {
+//                    return false;
+//                }
+//            }
 
             // Check the entire size of the structure for Blacklisted Biomes
             for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
-                if (StructureGenConfig.BLACKLISTED_BIOMES.get().contains(Objects.requireNonNull(biome1.getRegistryName()).toString())) {
-                    return false;
+                if (biome1.getRegistryName() != null) {
+                    if (StructureGenConfig.BLACKLISTED_BIOMES.get().contains(Objects.requireNonNull(biome1.getRegistryName()).toString())) {
+                        return false;
+                    }
                 }
             }
 
@@ -161,5 +168,38 @@ public abstract class AbstractValhelsiaStructure<C extends IFeatureConfig> exten
         }
 
         return new ChunkPos(k * spacing + i1, l * spacing + j1);
+    }
+
+    public Structure.IStartFactory<VillageConfig> getStartFactory() {
+        return (p_242778_1_, p_242778_2_, p_242778_3_, p_242778_4_, p_242778_5_, p_242778_6_) -> new Start(this, p_242778_2_, p_242778_3_, p_242778_4_, p_242778_5_, p_242778_6_, getGenerationHeight());
+    }
+
+    protected int getGenerationHeight() {
+        return -1;
+    }
+
+    public static class Start extends MarginedStructureStart<VillageConfig> {
+        private final JigsawStructure structure;
+        private final int height;
+
+        public Start(JigsawStructure structure, int p_i241979_2_, int p_i241979_3_, MutableBoundingBox boundingBox, int p_i241979_5_, long p_i241979_6_) {
+            this(structure, p_i241979_2_, p_i241979_3_, boundingBox, p_i241979_5_, p_i241979_6_, -1);
+        }
+
+        public Start(JigsawStructure structure, int p_i241979_2_, int p_i241979_3_, MutableBoundingBox boundingBox, int p_i241979_5_, long p_i241979_6_, int height) {
+            super(structure, p_i241979_2_, p_i241979_3_, boundingBox, p_i241979_5_, p_i241979_6_);
+            this.structure = structure;
+            this.height = height;
+        }
+
+        public void func_230364_a_(DynamicRegistries registries, ChunkGenerator generator, TemplateManager manager, int p_230364_4_, int p_230364_5_, Biome biome, VillageConfig villageConfig) {
+            BlockPos blockpos = new BlockPos(p_230364_4_ * 16, 0, p_230364_5_ * 16);
+            JigsawManager.func_242837_a(registries, villageConfig, AbstractVillagePiece::new, generator, manager, blockpos, this.components, this.rand, true, true);
+            this.recalculateStructureSize();
+
+            if (height != -1) {
+                this.func_214628_a(generator.func_230356_f_(), this.rand, height);
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraft.world.spawner.AbstractSpawner;
 
 public class SpecialSpawnerBlock extends ContainerBlock {
@@ -27,8 +28,8 @@ public class SpecialSpawnerBlock extends ContainerBlock {
         return new SpecialMobSpawnerTileEntity();
     }
 
-    public void spawnAdditionalDrops(BlockState state, World worldIn, BlockPos pos, ItemStack stack) {
-        super.spawnAdditionalDrops(state, worldIn, pos, stack);
+    public void spawnAdditionalDrops(BlockState state, ServerWorld world, BlockPos pos, ItemStack stack) {
+        super.spawnAdditionalDrops(state, world, pos, stack);
     }
 
     @Override

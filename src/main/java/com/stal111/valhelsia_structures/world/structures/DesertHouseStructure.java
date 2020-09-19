@@ -2,34 +2,21 @@ package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.config.StructureGenConfig;
-import com.stal111.valhelsia_structures.world.structures.pieces.DesertHousePieces;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.gen.feature.template.TemplateManager;
-
-import javax.annotation.Nonnull;
-import java.util.List;
-import java.util.Random;
+import net.minecraft.world.gen.feature.structure.VillageConfig;
 
 /**
  * Desert House Structure
  * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.DesertHouseStructure
  *
  * @author Valhelsia Team
- * @version 16.0.2
+ * @version 16.0.3
  * @since 2020-05-27
  */
 
-public class DesertHouseStructure extends AbstractValhelsiaStructure<NoFeatureConfig> {
+public class DesertHouseStructure extends AbstractValhelsiaStructure {
 
-    public DesertHouseStructure(Codec<NoFeatureConfig> noFeatureConfigCodec) {
-        super(noFeatureConfigCodec, "desert_house", 2);
+    public DesertHouseStructure(Codec<VillageConfig> villageConfigCodec) {
+        super(villageConfigCodec, "desert_house", 2);
     }
 
     @Override
@@ -52,31 +39,31 @@ public class DesertHouseStructure extends AbstractValhelsiaStructure<NoFeatureCo
         return StructureGenConfig.DESERT_HOUSE_SPAWN_CHANCE.get();
     }
 
-    @Override
-    @Nonnull
-    public IStartFactory<NoFeatureConfig> getStartFactory() {
-        return Start::new;
-    }
-
-    public static class Start extends ValhelsiaStructureStart<NoFeatureConfig> {
-
-        public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
-            super(structure, chunkX, chunkZ, bounds, reference, seed);
-        }
-
-        @Override
-        void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos pos, List<StructurePiece> components, Random random) {
-            DesertHousePieces.generate(generator, templateManager, pos, this.components, this.rand);
-        }
-
-        @Override
-        protected BlockState getTopLayerBlock() {
-            return Blocks.SAND.getDefaultState();
-        }
-
-        @Override
-        protected BlockState getLowerLayerBlock() {
-            return Blocks.SANDSTONE.getDefaultState();
-        }
-    }
+//    @Override
+//    @Nonnull
+//    public IStartFactory<NoFeatureConfig> getStartFactory() {
+//        return Start::new;
+//    }
+//
+//    public static class Start extends ValhelsiaStructureStart<NoFeatureConfig> {
+//
+//        public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
+//            super(structure, chunkX, chunkZ, bounds, reference, seed);
+//        }
+//
+//        @Override
+//        void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos pos, List<StructurePiece> components, Random random) {
+//            DesertHousePieces.generate(generator, templateManager, pos, this.components, this.rand);
+//        }
+//
+//        @Override
+//        protected BlockState getTopLayerBlock() {
+//            return Blocks.SAND.getDefaultState();
+//        }
+//
+//        @Override
+//        protected BlockState getLowerLayerBlock() {
+//            return Blocks.SANDSTONE.getDefaultState();
+//        }
+//    }
 }

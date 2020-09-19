@@ -26,7 +26,7 @@ import java.util.Random;
  * Valhelsia-Structures - com.stal111.valhelsia_structure.world.structures.ValhelsiaStructureStart
  *
  * @author Valhelsia Team
- * @version 16.0.2
+ * @version 16.0.3
  * @since 2020-08-06
  */
 
@@ -35,16 +35,6 @@ public abstract class ValhelsiaStructureStart<C extends IFeatureConfig> extends 
     public ValhelsiaStructureStart(Structure<C> p_i225874_1_, int p_i225874_2_, int p_i225874_3_, MutableBoundingBox p_i225874_4_, int p_i225874_5_, long p_i225874_6_) {
         super(p_i225874_1_, p_i225874_2_, p_i225874_3_, p_i225874_4_, p_i225874_5_, p_i225874_6_);
     }
-
-    @Override
-    public void func_230364_a_(ChunkGenerator generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, C config) {
-        Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-        BlockPos pos = StructureUtils.getSurfaceStructurePosition(generator, 2, rotation, chunkX, chunkZ);
-        this.generate(generator, templateManager, pos, this.components, this.rand);
-        this.recalculateStructureSize();
-    }
-
-    abstract void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos pos, List<StructurePiece> components, Random random);
 
     @Override
     public void func_230366_a_(ISeedReader seedReader, StructureManager manager, ChunkGenerator generator, Random random, MutableBoundingBox boundingBox, ChunkPos pos) {

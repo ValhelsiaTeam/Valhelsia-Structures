@@ -27,6 +27,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -129,7 +130,8 @@ public abstract class SpecialAbstractSpawner {
                     double d1 = j >= 2 ? listnbt.getDouble(1) : (double)(blockpos.getY() + world.rand.nextInt(3) - 1);
                     double d2 = j >= 3 ? listnbt.getDouble(2) : (double)blockpos.getZ() + (world.rand.nextDouble() - world.rand.nextDouble()) * (double)this.spawnRange + 0.5D;
                     if (world.hasNoCollisions(optional.get().getBoundingBoxWithSizeApplied(d0, d1, d2))) {
-                        Entity entity = EntityType.loadEntityAndExecute(compoundnbt, world, (p_221408_6_) -> {
+                        ServerWorld serverWorld = (ServerWorld) world;
+                        Entity entity = EntityType.loadEntityAndExecute(compoundnbt, serverWorld, (p_221408_6_) -> {
                             p_221408_6_.setLocationAndAngles(d0, d1, d2, p_221408_6_.rotationYaw, p_221408_6_.rotationPitch);
                             return p_221408_6_;
                         });
@@ -148,14 +150,18 @@ public abstract class SpecialAbstractSpawner {
                         if (entity instanceof MobEntity) {
 
                             if (this.spawnData.getNbt().size() == 1 && this.spawnData.getNbt().contains("id", 8)) {
-                                ((MobEntity)entity).onInitialSpawn(world, world.getDifficultyForLocation(entity.getPosition()), SpawnReason.SPAWNER, null, null);
+                                ((MobEntity)entity).onInitialSpawn(serverWorld, world.getDifficultyForLocation(entity.getPosition()), SpawnReason.SPAWNER, null, null);
                             }
                         }
 
-                        this.func_221409_a(entity);
+                        if (!serverWorld.func_242106_g(entity)) {
+                            this.resetTimer();
+                            return;
+                        }
+
                         world.playEvent(2004, blockpos, 0);
                         if (entity instanceof MobEntity) {
-                            ((MobEntity)entity).spawnExplosionParticle();
+                            ((MobEntity) entity).spawnExplosionParticle();
                         }
 
                         flag = true;
@@ -171,15 +177,6 @@ public abstract class SpecialAbstractSpawner {
                     this.waveCount++;
                     this.resetTimer();
                 }
-            }
-
-        }
-    }
-
-    private void func_221409_a(Entity p_221409_1_) {
-        if (this.getWorld().addEntity(p_221409_1_)) {
-            for(Entity entity : p_221409_1_.getPassengers()) {
-                this.func_221409_a(entity);
             }
 
         }
@@ -265,12 +262,12 @@ public abstract class SpecialAbstractSpawner {
         return compound;
     }
 
+    @Nullable
     @OnlyIn(Dist.CLIENT)
     public Entity getCachedEntity() {
         if (this.cachedEntity == null) {
             this.cachedEntity = EntityType.loadEntityAndExecute(this.spawnData.getNbt(), this.getWorld(), Function.identity());
             if (this.spawnData.getNbt().size() == 1 && this.spawnData.getNbt().contains("id", 8) && this.cachedEntity instanceof MobEntity) {
-                ((MobEntity)this.cachedEntity).onInitialSpawn(this.getWorld(), this.getWorld().getDifficultyForLocation(cachedEntity.getPosition()), SpawnReason.SPAWNER, (ILivingEntityData)null, (CompoundNBT)null);
             }
         }
 

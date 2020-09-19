@@ -30,23 +30,22 @@ import java.util.List;
  * @version 15.0.3
  * @since 2020-05-27
  */
-public class DesertHousePieces {
+public class DesertHousePools {
 
-    public static void register() {
-        JigsawHelper.register("desert_houses", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("desert_house", 1)));
-    }
+    public static final JigsawPattern PATTERN = JigsawHelper.register("desert_houses", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("desert_house", 1)));
 
-    public static void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
-        JigsawManager.func_236823_a_(new ResourceLocation(ValhelsiaStructures.MOD_ID, "desert_houses"), 7, DesertHousePiece::new, generator, templateManager, position, pieces, random, true, true);
-    }
 
-    public static class DesertHousePiece extends AbstractVillagePiece {
-        public DesertHousePiece(TemplateManager templateManager, JigsawPiece jigsawPiece, BlockPos position, int groundLevelDelta, Rotation rotation, MutableBoundingBox bounds) {
-            super(ModStructurePieces.DESERT_HOUSE, templateManager, jigsawPiece, position, groundLevelDelta, rotation, bounds);
-        }
-
-        public DesertHousePiece(TemplateManager templateManager, CompoundNBT compoundNBT) {
-            super(templateManager, compoundNBT, ModStructurePieces.DESERT_HOUSE);
-        }
-    }
+//    public static void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
+//        JigsawManager.func_236823_a_(new ResourceLocation(ValhelsiaStructures.MOD_ID, "desert_houses"), 7, DesertHousePiece::new, generator, templateManager, position, pieces, random, true, true);
+//    }
+//
+//    public static class DesertHousePiece extends AbstractVillagePiece {
+//        public DesertHousePiece(TemplateManager templateManager, JigsawPiece jigsawPiece, BlockPos position, int groundLevelDelta, Rotation rotation, MutableBoundingBox bounds) {
+//            super(ModStructurePieces.DESERT_HOUSE, templateManager, jigsawPiece, position, groundLevelDelta, rotation, bounds);
+//        }
+//
+//        public DesertHousePiece(TemplateManager templateManager, CompoundNBT compoundNBT) {
+//            super(templateManager, compoundNBT, ModStructurePieces.DESERT_HOUSE);
+//        }
+//    }
 }
