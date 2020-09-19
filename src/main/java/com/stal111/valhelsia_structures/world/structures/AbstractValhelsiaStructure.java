@@ -6,7 +6,6 @@ import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
-import com.stal111.valhelsia_structures.world.structures.pieces.SmallDungeonPools;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -18,9 +17,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
-import net.minecraft.world.gen.feature.jigsaw.JigsawPatternRegistry;
 import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
@@ -60,11 +57,11 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
         if (isSurfaceFlat(generator, chunkX, chunkZ)) {
 
             // Check the entire size of the structure to see if it's all a viable biome:
-//            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
-//                if (!biome1.hasStructure(this)) {
-//                    return false;
-//                }
-//            }
+            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
+                if (!biome1.func_242440_e().func_242493_a(this)) {
+                    return false;
+                }
+            }
 
             // Check the entire size of the structure for Blacklisted Biomes
             for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {

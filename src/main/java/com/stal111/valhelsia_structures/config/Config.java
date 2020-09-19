@@ -16,6 +16,7 @@ import java.io.File;
  * @version 15.0.3
  * @since 2020-05-27
  */
+
 @Mod.EventBusSubscriber
 public class Config {
     private static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();

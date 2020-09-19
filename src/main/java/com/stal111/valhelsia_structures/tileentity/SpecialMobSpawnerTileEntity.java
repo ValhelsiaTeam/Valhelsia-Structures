@@ -1,7 +1,5 @@
 package com.stal111.valhelsia_structures.tileentity;
 
-import javax.annotation.Nullable;
-
 import com.stal111.valhelsia_structures.block.SpecialAbstractSpawner;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
@@ -11,9 +9,10 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.WeightedSpawnerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickableTileEntity {
 

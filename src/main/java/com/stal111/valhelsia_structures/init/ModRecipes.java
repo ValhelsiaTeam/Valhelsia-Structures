@@ -18,6 +18,7 @@ import javax.annotation.Nonnull;
  * @version 15.0.3
  * @since 2020-06-01
  */
+
 public class ModRecipes {
     // TODO: Add JEI compatibility for our custom crafting.
 

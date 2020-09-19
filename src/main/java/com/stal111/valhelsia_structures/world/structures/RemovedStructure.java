@@ -39,21 +39,4 @@ public class RemovedStructure extends AbstractValhelsiaStructure {
     public double getSpawnChance() {
         return 0;
     }
-
-//    @Override
-//    @Nonnull
-//    public IStartFactory<NoFeatureConfig> getStartFactory() {
-//        return Start::new;
-//    }
-//
-//    public static class Start extends MarginedStructureStart<NoFeatureConfig> {
-//
-//        public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
-//            super(structure, chunkX, chunkZ, bounds, reference, seed);
-//        }
-//
-//        @Override
-//        public void func_230364_a_(ChunkGenerator generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, NoFeatureConfig noFeatureConfig) {
-//        }
-//    }
 }

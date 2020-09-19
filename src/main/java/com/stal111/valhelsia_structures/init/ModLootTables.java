@@ -13,6 +13,7 @@ import java.util.Set;
  * @author Valhelsia Team
  * @version 15.0.3
  */
+
 public class ModLootTables {
 
     private static final Set<ResourceLocation> LOOT_TABLES = Sets.newHashSet();

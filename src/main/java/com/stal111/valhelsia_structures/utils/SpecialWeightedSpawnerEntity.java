@@ -1,4 +1,5 @@
 package com.stal111.valhelsia_structures.utils;
+
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandom;

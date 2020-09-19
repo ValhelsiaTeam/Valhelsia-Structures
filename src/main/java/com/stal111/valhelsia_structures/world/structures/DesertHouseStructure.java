@@ -38,32 +38,4 @@ public class DesertHouseStructure extends AbstractValhelsiaStructure {
     public double getSpawnChance() {
         return StructureGenConfig.DESERT_HOUSE_SPAWN_CHANCE.get();
     }
-
-//    @Override
-//    @Nonnull
-//    public IStartFactory<NoFeatureConfig> getStartFactory() {
-//        return Start::new;
-//    }
-//
-//    public static class Start extends ValhelsiaStructureStart<NoFeatureConfig> {
-//
-//        public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
-//            super(structure, chunkX, chunkZ, bounds, reference, seed);
-//        }
-//
-//        @Override
-//        void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos pos, List<StructurePiece> components, Random random) {
-//            DesertHousePieces.generate(generator, templateManager, pos, this.components, this.rand);
-//        }
-//
-//        @Override
-//        protected BlockState getTopLayerBlock() {
-//            return Blocks.SAND.getDefaultState();
-//        }
-//
-//        @Override
-//        protected BlockState getLowerLayerBlock() {
-//            return Blocks.SANDSTONE.getDefaultState();
-//        }
-//    }
 }

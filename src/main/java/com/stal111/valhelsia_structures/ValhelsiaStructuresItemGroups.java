@@ -1,7 +1,6 @@
 package com.stal111.valhelsia_structures;
 
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import com.stal111.valhelsia_structures.init.ModItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 

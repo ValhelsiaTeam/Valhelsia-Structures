@@ -2,25 +2,8 @@ package com.stal111.valhelsia_structures.world.structures.pieces;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.init.ModStructurePieces;
 import com.stal111.valhelsia_structures.utils.JigsawHelper;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.SharedSeedRandom;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
-import net.minecraft.world.gen.feature.jigsaw.JigsawPiece;
-import net.minecraft.world.gen.feature.jigsaw.SingleJigsawPiece;
-import net.minecraft.world.gen.feature.structure.AbstractVillagePiece;
-import net.minecraft.world.gen.feature.structure.StructurePiece;
-import net.minecraft.world.gen.feature.template.TemplateManager;
-
-import java.util.List;
 
 /**
  * Desert House Pieces
@@ -34,18 +17,4 @@ public class DesertHousePools {
 
     public static final JigsawPattern PATTERN = JigsawHelper.register("desert_houses", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("desert_house", 1)));
 
-
-//    public static void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos position, List<StructurePiece> pieces, SharedSeedRandom random) {
-//        JigsawManager.func_236823_a_(new ResourceLocation(ValhelsiaStructures.MOD_ID, "desert_houses"), 7, DesertHousePiece::new, generator, templateManager, position, pieces, random, true, true);
-//    }
-//
-//    public static class DesertHousePiece extends AbstractVillagePiece {
-//        public DesertHousePiece(TemplateManager templateManager, JigsawPiece jigsawPiece, BlockPos position, int groundLevelDelta, Rotation rotation, MutableBoundingBox bounds) {
-//            super(ModStructurePieces.DESERT_HOUSE, templateManager, jigsawPiece, position, groundLevelDelta, rotation, bounds);
-//        }
-//
-//        public DesertHousePiece(TemplateManager templateManager, CompoundNBT compoundNBT) {
-//            super(templateManager, compoundNBT, ModStructurePieces.DESERT_HOUSE);
-//        }
-//    }
 }

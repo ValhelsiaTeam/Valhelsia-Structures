@@ -16,6 +16,7 @@ import java.util.function.Supplier;
  * @author Valhelsia Team
  * @version 15.0.3
  */
+
 public class ModTileEntities {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ValhelsiaStructures.MOD_ID);
 

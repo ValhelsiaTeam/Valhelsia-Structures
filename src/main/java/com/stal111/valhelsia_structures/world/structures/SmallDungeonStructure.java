@@ -44,30 +44,4 @@ public class SmallDungeonStructure extends AbstractValhelsiaStructure {
     protected int getGenerationHeight() {
         return 20;
     }
-
-    //    @Override
-//    public StructureType getStructureType() {
-//        return StructureType.UNDERGROUND;
-//    }
-
-//    @Override
-//    @Nonnull
-//    public IStartFactory<NoFeatureConfig> getStartFactory() {
-//        return Start::new;
-//    }
-//
-//    public static class Start extends MarginedStructureStart<NoFeatureConfig> {
-//
-//        public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
-//            super(structure, chunkX, chunkZ, bounds, reference, seed);
-//        }
-//
-//        @Override
-//        public void func_230364_a_(ChunkGenerator generator, TemplateManager templateManager, int chunkX, int chunkZ, Biome biome, NoFeatureConfig noFeatureConfig) {
-//            BlockPos blockpos = new BlockPos(chunkX * 16, 0, chunkZ * 16);
-//            SmallDungeonPieces.generate(generator, templateManager, blockpos, this.components, this.rand);
-//            this.recalculateStructureSize();
-//            this.func_214628_a(generator.func_230356_f_(), this.rand, 15);
-//        }
-//    }
 }

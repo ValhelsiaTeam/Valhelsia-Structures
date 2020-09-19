@@ -38,22 +38,4 @@ public class PlayerHouseStructure extends AbstractValhelsiaStructure {
     public double getSpawnChance() {
         return StructureGenConfig.PLAYER_HOUSE_SPAWN_CHANCE.get();
     }
-
-//    @Override
-//    @Nonnull
-//    public IStartFactory<NoFeatureConfig> getStartFactory() {
-//        return Start::new;
-//    }
-//
-//    public static class Start extends ValhelsiaStructureStart<NoFeatureConfig> {
-//
-//        public Start(Structure<NoFeatureConfig> structure, int chunkX, int chunkZ, MutableBoundingBox bounds, int reference, long seed) {
-//            super(structure, chunkX, chunkZ, bounds, reference, seed);
-//        }
-//
-//        @Override
-//        void generate(ChunkGenerator generator, TemplateManager templateManager, BlockPos pos, List<StructurePiece> components, Random random) {
-//            PlayerHousePieces.generate(generator, templateManager, pos, this.components, this.rand);
-//        }
-//    }
 }
