@@ -35,31 +35,31 @@ public class BiomeLoadingListener {
 
         // Add Structures
         if (StructureGenConfig.GENERATE_CASTLES.get() && checkBiome(StructureGenConfig.CASTLE_BIOME_CATEGORIES.get(), StructureGenConfig.CASTLE_BIOME_BLACKLIST.get(), name, category)) {
-            event.getGeneration().func_242516_a(ModStructureFeatures.CASTLE);
+            event.getGeneration().withStructure(ModStructureFeatures.CASTLE);
         }
 
         if (StructureGenConfig.GENERATE_CASTLE_RUINS.get() && checkBiome(StructureGenConfig.CASTLE_RUIN_BIOME_CATEGORIES.get(), StructureGenConfig.CASTLE_RUIN_BIOME_BLACKLIST.get(), name, category)) {
-            event.getGeneration().func_242516_a(ModStructureFeatures.CASTLE_RUIN);
+            event.getGeneration().withStructure(ModStructureFeatures.CASTLE_RUIN);
         }
 
         if (StructureGenConfig.GENERATE_FORGES.get() && checkBiome(StructureGenConfig.FORGE_BIOME_CATEGORIES.get(), StructureGenConfig.FORGE_BIOME_BLACKLISTS.get(), name, category)) {
-            event.getGeneration().func_242516_a(ModStructureFeatures.FORGE);
+            event.getGeneration().withStructure(ModStructureFeatures.FORGE);
         }
 
         if (StructureGenConfig.GENERATE_PLAYER_HOUSES.get() && checkBiome(StructureGenConfig.PLAYER_HOUSE_BIOME_CATEGORIES.get(), StructureGenConfig.PLAYER_HOUSE_BIOME_BLACKLIST.get(), name, category)) {
-            event.getGeneration().func_242516_a(ModStructureFeatures.PLAYER_HOUSE);
+            event.getGeneration().withStructure(ModStructureFeatures.PLAYER_HOUSE);
         }
 
         if (StructureGenConfig.GENERATE_TOWER_RUINS.get() && checkBiome(StructureGenConfig.TOWER_RUIN_BIOME_CATEGORIES.get(), StructureGenConfig.TOWER_RUIN_BIOME_BLACKLIST.get(), name, category)) {
-            event.getGeneration().func_242516_a(ModStructureFeatures.TOWER_RUIN);
+            event.getGeneration().withStructure(ModStructureFeatures.TOWER_RUIN);
         }
 
         if (StructureGenConfig.GENERATE_DESERT_HOUSES.get() && checkBiome(StructureGenConfig.DESERT_HOUSE_BIOME_CATEGORIES.get(), StructureGenConfig.DESERT_HOUSE_BIOME_BLACKLIST.get(), name, category)) {
-            event.getGeneration().func_242516_a(ModStructureFeatures.DESERT_HOUSE);
+            event.getGeneration().withStructure(ModStructureFeatures.DESERT_HOUSE);
         }
 
         if (StructureGenConfig.GENERATE_SMALL_DUNGEONS.get() && checkBiome(StructureGenConfig.SMALL_DUNGEON_BIOME_CATEGORIES.get(), StructureGenConfig.SMALL_DUNGEON_BIOME_BLACKLIST.get(), name, category)) {
-            event.getGeneration().func_242516_a(ModStructureFeatures.SMALL_DUNGEON);
+            event.getGeneration().withStructure(ModStructureFeatures.SMALL_DUNGEON);
         }
     }
 

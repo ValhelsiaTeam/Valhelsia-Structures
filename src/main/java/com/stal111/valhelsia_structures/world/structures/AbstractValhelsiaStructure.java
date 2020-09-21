@@ -58,7 +58,7 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
             // Check the entire size of the structure to see if it's all a viable biome:
             for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
-                if (!biome1.func_242440_e().func_242493_a(this)) {
+                if (!biome1.getGenerationSettings().hasStructure(this)) {
                     return false;
                 }
             }

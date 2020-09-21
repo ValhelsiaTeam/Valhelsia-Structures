@@ -27,6 +27,6 @@ public class ModStructureFeatures {
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> TOWER_RUIN = register("tower_ruin", ModStructures.TOWER_RUIN.get().func_236391_a_(new VillageConfig(() -> TowerRuinPools.PATTERN, 7)));
 
     private static <FC extends IFeatureConfig, F extends Structure<FC>> StructureFeature<FC, F> register(String name, StructureFeature<FC, F> structureFeature) {
-        return WorldGenRegistries.func_243663_a(WorldGenRegistries.field_243654_f, name, structureFeature);
+        return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, name, structureFeature);
     }
 }

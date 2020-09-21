@@ -54,7 +54,7 @@ public abstract class SpecialAbstractSpawner {
             return StringUtils.isNullOrEmpty(s) ? null : new ResourceLocation(s);
         } catch (ResourceLocationException var4) {
             BlockPos blockpos = this.getSpawnerPosition();
-            LOGGER.warn("Invalid entity id '{}' at spawner {}:[{},{},{}]", s, this.getWorld().func_234923_W_().func_240901_a_(), blockpos.getX(), blockpos.getY(), blockpos.getZ());
+            LOGGER.warn("Invalid entity id '{}' at spawner {}:[{},{},{}]", s, this.getWorld().getDimensionKey().getLocation(), blockpos.getX(), blockpos.getY(), blockpos.getZ());
             return null;
         }
     }
