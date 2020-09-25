@@ -1,22 +1,17 @@
 package com.stal111.valhelsia_structures.recipe;
 
-import com.google.common.collect.ImmutableMap;
+import com.google.gson.JsonObject;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.init.ModRecipes;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipeSerializer;
-import net.minecraft.item.crafting.IRecipeType;
-import net.minecraft.item.crafting.SpecialRecipe;
+import net.minecraft.item.crafting.*;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-
-import java.util.Map;
 
 /**
  * Axe Crafting Recipe
@@ -32,7 +27,9 @@ import java.util.Map;
 
 public class AxeCraftingRecipe extends SpecialRecipe {
 
-    public static Map<Block, Block> LOG_POST_MAP = null;
+    private final Ingredient input;
+    private final ItemStack output;
+    private final int count;
 
     public static final IRecipeType<AxeCraftingRecipe> RECIPE_TYPE = new IRecipeType<AxeCraftingRecipe>() {
         @Override
@@ -41,15 +38,17 @@ public class AxeCraftingRecipe extends SpecialRecipe {
         }
     };
 
-    public AxeCraftingRecipe(ResourceLocation idIn) {
-        super(idIn);
-        LOG_POST_MAP = (new ImmutableMap.Builder<Block, Block>()).put(Blocks.OAK_LOG, ModBlocks.OAK_POST.get()).put(Blocks.SPRUCE_LOG, ModBlocks.SPRUCE_POST.get()).put(Blocks.BIRCH_LOG, ModBlocks.BIRCH_POST.get()).put(Blocks.JUNGLE_LOG, ModBlocks.JUNGLE_POST.get()).put(Blocks.ACACIA_LOG, ModBlocks.ACACIA_POST.get()).put(Blocks.DARK_OAK_LOG, ModBlocks.DARK_OAK_POST.get()).build();
+    public AxeCraftingRecipe(ResourceLocation recipeId, Ingredient input, ItemStack output) {
+        super(recipeId);
+        this.input = input;
+        this.output = output;
+        this.count = output.getCount();
     }
 
     @Override
     public boolean matches(CraftingInventory inv, World worldIn) {
         int axeSlot = -1;
-        Block block = null;
+        ItemStack stack = null;
 
         for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
             if (inv.getStackInSlot(slot).getItem() instanceof AxeItem) {
@@ -63,33 +62,31 @@ public class AxeCraftingRecipe extends SpecialRecipe {
         }
 
         for (int i = 0; i < inv.getSizeInventory(); i++) {
-            ItemStack stack = inv.getStackInSlot(i);
-            if (i != axeSlot && !stack.isEmpty()) {
-                if (isValidBlock(stack) && (block == null || Block.getBlockFromItem(stack.getItem()) == block)) {
-                    block = Block.getBlockFromItem(stack.getItem());
+            ItemStack stack1 = inv.getStackInSlot(i);
+            if (i != axeSlot && !stack1.isEmpty()) {
+                if (input.test(stack1) && (stack == null || stack.isItemEqual(stack1))) {
+                    stack = stack1;
                 } else {
                     return false;
                 }
             }
         }
 
-        return block != null;
+        return stack != null;
     }
 
     @Override
     public ItemStack getCraftingResult(CraftingInventory inv) {
-        Block block = null;
         int logCount = 0;
 
         for(int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
-            if (isValidBlock(stack)) {
-                block = Block.getBlockFromItem(stack.getItem());
+            if (input.test(stack)) {
                 logCount++;
             }
         }
 
-        return new ItemStack(LOG_POST_MAP.get(block), logCount * 2);
+        return new ItemStack(output.getItem(), logCount * count);
     }
 
     @Override
@@ -99,7 +96,7 @@ public class AxeCraftingRecipe extends SpecialRecipe {
         int logCount = 0;
 
         for(int i = 0; i < nonnulllist.size(); i++) {
-            if (isValidBlock(inv.getStackInSlot(i))) {
+            if (input.test(inv.getStackInSlot(i))) {
                 logCount++;
             }
         }
@@ -130,7 +127,34 @@ public class AxeCraftingRecipe extends SpecialRecipe {
         return ModRecipes.AXE_CRAFTING_SERIALIZER.get();
     }
 
-    private boolean isValidBlock(ItemStack stack) {
-        return LOG_POST_MAP.containsKey(Block.getBlockFromItem(stack.getItem()));
+    public Ingredient getInput() {
+        return input;
+    }
+
+    public ItemStack getOutput() {
+        return output;
+    }
+
+    public static class Serializer extends net.minecraftforge.registries.ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<AxeCraftingRecipe> {
+
+        @Override
+        public AxeCraftingRecipe read(ResourceLocation recipeId, JsonObject json) {
+            Ingredient input = Ingredient.deserialize(JSONUtils.getJsonObject(json, "input"));
+            ItemStack output = ShapedRecipe.deserializeItem(JSONUtils.getJsonObject(json, "output"));
+            return new AxeCraftingRecipe(recipeId, input, output);
+        }
+
+        @Override
+        public AxeCraftingRecipe read(ResourceLocation recipeId, PacketBuffer buffer) {
+            Ingredient input = Ingredient.read(buffer);
+            ItemStack output = buffer.readItemStack();
+            return new AxeCraftingRecipe(recipeId, input, output);
+        }
+
+        @Override
+        public void write(PacketBuffer buffer, AxeCraftingRecipe recipe) {
+            recipe.input.write(buffer);
+            buffer.writeItemStack(recipe.output);
+        }
     }
 }
