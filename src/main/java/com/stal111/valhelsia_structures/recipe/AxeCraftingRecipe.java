@@ -3,8 +3,10 @@ package com.stal111.valhelsia_structures.recipe;
 import com.google.gson.JsonObject;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.init.ModRecipes;
+import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraft.network.PacketBuffer;
@@ -51,7 +53,8 @@ public class AxeCraftingRecipe extends SpecialRecipe {
         ItemStack stack = null;
 
         for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
-            if (inv.getStackInSlot(slot).getItem() instanceof AxeItem) {
+            Item item = inv.getStackInSlot(slot).getItem();
+            if (item instanceof AxeItem && !ModTags.Items.AXE_CRAFTING_BLACKLISTED.contains(item)) {
                 axeSlot = slot;
                 break;
             }

@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.integration;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.recipe.AxeCraftingRecipe;
+import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
@@ -10,7 +11,6 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapelessRecipe;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraftforge.common.crafting.StackList;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -31,17 +31,15 @@ public class AxeCraftingRecipeMaker {
         List<ShapelessRecipe> recipes = new ArrayList<>();
         String group = ValhelsiaStructures.MOD_ID + ".post";
 
-        Minecraft.getInstance().world.getRecipeManager().getRecipesForType(Objects.requireNonNull(Registry.RECIPE_TYPE.getOrDefault(new ResourceLocation(ValhelsiaStructures.MOD_ID, "axe_crafting")))).forEach(iRecipe -> {
-            AxeCraftingRecipe axeCraftingRecipe = (AxeCraftingRecipe) iRecipe;
+        Minecraft.getInstance().world.getRecipeManager().getRecipesForType(AxeCraftingRecipe.RECIPE_TYPE).forEach(iRecipe -> {
+            Ingredient axeIngredient = Ingredient.fromItemListStream(convertItemListToItemStackList(ForgeRegistries.ITEMS.getValues()).stream().filter(stack -> stack.getItem() instanceof AxeItem && !ModTags.Items.AXE_CRAFTING_BLACKLISTED.contains(stack.getItem())).map(stack -> new StackList(Collections.singleton(stack))));
 
-            Ingredient axeIngredient = Ingredient.fromItemListStream(convertItemListToItemStackList(ForgeRegistries.ITEMS.getValues()).stream().filter(stack -> stack.getItem() instanceof AxeItem).map(stack -> new StackList(Collections.singleton(stack))));
-
-            ItemStack output = axeCraftingRecipe.getOutput();
+            ItemStack output = iRecipe.getOutput();
             ResourceLocation id = new ResourceLocation(ValhelsiaStructures.MOD_ID, "jei.axe_crafting." + output.getTranslationKey());
 
             System.out.println(Arrays.toString(axeIngredient.getMatchingStacks()));
 
-            ShapelessRecipe recipe = new ShapelessRecipe(id, group, output, NonNullList.from(Ingredient.EMPTY, axeIngredient, axeCraftingRecipe.getInput()));
+            ShapelessRecipe recipe = new ShapelessRecipe(id, group, output, NonNullList.from(Ingredient.EMPTY, axeIngredient, iRecipe.getInput()));
 
             recipes.add(recipe);
         });
