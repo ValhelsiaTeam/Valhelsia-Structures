@@ -12,6 +12,13 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
+/**
+ * Client Proxy
+ * Valhelsia Structures - com.stal111.valhelsia_structures.proxy.ClientProxy
+ *
+ * @author Valhelsia Team
+ * @version 16.0.4
+ */
 @OnlyIn(Dist.CLIENT)
 public class ClientProxy implements IProxy {
 
@@ -22,6 +29,8 @@ public class ClientProxy implements IProxy {
         RenderTypeLookup.setRenderLayer(ModBlocks.BRAZIER.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.METAL_FRAMED_GLASS.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.METAL_FRAMED_GLASS_PANE.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.HANGING_VINES_BODY.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.HANGING_VINES.get(), RenderType.getCutout());
     }
 
     @Override

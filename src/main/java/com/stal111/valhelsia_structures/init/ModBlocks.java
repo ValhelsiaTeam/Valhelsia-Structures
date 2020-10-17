@@ -1,16 +1,10 @@
 package com.stal111.valhelsia_structures.init;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.ValhelsiaStructuresItemGroups;
-import com.stal111.valhelsia_structures.block.BrazierBlock;
-import com.stal111.valhelsia_structures.block.PostBlock;
-import com.stal111.valhelsia_structures.block.SpecialSpawnerBlock;
-import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
+import com.stal111.valhelsia_structures.block.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -20,9 +14,8 @@ import net.minecraftforge.registries.ForgeRegistries;
  * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModBlocks
  *
  * @author Valhelsia Team
- * @version 15.0.3
+ * @version 16.0.4
  */
-
 public class ModBlocks {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ValhelsiaStructures.MOD_ID);
@@ -38,6 +31,8 @@ public class ModBlocks {
     public static final RegistryObject<GlassBlock> METAL_FRAMED_GLASS = register("metal_framed_glass", new GlassBlock(Block.Properties.from(Blocks.GLASS)));
     public static final RegistryObject<PaneBlock> METAL_FRAMED_GLASS_PANE = register("metal_framed_glass_pane", new PaneBlock(Block.Properties.from(Blocks.GLASS_PANE)));
     public static final RegistryObject<PaneBlock> PAPER_WALL = register("paper_wall", new PaneBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid()));
+    public static final RegistryObject<HangingVinesBodyBlock> HANGING_VINES_BODY = registerNoItem("hanging_vines_body", new HangingVinesBodyBlock(Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.2F).sound(SoundType.VINE)));
+    public static final RegistryObject<HangingVinesBlock> HANGING_VINES = register("hanging_vines", new HangingVinesBlock(Block.Properties.create(Material.TALL_PLANTS).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.2F).sound(SoundType.VINE)));
 
     // Workaround for structures - stone that can't be replaced during later generation steps:
     public static final RegistryObject<Block> STONE = register("stone", new ValhelsiaStoneBlock(() -> Blocks.STONE, Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)));
@@ -48,9 +43,12 @@ public class ModBlocks {
     // Workaround for structures - dirt that wont transform into grass blocks:
     public static final RegistryObject<Block> DIRT = register("dirt", new ValhelsiaStoneBlock(() -> Blocks.DIRT, Block.Properties.from(Blocks.DIRT)));
 
+    private static <T extends Block> RegistryObject<T> registerNoItem(String name, T block) {
+        return BLOCKS.register(name, () -> block);
+    }
 
     private static <T extends Block> RegistryObject<T> register(String name, T block) {
-        ModItems.ITEMS.register(name, () -> new BlockItem(block, new Item.Properties().group(ValhelsiaStructuresItemGroups.MAIN)));
+        ModItems.registerBlockItem(name, block);
         return BLOCKS.register(name, () -> block);
     }
 }

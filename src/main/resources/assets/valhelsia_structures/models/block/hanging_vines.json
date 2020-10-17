@@ -1,0 +1,46 @@
+{
+  "credit": "Valhelsia Team",
+  "ambientocclusion": false,
+  "textures": {
+    "particle": "valhelsia_structures:block/hanging_vines",
+    "0": "valhelsia_structures:block/hanging_vines"
+  },
+  "elements": [
+    {
+      "from": [15, 6, 0],
+      "to": [15, 16, 16],
+      "shade": false,
+      "faces": {
+        "east": {"uv": [0, 0, 16, 10], "texture": "#0", "tintindex": 0},
+        "west": {"uv": [0, 0, 16, 10], "texture": "#0", "tintindex": 0}
+      }
+    },
+    {
+      "from": [1, 6, 0],
+      "to": [1, 16, 16],
+      "shade": false,
+      "faces": {
+        "east": {"uv": [0, 0, 16, 10], "texture": "#0", "tintindex": 0},
+        "west": {"uv": [0, 0, 16, 10], "texture": "#0", "tintindex": 0}
+      }
+    },
+    {
+      "from": [0, 6, 15],
+      "to": [16, 16, 15],
+      "shade": false,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 10], "texture": "#0", "tintindex": 0},
+        "south": {"uv": [0, 0, 16, 10], "texture": "#0", "tintindex": 0}
+      }
+    },
+    {
+      "from": [0, 6, 1],
+      "to": [16, 16, 1],
+      "shade": false,
+      "faces": {
+        "north": {"uv": [0, 0, 16, 10], "texture": "#0", "tintindex": 0},
+        "south": {"uv": [0, 0, 16, 10], "texture": "#0", "tintindex": 0}
+      }
+    }
+  ]
+}
