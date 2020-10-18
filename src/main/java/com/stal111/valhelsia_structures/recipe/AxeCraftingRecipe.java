@@ -14,6 +14,7 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistryEntry;
 
 /**
  * Axe Crafting Recipe
@@ -23,22 +24,14 @@ import net.minecraft.world.World;
  * form. The axe loses one durability per craft but is returned.
  *
  * @author Valhelsia Team
- * @version 15.0.3
+ * @version 16.0.4
  * @since 2020-06-01
  */
-
 public class AxeCraftingRecipe extends SpecialRecipe {
 
     private final Ingredient input;
     private final ItemStack output;
     private final int count;
-
-    public static final IRecipeType<AxeCraftingRecipe> RECIPE_TYPE = new IRecipeType<AxeCraftingRecipe>() {
-        @Override
-        public String toString() {
-            return ValhelsiaStructures.MOD_ID + ":axe_crafting";
-        }
-    };
 
     public AxeCraftingRecipe(ResourceLocation recipeId, Ingredient input, ItemStack output) {
         super(recipeId);
@@ -138,7 +131,7 @@ public class AxeCraftingRecipe extends SpecialRecipe {
         return output;
     }
 
-    public static class Serializer extends net.minecraftforge.registries.ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<AxeCraftingRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<AxeCraftingRecipe> {
 
         @Override
         public AxeCraftingRecipe read(ResourceLocation recipeId, JsonObject json) {

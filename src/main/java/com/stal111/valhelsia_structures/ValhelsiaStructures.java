@@ -6,12 +6,9 @@ import com.stal111.valhelsia_structures.init.*;
 import com.stal111.valhelsia_structures.proxy.ClientProxy;
 import com.stal111.valhelsia_structures.proxy.IProxy;
 import com.stal111.valhelsia_structures.proxy.ServerProxy;
-import com.stal111.valhelsia_structures.recipe.AxeCraftingRecipe;
 import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure;
 import com.stal111.valhelsia_structures.world.structures.pieces.SmallDungeonPools;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
@@ -37,7 +34,7 @@ import java.util.Map;
  * Valhelsia Structures - com.stal111.valhelsia_structures.ValhelsiaStructures
  *
  * @author Valhelsia Team
- * @version 16.0.3
+ * @version 16.0.4
  * @since 2019-10-31
  */
 
@@ -69,9 +66,6 @@ public class ValhelsiaStructures {
         Config.loadConfig(Config.SERVER_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MOD_ID + "-server.toml").toString());
 
         MinecraftForge.EVENT_BUS.register(this);
-
-        // I don't think Forge supports recipe types using their registries yet, so use vanilla:
-        Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(MOD_ID, "axe_crafting"), AxeCraftingRecipe.RECIPE_TYPE);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
