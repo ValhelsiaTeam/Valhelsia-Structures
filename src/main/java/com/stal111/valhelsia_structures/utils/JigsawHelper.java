@@ -18,9 +18,8 @@ import java.util.function.Function;
  * Valhelsia Structures - com.stal111.valhelsia_structures.utils.JigsawHelper
  *
  * @author Valhelsia Team
- * @version 16.0.3
+ * @version 16.0.5
  */
-
 public class JigsawHelper {
 
     public static JigsawPattern register(String name, JigsawPattern.PlacementBehaviour placementBehaviour, List<Pair<String, Integer>> list, StructureProcessor... processors) {
@@ -28,17 +27,25 @@ public class JigsawHelper {
     }
 
     public static JigsawPattern register(String name, JigsawPattern.PlacementBehaviour placementBehaviour, List<Pair<String, Integer>> list, boolean replaceStone, StructureProcessor... processors) {
+        return register(name, placementBehaviour, list, replaceStone, false, processors);
+    }
+
+    public static JigsawPattern register(String name, JigsawPattern.PlacementBehaviour placementBehaviour, List<Pair<String, Integer>> list, boolean replaceStone, boolean undergroundStructure, StructureProcessor... processors) {
         List<Pair<Function<JigsawPattern.PlacementBehaviour, ? extends JigsawPiece>, Integer>> newList = new ArrayList<>();
 
         List<StructureProcessor> processorList = new ArrayList<>(Arrays.asList(processors));
-        processorList.add(Processors.RED_GLASS_AND_STRUCTURE_BLOCK);
+        processorList.add(Processors.RED_GLASS);
 
         if (replaceStone) {
             processorList.add(Processors.STONE_REPLACEMENT_PROCESSOR);
         }
 
         for (Pair<String, Integer> pair : list) {
-            newList.add(Pair.of(JigsawPiece.func_242851_a (ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), new StructureProcessorList(processorList)), pair.getSecond()));
+            if (undergroundStructure) {
+                newList.add(Pair.of(JigsawPiece.func_242861_b (ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), new StructureProcessorList(processorList)), pair.getSecond()));
+            } else {
+                newList.add(Pair.of(JigsawPiece.func_242851_a (ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), new StructureProcessorList(processorList)), pair.getSecond()));
+            }
         }
         return JigsawPatternRegistry.func_244094_a(new JigsawPattern(new ResourceLocation(ValhelsiaStructures.MOD_ID, name), new ResourceLocation("empty"), newList, placementBehaviour));
     }
