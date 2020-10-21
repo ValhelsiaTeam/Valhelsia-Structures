@@ -21,9 +21,8 @@ import java.util.Map;
  * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModStructures
  *
  * @author Valhelsia Team
- * @version 16.0.3
+ * @version 16.0.5
  */
-
 public class ModStructures {
 
     public static final Map<StructureType, List<AbstractValhelsiaStructure>> STRUCTURES_MAP = new HashMap<>();
@@ -53,7 +52,9 @@ public class ModStructures {
         Structure.field_236365_a_.put(ValhelsiaStructures.MOD_ID + ":" + name, structure);
         Structure.field_236385_u_.put(structure, decoration);
 
-        Structure.field_236384_t_ = ImmutableList.<Structure<?>>builder().addAll(Structure.field_236384_t_).add(structure).build();
+        if (decoration != GenerationStage.Decoration.UNDERGROUND_STRUCTURES) {
+            Structure.field_236384_t_ = ImmutableList.<Structure<?>>builder().addAll(Structure.field_236384_t_).add(structure).build();
+        }
 
         STRUCTURES_MAP.computeIfAbsent(structure.getStructureType(), k -> new ArrayList<>());
         STRUCTURES_MAP.get(structure.getStructureType()).add(structure);
