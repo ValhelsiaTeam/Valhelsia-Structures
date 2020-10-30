@@ -46,16 +46,21 @@ public class BrazierBlock extends Block implements IWaterLoggable {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public BrazierBlock(Properties properties) {
+    private final boolean smokey;
+    private final int fireDamage;
+
+    public BrazierBlock(boolean smokey, int fireDamage, Properties properties) {
         super(properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.TRUE).with(WATERLOGGED, Boolean.FALSE));
+        this.smokey = smokey;
+        this.fireDamage = fireDamage;
     }
 
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
         if (!entity.isImmuneToFire() && state.get(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
             if (entity.getPosX() >= pos.getX() + 0.1 && entity.getPosZ() >= pos.getZ() + 0.1 && entity.getPosX() <= pos.getX() + 0.9 && entity.getPosZ() <= pos.getZ() + 0.9) {
-                entity.attackEntityFrom(DamageSource.IN_FIRE, 1.0F);
+                entity.attackEntityFrom(DamageSource.IN_FIRE, this.fireDamage);
             }
         }
 
@@ -97,7 +102,7 @@ public class BrazierBlock extends Block implements IWaterLoggable {
                 worldIn.playSound((float) pos.getX() + 0.5F, (float) pos.getY() + 0.5F, (float) pos.getZ() + 0.5F, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.6F, false);
             }
 
-            if (rand.nextInt(5) == 0) {
+            if (this.smokey && rand.nextInt(5) == 0) {
                 for(int i = 0; i < rand.nextInt(1) + 1; ++i) {
                     worldIn.addParticle(ParticleTypes.LAVA, (float) pos.getX() + 0.5F, (float) pos.getY() + 0.5F, (float) pos.getZ() + 0.5F, rand.nextFloat() / 2.0F, 5.0E-5D, rand.nextFloat() / 2.0F);
                 }
