@@ -49,8 +49,8 @@ public class ModStructures {
     }
 
     private static <T extends AbstractValhelsiaStructure> RegistryObject<T> register(String name, T structure, GenerationStage.Decoration decoration) {
-        Structure.field_236365_a_.put(ValhelsiaStructures.MOD_ID + ":" + name, structure);
-        Structure.field_236385_u_.put(structure, decoration);
+        Structure.NAME_STRUCTURE_BIMAP.put(ValhelsiaStructures.MOD_ID + ":" + name, structure);
+        Structure.STRUCTURE_DECORATION_STAGE_MAP.put(structure, decoration);
 
         if (decoration != GenerationStage.Decoration.UNDERGROUND_STRUCTURES) {
             Structure.field_236384_t_ = ImmutableList.<Structure<?>>builder().addAll(Structure.field_236384_t_).add(structure).build();

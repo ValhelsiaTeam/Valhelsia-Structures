@@ -19,16 +19,16 @@ import java.io.File;
 
 @Mod.EventBusSubscriber
 public class Config {
-    private static final ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
+    private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
     private static final ForgeConfigSpec.Builder CLIENT_BUILDER = new ForgeConfigSpec.Builder();
 
-    public static final ForgeConfigSpec SERVER_CONFIG;
+    public static final ForgeConfigSpec COMMON_CONFIG;
     public static final ForgeConfigSpec CLIENT_CONFIG;
 
     static {
-        StructureGenConfig.init(SERVER_BUILDER, CLIENT_BUILDER);
+        StructureGenConfig.init(COMMON_BUILDER, CLIENT_BUILDER);
 
-        SERVER_CONFIG = SERVER_BUILDER.build();
+        COMMON_CONFIG = COMMON_BUILDER.build();
         CLIENT_CONFIG = CLIENT_BUILDER.build();
     }
 

@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.block;
 
+import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -19,10 +20,7 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.CampfireTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
@@ -34,6 +32,8 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.valhelsia.valhelsia_core.helper.FireExtinguishHelper;
+import net.valhelsia.valhelsia_core.helper.FlintAndSteelHelper;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -46,16 +46,32 @@ public class BrazierBlock extends Block implements IWaterLoggable {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public BrazierBlock(Properties properties) {
+    private final boolean smokey;
+    private final int fireDamage;
+
+    public BrazierBlock(boolean smokey, int fireDamage, Properties properties) {
         super(properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.TRUE).with(WATERLOGGED, Boolean.FALSE));
+        this.smokey = smokey;
+        this.fireDamage = fireDamage;
+
+        FireExtinguishHelper.addExtinguishFireEffect(
+                state -> state.getBlock() == this && state.get(LIT),
+                this.getDefaultState().with(BrazierBlock.LIT, false),
+                (world, blockPos) -> world.playEvent(null, 1009, blockPos, 0));
+
+        FlintAndSteelHelper.addUse(
+                state -> state.getBlock() == this && !state.get(LIT),
+                this.getDefaultState(),
+                (playerEntity, world, blockPos) -> world.playSound(playerEntity, blockPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F),
+                world -> ActionResultType.func_233537_a_(world.isRemote()));
     }
 
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
         if (!entity.isImmuneToFire() && state.get(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
             if (entity.getPosX() >= pos.getX() + 0.1 && entity.getPosZ() >= pos.getZ() + 0.1 && entity.getPosX() <= pos.getX() + 0.9 && entity.getPosZ() <= pos.getZ() + 0.9) {
-                entity.attackEntityFrom(DamageSource.IN_FIRE, 1.0F);
+                entity.attackEntityFrom(DamageSource.IN_FIRE, this.fireDamage);
             }
         }
 
@@ -97,7 +113,7 @@ public class BrazierBlock extends Block implements IWaterLoggable {
                 worldIn.playSound((float) pos.getX() + 0.5F, (float) pos.getY() + 0.5F, (float) pos.getZ() + 0.5F, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.6F, false);
             }
 
-            if (rand.nextInt(5) == 0) {
+            if (this.smokey && rand.nextInt(5) == 0) {
                 for(int i = 0; i < rand.nextInt(1) + 1; ++i) {
                     worldIn.addParticle(ParticleTypes.LAVA, (float) pos.getX() + 0.5F, (float) pos.getY() + 0.5F, (float) pos.getZ() + 0.5F, rand.nextFloat() / 2.0F, 5.0E-5D, rand.nextFloat() / 2.0F);
                 }

@@ -57,14 +57,14 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
         if (isSurfaceFlat(generator, chunkX, chunkZ)) {
 
             // Check the entire size of the structure to see if it's all a viable biome:
-            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
+            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16)) {
                 if (!biome1.getGenerationSettings().hasStructure(this)) {
                     return false;
                 }
             }
 
             // Check the entire size of the structure for Blacklisted Biomes
-            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.func_230356_f_(), chunkZ * 16 + 9, getSize() * 16)) {
+            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16)) {
                 if (biome1.getRegistryName() != null) {
                     if (StructureGenConfig.BLACKLISTED_BIOMES.get().contains(Objects.requireNonNull(biome1.getRegistryName()).toString())) {
                         return false;
@@ -76,9 +76,9 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
             List<Structure<?>> structures = new ArrayList<>(ModStructures.STRUCTURES_MAP.get(getStructureType()));
 
             if (getStructureType() == StructureType.SURFACE) {
-                structures.add(Structure.field_236381_q_);
+                structures.add(Structure.VILLAGE);
             } else if (getStructureType() == StructureType.UNDERGROUND) {
-                structures.addAll(Arrays.asList(Structure.field_236367_c_, Structure.field_236375_k_));
+                structures.addAll(Arrays.asList(Structure.MINESHAFT, Structure.STRONGHOLD));
             }
 
             if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkX, chunkZ, structures)) {
@@ -145,7 +145,7 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
     }
 
     @Override
-    public ChunkPos func_236392_a_(StructureSeparationSettings settings, long seed, SharedSeedRandom sharedSeedRand, int x, int z) {
+    public ChunkPos getChunkPosForStructure(StructureSeparationSettings settings, long seed, SharedSeedRandom sharedSeedRand, int x, int z) {
         int spacing = this.getDistance();
         int separation = this.getSeparation();
 
@@ -195,7 +195,7 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
             this.recalculateStructureSize();
 
             if (height != -1) {
-                this.func_214628_a(generator.func_230356_f_(), this.rand, height);
+                this.func_214628_a(generator.getSeaLevel(), this.rand, height);
             }
         }
     }
