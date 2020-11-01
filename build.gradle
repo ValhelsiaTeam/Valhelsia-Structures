@@ -119,7 +119,7 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.16.3-34.1.35'
-    
+
     compile fg.deobf(files("libs/valhelsia_core-16.0.1-dev.jar"))
 
     // compile against the JEI API but do not include it at runtime

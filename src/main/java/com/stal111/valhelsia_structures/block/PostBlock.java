@@ -1,7 +1,6 @@
 package com.stal111.valhelsia_structures.block;
 
 import com.google.common.collect.ImmutableMap;
-import com.stal111.valhelsia_structures.utils.VoxelShapeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
@@ -21,6 +20,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
 
 import javax.annotation.Nullable;
 import java.util.Map;
