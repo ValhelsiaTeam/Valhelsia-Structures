@@ -30,3 +30,10 @@ authors="Valhelsia Team" #optional
 description='''
 Valhelsia Structures is mod that generates new structures such as abandoned buildings and dungeons.
 '''
+
+[[dependencies.valhelsia_structures]]
+modId="valhelsia_core"
+mandatory=true
+versionRange="[16.0.1,)"
+ordering="AFTER"
+side="BOTH"
