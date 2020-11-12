@@ -1,0 +1,20 @@
+{
+    "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
+    "comment_blocks": "Blocks",
+    "block.valhelsia_structures.special_spawner": "Специальный рассадник монстров",
+    "block.valhelsia_structures.brazier": "Мангал",
+    "block.valhelsia_structures.oak_post": "Дубовый столб",
+    "block.valhelsia_structures.spruce_post": "Еловый столб",
+    "block.valhelsia_structures.birch_post": "Берёзовый столб",
+    "block.valhelsia_structures.jungle_post": "Тропический столб",
+    "block.valhelsia_structures.acacia_post": "Столб из акации",
+    "block.valhelsia_structures.dark_oak_post": "Столб из тёмного дуба",
+    "block.valhelsia_structures.metal_framed_glass": "Обрамленный металлом стекло",
+    "block.valhelsia_structures.metal_framed_glass_pane": "Обрамленный металлом стеклянная панель",
+    "block.valhelsia_structures.paper_wall": "Бумажная стена",
+    "block.valhelsia_structures.stone": "Камень",
+    "block.valhelsia_structures.granite": "Гранит",
+    "block.valhelsia_structures.diorite": "Диорит",
+    "block.valhelsia_structures.andesite": "Андезит",
+    "block.valhelsia_structures.dirt": "Земля"
+}
