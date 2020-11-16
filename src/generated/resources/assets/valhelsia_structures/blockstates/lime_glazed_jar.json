@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "treasure=false": {
+      "model": "valhelsia_structures:block/lime_glazed_jar"
+    },
+    "treasure=true": {
+      "model": "valhelsia_structures:block/lime_glazed_jar"
+    }
+  }
+}
