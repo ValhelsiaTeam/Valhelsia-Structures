@@ -1,7 +1,8 @@
-package com.stal111.valhelsia_structures.tileentity;
+package com.stal111.valhelsia_structures.tileentity.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.stal111.valhelsia_structures.block.SpecialAbstractSpawner;
+import com.stal111.valhelsia_structures.tileentity.SpecialMobSpawnerTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;

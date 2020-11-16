@@ -2,18 +2,19 @@ package com.stal111.valhelsia_structures.init;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.ValhelsiaStructuresItemGroups;
-import com.stal111.valhelsia_structures.block.BrazierBlock;
-import com.stal111.valhelsia_structures.block.PostBlock;
-import com.stal111.valhelsia_structures.block.SpecialSpawnerBlock;
-import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
+import com.stal111.valhelsia_structures.block.*;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.DyeColor;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Blocks
@@ -38,7 +39,9 @@ public class ModBlocks {
     public static final RegistryObject<PostBlock> DARK_OAK_POST = register("dark_oak_post", new PostBlock(Block.Properties.from(Blocks.DARK_OAK_LOG).notSolid()));
     public static final RegistryObject<GlassBlock> METAL_FRAMED_GLASS = register("metal_framed_glass", new GlassBlock(Block.Properties.from(Blocks.GLASS)));
     public static final RegistryObject<PaneBlock> METAL_FRAMED_GLASS_PANE = register("metal_framed_glass_pane", new PaneBlock(Block.Properties.from(Blocks.GLASS_PANE)));
-    public static final RegistryObject<PaneBlock> PAPER_WALL = register("paper_wall", new PaneBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid()));
+    public static final RegistryObject<JarBlock> GLAZED_JAR = register("glazed_jar", new JarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()));
+    public static final RegistryObject<JarBlock> CRACKED_GLAZED_JAR = register("cracked_glazed_jar", new JarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.0F).notSolid()));
+    public static final List<RegistryObject<JarBlock>> COLORED_GLAZED_JARS = registerColoredGlazedJars();
 
     // Workaround for structures - stone that can't be replaced during later generation steps:
     public static final RegistryObject<Block> STONE = register("stone", new ValhelsiaStoneBlock(() -> Blocks.STONE, Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)));
@@ -49,6 +52,17 @@ public class ModBlocks {
     // Workaround for structures - dirt that wont transform into grass blocks:
     public static final RegistryObject<Block> DIRT = register("dirt", new ValhelsiaStoneBlock(() -> Blocks.DIRT, Block.Properties.from(Blocks.DIRT)));
 
+    private static List<RegistryObject<JarBlock>> registerColoredGlazedJars() {
+        List<RegistryObject<JarBlock>> list = new ArrayList<>();
+        for (DyeColor color : DyeColor.values()) {
+            list.add(register(color.getTranslationKey() + "_glazed_jar", new JarBlock(Block.Properties.create(Material.ROCK, color).setRequiresTool().hardnessAndResistance(1.4F).notSolid())));
+        }
+        return list;
+    }
+
+    private static <T extends Block> RegistryObject<T> registerNoItem(String name, T block) {
+        return BLOCKS.register(name, () -> block);
+    }
 
     private static <T extends Block> RegistryObject<T> register(String name, T block) {
         ModItems.ITEMS.register(name, () -> new BlockItem(block, new Item.Properties().group(ValhelsiaStructuresItemGroups.MAIN)));

@@ -13,10 +13,9 @@ import java.io.File;
  * Valhelsia Structures - com.stal111.valhelsia_structures.config.Config
  *
  * @author Valhelsia Team
- * @version 15.0.3
+ * @version 16.0.1
  * @since 2020-05-27
  */
-
 @Mod.EventBusSubscriber
 public class Config {
     private static final ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
@@ -27,6 +26,7 @@ public class Config {
 
     static {
         StructureGenConfig.init(COMMON_BUILDER, CLIENT_BUILDER);
+        BlockConfig.init(COMMON_BUILDER, CLIENT_BUILDER);
 
         COMMON_CONFIG = COMMON_BUILDER.build();
         CLIENT_CONFIG = CLIENT_BUILDER.build();
