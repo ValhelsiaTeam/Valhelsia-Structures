@@ -23,6 +23,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.valhelsia.valhelsia_core.registry.RegistryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -46,15 +47,22 @@ public class ValhelsiaStructures {
 
     public static IProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
+    public static final RegistryManager REGISTRY_MANAGER = new RegistryManager.Builder(MOD_ID).addDefaultHelpers().build();
+
     public ValhelsiaStructures() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        //REGISTRY_MANAGER = new RegistryManager.Builder(MOD_ID).addDefaultHelpers().build();
+
         // Deferred Registration
         ModRecipes.SERIALIZERS.register(eventBus);
-        ModBlocks.BLOCKS.register(eventBus);
         ModItems.ITEMS.register(eventBus);
         ModTileEntities.TILE_ENTITIES.register(eventBus);
         ModStructures.STRUCTURES.register(eventBus);
+
+        REGISTRY_MANAGER.getBlockHelper().setDefaultGroup(ValhelsiaStructuresItemGroups.MAIN);
+
+        REGISTRY_MANAGER.register(eventBus);
 
         // Event Listeners
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);

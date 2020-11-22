@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button_inventory",
+  "textures": {
+    "texture": "valhelsia_structures:block/lapidified_jungle_planks"
+  }
+}

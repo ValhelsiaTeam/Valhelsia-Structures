@@ -34,6 +34,10 @@ public class ValhelsiaStoneBlock extends Block {
         return new ItemStack(pickBlock.get());
     }
 
+    public Supplier<Block> getPickBlock() {
+        return pickBlock;
+    }
+
     @Override
     public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
     }

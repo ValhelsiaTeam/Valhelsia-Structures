@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/fence_side",
+  "textures": {
+    "texture": "valhelsia_structures:block/lapidified_jungle_planks"
+  }
+}

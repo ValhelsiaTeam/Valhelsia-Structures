@@ -6,15 +6,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "valhelsia_structures:hanging_vines"
+          "name": "valhelsia_structures:lapidified_jungle_button"
         }
       ],
       "conditions": [
         {
-          "condition": "minecraft:match_tool",
-          "predicate": {
-            "tag": "forge:shears"
-          }
+          "condition": "minecraft:survives_explosion"
         }
       ]
     }

@@ -31,6 +31,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         withParent(ModBlocks.CRACKED_GLAZED_JAR);
         ModBlocks.COLORED_GLAZED_JARS.forEach(this::withParent);
 
+        withParent(ModBlocks.LAPIDIFIED_JUNGLE_LOG);
+        withParent(ModBlocks.LAPIDIFIED_JUNGLE_WOOD);
+        withParent(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS);
+        withParent(ModBlocks.LAPIDIFIED_JUNGLE_SLAB);
+        withParent(ModBlocks.LAPIDIFIED_JUNGLE_STAIRS);
+        withParent(ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE);
+        withParentInventory(ModBlocks.LAPIDIFIED_JUNGLE_BUTTON);
+        withParentInventory(ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
+        withParent(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE);
+
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
 
         //builder(itemGenerated, "jar");
@@ -43,5 +53,10 @@ public class ModItemModelProvider extends ItemModelProvider {
     private <T extends Block>void withParent(RegistryObject<T> registryObject) {
         String name = Objects.requireNonNull(registryObject.get().getRegistryName()).getPath();
         withExistingParent(name, modLoc("block/" + name));
+    }
+
+    private <T extends Block>void withParentInventory(RegistryObject<T> registryObject) {
+        String name = Objects.requireNonNull(registryObject.get().getRegistryName()).getPath();
+        withExistingParent(name, modLoc("block/" + name + "_inventory"));
     }
 }
