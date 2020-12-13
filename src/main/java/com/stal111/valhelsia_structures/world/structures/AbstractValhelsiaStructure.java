@@ -56,15 +56,15 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
     protected boolean func_230363_a_(ChunkGenerator generator, BiomeProvider provider, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, Biome biome, ChunkPos pos, VillageConfig config) {
         if (isSurfaceFlat(generator, chunkX, chunkZ)) {
 
-            // Check the entire size of the structure to see if it's all a viable biome:
-            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16)) {
+            // Check the entire size of the structure to see if it's all a viable biome
+            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16 / 2)) {
                 if (!biome1.getGenerationSettings().hasStructure(this)) {
                     return false;
                 }
             }
 
             // Check the entire size of the structure for Blacklisted Biomes
-            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16)) {
+            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16 / 2)) {
                 if (biome1.getRegistryName() != null) {
                     if (StructureGenConfig.BLACKLISTED_BIOMES.get().contains(Objects.requireNonNull(biome1.getRegistryName()).toString())) {
                         return false;
