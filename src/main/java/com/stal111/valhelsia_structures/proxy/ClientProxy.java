@@ -4,6 +4,7 @@ import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
 import com.stal111.valhelsia_structures.tileentity.renderer.JarTileEntityRenderer;
 import com.stal111.valhelsia_structures.tileentity.renderer.SpecialMobSpawnerTileEntityRenderer;
+import com.stal111.valhelsia_structures.tileentity.renderer.ExplorersTentTileEntityRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -27,6 +28,8 @@ public class ClientProxy implements IProxy {
     public void init() {
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.SPECIAL_SPAWNER.get(), SpecialMobSpawnerTileEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.JAR.get(), JarTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.TENT.get(), ExplorersTentTileEntityRenderer::new);
+
         RenderTypeLookup.setRenderLayer(ModBlocks.SPECIAL_SPAWNER.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.BRAZIER.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.SOUL_BRAZIER.get(), RenderType.getCutout());
