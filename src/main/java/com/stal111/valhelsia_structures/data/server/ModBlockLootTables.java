@@ -31,7 +31,7 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
                 registerLootTable(block, ValhelsiaBlockLootTables::droppingSlab));
 
         takeAll(remainingBlocks, block -> block instanceof ValhelsiaStoneBlock).forEach(block ->
-                registerDropping(block, ((ValhelsiaStoneBlock) block).getPickBlock().get()));
+                registerDropping(block, ((ValhelsiaStoneBlock) block).getLootBlock().get()));
 
         takeAll(remainingBlocks, Arrays.asList(ModBlocks.METAL_FRAMED_GLASS, ModBlocks.METAL_FRAMED_GLASS_PANE)).forEach(this::registerSilkTouch);
 
