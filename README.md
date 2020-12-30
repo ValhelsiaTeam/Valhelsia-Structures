@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.curseforge.com/minecraft/mc-mods/valhelsia-structures">
-    <img border="0" alt="CurseForge" src="https://zupimages.net/up/20/43/wf5m.png">
+    <img border="0" alt="CurseForge" src="https://zupimages.net/up/20/53/5cjx.png">
   </a>
 </p>
 
@@ -10,7 +10,7 @@ We are in <strong>beta</strong> phase and will receive new structures and featur
 </p>
 
 <p align="center">
-  <a href="https://discord.gg/rdfQuaM">
+  <a href="https://valhelsia.net/discord">
     <img src="https://img.shields.io/discord/396333981601234944?color=1b1b1b&label=Discord&logo=Discord&style=plastic">
   </a>
   <a href="https://twitter.com/valhelsia">
@@ -39,7 +39,7 @@ Valhelsia Structures is licensed under a <a href="https://creativecommons.org/li
 
 <p align="center">
   <a href="https://bisecthosting.com/Valhelsia">
-    <img border="0" alt="BisectHosting" src="https://zupimages.net/up/20/20/zp4u.png">
+    <img border="0" alt="BisectHosting" src="https://zupimages.net/up/20/45/qo6j.png" width="900" height="164">
   </a>
 </p>                                                                                                                                             
 
