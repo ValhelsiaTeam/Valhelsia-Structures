@@ -50,6 +50,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         buttonBlock(ModBlocks.LAPIDIFIED_JUNGLE_BUTTON, lapidifiedJunglePlanks);
         fenceBlock(ModBlocks.LAPIDIFIED_JUNGLE_FENCE, lapidifiedJunglePlanks);
         fenceGateBlock(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get(), lapidifiedJunglePlanks);
+
+        simpleBlock(ModBlocks.HIBISCUS.get(), models().getExistingFile(modLoc("block/hibiscus")));
+        simpleBlock(ModBlocks.GIANT_FERN.get(), models().getExistingFile(modLoc("block/giant_fern")));
     }
 
     private void jarBlock(RegistryObject<JarBlock> registryObject) {

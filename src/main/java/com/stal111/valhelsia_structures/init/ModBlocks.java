@@ -60,6 +60,8 @@ public class ModBlocks {
     public static final RegistryObject<FenceGateBlock> LAPIDIFIED_JUNGLE_FENCE_GATE = HELPER.register("lapidified_jungle_fence_gate", new FenceGateBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS));
     private static final ExplorersTentBlock EXPLORERS_TENT_BLOCK = new ExplorersTentBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.doesNotBlockMovement());
     public static final RegistryObject<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", EXPLORERS_TENT_BLOCK, new DyeableBlockItem(EXPLORERS_TENT_BLOCK, new Item.Properties().group(HELPER.getDefaultGroup())));
+    public static final RegistryObject<BushBlock> HIBISCUS = HELPER.register("hibiscus", new BushBlock(AbstractBlock.Properties.from(Blocks.POPPY)));
+    public static final RegistryObject<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", new GiantFernBlock(AbstractBlock.Properties.from(Blocks.POPPY)));
 
     // Workaround for structures - stone that can't be replaced during later generation steps:
     public static final RegistryObject<Block> STONE = HELPER.register("stone", new ValhelsiaStoneBlock(() -> Blocks.STONE, () -> Blocks.COBBLESTONE, AbstractBlock.Properties.from(Blocks.STONE)));

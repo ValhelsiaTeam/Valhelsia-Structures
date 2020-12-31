@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.proxy;
 
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
+import com.stal111.valhelsia_structures.tileentity.renderer.GiantFernTileEntityRenderer;
 import com.stal111.valhelsia_structures.tileentity.renderer.JarTileEntityRenderer;
 import com.stal111.valhelsia_structures.tileentity.renderer.SpecialMobSpawnerTileEntityRenderer;
 import com.stal111.valhelsia_structures.tileentity.renderer.ExplorersTentTileEntityRenderer;
@@ -29,6 +30,7 @@ public class ClientProxy implements IProxy {
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.SPECIAL_SPAWNER.get(), SpecialMobSpawnerTileEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.JAR.get(), JarTileEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.TENT.get(), ExplorersTentTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.GIANT_FERN.get(), GiantFernTileEntityRenderer::new);
 
         RenderTypeLookup.setRenderLayer(ModBlocks.SPECIAL_SPAWNER.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.BRAZIER.get(), RenderType.getCutout());
@@ -38,6 +40,7 @@ public class ClientProxy implements IProxy {
         RenderTypeLookup.setRenderLayer(ModBlocks.HANGING_VINES_BODY.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.HANGING_VINES.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.JUNGLE_HEAD.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.HIBISCUS.get(), RenderType.getCutout());
     }
 
     @Override

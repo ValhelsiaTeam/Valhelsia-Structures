@@ -41,6 +41,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         withParentInventory(ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
         withParent(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE);
 
+        withParent(ModBlocks.HIBISCUS);
+
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
 
         //builder(itemGenerated, "jar");
