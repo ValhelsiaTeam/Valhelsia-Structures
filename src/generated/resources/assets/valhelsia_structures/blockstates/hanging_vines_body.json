@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "attached=false": {
+      "model": "valhelsia_structures:block/hanging_vines_body"
+    },
+    "attached=true": {
+      "model": "valhelsia_structures:block/attached_hanging_vines_body"
+    }
+  }
+}

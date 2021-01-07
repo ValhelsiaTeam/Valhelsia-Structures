@@ -1,24 +1,22 @@
 package com.stal111.valhelsia_structures.data.client;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.JarBlock;
+import com.stal111.valhelsia_structures.block.*;
+import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.minecraft.block.AbstractButtonBlock;
-import net.minecraft.block.FenceBlock;
-import net.minecraft.block.PressurePlateBlock;
+import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.state.DirectionProperty;
-import net.minecraft.state.properties.AttachFace;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.fml.RegistryObject;
+import net.valhelsia.valhelsia_core.data.ValhelsiaBlockStateProvider;
 
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Mod Block State Provider
@@ -28,79 +26,99 @@ import java.util.Objects;
  * @version 16.1.0
  * @since 2020-11-13
  */
-public class ModBlockStateProvider extends BlockStateProvider {
+public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
 
     public ModBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, ValhelsiaStructures.MOD_ID, exFileHelper);
+        super(gen, ValhelsiaStructures.REGISTRY_MANAGER, exFileHelper);
     }
 
     @Override
-    protected void registerStatesAndModels() {
-        jarBlock(ModBlocks.GLAZED_JAR);
-        jarBlock(ModBlocks.CRACKED_GLAZED_JAR);
-        ModBlocks.COLORED_GLAZED_JARS.forEach(this::jarBlock);
+    protected void register(Set<RegistryObject<Block>> blocks) { ;
+        forEach(blocks, block -> block.getRegistryName().toString().contains("lapidified_jungle_post"), block -> {});
 
-        logBlock(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get());
-        axisBlock(ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get(), modLoc("block/lapidified_jungle_log"), modLoc("block/lapidified_jungle_log"));
-        simpleBlock(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get());
+        forEach(blocks, block -> block instanceof BrazierBlock, this::brazierBlock);
+        forEach(blocks, block -> block instanceof PostBlock, this::postBlock);
+        take(blocks, block -> paneBlock((PaneBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);
+        take(blocks, block -> paneBlock((PaneBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
+        take(blocks, this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);;
+        forEach(blocks, block -> block instanceof JarBlock, this::jarBlock);
+        take(blocks, block -> logBlock((RotatedPillarBlock) block), ModBlocks.LAPIDIFIED_JUNGLE_LOG);
+        take(blocks, block -> axisBlock((RotatedPillarBlock) block, modLoc("block/lapidified_jungle_log"), modLoc("block/lapidified_jungle_log")), ModBlocks.LAPIDIFIED_JUNGLE_WOOD);
         ResourceLocation lapidifiedJunglePlanks = modLoc("block/lapidified_jungle_planks");
-        slabBlock(ModBlocks.LAPIDIFIED_JUNGLE_SLAB.get(), lapidifiedJunglePlanks, lapidifiedJunglePlanks);
-        stairsBlock(ModBlocks.LAPIDIFIED_JUNGLE_STAIRS.get(), lapidifiedJunglePlanks);
-        pressurePlateBlock(ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE, lapidifiedJunglePlanks);
-        buttonBlock(ModBlocks.LAPIDIFIED_JUNGLE_BUTTON, lapidifiedJunglePlanks);
-        fenceBlock(ModBlocks.LAPIDIFIED_JUNGLE_FENCE, lapidifiedJunglePlanks);
-        fenceGateBlock(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get(), lapidifiedJunglePlanks);
+        take(blocks, this::simpleBlock, ModBlocks.LAPIDIFIED_JUNGLE_PLANKS);
+        take(blocks, block -> slabBlock((SlabBlock) block, lapidifiedJunglePlanks, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_SLAB);
+        take(blocks, block -> stairsBlock((StairsBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_STAIRS);
+        take(blocks, block -> pressurePlateBlock(block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE);
+        take(blocks, block -> buttonBlock((AbstractButtonBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_BUTTON);
+        take(blocks, block -> fenceBlock((FenceBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
+        take(blocks, block -> fenceGateBlock((FenceGateBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE);
+        take(blocks, this::withExistingModel, ModBlocks.HIBISCUS, ModBlocks.GIANT_FERN);
 
-        simpleBlock(ModBlocks.HIBISCUS.get(), models().getExistingFile(modLoc("block/hibiscus")));
-        simpleBlock(ModBlocks.GIANT_FERN.get(), models().getExistingFile(modLoc("block/giant_fern")));
+        forEach(blocks, block -> block instanceof ValhelsiaGrassBlock || block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
+
+        forEach(blocks, this::simpleBlock);
     }
 
-    private void jarBlock(RegistryObject<JarBlock> registryObject) {
-        String name = Objects.requireNonNull(registryObject.get().getRegistryName()).getPath();
+    private void brazierBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+        ModelFile model = getExistingModel(modLoc("block/" + name));
+        ModelFile offModel = getExistingModel(modLoc("block/" + name + "_off"));
+
+        getVariantBuilder(block)
+                .partialState().with(BlockStateProperties.LIT, true).modelForState().modelFile(model).addModel()
+                .partialState().with(BlockStateProperties.LIT, false).modelForState().modelFile(offModel).addModel();
+    }
+
+    private void postBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+
+        ModelFile model = models().withExistingParent(name, modLoc("block/post"))
+                .texture("post_side", modLoc("block/post/" + name))
+                .texture("post_end", modLoc("block/post/" + name + "_top"));
+
+        ModelFile attached = models().withExistingParent(name + "_attached", modLoc("block/post_attached"))
+                .texture("post_side", modLoc("block/post/" + name))
+                .texture("post_end", modLoc("block/post/" + name + "_top"));
+
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            int rotationX = state.get(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? 0 : 90;
+            int rotationY = state.get(RotatedPillarBlock.AXIS) == Direction.Axis.X ? 90 : 0;
+
+            return ConfiguredModel.builder()
+                    .modelFile(state.get(PostBlock.ATTACHED) ? attached : model)
+                    .rotationX(rotationX)
+                    .rotationY(rotationY)
+                    .build();
+        }, PostBlock.WATERLOGGED);
+    }
+
+    private void hangingVinesBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+
+        ModelFile model = getExistingModel(modLoc("block/" + name));
+        ModelFile attachedModel = getExistingModel(modLoc("block/" + "attached_" + name));
+
+        getVariantBuilder(block)
+                .partialState().with(ModBlockStateProperties.ATTACHED, true).modelForState().modelFile(attachedModel).addModel()
+                .partialState().with(ModBlockStateProperties.ATTACHED, false).modelForState().modelFile(model).addModel();
+    }
+
+    private void jarBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
         ModelFile model = models().withExistingParent(name, modLoc("block/jar")).texture("jar", modLoc("block/jar/" + name));
 
-        getVariantBuilder(registryObject.get()).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(model).build(), JarBlock.WATERLOGGED);
+        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(model).build(), JarBlock.WATERLOGGED);
     }
 
-    private void pressurePlateBlock(RegistryObject<PressurePlateBlock> registryObject, ResourceLocation texture) {
-        String name = Objects.requireNonNull(registryObject.get().getRegistryName()).getPath();
+    private void pressurePlateBlock(Block block, ResourceLocation texture) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
         ModelFile model = models().withExistingParent(name, mcLoc("block/pressure_plate_up")).texture("texture", texture);
         ModelFile modelDown = models().withExistingParent(name + "_down", mcLoc("block/pressure_plate_down")).texture("texture", texture);
 
-        getVariantBuilder(registryObject.get())
+        getVariantBuilder(block)
                 .partialState().with(PressurePlateBlock.POWERED, false)
                     .modelForState().modelFile(model).addModel()
                 .partialState().with(PressurePlateBlock.POWERED, true)
                     .modelForState().modelFile(modelDown).addModel();
-    }
-
-    private <T extends AbstractButtonBlock>void buttonBlock(RegistryObject<T> registryObject, ResourceLocation texture) {
-        String name = Objects.requireNonNull(registryObject.get().getRegistryName()).getPath();
-        ModelFile model = models().withExistingParent(name, mcLoc("block/button")).texture("texture", texture);
-        ModelFile modelPressed = models().withExistingParent(name + "_pressed", mcLoc("block/button_pressed")).texture("texture", texture);
-        models().withExistingParent(name + "_inventory", mcLoc("block/button_inventory")).texture("texture", texture);
-
-        getVariantBuilder(registryObject.get())
-                .forAllStates(state -> {
-                    Direction facing = state.get(BlockStateProperties.HORIZONTAL_FACING);
-                    AttachFace face = state.get(BlockStateProperties.FACE);
-
-                    int rotationX = face == AttachFace.CEILING ? 180 : face == AttachFace.WALL ? 90 : 0;
-                    int rotationY = (int) facing.rotateY().getHorizontalAngle() + 90;
-
-                    return ConfiguredModel.builder()
-                            .modelFile(!state.get(BlockStateProperties.POWERED) ? model : modelPressed)
-                            .rotationX(rotationX)
-                            .rotationY(face == AttachFace.CEILING ? rotationY - 180 : rotationY)
-                            .uvLock(face == AttachFace.WALL)
-                            .build();
-                });
-    }
-
-    private void fenceBlock(RegistryObject<FenceBlock> registryObject, ResourceLocation texture) {
-        super.fenceBlock(registryObject.get(), texture);
-
-        String name = Objects.requireNonNull(registryObject.get().getRegistryName()).getPath();
-        models().fenceInventory(name + "_inventory", texture);
     }
 }

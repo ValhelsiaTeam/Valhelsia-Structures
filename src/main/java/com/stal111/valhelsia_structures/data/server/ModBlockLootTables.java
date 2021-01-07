@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.data.server;
 
 import com.google.common.collect.ImmutableSet;
 import com.stal111.valhelsia_structures.block.JarBlock;
+import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.block.Block;
@@ -30,8 +31,7 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
         takeAll(remainingBlocks, block -> block instanceof SlabBlock).forEach(block ->
                 registerLootTable(block, ValhelsiaBlockLootTables::droppingSlab));
 
-        takeAll(remainingBlocks, block -> block instanceof ValhelsiaStoneBlock).forEach(block ->
-                registerDropping(block, ((ValhelsiaStoneBlock) block).getLootBlock().get()));
+        takeAll(remainingBlocks, block -> block instanceof ValhelsiaStoneBlock || block instanceof ValhelsiaGrassBlock);
 
         takeAll(remainingBlocks, Arrays.asList(ModBlocks.METAL_FRAMED_GLASS, ModBlocks.METAL_FRAMED_GLASS_PANE)).forEach(this::registerSilkTouch);
 

@@ -63,14 +63,17 @@ public class ModBlocks {
     public static final RegistryObject<BushBlock> HIBISCUS = HELPER.register("hibiscus", new BushBlock(AbstractBlock.Properties.from(Blocks.POPPY)));
     public static final RegistryObject<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", new GiantFernBlock(AbstractBlock.Properties.from(Blocks.POPPY)));
 
-    // Workaround for structures - stone that can't be replaced during later generation steps:
-    public static final RegistryObject<Block> STONE = HELPER.register("stone", new ValhelsiaStoneBlock(() -> Blocks.STONE, () -> Blocks.COBBLESTONE, AbstractBlock.Properties.from(Blocks.STONE)));
-    public static final RegistryObject<Block> GRANITE = HELPER.register("granite", new ValhelsiaStoneBlock(() -> Blocks.GRANITE, AbstractBlock.Properties.from(Blocks.GRANITE)));
-    public static final RegistryObject<Block> DIORITE = HELPER.register("diorite", new ValhelsiaStoneBlock(() -> Blocks.DIORITE, AbstractBlock.Properties.from(Blocks.DIORITE)));
-    public static final RegistryObject<Block> ANDESITE = HELPER.register("andesite", new ValhelsiaStoneBlock(() -> Blocks.ANDESITE, AbstractBlock.Properties.from(Blocks.ANDESITE)));
+    // Workarounds for structures:
 
-    // Workaround for structures - dirt that wont transform into grass blocks:
-    public static final RegistryObject<Block> DIRT = HELPER.register("dirt", new ValhelsiaStoneBlock(() -> Blocks.DIRT, Block.Properties.from(Blocks.DIRT)));
+    // stone that can't be replaced during later generation steps
+    public static final RegistryObject<Block> STONE = HELPER.register("stone", new ValhelsiaStoneBlock(() -> Blocks.STONE, AbstractBlock.Properties.from(Blocks.STONE).lootFrom(Blocks.STONE)));
+    public static final RegistryObject<Block> GRANITE = HELPER.register("granite", new ValhelsiaStoneBlock(() -> Blocks.GRANITE, AbstractBlock.Properties.from(Blocks.GRANITE).lootFrom(Blocks.GRANITE)));
+    public static final RegistryObject<Block> DIORITE = HELPER.register("diorite", new ValhelsiaStoneBlock(() -> Blocks.DIORITE, AbstractBlock.Properties.from(Blocks.DIORITE).lootFrom(Blocks.DIORITE)));
+    public static final RegistryObject<Block> ANDESITE = HELPER.register("andesite", new ValhelsiaStoneBlock(() -> Blocks.ANDESITE, AbstractBlock.Properties.from(Blocks.ANDESITE).lootFrom(Blocks.ANDESITE)));
+    // grass block on which features cannot generate
+    public static final RegistryObject<Block> GRASS_BLOCK = HELPER.register("grass_block", new ValhelsiaGrassBlock(Block.Properties.from(Blocks.GRASS_BLOCK).lootFrom(Blocks.GRASS_BLOCK)));
+    // dirt that wont transform into grass blocks
+    public static final RegistryObject<Block> DIRT = HELPER.register("dirt", new ValhelsiaStoneBlock(() -> Blocks.DIRT, Block.Properties.from(Blocks.DIRT).lootFrom(Blocks.DIRT)));
 
     private static List<RegistryObject<PostBlock>> registerPosts(List<Pair<String, AbstractBlock.Properties>> posts) {
         List<RegistryObject<PostBlock>> list = new ArrayList<>();
