@@ -2,7 +2,11 @@ package com.stal111.valhelsia_structures;
 
 import com.google.common.collect.ImmutableMap;
 import com.stal111.valhelsia_structures.config.Config;
-import com.stal111.valhelsia_structures.init.*;
+import com.stal111.valhelsia_structures.init.ModRecipes;
+import com.stal111.valhelsia_structures.init.ModStructures;
+import com.stal111.valhelsia_structures.init.ModTileEntities;
+import com.stal111.valhelsia_structures.init.other.FireExtinguishRegistry;
+import com.stal111.valhelsia_structures.init.other.FlintAndSteelRegistry;
 import com.stal111.valhelsia_structures.proxy.ClientProxy;
 import com.stal111.valhelsia_structures.proxy.IProxy;
 import com.stal111.valhelsia_structures.proxy.ServerProxy;
@@ -56,7 +60,6 @@ public class ValhelsiaStructures {
 
         // Deferred Registration
         ModRecipes.SERIALIZERS.register(eventBus);
-        ModItems.ITEMS.register(eventBus);
         ModTileEntities.TILE_ENTITIES.register(eventBus);
         ModStructures.STRUCTURES.register(eventBus);
 
@@ -81,6 +84,9 @@ public class ValhelsiaStructures {
         DeferredWorkQueue.runLater(() -> {
             proxy.init();
         });
+
+        FlintAndSteelRegistry.register();
+        FireExtinguishRegistry.register();
 
         for (Map.Entry<StructureType, List<AbstractValhelsiaStructure>> entry : ModStructures.STRUCTURES_MAP.entrySet()) {
             entry.getValue().forEach(structure -> {

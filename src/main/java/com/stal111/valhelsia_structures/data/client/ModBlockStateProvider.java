@@ -53,6 +53,8 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         take(blocks, block -> fenceBlock((FenceBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
         take(blocks, block -> fenceGateBlock((FenceGateBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE);
         take(blocks, this::withExistingModel, ModBlocks.HIBISCUS, ModBlocks.GIANT_FERN);
+        take(blocks, block -> torchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_TORCH, ModBlocks.DOUSED_SOUL_TORCH);
+        take(blocks, block -> wallTorchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_WALL_TORCH, ModBlocks.DOUSED_SOUL_WALL_TORCH);
 
         forEach(blocks, block -> block instanceof ValhelsiaGrassBlock || block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
 
@@ -107,7 +109,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         String name = Objects.requireNonNull(block.getRegistryName()).getPath();
         ModelFile model = models().withExistingParent(name, modLoc("block/jar")).texture("jar", modLoc("block/jar/" + name));
 
-        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(model).build(), JarBlock.WATERLOGGED);
+        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(model).build(), BlockStateProperties.WATERLOGGED);
     }
 
     private void pressurePlateBlock(Block block, ResourceLocation texture) {
@@ -120,5 +122,29 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
                     .modelForState().modelFile(model).addModel()
                 .partialState().with(PressurePlateBlock.POWERED, true)
                     .modelForState().modelFile(modelDown).addModel();
+    }
+
+    private void torchBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+        torchBlock(block, modLoc("blocks/" + name));
+    }
+
+    private void torchBlock(Block block, ResourceLocation texture) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+
+        getVariantBuilder(block)
+                .partialState().setModels(new ConfiguredModel(models().torch(name, texture)));
+    }
+
+    private void wallTorchBlock(Block block, ResourceLocation texture) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+
+        getVariantBuilder(block)
+                .forAllStatesExcept(state -> ConfiguredModel.builder()
+                        .modelFile(models().torchWall(name, texture))
+                        .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 90) % 360)
+                        .build(),
+                        BlockStateProperties.WATERLOGGED
+                );
     }
 }

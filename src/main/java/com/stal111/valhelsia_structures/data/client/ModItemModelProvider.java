@@ -4,6 +4,7 @@ import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
+import com.stal111.valhelsia_structures.init.ModItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -30,12 +31,21 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
 
     @Override
     protected void register(Set<RegistryObject<Item>> items, Set<RegistryObject<Item>> blockItems) {
-        forEach(blockItems, item -> ((BlockItem) item).getBlock() instanceof ValhelsiaGrassBlock || ((BlockItem) item).getBlock() instanceof ValhelsiaStoneBlock || item.getRegistryName().getPath().contains("lapidified_jungle_post"), item -> {});
+        forEach(blockItems, item -> item.getRegistryName().getPath().contains("lapidified_jungle_post"), item -> {});
+
+        forEach(blockItems, item -> ((BlockItem) item).getBlock() instanceof ValhelsiaGrassBlock || ((BlockItem) item).getBlock() instanceof ValhelsiaStoneBlock, item -> withParent(item, true));
         takeBlockItem(blockItems, item -> withParent(item, Objects.requireNonNull(item.getRegistryName()).getPath() + "_off"), ModBlocks.BRAZIER, ModBlocks.SOUL_BRAZIER);
         takeBlockItem(blockItems, item -> simpleModelBlockTexture(item, "metal_framed_glass"), ModBlocks.METAL_FRAMED_GLASS_PANE);
-        takeBlockItem(blockItems, this::simpleModelBlockTexture, ModBlocks.HANGING_VINES);
-        takeBlockItem(blockItems, this::simpleModelBlockTexture, ModBlocks.PAPER_WALL);
+        takeBlockItem(blockItems, this::simpleModelBlockTexture,
+                ModBlocks.HANGING_VINES,
+                ModBlocks.PAPER_WALL
+        );
         takeBlockItem(blockItems, this::withParentInventory, ModBlocks.LAPIDIFIED_JUNGLE_BUTTON, ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
+
+        take(blockItems, item -> simpleModelBlockTexture(item, "doused_torch"),
+                ModItems.DOUSED_TORCH,
+                ModItems.DOUSED_SOUL_TORCH
+        );
 
         forEach(blockItems, this::withParent);
 

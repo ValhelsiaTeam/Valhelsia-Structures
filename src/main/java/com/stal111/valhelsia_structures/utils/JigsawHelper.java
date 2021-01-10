@@ -30,18 +30,19 @@ public class JigsawHelper {
         return register(name, placementBehaviour, list, replaceStone, false, processors);
     }
 
-    public static JigsawPattern register(String name, JigsawPattern.PlacementBehaviour placementBehaviour, List<Pair<String, Integer>> list, boolean replaceStone, boolean undergroundStructure, StructureProcessor... processors) {
+    public static JigsawPattern register(String name, JigsawPattern.PlacementBehaviour placementBehaviour, List<Pair<String, Integer>> list, boolean replaceStone, boolean forceAir, StructureProcessor... processors) {
         List<Pair<Function<JigsawPattern.PlacementBehaviour, ? extends JigsawPiece>, Integer>> newList = new ArrayList<>();
 
         List<StructureProcessor> processorList = new ArrayList<>(Arrays.asList(processors));
         processorList.add(Processors.RED_GLASS);
+        processorList.add(Processors.GRASS_BLOCK_REPLACEMENT_PROCESSOR);
 
         if (replaceStone) {
             processorList.add(Processors.STONE_REPLACEMENT_PROCESSOR);
         }
 
         for (Pair<String, Integer> pair : list) {
-            if (undergroundStructure) {
+            if (forceAir) {
                 newList.add(Pair.of(JigsawPiece.func_242861_b (ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), new StructureProcessorList(processorList)), pair.getSecond()));
             } else {
                 newList.add(Pair.of(JigsawPiece.func_242851_a (ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), new StructureProcessorList(processorList)), pair.getSecond()));

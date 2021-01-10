@@ -34,7 +34,7 @@ public class ExplorersTentTileEntityRenderer extends TileEntityRenderer<Explorer
     public void render(ExplorersTentTileEntity tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
         matrixStack.push();
 
-        matrixStack.translate(0.5, 1.85, 0.5);
+        matrixStack.translate(0.5, 1.8, 0.5);
         matrixStack.rotate(Vector3f.YP.rotationDegrees(tileEntity.getBlockState().get(ExplorersTentBlock.FACING).getHorizontalAngle() + 90));
         matrixStack.rotate(Vector3f.ZP.rotationDegrees(180));
 
@@ -44,7 +44,7 @@ public class ExplorersTentTileEntityRenderer extends TileEntityRenderer<Explorer
         float blue = (float) (i & 255) / 255.0F;
 
         tentModel.render(matrixStack, buffer.getBuffer(tentModel.getRenderType(TENT_TEXTURE)), combinedLight, combinedOverlay, red, green, blue, 1.0F);
-        matrixStack.translate(0, 0.35, 0);
+        matrixStack.translate(0, 0.3, 0);
         matrixStack.rotate(Vector3f.YP.rotationDegrees(90));
         tentModel.renderSticks(matrixStack, buffer.getBuffer(tentModel.getRenderType(TENT_STICKS_TEXTURE)), combinedLight, combinedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
         matrixStack.pop();
