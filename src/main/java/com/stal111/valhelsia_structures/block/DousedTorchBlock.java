@@ -58,9 +58,7 @@ public class DousedTorchBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos) {
-        System.out.println(hasEnoughSolidSide(world, pos.down(), Direction.UP));
-        return hasEnoughSolidSide(world, pos.down(), Direction.UP);
+    public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos) { return hasEnoughSolidSide(world, pos.down(), Direction.UP);
     }
 
     @Override

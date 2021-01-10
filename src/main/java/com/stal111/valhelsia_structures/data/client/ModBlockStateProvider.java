@@ -56,7 +56,8 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         take(blocks, block -> torchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_TORCH, ModBlocks.DOUSED_SOUL_TORCH);
         take(blocks, block -> wallTorchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_WALL_TORCH, ModBlocks.DOUSED_SOUL_WALL_TORCH);
 
-        forEach(blocks, block -> block instanceof ValhelsiaGrassBlock || block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
+        forEach(blocks, block -> block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
+        take(blocks, this::valhelsiaGrassBlock, ModBlocks.GRASS_BLOCK);
 
         forEach(blocks, this::simpleBlock);
     }
@@ -146,5 +147,17 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
                         .build(),
                         BlockStateProperties.WATERLOGGED
                 );
+    }
+
+    private void valhelsiaGrassBlock(Block block) {
+        getVariantBuilder(block)
+                .partialState().with(BlockStateProperties.SNOWY, false).modelForState()
+                    .modelFile(getExistingModel(mcLoc("block/grass_block"))).nextModel()
+                    .modelFile(getExistingModel(mcLoc("block/grass_block"))).rotationY(90).nextModel()
+                    .modelFile(getExistingModel(mcLoc("block/grass_block"))).rotationY(180).nextModel()
+                    .modelFile(getExistingModel(mcLoc("block/grass_block"))).rotationY(270).addModel()
+                .partialState().with(BlockStateProperties.SNOWY, true).modelForState()
+                    .modelFile(getExistingModel(mcLoc("block/grass_block_snow"))).addModel()
+        ;
     }
 }
