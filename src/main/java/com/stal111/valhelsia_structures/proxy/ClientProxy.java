@@ -45,6 +45,9 @@ public class ClientProxy implements IProxy {
         RenderTypeLookup.setRenderLayer(ModBlocks.DOUSED_WALL_TORCH.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.DOUSED_SOUL_TORCH.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.DOUSED_SOUL_WALL_TORCH.get(), RenderType.getCutout());
+
+        RenderTypeLookup.setRenderLayer(ModBlocks.GRASS_BLOCK.get(), RenderType.getCutout());
+
     }
 
     @Override

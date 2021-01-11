@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.data.server;
+package com.stal111.valhelsia_structures.data.data;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;

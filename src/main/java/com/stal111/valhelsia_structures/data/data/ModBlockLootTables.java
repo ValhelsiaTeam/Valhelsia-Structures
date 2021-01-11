@@ -1,13 +1,11 @@
-package com.stal111.valhelsia_structures.data.server;
+package com.stal111.valhelsia_structures.data.data;
 
-import com.google.common.collect.ImmutableSet;
 import com.stal111.valhelsia_structures.block.JarBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.data.loot.BlockLootTables;
 import net.minecraftforge.fml.RegistryObject;
 import net.valhelsia.valhelsia_core.data.ValhelsiaBlockLootTables;
 

@@ -7,7 +7,9 @@
   "mixins": [
     "BucketItemMixin",
     "ClientPlayNetHandlerMixin",
+    "FeatureMixin",
     "FlowingFluidMixin",
+    "SpreadableSnowyDirtBlockMixin",
     "TorchBlockMixin",
     "WallTorchBlockMixin"
   ],

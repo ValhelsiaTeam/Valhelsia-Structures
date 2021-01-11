@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.data.server;
+package com.stal111.valhelsia_structures.data.data;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.IFinishedRecipe;
