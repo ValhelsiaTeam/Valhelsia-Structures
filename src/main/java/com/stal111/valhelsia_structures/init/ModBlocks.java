@@ -46,6 +46,7 @@ public class ModBlocks {
     public static final RegistryObject<PaneBlock> PAPER_WALL = HELPER.register("paper_wall", new PaneBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid()));
     public static final RegistryObject<HangingVinesBodyBlock> HANGING_VINES_BODY = HELPER.registerNoItem("hanging_vines_body", new HangingVinesBodyBlock(Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.2F).sound(SoundType.VINE)));
     public static final RegistryObject<HangingVinesBlock> HANGING_VINES = HELPER.register("hanging_vines", new HangingVinesBlock(Block.Properties.create(Material.TALL_PLANTS).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.2F).sound(SoundType.VINE)));
+    public static final RegistryObject<JungleHeadBlock> JUNGLE_HEAD = HELPER.register("jungle_head", new JungleHeadBlock(Block.Properties.from(Blocks.COBBLESTONE).notSolid()));
     public static final RegistryObject<JarBlock> GLAZED_JAR = HELPER.register("glazed_jar", new JarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()));
     public static final RegistryObject<JarBlock> CRACKED_GLAZED_JAR = HELPER.register("cracked_glazed_jar", new JarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.0F).notSolid()));
     public static final List<RegistryObject<JarBlock>> COLORED_GLAZED_JARS = registerColoredGlazedJars();

@@ -2,10 +2,7 @@ package com.stal111.valhelsia_structures.proxy;
 
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
-import com.stal111.valhelsia_structures.tileentity.renderer.GiantFernTileEntityRenderer;
-import com.stal111.valhelsia_structures.tileentity.renderer.JarTileEntityRenderer;
-import com.stal111.valhelsia_structures.tileentity.renderer.SpecialMobSpawnerTileEntityRenderer;
-import com.stal111.valhelsia_structures.tileentity.renderer.ExplorersTentTileEntityRenderer;
+import com.stal111.valhelsia_structures.tileentity.renderer.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
@@ -31,6 +28,7 @@ public class ClientProxy implements IProxy {
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.JAR.get(), JarTileEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.TENT.get(), ExplorersTentTileEntityRenderer::new);
         ClientRegistry.bindTileEntityRenderer(ModTileEntities.GIANT_FERN.get(), GiantFernTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.DUNGEON_DOOR.get(), DungeonDoorTileEntityRenderer::new);
 
         RenderTypeLookup.setRenderLayer(ModBlocks.SPECIAL_SPAWNER.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.BRAZIER.get(), RenderType.getCutout());

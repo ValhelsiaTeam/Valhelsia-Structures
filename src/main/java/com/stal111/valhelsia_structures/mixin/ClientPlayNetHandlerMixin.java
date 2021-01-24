@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.mixin;
 
+import com.stal111.valhelsia_structures.tileentity.DungeonDoorTileEntity;
 import com.stal111.valhelsia_structures.tileentity.JarTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.play.ClientPlayNetHandler;
@@ -34,6 +35,9 @@ public class ClientPlayNetHandlerMixin {
         int i = packet.getTileEntityType();
 
         if (i == 15 && tileentity instanceof JarTileEntity) {
+            tileentity.read(this.client.world.getBlockState(blockpos), packet.getNbtCompound());
+        }
+        if (i == 16 && tileentity instanceof DungeonDoorTileEntity) {
             tileentity.read(this.client.world.getBlockState(blockpos), packet.getNbtCompound());
         }
     }
