@@ -6,6 +6,7 @@ import com.stal111.valhelsia_structures.data.client.ModItemModelProvider;
 import com.stal111.valhelsia_structures.data.data.ModBlockTagsProvider;
 import com.stal111.valhelsia_structures.data.data.ModItemTagsProvider;
 import com.stal111.valhelsia_structures.data.data.ModLootTableProvider;
+import com.stal111.valhelsia_structures.data.data.ModRecipeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,5 +36,6 @@ public class DataGenerators {
         ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(generator, existingFileHelper);
         generator.addProvider(blockTagsProvider);
         generator.addProvider(new ModItemTagsProvider(generator, blockTagsProvider, existingFileHelper));
+        generator.addProvider(new ModRecipeProvider(generator));
     }
 }

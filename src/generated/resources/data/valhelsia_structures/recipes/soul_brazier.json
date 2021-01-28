@@ -1,5 +1,5 @@
 {
-  "type": "crafting_shaped",
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "*X*",
     "###"
@@ -16,7 +16,6 @@
     }
   },
   "result": {
-    "item": "valhelsia_structures:soul_brazier",
-    "count": 1
+    "item": "valhelsia_structures:soul_brazier"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "type": "crafting_shaped",
+  "type": "minecraft:crafting_shaped",
   "pattern": [
     "###",
     "#X#",
@@ -10,7 +10,7 @@
       "item": "minecraft:glass"
     },
     "X": {
-      "item": "minecraft:iron_ingot"
+      "tag": "forge:ingots/iron"
     }
   },
   "result": {

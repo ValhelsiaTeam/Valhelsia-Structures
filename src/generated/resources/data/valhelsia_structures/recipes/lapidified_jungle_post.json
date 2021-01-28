@@ -1,0 +1,8 @@
+{
+  "type": "valhelsia_structures:axe_crafting",
+  "input": [],
+  "output": {
+    "item": "valhelsia_structures:lapidified_jungle_post",
+    "count": 2
+  }
+}

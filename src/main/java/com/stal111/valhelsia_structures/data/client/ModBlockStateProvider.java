@@ -35,6 +35,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
     @Override
     protected void register(Set<RegistryObject<Block>> blocks) { ;
         forEach(blocks, block -> block.getRegistryName().toString().contains("lapidified_jungle_post"), block -> {});
+        blocks.remove(ModBlocks.DUNGEON_DOOR_LEAF);
 
         forEach(blocks, block -> block instanceof BrazierBlock, this::brazierBlock);
         forEach(blocks, block -> block instanceof PostBlock, this::postBlock);
