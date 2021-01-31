@@ -37,13 +37,16 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.SOUL_BRAZIER.get()).patternLine("*X*").patternLine("###").key('#', Items.IRON_INGOT).key('X', ItemTags.SOUL_FIRE_BASE_BLOCKS).key('*', Items.IRON_BARS).addCriterion("has_item", hasItem(ItemTags.SOUL_FIRE_BASE_BLOCKS)).build(consumer);
 
         ModBlocks.WOODEN_POSTS.forEach(registryObject -> {
-            String name = registryObject.get().getRegistryName().getPath();
-            Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name.substring(0, name.length() - 5) + "_log"));
-           if (block != null) {
-               new AxeCraftingRecipeBuilder(Ingredient.fromItems(block), registryObject.get().asItem(), 2)
-                       .addCriterion("has_item", hasItem(block))
-                       .build(consumer);
-           }
+            if (ModBlocks.POST_LOG_MAP.containsKey(registryObject.get())) {
+                Block block = ForgeRegistries.BLOCKS.getValue(ModBlocks.POST_LOG_MAP.get(registryObject.get()));
+
+                System.out.println(block.getRegistryName());
+                if (block != null) {
+                    new AxeCraftingRecipeBuilder(Ingredient.fromItems(block), registryObject.get().asItem(), 2)
+                            .addCriterion("has_item", hasItem(block))
+                            .build(consumer);
+                }
+            }
         });
 
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.METAL_FRAMED_GLASS.get(), 8).patternLine("###").patternLine("#X#").patternLine("###").key('#', Blocks.GLASS).key('X', Tags.Items.INGOTS_IRON).addCriterion("has_item", hasItem(Blocks.GLASS)).build(consumer);

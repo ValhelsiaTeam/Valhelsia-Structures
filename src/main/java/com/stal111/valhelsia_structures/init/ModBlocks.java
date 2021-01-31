@@ -10,13 +10,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.registry.BlockRegistryHelper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * Blocks
@@ -27,6 +27,8 @@ import java.util.List;
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
+
+    public static final Map<PostBlock, ResourceLocation> POST_LOG_MAP = new HashMap<>();
 
     public static final BlockRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getBlockHelper();
 
@@ -40,7 +42,9 @@ public class ModBlocks {
             Pair.of("jungle", AbstractBlock.Properties.from(Blocks.JUNGLE_LOG)),
             Pair.of("acacia", AbstractBlock.Properties.from(Blocks.ACACIA_LOG)),
             Pair.of("dark_oak", AbstractBlock.Properties.from(Blocks.DARK_OAK_LOG)),
-            Pair.of("lapidified_jungle", BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)));
+            Pair.of("warped", AbstractBlock.Properties.from(Blocks.WARPED_STEM)),
+            Pair.of("crimson", AbstractBlock.Properties.from(Blocks.CRIMSON_STEM)),
+            Pair.of("lapidified_jungle", BlockProperties.LAPIDIFIED_JUNGLE_LOG)));
     public static final RegistryObject<GlassBlock> METAL_FRAMED_GLASS = HELPER.register("metal_framed_glass", new GlassBlock(Block.Properties.from(Blocks.GLASS)));
     public static final RegistryObject<PaneBlock> METAL_FRAMED_GLASS_PANE = HELPER.register("metal_framed_glass_pane", new PaneBlock(Block.Properties.from(Blocks.GLASS_PANE)));
     public static final RegistryObject<PaneBlock> PAPER_WALL = HELPER.register("paper_wall", new PaneBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid()));
@@ -67,6 +71,8 @@ public class ModBlocks {
     public static final RegistryObject<DousedWallTorchBlock> DOUSED_WALL_TORCH = HELPER.registerNoItem("doused_wall_torch", new DousedWallTorchBlock((TorchBlock) Blocks.WALL_TORCH, AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance()));
     public static final RegistryObject<DousedTorchBlock> DOUSED_SOUL_TORCH = HELPER.registerNoItem("doused_soul_torch", new DousedTorchBlock((TorchBlock) Blocks.SOUL_TORCH, AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance()));
     public static final RegistryObject<DousedWallTorchBlock> DOUSED_SOUL_WALL_TORCH = HELPER.registerNoItem("doused_soul_wall_torch", new DousedWallTorchBlock((TorchBlock) Blocks.SOUL_WALL_TORCH, AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance()));
+    public static final RegistryObject<DungeonDoorBlock> DUNGEON_DOOR = HELPER.register("dungeon_door", new DungeonDoorBlock(AbstractBlock.Properties.create(Material.IRON).notSolid()));
+    public static final RegistryObject<DungeonDoorLeafBlock> DUNGEON_DOOR_LEAF = HELPER.registerNoItem("dungeon_door_leaf", new DungeonDoorLeafBlock(AbstractBlock.Properties.create(Material.IRON).notSolid()));
 
     // Workarounds for structures:
 
@@ -84,9 +90,19 @@ public class ModBlocks {
     private static List<RegistryObject<PostBlock>> registerPosts(List<Pair<String, AbstractBlock.Properties>> posts) {
         List<RegistryObject<PostBlock>> list = new ArrayList<>();
         for (Pair<String, AbstractBlock.Properties> pair : posts) {
-            list.add(HELPER.register(pair.getFirst() + "_post", new PostBlock(pair.getSecond().notSolid())));
+            list.add(registerPost(pair, pair.getFirst().equals("warped") || pair.getFirst().equals("crimson")));
         }
         return list;
+    }
+
+    private static RegistryObject<PostBlock> registerPost(Pair<String, AbstractBlock.Properties> pair, boolean netherWood) {
+        PostBlock postBlock = new PostBlock(pair.getSecond().notSolid());
+
+        String name = pair.getFirst() + (netherWood ? "_stem" : "_log");
+        ResourceLocation resourceLocation = pair.getFirst().equals("lapidified_jungle") ? new ResourceLocation(ValhelsiaStructures.MOD_ID, name) : new ResourceLocation(name);
+        POST_LOG_MAP.put(postBlock, resourceLocation);
+
+        return HELPER.register(pair.getFirst() + "_post", postBlock);
     }
 
     private static List<RegistryObject<JarBlock>> registerColoredGlazedJars() {

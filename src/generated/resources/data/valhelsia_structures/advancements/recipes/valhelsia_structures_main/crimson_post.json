@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "valhelsia_structures:lapidified_jungle_post"
+      "valhelsia_structures:crimson_post"
     ]
   },
   "criteria": {
@@ -11,7 +11,7 @@
       "conditions": {
         "items": [
           {
-            "item": "valhelsia_structures:lapidified_jungle_log"
+            "item": "minecraft:crimson_stem"
           }
         ]
       }
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "valhelsia_structures:lapidified_jungle_post"
+        "recipe": "valhelsia_structures:crimson_post"
       }
     }
   },
