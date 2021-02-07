@@ -1,0 +1,20 @@
+{
+    "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
+    "comment_blocks": "Bloques",
+    "block.valhelsia_structures.special_spawner": "Generador especial",
+    "block.valhelsia_structures.brazier": "Brasero",
+    "block.valhelsia_structures.oak_post": "Poste de roble",
+    "block.valhelsia_structures.spruce_post": "Poste de abeto",
+    "block.valhelsia_structures.birch_post": "Poste de abedul",
+    "block.valhelsia_structures.jungle_post": "Poste de jungla",
+    "block.valhelsia_structures.acacia_post": "Poste de acacia",
+    "block.valhelsia_structures.dark_oak_post": "Poste de roble oscuro",
+    "block.valhelsia_structures.metal_framed_glass": "Vidrio con marco de metal",
+    "block.valhelsia_structures.metal_framed_glass_pane": "Panel de vidrio con marco de metal",
+    "block.valhelsia_structures.paper_wall": "Pared de papel",
+    "block.valhelsia_structures.stone": "Piedra",
+    "block.valhelsia_structures.granite": "Granito",
+    "block.valhelsia_structures.diorite": "Diorita",
+    "block.valhelsia_structures.andesite": "Andesita",
+    "block.valhelsia_structures.dirt": "Tierra"
+}
