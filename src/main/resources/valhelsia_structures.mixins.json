@@ -9,6 +9,7 @@
     "ClientPlayNetHandlerMixin",
     "FeatureMixin",
     "FlowingFluidMixin",
+    "LakesFeatureMixin",
     "SpreadableSnowyDirtBlockMixin",
     "TorchBlockMixin",
     "WallTorchBlockMixin"
