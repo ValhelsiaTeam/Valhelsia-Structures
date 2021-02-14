@@ -12,6 +12,7 @@ import com.stal111.valhelsia_structures.proxy.IProxy;
 import com.stal111.valhelsia_structures.proxy.ServerProxy;
 import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure;
+import com.stal111.valhelsia_structures.world.structures.RemovedStructure;
 import com.stal111.valhelsia_structures.world.structures.pieces.SmallDungeonPools;
 import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -53,6 +54,8 @@ public class ValhelsiaStructures {
 
     public static final RegistryManager REGISTRY_MANAGER = new RegistryManager.Builder(MOD_ID).addDefaultHelpers().build();
 
+    public static boolean configValidated = false;
+
     public ValhelsiaStructures() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -74,8 +77,8 @@ public class ValhelsiaStructures {
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
         Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MOD_ID + "-client.toml").toString());
-        Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MOD_ID + "-server.toml").toString());
-
+        Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MOD_ID + "-common.toml").toString());
+        
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -90,13 +93,15 @@ public class ValhelsiaStructures {
 
         for (Map.Entry<StructureType, List<AbstractValhelsiaStructure>> entry : ModStructures.STRUCTURES_MAP.entrySet()) {
             entry.getValue().forEach(structure -> {
-                DimensionStructuresSettings.field_236191_b_ = // Default structures
-                        ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
-                                .putAll(DimensionStructuresSettings.field_236191_b_)
-                                .put(structure, new StructureSeparationSettings(structure.getDistance(), structure.getSeparation(), structure.getSeedModifier()))
-                                .build();
+                if (!(structure instanceof RemovedStructure)) {
+                    DimensionStructuresSettings.field_236191_b_ = // Default structures
+                            ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
+                                    .putAll(DimensionStructuresSettings.field_236191_b_)
+                                    .put(structure, new StructureSeparationSettings(structure.getSpacing(), structure.getSeparation(), structure.getSeedModifier()))
+                                    .build();
 
-                DimensionSettings.field_242740_q.getStructures().field_236193_d_.put(structure, new StructureSeparationSettings(structure.getDistance(), structure.getSeparation(), structure.getSeedModifier()));
+                    DimensionSettings.field_242740_q.getStructures().field_236193_d_.put(structure, new StructureSeparationSettings(structure.getSpacing(), structure.getSeparation(), structure.getSeedModifier()));
+                }
             });
         }
 

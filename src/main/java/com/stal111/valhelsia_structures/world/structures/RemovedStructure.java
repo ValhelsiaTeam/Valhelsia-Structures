@@ -1,6 +1,9 @@
 package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.serialization.Codec;
+import com.stal111.valhelsia_structures.config.StructureConfigEntry;
+import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 
 /**
@@ -17,17 +20,7 @@ import net.minecraft.world.gen.feature.structure.VillageConfig;
 public class RemovedStructure extends AbstractValhelsiaStructure {
 
     public RemovedStructure(Codec<VillageConfig> villageConfigCodec, String name) {
-        super(villageConfigCodec, name, 2);
-    }
-
-    @Override
-    public int getSeparation() {
-        return 8;
-    }
-
-    @Override
-    public int getDistance() {
-        return 35;
+        super(villageConfigCodec, name, 2, new StructureConfigEntry(0.0D, 0, 0));
     }
 
     @Override
@@ -36,7 +29,7 @@ public class RemovedStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public double getSpawnChance() {
-        return 0;
+    public StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature() {
+        return null;
     }
 }
