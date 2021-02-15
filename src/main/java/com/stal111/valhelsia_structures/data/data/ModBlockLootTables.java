@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.data.data;
 
+import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.block.JarBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
@@ -8,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SlabBlock;
 import net.minecraftforge.fml.RegistryObject;
 import net.valhelsia.valhelsia_core.data.ValhelsiaBlockLootTables;
+import net.valhelsia.valhelsia_core.registry.RegistryManager;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -21,6 +23,10 @@ import java.util.function.Predicate;
  * @since 2020-11-22
  */
 public class ModBlockLootTables extends ValhelsiaBlockLootTables {
+
+    public ModBlockLootTables() {
+        super(ValhelsiaStructures.REGISTRY_MANAGER);
+    }
 
     @Override
     public void addTables() {

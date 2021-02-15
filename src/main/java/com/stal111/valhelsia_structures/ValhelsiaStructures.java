@@ -10,6 +10,7 @@ import com.stal111.valhelsia_structures.init.other.FlintAndSteelRegistry;
 import com.stal111.valhelsia_structures.proxy.ClientProxy;
 import com.stal111.valhelsia_structures.proxy.IProxy;
 import com.stal111.valhelsia_structures.proxy.ServerProxy;
+import com.stal111.valhelsia_structures.setup.CommonSetup;
 import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure;
 import com.stal111.valhelsia_structures.world.structures.RemovedStructure;
@@ -72,6 +73,7 @@ public class ValhelsiaStructures {
 
         // Event Listeners
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonSetup::setup);
 
         // Config
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
