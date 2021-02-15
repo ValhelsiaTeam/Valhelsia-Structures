@@ -29,6 +29,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void registerTags() {
         this.copy(ModTags.Blocks.POSTS, ModTags.Items.POSTS);
+        this.copy(ModTags.Blocks.NON_FLAMMABLE_POSTS, ModTags.Items.NON_FLAMMABLE_POSTS);
         this.copy(Tags.Blocks.GLASS, Tags.Items.GLASS);
         this.copy(Tags.Blocks.GLASS_COLORLESS, Tags.Items.GLASS_COLORLESS);
         this.copy(Tags.Blocks.GLASS_PANES, Tags.Items.GLASS_PANES);

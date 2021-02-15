@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.init;
 
-import com.mojang.datafixers.util.Pair;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.block.*;
 import com.stal111.valhelsia_structures.block.properties.BlockProperties;
@@ -13,10 +12,10 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.registry.BlockRegistryHelper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Blocks
@@ -28,23 +27,20 @@ import java.util.*;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
 
-    public static final Map<PostBlock, ResourceLocation> POST_LOG_MAP = new HashMap<>();
-
     public static final BlockRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getBlockHelper();
 
     public static final RegistryObject<SpecialSpawnerBlock> SPECIAL_SPAWNER = HELPER.register("special_spawner", new SpecialSpawnerBlock(Block.Properties.from(Blocks.SPAWNER).hardnessAndResistance(-1.0F, 3600000.0F).noDrops()));
     public static final RegistryObject<BrazierBlock> BRAZIER = HELPER.register("brazier", new BrazierBlock(true, 1, Block.Properties.from(Blocks.IRON_BARS).notSolid().setLightLevel(state -> state.get(BrazierBlock.LIT) ? 15 : 0)));
     public static final RegistryObject<BrazierBlock> SOUL_BRAZIER = HELPER.register("soul_brazier", new BrazierBlock(false, 2, Block.Properties.from(Blocks.IRON_BARS).notSolid().setLightLevel(state -> state.get(BrazierBlock.LIT) ? 11 : 0)));
-    public static final List<RegistryObject<PostBlock>> WOODEN_POSTS = registerPosts(Arrays.asList(
-            Pair.of("oak", AbstractBlock.Properties.from(Blocks.OAK_LOG)),
-            Pair.of("spruce", AbstractBlock.Properties.from(Blocks.SPRUCE_LOG)),
-            Pair.of("birch", AbstractBlock.Properties.from(Blocks.BIRCH_LOG)),
-            Pair.of("jungle", AbstractBlock.Properties.from(Blocks.JUNGLE_LOG)),
-            Pair.of("acacia", AbstractBlock.Properties.from(Blocks.ACACIA_LOG)),
-            Pair.of("dark_oak", AbstractBlock.Properties.from(Blocks.DARK_OAK_LOG)),
-            Pair.of("warped", AbstractBlock.Properties.from(Blocks.WARPED_STEM)),
-            Pair.of("crimson", AbstractBlock.Properties.from(Blocks.CRIMSON_STEM)),
-            Pair.of("lapidified_jungle", BlockProperties.LAPIDIFIED_JUNGLE_LOG)));
+    public static final RegistryObject<PostBlock> OAK_POST = HELPER.register("oak_post", new PostBlock(() -> Blocks.OAK_LOG));
+    public static final RegistryObject<PostBlock> SPRUCE_POST = HELPER.register("spruce_post", new PostBlock(() -> Blocks.SPRUCE_LOG));
+    public static final RegistryObject<PostBlock> BIRCH_POST = HELPER.register("birch_post", new PostBlock(() -> Blocks.BIRCH_LOG));
+    public static final RegistryObject<PostBlock> JUNGLE_POST = HELPER.register("jungle_post", new PostBlock(() -> Blocks.JUNGLE_LOG));
+    public static final RegistryObject<PostBlock> ACACIA_POST = HELPER.register("acacia_post", new PostBlock(() -> Blocks.ACACIA_LOG));
+    public static final RegistryObject<PostBlock> DARK_OAK_POST = HELPER.register("dark_oak_post", new PostBlock(() -> Blocks.DARK_OAK_LOG));
+    public static final RegistryObject<PostBlock> WARPED_POST = HELPER.register("warped_post", new PostBlock(() -> Blocks.WARPED_STEM));
+    public static final RegistryObject<PostBlock> CRIMSON_POST = HELPER.register("crimson_post", new PostBlock(() -> Blocks.CRIMSON_STEM));
+    public static final RegistryObject<PostBlock> LAPIDIFIED_JUNGLE_POST = HELPER.register("lapidified_jungle_post", new PostBlock(new ResourceLocation(ValhelsiaStructures.MOD_ID, "lapidified_jungle_log"), BlockProperties.LAPIDIFIED_JUNGLE_LOG));
     public static final RegistryObject<GlassBlock> METAL_FRAMED_GLASS = HELPER.register("metal_framed_glass", new GlassBlock(Block.Properties.from(Blocks.GLASS)));
     public static final RegistryObject<PaneBlock> METAL_FRAMED_GLASS_PANE = HELPER.register("metal_framed_glass_pane", new PaneBlock(Block.Properties.from(Blocks.GLASS_PANE)));
     public static final RegistryObject<PaneBlock> PAPER_WALL = HELPER.register("paper_wall", new PaneBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid()));
@@ -86,24 +82,6 @@ public class ModBlocks {
     // dirt that wont transform into grass blocks
     public static final RegistryObject<Block> DIRT = HELPER.register("dirt", new ValhelsiaStoneBlock(() -> Blocks.DIRT, Block.Properties.from(Blocks.DIRT).lootFrom(Blocks.DIRT)));
     public static final RegistryObject<Block> COARSE_DIRT = HELPER.register("coarse_dirt", new ValhelsiaStoneBlock(() -> Blocks.COARSE_DIRT, Block.Properties.from(Blocks.COARSE_DIRT).lootFrom(Blocks.COARSE_DIRT)));
-
-    private static List<RegistryObject<PostBlock>> registerPosts(List<Pair<String, AbstractBlock.Properties>> posts) {
-        List<RegistryObject<PostBlock>> list = new ArrayList<>();
-        for (Pair<String, AbstractBlock.Properties> pair : posts) {
-            list.add(registerPost(pair, pair.getFirst().equals("warped") || pair.getFirst().equals("crimson")));
-        }
-        return list;
-    }
-
-    private static RegistryObject<PostBlock> registerPost(Pair<String, AbstractBlock.Properties> pair, boolean netherWood) {
-        PostBlock postBlock = new PostBlock(pair.getSecond().notSolid());
-
-        String name = pair.getFirst() + (netherWood ? "_stem" : "_log");
-        ResourceLocation resourceLocation = pair.getFirst().equals("lapidified_jungle") ? new ResourceLocation(ValhelsiaStructures.MOD_ID, name) : new ResourceLocation(name);
-        POST_LOG_MAP.put(postBlock, resourceLocation);
-
-        return HELPER.register(pair.getFirst() + "_post", postBlock);
-    }
 
     private static List<RegistryObject<JarBlock>> registerColoredGlazedJars() {
         List<RegistryObject<JarBlock>> list = new ArrayList<>();

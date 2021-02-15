@@ -13,6 +13,7 @@ public class ModTags {
     public static class Blocks {
         public static final ITag.INamedTag<Block> BRAZIERS = forgeTag("braziers");
         public static final ITag.INamedTag<Block> POSTS = modTag("posts");
+        public static final ITag.INamedTag<Block> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
         public static final ITag.INamedTag<Block> COLORED_JARS = modTag("colored_jars");
         public static final ITag.INamedTag<Block> JARS = modTag("jars");
         public static final ITag.INamedTag<Block> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
@@ -28,6 +29,7 @@ public class ModTags {
 
     public static class Items {
         public static final ITag.INamedTag<Item> POSTS = modTag("posts");
+        public static final ITag.INamedTag<Item> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
         public static final ITag.INamedTag<Item> COLORED_JARS = modTag("colored_jars");
         public static final ITag.INamedTag<Item> JARS = modTag("jars");
         public static final ITag.INamedTag<Item> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");

@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.data.data;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.block.PostBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.data.BlockTagsProvider;
@@ -28,7 +29,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void registerTags() {
         getOrCreateBuilder(ModTags.Blocks.BRAZIERS).add(ModBlocks.BRAZIER.get(), ModBlocks.SOUL_BRAZIER.get());
-        ModBlocks.WOODEN_POSTS.forEach(registryObject -> getOrCreateBuilder(ModTags.Blocks.POSTS).add(registryObject.get()));
+        ModBlocks.HELPER.getDeferredRegister().getEntries().forEach(registryObject -> {
+            if (registryObject.get() instanceof PostBlock) {
+                getOrCreateBuilder(ModTags.Blocks.POSTS).add(registryObject.get());
+            }
+        });
+        getOrCreateBuilder(ModTags.Blocks.NON_FLAMMABLE_POSTS).add(ModBlocks.WARPED_POST.get(), ModBlocks.CRIMSON_POST.get(), ModBlocks.LAPIDIFIED_JUNGLE_POST.get());
         getOrCreateBuilder(BlockTags.IMPERMEABLE).add(ModBlocks.METAL_FRAMED_GLASS.get());
         getOrCreateBuilder(Tags.Blocks.GLASS).add(ModBlocks.METAL_FRAMED_GLASS.get());
         getOrCreateBuilder(Tags.Blocks.GLASS_COLORLESS).add(ModBlocks.METAL_FRAMED_GLASS.get());
