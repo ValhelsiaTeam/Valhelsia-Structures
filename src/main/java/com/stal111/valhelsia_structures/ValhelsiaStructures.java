@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures;
 
 import com.google.common.collect.ImmutableMap;
 import com.stal111.valhelsia_structures.config.Config;
+import com.stal111.valhelsia_structures.config.ConfigValidator;
 import com.stal111.valhelsia_structures.init.ModRecipes;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
@@ -55,8 +56,6 @@ public class ValhelsiaStructures {
 
     public static final RegistryManager REGISTRY_MANAGER = new RegistryManager.Builder(MOD_ID).addDefaultHelpers().build();
 
-    public static boolean configValidated = false;
-
     public ValhelsiaStructures() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -68,6 +67,7 @@ public class ValhelsiaStructures {
         ModStructures.STRUCTURES.register(eventBus);
 
         REGISTRY_MANAGER.getBlockHelper().setDefaultGroup(ValhelsiaStructuresItemGroups.MAIN);
+        REGISTRY_MANAGER.registerConfigValidator(new ConfigValidator());
 
         REGISTRY_MANAGER.register(eventBus);
 
