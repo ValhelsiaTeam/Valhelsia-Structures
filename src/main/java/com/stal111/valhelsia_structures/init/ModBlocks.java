@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
-import net.valhelsia.valhelsia_core.registry.BlockRegistryHelper;
+import net.valhelsia.valhelsia_core.registry.block.BlockRegistryHelper;
 
 import java.util.ArrayList;
 import java.util.List;

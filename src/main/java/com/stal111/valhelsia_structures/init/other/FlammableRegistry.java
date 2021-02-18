@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.init.other;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.valhelsia.valhelsia_core.helper.FlammableHelper;
+import net.valhelsia.valhelsia_core.registry.block.FlammableHelper;
 
 /**
  * Flammable Registry
