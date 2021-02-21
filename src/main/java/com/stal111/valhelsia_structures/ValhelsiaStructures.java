@@ -11,6 +11,7 @@ import com.stal111.valhelsia_structures.init.other.FlintAndSteelRegistry;
 import com.stal111.valhelsia_structures.proxy.ClientProxy;
 import com.stal111.valhelsia_structures.proxy.IProxy;
 import com.stal111.valhelsia_structures.proxy.ServerProxy;
+import com.stal111.valhelsia_structures.setup.ClientSetup;
 import com.stal111.valhelsia_structures.setup.CommonSetup;
 import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure;
@@ -20,6 +21,7 @@ import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DeferredWorkQueue;
@@ -30,6 +32,7 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.valhelsia.valhelsia_core.registry.EntityRegistryHelper;
 import net.valhelsia.valhelsia_core.registry.RegistryManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -54,12 +57,12 @@ public class ValhelsiaStructures {
 
     public static IProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
-    public static final RegistryManager REGISTRY_MANAGER = new RegistryManager.Builder(MOD_ID).addDefaultHelpers().build();
+    public static final RegistryManager REGISTRY_MANAGER = new RegistryManager.Builder(MOD_ID).addDefaultHelpers().addHelpers(new EntityRegistryHelper()).build();
 
     public ValhelsiaStructures() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        //REGISTRY_MANAGER = new RegistryManager.Builder(MOD_ID).addDefaultHelpers().build();
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSetup::new);
 
         // Deferred Registration
         ModRecipes.SERIALIZERS.register(eventBus);
