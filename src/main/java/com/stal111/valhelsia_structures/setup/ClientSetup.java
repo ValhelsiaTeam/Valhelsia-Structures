@@ -2,11 +2,8 @@ package com.stal111.valhelsia_structures.setup;
 
 import com.stal111.valhelsia_structures.entity.render.MossySkeletonRenderer;
 import com.stal111.valhelsia_structures.init.ModEntities;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.AtlasTexture;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.ModelBakeEvent;
-import net.minecraftforge.client.event.TextureStitchEvent;
+import com.stal111.valhelsia_structures.init.ModTileEntities;
+import com.stal111.valhelsia_structures.tileentity.renderer.*;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -25,8 +22,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 public class ClientSetup {
 
     public ClientSetup() {
-        Minecraft minecraft = Minecraft.getInstance();
-
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         modEventBus.addListener(this::onClientSetup);
@@ -35,5 +30,11 @@ public class ClientSetup {
     @SubscribeEvent
     public void onClientSetup(FMLClientSetupEvent event) {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.MOSSY_SKELETON.get(), MossySkeletonRenderer::new);
+
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.SPECIAL_SPAWNER.get(), SpecialMobSpawnerTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.JAR.get(), JarTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.TENT.get(), ExplorersTentTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.GIANT_FERN.get(), GiantFernTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ModTileEntities.DUNGEON_DOOR.get(), DungeonDoorTileEntityRenderer::new);
     }
 }

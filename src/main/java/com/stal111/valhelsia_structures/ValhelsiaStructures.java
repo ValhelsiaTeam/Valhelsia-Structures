@@ -8,9 +8,6 @@ import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
 import com.stal111.valhelsia_structures.init.other.FireExtinguishRegistry;
 import com.stal111.valhelsia_structures.init.other.FlintAndSteelRegistry;
-import com.stal111.valhelsia_structures.proxy.ClientProxy;
-import com.stal111.valhelsia_structures.proxy.IProxy;
-import com.stal111.valhelsia_structures.proxy.ServerProxy;
 import com.stal111.valhelsia_structures.setup.ClientSetup;
 import com.stal111.valhelsia_structures.setup.CommonSetup;
 import com.stal111.valhelsia_structures.utils.StructureType;
@@ -24,7 +21,6 @@ import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -55,8 +51,6 @@ public class ValhelsiaStructures {
 
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public static IProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
-
     public static final RegistryManager REGISTRY_MANAGER = new RegistryManager.Builder(MOD_ID).addDefaultHelpers().addHelpers(new EntityRegistryHelper()).build();
 
     public ValhelsiaStructures() {
@@ -83,16 +77,11 @@ public class ValhelsiaStructures {
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_CONFIG);
         Config.loadConfig(Config.CLIENT_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MOD_ID + "-client.toml").toString());
         Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MOD_ID + "-common.toml").toString());
-        
+
         MinecraftForge.EVENT_BUS.register(this);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-        // This deprecation can be safely ignored - Forge hasn't actually added the proposed replacement for it yet.
-        DeferredWorkQueue.runLater(() -> {
-            proxy.init();
-        });
-
         FlintAndSteelRegistry.register();
         FireExtinguishRegistry.register();
 
