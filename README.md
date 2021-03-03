@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.curseforge.com/minecraft/mc-mods/valhelsia-structures">
-    <img border="0" alt="CurseForge" src="https://zupimages.net/up/20/53/5cjx.png">
+    <img border="0" alt="CurseForge" src="https://zupimages.net/up/21/09/u9pk.png">
   </a>
 </p>
 
