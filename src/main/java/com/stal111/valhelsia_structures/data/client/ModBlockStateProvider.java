@@ -1,7 +1,10 @@
 package com.stal111.valhelsia_structures.data.client;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.*;
+import com.stal111.valhelsia_structures.block.BrazierBlock;
+import com.stal111.valhelsia_structures.block.JarBlock;
+import com.stal111.valhelsia_structures.block.PostBlock;
+import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.block.*;
@@ -12,11 +15,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.RegistryObject;
 import net.valhelsia.valhelsia_core.data.ValhelsiaBlockStateProvider;
 
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * Mod Block State Provider
@@ -33,34 +34,34 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
     }
 
     @Override
-    protected void register(Set<RegistryObject<Block>> blocks) { ;
-        forEach(blocks, block -> block.getRegistryName().toString().contains("lapidified_jungle_post"), block -> {});
-        blocks.remove(ModBlocks.DUNGEON_DOOR_LEAF);
+    protected void registerStatesAndModels() {
+        getRemainingBlocks().removeIf(block -> block.get().getRegistryName().toString().contains("lapidified_jungle_post"));
+        getRemainingBlocks().remove(ModBlocks.DUNGEON_DOOR_LEAF);
 
-        forEach(blocks, block -> block instanceof BrazierBlock, this::brazierBlock);
-        forEach(blocks, block -> block instanceof PostBlock, this::postBlock);
-        take(blocks, block -> paneBlock((PaneBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);
-        take(blocks, block -> paneBlock((PaneBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
-        take(blocks, this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);;
-        forEach(blocks, block -> block instanceof JarBlock, this::jarBlock);
-        take(blocks, block -> logBlock((RotatedPillarBlock) block), ModBlocks.LAPIDIFIED_JUNGLE_LOG);
-        take(blocks, block -> axisBlock((RotatedPillarBlock) block, modLoc("block/lapidified_jungle_log"), modLoc("block/lapidified_jungle_log")), ModBlocks.LAPIDIFIED_JUNGLE_WOOD);
+        forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
+        forEach(block -> block instanceof PostBlock, this::postBlock);
+        take(block -> paneBlock((PaneBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);
+        take(block -> paneBlock((PaneBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
+        take(this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);;
+        forEach(block -> block instanceof JarBlock, this::jarBlock);
+        take( block -> logBlock((RotatedPillarBlock) block), ModBlocks.LAPIDIFIED_JUNGLE_LOG);
+        take(block -> axisBlock((RotatedPillarBlock) block, modLoc("block/lapidified_jungle_log"), modLoc("block/lapidified_jungle_log")), ModBlocks.LAPIDIFIED_JUNGLE_WOOD);
         ResourceLocation lapidifiedJunglePlanks = modLoc("block/lapidified_jungle_planks");
-        take(blocks, this::simpleBlock, ModBlocks.LAPIDIFIED_JUNGLE_PLANKS);
-        take(blocks, block -> slabBlock((SlabBlock) block, lapidifiedJunglePlanks, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_SLAB);
-        take(blocks, block -> stairsBlock((StairsBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_STAIRS);
-        take(blocks, block -> pressurePlateBlock(block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE);
-        take(blocks, block -> buttonBlock((AbstractButtonBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_BUTTON);
-        take(blocks, block -> fenceBlock((FenceBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
-        take(blocks, block -> fenceGateBlock((FenceGateBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE);
-        take(blocks, this::withExistingModel, ModBlocks.HIBISCUS, ModBlocks.GIANT_FERN);
-        take(blocks, block -> torchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_TORCH, ModBlocks.DOUSED_SOUL_TORCH);
-        take(blocks, block -> wallTorchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_WALL_TORCH, ModBlocks.DOUSED_SOUL_WALL_TORCH);
+        take(this::simpleBlock, ModBlocks.LAPIDIFIED_JUNGLE_PLANKS);
+        take(block -> slabBlock((SlabBlock) block, lapidifiedJunglePlanks, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_SLAB);
+        take(block -> stairsBlock((StairsBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_STAIRS);
+        take(block -> pressurePlateBlock(block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE);
+        take(block -> buttonBlock((AbstractButtonBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_BUTTON);
+        take(block -> fenceBlock((FenceBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
+        take(block -> fenceGateBlock((FenceGateBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE);
+        take(this::withExistingModel, ModBlocks.HIBISCUS, ModBlocks.GIANT_FERN);
+        take(block -> torchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_TORCH, ModBlocks.DOUSED_SOUL_TORCH);
+        take(block -> wallTorchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_WALL_TORCH, ModBlocks.DOUSED_SOUL_WALL_TORCH);
 
-        forEach(blocks, block -> block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
-        take(blocks, this::valhelsiaGrassBlock, ModBlocks.GRASS_BLOCK);
+        forEach(block -> block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
+        take(this::valhelsiaGrassBlock, ModBlocks.GRASS_BLOCK);
 
-        forEach(blocks, this::simpleBlock);
+        forEach(this::simpleBlock);
     }
 
     private void brazierBlock(Block block) {
@@ -112,18 +113,6 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         ModelFile model = models().withExistingParent(name, modLoc("block/jar")).texture("jar", modLoc("block/jar/" + name));
 
         getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(model).build(), BlockStateProperties.WATERLOGGED);
-    }
-
-    private void pressurePlateBlock(Block block, ResourceLocation texture) {
-        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
-        ModelFile model = models().withExistingParent(name, mcLoc("block/pressure_plate_up")).texture("texture", texture);
-        ModelFile modelDown = models().withExistingParent(name + "_down", mcLoc("block/pressure_plate_down")).texture("texture", texture);
-
-        getVariantBuilder(block)
-                .partialState().with(PressurePlateBlock.POWERED, false)
-                    .modelForState().modelFile(model).addModel()
-                .partialState().with(PressurePlateBlock.POWERED, true)
-                    .modelForState().modelFile(modelDown).addModel();
     }
 
     private void torchBlock(Block block) {
