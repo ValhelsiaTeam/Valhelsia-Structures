@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.utils;
 
+import com.stal111.valhelsia_structures.world.structures.RemovedStructure;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
@@ -10,6 +11,7 @@ import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -23,10 +25,10 @@ import java.util.Random;
  * Valhelsia Structure - com.stal111.valhelsia_structures.utils.StructureUtils
  *
  * @author Valhelsia Team
- * @version 16.0.3
+ * @version 16.1.0
  */
-
 public class StructureUtils {
+
     /**
      * Get Random Direction
      * @param rand Instance of Random to use.
@@ -83,11 +85,14 @@ public class StructureUtils {
         for (int k = chunkX - 5; k <= chunkX + 5; ++k) {
             for (int l = chunkZ - 5; l <= chunkZ + 5; ++l) {
                 for (Structure<?> structure1 : structures) {
-                    if (structure != structure1) {
-                        ChunkPos structurePos = structure1.getChunkPosForStructure(Objects.requireNonNull(generator.func_235957_b_().func_236197_a_(structure1)), seed, rand, k, l);
+                    if (structure != structure1 && !(structure instanceof RemovedStructure)) {
+                        StructureSeparationSettings separationSettings = generator.func_235957_b_().func_236197_a_(structure1);
+                        if (separationSettings != null) {
+                            ChunkPos structurePos = structure1.getChunkPosForStructure(separationSettings, seed, rand, k, l);
 
-                        if (k == structurePos.x && l == structurePos.z) {
-                            return false;
+                            if (k == structurePos.x && l == structurePos.z) {
+                                return false;
+                            }
                         }
                     }
                 }

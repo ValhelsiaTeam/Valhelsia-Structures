@@ -5,7 +5,10 @@
   "package": "com.stal111.valhelsia_structures.mixin",
   "refmap": "valhelsia_structures.refmap.json",
   "mixins": [
-    "ClientPlayNetHandlerMixin"
+    "ClientPlayNetHandlerMixin",
+    "LakesFeatureMixin",
+    "FeatureMixin",
+    "SpreadableSnowyDirtBlockMixin"
   ],
   "client": [
   ],

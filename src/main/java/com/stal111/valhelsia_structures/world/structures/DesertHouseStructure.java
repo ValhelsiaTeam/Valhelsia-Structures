@@ -1,7 +1,11 @@
 package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.serialization.Codec;
-import com.stal111.valhelsia_structures.config.StructureGenConfig;
+import com.stal111.valhelsia_structures.config.StructureConfigEntry;
+import com.stal111.valhelsia_structures.init.ModStructureFeatures;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 
 /**
@@ -16,17 +20,8 @@ import net.minecraft.world.gen.feature.structure.VillageConfig;
 public class DesertHouseStructure extends AbstractValhelsiaStructure {
 
     public DesertHouseStructure(Codec<VillageConfig> villageConfigCodec) {
-        super(villageConfigCodec, "desert_house", 2);
-    }
-
-    @Override
-    public int getSeparation() {
-        return StructureGenConfig.DESERT_HOUSE_SEPARATION.get();
-    }
-
-    @Override
-    public int getDistance() {
-        return StructureGenConfig.DESERT_HOUSE_DISTANCE.get();
+        super(villageConfigCodec, "desert_house", 2,
+                new StructureConfigEntry(0.7D, 30, 8, Biome.Category.DESERT.getName()));
     }
 
     @Override
@@ -35,7 +30,7 @@ public class DesertHouseStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public double getSpawnChance() {
-        return StructureGenConfig.DESERT_HOUSE_SPAWN_CHANCE.get();
+    public StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature() {
+        return ModStructureFeatures.DESERT_HOUSE;
     }
 }

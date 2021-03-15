@@ -36,4 +36,11 @@ public class Processors {
             new RuleEntry(new BlockMatchRuleTest(Blocks.DIORITE), AlwaysTrueRuleTest.INSTANCE, ModBlocks.DIORITE.get().getDefaultState()),
             new RuleEntry(new BlockMatchRuleTest(Blocks.ANDESITE), AlwaysTrueRuleTest.INSTANCE, ModBlocks.ANDESITE.get().getDefaultState())
     ));
+
+    /**
+     * Processor that causes grass blocks to be replaced with a different type to prevent features generating on it.
+     */
+    public static final RuleStructureProcessor GRASS_BLOCK_REPLACEMENT_PROCESSOR = new RuleStructureProcessor(ImmutableList.of(
+            new RuleEntry(new BlockMatchRuleTest(Blocks.GRASS_BLOCK), AlwaysTrueRuleTest.INSTANCE, ModBlocks.GRASS_BLOCK.get().getDefaultState())
+    ));
 }

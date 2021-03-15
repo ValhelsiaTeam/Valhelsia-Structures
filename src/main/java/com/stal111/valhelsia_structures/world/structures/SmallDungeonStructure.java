@@ -1,8 +1,11 @@
 package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.serialization.Codec;
-import com.stal111.valhelsia_structures.config.StructureGenConfig;
-import com.stal111.valhelsia_structures.utils.StructureType;
+import com.stal111.valhelsia_structures.config.StructureConfigEntry;
+import com.stal111.valhelsia_structures.init.ModStructureFeatures;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 
 /**
@@ -17,17 +20,20 @@ import net.minecraft.world.gen.feature.structure.VillageConfig;
 public class SmallDungeonStructure extends AbstractValhelsiaStructure {
 
     public SmallDungeonStructure(Codec<VillageConfig> villageConfigCodec) {
-        super(villageConfigCodec, "small_dungeon", 3);
-    }
-
-    @Override
-    public int getSeparation() {
-        return StructureGenConfig.SMALL_DUNGEON_SEPARATION.get();
-    }
-
-    @Override
-    public int getDistance() {
-        return StructureGenConfig.SMALL_DUNGEON_DISTANCE.get();
+        super(villageConfigCodec, "small_dungeon", 3,
+                new StructureConfigEntry(0.7D, 30, 8,
+                        Biome.Category.PLAINS.getName(),
+                        Biome.Category.FOREST.getName(),
+                        Biome.Category.EXTREME_HILLS.getName(),
+                        Biome.Category.TAIGA.getName(),
+                        Biome.Category.DESERT.getName(),
+                        Biome.Category.MESA.getName(),
+                        Biome.Category.SAVANNA.getName(),
+                        Biome.Category.JUNGLE.getName(),
+                        Biome.Category.ICY.getName(),
+                        Biome.Category.SWAMP.getName(),
+                        Biome.Category.MUSHROOM.getName()
+                ));
     }
 
     @Override
@@ -36,8 +42,8 @@ public class SmallDungeonStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public double getSpawnChance() {
-        return StructureGenConfig.SMALL_DUNGEON_SPAWN_CHANCE.get();
+    public StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature() {
+        return ModStructureFeatures.SMALL_DUNGEON;
     }
 
     @Override

@@ -2,7 +2,6 @@ package com.stal111.valhelsia_structures.config;
 
 import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import com.electronwill.nightconfig.core.io.WritingMode;
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.fml.common.Mod;
 
@@ -13,7 +12,7 @@ import java.io.File;
  * Valhelsia Structures - com.stal111.valhelsia_structures.config.Config
  *
  * @author Valhelsia Team
- * @version 16.0.1
+ * @version 16.1.0
  * @since 2020-05-27
  */
 @Mod.EventBusSubscriber

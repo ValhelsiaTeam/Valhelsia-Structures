@@ -1,13 +1,12 @@
 package com.stal111.valhelsia_structures.data.client;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
+import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.RegistryObject;
+import net.valhelsia.valhelsia_core.data.ValhelsiaItemModelProvider;
 
 import java.util.Objects;
 
@@ -19,29 +18,26 @@ import java.util.Objects;
  * @version 16.1.0
  * @since 2020-11-13
  */
-public class ModItemModelProvider extends ItemModelProvider {
+public class ModItemModelProvider extends ValhelsiaItemModelProvider {
 
     public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, ValhelsiaStructures.MOD_ID, existingFileHelper);
+        super(generator, ValhelsiaStructures.REGISTRY_MANAGER, existingFileHelper);
     }
 
     @Override
     protected void registerModels() {
-        withParent(ModBlocks.GLAZED_JAR);
-        withParent(ModBlocks.CRACKED_GLAZED_JAR);
-        ModBlocks.COLORED_GLAZED_JARS.forEach(this::withParent);
+        getRemainingBlockItems().removeIf(item -> item.get().getRegistryName().getPath().contains("lapidified_jungle_post"));
 
-        ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
+        forEachBlockItem(item -> item.getBlock() instanceof ValhelsiaGrassBlock || item.getBlock() instanceof ValhelsiaStoneBlock, item -> withParent(item, true));
+        takeBlockItem(item -> withParent(item, Objects.requireNonNull(item.getRegistryName()).getPath() + "_off"), ModBlocks.BRAZIER, ModBlocks.SOUL_BRAZIER);
+        takeBlockItem(item -> simpleModelBlockTexture(item, "metal_framed_glass"), ModBlocks.METAL_FRAMED_GLASS_PANE);
+        takeBlockItem(this::simpleModelBlockTexture,
+                ModBlocks.HANGING_VINES,
+                ModBlocks.PAPER_WALL
+        );
 
-        //builder(itemGenerated, "jar");
-    }
+        forEachBlockItem(this::withParent);
 
-    private void builder(ModelFile itemGenerated, String name) {
-        getBuilder(name).parent(itemGenerated).texture("layer0", "item/" + name);
-    }
-
-    private <T extends Block>void withParent(RegistryObject<T> registryObject) {
-        String name = Objects.requireNonNull(registryObject.get().getRegistryName()).getPath();
-        withExistingParent(name, modLoc("block/" + name));
+        forEachItem(this::simpleModel);
     }
 }

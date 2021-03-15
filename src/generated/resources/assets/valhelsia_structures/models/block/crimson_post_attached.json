@@ -1,0 +1,7 @@
+{
+  "parent": "valhelsia_structures:block/post_attached",
+  "textures": {
+    "post_side": "valhelsia_structures:block/post/crimson_post",
+    "post_end": "valhelsia_structures:block/post/crimson_post_top"
+  }
+}

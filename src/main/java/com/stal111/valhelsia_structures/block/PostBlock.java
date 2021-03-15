@@ -14,36 +14,52 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 public class PostBlock extends RotatedPillarBlock implements IWaterLoggable {
 
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     public static final BooleanProperty ATTACHED = BooleanProperty.create("attached");
 
+    private final Supplier<? extends Block> logBlock;
+
     protected static final Map<Direction.Axis, VoxelShape> SHAPES = ImmutableMap.of(
             Direction.Axis.Y, Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D),
             Direction.Axis.Z, Block.makeCuboidShape(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 16.0D),
             Direction.Axis.X, Block.makeCuboidShape(0.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D));
 
-    public PostBlock(Properties properties) {
-        super(properties);
+    public PostBlock(Supplier<? extends Block> logBlock) {
+        super(Properties.from(logBlock.get()).notSolid());
+        this.logBlock = logBlock;
+        this.setDefaultState(this.getStateContainer().getBaseState().with(ATTACHED, false).with(WATERLOGGED, false));
+    }
+
+    public PostBlock(ResourceLocation logBlock, Properties properties) {
+        super(properties.notSolid());
+        this.logBlock = () -> ForgeRegistries.BLOCKS.getValue(logBlock);
         this.setDefaultState(this.getStateContainer().getBaseState().with(ATTACHED, false).with(WATERLOGGED, false));
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
         return state.get(ATTACHED) ? VoxelShapeHelper.add(0, -3, 0, 0, -3, 0, SHAPES.get(state.get(AXIS))) : SHAPES.get(state.get(AXIS));
+    }
+
+    public Block getLogBlock() {
+        return logBlock.get();
     }
 
     @Override

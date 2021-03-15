@@ -17,7 +17,7 @@ import java.util.function.Supplier;
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock
  *
  * @author Valhelsia Team
- * @version 15.0.3
+ * @version 16.1.0
  */
 
 public class ValhelsiaStoneBlock extends Block {
@@ -32,6 +32,10 @@ public class ValhelsiaStoneBlock extends Block {
     @Override
     public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
         return new ItemStack(pickBlock.get());
+    }
+
+    public Supplier<Block> getPickBlock() {
+        return pickBlock;
     }
 
     @Override

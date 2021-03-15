@@ -1,0 +1,7 @@
+{
+  "parent": "valhelsia_structures:block/post",
+  "textures": {
+    "post_side": "valhelsia_structures:block/post/spruce_post",
+    "post_end": "valhelsia_structures:block/post/spruce_post_top"
+  }
+}

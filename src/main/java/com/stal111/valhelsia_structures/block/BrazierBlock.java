@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.block;
 
-import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -20,7 +19,10 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.CampfireTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.IBooleanFunction;
@@ -32,8 +34,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.valhelsia.valhelsia_core.helper.FireExtinguishHelper;
-import net.valhelsia.valhelsia_core.helper.FlintAndSteelHelper;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -54,17 +54,6 @@ public class BrazierBlock extends Block implements IWaterLoggable {
         this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.TRUE).with(WATERLOGGED, Boolean.FALSE));
         this.smokey = smokey;
         this.fireDamage = fireDamage;
-
-        FireExtinguishHelper.addExtinguishFireEffect(
-                state -> state.getBlock() == this && state.get(LIT),
-                this.getDefaultState().with(BrazierBlock.LIT, false),
-                (world, blockPos) -> world.playEvent(null, 1009, blockPos, 0));
-
-        FlintAndSteelHelper.addUse(
-                state -> state.getBlock() == this && !state.get(LIT),
-                this.getDefaultState(),
-                (playerEntity, world, blockPos) -> world.playSound(playerEntity, blockPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F),
-                world -> ActionResultType.func_233537_a_(world.isRemote()));
     }
 
     @Override
@@ -130,14 +119,9 @@ public class BrazierBlock extends Block implements IWaterLoggable {
                 if (!world.isRemote()) {
                     world.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 }
-
-                TileEntity tileentity = world.getTileEntity(pos);
-                if (tileentity instanceof CampfireTileEntity) {
-                    ((CampfireTileEntity)tileentity).dropAllItems();
-                }
             }
 
-            world.setBlockState(pos, state.with(WATERLOGGED, Boolean.TRUE).with(LIT, Boolean.FALSE), 3);
+            world.setBlockState(pos, state.with(WATERLOGGED, true).with(LIT, false), 3);
             world.getPendingFluidTicks().scheduleTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
             return true;
         } else {

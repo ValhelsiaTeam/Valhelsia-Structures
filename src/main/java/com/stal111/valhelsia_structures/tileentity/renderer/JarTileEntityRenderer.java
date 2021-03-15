@@ -25,9 +25,6 @@ public class JarTileEntityRenderer extends TileEntityRenderer<JarTileEntity> {
 
     @Override
     public void render(JarTileEntity tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int combinedLight, int combinedOverlay) {
-        System.out.println(tileEntity.hasPlant());
-        System.out.println(tileEntity.getPlant());
-
         if (tileEntity.hasPlant()) {
             matrixStack.push();
             matrixStack.translate(0.2, 0.45, 0.2);

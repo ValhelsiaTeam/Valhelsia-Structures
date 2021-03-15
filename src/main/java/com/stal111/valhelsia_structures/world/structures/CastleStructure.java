@@ -1,8 +1,14 @@
 package com.stal111.valhelsia_structures.world.structures;
 
 import com.mojang.serialization.Codec;
-import com.stal111.valhelsia_structures.config.StructureGenConfig;
+import com.stal111.valhelsia_structures.config.StructureConfigEntry;
+import com.stal111.valhelsia_structures.init.ModStructureFeatures;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.feature.StructureFeature;
+import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
+
+import java.util.Arrays;
 
 /**
  * Castle Structure
@@ -16,17 +22,12 @@ import net.minecraft.world.gen.feature.structure.VillageConfig;
 public class CastleStructure extends AbstractValhelsiaStructure {
 
     public CastleStructure(Codec<VillageConfig> villageConfigCodec) {
-        super(villageConfigCodec, "castle", 3);
-    }
-
-    @Override
-    public int getSeparation() {
-        return StructureGenConfig.CASTLE_SEPARATION.get();
-    }
-
-    @Override
-    public int getDistance() {
-        return StructureGenConfig.CASTLE_DISTANCE.get();
+        super(villageConfigCodec, "castle", 3,
+                new StructureConfigEntry(0.5D, 40, 8,
+                        Biome.Category.PLAINS.getName(),
+                        Biome.Category.FOREST.getName(),
+                        Biome.Category.TAIGA.getName()
+                ));
     }
 
     @Override
@@ -35,7 +36,7 @@ public class CastleStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public double getSpawnChance() {
-        return StructureGenConfig.CASTLE_SPAWN_CHANCE.get();
+    public StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature() {
+        return ModStructureFeatures.CASTLE;
     }
 }

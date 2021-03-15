@@ -131,7 +131,7 @@ public class JarBlock extends Block implements IWaterLoggable {
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
         boolean flag = fluidstate.getFluid() == Fluids.WATER;
-        return super.getStateForPlacement(context).with(WATERLOGGED, flag);
+        return this.getDefaultState().with(WATERLOGGED, flag);
     }
 
     @Override

@@ -1,0 +1,10 @@
+{
+  "type": "valhelsia_structures:axe_crafting",
+  "input": {
+    "item": "minecraft:spruce_log"
+  },
+  "output": {
+    "item": "valhelsia_structures:spruce_post",
+    "count": 2
+  }
+}

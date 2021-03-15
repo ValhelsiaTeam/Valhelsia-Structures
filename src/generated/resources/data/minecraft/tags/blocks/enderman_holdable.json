@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "valhelsia_structures:grass_block",
+    "valhelsia_structures:dirt",
+    "valhelsia_structures:coarse_dirt"
+  ]
+}
