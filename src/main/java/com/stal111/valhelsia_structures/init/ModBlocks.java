@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.init;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.block.*;
 import com.stal111.valhelsia_structures.ValhelsiaStructuresItemGroups;
 import com.stal111.valhelsia_structures.block.*;
 import net.minecraft.block.*;
@@ -21,7 +22,7 @@ import java.util.List;
  * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModBlocks
  *
  * @author Valhelsia Team
- * @version 15.0.3
+ * @version 16.0.4
  */
 
 public class ModBlocks {
@@ -42,6 +43,9 @@ public class ModBlocks {
     public static final RegistryObject<JarBlock> GLAZED_JAR = register("glazed_jar", new JarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()));
     public static final RegistryObject<JarBlock> CRACKED_GLAZED_JAR = register("cracked_glazed_jar", new JarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.0F).notSolid()));
     public static final List<RegistryObject<JarBlock>> COLORED_GLAZED_JARS = registerColoredGlazedJars();
+    public static final RegistryObject<PaneBlock> PAPER_WALL = register("paper_wall", new PaneBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid()));
+    public static final RegistryObject<HangingVinesBodyBlock> HANGING_VINES_BODY = registerNoItem("hanging_vines_body", new HangingVinesBodyBlock(Block.Properties.create(Material.TALL_PLANTS).doesNotBlockMovement().hardnessAndResistance(0.2F).sound(SoundType.VINE)));
+    public static final RegistryObject<HangingVinesBlock> HANGING_VINES = register("hanging_vines", new HangingVinesBlock(Block.Properties.create(Material.TALL_PLANTS).tickRandomly().doesNotBlockMovement().hardnessAndResistance(0.2F).sound(SoundType.VINE)));
 
     // Workaround for structures - stone that can't be replaced during later generation steps:
     public static final RegistryObject<Block> STONE = register("stone", new ValhelsiaStoneBlock(() -> Blocks.STONE, Block.Properties.create(Material.ROCK, MaterialColor.STONE).hardnessAndResistance(1.5F, 6.0F)));

@@ -11,5 +11,6 @@ import net.minecraft.state.BooleanProperty;
  * @since 2020-10-16
  */
 public class ModBlockStateProperties {
+    public static final BooleanProperty ATTACHED = BooleanProperty.create("attached");
     public static final BooleanProperty TREASURE = BooleanProperty.create("treasure");
 }
