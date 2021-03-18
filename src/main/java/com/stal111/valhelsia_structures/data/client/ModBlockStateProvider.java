@@ -8,6 +8,7 @@ import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -39,6 +40,8 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         take(block -> paneBlock((PaneBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
         take(this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);;
         forEach(block -> block instanceof JarBlock, this::jarBlock);
+        take(block -> torchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_TORCH, ModBlocks.DOUSED_SOUL_TORCH);
+        take(block -> wallTorchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_WALL_TORCH, ModBlocks.DOUSED_SOUL_WALL_TORCH);
 
         forEach(block -> block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
         take(this::valhelsiaGrassBlock, ModBlocks.GRASS_BLOCK);
@@ -95,6 +98,30 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         ModelFile model = models().withExistingParent(name, modLoc("block/jar")).texture("jar", modLoc("block/jar/" + name));
 
         getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(model).build(), BlockStateProperties.WATERLOGGED);
+    }
+
+    private void torchBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+        torchBlock(block, modLoc("blocks/" + name));
+    }
+
+    private void torchBlock(Block block, ResourceLocation texture) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+
+        getVariantBuilder(block)
+                .partialState().setModels(new ConfiguredModel(models().torch(name, texture)));
+    }
+
+    private void wallTorchBlock(Block block, ResourceLocation texture) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+
+        getVariantBuilder(block)
+                .forAllStatesExcept(state -> ConfiguredModel.builder()
+                                .modelFile(models().torchWall(name, texture))
+                                .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 90) % 360)
+                                .build(),
+                        BlockStateProperties.WATERLOGGED
+                );
     }
 
     private void valhelsiaGrassBlock(Block block) {

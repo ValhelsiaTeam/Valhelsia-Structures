@@ -46,10 +46,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         getOrCreateBuilder(Tags.Blocks.DIRT).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get(), ModBlocks.COARSE_DIRT.get());
 
         getOrCreateBuilder(BlockTags.PIGLIN_REPELLENTS).add(ModBlocks.SOUL_BRAZIER.get());
+        getOrCreateBuilder(BlockTags.WALL_POST_OVERRIDE).add(
+                ModBlocks.DOUSED_TORCH.get(),
+                ModBlocks.DOUSED_SOUL_TORCH.get()
+        );
         getOrCreateBuilder(BlockTags.VALID_SPAWN).add(ModBlocks.GRASS_BLOCK.get());
         getOrCreateBuilder(BlockTags.BAMBOO_PLANTABLE_ON).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get());
         getOrCreateBuilder(BlockTags.ENDERMAN_HOLDABLE).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get(), ModBlocks.COARSE_DIRT.get());
-
-
     }
 }

@@ -4,6 +4,7 @@ import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
+import com.stal111.valhelsia_structures.init.ModItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.valhelsia.valhelsia_core.data.ValhelsiaItemModelProvider;
@@ -34,6 +35,11 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
         takeBlockItem(this::simpleModelBlockTexture,
                 ModBlocks.HANGING_VINES,
                 ModBlocks.PAPER_WALL
+        );
+
+        takeBlockItem(item -> simpleModelBlockTexture(item, "doused_torch"),
+                ModItems.DOUSED_TORCH,
+                ModItems.DOUSED_SOUL_TORCH
         );
 
         forEachBlockItem(this::withParent);
