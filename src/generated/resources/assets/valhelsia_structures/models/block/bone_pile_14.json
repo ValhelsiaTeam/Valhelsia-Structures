@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/snow_height14",
+  "textures": {
+    "texture": "valhelsia_structures:block/bone_pile"
+  }
+}

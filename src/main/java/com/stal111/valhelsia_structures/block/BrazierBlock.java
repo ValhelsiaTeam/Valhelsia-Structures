@@ -68,9 +68,9 @@ public class BrazierBlock extends Block implements IWaterLoggable {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        IWorld iworld = context.getWorld();
+        IWorld world = context.getWorld();
         BlockPos blockpos = context.getPos();
-        boolean flag = iworld.getFluidState(blockpos).getFluid() == Fluids.WATER;
+        boolean flag = world.getFluidState(blockpos).getFluid() == Fluids.WATER;
         return this.getDefaultState().with(WATERLOGGED, flag).with(LIT, !flag);
     }
 

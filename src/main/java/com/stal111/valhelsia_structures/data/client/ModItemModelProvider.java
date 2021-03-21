@@ -43,6 +43,8 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
                 ModItems.DOUSED_SOUL_TORCH
         );
 
+        takeBlockItem(blockItem -> withParent(blockItem, "bone_pile_2"), ModBlocks.BONE_PILE);
+
         forEachBlockItem(this::withParent);
 
         forEachItem(this::simpleModel);

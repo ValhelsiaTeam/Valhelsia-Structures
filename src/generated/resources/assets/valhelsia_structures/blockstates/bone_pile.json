@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "layers=1": {
+      "model": "valhelsia_structures:block/bone_pile_2"
+    },
+    "layers=2": {
+      "model": "valhelsia_structures:block/bone_pile_4"
+    },
+    "layers=3": {
+      "model": "valhelsia_structures:block/bone_pile_6"
+    },
+    "layers=4": {
+      "model": "valhelsia_structures:block/bone_pile_8"
+    },
+    "layers=5": {
+      "model": "valhelsia_structures:block/bone_pile_10"
+    },
+    "layers=6": {
+      "model": "valhelsia_structures:block/bone_pile_12"
+    },
+    "layers=7": {
+      "model": "valhelsia_structures:block/bone_pile_14"
+    },
+    "layers=8": {
+      "model": "valhelsia_structures:block/bone_pile"
+    }
+  }
+}

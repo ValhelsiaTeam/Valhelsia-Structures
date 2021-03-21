@@ -55,5 +55,9 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.LAPIDIFIED_JUNGLE_FENCE.get(), 3).patternLine("#X#").patternLine("#X#").key('#', ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()).key('X', Tags.Items.RODS_WOODEN).addCriterion("has_item", hasItem(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get())).build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get()).patternLine("#X#").patternLine("#X#").key('#', Tags.Items.RODS_WOODEN).key('X', ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()).addCriterion("has_item", hasItem(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get())).build(consumer);
 
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.BONE_PILE.get(), 3).patternLine("###").key('#', Items.BONE).setGroup("bone_pile").addCriterion("has_item", hasItem(Items.BONE)).build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(ModBlocks.BONE_PILE.get(), 9).addIngredient(ModBlocks.BONE_PILE_BLOCK.get()).setGroup("bone_pile").addCriterion("has_item", hasItem(ModBlocks.BONE_PILE_BLOCK.get())).build(consumer, "bone_pile_from_bone_pile_block");
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.BONE_PILE_BLOCK.get()).patternLine("###").patternLine("###").patternLine("###").key('#', Items.BONE).setGroup("bone_pile_block").addCriterion("has_item", hasItem(Items.BONE)).build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.BONE_PILE_BLOCK.get()).patternLine("###").patternLine("###").patternLine("###").key('#', ModBlocks.BONE_PILE.get()).setGroup("bone_pile_block").addCriterion("has_item", hasItem(ModBlocks.BONE_PILE.get())).build(consumer, "bone_pile_block_from_bone_piles");
     }
 }

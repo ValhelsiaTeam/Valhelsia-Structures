@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "bone_pile",
+  "ingredients": [
+    {
+      "item": "valhelsia_structures:bone_pile_block"
+    }
+  ],
+  "result": {
+    "item": "valhelsia_structures:bone_pile",
+    "count": 9
+  }
+}
