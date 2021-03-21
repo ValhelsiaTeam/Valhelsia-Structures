@@ -30,7 +30,7 @@ public class StructureGenConfig {
         COMMON_BUILDER.push("structures");
 
         FLATNESS_DELTA = COMMON_BUILDER.comment("How flat does terrain need to be for surface structures to spawn? (in blocks) [default: 4]").defineInRange("global.flatness_delta", 4, 0, 64);
-        BLACKLISTED_BIOMES = COMMON_BUILDER.comment("Biomes in which Structures can NOT generate in").defineList("global.blacklisted_biomes", StructureUtils.getAllBiomesForCategory(Biome.Category.RIVER, Biome.Category.OCEAN), StructureGenConfig::validateBiome);
+        BLACKLISTED_BIOMES = COMMON_BUILDER.comment("Biomes in which Structures can NOT generate in").defineList("global.blacklisted_biomes", StructureUtils.getAllBiomesForCategory(Biome.Category.RIVER, Biome.Category.OCEAN, Biome.Category.BEACH), StructureGenConfig::validateBiome);
 
         for (Map.Entry<StructureType, List<AbstractValhelsiaStructure>> entry : ModStructures.STRUCTURES_MAP.entrySet()) {
             entry.getValue().forEach(structure -> {
