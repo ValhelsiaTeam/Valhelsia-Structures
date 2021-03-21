@@ -44,5 +44,9 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.METAL_FRAMED_GLASS.get(), 8).patternLine("###").patternLine("#X#").patternLine("###").key('#', Blocks.GLASS).key('X', Tags.Items.INGOTS_IRON).addCriterion("has_item", hasItem(Blocks.GLASS)).build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.METAL_FRAMED_GLASS_PANE.get(), 16).patternLine("###").patternLine("###").key('#', ModBlocks.METAL_FRAMED_GLASS.get()).addCriterion("has_item", hasItem(ModBlocks.METAL_FRAMED_GLASS.get())).build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.PAPER_WALL.get(), 2).patternLine("#X#").patternLine("#X#").patternLine("#X#").key('#', Items.BAMBOO).key('X', Items.PAPER).addCriterion("has_item", hasItem(Items.BAMBOO)).build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.BONE_PILE.get(), 3).patternLine("###").key('#', Items.BONE).setGroup("bone_pile").addCriterion("has_item", hasItem(Items.BONE)).build(consumer);
+        ShapelessRecipeBuilder.shapelessRecipe(ModBlocks.BONE_PILE.get(), 9).addIngredient(ModBlocks.BONE_PILE_BLOCK.get()).setGroup("bone_pile").addCriterion("has_item", hasItem(ModBlocks.BONE_PILE_BLOCK.get())).build(consumer, "bone_pile_from_bone_pile_block");
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.BONE_PILE_BLOCK.get()).patternLine("###").patternLine("###").patternLine("###").key('#', Items.BONE).setGroup("bone_pile_block").addCriterion("has_item", hasItem(Items.BONE)).build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.BONE_PILE_BLOCK.get()).patternLine("###").patternLine("###").patternLine("###").key('#', ModBlocks.BONE_PILE.get()).setGroup("bone_pile_block").addCriterion("has_item", hasItem(ModBlocks.BONE_PILE.get())).build(consumer, "bone_pile_block_from_bone_piles");
     }
 }

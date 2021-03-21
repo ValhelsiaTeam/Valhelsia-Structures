@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "bone_pile_block",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "valhelsia_structures:bone_pile"
+    }
+  },
+  "result": {
+    "item": "valhelsia_structures:bone_pile_block"
+  }
+}

@@ -1,10 +1,15 @@
 package com.stal111.valhelsia_structures.data.client;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.*;
+import com.stal111.valhelsia_structures.block.BrazierBlock;
+import com.stal111.valhelsia_structures.block.JarBlock;
+import com.stal111.valhelsia_structures.block.PostBlock;
+import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.PaneBlock;
+import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
@@ -38,10 +43,11 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         forEach(block -> block instanceof PostBlock, this::postBlock);
         take(block -> paneBlock((PaneBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);
         take(block -> paneBlock((PaneBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
-        take(this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);;
+        take(this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);
         forEach(block -> block instanceof JarBlock, this::jarBlock);
         take(block -> torchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_TORCH, ModBlocks.DOUSED_SOUL_TORCH);
         take(block -> wallTorchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_WALL_TORCH, ModBlocks.DOUSED_SOUL_WALL_TORCH);
+        take(this::layerBlock, ModBlocks.BONE_PILE);
 
         forEach(block -> block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
         take(this::valhelsiaGrassBlock, ModBlocks.GRASS_BLOCK);
@@ -127,12 +133,25 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
     private void valhelsiaGrassBlock(Block block) {
         getVariantBuilder(block)
                 .partialState().with(BlockStateProperties.SNOWY, false).modelForState()
-                    .modelFile(getExistingModel(mcLoc("block/grass_block"))).nextModel()
-                    .modelFile(getExistingModel(mcLoc("block/grass_block"))).rotationY(90).nextModel()
-                    .modelFile(getExistingModel(mcLoc("block/grass_block"))).rotationY(180).nextModel()
-                    .modelFile(getExistingModel(mcLoc("block/grass_block"))).rotationY(270).addModel()
+                .modelFile(getExistingModel(mcLoc("block/grass_block"))).nextModel()
+                .modelFile(getExistingModel(mcLoc("block/grass_block"))).rotationY(90).nextModel()
+                .modelFile(getExistingModel(mcLoc("block/grass_block"))).rotationY(180).nextModel()
+                .modelFile(getExistingModel(mcLoc("block/grass_block"))).rotationY(270).addModel()
                 .partialState().with(BlockStateProperties.SNOWY, true).modelForState()
-                    .modelFile(getExistingModel(mcLoc("block/grass_block_snow"))).addModel()
-        ;
+                .modelFile(getExistingModel(mcLoc("block/grass_block_snow"))).addModel();
+    }
+
+    private void layerBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+
+        getVariantBuilder(block).forAllStates(state -> {
+            int height = state.get(BlockStateProperties.LAYERS_1_8) * 2;
+
+            ModelFile model = height == 16 ? cubeAll(block) : models().withExistingParent(name + "_" + height, mcLoc("block/snow_height" + height)).texture("texture", modLoc("block/" + name));
+
+            return ConfiguredModel.builder()
+                    .modelFile(model)
+                    .build();
+        });
     }
 }

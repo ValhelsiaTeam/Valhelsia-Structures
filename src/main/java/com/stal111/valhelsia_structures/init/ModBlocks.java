@@ -51,6 +51,8 @@ public class ModBlocks {
     public static final RegistryObject<DousedWallTorchBlock> DOUSED_SOUL_WALL_TORCH = HELPER.registerNoItem("doused_soul_wall_torch", new DousedWallTorchBlock((TorchBlock) Blocks.SOUL_WALL_TORCH, AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance()), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<DungeonDoorBlock> DUNGEON_DOOR = HELPER.register("dungeon_door", new DungeonDoorBlock(AbstractBlock.Properties.create(Material.IRON).notSolid()));
     public static final RegistryObject<DungeonDoorLeafBlock> DUNGEON_DOOR_LEAF = HELPER.registerNoItem("dungeon_door_leaf", new DungeonDoorLeafBlock(AbstractBlock.Properties.create(Material.IRON).notSolid()));
+    public static final RegistryObject<BonePileBlock> BONE_PILE = HELPER.register("bone_pile", new BonePileBlock(AbstractBlock.Properties.from(Blocks.BONE_BLOCK).notSolid()), ValhelsiaRenderType.CUTOUT);
+    public static final RegistryObject<Block> BONE_PILE_BLOCK = HELPER.register("bone_pile_block", new Block(AbstractBlock.Properties.from(Blocks.BONE_BLOCK)));
 
     // Workarounds for structures:
 

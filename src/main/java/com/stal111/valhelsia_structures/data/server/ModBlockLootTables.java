@@ -5,14 +5,20 @@ import com.stal111.valhelsia_structures.block.JarBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.minecraft.block.Block;
+import net.minecraft.advancements.criterion.EnchantmentPredicate;
+import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.block.SlabBlock;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.item.Items;
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.conditions.MatchTool;
+import net.minecraft.loot.functions.SetCount;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.valhelsia.valhelsia_core.data.ValhelsiaBlockLootTables;
-import net.valhelsia.valhelsia_core.registry.RegistryManager;
-
-import java.util.*;
-import java.util.function.Predicate;
 
 /**
  * Mod Block Loot Tables
@@ -30,47 +36,22 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
 
     @Override
     public void addTables() {
-        Set<RegistryObject<Block>> remainingBlocks = new HashSet<>(ModBlocks.HELPER.getDeferredRegister().getEntries());
+        getRemainingBlocks().removeIf(block ->
+                block.get() instanceof ValhelsiaStoneBlock ||
+                        block.get() instanceof ValhelsiaGrassBlock ||
+                        block.get() instanceof JarBlock
+        );
 
-        takeAll(remainingBlocks, block -> block instanceof SlabBlock).forEach(block ->
-                registerLootTable(block, ValhelsiaBlockLootTables::droppingSlab));
+        forEach(block -> block instanceof SlabBlock, block -> registerLootTable(block, ValhelsiaBlockLootTables::droppingSlab));
+        take(this::registerSilkTouch, ModBlocks.METAL_FRAMED_GLASS, ModBlocks.METAL_FRAMED_GLASS_PANE);
+        take(block -> registerLootTable(block, droppingSheared(ModBlocks.HANGING_VINES.get())), ModBlocks.HANGING_VINES, ModBlocks.HANGING_VINES_BODY);
+        take(block -> registerLootTable(block, bonePile ->
+                LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(setCountFromIntegerProperty(bonePile, ItemLootEntry.builder(bonePile), BlockStateProperties.LAYERS_1_8).acceptCondition(SILK_TOUCH).alternatively(setCountFromIntegerProperty(bonePile, ItemLootEntry.builder(Items.BONE), BlockStateProperties.LAYERS_1_8))))),
+                ModBlocks.BONE_PILE);
+        take(block -> registerLootTable(block, bonePile ->
+                droppingWithSilkTouch(bonePile, withSurvivesExplosion(bonePile, ItemLootEntry.builder(Items.BONE).acceptFunction(SetCount.builder(ConstantRange.of(9)))))),
+                ModBlocks.BONE_PILE_BLOCK);
 
-        takeAll(remainingBlocks, block -> block instanceof ValhelsiaStoneBlock || block instanceof ValhelsiaGrassBlock);
-
-        takeAll(remainingBlocks, Arrays.asList(ModBlocks.METAL_FRAMED_GLASS, ModBlocks.METAL_FRAMED_GLASS_PANE)).forEach(this::registerSilkTouch);
-
-        remainingBlocks.removeIf(blockRegistryObject -> blockRegistryObject.get() instanceof JarBlock);
-
-        takeAll(remainingBlocks, Arrays.asList(ModBlocks.HANGING_VINES, ModBlocks.HANGING_VINES_BODY)).forEach(block ->
-                registerLootTable(block, droppingSheared(ModBlocks.HANGING_VINES.get())));
-
-        remainingBlocks.forEach(blockRegistryObject -> registerDropSelfLootTable(blockRegistryObject.get()));
-    }
-
-    public static <T extends Block> Collection<? extends T> takeAll(Set<RegistryObject<T>> src, List<RegistryObject<? extends T>> blocks) {
-        List<T> ret = new ArrayList<>();
-
-        for (RegistryObject<? extends T> registryObject : blocks) {
-            ret.add(registryObject.get());
-        }
-        src.removeAll(blocks);
-
-        return ret;
-    }
-
-
-    public static Collection<Block> takeAll(Set<RegistryObject<Block>> src, Predicate<Block> predicate) {
-        List<Block> ret = new ArrayList<>();
-
-        Iterator<RegistryObject<Block>> iter = src.iterator();
-        while (iter.hasNext()) {
-            RegistryObject<Block> block = iter.next();
-            if (predicate.test(block.get())) {
-                iter.remove();
-                ret.add(block.get());
-            }
-        }
-
-        return ret;
+        forEach(this::registerDropSelfLootTable);
     }
 }
