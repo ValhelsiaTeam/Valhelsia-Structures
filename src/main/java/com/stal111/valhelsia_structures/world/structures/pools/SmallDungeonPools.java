@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.world.structures.pieces;
+package com.stal111.valhelsia_structures.world.structures.pools;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 
 /**
  * Small Dungeon Pools
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.pieces.SmallDungeonPieces
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.pools.SmallDungeonPieces
  *
  * @author Valhelsia Team
  * @version 16.0.5
