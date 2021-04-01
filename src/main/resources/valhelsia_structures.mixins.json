@@ -5,6 +5,8 @@
   "package": "com.stal111.valhelsia_structures.mixin",
   "refmap": "valhelsia_structures.refmap.json",
   "mixins": [
+    "AbstractBlockStateMixin",
+    "BlockModelRendererMixin",
     "BucketItemMixin",
     "ClientPlayNetHandlerMixin",
     "FeatureMixin",

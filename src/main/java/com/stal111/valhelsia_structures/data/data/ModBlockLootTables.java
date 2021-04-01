@@ -4,20 +4,15 @@ import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.block.JarBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
+import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.minecraft.advancements.criterion.EnchantmentPredicate;
-import net.minecraft.advancements.criterion.ItemPredicate;
-import net.minecraft.advancements.criterion.MinMaxBounds;
 import net.minecraft.block.SlabBlock;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Items;
 import net.minecraft.loot.ConstantRange;
 import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
-import net.minecraft.loot.conditions.MatchTool;
 import net.minecraft.loot.functions.SetCount;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.valhelsia.valhelsia_core.data.ValhelsiaBlockLootTables;
 
 /**
@@ -46,7 +41,7 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
         take(this::registerSilkTouch, ModBlocks.METAL_FRAMED_GLASS, ModBlocks.METAL_FRAMED_GLASS_PANE);
         take(block -> registerLootTable(block, droppingSheared(ModBlocks.HANGING_VINES.get())), ModBlocks.HANGING_VINES, ModBlocks.HANGING_VINES_BODY);
         take(block -> registerLootTable(block, bonePile ->
-                LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(setCountFromIntegerProperty(bonePile, ItemLootEntry.builder(bonePile), BlockStateProperties.LAYERS_1_8).acceptCondition(SILK_TOUCH).alternatively(setCountFromIntegerProperty(bonePile, ItemLootEntry.builder(Items.BONE), BlockStateProperties.LAYERS_1_8))))),
+                LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(setCountFromIntegerProperty(bonePile, ItemLootEntry.builder(bonePile), ModBlockStateProperties.LAYERS_1_5).acceptCondition(SILK_TOUCH).alternatively(setCountFromIntegerProperty(bonePile, ItemLootEntry.builder(Items.BONE), ModBlockStateProperties.LAYERS_1_5))))),
                 ModBlocks.BONE_PILE);
         take(block -> registerLootTable(block, bonePile ->
                 droppingWithSilkTouch(bonePile, withSurvivesExplosion(bonePile, ItemLootEntry.builder(Items.BONE).acceptFunction(SetCount.builder(ConstantRange.of(9)))))),

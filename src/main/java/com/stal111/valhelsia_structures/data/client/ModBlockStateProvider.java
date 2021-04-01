@@ -17,6 +17,7 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.valhelsia.valhelsia_core.data.ValhelsiaBlockStateProvider;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -36,7 +37,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         getRemainingBlocks().removeIf(block -> block.get().getRegistryName().toString().contains("lapidified_jungle_post"));
-        getRemainingBlocks().remove(ModBlocks.DUNGEON_DOOR_LEAF);
+        getRemainingBlocks().removeAll(Arrays.asList(ModBlocks.DUNGEON_DOOR_LEAF, ModBlocks.JUNGLE_HEAD));
 
         forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
         forEach(block -> block instanceof PostBlock, this::postBlock);
@@ -57,7 +58,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         take(this::withExistingModel, ModBlocks.HIBISCUS, ModBlocks.GIANT_FERN);
         take(block -> torchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_TORCH, ModBlocks.DOUSED_SOUL_TORCH);
         take(block -> wallTorchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_WALL_TORCH, ModBlocks.DOUSED_SOUL_WALL_TORCH);
-        take(this::layerBlock, ModBlocks.BONE_PILE);
+        take(this::bonePileBlock, ModBlocks.BONE_PILE);
 
         forEach(block -> block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
         take(this::valhelsiaGrassBlock, ModBlocks.GRASS_BLOCK);
@@ -151,17 +152,9 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
                 .modelFile(getExistingModel(mcLoc("block/grass_block_snow"))).addModel();
     }
 
-    private void layerBlock(Block block) {
+    private void bonePileBlock(Block block) {
         String name = Objects.requireNonNull(block.getRegistryName()).getPath();
-
-        getVariantBuilder(block).forAllStates(state -> {
-            int height = state.get(BlockStateProperties.LAYERS_1_8) * 2;
-
-            ModelFile model = height == 16 ? cubeAll(block) : models().withExistingParent(name + "_" + height, mcLoc("block/snow_height" + height)).texture("texture", modLoc("block/" + name));
-
-            return ConfiguredModel.builder()
-                    .modelFile(model)
-                    .build();
-        });
+        ModelFile model = models().getBuilder(name).parent(new ModelFile.UncheckedModelFile("builtin/generated")).texture("layer0", modLoc("block/" + name));
+        getVariantBuilder(block).partialState().modelForState().modelFile(model).rotationX(90).addModel();
     }
 }

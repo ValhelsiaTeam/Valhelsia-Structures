@@ -28,6 +28,7 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
     @Override
     protected void registerModels() {
         getRemainingBlockItems().removeIf(item -> item.get().getRegistryName().getPath().contains("lapidified_jungle_post"));
+        getRemainingBlockItems().remove(ModBlocks.JUNGLE_HEAD);
 
         forEachBlockItem(item -> item.getBlock() instanceof ValhelsiaGrassBlock || item.getBlock() instanceof ValhelsiaStoneBlock, item -> withParent(item, true));
         takeBlockItem(item -> withParent(item, Objects.requireNonNull(item.getRegistryName()).getPath() + "_off"), ModBlocks.BRAZIER, ModBlocks.SOUL_BRAZIER);
@@ -42,8 +43,6 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
                 ModItems.DOUSED_TORCH,
                 ModItems.DOUSED_SOUL_TORCH
         );
-
-        takeBlockItem(blockItem -> withParent(blockItem, "bone_pile_2"), ModBlocks.BONE_PILE);
 
         forEachBlockItem(this::withParent);
 
