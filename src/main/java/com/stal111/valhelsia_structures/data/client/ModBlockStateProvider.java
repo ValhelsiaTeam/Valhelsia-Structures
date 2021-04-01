@@ -113,8 +113,9 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
     private void jarBlock(Block block) {
         String name = Objects.requireNonNull(block.getRegistryName()).getPath();
         ModelFile model = models().withExistingParent(name, modLoc("block/jar")).texture("jar", modLoc("block/jar/" + name));
+        ModelFile rotatedModel = models().withExistingParent("rotated_" + name, modLoc("block/rotated_jar")).texture("jar", modLoc("block/jar/" + name));
 
-        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(model).build(), BlockStateProperties.WATERLOGGED);
+        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(state.get(ModBlockStateProperties.ROTATED) ? rotatedModel : model).build(), ModBlockStateProperties.TREASURE, BlockStateProperties.WATERLOGGED);
     }
 
     private void torchBlock(Block block) {

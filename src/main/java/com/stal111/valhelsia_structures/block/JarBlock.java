@@ -25,6 +25,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
@@ -46,18 +47,19 @@ import java.util.Objects;
  */
 public class JarBlock extends Block implements IWaterLoggable {
 
+    public static final BooleanProperty TREASURE = ModBlockStateProperties.TREASURE;
+    public static final BooleanProperty ROTATED = ModBlockStateProperties.ROTATED;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
     private static final VoxelShape SHAPE = VoxelShapeHelper.combineAll(
             Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D),
             Block.makeCuboidShape(7.0D, 4.0D, 7.0D, 9.0D, 7.0D, 9.0D),
             Block.makeCuboidShape(6.0D, 7.0D, 6.0D, 10.0D, 8.0D, 10.0D)
     );
 
-    public static final BooleanProperty TREASURE = ModBlockStateProperties.TREASURE;
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-
     public JarBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(TREASURE, Boolean.FALSE).with(WATERLOGGED, Boolean.FALSE));
+        this.setDefaultState(this.stateContainer.getBaseState().with(TREASURE, false).with(ROTATED, false).with(WATERLOGGED, false));
     }
 
     @Nullable
@@ -131,7 +133,7 @@ public class JarBlock extends Block implements IWaterLoggable {
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
         boolean flag = fluidstate.getFluid() == Fluids.WATER;
-        return this.getDefaultState().with(WATERLOGGED, flag);
+        return this.getDefaultState().with(WATERLOGGED, flag).with(ROTATED, (MathHelper.floor((double) ((180.0F + context.getPlacementYaw()) * 8.0F / 360.0F) + 0.5D) & 7) % 2 != 0);
     }
 
     @Override
@@ -159,7 +161,7 @@ public class JarBlock extends Block implements IWaterLoggable {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(TREASURE, WATERLOGGED);
+        builder.add(TREASURE, ROTATED, WATERLOGGED);
     }
 
     @Override
