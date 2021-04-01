@@ -55,7 +55,6 @@ public class GiantFernBlock extends BushBlock {
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        System.out.println(context.getPlacementYaw());
         return this.getDefaultState().with(ROTATED, (MathHelper.floor((double) ((180.0F + context.getPlacementYaw()) * 8.0F / 360.0F) + 0.5D) & 7) % 2 != 0);
     }
 
