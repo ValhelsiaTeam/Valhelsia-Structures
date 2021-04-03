@@ -38,31 +38,37 @@ import java.util.Random;
 
 public class BrazierBlock extends Block implements IWaterLoggable {
 
-    protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 5.0D, 1.0D, 15.0D, 14.0D, 15.0D);
-    protected static final VoxelShape INNER_SHAPE = Block.makeCuboidShape(2.0D, 8.0D, 2.0D, 14.0D, 14.0D, 14.0D);
-
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
+    protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 5.0D, 1.0D, 15.0D, 14.0D, 15.0D);
+    protected static final VoxelShape INNER_SHAPE = Block.makeCuboidShape(2.0D, 8.0D, 2.0D, 14.0D, 14.0D, 14.0D);
 
     private final boolean smokey;
     private final int fireDamage;
 
     public BrazierBlock(boolean smokey, int fireDamage, Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(LIT, Boolean.TRUE).with(WATERLOGGED, Boolean.FALSE));
+        this.setDefaultState(this.stateContainer.getBaseState().with(LIT, true).with(WATERLOGGED, false));
         this.smokey = smokey;
         this.fireDamage = fireDamage;
     }
 
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
-        if (!entity.isImmuneToFire() && state.get(LIT) && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
-            if (entity.getPosX() >= pos.getX() + 0.1 && entity.getPosZ() >= pos.getZ() + 0.1 && entity.getPosX() <= pos.getX() + 0.9 && entity.getPosZ() <= pos.getZ() + 0.9) {
-                entity.attackEntityFrom(DamageSource.IN_FIRE, this.fireDamage);
+        super.onEntityCollision(state, worldIn, pos, entity);
+
+        if (state.get(LIT)) {
+            if (entity.isImmuneToFire() || !(entity instanceof LivingEntity) || EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
+                return;
+            }
+
+            if (entity.getPosX() >= pos.getX() + 0.1D && entity.getPosZ() >= pos.getZ() + 0.1D && entity.getPosX() <= pos.getX() + 0.9D && entity.getPosZ() <= pos.getZ() + 0.9D) {
+                if (entity.getPosY() >= pos.getY() + 0.5D) {
+                    entity.attackEntityFrom(DamageSource.IN_FIRE, this.fireDamage);
+                }
             }
         }
-
-        super.onEntityCollision(state, worldIn, pos, entity);
     }
 
     @Nullable
@@ -101,11 +107,10 @@ public class BrazierBlock extends Block implements IWaterLoggable {
             }
 
             if (this.smokey && rand.nextInt(5) == 0) {
-                for(int i = 0; i < rand.nextInt(1) + 1; ++i) {
+                for (int i = 0; i < rand.nextInt(1) + 1; ++i) {
                     worldIn.addParticle(ParticleTypes.LAVA, (float) pos.getX() + 0.5F, (float) pos.getY() + 0.5F, (float) pos.getZ() + 0.5F, rand.nextFloat() / 2.0F, 5.0E-5D, rand.nextFloat() / 2.0F);
                 }
             }
-
         }
     }
 
