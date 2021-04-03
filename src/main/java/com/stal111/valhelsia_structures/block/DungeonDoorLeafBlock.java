@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 /**
  * Dungeon Door Leaf Block
@@ -91,12 +90,14 @@ public class DungeonDoorLeafBlock extends Block implements IWaterLoggable {
 
     @Override
     public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-            BlockPos pos1 = pos.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle()).getOpposite());
-            DungeonDoorTileEntity tileEntity = (DungeonDoorTileEntity) world.getTileEntity(pos1);
+        BlockPos offsetPos = pos.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle()).getOpposite());
+        DungeonDoorTileEntity tileEntity = (DungeonDoorTileEntity) world.getTileEntity(offsetPos);
 
-            BlockState state1 = world.getBlockState(Objects.requireNonNull(tileEntity).getMainBlock());
+        if (tileEntity != null) {
+            BlockState state1 = world.getBlockState(tileEntity.getMainBlock());
 
             state1.getBlock().onBlockHarvested(world, tileEntity.getMainBlock(), state1, player);
+        }
     }
 
     @Override

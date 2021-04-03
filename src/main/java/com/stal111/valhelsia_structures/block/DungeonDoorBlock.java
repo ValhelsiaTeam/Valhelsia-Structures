@@ -25,6 +25,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
 
@@ -85,25 +86,29 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         BlockPos pos = context.getPos();
-        if (pos.getY() < 253) {
-            boolean canPlace = true;
-            for (Position position : Position.values()) {
-                for (int i = 0; i < 4; i++) {
-                    BlockPos pos1 = pos.up(i);
-                    if (position != Position.MIDDLE) {
-                        pos1 = pos1.offset(Direction.fromAngle(context.getPlacementHorizontalFacing().getOpposite().getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
-                    }
-                    if (!context.getWorld().getBlockState(pos1).isReplaceable(context)) {
-                        canPlace = false;
-                    }
+
+        if (pos.getY() > 253 || !canPlace(context)) {
+            return null;
+        }
+
+        boolean canPlace = true;
+        for (Position position : Position.values()) {
+            for (int i = 0; i < 4; i++) {
+                BlockPos pos1 = pos.up(i);
+                if (position != Position.MIDDLE) {
+                    pos1 = pos1.offset(Direction.fromAngle(context.getPlacementHorizontalFacing().getOpposite().getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
+                }
+                if (!context.getWorld().getBlockState(pos1).isReplaceable(context)) {
+                    canPlace = false;
                 }
             }
-            if (canPlace) {
-                FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
-                boolean flag = fluidstate.getFluid() == Fluids.WATER;
-                return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, flag);
-            }
         }
+        if (canPlace) {
+            FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
+            boolean flag = fluidstate.getFluid() == Fluids.WATER;
+            return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, flag);
+        }
+
         return null;
     }
 
@@ -111,6 +116,11 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
     public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
         if (state.get(WATERLOGGED)) {
             world.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+        }
+
+        if (!state.isValidPosition(world, currentPos)) {
+            this.breakDoor((World) world, currentPos, state, null);
+            return Blocks.AIR.getDefaultState();
         }
 
         return super.updatePostPlacement(state, facing, facingState, world, currentPos, facingPos);
@@ -133,7 +143,10 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
                     world.setBlockState(pos1, state.with(PART, dungeonDoorPart).with(WATERLOGGED, flag), 3);
                 }
                 DungeonDoorTileEntity dungeonDoorTileEntity = ((DungeonDoorTileEntity) world.getTileEntity(pos1));
-                Objects.requireNonNull(dungeonDoorTileEntity).setMainBlock(pos);
+
+                if (dungeonDoorTileEntity != null) {
+                    dungeonDoorTileEntity.setMainBlock(pos);
+                }
             }
         }
     }
@@ -145,9 +158,9 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         Map<BlockPos, BlockState> map = new HashMap<>();
         boolean canOpen = true;
 
-        if (!world.isRemote()) {
-            DungeonDoorTileEntity tileEntity = (DungeonDoorTileEntity) world.getTileEntity(pos);
+        DungeonDoorTileEntity tileEntity = (DungeonDoorTileEntity) world.getTileEntity(((DungeonDoorTileEntity) world.getTileEntity(pos)).getMainBlock());
 
+        if (!world.isRemote()) {
             for (Position position : Position.values()) {
                 for (int k = 0; k < 4; k++) {
                     BlockPos pos1 = Objects.requireNonNull(tileEntity).getMainBlock().up(k);
@@ -159,9 +172,12 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
                             if (!world.getBlockState(pos2).isReplaceable(new BlockItemUseContext(player, hand, new ItemStack(ModBlocks.DUNGEON_DOOR.get()), hit))) {
                                 canOpen = false;
                             }
-                            map.put(pos2, ModBlocks.DUNGEON_DOOR_LEAF.get().getDefaultState().with(HorizontalBlock.HORIZONTAL_FACING, state.get(FACING)).with(ModBlockStateProperties.MIRRORED, position == Position.RIGHT));
+                            map.put(pos2, ModBlocks.DUNGEON_DOOR_LEAF.get().getDefaultState()
+                                    .with(HorizontalBlock.HORIZONTAL_FACING, state.get(FACING))
+                                    .with(ModBlockStateProperties.MIRRORED, position == Position.RIGHT)
+                                    .with(BlockStateProperties.WATERLOGGED, world.getBlockState(pos2).getBlock() == Blocks.WATER));
                         } else {
-                            map.put(pos2, Blocks.AIR.getDefaultState());
+                            map.put(pos2, world.getBlockState(pos2).get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState());
                         }
                     }
                     if (pos1 != pos) {
@@ -180,26 +196,20 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
 
     @Override
     public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-            DungeonDoorTileEntity tileEntity = (DungeonDoorTileEntity) world.getTileEntity(pos);
+        this.breakDoor(world, pos, state, player);
+    }
 
-            for (Position position : Position.values()) {
-                for (int k = 0; k < 4; k++) {
-                    BlockPos pos1 = Objects.requireNonNull(tileEntity).getMainBlock().up(k);
-                    if (position != Position.MIDDLE) {
-                        pos1 = pos1.offset(Direction.fromAngle(state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
+    @Override
+    public boolean isValidPosition(BlockState state, IWorldReader world, BlockPos pos) {
+        BlockPos posDown = pos.down();
+        BlockState stateDown = world.getBlockState(posDown);
 
-                        if (state.get(OPEN)) {
-                            BlockPos pos2 = pos1.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle()));
-                            world.playEvent(player, 2001, pos2, Block.getStateId(world.getBlockState(pos2)));
-                            world.setBlockState(pos2, Blocks.AIR.getDefaultState(), 35);
-
-                        }
-                    }
-                    world.playEvent(player, 2001, pos1, Block.getStateId(world.getBlockState(pos1)));
-                    world.setBlockState(pos1, Blocks.AIR.getDefaultState(), 35);
-                }
-            }
-
+        if (state.get(PART).isBottom()) {
+            return stateDown.isSolidSide(world, posDown, Direction.UP);
+        } else if (state.get(PART).getString().contains("3") && !world.getBlockState(pos.up()).isIn(this)) {
+            return false;
+        }
+        return stateDown.isIn(this);
     }
 
     @Override
@@ -210,6 +220,54 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.toRotation(state.get(FACING)));
+    }
+
+    private boolean canPlace(BlockItemUseContext context) {
+        World world = context.getWorld();
+        BlockPos pos = context.getPos();
+
+        if (pos.getY() > 253) {
+            return false;
+        }
+
+        for (Position position : Position.values()) {
+            BlockPos posDown = pos.down();
+            if (position != Position.MIDDLE) {
+                posDown = posDown.offset(Direction.fromAngle(context.getPlacementHorizontalFacing().getOpposite().getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
+            }
+            if (!world.getBlockState(posDown).isSolidSide(world, pos.down(), Direction.UP)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void breakDoor(World world, BlockPos pos, BlockState state, @Nullable PlayerEntity player) {
+        DungeonDoorTileEntity tileEntity = (DungeonDoorTileEntity) world.getTileEntity(pos);
+
+        for (Position position : Position.values()) {
+            for (int k = 0; k < 4; k++) {
+                BlockPos pos1 = Objects.requireNonNull(tileEntity).getMainBlock().up(k);
+                if (position != Position.MIDDLE) {
+                    pos1 = pos1.offset(Direction.fromAngle(state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
+
+                    if (state.get(OPEN)) {
+                        BlockPos pos2 = pos1.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle()));
+                        BlockState state1 = world.getBlockState(pos2);
+
+                        if (state1.getBlock() == ModBlocks.DUNGEON_DOOR_LEAF.get()) {
+                            world.playEvent(player, 2001, pos2, Block.getStateId(world.getBlockState(pos2)));
+                            world.setBlockState(pos2, world.getBlockState(pos2).get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 35);
+                        }
+                    }
+                }
+                BlockState state1 = world.getBlockState(pos1);
+                if (state1.getBlock() == ModBlocks.DUNGEON_DOOR.get()) {
+                    world.playEvent(player, 2001, pos1, Block.getStateId(world.getBlockState(pos1)));
+                    world.setBlockState(pos1, state1.get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 35);
+                }
+            }
+        }
     }
 
     @Override

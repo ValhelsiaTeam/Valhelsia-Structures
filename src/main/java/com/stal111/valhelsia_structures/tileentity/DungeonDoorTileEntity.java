@@ -62,8 +62,8 @@ public class DungeonDoorTileEntity extends TileEntity implements ITickableTileEn
     public CompoundNBT write(CompoundNBT compound) {
         super.write(compound);
 
-        if (mainBlock != BlockPos.ZERO) {
-            compound.putLong("mainBlock", mainBlock.toLong());
+        if (this.mainBlock != BlockPos.ZERO) {
+            compound.putLong("mainBlock", this.mainBlock.toLong());
         }
         return compound;
     }
@@ -72,7 +72,7 @@ public class DungeonDoorTileEntity extends TileEntity implements ITickableTileEn
     public void read(BlockState state, CompoundNBT compound) {
         super.read(state, compound);
         if (compound.contains("mainBlock")) {
-            mainBlock = BlockPos.fromLong(compound.getLong("mainBlock"));
+            this.mainBlock = BlockPos.fromLong(compound.getLong("mainBlock"));
         }
     }
 
