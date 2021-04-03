@@ -84,15 +84,7 @@ public class BonePileBlock extends Block implements IWaterLoggable {
 
     @Override
     public boolean isReplaceable(BlockState state, BlockItemUseContext useContext) {
-        if (useContext.getItem().getItem() == this.asItem() && state.get(LAYERS) < 5) {
-            if (useContext.replacingClickedOnBlock()) {
-                return useContext.getFace() == Direction.UP;
-            } else {
-                return true;
-            }
-        } else {
-            return state.get(LAYERS) == 1;
-        }
+        return useContext.getItem().getItem() == this.asItem() && state.get(LAYERS) < 5 || super.isReplaceable(state, useContext);
     }
 
     @Nullable
