@@ -4,13 +4,19 @@ import com.stal111.valhelsia_structures.block.PostBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.recipe.AxeCraftingRecipeBuilder;
 import com.stal111.valhelsia_structures.utils.ModTags;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.Locale;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 /**
@@ -29,6 +35,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+        //Crafting Recipes
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.BRAZIER.get()).patternLine("*X*").patternLine("###").key('#', Items.IRON_INGOT).key('X', ItemTags.COALS).key('*', Items.IRON_BARS).addCriterion("has_item", hasItem(ItemTags.COALS)).build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.SOUL_BRAZIER.get()).patternLine("*X*").patternLine("###").key('#', Items.IRON_INGOT).key('X', ItemTags.SOUL_FIRE_BASE_BLOCKS).key('*', Items.IRON_BARS).addCriterion("has_item", hasItem(ItemTags.SOUL_FIRE_BASE_BLOCKS)).build(consumer);
 
@@ -59,5 +66,15 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapelessRecipe(ModBlocks.BONE_PILE.get(), 9).addIngredient(ModBlocks.BONE_PILE_BLOCK.get()).setGroup("bone_pile").addCriterion("has_item", hasItem(ModBlocks.BONE_PILE_BLOCK.get())).build(consumer, "bone_pile_from_bone_pile_block");
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.BONE_PILE_BLOCK.get()).patternLine("###").patternLine("###").patternLine("###").key('#', Items.BONE).setGroup("bone_pile_block").addCriterion("has_item", hasItem(Items.BONE)).build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.BONE_PILE_BLOCK.get()).patternLine("###").patternLine("###").patternLine("###").key('#', ModBlocks.BONE_PILE.get()).setGroup("bone_pile_block").addCriterion("has_item", hasItem(ModBlocks.BONE_PILE.get())).build(consumer, "bone_pile_block_from_bone_piles");
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.GLAZED_JAR.get()).patternLine("# #").patternLine(" # ").key('#', Blocks.TERRACOTTA).setGroup("jar").addCriterion("has_item", hasItem(Blocks.TERRACOTTA)).build(consumer);
+
+        ModBlocks.COLORED_GLAZED_JARS.forEach(blockRegistryObject -> {
+            String name = blockRegistryObject.get().getRegistryName().getPath();
+            Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name.substring(0, name.length() - 11) + "_terracotta")));
+            ShapedRecipeBuilder.shapedRecipe(blockRegistryObject.get()).patternLine("# #").patternLine(" # ").key('#', block).setGroup("jar").addCriterion("has_item", hasItem(block)).build(consumer);
+        });
+
+        //Smelting Recipes
+        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModBlocks.GLAZED_JAR.get()), ModBlocks.CRACKED_GLAZED_JAR.get(), 0.1F, 200).addCriterion("has_item", hasItem(ModBlocks.GLAZED_JAR.get())).build(consumer, "valhelsia_structures:smelting/cracked_glazed_jar");
     }
 }
