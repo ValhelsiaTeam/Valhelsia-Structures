@@ -51,6 +51,9 @@ public class ModBlocks {
     public static final RegistryObject<JarBlock> GLAZED_JAR = HELPER.register("glazed_jar", new JarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()));
     public static final RegistryObject<JarBlock> CRACKED_GLAZED_JAR = HELPER.register("cracked_glazed_jar", new JarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.0F).notSolid()));
     public static final List<RegistryObject<JarBlock>> COLORED_GLAZED_JARS = registerColoredGlazedJars();
+    public static final RegistryObject<BigJarBlock> BIG_GLAZED_JAR = HELPER.register("big_glazed_jar", new BigJarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()), ValhelsiaRenderType.CUTOUT);
+    public static final RegistryObject<BigJarBlock> CRACKED_BIG_GLAZED_JAR = HELPER.register("cracked_big_glazed_jar", new BigJarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()), ValhelsiaRenderType.CUTOUT);
+    public static final List<RegistryObject<BigJarBlock>> BIG_COLORED_GLAZED_JARS = registerBigColoredGlazedJars();
     public static final RegistryObject<RotatedPillarBlock> LAPIDIFIED_JUNGLE_LOG = HELPER.register("lapidified_jungle_log", new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG));
     public static final RegistryObject<RotatedPillarBlock> LAPIDIFIED_JUNGLE_WOOD = HELPER.register("lapidified_jungle_wood", new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG));
     public static final RegistryObject<Block> LAPIDIFIED_JUNGLE_PLANKS = HELPER.register("lapidified_jungle_planks", new Block(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS));
@@ -90,6 +93,14 @@ public class ModBlocks {
         List<RegistryObject<JarBlock>> list = new ArrayList<>();
         for (DyeColor color : DyeColor.values()) {
             list.add(HELPER.register(color.getTranslationKey() + "_glazed_jar", new JarBlock(Block.Properties.create(Material.ROCK, color).setRequiresTool().hardnessAndResistance(1.4F).notSolid())));
+        }
+        return list;
+    }
+
+    private static List<RegistryObject<BigJarBlock>> registerBigColoredGlazedJars() {
+        List<RegistryObject<BigJarBlock>> list = new ArrayList<>();
+        for (DyeColor color : DyeColor.values()) {
+            list.add(HELPER.register("big_" +color.getTranslationKey() + "_glazed_jar", new BigJarBlock(Block.Properties.create(Material.ROCK, color).setRequiresTool().hardnessAndResistance(1.4F).notSolid()), ValhelsiaRenderType.CUTOUT));
         }
         return list;
     }

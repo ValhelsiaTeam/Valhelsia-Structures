@@ -1,10 +1,7 @@
 package com.stal111.valhelsia_structures.data.client;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.BrazierBlock;
-import com.stal111.valhelsia_structures.block.JarBlock;
-import com.stal111.valhelsia_structures.block.PostBlock;
-import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
+import com.stal111.valhelsia_structures.block.*;
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.block.*;
@@ -45,6 +42,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         take(block -> paneBlock((PaneBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
         take(this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);
         forEach(block -> block instanceof JarBlock, this::jarBlock);
+        forEach(block -> block instanceof BigJarBlock, this::bigJarBlock);
         take( block -> logBlock((RotatedPillarBlock) block), ModBlocks.LAPIDIFIED_JUNGLE_LOG);
         take(block -> axisBlock((RotatedPillarBlock) block, modLoc("block/lapidified_jungle_log"), modLoc("block/lapidified_jungle_log")), ModBlocks.LAPIDIFIED_JUNGLE_WOOD);
         ResourceLocation lapidifiedJunglePlanks = modLoc("block/lapidified_jungle_planks");
@@ -116,6 +114,17 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         ModelFile rotatedModel = models().withExistingParent("rotated_" + name, modLoc("block/rotated_jar")).texture("jar", modLoc("block/jar/" + name));
 
         getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(state.get(ModBlockStateProperties.ROTATED) ? rotatedModel : model).build(), ModBlockStateProperties.TREASURE, BlockStateProperties.WATERLOGGED);
+    }
+
+    private void bigJarBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+        ModelFile model = models().withExistingParent(name, modLoc("block/big_jar")).texture("jar", modLoc("block/jar/big/" + name));
+        ModelFile rotatedModel = models().withExistingParent("rotated_" + name, modLoc("block/rotated_big_jar")).texture("jar", modLoc("block/jar/big/" + name));
+
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            int rotation = state.get(ModBlockStateProperties.ROTATION_0_7);
+            return ConfiguredModel.builder().modelFile(rotation % 2 == 0 ? model : rotatedModel).rotationY(rotation % 2 == 0 ? rotation * 45 : (rotation - 1) * 45).build();
+        }, ModBlockStateProperties.TREASURE, BlockStateProperties.WATERLOGGED);
     }
 
     private void torchBlock(Block block) {

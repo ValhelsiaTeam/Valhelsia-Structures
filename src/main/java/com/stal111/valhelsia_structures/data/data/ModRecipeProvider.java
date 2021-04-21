@@ -67,6 +67,7 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.BONE_PILE_BLOCK.get()).patternLine("###").patternLine("###").patternLine("###").key('#', Items.BONE).setGroup("bone_pile_block").addCriterion("has_item", hasItem(Items.BONE)).build(consumer);
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.BONE_PILE_BLOCK.get()).patternLine("###").patternLine("###").patternLine("###").key('#', ModBlocks.BONE_PILE.get()).setGroup("bone_pile_block").addCriterion("has_item", hasItem(ModBlocks.BONE_PILE.get())).build(consumer, "bone_pile_block_from_bone_piles");
         ShapedRecipeBuilder.shapedRecipe(ModBlocks.GLAZED_JAR.get()).patternLine("# #").patternLine(" # ").key('#', Blocks.TERRACOTTA).setGroup("jar").addCriterion("has_item", hasItem(Blocks.TERRACOTTA)).build(consumer);
+        ShapedRecipeBuilder.shapedRecipe(ModBlocks.BIG_GLAZED_JAR.get()).patternLine("# #").patternLine("# #").patternLine(" # ").key('#', Blocks.TERRACOTTA).setGroup("big_jar").addCriterion("has_item", hasItem(Blocks.TERRACOTTA)).build(consumer);
 
         ModBlocks.COLORED_GLAZED_JARS.forEach(blockRegistryObject -> {
             String name = blockRegistryObject.get().getRegistryName().getPath();
@@ -74,7 +75,14 @@ public class ModRecipeProvider extends RecipeProvider {
             ShapedRecipeBuilder.shapedRecipe(blockRegistryObject.get()).patternLine("# #").patternLine(" # ").key('#', block).setGroup("jar").addCriterion("has_item", hasItem(block)).build(consumer);
         });
 
+        ModBlocks.BIG_COLORED_GLAZED_JARS.forEach(blockRegistryObject -> {
+            String name = blockRegistryObject.get().getRegistryName().getPath();
+            Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name.substring(4, name.length() - 11) + "_terracotta")));
+            ShapedRecipeBuilder.shapedRecipe(blockRegistryObject.get()).patternLine("# #").patternLine("# #").patternLine(" # ").key('#', block).setGroup("big_jar").addCriterion("has_item", hasItem(block)).build(consumer);
+        });
+
         //Smelting Recipes
         CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModBlocks.GLAZED_JAR.get()), ModBlocks.CRACKED_GLAZED_JAR.get(), 0.1F, 200).addCriterion("has_item", hasItem(ModBlocks.GLAZED_JAR.get())).build(consumer, "valhelsia_structures:smelting/cracked_glazed_jar");
+        CookingRecipeBuilder.smeltingRecipe(Ingredient.fromItems(ModBlocks.BIG_GLAZED_JAR.get()), ModBlocks.CRACKED_BIG_GLAZED_JAR.get(), 0.1F, 200).addCriterion("has_item", hasItem(ModBlocks.BIG_GLAZED_JAR.get())).build(consumer, "valhelsia_structures:smelting/cracked_big_glazed_jar");
     }
 }

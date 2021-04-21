@@ -32,19 +32,17 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
     @Override
     public void addTables() {
         getRemainingBlocks().removeIf(block ->
-                block.get() instanceof ValhelsiaStoneBlock ||
-                        block.get() instanceof ValhelsiaGrassBlock ||
-                        block.get() instanceof JarBlock
+                block.get() instanceof ValhelsiaStoneBlock || block.get() instanceof ValhelsiaGrassBlock || block.get() instanceof JarBlock
         );
 
         forEach(block -> block instanceof SlabBlock, block -> registerLootTable(block, ValhelsiaBlockLootTables::droppingSlab));
         take(this::registerSilkTouch, ModBlocks.METAL_FRAMED_GLASS, ModBlocks.METAL_FRAMED_GLASS_PANE);
         take(block -> registerLootTable(block, droppingSheared(ModBlocks.HANGING_VINES.get())), ModBlocks.HANGING_VINES, ModBlocks.HANGING_VINES_BODY);
         take(block -> registerLootTable(block, bonePile ->
-                LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(setCountFromIntegerProperty(bonePile, ItemLootEntry.builder(bonePile), ModBlockStateProperties.LAYERS_1_5).acceptCondition(SILK_TOUCH).alternatively(setCountFromIntegerProperty(bonePile, ItemLootEntry.builder(Items.BONE), ModBlockStateProperties.LAYERS_1_5))))),
+                        LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(setCountFromIntegerProperty(bonePile, ItemLootEntry.builder(bonePile), ModBlockStateProperties.LAYERS_1_5).acceptCondition(SILK_TOUCH).alternatively(setCountFromIntegerProperty(bonePile, ItemLootEntry.builder(Items.BONE), ModBlockStateProperties.LAYERS_1_5))))),
                 ModBlocks.BONE_PILE);
         take(block -> registerLootTable(block, bonePile ->
-                droppingWithSilkTouch(bonePile, withSurvivesExplosion(bonePile, ItemLootEntry.builder(Items.BONE).acceptFunction(SetCount.builder(ConstantRange.of(9)))))),
+                        droppingWithSilkTouch(bonePile, withSurvivesExplosion(bonePile, ItemLootEntry.builder(Items.BONE).acceptFunction(SetCount.builder(ConstantRange.of(9)))))),
                 ModBlocks.BONE_PILE_BLOCK);
 
         forEach(this::registerDropSelfLootTable);
