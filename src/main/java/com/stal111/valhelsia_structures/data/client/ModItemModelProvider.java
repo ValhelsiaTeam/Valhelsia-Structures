@@ -37,7 +37,11 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
                 ModBlocks.HANGING_VINES,
                 ModBlocks.PAPER_WALL
         );
-        takeBlockItem(this::withParentInventory, ModBlocks.LAPIDIFIED_JUNGLE_BUTTON, ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
+        takeBlockItem(this::withParentInventory,
+                ModBlocks.LAPIDIFIED_JUNGLE_BUTTON,
+                ModBlocks.LAPIDIFIED_JUNGLE_FENCE,
+                ModBlocks.BONE_PILE
+        );
 
         takeBlockItem(item -> simpleModelBlockTexture(item, "doused_torch"),
                 ModItems.DOUSED_TORCH,

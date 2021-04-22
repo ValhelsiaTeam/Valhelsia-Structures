@@ -9,6 +9,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -166,5 +167,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         String name = Objects.requireNonNull(block.getRegistryName()).getPath();
         ModelFile model = models().getBuilder(name).parent(new ModelFile.UncheckedModelFile("builtin/generated")).texture("layer0", modLoc("block/" + name));
         getVariantBuilder(block).partialState().modelForState().modelFile(model).rotationX(90).addModel();
+
+        this.models().withExistingParent(name + "_inventory", this.mcLoc("block/pressure_plate_up")).texture("texture", modLoc("block/" + name));
     }
 }
