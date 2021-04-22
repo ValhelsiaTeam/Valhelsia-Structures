@@ -44,6 +44,10 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
                 ModItems.DOUSED_SOUL_TORCH
         );
 
+        takeBlockItem(this::simpleModel,
+                ModBlocks.DUNGEON_DOOR
+        );
+
         forEachBlockItem(this::withParent);
 
         forEachItem(this::simpleModel);
