@@ -8,8 +8,6 @@ import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 
-import java.util.Arrays;
-
 /**
  * Castle Structure
  * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.CastleStructure
