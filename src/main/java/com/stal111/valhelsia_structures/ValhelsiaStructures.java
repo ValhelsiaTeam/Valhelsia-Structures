@@ -13,6 +13,7 @@ import com.stal111.valhelsia_structures.setup.CommonSetup;
 import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure;
 import com.stal111.valhelsia_structures.world.structures.RemovedStructure;
+import com.stal111.valhelsia_structures.world.structures.pools.MobPools;
 import com.stal111.valhelsia_structures.world.structures.pools.SmallDungeonPools;
 import net.minecraft.world.gen.DimensionSettings;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -100,5 +101,6 @@ public class ValhelsiaStructures {
         }
 
         SmallDungeonPools.load();
+        MobPools.load();
     }
 }

@@ -21,7 +21,7 @@ import java.util.Map;
  * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModStructures
  *
  * @author Valhelsia Team
- * @version 16.0.5
+ * @version 16.1.0
  */
 public class ModStructures {
 
@@ -36,6 +36,7 @@ public class ModStructures {
     public static final RegistryObject<PlayerHouseStructure> PLAYER_HOUSE = registerSurfaceStructure(new PlayerHouseStructure(VillageConfig.field_236533_a_));
     public static final RegistryObject<SmallDungeonStructure> SMALL_DUNGEON = registerUndergroundStructure(new SmallDungeonStructure(VillageConfig.field_236533_a_));
     public static final RegistryObject<TowerRuinStructure> TOWER_RUIN = registerSurfaceStructure(new TowerRuinStructure(VillageConfig.field_236533_a_));
+    public static final RegistryObject<WitchHutStructure> WITCH_HUT = registerSurfaceStructure(new WitchHutStructure(VillageConfig.field_236533_a_));
 
     // Removed Structures - these prevent crashes related to a vanilla bug.
     public static final RegistryObject<RemovedStructure> SMALL_CASTLE = registerSurfaceStructure(new RemovedStructure(VillageConfig.field_236533_a_, "small_castle"));

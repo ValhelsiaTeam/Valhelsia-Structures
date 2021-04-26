@@ -30,7 +30,7 @@ public class JigsawHelper {
         return register(name, placementBehaviour, list, replaceStone, false, processors);
     }
 
-    public static JigsawPattern register(String name, JigsawPattern.PlacementBehaviour placementBehaviour, List<Pair<String, Integer>> list, boolean replaceStone, boolean forceAir, StructureProcessor... processors) {
+    public static JigsawPattern register(String name, JigsawPattern.PlacementBehaviour placementBehaviour, List<Pair<String, Integer>> list, boolean replaceStone, boolean legacyPiece, StructureProcessor... processors) {
         List<Pair<Function<JigsawPattern.PlacementBehaviour, ? extends JigsawPiece>, Integer>> newList = new ArrayList<>();
 
         List<StructureProcessor> processorList = new ArrayList<>(Arrays.asList(processors));
@@ -42,7 +42,7 @@ public class JigsawHelper {
         }
 
         for (Pair<String, Integer> pair : list) {
-            if (forceAir) {
+            if (!legacyPiece) {
                 newList.add(Pair.of(JigsawPiece.func_242861_b (ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), new StructureProcessorList(processorList)), pair.getSecond()));
             } else {
                 newList.add(Pair.of(JigsawPiece.func_242851_a (ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), new StructureProcessorList(processorList)), pair.getSecond()));

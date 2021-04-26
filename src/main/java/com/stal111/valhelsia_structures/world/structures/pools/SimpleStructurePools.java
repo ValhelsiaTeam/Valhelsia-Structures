@@ -21,5 +21,6 @@ public class SimpleStructurePools {
     public static final JigsawPattern FORGE_PATTERN = JigsawHelper.register("forges", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("forge", 1)), true);
     public static final JigsawPattern PLAYER_HOUSE_PATTERN = JigsawHelper.register("player_houses", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("player_house", 1)), true);
     public static final JigsawPattern TOWER_RUIN_PATTERN = JigsawHelper.register("tower_ruins", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("tower_ruin", 1), Pair.of("tower_ruin1", 1), Pair.of("tower_ruin2", 1)), true);
+    public static final JigsawPattern WITCH_HUT_PATTERN = JigsawHelper.register("witch_huts", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("witch_hut", 1)), true);
 
 }
