@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.data.data;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.block.CutPostBlock;
 import com.stal111.valhelsia_structures.block.JarBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
@@ -44,6 +45,7 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
         take(block -> registerLootTable(block, bonePile ->
                         droppingWithSilkTouch(bonePile, withSurvivesExplosion(bonePile, ItemLootEntry.builder(Items.BONE).acceptFunction(SetCount.builder(ConstantRange.of(9)))))),
                 ModBlocks.BONE_PILE_BLOCK);
+        forEach(block -> block instanceof CutPostBlock, block -> registerLootTable(block, cutPostBlock -> LootTable.builder().addLootPool(LootPool.builder().rolls(ConstantRange.of(1)).addEntry(setCountFromIntegerProperty(block, ItemLootEntry.builder(block), ModBlockStateProperties.PARTS_1_4)))));
 
         forEach(this::registerDropSelfLootTable);
     }

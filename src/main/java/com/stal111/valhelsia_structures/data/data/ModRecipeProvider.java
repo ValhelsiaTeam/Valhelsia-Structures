@@ -1,5 +1,7 @@
 package com.stal111.valhelsia_structures.data.data;
 
+import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.block.CutPostBlock;
 import com.stal111.valhelsia_structures.block.PostBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.recipe.AxeCraftingRecipeBuilder;
@@ -13,9 +15,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.StringUtils;
 
-import java.util.Locale;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -43,9 +43,13 @@ public class ModRecipeProvider extends RecipeProvider {
             if (registryObject.get() instanceof PostBlock) {
                 PostBlock postBlock = (PostBlock) registryObject.get();
 
-                new AxeCraftingRecipeBuilder(Ingredient.fromItems(postBlock.getLogBlock()), postBlock.asItem(), 2)
-                        .addCriterion("has_item", hasItem(postBlock.getLogBlock()))
-                        .build(consumer);
+                new AxeCraftingRecipeBuilder(Ingredient.fromItems(postBlock.getLogBlock()), postBlock.asItem(), 2).addCriterion("has_item", hasItem(postBlock.getLogBlock())).build(consumer);
+            } else  if (registryObject.get() instanceof CutPostBlock) {
+                Block postBlock = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(registryObject.get().getRegistryName()).getPath().substring(4)));
+
+                if (postBlock != null) {
+                    new AxeCraftingRecipeBuilder(Ingredient.fromItems(postBlock), registryObject.get().asItem(), 4).addCriterion("has_item", hasItem(postBlock)).build(consumer);
+                }
             }
         });
 

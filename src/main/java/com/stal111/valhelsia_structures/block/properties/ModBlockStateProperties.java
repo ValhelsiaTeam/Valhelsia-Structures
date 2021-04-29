@@ -20,6 +20,7 @@ public class ModBlockStateProperties {
 
     public static final IntegerProperty LAYERS_1_5 = IntegerProperty.create("layers", 1, 5);
     public static final IntegerProperty ROTATION_0_7 = IntegerProperty.create("rotation", 0, 7);
+    public static final IntegerProperty PARTS_1_4 = IntegerProperty.create("parts", 1, 4);
 
     public static final EnumProperty<DungeonDoorPart> DUNGEON_DOOR_PART = EnumProperty.create("part", DungeonDoorPart.class);
 }

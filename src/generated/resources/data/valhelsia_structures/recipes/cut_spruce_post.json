@@ -1,0 +1,10 @@
+{
+  "type": "valhelsia_structures:axe_crafting",
+  "input": {
+    "item": "valhelsia_structures:spruce_post"
+  },
+  "output": {
+    "item": "valhelsia_structures:cut_spruce_post",
+    "count": 4
+  }
+}

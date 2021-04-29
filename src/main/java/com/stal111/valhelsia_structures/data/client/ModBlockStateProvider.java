@@ -9,7 +9,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -39,6 +38,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
 
         forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
         forEach(block -> block instanceof PostBlock, this::postBlock);
+        forEach(block -> block instanceof CutPostBlock, this::cutPostBlock);
         take(block -> paneBlock((PaneBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);
         take(block -> paneBlock((PaneBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
         take(this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);
@@ -82,7 +82,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
                 .texture("post_side", modLoc("block/post/" + name))
                 .texture("post_end", modLoc("block/post/" + name + "_top"));
 
-        ModelFile attached = models().withExistingParent(name + "_attached", modLoc("block/post_attached"))
+        ModelFile attachedModel = models().withExistingParent("attached_" + name, modLoc("block/attached_post"))
                 .texture("post_side", modLoc("block/post/" + name))
                 .texture("post_end", modLoc("block/post/" + name + "_top"));
 
@@ -91,7 +91,33 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
             int rotationY = state.get(RotatedPillarBlock.AXIS) == Direction.Axis.X ? 90 : 0;
 
             return ConfiguredModel.builder()
-                    .modelFile(state.get(PostBlock.ATTACHED) ? attached : model)
+                    .modelFile(state.get(PostBlock.ATTACHED) ? attachedModel : model)
+                    .rotationX(rotationX)
+                    .rotationY(rotationY)
+                    .build();
+        }, PostBlock.WATERLOGGED);
+    }
+
+    private void cutPostBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            Direction facing = state.get(DirectionalBlock.FACING);
+            int rotationX = facing == Direction.DOWN ? 180 : facing == Direction.UP ? 0 : 90;
+            int rotationY = facing == Direction.SOUTH ? 180 : facing == Direction.WEST ? 270 : facing == Direction.EAST ? 90 : 0;
+
+            int parts = state.get(ModBlockStateProperties.PARTS_1_4);
+
+            ModelFile model = parts == 4 ? getExistingModel(modLoc(name.substring(4))) : models().withExistingParent(name + "_" + parts, modLoc("block/cut_post_" + parts))
+                    .texture("post_side", modLoc("block/post/" + name.substring(4)))
+                    .texture("post_end", modLoc("block/post/" + name.substring(4) + "_top"));
+
+            ModelFile attachedModel = parts == 4 ? getExistingModel(modLoc("attached_" + name.substring(4))) : models().withExistingParent("attached_" + name + "_" + parts, modLoc("block/attached_cut_post_" + parts))
+                    .texture("post_side", modLoc("block/post/" + name.substring(4)))
+                    .texture("post_end", modLoc("block/post/" + name.substring(4) + "_top"));
+
+            return ConfiguredModel.builder()
+                    .modelFile(state.get(PostBlock.ATTACHED) ? attachedModel : model)
                     .rotationX(rotationX)
                     .rotationY(rotationY)
                     .build();

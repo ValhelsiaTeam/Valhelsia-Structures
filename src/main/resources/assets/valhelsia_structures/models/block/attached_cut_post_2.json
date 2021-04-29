@@ -1,0 +1,20 @@
+{
+	"credit": "Remodeled By Soumeh",
+	"textures": {
+		"particle": "#post_side"
+	},
+	"elements": [
+		{
+			"from": [3, 0, 0],
+			"to": [13, 8, 10],
+			"faces": {
+				"north": {"uv": [0, 8, 10, 16], "texture": "#post_side"},
+				"east": {"uv": [0, 8, 10, 16], "texture": "#post_side"},
+				"south": {"uv": [0, 8, 10, 16], "texture": "#post_side"},
+				"west": {"uv": [0, 8, 10, 16], "texture": "#post_side"},
+				"up": {"uv": [0, 0, 10, 10], "texture": "#post_end"},
+				"down": {"uv": [0, 0, 10, 10], "texture": "#post_end"}
+			}
+		}
+	]
+}

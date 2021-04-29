@@ -33,9 +33,7 @@ public abstract class CatEntityMixin extends TameableEntity {
 
     @Inject(at = @At(value = "HEAD"), method = "onInitialSpawn", cancellable = true)
     private void valhelsia_avoidOverridingType(IServerWorld world, DifficultyInstance difficulty, SpawnReason reason, ILivingEntityData spawnData, CompoundNBT dataTag, CallbackInfoReturnable<ILivingEntityData> cir) {
-
         if (reason == SpawnReason.STRUCTURE && world.getWorld().func_241112_a_().getStructureStart(this.getPosition(), true, ModStructures.WITCH_HUT.get()).isValid()) {
-            System.out.println("TEST");
             cir.setReturnValue(super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag));
         }
     }

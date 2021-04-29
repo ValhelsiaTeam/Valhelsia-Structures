@@ -1,5 +1,5 @@
 {
-  "parent": "valhelsia_structures:block/post_attached",
+  "parent": "valhelsia_structures:block/cut_post_2",
   "textures": {
     "post_side": "valhelsia_structures:block/post/oak_post",
     "post_end": "valhelsia_structures:block/post/oak_post_top"

@@ -6,7 +6,7 @@
       "y": 90
     },
     "attached=true,axis=x": {
-      "model": "valhelsia_structures:block/jungle_post_attached",
+      "model": "valhelsia_structures:block/attached_jungle_post",
       "x": 90,
       "y": 90
     },
@@ -14,14 +14,14 @@
       "model": "valhelsia_structures:block/jungle_post"
     },
     "attached=true,axis=y": {
-      "model": "valhelsia_structures:block/jungle_post_attached"
+      "model": "valhelsia_structures:block/attached_jungle_post"
     },
     "attached=false,axis=z": {
       "model": "valhelsia_structures:block/jungle_post",
       "x": 90
     },
     "attached=true,axis=z": {
-      "model": "valhelsia_structures:block/jungle_post_attached",
+      "model": "valhelsia_structures:block/attached_jungle_post",
       "x": 90
     }
   }

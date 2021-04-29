@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.data.client;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.block.CutPostBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
@@ -33,6 +34,7 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
         forEachBlockItem(item -> item.getBlock() instanceof ValhelsiaGrassBlock || item.getBlock() instanceof ValhelsiaStoneBlock, item -> withParent(item, true));
         takeBlockItem(item -> withParent(item, Objects.requireNonNull(item.getRegistryName()).getPath() + "_off"), ModBlocks.BRAZIER, ModBlocks.SOUL_BRAZIER);
         takeBlockItem(item -> simpleModelBlockTexture(item, "metal_framed_glass"), ModBlocks.METAL_FRAMED_GLASS_PANE);
+        forEachBlockItem(item -> item.getBlock() instanceof CutPostBlock, item -> withParent(item, item.getRegistryName().getPath() + "_1"));
         takeBlockItem(this::simpleModelBlockTexture,
                 ModBlocks.HANGING_VINES,
                 ModBlocks.PAPER_WALL

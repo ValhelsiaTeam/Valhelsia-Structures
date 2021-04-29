@@ -22,5 +22,6 @@ public class MobPools {
         JigsawHelper.register("mobs/pillager_with_crossbow_1", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/pillager_with_crossbow_1", 1)));
         JigsawHelper.register("mobs/pillager_with_sword_1", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/pillager_with_sword_1", 1)));
         JigsawHelper.register("mobs/witch_with_cat", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/witch_with_cat", 1)));
+        JigsawHelper.register("mobs/horse", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/horse", 1)));
     }
 }

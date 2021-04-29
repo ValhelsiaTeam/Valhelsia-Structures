@@ -33,6 +33,7 @@ public class ModBlocks {
     public static final RegistryObject<SpecialSpawnerBlock> SPECIAL_SPAWNER = HELPER.register("special_spawner", new SpecialSpawnerBlock(Block.Properties.from(Blocks.SPAWNER).hardnessAndResistance(-1.0F, 3600000.0F).noDrops()), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<BrazierBlock> BRAZIER = HELPER.register("brazier", new BrazierBlock(true, 1, Block.Properties.from(Blocks.IRON_BARS).notSolid().setLightLevel(state -> state.get(BrazierBlock.LIT) ? 15 : 0)), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<BrazierBlock> SOUL_BRAZIER = HELPER.register("soul_brazier", new BrazierBlock(false, 2, Block.Properties.from(Blocks.IRON_BARS).notSolid().setLightLevel(state -> state.get(BrazierBlock.LIT) ? 11 : 0)), ValhelsiaRenderType.CUTOUT);
+    //Posts
     public static final RegistryObject<PostBlock> OAK_POST = HELPER.register("oak_post", new PostBlock(() -> Blocks.OAK_LOG));
     public static final RegistryObject<PostBlock> SPRUCE_POST = HELPER.register("spruce_post", new PostBlock(() -> Blocks.SPRUCE_LOG));
     public static final RegistryObject<PostBlock> BIRCH_POST = HELPER.register("birch_post", new PostBlock(() -> Blocks.BIRCH_LOG));
@@ -42,6 +43,17 @@ public class ModBlocks {
     public static final RegistryObject<PostBlock> WARPED_POST = HELPER.register("warped_post", new PostBlock(() -> Blocks.WARPED_STEM));
     public static final RegistryObject<PostBlock> CRIMSON_POST = HELPER.register("crimson_post", new PostBlock(() -> Blocks.CRIMSON_STEM));
     public static final RegistryObject<PostBlock> LAPIDIFIED_JUNGLE_POST = HELPER.register("lapidified_jungle_post", new PostBlock(new ResourceLocation(ValhelsiaStructures.MOD_ID, "lapidified_jungle_log"), BlockProperties.LAPIDIFIED_JUNGLE_LOG));
+    //Cut Posts
+    public static final RegistryObject<CutPostBlock> CUT_OAK_POST = HELPER.register("cut_oak_post", new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.WOOD, MaterialColor.OBSIDIAN)));
+    public static final RegistryObject<CutPostBlock> CUT_SPRUCE_POST = HELPER.register("cut_spruce_post", new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.OBSIDIAN, MaterialColor.BROWN)));
+    public static final RegistryObject<CutPostBlock> CUT_BIRCH_POST = HELPER.register("cut_birch_post", new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.SAND, MaterialColor.QUARTZ)));
+    public static final RegistryObject<CutPostBlock> CUT_JUNGLE_POST = HELPER.register("cut_jungle_post", new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.DIRT, MaterialColor.OBSIDIAN)));
+    public static final RegistryObject<CutPostBlock> CUT_ACACIA_POST = HELPER.register("cut_acacia_post", new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.ADOBE, MaterialColor.STONE)));
+    public static final RegistryObject<CutPostBlock> CUT_DARK_OAK_POST = HELPER.register("cut_dark_oak_post", new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.BROWN, MaterialColor.BROWN)));
+    public static final RegistryObject<CutPostBlock> CUT_WARPED_POST = HELPER.register("cut_warped_post", new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.WARPED_STEM)));
+    public static final RegistryObject<CutPostBlock> CUT_CRIMSON_POST = HELPER.register("cut_crimson_post", new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.CRIMSON_STEM)));
+    public static final RegistryObject<CutPostBlock> CUT_LAPIDIFIED_JUNGLE_POST = HELPER.register("cut_lapidified_jungle_post", new CutPostBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG.notSolid()));
+
     public static final RegistryObject<GlassBlock> METAL_FRAMED_GLASS = HELPER.register("metal_framed_glass", new GlassBlock(Block.Properties.from(Blocks.GLASS)), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<PaneBlock> METAL_FRAMED_GLASS_PANE = HELPER.register("metal_framed_glass_pane", new PaneBlock(Block.Properties.from(Blocks.GLASS_PANE)), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<PaneBlock> PAPER_WALL = HELPER.register("paper_wall", new PaneBlock(Block.Properties.create(Material.MISCELLANEOUS).hardnessAndResistance(0.3F).sound(SoundType.CLOTH).notSolid()));
