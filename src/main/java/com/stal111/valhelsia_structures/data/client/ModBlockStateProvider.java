@@ -14,7 +14,6 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.valhelsia.valhelsia_core.data.ValhelsiaBlockStateProvider;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -34,7 +33,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         getRemainingBlocks().removeIf(block -> block.get().getRegistryName().toString().contains("lapidified_jungle_post"));
-        getRemainingBlocks().removeAll(Arrays.asList(ModBlocks.DUNGEON_DOOR_LEAF, ModBlocks.JUNGLE_HEAD));
+        getRemainingBlocks().remove(ModBlocks.JUNGLE_HEAD);
 
         forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
         forEach(block -> block instanceof PostBlock, this::postBlock);
@@ -61,6 +60,8 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
 
         forEach(block -> block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
         take(this::valhelsiaGrassBlock, ModBlocks.GRASS_BLOCK);
+
+        take(block -> simpleBlock(block, models().cubeAll(block.getRegistryName().getPath(), modLoc("block/dungeon_door"))), ModBlocks.DUNGEON_DOOR_LEAF);
 
         forEach(this::simpleBlock);
     }
