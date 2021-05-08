@@ -1,7 +1,8 @@
-package com.stal111.valhelsia_structures.data.data;
+package com.stal111.valhelsia_structures.data.server.loot;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
+import com.stal111.valhelsia_structures.data.server.loot.ModBlockLootTables;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
 import net.minecraft.loot.*;
@@ -15,7 +16,7 @@ import java.util.function.Supplier;
 
 /**
  * Mod Loot Table Provider
- * Valhelsia Structures - com.stal111.valhelsia_structures.data.server.ModLootTableProvider
+ * Valhelsia Structures - com.stal111.valhelsia_structures.data.server.loot.ModLootTableProvider
  *
  * @author Valhelsia Team
  * @version 16.1.0

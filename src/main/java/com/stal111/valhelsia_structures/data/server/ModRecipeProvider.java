@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.data.data;
+package com.stal111.valhelsia_structures.data.server;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.block.CutPostBlock;

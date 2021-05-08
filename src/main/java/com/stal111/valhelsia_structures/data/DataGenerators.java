@@ -3,10 +3,11 @@ package com.stal111.valhelsia_structures.data;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.data.client.ModBlockStateProvider;
 import com.stal111.valhelsia_structures.data.client.ModItemModelProvider;
-import com.stal111.valhelsia_structures.data.data.ModBlockTagsProvider;
-import com.stal111.valhelsia_structures.data.data.ModItemTagsProvider;
-import com.stal111.valhelsia_structures.data.data.ModLootTableProvider;
-import com.stal111.valhelsia_structures.data.data.ModRecipeProvider;
+import com.stal111.valhelsia_structures.data.server.ModBlockTagsProvider;
+import com.stal111.valhelsia_structures.data.server.ModItemTagsProvider;
+import com.stal111.valhelsia_structures.data.server.loot.ModLootModifierProvider;
+import com.stal111.valhelsia_structures.data.server.loot.ModLootTableProvider;
+import com.stal111.valhelsia_structures.data.server.ModRecipeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,13 +30,19 @@ public class DataGenerators {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        generator.addProvider(new ModBlockStateProvider(generator, existingFileHelper));
-        generator.addProvider(new ModItemModelProvider(generator, existingFileHelper));
+        if (event.includeClient()) {
+            generator.addProvider(new ModBlockStateProvider(generator, existingFileHelper));
+            generator.addProvider(new ModItemModelProvider(generator, existingFileHelper));
+        }
 
-        generator.addProvider(new ModLootTableProvider(generator));
-        ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(generator, existingFileHelper);
-        generator.addProvider(blockTagsProvider);
-        generator.addProvider(new ModItemTagsProvider(generator, blockTagsProvider, existingFileHelper));
-        generator.addProvider(new ModRecipeProvider(generator));
+        if (event.includeServer()) {
+            ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(generator, existingFileHelper);
+            generator.addProvider(blockTagsProvider);
+            generator.addProvider(new ModItemTagsProvider(generator, blockTagsProvider, existingFileHelper));
+
+            generator.addProvider(new ModLootTableProvider(generator));
+            generator.addProvider(new ModRecipeProvider(generator));
+            generator.addProvider(new ModLootModifierProvider(generator));
+        }
     }
 }

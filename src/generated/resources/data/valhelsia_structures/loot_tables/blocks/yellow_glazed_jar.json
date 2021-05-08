@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "valhelsia_structures:big_lime_glazed_jar"
+          "name": "valhelsia_structures:yellow_glazed_jar"
         }
       ],
       "conditions": [
