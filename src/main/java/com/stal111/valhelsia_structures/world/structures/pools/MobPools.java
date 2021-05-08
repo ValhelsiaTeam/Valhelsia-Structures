@@ -23,5 +23,13 @@ public class MobPools {
         JigsawHelper.register("mobs/pillager_with_sword_1", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/pillager_with_sword_1", 1)));
         JigsawHelper.register("mobs/witch_with_cat", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/witch_with_cat", 1)));
         JigsawHelper.register("mobs/horse", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/horse", 1)));
+        JigsawHelper.register("mobs/villagers", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/villagers/villager", 5), Pair.of("mobs/villagers/villager_khytwel", 1), Pair.of("mobs/villagers/villager_vaelzan", 1), Pair.of("mobs/villagers/villager_stal", 1), Pair.of("mobs/villagers/villager_cynthal", 1), Pair.of("mobs/villagers/villager_kanadet", 1)));
+
+        //Spawners
+        JigsawHelper.register("mobs/spawners", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/spawners/zombie", 1), Pair.of("mobs/spawners/skeleton", 1), Pair.of("mobs/spawners/spider", 1)));
+        JigsawHelper.register("mobs/spawners/zombie", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/spawners/zombie", 1)));
+        JigsawHelper.register("mobs/spawners/skeleton", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/spawners/skeleton", 1)));
+        JigsawHelper.register("mobs/spawners/spider", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/special_spawners/spider", 1)));
+        JigsawHelper.register("mobs/special_spawners/zombie_or_skeleton", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("mobs/special_spawners/zombie", 1), Pair.of("mobs/special_spawners/skeleton", 1)));
     }
 }

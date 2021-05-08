@@ -3,25 +3,89 @@
   "pools": [
     {
       "rolls": {
-        "min": 2.0,
-        "max": 3.0,
-        "type": "minecraft:uniform"
+        "min": 2,
+        "max": 4
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 25,
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ],
           "name": "minecraft:lead"
         },
         {
           "type": "minecraft:item",
-          "weight": 20,
+          "weight": 15,
           "name": "minecraft:saddle"
         },
         {
           "type": "minecraft:item",
           "weight": 15,
           "name": "minecraft:golden_apple"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 3,
+                "max": 4
+              }
+            }
+          ],
+          "name": "minecraft:apple"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 18,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 3
+              }
+            }
+          ],
+          "name": "minecraft:cooked_beef"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 18,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 3
+              }
+            }
+          ],
+          "name": "minecraft:cooked_chicken"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 4
+              }
+            }
+          ],
+          "name": "minecraft:bread"
         },
         {
           "type": "minecraft:item",
@@ -36,6 +100,11 @@
         {
           "type": "minecraft:item",
           "weight": 5,
+          "name": "minecraft:iron_horse_armor"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
           "name": "minecraft:diamond_horse_armor"
         },
         {
@@ -52,9 +121,8 @@
     },
     {
       "rolls": {
-        "min": 3.0,
-        "max": 6.0,
-        "type": "minecraft:uniform"
+        "min": 1,
+        "max": 3
       },
       "entries": [
         {
@@ -64,9 +132,8 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2.0,
-                "max": 4.0,
-                "type": "minecraft:uniform"
+                "min": 2,
+                "max": 4
               }
             }
           ],
@@ -79,9 +146,8 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 1.0,
-                "max": 3.0,
-                "type": "minecraft:uniform"
+                "min": 1,
+                "max": 3
               }
             }
           ],
@@ -94,43 +160,39 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 6
+              }
+            }
+          ],
+          "name": "minecraft:charcoal"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
           "weight": 20,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2.0,
-                "max": 3.0,
-                "type": "minecraft:uniform"
+                "min": 4,
+                "max": 6
               }
             }
           ],
-          "name": "minecraft:apple"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 20,
-          "name": "minecraft:cooked_beef"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 20,
-          "name": "minecraft:cooked_chicken"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 5,
-          "name": "minecraft:water_bucket"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 10,
-          "name": "minecraft:compass"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 10,
-          "name": "minecraft:clock"
+          "name": "minecraft:wheat_seeds"
         },
         {
           "type": "minecraft:item",
@@ -139,24 +201,8 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2.0,
-                "max": 6.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:coal"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 10,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 4.0,
-                "type": "minecraft:uniform"
+                "min": 2,
+                "max": 6
               }
             }
           ],
@@ -164,14 +210,13 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 15,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2.0,
-                "max": 4.0,
-                "type": "minecraft:uniform"
+                "min": 2,
+                "max": 6
               }
             }
           ],
@@ -179,48 +224,17 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 15,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2.0,
-                "max": 4.0,
-                "type": "minecraft:uniform"
+                "min": 2,
+                "max": 6
               }
             }
           ],
           "name": "minecraft:beetroot_seeds"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 4.0,
-                "max": 6.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:wheat"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 4.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:arrow"
         }
       ]
     },
@@ -229,14 +243,87 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "name": "minecraft:compass"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:clock"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:water_bucket"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 0,
+        "max": 1
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:music_disc_cat"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:music_disc_blocks"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:music_disc_chirp"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:music_disc_far"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:music_disc_mall"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:music_disc_mellohi"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:music_disc_stal"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:music_disc_strad"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:music_disc_ward"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 7,
+          "name": "minecraft:music_disc_wait"
+        }
+      ]
+    },    
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 10,
+                "max": 15
               },
               "treasure": true
             }
@@ -245,14 +332,13 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 10,
+                "max": 15
               },
               "treasure": true
             }
@@ -261,19 +347,48 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 10.0,
-                "max": 15.0,
-                "type": "minecraft:uniform"
+                "min": 10,
+                "max": 15
               },
               "treasure": true
             }
           ],
-          "name": "minecraft:bow"
+          "name": "minecraft:iron_axe"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 10,
+                "max": 15
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:iron_shovel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 10,
+                "max": 15
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:iron_hoe"
         },
         {
           "type": "minecraft:item",
@@ -282,9 +397,8 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 10.0,
-                "max": 15.0,
-                "type": "minecraft:uniform"
+                "min": 20,
+                "max": 25
               },
               "treasure": true
             }
@@ -298,9 +412,8 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 5,
+                "max": 10
               },
               "treasure": true
             }

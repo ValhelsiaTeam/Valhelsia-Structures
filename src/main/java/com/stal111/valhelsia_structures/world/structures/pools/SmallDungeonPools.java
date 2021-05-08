@@ -15,10 +15,13 @@ import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
  */
 public class SmallDungeonPools {
 
-    public static final JigsawPattern PATTERN = JigsawHelper.register("dungeon1/entrances", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("dungeon1/entrance", 1), Pair.of("dungeon1/entrance1", 1)), true);
+    public static final JigsawPattern PATTERN = JigsawHelper.register("spawner_dungeon/entrances", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/entrance", 1)), true);
 
     public static void load() {
-        JigsawHelper.register("dungeon1/main_rooms", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("dungeon1/main_room", 1), Pair.of("dungeon1/main_room1", 1), Pair.of("dungeon1/main_room2", 1)), true, Processors.OBSIDIAN_REPLACEMENT_PROCESSOR);
-        JigsawHelper.register("dungeon1/side_rooms", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("dungeon1/side_room", 1), Pair.of("dungeon1/side_room1", 1)), true, Processors.OBSIDIAN_REPLACEMENT_PROCESSOR);
+        JigsawHelper.register("spawner_dungeon/main_rooms", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/main_room_1", 1), Pair.of("spawner_dungeon/main_room_2", 1), Pair.of("spawner_dungeon/main_room_3", 1)), true);
+        JigsawHelper.register("spawner_dungeon/side_rooms", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/side_room_1", 1), Pair.of("spawner_dungeon/side_room_2", 1)), true);
+        JigsawHelper.register("spawner_dungeon/spawner_rooms", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/zombie_spawner", 1), Pair.of("spawner_dungeon/skeleton_spawner", 1), Pair.of("spawner_dungeon/spider_spawner", 1)), true);
+        JigsawHelper.register("spawner_dungeon/stairs", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/stairs_1", 1), Pair.of("spawner_dungeon/stairs_2", 1)), true);
+        JigsawHelper.register("spawner_dungeon/passages", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/passage_1", 1), Pair.of("spawner_dungeon/passage_2", 1)), true);
     }
 }

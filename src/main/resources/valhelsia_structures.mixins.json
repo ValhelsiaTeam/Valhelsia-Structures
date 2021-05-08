@@ -13,6 +13,7 @@
     "FeatureMixin",
     "FlowingFluidMixin",
     "LakesFeatureMixin",
+    "PillagerEntityMixin",
     "SpreadableSnowyDirtBlockMixin",
     "TorchBlockMixin",
     "WallTorchBlockMixin"

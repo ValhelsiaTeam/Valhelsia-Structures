@@ -4,55 +4,45 @@
     {
       "rolls": {
         "min": 2,
-        "max": 4
+        "max": 3
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
-            }
-          ],
-          "name": "minecraft:glistering_melon_slice"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 12,
+          "weight": 15,
           "name": "minecraft:golden_apple"
         },
         {
           "type": "minecraft:item",
-          "weight": 1,
-          "name": "minecraft:enchanted_golden_apple"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 20,
-          "name": "minecraft:fermented_spider_eye"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
+          "weight": 17,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 3
+                "min": 3,
+                "max": 5
               }
             }
           ],
-          "name": "minecraft:blaze_powder"
+          "name": "minecraft:iron_ingot"
         },
         {
           "type": "minecraft:item",
-          "weight": 15,
+          "weight": 17,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 3,
+                "max": 6
+              }
+            }
+          ],
+          "name": "minecraft:gold_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -62,58 +52,63 @@
               }
             }
           ],
-          "name": "minecraft:magma_cream"
+          "name": "minecraft:diamond"
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
-          "name": "minecraft:ghast_tear"
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book"
         }
       ]
     },
     {
       "rolls": {
-        "min": 2,
-        "max": 4
+        "min": 1,
+        "max": 3
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 15,
+          "weight": 20,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2,
-                "max": 6
+                "min": 3,
+                "max": 5
               }
             }
           ],
-          "name": "minecraft:sugar"
+          "name": "minecraft:bone"
         },
         {
           "type": "minecraft:item",
-          "weight": 15,
+          "weight": 20,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 4
+                "min": 3,
+                "max": 5
               }
             }
           ],
-          "name": "minecraft:redstone"
+          "name": "minecraft:string"
         },
         {
           "type": "minecraft:item",
-          "weight": 15,
+          "weight": 20,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 2
+                "min": 3,
+                "max": 5
               }
             }
           ],
@@ -126,12 +121,12 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2,
-                "max": 5
+                "min": 4,
+                "max": 12
               }
             }
           ],
-          "name": "minecraft:glass_bottle"
+          "name": "minecraft:iron_nugget"
         },
         {
           "type": "minecraft:item",
@@ -140,62 +135,37 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 1,
-                "max": 2
+                "min": 4,
+                "max": 12
               }
             }
           ],
-          "name": "minecraft:mushroom_stew"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 3
-              }
-            }
-          ],
-          "name": "minecraft:melon_slice"
+          "name": "minecraft:gold_nugget"
         }
       ]
     },
     {
-      "rolls": {
-        "min": 1,
-        "max": 2
-      },
+      "rolls": 1, 
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 20,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 4
-              }
-            }
-          ],
-          "name": "minecraft:brown_mushroom"
+          "weight": 2,
+          "name": "minecraft:enchanted_golden_apple"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "minecraft:totem_of_undying"
         },
         {
           "type": "minecraft:item",
           "weight": 20,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1,
-                "max": 3
-              }
-            }
-          ],
-          "name": "minecraft:red_mushroom"
+          "name": "minecraft:compass"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "name": "minecraft:clock"
         }
       ]
     }

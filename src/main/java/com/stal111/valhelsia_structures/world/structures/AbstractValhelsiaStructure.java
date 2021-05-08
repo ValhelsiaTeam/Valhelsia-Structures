@@ -39,10 +39,9 @@ import java.util.Objects;
  * but can be overridden if needed.
  *
  * @author Valhelsia Team
- * @version 16.0.3
+ * @version 16.1.0
  * @since 2020-03-22
  */
-
 public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
     private final String name;
@@ -59,46 +58,39 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
     @Override
     protected boolean func_230363_a_(ChunkGenerator generator, BiomeProvider provider, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, Biome biome, ChunkPos pos, VillageConfig config) {
-        if (isSurfaceFlat(generator, chunkX, chunkZ)) {
+        if (this.checkSurface() && !this.isSurfaceFlat(generator, chunkX, chunkZ)) {
+            return false;
+        }
 
-            // Check the entire size of the structure to see if it's all a viable biome
-            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16 / 2)) {
-                if (!biome1.getGenerationSettings().hasStructure(this)) {
+        // Check the entire size of the structure to see if it's all a viable biome & check for blacklisted biomes
+        for (Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16 / 2)) {
+            if (biome1.getRegistryName() != null) {
+                if (!biome1.getGenerationSettings().hasStructure(this) || StructureGenConfig.BLACKLISTED_BIOMES.get().contains(Objects.requireNonNull(biome1.getRegistryName()).toString())) {
                     return false;
                 }
             }
-
-            // Check the entire size of the structure for Blacklisted Biomes
-            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16 / 2)) {
-                if (biome1.getRegistryName() != null) {
-                    if (StructureGenConfig.BLACKLISTED_BIOMES.get().contains(Objects.requireNonNull(biome1.getRegistryName()).toString())) {
-                        return false;
-                    }
-                }
-            }
-
-            int i = chunkX >> 4;
-            int j = chunkZ >> 4;
-            rand.setSeed((long) (i ^ j << 4) ^ seed);
-            rand.nextInt();
-
-            // Check for other structures
-            List<Structure<?>> structures = new ArrayList<>(ModStructures.STRUCTURES_MAP.get(getStructureType()));
-
-            if (getStructureType() == StructureType.SURFACE) {
-                structures.add(Structure.VILLAGE);
-            } else if (getStructureType() == StructureType.UNDERGROUND) {
-                structures.addAll(Arrays.asList(Structure.MINESHAFT, Structure.STRONGHOLD));
-            }
-
-            if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkX, chunkZ, structures)) {
-                return false;
-            }
-
-            return rand.nextDouble() < getSpawnChance();
         }
 
-        return false;
+        int i = chunkX >> 4;
+        int j = chunkZ >> 4;
+        rand.setSeed((long) (i ^ j << 4) ^ seed);
+        rand.nextInt();
+
+        // Check for other structures
+        List<Structure<?>> structures = new ArrayList<>(ModStructures.STRUCTURES_MAP.get(getStructureType()));
+
+        if (getStructureType() == StructureType.SURFACE) {
+            structures.add(Structure.VILLAGE);
+        } else if (getStructureType() == StructureType.UNDERGROUND) {
+            structures.addAll(Arrays.asList(Structure.MINESHAFT, Structure.STRONGHOLD));
+        }
+
+        if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkX, chunkZ, structures)) {
+            return false;
+        }
+
+        return rand.nextDouble() < getSpawnChance();
+
     }
 
     @Override
@@ -155,6 +147,10 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
     }
 
     public abstract StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature();
+
+    public boolean checkSurface() {
+        return true;
+    }
 
     @Nullable
     @Override

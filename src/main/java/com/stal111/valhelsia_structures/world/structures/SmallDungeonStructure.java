@@ -50,4 +50,9 @@ public class SmallDungeonStructure extends AbstractValhelsiaStructure {
     protected int getGenerationHeight() {
         return 20;
     }
+
+    @Override
+    public boolean checkSurface() {
+        return false;
+    }
 }
