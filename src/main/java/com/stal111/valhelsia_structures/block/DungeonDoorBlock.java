@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.tileentity.DungeonDoorTileEntity;
 import net.minecraft.block.*;
+import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -32,7 +33,6 @@ import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Dungeon Door Block
@@ -65,16 +65,16 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
 
     @Override
     public boolean hasTileEntity(BlockState state) {
-        return true;
+        return state.get(PART) == DungeonDoorPart.MIDDLE_1;
     }
 
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
         VoxelShape shape = state.get(OPEN) ? SHAPE_OPEN : SHAPE;
-        if (state.get(OPEN) && state.get(PART).getString().contains("right")) {
+        if (state.get(OPEN) && state.get(PART).isRight()) {
             shape = VoxelShapeHelper.add(-12.0D, 0.0D, 0.0D, -12.0D, 0.0D, 0.0D, shape);
         }
-        return state.get(OPEN) && state.get(PART).getString().contains("middle") ? VoxelShapes.empty() : VoxelShapeHelper.rotateShapeDirection(shape, state.get(FACING));
+        return state.get(OPEN) && state.get(PART).isMiddle() ? VoxelShapes.empty() : VoxelShapeHelper.rotateShapeDirection(shape, state.get(FACING));
     }
 
     @Override
@@ -87,11 +87,10 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         BlockPos pos = context.getPos();
 
-        if (pos.getY() > 253 || !canPlace(context)) {
+        if (!canPlace(context)) {
             return null;
         }
 
-        boolean canPlace = true;
         for (Position position : Position.values()) {
             for (int i = 0; i < 4; i++) {
                 BlockPos pos1 = pos.up(i);
@@ -99,17 +98,14 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
                     pos1 = pos1.offset(Direction.fromAngle(context.getPlacementHorizontalFacing().getOpposite().getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
                 }
                 if (!context.getWorld().getBlockState(pos1).isReplaceable(context)) {
-                    canPlace = false;
+                    return null;
                 }
             }
         }
-        if (canPlace) {
-            FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
-            boolean flag = fluidstate.getFluid() == Fluids.WATER;
-            return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, flag);
-        }
+        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
+        boolean flag = fluidstate.getFluid() == Fluids.WATER;
 
-        return null;
+        return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, flag);
     }
 
     @Override
@@ -135,17 +131,12 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
                     pos1 = pos1.offset(Direction.fromAngle(state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
                 }
                 if (pos1 != pos) {
-                    DungeonDoorPart dungeonDoorPart = DungeonDoorPart.valueOf(position + "_" + (i + 1));
+                    DungeonDoorPart part = DungeonDoorPart.valueOf(position + "_" + (i + 1));
 
                     FluidState fluidstate = world.getFluidState(pos1);
                     boolean flag = fluidstate.getFluid() == Fluids.WATER;
 
-                    world.setBlockState(pos1, state.with(PART, dungeonDoorPart).with(WATERLOGGED, flag), 3);
-                }
-                DungeonDoorTileEntity dungeonDoorTileEntity = ((DungeonDoorTileEntity) world.getTileEntity(pos1));
-
-                if (dungeonDoorTileEntity != null) {
-                    dungeonDoorTileEntity.setMainBlock(pos);
+                    world.setBlockState(pos1, state.with(PART, part).with(WATERLOGGED, flag), 3);
                 }
             }
         }
@@ -158,12 +149,12 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         Map<BlockPos, BlockState> map = new HashMap<>();
         boolean canOpen = true;
 
-        DungeonDoorTileEntity tileEntity = (DungeonDoorTileEntity) world.getTileEntity(((DungeonDoorTileEntity) world.getTileEntity(pos)).getMainBlock());
+        BlockPos mainPos = this.getMainBlock(pos, state);
 
         if (!world.isRemote()) {
             for (Position position : Position.values()) {
                 for (int k = 0; k < 4; k++) {
-                    BlockPos pos1 = Objects.requireNonNull(tileEntity).getMainBlock().up(k);
+                    BlockPos pos1 = mainPos.up(k);
                     if (position != Position.MIDDLE) {
                         pos1 = pos1.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
 
@@ -206,7 +197,7 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
 
         if (state.get(PART).isBottom()) {
             return stateDown.isSolidSide(world, posDown, Direction.UP);
-        } else if (state.get(PART).getString().contains("3") && !world.getBlockState(pos.up()).isIn(this)) {
+        } else if (state.get(PART).getString().endsWith("3") && !world.getBlockState(pos.up()).isIn(this)) {
             return false;
         }
         return stateDown.isIn(this);
@@ -226,7 +217,7 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         World world = context.getWorld();
         BlockPos pos = context.getPos();
 
-        if (pos.getY() > 253) {
+        if (pos.getY() > context.getWorld().getHeight() - 4) {
             return false;
         }
 
@@ -243,11 +234,11 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
     }
 
     private void breakDoor(World world, BlockPos pos, BlockState state, @Nullable PlayerEntity player) {
-        DungeonDoorTileEntity tileEntity = (DungeonDoorTileEntity) world.getTileEntity(pos);
+        BlockPos mainPos = this.getMainBlock(pos, state);
 
         for (Position position : Position.values()) {
             for (int k = 0; k < 4; k++) {
-                BlockPos pos1 = Objects.requireNonNull(tileEntity).getMainBlock().up(k);
+                BlockPos pos1 = mainPos.up(k);
                 if (position != Position.MIDDLE) {
                     pos1 = pos1.offset(Direction.fromAngle(state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
 
@@ -268,6 +259,21 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
                 }
             }
         }
+    }
+
+    @Override
+    public PushReaction getPushReaction(BlockState state) {
+        return PushReaction.BLOCK;
+    }
+
+    private BlockPos getMainBlock(BlockPos pos, BlockState state) {
+        DungeonDoorPart part = state.get(PART);
+
+        if (!part.isMiddle()) {
+            pos = pos.offset(Direction.fromAngle(state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + Position.getPositionFromPart(part).getDirection().getHorizontalAngle()).getOpposite());
+        }
+
+        return pos.down(Integer.parseInt(String.valueOf(part.getString().charAt(part.getString().length() - 1))) - 1);
     }
 
     @Override
@@ -293,6 +299,10 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
 
         public Direction getDirection() {
             return direction;
+        }
+
+        public static Position getPositionFromPart(DungeonDoorPart part) {
+            return part.isLeft() ? Position.LEFT : part.isRight() ? Position.RIGHT : Position.MIDDLE;
         }
     }
 }
