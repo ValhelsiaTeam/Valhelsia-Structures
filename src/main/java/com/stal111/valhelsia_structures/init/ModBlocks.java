@@ -10,6 +10,7 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.valhelsia.valhelsia_core.registry.block.BlockRegistryHelper;
@@ -83,8 +84,8 @@ public class ModBlocks {
     public static final RegistryObject<DousedWallTorchBlock> DOUSED_WALL_TORCH = HELPER.registerNoItem("doused_wall_torch", new DousedWallTorchBlock((TorchBlock) Blocks.WALL_TORCH, AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance()), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<DousedTorchBlock> DOUSED_SOUL_TORCH = HELPER.registerNoItem("doused_soul_torch", new DousedTorchBlock((TorchBlock) Blocks.SOUL_TORCH, AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance()), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<DousedWallTorchBlock> DOUSED_SOUL_WALL_TORCH = HELPER.registerNoItem("doused_soul_wall_torch", new DousedWallTorchBlock((TorchBlock) Blocks.SOUL_WALL_TORCH, AbstractBlock.Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().zeroHardnessAndResistance()), ValhelsiaRenderType.CUTOUT);
-    public static final RegistryObject<DungeonDoorBlock> DUNGEON_DOOR = HELPER.register("dungeon_door", new DungeonDoorBlock(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(5.0F, 100.0F).setRequiresTool().notSolid()));
-    public static final RegistryObject<DungeonDoorLeafBlock> DUNGEON_DOOR_LEAF = HELPER.registerNoItem("dungeon_door_leaf", new DungeonDoorLeafBlock(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(5.0F, 100.0F).setRequiresTool().notSolid().lootFrom(ModBlocks.DUNGEON_DOOR)));
+    public static final RegistryObject<DungeonDoorBlock> DUNGEON_DOOR = HELPER.register("dungeon_door", new DungeonDoorBlock(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(50.0F, 100.0F).setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(3).notSolid()));
+    public static final RegistryObject<DungeonDoorLeafBlock> DUNGEON_DOOR_LEAF = HELPER.registerNoItem("dungeon_door_leaf", new DungeonDoorLeafBlock(AbstractBlock.Properties.create(Material.IRON).hardnessAndResistance(50.0F, 100.0F).setRequiresTool().harvestTool(ToolType.PICKAXE).harvestLevel(3).notSolid().lootFrom(ModBlocks.DUNGEON_DOOR)));
     public static final RegistryObject<BonePileBlock> BONE_PILE = HELPER.register("bone_pile", new BonePileBlock(AbstractBlock.Properties.from(Blocks.BONE_BLOCK).notSolid()), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<Block> BONE_PILE_BLOCK = HELPER.register("bone_pile_block", new Block(AbstractBlock.Properties.from(Blocks.BONE_BLOCK)));
 
