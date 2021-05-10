@@ -200,6 +200,7 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         } else if (state.get(PART).getString().endsWith("3") && !world.getBlockState(pos.up()).isIn(this)) {
             return false;
         }
+
         return stateDown.isIn(this);
     }
 
@@ -234,7 +235,11 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
     }
 
     private void breakDoor(World world, BlockPos pos, BlockState state, @Nullable PlayerEntity player) {
-        BlockPos mainPos = this.getMainBlock(pos, state);
+        BlockPos mainPos = getMainBlock(pos, state);
+
+        if (world.isRemote() || (player != null && !player.abilities.isCreativeMode)) {
+            return;
+        }
 
         for (Position position : Position.values()) {
             for (int k = 0; k < 4; k++) {
@@ -247,14 +252,14 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
                         BlockState state1 = world.getBlockState(pos2);
 
                         if (state1.getBlock() == ModBlocks.DUNGEON_DOOR_LEAF.get()) {
-                            world.playEvent(player, 2001, pos2, Block.getStateId(world.getBlockState(pos2)));
-                            world.setBlockState(pos2, world.getBlockState(pos2).get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 35);
+                            world.playEvent(player, 2001, pos2, Block.getStateId(state1));
+                            world.setBlockState(pos2, state1.get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 35);
                         }
                     }
                 }
                 BlockState state1 = world.getBlockState(pos1);
                 if (state1.getBlock() == ModBlocks.DUNGEON_DOOR.get()) {
-                    world.playEvent(player, 2001, pos1, Block.getStateId(world.getBlockState(pos1)));
+                    world.playEvent(player, 2001, pos1, Block.getStateId(state1));
                     world.setBlockState(pos1, state1.get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 35);
                 }
             }

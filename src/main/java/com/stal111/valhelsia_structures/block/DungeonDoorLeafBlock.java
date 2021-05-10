@@ -89,11 +89,12 @@ public class DungeonDoorLeafBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public void onPlayerDestroy(IWorld world, BlockPos pos, BlockState state) {
         BlockPos offsetPos = pos.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle()).getOpposite());
         BlockState offsetState = world.getBlockState(offsetPos);
 
-        offsetState.getBlock().onBlockHarvested(world, offsetPos, offsetState, player);
+        world.playEvent(null, 2001, offsetPos, Block.getStateId(offsetState));
+        world.setBlockState(offsetPos, offsetState.get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 35);
     }
 
     @Override
