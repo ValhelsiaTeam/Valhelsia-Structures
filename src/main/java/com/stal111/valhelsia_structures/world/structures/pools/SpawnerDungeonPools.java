@@ -7,13 +7,13 @@ import com.stal111.valhelsia_structures.world.template.Processors;
 import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
 
 /**
- * Small Dungeon Pools
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.pools.SmallDungeonPieces
+ * Spawner Dungeon Pools
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.pools.SpawnerDungeonPieces
  *
  * @author Valhelsia Team
  * @version 16.0.5
  */
-public class SmallDungeonPools {
+public class SpawnerDungeonPools {
 
     public static final JigsawPattern PATTERN = JigsawHelper.register("spawner_dungeon/entrances", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/entrance", 1)), true);
 

@@ -9,18 +9,18 @@ import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 
 /**
- * Small Dungeon Structure
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.SmallDungeonStructure
+ * Spawner Dungeon Structure
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.SpawnerDungeonStructure
  *
  * @author Valhelsia Team
- * @version 16.0.3
+ * @version 16.1.0
  * @since 2020-05-27
  */
 
-public class SmallDungeonStructure extends AbstractValhelsiaStructure {
+public class SpawnerDungeonStructure extends AbstractValhelsiaStructure {
 
-    public SmallDungeonStructure(Codec<VillageConfig> villageConfigCodec) {
-        super(villageConfigCodec, "small_dungeon", 3,
+    public SpawnerDungeonStructure(Codec<VillageConfig> villageConfigCodec) {
+        super(villageConfigCodec, "spawner_dungeon", 3,
                 new StructureConfigEntry(0.7D, 30, 8,
                         Biome.Category.PLAINS.getName(),
                         Biome.Category.FOREST.getName(),
@@ -43,7 +43,7 @@ public class SmallDungeonStructure extends AbstractValhelsiaStructure {
 
     @Override
     public StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature() {
-        return ModStructureFeatures.SMALL_DUNGEON;
+        return ModStructureFeatures.SPAWNER_DUNGEON;
     }
 
     @Override
