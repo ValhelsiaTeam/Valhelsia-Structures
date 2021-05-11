@@ -34,20 +34,22 @@ public class AxeCraftingRecipeMaker {
         List<ShapelessRecipe> recipes = new ArrayList<>();
         String group = ValhelsiaStructures.MOD_ID + ".post";
 
-        Minecraft.getInstance().world.getRecipeManager().getRecipesForType(IRecipeType.CRAFTING).forEach(iCraftingRecipe -> {
-            if (iCraftingRecipe instanceof AxeCraftingRecipe) {
-                AxeCraftingRecipe axeCraftingRecipe = (AxeCraftingRecipe) iCraftingRecipe;
+        if (Minecraft.getInstance().world != null) {
+            Minecraft.getInstance().world.getRecipeManager().getRecipesForType(IRecipeType.CRAFTING).forEach(iCraftingRecipe -> {
+                if (iCraftingRecipe instanceof AxeCraftingRecipe) {
+                    AxeCraftingRecipe axeCraftingRecipe = (AxeCraftingRecipe) iCraftingRecipe;
 
-                Ingredient axeIngredient = Ingredient.fromItemListStream(convertItemListToItemStackList(ForgeRegistries.ITEMS.getValues()).stream().filter(stack -> stack.getItem() instanceof AxeItem && !ModTags.Items.AXE_CRAFTING_BLACKLISTED.contains(stack.getItem())).map(stack -> new StackList(Collections.singleton(stack))));
+                    Ingredient axeIngredient = Ingredient.fromItemListStream(convertItemListToItemStackList(ForgeRegistries.ITEMS.getValues()).stream().filter(stack -> stack.getItem() instanceof AxeItem && !ModTags.Items.AXE_CRAFTING_BLACKLISTED.contains(stack.getItem())).map(stack -> new StackList(Collections.singleton(stack))));
 
-                ItemStack output = axeCraftingRecipe.getOutput();
-                ResourceLocation id = new ResourceLocation(ValhelsiaStructures.MOD_ID, "jei.axe_crafting." + output.getTranslationKey());
+                    ItemStack output = axeCraftingRecipe.getOutput();
+                    ResourceLocation id = new ResourceLocation(ValhelsiaStructures.MOD_ID, "jei.axe_crafting." + output.getTranslationKey());
 
-                ShapelessRecipe recipe = new ShapelessRecipe(id, group, output, NonNullList.from(Ingredient.EMPTY, axeIngredient, axeCraftingRecipe.getInput()));
+                    ShapelessRecipe recipe = new ShapelessRecipe(id, group, output, NonNullList.from(Ingredient.EMPTY, axeIngredient, axeCraftingRecipe.getInput()));
 
-                recipes.add(recipe);
-            }
-        });
+                    recipes.add(recipe);
+                }
+            });
+        }
 
         return recipes;
     }
