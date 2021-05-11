@@ -22,7 +22,7 @@ public class CommonSetup {
             FlammableRegistry.register();
             CompostableRegistry.register();
 
-            GlobalEntityTypeAttributes.put(ModEntities.MOSSY_SKELETON.get(), AbstractSkeletonEntity.registerAttributes().create());
+            //GlobalEntityTypeAttributes.put(ModEntities.MOSSY_SKELETON.get(), AbstractSkeletonEntity.registerAttributes().create());
         });
     }
 }
