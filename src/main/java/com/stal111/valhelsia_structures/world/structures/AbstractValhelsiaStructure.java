@@ -49,15 +49,15 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
     private final StructureConfigEntry structureConfigEntry;
 
-    public AbstractValhelsiaStructure(Codec<VillageConfig> configCoded, String name, int size, StructureConfigEntry structureConfigEntry) {
-        super(configCoded, 0, true, true);
+    public AbstractValhelsiaStructure(Codec<VillageConfig> codec, String name, int size, StructureConfigEntry structureConfigEntry) {
+        super(codec, 0, true, true);
         this.name = name;
         this.size = size;
         this.structureConfigEntry = structureConfigEntry;
     }
 
     @Override
-    protected boolean func_230363_a_(ChunkGenerator generator, BiomeProvider provider, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, Biome biome, ChunkPos pos, VillageConfig config) {
+    protected boolean func_230363_a_(@Nonnull ChunkGenerator generator, @Nonnull BiomeProvider provider, long seed, @Nonnull SharedSeedRandom rand, int chunkX, int chunkZ, @Nonnull Biome biome, @Nonnull ChunkPos pos, @Nonnull VillageConfig config) {
         if (this.checkSurface() && !this.isSurfaceFlat(generator, chunkX, chunkZ)) {
             return false;
         }
@@ -154,36 +154,44 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
     @Nullable
     @Override
-    public BlockPos func_236388_a_(IWorldReader world, StructureManager structureManager, BlockPos startPos, int searchRadius, boolean skipExistingChunks, long seed, StructureSeparationSettings settings) {
+    public BlockPos func_236388_a_(@Nonnull IWorldReader world, @Nonnull StructureManager structureManager, @Nonnull BlockPos startPos, int searchRadius, boolean skipExistingChunks, long seed, @Nonnull StructureSeparationSettings settings) {
         return super.func_236388_a_(world, structureManager, startPos, searchRadius, skipExistingChunks, seed, new StructureSeparationSettings(this.getSpacing(), this.getSeparation(), this.getSeedModifier()));
     }
 
-    public Structure.IStartFactory<VillageConfig> getStartFactory() {
-        return (p_242778_1_, p_242778_2_, p_242778_3_, p_242778_4_, p_242778_5_, p_242778_6_) -> new Start(this, p_242778_2_, p_242778_3_, p_242778_4_, p_242778_5_, p_242778_6_, getGenerationHeight());
+    //public Structure.IStartFactory<VillageConfig> getStartFactory() {
+    //    return (p_242778_1_, p_242778_2_, p_242778_3_, p_242778_4_, p_242778_5_, p_242778_6_) -> new Start(this, p_242778_2_, p_242778_3_, p_242778_4_, p_242778_5_, p_242778_6_, getGenerationHeight());
+    //}
+
+    @Override
+    @Nonnull
+    public IStartFactory<VillageConfig> getStartFactory() {
+        return AbstractValhelsiaStructure.Start::new;
     }
+
 
     protected int getGenerationHeight() {
         return -1;
     }
 
-    public static class Start extends MarginedStructureStart<VillageConfig> {
-        private final AbstractValhelsiaStructure structure;
+    public static class Start extends StructureStart<VillageConfig> {
+        private final Structure<VillageConfig> structure;
         private final int height;
 
-        public Start(AbstractValhelsiaStructure structure, int p_i241979_2_, int p_i241979_3_, MutableBoundingBox boundingBox, int p_i241979_5_, long p_i241979_6_) {
-            this(structure, p_i241979_2_, p_i241979_3_, boundingBox, p_i241979_5_, p_i241979_6_, -1);
+        public Start(Structure<VillageConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox, int reference, long seed) {
+            this(structure, chunkX, chunkZ, boundingBox, reference, seed, -1);
         }
 
-        public Start(AbstractValhelsiaStructure structure, int p_i241979_2_, int p_i241979_3_, MutableBoundingBox boundingBox, int p_i241979_5_, long p_i241979_6_, int height) {
-            super(structure, p_i241979_2_, p_i241979_3_, boundingBox, p_i241979_5_, p_i241979_6_);
+        public Start(Structure<VillageConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox, int reference, long seed, int height) {
+            super(structure, chunkX, chunkZ, boundingBox, reference, seed);
             this.structure = structure;
             this.height = height;
         }
 
         @Override
-        public void func_230364_a_(DynamicRegistries registries, ChunkGenerator generator, TemplateManager manager, int p_230364_4_, int p_230364_5_, Biome biome, VillageConfig villageConfig) {
-            BlockPos blockpos = new BlockPos(p_230364_4_ * 16, 0, p_230364_5_ * 16);
-            JigsawManager.func_242837_a(registries, villageConfig, AbstractVillagePiece::new, generator, manager, blockpos, this.components, this.rand, true, true);
+        public void func_230364_a_(@Nonnull DynamicRegistries registries, @Nonnull ChunkGenerator generator, @Nonnull TemplateManager manager, int chunkX, int chunkZ, @Nonnull Biome biome, @Nonnull VillageConfig villageConfig) {
+            BlockPos blockpos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
+
+            JigsawManager.func_242837_a(registries, villageConfig, AbstractVillagePiece::new, generator, manager, blockpos, this.components, this.rand, false, true);
             this.recalculateStructureSize();
 
             if (height != -1) {
