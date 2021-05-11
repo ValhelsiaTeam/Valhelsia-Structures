@@ -6,19 +6,30 @@ import com.stal111.valhelsia_structures.init.ModTileEntities;
 import com.stal111.valhelsia_structures.utils.SpecialWeightedSpawnerEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+/**
+ * Special Spawner Tile Entity
+ * Valhelsia Structures - com.stal111.valhelsia_structures.tileentity.SpecialMobSpawnerTileEntity
+ *
+ * @author Valhelsia Team
+ * @version 16.1.0
+ */
 public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickableTileEntity {
 
     private final SpecialAbstractSpawner spawnerLogic = new SpecialAbstractSpawner() {
         public void broadcastEvent(int id) {
-            SpecialMobSpawnerTileEntity.this.world.addBlockEvent(SpecialMobSpawnerTileEntity.this.pos, ModBlocks.SPECIAL_SPAWNER.get(), id, 0);
+            if (SpecialMobSpawnerTileEntity.this.world != null){
+                SpecialMobSpawnerTileEntity.this.world.addBlockEvent(SpecialMobSpawnerTileEntity.this.pos, ModBlocks.SPECIAL_SPAWNER.get(), id, 0);
+            }
         }
 
         @Override
@@ -38,7 +49,6 @@ public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickable
                 BlockState blockstate = this.getWorld().getBlockState(this.getSpawnerPosition());
                 this.getWorld().notifyBlockUpdate(SpecialMobSpawnerTileEntity.this.pos, blockstate, blockstate, 4);
             }
-
         }
     };
 
@@ -47,16 +57,16 @@ public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickable
     }
 
     @Override
-    public void read(BlockState state ,CompoundNBT compound) {
+    public void read(@Nonnull BlockState state, @Nonnull CompoundNBT compound) {
         super.read(state, compound);
         this.spawnerLogic.read(compound);
     }
 
+    @Nonnull
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT write(@Nonnull CompoundNBT compound) {
         super.write(compound);
-        this.spawnerLogic.write(compound);
-        return compound;
+        return spawnerLogic.write(compound);
     }
 
     @Override
@@ -64,20 +74,25 @@ public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickable
         this.spawnerLogic.tick();
     }
 
-    /**
-     * Retrieves packet to send to the client whenever this Tile Entity is resynced via World.notifyBlockUpdate. For
-     * modded TE's, this packet comes back to you clientside in {@link #onDataPacket}
-     */
     @Nullable
+    @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 1, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
     }
 
+    @Nonnull
     @Override
     public CompoundNBT getUpdateTag() {
         CompoundNBT compoundnbt = this.write(new CompoundNBT());
         compoundnbt.remove("SpawnPotentials");
         return compoundnbt;
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet) {
+        if (this.world != null) {
+            this.read(this.world.getBlockState(packet.getPos()), packet.getNbtCompound());
+        }
     }
 
     @Override
