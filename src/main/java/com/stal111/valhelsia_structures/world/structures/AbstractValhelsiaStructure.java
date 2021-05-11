@@ -158,18 +158,13 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
         return super.func_236388_a_(world, structureManager, startPos, searchRadius, skipExistingChunks, seed, new StructureSeparationSettings(this.getSpacing(), this.getSeparation(), this.getSeedModifier()));
     }
 
-    //public Structure.IStartFactory<VillageConfig> getStartFactory() {
-    //    return (p_242778_1_, p_242778_2_, p_242778_3_, p_242778_4_, p_242778_5_, p_242778_6_) -> new Start(this, p_242778_2_, p_242778_3_, p_242778_4_, p_242778_5_, p_242778_6_, getGenerationHeight());
-    //}
-
     @Override
     @Nonnull
     public IStartFactory<VillageConfig> getStartFactory() {
         return AbstractValhelsiaStructure.Start::new;
     }
 
-
-    protected int getGenerationHeight() {
+    public int getGenerationHeight() {
         return -1;
     }
 
@@ -178,7 +173,7 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
         private final int height;
 
         public Start(Structure<VillageConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox, int reference, long seed) {
-            this(structure, chunkX, chunkZ, boundingBox, reference, seed, -1);
+            this(structure, chunkX, chunkZ, boundingBox, reference, seed, ((AbstractValhelsiaStructure) structure).getGenerationHeight());
         }
 
         public Start(Structure<VillageConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox, int reference, long seed, int height) {
