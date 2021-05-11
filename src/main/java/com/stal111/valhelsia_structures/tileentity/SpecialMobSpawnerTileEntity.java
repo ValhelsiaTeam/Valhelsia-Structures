@@ -3,13 +3,13 @@ package com.stal111.valhelsia_structures.tileentity;
 import com.stal111.valhelsia_structures.block.SpecialAbstractSpawner;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
-import com.stal111.valhelsia_structures.utils.SpecialWeightedSpawnerEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.WeightedSpawnerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -43,7 +43,7 @@ public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickable
         }
 
         @Override
-        public void setNextSpawnData(SpecialWeightedSpawnerEntity nextSpawnData) {
+        public void setNextSpawnData(WeightedSpawnerEntity nextSpawnData) {
             super.setNextSpawnData(nextSpawnData);
             if (this.getWorld() != null) {
                 BlockState blockstate = this.getWorld().getBlockState(this.getSpawnerPosition());
