@@ -7,6 +7,8 @@ import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
+
 /**
  * Valhelsia Structures JEI Plugin
  * Valhelsia Structures - com.stal111.valhelsia_structures.integration.ValhelsiaStructuresJEIPlugin
@@ -21,6 +23,7 @@ public class ValhelsiaStructuresJEIPlugin implements IModPlugin {
     private static final ResourceLocation ID = new ResourceLocation(ValhelsiaStructures.MOD_ID, "main");
 
     @Override
+    @Nonnull
     public ResourceLocation getPluginUid() {
         return ID;
     }
