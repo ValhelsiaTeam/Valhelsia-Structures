@@ -55,4 +55,9 @@ public class SpawnerDungeonStructure extends AbstractValhelsiaStructure {
     public boolean checkSurface() {
         return false;
     }
+
+    @Override
+    public boolean hasMargin() {
+        return false;
+    }
 }

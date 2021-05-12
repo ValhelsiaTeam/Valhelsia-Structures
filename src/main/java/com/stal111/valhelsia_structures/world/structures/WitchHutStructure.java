@@ -21,7 +21,6 @@ import java.util.List;
  * @version 16.1.0
  * @since 2021-04-23
  */
-
 public class WitchHutStructure extends AbstractValhelsiaStructure {
 
     private static final List<MobSpawnInfo.Spawners> MONSTER_SPAWN_LIST = ImmutableList.of(new MobSpawnInfo.Spawners(EntityType.WITCH, 100, 1, 1));
@@ -50,5 +49,10 @@ public class WitchHutStructure extends AbstractValhelsiaStructure {
     @Override
     public List<MobSpawnInfo.Spawners> getDefaultCreatureSpawnList() {
         return CREATURE_SPAWN_LIST;
+    }
+
+    @Override
+    public boolean hasMargin() {
+        return false;
     }
 }
