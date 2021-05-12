@@ -7,6 +7,7 @@ import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
+import com.stal111.valhelsia_structures.world.structures.start.ValhelsiaStructureStart;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -158,6 +159,14 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
         return super.func_236388_a_(world, structureManager, startPos, searchRadius, skipExistingChunks, seed, new StructureSeparationSettings(this.getSpacing(), this.getSeparation(), this.getSeedModifier()));
     }
 
+    public boolean hasMargin() {
+        return true;
+    }
+
+    public int getMargin() {
+        return 12;
+    }
+
     @Override
     @Nonnull
     public IStartFactory<VillageConfig> getStartFactory() {
@@ -168,7 +177,7 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
         return -1;
     }
 
-    public static class Start extends StructureStart<VillageConfig> {
+    public static class Start extends ValhelsiaStructureStart<VillageConfig> {
         private final Structure<VillageConfig> structure;
         private final int height;
 
