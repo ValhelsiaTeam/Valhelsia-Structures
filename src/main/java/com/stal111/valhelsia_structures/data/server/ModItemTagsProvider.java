@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
+import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraftforge.common.Tags;
@@ -50,5 +51,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.copy(BlockTags.FLOWERS, ItemTags.FLOWERS);
 
         this.copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS);
+
+        this.getOrCreateBuilder(ModTags.Items.JAR_BLACKLISTED).add(Items.CACTUS, Items.CRIMSON_ROOTS, Items.WARPED_ROOTS);
     }
 }

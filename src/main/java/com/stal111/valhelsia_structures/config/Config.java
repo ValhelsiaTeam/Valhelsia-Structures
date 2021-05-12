@@ -25,7 +25,6 @@ public class Config {
 
     static {
         StructureGenConfig.init(COMMON_BUILDER, CLIENT_BUILDER);
-        BlockConfig.init(COMMON_BUILDER, CLIENT_BUILDER);
 
         COMMON_CONFIG = COMMON_BUILDER.build();
         CLIENT_CONFIG = CLIENT_BUILDER.build();

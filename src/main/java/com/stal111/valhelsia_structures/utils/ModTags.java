@@ -34,6 +34,7 @@ public class ModTags {
         public static final ITag.INamedTag<Item> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
         public static final ITag.INamedTag<Item> COLORED_JARS = modTag("colored_jars");
         public static final ITag.INamedTag<Item> JARS = modTag("jars");
+        public static final ITag.INamedTag<Item> JAR_BLACKLISTED = modTag("jar_blacklisted");
         public static final ITag.INamedTag<Item> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
 
         public static final ITag.INamedTag<Item> AXE_CRAFTING_BLACKLISTED = modTag( "axe_crafting_blacklisted");
