@@ -1,6 +1,8 @@
 package com.stal111.valhelsia_structures.tileentity;
 
 import com.stal111.valhelsia_structures.init.ModTileEntities;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.ITickableTileEntity;
@@ -8,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -48,6 +51,19 @@ public class DungeonDoorTileEntity extends TileEntity implements ITickableTileEn
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
         return new SUpdateTileEntityPacket(this.pos, 16, this.getUpdateTag());
+    }
+
+    @Nonnull
+    @Override
+    public CompoundNBT getUpdateTag() {
+        return this.write(new CompoundNBT());
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet) {
+        if (this.world != null) {
+            this.read(this.world.getBlockState(packet.getPos()), packet.getNbtCompound());
+        }
     }
 
     @Override

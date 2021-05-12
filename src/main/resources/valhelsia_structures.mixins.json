@@ -9,7 +9,6 @@
     "BlockModelRendererMixin",
     "BucketItemMixin",
     "CatEntityMixin",
-    "ClientPlayNetHandlerMixin",
     "FeatureMixin",
     "FlowingFluidMixin",
     "LakesFeatureMixin",
