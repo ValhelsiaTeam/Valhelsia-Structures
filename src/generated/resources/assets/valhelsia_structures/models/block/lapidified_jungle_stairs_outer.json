@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "side": "valhelsia_structures:block/lapidified_jungle_planks",
-    "bottom": "valhelsia_structures:block/lapidified_jungle_planks",
-    "top": "valhelsia_structures:block/lapidified_jungle_planks"
-  }
-}

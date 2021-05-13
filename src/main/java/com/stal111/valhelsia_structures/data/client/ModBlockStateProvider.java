@@ -33,7 +33,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         getRemainingBlocks().removeIf(block -> block.get().getRegistryName().toString().contains("lapidified_jungle_post"));
-        getRemainingBlocks().remove(ModBlocks.JUNGLE_HEAD);
+       // getRemainingBlocks().remove(ModBlocks.JUNGLE_HEAD);
 
         forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
         forEach(block -> block instanceof PostBlock, this::postBlock);
@@ -43,17 +43,17 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         take(this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);
         forEach(block -> block instanceof JarBlock, this::jarBlock);
         forEach(block -> block instanceof BigJarBlock, this::bigJarBlock);
-        take( block -> logBlock((RotatedPillarBlock) block), ModBlocks.LAPIDIFIED_JUNGLE_LOG);
-        take(block -> axisBlock((RotatedPillarBlock) block, modLoc("block/lapidified_jungle_log"), modLoc("block/lapidified_jungle_log")), ModBlocks.LAPIDIFIED_JUNGLE_WOOD);
-        ResourceLocation lapidifiedJunglePlanks = modLoc("block/lapidified_jungle_planks");
-        take(this::simpleBlock, ModBlocks.LAPIDIFIED_JUNGLE_PLANKS);
-        take(block -> slabBlock((SlabBlock) block, lapidifiedJunglePlanks, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_SLAB);
-        take(block -> stairsBlock((StairsBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_STAIRS);
-        take(block -> pressurePlateBlock(block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE);
-        take(block -> buttonBlock((AbstractButtonBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_BUTTON);
-        take(block -> fenceBlock((FenceBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
-        take(block -> fenceGateBlock((FenceGateBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE);
-        take(this::withExistingModel, ModBlocks.HIBISCUS, ModBlocks.GIANT_FERN);
+//        take( block -> logBlock((RotatedPillarBlock) block), ModBlocks.LAPIDIFIED_JUNGLE_LOG);
+//        take(block -> axisBlock((RotatedPillarBlock) block, modLoc("block/lapidified_jungle_log"), modLoc("block/lapidified_jungle_log")), ModBlocks.LAPIDIFIED_JUNGLE_WOOD);
+//        ResourceLocation lapidifiedJunglePlanks = modLoc("block/lapidified_jungle_planks");
+//        take(this::simpleBlock, ModBlocks.LAPIDIFIED_JUNGLE_PLANKS);
+//        take(block -> slabBlock((SlabBlock) block, lapidifiedJunglePlanks, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_SLAB);
+//        take(block -> stairsBlock((StairsBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_STAIRS);
+//        take(block -> pressurePlateBlock(block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE);
+//        take(block -> buttonBlock((AbstractButtonBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_BUTTON);
+//        take(block -> fenceBlock((FenceBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
+//        take(block -> fenceGateBlock((FenceGateBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE);
+//        take(this::withExistingModel, ModBlocks.HIBISCUS, ModBlocks.GIANT_FERN);
         take(block -> torchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_TORCH, ModBlocks.DOUSED_SOUL_TORCH);
         take(block -> wallTorchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_WALL_TORCH, ModBlocks.DOUSED_SOUL_WALL_TORCH);
         take(this::bonePileBlock, ModBlocks.BONE_PILE);

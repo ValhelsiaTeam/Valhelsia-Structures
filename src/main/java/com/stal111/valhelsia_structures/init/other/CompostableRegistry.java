@@ -18,7 +18,7 @@ public class CompostableRegistry {
 
     public static void register() {
         HELPER.register05(ModBlocks.HANGING_VINES.get());
-        HELPER.register065(ModBlocks.HIBISCUS.get());
-        HELPER.register065(ModBlocks.GIANT_FERN.get());
+       // HELPER.register065(ModBlocks.HIBISCUS.get());
+       // HELPER.register065(ModBlocks.GIANT_FERN.get());
     }
 }
