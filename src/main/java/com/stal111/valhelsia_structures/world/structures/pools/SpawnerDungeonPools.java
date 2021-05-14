@@ -23,5 +23,6 @@ public class SpawnerDungeonPools {
         JigsawHelper.register("spawner_dungeon/spawner_rooms", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/zombie_spawner", 1), Pair.of("spawner_dungeon/skeleton_spawner", 1), Pair.of("spawner_dungeon/spider_spawner", 1)), true);
         JigsawHelper.register("spawner_dungeon/stairs", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/stairs_1", 1), Pair.of("spawner_dungeon/stairs_2", 1)), true);
         JigsawHelper.register("spawner_dungeon/passages", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/passage_1", 1), Pair.of("spawner_dungeon/passage_2", 1)), true);
+        JigsawHelper.register("spawner_dungeon/caves", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("spawner_dungeon/cave_entrance", 1)));
     }
 }
