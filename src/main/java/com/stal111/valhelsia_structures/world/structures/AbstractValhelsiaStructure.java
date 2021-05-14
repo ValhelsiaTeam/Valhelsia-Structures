@@ -198,8 +198,13 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
             JigsawManager.func_242837_a(registries, villageConfig, AbstractVillagePiece::new, generator, manager, blockpos, this.components, this.rand, false, true);
             this.recalculateStructureSize();
 
-            if (height != -1) {
-                this.func_214628_a(generator.getSeaLevel(), this.rand, height);
+            if (this.height != -1) {
+                int offset = this.height - this.bounds.minY;
+                this.bounds.offset(0, offset, 0);
+
+                for(StructurePiece structurepiece : this.components) {
+                    structurepiece.offset(0, offset, 0);
+                }
             }
         }
     }
