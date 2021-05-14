@@ -25,6 +25,7 @@ public class ModStructureFeatures {
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> SPAWNER_DUNGEON = register("small_dungeon", ModStructures.SPAWNER_DUNGEON.get().withConfiguration(new VillageConfig(() -> SpawnerDungeonPools.PATTERN, 10)));
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> TOWER_RUIN = register("tower_ruin", ModStructures.TOWER_RUIN.get().withConfiguration(new VillageConfig(() -> SimpleStructurePools.TOWER_RUIN_PATTERN, 7)));
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> WITCH_HUT = register("witch_hut", ModStructures.WITCH_HUT.get().withConfiguration(new VillageConfig(() -> SimpleStructurePools.WITCH_HUT_PATTERN, 7)));
+    public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> BIG_TREE = register("big_tree", ModStructures.BIG_TREE.get().withConfiguration(new VillageConfig(() -> BigTreePools.PATTERN, 7)));
 
     private static <FC extends IFeatureConfig, F extends Structure<FC>> StructureFeature<FC, F> register(String name, StructureFeature<FC, F> structureFeature) {
         return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, name, structureFeature);

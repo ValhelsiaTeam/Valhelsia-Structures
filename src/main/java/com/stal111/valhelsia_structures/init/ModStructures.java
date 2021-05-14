@@ -37,6 +37,7 @@ public class ModStructures {
     public static final RegistryObject<SpawnerDungeonStructure> SPAWNER_DUNGEON = registerUndergroundStructure(new SpawnerDungeonStructure(VillageConfig.field_236533_a_));
     public static final RegistryObject<TowerRuinStructure> TOWER_RUIN = registerSurfaceStructure(new TowerRuinStructure(VillageConfig.field_236533_a_));
     public static final RegistryObject<WitchHutStructure> WITCH_HUT = registerSurfaceStructure(new WitchHutStructure(VillageConfig.field_236533_a_));
+    public static final RegistryObject<BigTreeStructure> BIG_TREE = registerSurfaceStructure(new BigTreeStructure(VillageConfig.field_236533_a_));
 
     // Removed Structures - these prevent crashes related to a vanilla bug.
     public static final RegistryObject<RemovedStructure> SMALL_CASTLE = registerSurfaceStructure(new RemovedStructure(VillageConfig.field_236533_a_, "small_castle"));
