@@ -34,6 +34,6 @@ Valhelsia Structures is mod that generates new structures such as abandoned buil
 [[dependencies.valhelsia_structures]]
 modId="valhelsia_core"
 mandatory=true
-versionRange="[1.16.5-0.1.0,)"
+versionRange="[16.0.7,)"
 ordering="AFTER"
 side="BOTH"
