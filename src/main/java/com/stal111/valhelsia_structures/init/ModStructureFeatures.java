@@ -22,7 +22,7 @@ public class ModStructureFeatures {
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> DESERT_HOUSE = register("desert_house", ModStructures.DESERT_HOUSE.get().withConfiguration(new VillageConfig(() -> DesertHousePools.PATTERN, 7)));
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> FORGE = register("forge", ModStructures.FORGE.get().withConfiguration(new VillageConfig(() -> SimpleStructurePools.FORGE_PATTERN, 7)));
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> PLAYER_HOUSE = register("player_house", ModStructures.PLAYER_HOUSE.get().withConfiguration(new VillageConfig(() -> PlayerHousePools.PATTERN, 7)));
-    public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> SPAWNER_DUNGEON = register("small_dungeon", ModStructures.SPAWNER_DUNGEON.get().withConfiguration(new VillageConfig(() -> SpawnerDungeonPools.PATTERN, 7)));
+    public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> SPAWNER_DUNGEON = register("small_dungeon", ModStructures.SPAWNER_DUNGEON.get().withConfiguration(new VillageConfig(() -> SpawnerDungeonPools.PATTERN, 10)));
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> TOWER_RUIN = register("tower_ruin", ModStructures.TOWER_RUIN.get().withConfiguration(new VillageConfig(() -> SimpleStructurePools.TOWER_RUIN_PATTERN, 7)));
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> WITCH_HUT = register("witch_hut", ModStructures.WITCH_HUT.get().withConfiguration(new VillageConfig(() -> SimpleStructurePools.WITCH_HUT_PATTERN, 7)));
 
