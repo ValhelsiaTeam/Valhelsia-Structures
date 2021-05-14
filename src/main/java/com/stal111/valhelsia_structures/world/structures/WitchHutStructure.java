@@ -28,7 +28,7 @@ public class WitchHutStructure extends AbstractValhelsiaStructure {
 
     public WitchHutStructure(Codec<VillageConfig> villageConfigCodec) {
         super(villageConfigCodec, "witch_hut", 1,
-                new StructureConfigEntry(0.7D, 25, 7, Biome.Category.SWAMP.getName()));
+                new StructureConfigEntry(0.85D, 25, 7, Biome.Category.SWAMP.getName()));
     }
 
     @Override
