@@ -52,7 +52,7 @@ public class WitchHutStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public boolean hasMargin() {
-        return false;
+    public int getMargin() {
+        return 3;
     }
 }
