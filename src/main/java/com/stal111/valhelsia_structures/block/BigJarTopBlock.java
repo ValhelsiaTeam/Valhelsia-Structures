@@ -1,11 +1,14 @@
 package com.stal111.valhelsia_structures.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -28,12 +31,15 @@ import javax.annotation.Nullable;
  * @version 0.1.1
  * @since 2021-05-15
  */
-public class BigJarTopBlock extends Block {
+public class BigJarTopBlock extends Block implements IWaterLoggable {
+
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     private static final VoxelShape SHAPE = VoxelShapeHelper.add(0.0D, -16.0D, 0.0D, 0.0D, -16.0D, 0.0D, BigJarBlock.SHAPE);
 
     public BigJarTopBlock(Properties properties) {
         super(properties);
+        this.setDefaultState(this.stateContainer.getBaseState().with(WATERLOGGED, false));
     }
 
     @Nonnull
@@ -52,6 +58,13 @@ public class BigJarTopBlock extends Block {
     @Override
     public BlockState updatePostPlacement(@Nonnull BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld world, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
         return !state.isValidPosition(world, currentPos) ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(state, facing, facingState, world, currentPos, facingPos);
+    }
+
+    @Nullable
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
+        boolean flag = context.getWorld().getFluidState(context.getPos()).getFluid() == Fluids.WATER;
+        return this.getDefaultState().with(WATERLOGGED, flag);
     }
 
     @Override
@@ -86,7 +99,18 @@ public class BigJarTopBlock extends Block {
     }
 
     @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        builder.add(WATERLOGGED);
+    }
+
+    @Override
     public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
         return new ItemStack(world.getBlockState(pos.down()).getBlock());
+    }
+
+    @Nonnull
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
     }
 }

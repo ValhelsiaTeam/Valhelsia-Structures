@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.BigJarBlock
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 0.1.1
  * @since 2021-04-17
  */
 public class BigJarBlock extends Block implements IWaterLoggable {
