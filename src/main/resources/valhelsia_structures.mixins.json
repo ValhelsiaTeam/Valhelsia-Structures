@@ -10,6 +10,7 @@
     "BlockModelRendererMixin",
     "BucketItemMixin",
     "CatEntityMixin",
+    "DoublePlantBlockPlacerMixin",
     "FeatureMixin",
     "FlowingFluidMixin",
     "LakesFeatureMixin",
