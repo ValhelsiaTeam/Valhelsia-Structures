@@ -62,6 +62,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         take(this::valhelsiaGrassBlock, ModBlocks.GRASS_BLOCK);
 
         take(block -> simpleBlock(block, models().cubeAll(block.getRegistryName().getPath(), modLoc("block/dungeon_door"))), ModBlocks.DUNGEON_DOOR_LEAF);
+        take(block -> simpleBlock(block, models().cubeAll(block.getRegistryName().getPath(), modLoc("block/empty"))), ModBlocks.BIG_JAR_TOP);
 
         forEach(this::simpleBlock);
     }
