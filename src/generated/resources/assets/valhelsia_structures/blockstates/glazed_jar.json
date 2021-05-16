@@ -1,10 +1,10 @@
 {
   "variants": {
-    "treasure=false": {
+    "rotated=false": {
       "model": "valhelsia_structures:block/glazed_jar"
     },
-    "treasure=true": {
-      "model": "valhelsia_structures:block/glazed_jar"
+    "rotated=true": {
+      "model": "valhelsia_structures:block/rotated_glazed_jar"
     }
   }
 }

@@ -1,7 +1,6 @@
 package com.stal111.valhelsia_structures.block;
 
-import com.google.common.collect.Lists;
-import com.stal111.valhelsia_structures.utils.SpecialWeightedSpawnerEntity;
+import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -20,21 +19,19 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Random;
 import java.util.function.Function;
 
 public abstract class SpecialAbstractSpawner {
-    private static final Logger LOGGER = LogManager.getLogger();
+
+    private final List<WeightedSpawnerEntity> potentialSpawns = new ArrayList<>();
     private int spawnDelay = 20;
-    private final List<SpecialWeightedSpawnerEntity> potentialSpawns = Lists.newArrayList();
-    private SpecialWeightedSpawnerEntity spawnData = new SpecialWeightedSpawnerEntity();
+    private WeightedSpawnerEntity spawnData = new WeightedSpawnerEntity();
     private double mobRotation;
     private double prevMobRotation;
     private int minSpawnDelay = 80;
@@ -48,13 +45,13 @@ public abstract class SpecialAbstractSpawner {
 
     @Nullable
     private ResourceLocation getEntityId() {
-        String s = this.spawnData.getNbt().getString("id");
+        String id = this.spawnData.getNbt().getString("id");
 
         try {
-            return StringUtils.isNullOrEmpty(s) ? null : new ResourceLocation(s);
-        } catch (ResourceLocationException var4) {
+            return StringUtils.isNullOrEmpty(id) ? null : new ResourceLocation(id);
+        } catch (ResourceLocationException exception) {
             BlockPos blockpos = this.getSpawnerPosition();
-            LOGGER.warn("Invalid entity id '{}' at spawner {}:[{},{},{}]", s, this.getWorld().getDimensionKey().getLocation(), blockpos.getX(), blockpos.getY(), blockpos.getZ());
+            ValhelsiaStructures.LOGGER.warn("Invalid entity id '{}' at spawner {}:[{},{},{}]", id, this.getWorld().getDimensionKey().getLocation(), blockpos.getX(), blockpos.getY(), blockpos.getZ());
             return null;
         }
     }
@@ -67,13 +64,13 @@ public abstract class SpecialAbstractSpawner {
      * Returns true if there's a player close enough to this mob spawner to activate it.
      */
     private boolean isActivated() {
-        BlockPos blockpos = this.getSpawnerPosition();
+        BlockPos pos = this.getSpawnerPosition();
 
-        for(PlayerEntity playerentity : this.getWorld().getPlayers()) {
-            if (EntityPredicates.NOT_SPECTATING.test(playerentity) && EntityPredicates.IS_LIVING_ALIVE.test(playerentity)) {
-                double d0 = playerentity.getDistanceSq((double) blockpos.getX() + 0.5D, (double) blockpos.getY() + 0.5D, (double) blockpos.getZ() + 0.5D);
-                if (this.activatingRangeFromPlayer < 0.0D || d0 < this.activatingRangeFromPlayer * this.activatingRangeFromPlayer) {
-                    if (playerentity.getPosY() >= blockpos.getY()) {
+        for (PlayerEntity player : this.getWorld().getPlayers()) {
+            if (EntityPredicates.NOT_SPECTATING.test(player) && EntityPredicates.IS_LIVING_ALIVE.test(player)) {
+                double distance = player.getDistanceSq((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D);
+                if (this.activatingRangeFromPlayer < 0.0D || distance < this.activatingRangeFromPlayer * this.activatingRangeFromPlayer) {
+                    if (player.getPosY() >= pos.getY() - 2) {
                         return true;
                     }
                 }
@@ -87,19 +84,20 @@ public abstract class SpecialAbstractSpawner {
             this.prevMobRotation = this.mobRotation;
         } else {
             World world = this.getWorld();
-            BlockPos blockpos = this.getSpawnerPosition();
-            if (world.isRemote) {
-                double d3 = ((float)blockpos.getX() + world.rand.nextFloat());
-                double d4 = ((float)blockpos.getY() + world.rand.nextFloat());
-                double d5 = ((float)blockpos.getZ() + world.rand.nextFloat());
-                world.addParticle(ParticleTypes.SMOKE, d3, d4, d5, 0.0D, 0.0D, 0.0D);
-                world.addParticle(ParticleTypes.FLAME, d3, d4, d5, 0.0D, 0.0D, 0.0D);
+            BlockPos pos = this.getSpawnerPosition();
+            if (world.isRemote()) {
+                double x = ((float) pos.getX() + world.rand.nextFloat());
+                double y = ((float) pos.getY() + world.rand.nextFloat());
+                double z = ((float) pos.getZ() + world.rand.nextFloat());
+                world.addParticle(ParticleTypes.SMOKE, x, y, z, 0.0D, 0.0D, 0.0D);
+                world.addParticle(ParticleTypes.FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
+
                 if (this.spawnDelay > 0) {
                     --this.spawnDelay;
                 }
 
                 this.prevMobRotation = this.mobRotation;
-                this.mobRotation = (this.mobRotation + (double)(1000.0F / ((float)this.spawnDelay + 200.0F))) % 360.0D;
+                this.mobRotation = (this.mobRotation + (double) (1000.0F / ((float) this.spawnDelay + 200.0F))) % 360.0D;
             } else {
                 if (this.spawnDelay == -1) {
                     this.resetTimer();
@@ -112,7 +110,7 @@ public abstract class SpecialAbstractSpawner {
 
                 boolean flag = false;
 
-                for(int i = 0; i < this.spawnCount; ++i) {
+                for (int i = 0; i < this.spawnCount; ++i) {
                     CompoundNBT compoundnbt = this.spawnData.getNbt();
                     Optional<EntityType<?>> optional = EntityType.readEntityType(compoundnbt);
                     if (!optional.isPresent()) {
@@ -122,9 +120,9 @@ public abstract class SpecialAbstractSpawner {
 
                     ListNBT listnbt = compoundnbt.getList("Pos", 6);
                     int j = listnbt.size();
-                    double d0 = j >= 1 ? listnbt.getDouble(0) : (double)blockpos.getX() + (world.rand.nextDouble() - world.rand.nextDouble()) * (double)this.spawnRange + 0.5D;
-                    double d1 = j >= 2 ? listnbt.getDouble(1) : (double)(blockpos.getY() + world.rand.nextInt(3) - 1);
-                    double d2 = j >= 3 ? listnbt.getDouble(2) : (double)blockpos.getZ() + (world.rand.nextDouble() - world.rand.nextDouble()) * (double)this.spawnRange + 0.5D;
+                    double d0 = j >= 1 ? listnbt.getDouble(0) : pos.getX() + (world.rand.nextDouble() - world.rand.nextDouble()) * (double) this.spawnRange + 0.5D;
+                    double d1 = j >= 2 ? listnbt.getDouble(1) : (double) (pos.getY() + world.rand.nextInt(3) - 1);
+                    double d2 = j >= 3 ? listnbt.getDouble(2) : pos.getZ() + (world.rand.nextDouble() - world.rand.nextDouble()) * (double) this.spawnRange + 0.5D;
                     if (world.hasNoCollisions(optional.get().getBoundingBoxWithSizeApplied(d0, d1, d2))) {
                         ServerWorld serverWorld = (ServerWorld) world;
                         Entity entity = EntityType.loadEntityAndExecute(compoundnbt, serverWorld, (p_221408_6_) -> {
@@ -136,17 +134,17 @@ public abstract class SpecialAbstractSpawner {
                             return;
                         }
 
-                        int k = world.getEntitiesWithinAABB(entity.getClass(), (new AxisAlignedBB(blockpos.getX(), blockpos.getY(), blockpos.getZ(), (blockpos.getX() + 1), (blockpos.getY() + 1), (double)(blockpos.getZ() + 1))).grow((double)this.spawnRange)).size();
+                        int k = world.getEntitiesWithinAABB(entity.getClass(), (new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), (pos.getX() + 1), (pos.getY() + 1), pos.getZ() + 1)).grow(this.spawnRange)).size();
                         if (k >= this.maxNearbyEntities) {
                             this.resetTimer();
                             return;
                         }
 
                         entity.setLocationAndAngles(entity.getPosX(), entity.getPosY(), entity.getPosZ(), world.rand.nextFloat() * 360.0F, 0.0F);
-                        if (entity instanceof MobEntity) {
 
+                        if (entity instanceof MobEntity) {
                             if (this.spawnData.getNbt().size() == 1 && this.spawnData.getNbt().contains("id", 8)) {
-                                ((MobEntity)entity).onInitialSpawn(serverWorld, world.getDifficultyForLocation(entity.getPosition()), SpawnReason.SPAWNER, null, null);
+                                ((MobEntity) entity).onInitialSpawn(serverWorld, world.getDifficultyForLocation(entity.getPosition()), SpawnReason.SPAWNER, null, null);
                             }
                         }
 
@@ -155,14 +153,14 @@ public abstract class SpecialAbstractSpawner {
                             return;
                         }
 
-                        world.playEvent(2004, blockpos, 0);
+                        world.playEvent(2004, pos, 0);
                         if (entity instanceof MobEntity) {
                             ((MobEntity) entity).spawnExplosionParticle();
                         }
 
                         flag = true;
 
-                        if ((new Random().nextDouble() <= 0.15 && this.waveCount >= 1) || this.waveCount >= 3) {
+                        if ((world.getRandom().nextDouble() <= 0.15 && this.waveCount >= 1) || this.waveCount >= 3) {
                             world.playEvent(null, 2001, getSpawnerPosition(), Block.getStateId(world.getBlockState(getSpawnerPosition())));
                             world.setBlockState(getSpawnerPosition(), Blocks.AIR.getDefaultState());
                         }
@@ -174,7 +172,6 @@ public abstract class SpecialAbstractSpawner {
                     this.resetTimer();
                 }
             }
-
         }
     }
 
@@ -183,11 +180,11 @@ public abstract class SpecialAbstractSpawner {
             this.spawnDelay = this.minSpawnDelay;
         } else {
             int i = this.maxSpawnDelay - this.minSpawnDelay;
-            this.spawnDelay = this.minSpawnDelay + this.getWorld().rand.nextInt(i);
+            this.spawnDelay = this.minSpawnDelay + this.getWorld().getRandom().nextInt(i);
         }
 
         if (!this.potentialSpawns.isEmpty()) {
-            this.setNextSpawnData(WeightedRandom.getRandomItem(this.getWorld().rand, this.potentialSpawns));
+            this.setNextSpawnData(WeightedRandom.getRandomItem(this.getWorld().getRandom(), this.potentialSpawns));
         }
 
         this.broadcastEvent(1);
@@ -197,17 +194,17 @@ public abstract class SpecialAbstractSpawner {
         this.spawnDelay = nbt.getShort("Delay");
         this.potentialSpawns.clear();
         if (nbt.contains("SpawnPotentials", 9)) {
-            ListNBT listnbt = nbt.getList("SpawnPotentials", 10);
+            ListNBT listNBT = nbt.getList("SpawnPotentials", 10);
 
-            for(int i = 0; i < listnbt.size(); ++i) {
-                this.potentialSpawns.add(new SpecialWeightedSpawnerEntity(listnbt.getCompound(i)));
+            for (int i = 0; i < listNBT.size(); ++i) {
+                this.potentialSpawns.add(new WeightedSpawnerEntity(listNBT.getCompound(i)));
             }
         }
 
         if (nbt.contains("SpawnData", 10)) {
-            this.setNextSpawnData(new SpecialWeightedSpawnerEntity(1, nbt.getCompound("SpawnData")));
+            this.setNextSpawnData(new WeightedSpawnerEntity(1, nbt.getCompound("SpawnData")));
         } else if (!this.potentialSpawns.isEmpty()) {
-            this.setNextSpawnData(WeightedRandom.getRandomItem(this.getWorld().rand, this.potentialSpawns));
+            this.setNextSpawnData(WeightedRandom.getRandomItem(this.getWorld().getRandom(), this.potentialSpawns));
         }
 
         if (nbt.contains("MinSpawnDelay", 99)) {
@@ -229,12 +226,12 @@ public abstract class SpecialAbstractSpawner {
             this.cachedEntity = null;
         }
         this.waveCount = nbt.getInt("WaveCount");
-
     }
 
     public CompoundNBT write(CompoundNBT compound) {
-        ResourceLocation resourcelocation = this.getEntityId();
-        if (resourcelocation != null) {
+        ResourceLocation resourceLocation = this.getEntityId();
+
+        if (resourceLocation != null) {
             compound.putShort("Delay", (short) this.spawnDelay);
             compound.putShort("MinSpawnDelay", (short) this.minSpawnDelay);
             compound.putShort("MaxSpawnDelay", (short) this.maxSpawnDelay);
@@ -244,16 +241,17 @@ public abstract class SpecialAbstractSpawner {
             compound.putShort("SpawnRange", (short) this.spawnRange);
             compound.put("SpawnData", this.spawnData.getNbt().copy());
             compound.putInt("WaveCount", this.waveCount);
-            ListNBT listnbt = new ListNBT();
+            ListNBT listNBT = new ListNBT();
+
             if (this.potentialSpawns.isEmpty()) {
-                listnbt.add(this.spawnData.toCompoundTag());
+                listNBT.add(this.spawnData.toCompoundTag());
             } else {
-                for (SpecialWeightedSpawnerEntity weightedspawnerentity : this.potentialSpawns) {
-                    listnbt.add(weightedspawnerentity.toCompoundTag());
+                for (WeightedSpawnerEntity weightedSpawnerEntity : this.potentialSpawns) {
+                    listNBT.add(weightedSpawnerEntity.toCompoundTag());
                 }
             }
 
-            compound.put("SpawnPotentials", listnbt);
+            compound.put("SpawnPotentials", listNBT);
         }
         return compound;
     }
@@ -263,8 +261,6 @@ public abstract class SpecialAbstractSpawner {
     public Entity getCachedEntity() {
         if (this.cachedEntity == null) {
             this.cachedEntity = EntityType.loadEntityAndExecute(this.spawnData.getNbt(), this.getWorld(), Function.identity());
-            if (this.spawnData.getNbt().size() == 1 && this.spawnData.getNbt().contains("id", 8) && this.cachedEntity instanceof MobEntity) {
-            }
         }
 
         return this.cachedEntity;
@@ -274,15 +270,14 @@ public abstract class SpecialAbstractSpawner {
      * Sets the delay to minDelay if parameter given is 1, else return false.
      */
     public boolean setDelayToMin(int delay) {
-        if (delay == 1 && this.getWorld().isRemote) {
+        if (delay == 1 && this.getWorld().isRemote()) {
             this.spawnDelay = this.minSpawnDelay;
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
-    public void setNextSpawnData(SpecialWeightedSpawnerEntity nextSpawnData) {
+    public void setNextSpawnData(WeightedSpawnerEntity nextSpawnData) {
         this.spawnData = nextSpawnData;
     }
 

@@ -7,6 +7,7 @@ import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
+import com.stal111.valhelsia_structures.world.structures.start.ValhelsiaStructureStart;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -39,10 +40,9 @@ import java.util.Objects;
  * but can be overridden if needed.
  *
  * @author Valhelsia Team
- * @version 16.0.3
+ * @version 16.1.0
  * @since 2020-03-22
  */
-
 public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
     private final String name;
@@ -50,55 +50,48 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
     private final StructureConfigEntry structureConfigEntry;
 
-    public AbstractValhelsiaStructure(Codec<VillageConfig> configCoded, String name, int size, StructureConfigEntry structureConfigEntry) {
-        super(configCoded, 0, true, true);
+    public AbstractValhelsiaStructure(Codec<VillageConfig> codec, String name, int size, StructureConfigEntry structureConfigEntry) {
+        super(codec, 0, true, true);
         this.name = name;
         this.size = size;
         this.structureConfigEntry = structureConfigEntry;
     }
 
     @Override
-    protected boolean func_230363_a_(ChunkGenerator generator, BiomeProvider provider, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, Biome biome, ChunkPos pos, VillageConfig config) {
-        if (isSurfaceFlat(generator, chunkX, chunkZ)) {
+    protected boolean func_230363_a_(@Nonnull ChunkGenerator generator, @Nonnull BiomeProvider provider, long seed, @Nonnull SharedSeedRandom rand, int chunkX, int chunkZ, @Nonnull Biome biome, @Nonnull ChunkPos pos, @Nonnull VillageConfig config) {
+        if (this.checkSurface() && !this.isSurfaceFlat(generator, chunkX, chunkZ)) {
+            return false;
+        }
 
-            // Check the entire size of the structure to see if it's all a viable biome
-            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16 / 2)) {
-                if (!biome1.getGenerationSettings().hasStructure(this)) {
+        // Check the entire size of the structure to see if it's all a viable biome & check for blacklisted biomes
+        for (Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16 / 2)) {
+            if (biome1.getRegistryName() != null) {
+                if (!biome1.getGenerationSettings().hasStructure(this) || StructureGenConfig.BLACKLISTED_BIOMES.get().contains(Objects.requireNonNull(biome1.getRegistryName()).toString())) {
                     return false;
                 }
             }
-
-            // Check the entire size of the structure for Blacklisted Biomes
-            for(Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16 / 2)) {
-                if (biome1.getRegistryName() != null) {
-                    if (StructureGenConfig.BLACKLISTED_BIOMES.get().contains(Objects.requireNonNull(biome1.getRegistryName()).toString())) {
-                        return false;
-                    }
-                }
-            }
-
-            int i = chunkX >> 4;
-            int j = chunkZ >> 4;
-            rand.setSeed((long) (i ^ j << 4) ^ seed);
-            rand.nextInt();
-
-            // Check for other structures
-            List<Structure<?>> structures = new ArrayList<>(ModStructures.STRUCTURES_MAP.get(getStructureType()));
-
-            if (getStructureType() == StructureType.SURFACE) {
-                structures.add(Structure.VILLAGE);
-            } else if (getStructureType() == StructureType.UNDERGROUND) {
-                structures.addAll(Arrays.asList(Structure.MINESHAFT, Structure.STRONGHOLD));
-            }
-
-            if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkX, chunkZ, structures)) {
-                return false;
-            }
-
-            return rand.nextDouble() < getSpawnChance();
         }
 
-        return false;
+        int i = chunkX >> 4;
+        int j = chunkZ >> 4;
+        rand.setSeed((long) (i ^ j << 4) ^ seed);
+        rand.nextInt();
+
+        // Check for other structures
+        List<Structure<?>> structures = new ArrayList<>(ModStructures.STRUCTURES_MAP.get(getStructureType()));
+
+        if (getStructureType() == StructureType.SURFACE) {
+            structures.add(Structure.VILLAGE);
+        } else if (getStructureType() == StructureType.UNDERGROUND) {
+            structures.addAll(Arrays.asList(Structure.MINESHAFT, Structure.STRONGHOLD));
+        }
+
+        if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkX, chunkZ, structures)) {
+            return false;
+        }
+
+        return rand.nextDouble() < getSpawnChance();
+
     }
 
     @Override
@@ -156,42 +149,62 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
     public abstract StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature();
 
+    public boolean checkSurface() {
+        return true;
+    }
+
     @Nullable
     @Override
-    public BlockPos func_236388_a_(IWorldReader world, StructureManager structureManager, BlockPos startPos, int searchRadius, boolean skipExistingChunks, long seed, StructureSeparationSettings settings) {
+    public BlockPos func_236388_a_(@Nonnull IWorldReader world, @Nonnull StructureManager structureManager, @Nonnull BlockPos startPos, int searchRadius, boolean skipExistingChunks, long seed, @Nonnull StructureSeparationSettings settings) {
         return super.func_236388_a_(world, structureManager, startPos, searchRadius, skipExistingChunks, seed, new StructureSeparationSettings(this.getSpacing(), this.getSeparation(), this.getSeedModifier()));
     }
 
-    public Structure.IStartFactory<VillageConfig> getStartFactory() {
-        return (p_242778_1_, p_242778_2_, p_242778_3_, p_242778_4_, p_242778_5_, p_242778_6_) -> new Start(this, p_242778_2_, p_242778_3_, p_242778_4_, p_242778_5_, p_242778_6_, getGenerationHeight());
+    public boolean hasMargin() {
+        return true;
     }
 
-    protected int getGenerationHeight() {
+    public int getMargin() {
+        return 12;
+    }
+
+    @Override
+    @Nonnull
+    public IStartFactory<VillageConfig> getStartFactory() {
+        return AbstractValhelsiaStructure.Start::new;
+    }
+
+    public int getGenerationHeight() {
         return -1;
     }
 
-    public static class Start extends MarginedStructureStart<VillageConfig> {
-        private final AbstractValhelsiaStructure structure;
+    public static class Start extends ValhelsiaStructureStart<VillageConfig> {
+        private final Structure<VillageConfig> structure;
         private final int height;
 
-        public Start(AbstractValhelsiaStructure structure, int p_i241979_2_, int p_i241979_3_, MutableBoundingBox boundingBox, int p_i241979_5_, long p_i241979_6_) {
-            this(structure, p_i241979_2_, p_i241979_3_, boundingBox, p_i241979_5_, p_i241979_6_, -1);
+        public Start(Structure<VillageConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox, int reference, long seed) {
+            this(structure, chunkX, chunkZ, boundingBox, reference, seed, ((AbstractValhelsiaStructure) structure).getGenerationHeight());
         }
 
-        public Start(AbstractValhelsiaStructure structure, int p_i241979_2_, int p_i241979_3_, MutableBoundingBox boundingBox, int p_i241979_5_, long p_i241979_6_, int height) {
-            super(structure, p_i241979_2_, p_i241979_3_, boundingBox, p_i241979_5_, p_i241979_6_);
+        public Start(Structure<VillageConfig> structure, int chunkX, int chunkZ, MutableBoundingBox boundingBox, int reference, long seed, int height) {
+            super(structure, chunkX, chunkZ, boundingBox, reference, seed);
             this.structure = structure;
             this.height = height;
         }
 
         @Override
-        public void func_230364_a_(DynamicRegistries registries, ChunkGenerator generator, TemplateManager manager, int p_230364_4_, int p_230364_5_, Biome biome, VillageConfig villageConfig) {
-            BlockPos blockpos = new BlockPos(p_230364_4_ * 16, 0, p_230364_5_ * 16);
-            JigsawManager.func_242837_a(registries, villageConfig, AbstractVillagePiece::new, generator, manager, blockpos, this.components, this.rand, true, true);
+        public void func_230364_a_(@Nonnull DynamicRegistries registries, @Nonnull ChunkGenerator generator, @Nonnull TemplateManager manager, int chunkX, int chunkZ, @Nonnull Biome biome, @Nonnull VillageConfig villageConfig) {
+            BlockPos blockpos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
+
+            JigsawManager.func_242837_a(registries, villageConfig, AbstractVillagePiece::new, generator, manager, blockpos, this.components, this.rand, false, true);
             this.recalculateStructureSize();
 
-            if (height != -1) {
-                this.func_214628_a(generator.getSeaLevel(), this.rand, height);
+            if (this.height != -1) {
+                int offset = this.height - this.bounds.minY;
+                this.bounds.offset(0, offset, 0);
+
+                for(StructurePiece structurepiece : this.components) {
+                    structurepiece.offset(0, offset, 0);
+                }
             }
         }
     }

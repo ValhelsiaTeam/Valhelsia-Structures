@@ -15,30 +15,39 @@ public enum DungeonDoorPart implements IStringSerializable {
     LEFT_2("left_2"),
     LEFT_3("left_3"),
     LEFT_4("left_4"),
-    MIDDLE_1("middle_1", true),
-    MIDDLE_2("middle2", true),
-    MIDDLE_3("middle_3", true),
-    MIDDLE_4("middle_4", true),
+    MIDDLE_1("middle_1"),
+    MIDDLE_2("middle2"),
+    MIDDLE_3("middle_3"),
+    MIDDLE_4("middle_4"),
     RIGHT_1("right_1"),
     RIGHT_2("right_2"),
     RIGHT_3("right_3"),
     RIGHT_4("right_4");
 
     private final String name;
-    private final boolean middle;
 
     DungeonDoorPart(String name) {
         this.name = name;
-        this.middle = false;
-    }
-
-    DungeonDoorPart(String name, boolean middle) {
-        this.name = name;
-        this.middle = middle;
     }
 
     @Override
     public String getString() {
         return this.name;
+    }
+
+    public boolean isBottom() {
+        return this.name.endsWith("1");
+    }
+
+    public boolean isLeft() {
+        return this.name.startsWith("left");
+    }
+
+    public boolean isRight() {
+        return this.name.startsWith("right");
+    }
+
+    public boolean isMiddle() {
+        return this.name.startsWith("middle");
     }
 }

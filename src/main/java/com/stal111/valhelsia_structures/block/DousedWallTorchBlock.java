@@ -89,7 +89,7 @@ public class DousedWallTorchBlock extends DousedTorchBlock {
     }
 
     @Override
-    public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
+    public BlockState rotate(BlockState state, Rotation direction) {
         return state.with(HORIZONTAL_FACING, direction.rotate(state.get(HORIZONTAL_FACING)));
     }
 

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "jar",
+  "pattern": [
+    "# #",
+    " # "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:blue_terracotta"
+    }
+  },
+  "result": {
+    "item": "valhelsia_structures:blue_glazed_jar"
+  }
+}

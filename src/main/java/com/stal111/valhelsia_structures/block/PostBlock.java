@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.block;
 
 import com.google.common.collect.ImmutableMap;
+import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IWaterLoggable;
@@ -10,6 +11,7 @@ import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -29,14 +31,21 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
+/**
+ * Post Block
+ * Valhelsia Structures - com.stal111.valhelsia_structures.block.PostBlock
+ *
+ * @author Valhelsia Team
+ * @version 16.1.0
+ */
 public class PostBlock extends RotatedPillarBlock implements IWaterLoggable {
 
+    public static final BooleanProperty ATTACHED = ModBlockStateProperties.ATTACHED;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    public static final BooleanProperty ATTACHED = BooleanProperty.create("attached");
 
     private final Supplier<? extends Block> logBlock;
 
-    protected static final Map<Direction.Axis, VoxelShape> SHAPES = ImmutableMap.of(
+    public static final Map<Direction.Axis, VoxelShape> SHAPES = ImmutableMap.of(
             Direction.Axis.Y, Block.makeCuboidShape(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D),
             Direction.Axis.Z, Block.makeCuboidShape(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 16.0D),
             Direction.Axis.X, Block.makeCuboidShape(0.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D));
@@ -86,23 +95,18 @@ public class PostBlock extends RotatedPillarBlock implements IWaterLoggable {
         return super.updatePostPlacement(state, facing, facingState, world, currentPos, facingPos);
     }
 
-    @Override
-    public void neighborChanged(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
-        if (shouldAttach(world, pos) && !state.get(ATTACHED)) {
-            world.setBlockState(pos, state.with(ATTACHED, true), 2);
-        } else if (!shouldAttach(world, pos) && state.get(ATTACHED)) {
-            world.setBlockState(pos, state.with(ATTACHED, false), 2);
-        }
-        super.neighborChanged(state, world, pos, block, fromPos, isMoving);
-    }
-
     private boolean shouldAttach(World world, BlockPos pos) {
         return world.getBlockState(pos.down()).isSolidSide(world, pos.down(), Direction.UP) && world.getBlockState(pos).get(AXIS) != Direction.Axis.Y;
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(ATTACHED, WATERLOGGED, AXIS);
+        builder.add(ATTACHED, AXIS, WATERLOGGED);
+    }
+
+    @Override
+    public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+        return false;
     }
 
     @Override

@@ -1,11 +1,10 @@
 package com.stal111.valhelsia_structures.block;
 
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
-import com.stal111.valhelsia_structures.config.BlockConfig;
 import com.stal111.valhelsia_structures.tileentity.JarTileEntity;
+import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -18,23 +17,24 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tileentity.CampfireTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 /**
  * Jar Block
@@ -46,18 +46,19 @@ import java.util.Objects;
  */
 public class JarBlock extends Block implements IWaterLoggable {
 
+    public static final BooleanProperty TREASURE = ModBlockStateProperties.TREASURE;
+    public static final BooleanProperty ROTATED = ModBlockStateProperties.ROTATED;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+
     private static final VoxelShape SHAPE = VoxelShapeHelper.combineAll(
             Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D),
             Block.makeCuboidShape(7.0D, 4.0D, 7.0D, 9.0D, 7.0D, 9.0D),
             Block.makeCuboidShape(6.0D, 7.0D, 6.0D, 10.0D, 8.0D, 10.0D)
     );
 
-    public static final BooleanProperty TREASURE = ModBlockStateProperties.TREASURE;
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-
     public JarBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(TREASURE, Boolean.FALSE).with(WATERLOGGED, Boolean.FALSE));
+        this.setDefaultState(this.stateContainer.getBaseState().with(TREASURE, false).with(ROTATED, false).with(WATERLOGGED, false));
     }
 
     @Nullable
@@ -71,59 +72,56 @@ public class JarBlock extends Block implements IWaterLoggable {
         return true;
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
         return SHAPE;
     }
 
+    @Nonnull
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(@Nonnull BlockState state, World world, @Nonnull BlockPos pos, PlayerEntity player, @Nonnull Hand hand, @Nonnull BlockRayTraceResult hit) {
         ItemStack stack = player.getHeldItem(hand);
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof JarTileEntity) {
-            JarTileEntity jarTileEntity = (JarTileEntity) tileEntity;
-            if (!canBePotted((Block.getBlockFromItem(stack.getItem()))) && jarTileEntity.hasPlant()) {
-                ItemStack flowerStack = jarTileEntity.getPlant();
 
-                if (!world.isRemote) {
-                    if (stack.isEmpty()) {
-                        player.setHeldItem(hand, flowerStack);
-                    } else if (!player.addItemStackToInventory(flowerStack)) {
-                        player.dropItem(flowerStack, false);
-                    }
-                }
+        if (!(tileEntity instanceof JarTileEntity)) {
+            return ActionResultType.PASS;
+        }
+        JarTileEntity jarTileEntity = (JarTileEntity) tileEntity;
 
-                jarTileEntity.setPlant(ItemStack.EMPTY);
+        if (!canBePotted((Block.getBlockFromItem(stack.getItem()))) && jarTileEntity.hasPlant()) {
+            ItemStack flowerStack = jarTileEntity.getPlant();
 
-                return ActionResultType.func_233537_a_(world.isRemote);
-            } else if (canBePotted((Block.getBlockFromItem(stack.getItem()))) && !jarTileEntity.hasPlant()) {
-                jarTileEntity.setPlant(stack.copy().split(1));
-
-                player.addStat(Stats.POT_FLOWER);
-
-                if (!player.abilities.isCreativeMode) {
-                    stack.shrink(1);
-                }
-
-                return ActionResultType.func_233537_a_(world.isRemote);
+            if (stack.isEmpty()) {
+                player.setHeldItem(hand, flowerStack);
+            } else if (!player.addItemStackToInventory(flowerStack)) {
+                player.dropItem(flowerStack, false);
             }
+            jarTileEntity.setPlant(ItemStack.EMPTY);
+
+        } else if (canBePotted((Block.getBlockFromItem(stack.getItem()))) && !jarTileEntity.hasPlant()) {
+            jarTileEntity.setPlant(stack.copy().split(1));
+
+            player.addStat(Stats.POT_FLOWER);
+
+            if (!player.abilities.isCreativeMode) {
+                stack.shrink(1);
+            }
+        } else {
+            return ActionResultType.PASS;
         }
 
-        return ActionResultType.CONSUME;
+        return ActionResultType.func_233537_a_(world.isRemote);
     }
 
     private boolean canBePotted(Block block) {
-        for (Block flowerPot : BlockTags.FLOWER_POTS.getAllElements()) {
-            if (Objects.requireNonNull(flowerPot.getRegistryName()).getPath().startsWith("potted_")) {
-                String name = flowerPot.getRegistryName().getPath().split("_", 2)[1];
-                if (Objects.requireNonNull(block.getRegistryName()).getPath().equals(name)) {
-                    if (!BlockConfig.JAR_BLACKLIST.get().contains(flowerPot.getRegistryName().getNamespace() + ":" + name)) {
-                        return true;
-                    }
-                }
-            }
+        ResourceLocation registryName = block.getRegistryName();
+        if (registryName == null) {
+            return false;
         }
-        return false;
+        boolean flag = BlockTags.FLOWER_POTS.getAllElements().contains(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block.getRegistryName().getNamespace(), "potted_" + block.getRegistryName().getPath())));
+
+        return flag && !ModTags.Items.JAR_BLACKLISTED.contains(block.asItem());
     }
 
     @Nullable
@@ -131,11 +129,11 @@ public class JarBlock extends Block implements IWaterLoggable {
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
         boolean flag = fluidstate.getFluid() == Fluids.WATER;
-        return this.getDefaultState().with(WATERLOGGED, flag);
+        return this.getDefaultState().with(WATERLOGGED, flag).with(ROTATED, (MathHelper.floor((double) ((180.0F + context.getPlacementYaw()) * 8.0F / 360.0F) + 0.5D) & 7) % 2 != 0);
     }
 
     @Override
-    public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, @Nonnull World world, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.isIn(newState.getBlock())) {
             TileEntity tileentity = world.getTileEntity(pos);
             if (tileentity instanceof JarTileEntity) {
@@ -148,20 +146,21 @@ public class JarBlock extends Block implements IWaterLoggable {
         super.onReplaced(state, world, pos, newState, isMoving);
     }
 
+    @Nonnull
     @Override
-    public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updatePostPlacement(BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld world, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
         if (state.get(WATERLOGGED)) {
             world.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
-
         return super.updatePostPlacement(state, facing, facingState, world, currentPos, facingPos);
     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(TREASURE, WATERLOGGED);
+        builder.add(TREASURE, ROTATED, WATERLOGGED);
     }
 
+    @Nonnull
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);

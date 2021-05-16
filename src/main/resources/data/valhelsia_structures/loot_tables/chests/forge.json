@@ -3,14 +3,13 @@
   "pools": [
     {
       "rolls": {
-        "min": 2.0,
-        "max": 3.0,
-        "type": "minecraft:uniform"
+        "min": 2,
+        "max": 4
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 20,
+          "weight": 15,
           "name": "minecraft:saddle"
         },
         {
@@ -20,22 +19,64 @@
         },
         {
           "type": "minecraft:item",
+          "weight": 17,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "name": "minecraft:cooked_beef"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 17,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "name": "minecraft:cooked_chicken"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 20,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ],
+          "name": "minecraft:bread"
+        },
+        {
+          "type": "minecraft:item",
           "weight": 15,
           "name": "minecraft:leather_horse_armor"
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 12,
           "name": "minecraft:golden_horse_armor"
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
-          "name": "minecraft:diamond_horse_armor"
+          "weight": 10,
+          "name": "minecraft:iron_horse_armor"
         },
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 8,
           "functions": [
             {
               "function": "minecraft:enchant_randomly"
@@ -47,160 +88,23 @@
     },
     {
       "rolls": {
-        "min": 3.0,
-        "max": 6.0,
-        "type": "minecraft:uniform"
+        "min": 2,
+        "max": 3
       },
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 10,
+          "weight": 15,
           "functions": [
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 4.0,
-                "max": 8.0,
-                "type": "minecraft:uniform"
+                "min": 3,
+                "max": 9
               }
             }
           ],
           "name": "minecraft:iron_ingot"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 6,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 6.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:gold_ingot"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 20,
-          "name": "minecraft:cooked_beef"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 20,
-          "name": "minecraft:cooked_chicken"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 5,
-          "name": "minecraft:lava_bucket"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 10,
-          "name": "minecraft:compass"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 10,
-          "name": "minecraft:clock"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 8.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:redstone"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 15,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 2.0,
-                "max": 8.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:coal"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 10,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1.0,
-                "max": 2.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:melon_seeds"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 10,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1.0,
-                "max": 2.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:pumpkin_seeds"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 10,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 1.0,
-                "max": 2.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:beetroot_seeds"
-        }
-      ]
-    },
-    {
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "weight": 12,
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "min": 4.0,
-                "max": 8.0,
-                "type": "minecraft:uniform"
-              }
-            }
-          ],
-          "name": "minecraft:iron_ore"
         },
         {
           "type": "minecraft:item",
@@ -209,13 +113,40 @@
             {
               "function": "minecraft:set_count",
               "count": {
-                "min": 2.0,
-                "max": 6.0,
-                "type": "minecraft:uniform"
+                "min": 2,
+                "max": 6
               }
             }
           ],
-          "name": "minecraft:gold_ore"
+          "name": "minecraft:gold_ingot"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 6
+              }
+            }
+          ],
+          "name": "minecraft:redstone"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 17,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 4,
+                "max": 12
+              }
+            }
+          ],
+          "name": "minecraft:coal"
         }
       ]
     },
@@ -224,14 +155,47 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "name": "minecraft:compass"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:clock"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:lava_bucket"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ],
+          "name": "minecraft:netherite_scrap"
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1,
+        "max": 2
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 6,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 5,
+                "max": 10
               },
               "treasure": true
             }
@@ -240,14 +204,13 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 6,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 5,
+                "max": 10
               },
               "treasure": true
             }
@@ -256,14 +219,13 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 6,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 5,
+                "max": 10
               },
               "treasure": true
             }
@@ -272,14 +234,13 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 3,
+          "weight": 6,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 5,
+                "max": 10
               },
               "treasure": true
             }
@@ -288,30 +249,13 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
-              },
-              "treasure": true
-            }
-          ],
-          "name": "minecraft:iron_pickaxe"
-        },
-        {
-          "type": "minecraft:item",
-          "weight": 4,
-          "functions": [
-            {
-              "function": "minecraft:enchant_with_levels",
-              "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 10,
+                "max": 15
               },
               "treasure": true
             }
@@ -320,14 +264,13 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 10,
+                "max": 15
               },
               "treasure": true
             }
@@ -336,14 +279,13 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 10,
+                "max": 15
               },
               "treasure": true
             }
@@ -352,19 +294,98 @@
         },
         {
           "type": "minecraft:item",
-          "weight": 4,
+          "weight": 10,
           "functions": [
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 10,
+                "max": 15
               },
               "treasure": true
             }
           ],
           "name": "minecraft:chainmail_boots"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 10,
+                "max": 15
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:iron_sword"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 10,
+                "max": 15
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:iron_pickaxe"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 10,
+                "max": 15
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:iron_axe"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 10,
+                "max": 15
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:iron_shovel"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 10,
+                "max": 15
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:iron_hoe"
         },
         {
           "type": "minecraft:item",
@@ -373,9 +394,23 @@
             {
               "function": "minecraft:enchant_with_levels",
               "levels": {
-                "min": 5.0,
-                "max": 10.0,
-                "type": "minecraft:uniform"
+                "min": 5,
+                "max": 10
+              },
+              "treasure": true
+            }
+          ],
+          "name": "minecraft:diamond_sword"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:enchant_with_levels",
+              "levels": {
+                "min": 5,
+                "max": 10
               },
               "treasure": true
             }

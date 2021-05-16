@@ -29,7 +29,7 @@ import java.util.Map;
 public class BiomeLoadingListener {
 
     @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void onPlayerInteractBlock(BiomeLoadingEvent event) {
+    public static void onBiomeLoad(BiomeLoadingEvent event) {
         ResourceLocation name = event.getName();
         Biome.Category category = event.getCategory();
 

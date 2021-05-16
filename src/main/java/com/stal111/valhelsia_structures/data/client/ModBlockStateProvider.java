@@ -1,15 +1,10 @@
 package com.stal111.valhelsia_structures.data.client;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.BrazierBlock;
-import com.stal111.valhelsia_structures.block.JarBlock;
-import com.stal111.valhelsia_structures.block.PostBlock;
-import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
+import com.stal111.valhelsia_structures.block.*;
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.PaneBlock;
-import net.minecraft.block.RotatedPillarBlock;
+import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
@@ -37,20 +32,37 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        getRemainingBlocks().remove(ModBlocks.DUNGEON_DOOR_LEAF);
+        getRemainingBlocks().removeIf(block -> block.get().getRegistryName().toString().contains("lapidified_jungle_post"));
+       // getRemainingBlocks().remove(ModBlocks.JUNGLE_HEAD);
 
         forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
         forEach(block -> block instanceof PostBlock, this::postBlock);
+        forEach(block -> block instanceof CutPostBlock, this::cutPostBlock);
         take(block -> paneBlock((PaneBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);
         take(block -> paneBlock((PaneBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
         take(this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);
         forEach(block -> block instanceof JarBlock, this::jarBlock);
+        forEach(block -> block instanceof BigJarBlock, this::bigJarBlock);
+//        take( block -> logBlock((RotatedPillarBlock) block), ModBlocks.LAPIDIFIED_JUNGLE_LOG);
+//        take(block -> axisBlock((RotatedPillarBlock) block, modLoc("block/lapidified_jungle_log"), modLoc("block/lapidified_jungle_log")), ModBlocks.LAPIDIFIED_JUNGLE_WOOD);
+//        ResourceLocation lapidifiedJunglePlanks = modLoc("block/lapidified_jungle_planks");
+//        take(this::simpleBlock, ModBlocks.LAPIDIFIED_JUNGLE_PLANKS);
+//        take(block -> slabBlock((SlabBlock) block, lapidifiedJunglePlanks, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_SLAB);
+//        take(block -> stairsBlock((StairsBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_STAIRS);
+//        take(block -> pressurePlateBlock(block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE);
+//        take(block -> buttonBlock((AbstractButtonBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_BUTTON);
+//        take(block -> fenceBlock((FenceBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE);
+//        take(block -> fenceGateBlock((FenceGateBlock) block, lapidifiedJunglePlanks), ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE);
+//        take(this::withExistingModel, ModBlocks.HIBISCUS, ModBlocks.GIANT_FERN);
         take(block -> torchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_TORCH, ModBlocks.DOUSED_SOUL_TORCH);
         take(block -> wallTorchBlock(block, modLoc("block/doused_torch")), ModBlocks.DOUSED_WALL_TORCH, ModBlocks.DOUSED_SOUL_WALL_TORCH);
-        take(this::layerBlock, ModBlocks.BONE_PILE);
+        take(this::bonePileBlock, ModBlocks.BONE_PILE);
 
         forEach(block -> block instanceof ValhelsiaStoneBlock, block -> withExistingModel(block, true));
         take(this::valhelsiaGrassBlock, ModBlocks.GRASS_BLOCK);
+
+        take(block -> simpleBlock(block, models().cubeAll(block.getRegistryName().getPath(), modLoc("block/dungeon_door"))), ModBlocks.DUNGEON_DOOR_LEAF);
+        take(block -> simpleBlock(block, models().cubeAll(block.getRegistryName().getPath(), modLoc("block/empty"))), ModBlocks.BIG_JAR_TOP);
 
         forEach(this::simpleBlock);
     }
@@ -72,7 +84,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
                 .texture("post_side", modLoc("block/post/" + name))
                 .texture("post_end", modLoc("block/post/" + name + "_top"));
 
-        ModelFile attached = models().withExistingParent(name + "_attached", modLoc("block/post_attached"))
+        ModelFile attachedModel = models().withExistingParent("attached_" + name, modLoc("block/attached_post"))
                 .texture("post_side", modLoc("block/post/" + name))
                 .texture("post_end", modLoc("block/post/" + name + "_top"));
 
@@ -81,7 +93,33 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
             int rotationY = state.get(RotatedPillarBlock.AXIS) == Direction.Axis.X ? 90 : 0;
 
             return ConfiguredModel.builder()
-                    .modelFile(state.get(PostBlock.ATTACHED) ? attached : model)
+                    .modelFile(state.get(PostBlock.ATTACHED) ? attachedModel : model)
+                    .rotationX(rotationX)
+                    .rotationY(rotationY)
+                    .build();
+        }, PostBlock.WATERLOGGED);
+    }
+
+    private void cutPostBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            Direction facing = state.get(DirectionalBlock.FACING);
+            int rotationX = facing == Direction.DOWN ? 180 : facing == Direction.UP ? 0 : 90;
+            int rotationY = facing == Direction.SOUTH ? 180 : facing == Direction.WEST ? 270 : facing == Direction.EAST ? 90 : 0;
+
+            int parts = state.get(ModBlockStateProperties.PARTS_1_4);
+
+            ModelFile model = parts == 4 ? getExistingModel(modLoc(name.substring(4))) : models().withExistingParent(name + "_" + parts, modLoc("block/cut_post_" + parts))
+                    .texture("post_side", modLoc("block/post/" + name.substring(4)))
+                    .texture("post_end", modLoc("block/post/" + name.substring(4) + "_top"));
+
+            ModelFile attachedModel = parts == 4 ? getExistingModel(modLoc("attached_" + name.substring(4))) : models().withExistingParent("attached_" + name + "_" + parts, modLoc("block/attached_cut_post_" + parts))
+                    .texture("post_side", modLoc("block/post/" + name.substring(4)))
+                    .texture("post_end", modLoc("block/post/" + name.substring(4) + "_top"));
+
+            return ConfiguredModel.builder()
+                    .modelFile(state.get(PostBlock.ATTACHED) ? attachedModel : model)
                     .rotationX(rotationX)
                     .rotationY(rotationY)
                     .build();
@@ -102,8 +140,20 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
     private void jarBlock(Block block) {
         String name = Objects.requireNonNull(block.getRegistryName()).getPath();
         ModelFile model = models().withExistingParent(name, modLoc("block/jar")).texture("jar", modLoc("block/jar/" + name));
+        ModelFile rotatedModel = models().withExistingParent("rotated_" + name, modLoc("block/rotated_jar")).texture("jar", modLoc("block/jar/" + name));
 
-        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(model).build(), BlockStateProperties.WATERLOGGED);
+        getVariantBuilder(block).forAllStatesExcept(state -> ConfiguredModel.builder().modelFile(state.get(ModBlockStateProperties.ROTATED) ? rotatedModel : model).build(), ModBlockStateProperties.TREASURE, BlockStateProperties.WATERLOGGED);
+    }
+
+    private void bigJarBlock(Block block) {
+        String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+        ModelFile model = models().withExistingParent(name, modLoc("block/big_jar")).texture("jar", modLoc("block/jar/big/" + name));
+        ModelFile rotatedModel = models().withExistingParent("rotated_" + name, modLoc("block/rotated_big_jar")).texture("jar", modLoc("block/jar/big/" + name));
+
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            int rotation = state.get(ModBlockStateProperties.ROTATION_0_7);
+            return ConfiguredModel.builder().modelFile(rotation % 2 == 0 ? model : rotatedModel).rotationY(rotation % 2 == 0 ? rotation * 45 : (rotation - 1) * 45).build();
+        }, ModBlockStateProperties.TREASURE, BlockStateProperties.WATERLOGGED);
     }
 
     private void torchBlock(Block block) {
@@ -123,9 +173,9 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
 
         getVariantBuilder(block)
                 .forAllStatesExcept(state -> ConfiguredModel.builder()
-                                .modelFile(models().torchWall(name, texture))
-                                .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 90) % 360)
-                                .build(),
+                        .modelFile(models().torchWall(name, texture))
+                        .rotationY(((int) state.get(BlockStateProperties.HORIZONTAL_FACING).getHorizontalAngle() + 90) % 360)
+                        .build(),
                         BlockStateProperties.WATERLOGGED
                 );
     }
@@ -141,17 +191,11 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
                 .modelFile(getExistingModel(mcLoc("block/grass_block_snow"))).addModel();
     }
 
-    private void layerBlock(Block block) {
+    private void bonePileBlock(Block block) {
         String name = Objects.requireNonNull(block.getRegistryName()).getPath();
+        ModelFile model = models().getBuilder(name).parent(new ModelFile.UncheckedModelFile("builtin/generated")).texture("layer0", modLoc("block/" + name));
+        getVariantBuilder(block).partialState().modelForState().modelFile(model).rotationX(90).addModel();
 
-        getVariantBuilder(block).forAllStates(state -> {
-            int height = state.get(BlockStateProperties.LAYERS_1_8) * 2;
-
-            ModelFile model = height == 16 ? cubeAll(block) : models().withExistingParent(name + "_" + height, mcLoc("block/snow_height" + height)).texture("texture", modLoc("block/" + name));
-
-            return ConfiguredModel.builder()
-                    .modelFile(model)
-                    .build();
-        });
+        this.models().withExistingParent(name + "_inventory", this.mcLoc("block/pressure_plate_up")).texture("texture", modLoc("block/" + name));
     }
 }

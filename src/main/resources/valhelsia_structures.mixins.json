@@ -5,11 +5,16 @@
   "package": "com.stal111.valhelsia_structures.mixin",
   "refmap": "valhelsia_structures.refmap.json",
   "mixins": [
+    "AbstractBlockStateMixin",
+    "BeehiveBlockMixin",
+    "BlockModelRendererMixin",
     "BucketItemMixin",
-    "ClientPlayNetHandlerMixin",
+    "CatEntityMixin",
+    "DoublePlantBlockPlacerMixin",
     "FeatureMixin",
     "FlowingFluidMixin",
     "LakesFeatureMixin",
+    "PillagerEntityMixin",
     "SpreadableSnowyDirtBlockMixin",
     "TorchBlockMixin",
     "WallTorchBlockMixin"

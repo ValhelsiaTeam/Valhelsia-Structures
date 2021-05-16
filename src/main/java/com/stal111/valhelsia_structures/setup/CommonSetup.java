@@ -1,7 +1,10 @@
 package com.stal111.valhelsia_structures.setup;
 
+import com.stal111.valhelsia_structures.init.ModEntities;
 import com.stal111.valhelsia_structures.init.other.CompostableRegistry;
 import com.stal111.valhelsia_structures.init.other.FlammableRegistry;
+import net.minecraft.entity.ai.attributes.GlobalEntityTypeAttributes;
+import net.minecraft.entity.monster.AbstractSkeletonEntity;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 /**
@@ -18,6 +21,8 @@ public class CommonSetup {
         event.enqueueWork(() -> {
             FlammableRegistry.register();
             CompostableRegistry.register();
+
+            //GlobalEntityTypeAttributes.put(ModEntities.MOSSY_SKELETON.get(), AbstractSkeletonEntity.registerAttributes().create());
         });
     }
 }

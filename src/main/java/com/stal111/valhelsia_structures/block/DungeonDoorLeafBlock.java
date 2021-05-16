@@ -2,8 +2,8 @@ package com.stal111.valhelsia_structures.block;
 
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import com.stal111.valhelsia_structures.tileentity.DungeonDoorTileEntity;
 import net.minecraft.block.*;
+import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -25,7 +25,6 @@ import net.minecraft.world.World;
 import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 /**
  * Dungeon Door Leaf Block
@@ -81,22 +80,21 @@ public class DungeonDoorLeafBlock extends Block implements IWaterLoggable {
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
-        BlockPos pos1 = pos.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle()).getOpposite());
+        BlockPos offsetPos = pos.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle()).getOpposite());
+        BlockState offsetState = world.getBlockState(offsetPos);
 
-        BlockState state1 = world.getBlockState(pos1);
-        state1.getBlock().onBlockActivated(state1, world, pos1, player, hand, hit);
+        offsetState.getBlock().onBlockActivated(offsetState, world, offsetPos, player, hand, hit);
 
         return ActionResultType.func_233537_a_(world.isRemote);
     }
 
     @Override
-    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
-            BlockPos pos1 = pos.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle()).getOpposite());
-            DungeonDoorTileEntity tileEntity = (DungeonDoorTileEntity) world.getTileEntity(pos1);
+    public void onPlayerDestroy(IWorld world, BlockPos pos, BlockState state) {
+        BlockPos offsetPos = pos.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle()).getOpposite());
+        BlockState offsetState = world.getBlockState(offsetPos);
 
-            BlockState state1 = world.getBlockState(Objects.requireNonNull(tileEntity).getMainBlock());
-
-            state1.getBlock().onBlockHarvested(world, tileEntity.getMainBlock(), state1, player);
+        world.playEvent(null, 2001, offsetPos, Block.getStateId(offsetState));
+        world.setBlockState(offsetPos, offsetState.get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState(), 35);
     }
 
     @Override
@@ -107,6 +105,11 @@ public class DungeonDoorLeafBlock extends Block implements IWaterLoggable {
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.toRotation(state.get(FACING)));
+    }
+
+    @Override
+    public PushReaction getPushReaction(BlockState state) {
+        return PushReaction.BLOCK;
     }
 
     @Override

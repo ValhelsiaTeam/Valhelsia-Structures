@@ -4,9 +4,11 @@ import com.stal111.valhelsia_structures.init.ModTileEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -39,13 +41,14 @@ public class JarTileEntity extends TileEntity {
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void read(@Nonnull BlockState state, @Nonnull CompoundNBT compound) {
         super.read(state, compound);
         this.plant =  compound.contains("Plant", 10) ? ItemStack.read(compound.getCompound("Plant")) : ItemStack.EMPTY;
     }
 
+    @Nonnull
     @Override
-    public CompoundNBT write(CompoundNBT compound) {
+    public CompoundNBT write(@Nonnull CompoundNBT compound) {
         super.write(compound);
         if (hasPlant()) {
             compound.put("Plant", plant.write(new CompoundNBT()));
@@ -57,12 +60,19 @@ public class JarTileEntity extends TileEntity {
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        return new SUpdateTileEntityPacket(this.pos, 15, this.getUpdateTag());
+        return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
     }
 
+    @Nonnull
     @Override
     public CompoundNBT getUpdateTag() {
         return this.write(new CompoundNBT());
     }
 
+    @Override
+    public void onDataPacket(NetworkManager networkManager, SUpdateTileEntityPacket packet) {
+        if (this.world != null) {
+            this.read(this.world.getBlockState(packet.getPos()), packet.getNbtCompound());
+        }
+    }
 }

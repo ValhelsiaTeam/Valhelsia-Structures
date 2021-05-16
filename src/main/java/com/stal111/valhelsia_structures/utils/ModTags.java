@@ -13,9 +13,11 @@ public class ModTags {
     public static class Blocks {
         public static final ITag.INamedTag<Block> BRAZIERS = forgeTag("braziers");
         public static final ITag.INamedTag<Block> POSTS = modTag("posts");
+        public static final ITag.INamedTag<Block> CUT_POSTS = modTag("cut_posts");
         public static final ITag.INamedTag<Block> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
         public static final ITag.INamedTag<Block> COLORED_JARS = modTag("colored_jars");
         public static final ITag.INamedTag<Block> JARS = modTag("jars");
+        public static final ITag.INamedTag<Block> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
 
         private static ITag.INamedTag<Block> forgeTag(String name) {
             return BlockTags.makeWrapperTag(new ResourceLocation("forge", name).toString());
@@ -28,9 +30,12 @@ public class ModTags {
 
     public static class Items {
         public static final ITag.INamedTag<Item> POSTS = modTag("posts");
+        public static final ITag.INamedTag<Item> CUT_POSTS = modTag("cut_posts");
         public static final ITag.INamedTag<Item> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
         public static final ITag.INamedTag<Item> COLORED_JARS = modTag("colored_jars");
         public static final ITag.INamedTag<Item> JARS = modTag("jars");
+        public static final ITag.INamedTag<Item> JAR_BLACKLISTED = modTag("jar_blacklisted");
+        public static final ITag.INamedTag<Item> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
 
         public static final ITag.INamedTag<Item> AXE_CRAFTING_BLACKLISTED = modTag( "axe_crafting_blacklisted");
 

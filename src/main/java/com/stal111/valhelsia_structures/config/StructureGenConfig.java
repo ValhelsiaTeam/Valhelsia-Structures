@@ -43,7 +43,7 @@ public class StructureGenConfig {
                     structureConfigEntry.configuredSpacing = COMMON_BUILDER.comment("Spacing (in chunks) [default: " + structureConfigEntry.getDefaultSpacing() + "]").defineInRange(structure.getName()  + ".spacing", structureConfigEntry.getDefaultSpacing(), 0, 200);
                     structureConfigEntry.configuredSeparation = COMMON_BUILDER.comment("Minimum Separation (in chunks) [default: " + structureConfigEntry.getDefaultSeparation() + "]").defineInRange(structure.getName()  + ".separation", structureConfigEntry.getDefaultSeparation(), 0, 200);
 
-                    structureConfigEntry.configuredBiomeCategories = COMMON_BUILDER.comment("Biome Categories the structure can generate in \nAllowed Values: " + Arrays.toString(Biome.Category.values()).toLowerCase()).defineList(structure.getName() + ".biome_categories", structureConfigEntry.getDefaultBiomeCategories(), o -> o instanceof String);
+                    structureConfigEntry.configuredBiomeCategories = COMMON_BUILDER.comment("Biome Categories the structure can generate in \nAllowed Values: " + Arrays.toString(Biome.Category.values()).toLowerCase(Locale.ROOT)).defineList(structure.getName() + ".biome_categories", structureConfigEntry.getDefaultBiomeCategories(), o -> o instanceof String);
                     structureConfigEntry.configuredBlacklistedBiomes = COMMON_BUILDER.comment("Biomes the structure can NOT generate in").defineList(structure.getName() + ".blacklisted_biomes", structureConfigEntry.getDefaultBlacklistedBiomes(), o -> o instanceof String);
                 }
             });

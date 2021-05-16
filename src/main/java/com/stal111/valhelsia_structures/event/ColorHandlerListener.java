@@ -2,10 +2,12 @@ package com.stal111.valhelsia_structures.event;
 
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.BlockItem;
 import net.minecraft.world.FoliageColors;
+import net.minecraft.world.GrassColors;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -30,6 +32,8 @@ public class ColorHandlerListener {
         blockColors.register(
                 (state, reader, pos, color) -> reader != null && pos != null ? BiomeColors.getFoliageColor(reader, pos) : FoliageColors.getDefault(),
                 ModBlocks.HANGING_VINES_BODY.get(), ModBlocks.HANGING_VINES.get());
+        blockColors.register((state, reader, pos, color) -> reader != null && pos != null ? BiomeColors.getGrassColor(reader, pos) : GrassColors.get(0.5D, 1.0D),
+                ModBlocks.GRASS_BLOCK.get());
     }
 
     @SubscribeEvent
@@ -40,6 +44,6 @@ public class ColorHandlerListener {
         itemColors.register((stack, color) -> {
             BlockState blockstate = ((BlockItem) stack.getItem()).getBlock().getDefaultState();
             return blockColors.getColor(blockstate, null, null, color);
-        }, ModBlocks.HANGING_VINES.get().asItem());
+        }, ModBlocks.HANGING_VINES.get(), ModBlocks.GRASS_BLOCK.get());
     }
 }

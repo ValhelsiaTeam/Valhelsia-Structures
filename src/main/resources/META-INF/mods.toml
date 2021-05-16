@@ -6,7 +6,7 @@
 # The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[34,)" #mandatory (31 is current forge version)
+loaderVersion="[36,)" #mandatory
 license="Attribution-NonCommercial-NoDerivatives 4.0 International"
 # A URL to refer people to when problems occur with this mod
 issueTrackerURL="https://github.com/stal111/Valhelsia-Structures/issues" #optional
@@ -34,6 +34,6 @@ Valhelsia Structures is mod that generates new structures such as abandoned buil
 [[dependencies.valhelsia_structures]]
 modId="valhelsia_core"
 mandatory=true
-versionRange="[16.0.1,)"
+versionRange="[16.0.7,)"
 ordering="AFTER"
 side="BOTH"

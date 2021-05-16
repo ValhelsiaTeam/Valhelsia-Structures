@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.data.client;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.block.CutPostBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
@@ -28,13 +29,20 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
     @Override
     protected void registerModels() {
         getRemainingBlockItems().removeIf(item -> item.get().getRegistryName().getPath().contains("lapidified_jungle_post"));
+       // getRemainingBlockItems().remove(ModBlocks.JUNGLE_HEAD);
 
         forEachBlockItem(item -> item.getBlock() instanceof ValhelsiaGrassBlock || item.getBlock() instanceof ValhelsiaStoneBlock, item -> withParent(item, true));
         takeBlockItem(item -> withParent(item, Objects.requireNonNull(item.getRegistryName()).getPath() + "_off"), ModBlocks.BRAZIER, ModBlocks.SOUL_BRAZIER);
         takeBlockItem(item -> simpleModelBlockTexture(item, "metal_framed_glass"), ModBlocks.METAL_FRAMED_GLASS_PANE);
+        forEachBlockItem(item -> item.getBlock() instanceof CutPostBlock, item -> withParent(item, item.getRegistryName().getPath() + "_1"));
         takeBlockItem(this::simpleModelBlockTexture,
                 ModBlocks.HANGING_VINES,
                 ModBlocks.PAPER_WALL
+        );
+        takeBlockItem(this::withParentInventory,
+          //     ModBlocks.LAPIDIFIED_JUNGLE_BUTTON,
+            //    ModBlocks.LAPIDIFIED_JUNGLE_FENCE,
+                ModBlocks.BONE_PILE
         );
 
         takeBlockItem(item -> simpleModelBlockTexture(item, "doused_torch"),
@@ -42,7 +50,9 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
                 ModItems.DOUSED_SOUL_TORCH
         );
 
-        takeBlockItem(blockItem -> withParent(blockItem, "bone_pile_2"), ModBlocks.BONE_PILE);
+        takeBlockItem(this::simpleModel,
+                ModBlocks.DUNGEON_DOOR
+        );
 
         forEachBlockItem(this::withParent);
 
