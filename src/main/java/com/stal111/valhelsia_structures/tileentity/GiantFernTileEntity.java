@@ -14,6 +14,6 @@ import net.minecraft.tileentity.TileEntity;
 public class GiantFernTileEntity extends TileEntity {
 
     public GiantFernTileEntity() {
-        super(null);
+        super(ModTileEntities.GIANT_FERN.get());
     }
 }

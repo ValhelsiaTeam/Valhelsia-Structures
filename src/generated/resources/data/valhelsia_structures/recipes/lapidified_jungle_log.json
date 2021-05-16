@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:jungle_log"
+    },
+    "X": [
+      {
+        "item": "minecraft:vine"
+      },
+      {
+        "item": "valhelsia_structures:hanging_vines"
+      }
+    ]
+  },
+  "result": {
+    "item": "valhelsia_structures:lapidified_jungle_log",
+    "count": 8
+  }
+}

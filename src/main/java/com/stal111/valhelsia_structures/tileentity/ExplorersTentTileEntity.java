@@ -18,7 +18,7 @@ public class ExplorersTentTileEntity extends TileEntity implements IDyeableTileE
     private int color = 10511680;
 
     public ExplorersTentTileEntity() {
-        super(null);
+        super(ModTileEntities.TENT.get());
     }
 
     @Override

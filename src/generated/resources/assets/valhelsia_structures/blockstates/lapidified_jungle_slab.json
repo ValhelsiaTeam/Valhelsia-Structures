@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=top": {
+      "model": "valhelsia_structures:block/lapidified_jungle_slab_top"
+    },
+    "type=bottom": {
+      "model": "valhelsia_structures:block/lapidified_jungle_slab"
+    },
+    "type=double": {
+      "model": "valhelsia_structures:block/lapidified_jungle_planks"
+    }
+  }
+}

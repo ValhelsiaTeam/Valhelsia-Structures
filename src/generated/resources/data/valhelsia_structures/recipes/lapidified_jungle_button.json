@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "valhelsia_structures:lapidified_jungle_planks"
+    }
+  ],
+  "result": {
+    "item": "valhelsia_structures:lapidified_jungle_button"
+  }
+}
