@@ -24,19 +24,6 @@ We are in <strong>beta</strong> phase and will receive new structures and featur
   </a>
 </p>
 
----------------------------------
-<p align="center">
-  <img src="https://zupimages.net/up/20/17/2ssp.png">
-</p>
-
-<p align="center">
-Valhelsia Structures is licensed under a <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/">[Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.]</a>
-</p>
-
-<p align="center">
-  <strong>NOTE:</strong> You can use our mod in your modpack, but you must give credit. <strong>No rehosting of the mod is allowed.</strong>
-</p>
-
 ------------------------------
 
 <p align="center">
