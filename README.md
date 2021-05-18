@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://www.curseforge.com/minecraft/mc-mods/valhelsia-structures">
-    <img border="0" alt="CurseForge" src="https://zupimages.net/up/21/09/u9pk.png">
+    <img border="0" alt="CurseForge" src="https://zupimages.net/up/21/20/k39z.png">
   </a>
 </p>
 
@@ -10,11 +10,17 @@ We are in <strong>beta</strong> phase and will receive new structures and featur
 </p>
 
 <p align="center">
+  <a href="https://valhelsia.net/">
+    <img src="https://img.shields.io/badge/Website-Valhelsia.net-1b1b1b?style=for-the-badge">
+  </a>
   <a href="https://valhelsia.net/discord">
-    <img src="https://img.shields.io/discord/396333981601234944?color=1b1b1b&label=Discord&logo=Discord&style=plastic">
+    <img src="https://img.shields.io/discord/396333981601234944?color=1b1b1b&label=Discord&logo=Discord&style=for-the-badge">
   </a>
   <a href="https://twitter.com/valhelsia">
-    <img src="https://img.shields.io/twitter/follow/valhelsia?color=1b1b1b&label=Twitter&logo=twitter&style=plastic">
+    <img src="https://img.shields.io/twitter/follow/valhelsia?color=1b1b1b&label=Twitter&logo=twitter&style=for-the-badge">
+  </a>
+  <a href="https://github.com/ValhelsiaTeam">
+    <img src="https://img.shields.io/badge/GitHub-ValhelsiaTeam-1b1b1b?logo=GitHub&style=for-the-badge">
   </a>
 </p>
 
