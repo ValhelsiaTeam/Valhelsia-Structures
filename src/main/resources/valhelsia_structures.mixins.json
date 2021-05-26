@@ -7,7 +7,6 @@
   "mixins": [
     "AbstractBlockStateMixin",
     "BeehiveBlockMixin",
-    "BlockModelRendererMixin",
     "BucketItemMixin",
     "CatEntityMixin",
     "DoublePlantBlockPlacerMixin",
@@ -20,6 +19,7 @@
     "WallTorchBlockMixin"
   ],
   "client": [
+    "BlockModelRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
