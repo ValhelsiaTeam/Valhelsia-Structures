@@ -4,19 +4,21 @@ import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.init.ModStructureFeatures;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
+
+import javax.annotation.Nonnull;
 
 /**
  * Spawner Dungeon Structure
  * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.SpawnerDungeonStructure
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.0.2
  * @since 2020-05-27
  */
-
 public class SpawnerDungeonStructure extends AbstractValhelsiaStructure {
 
     public SpawnerDungeonStructure(Codec<VillageConfig> villageConfigCodec) {
@@ -44,6 +46,12 @@ public class SpawnerDungeonStructure extends AbstractValhelsiaStructure {
     @Override
     public StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature() {
         return ModStructureFeatures.SPAWNER_DUNGEON;
+    }
+
+    @Nonnull
+    @Override
+    public GenerationStage.Decoration getDecorationStage() {
+        return GenerationStage.Decoration.UNDERGROUND_STRUCTURES;
     }
 
     @Override

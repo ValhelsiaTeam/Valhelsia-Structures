@@ -5,7 +5,6 @@ import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.init.ModStructures;
-import com.stal111.valhelsia_structures.utils.StructureType;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
 import com.stal111.valhelsia_structures.world.structures.start.ValhelsiaStructureStart;
 import net.minecraft.util.ResourceLocation;
@@ -18,12 +17,15 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
 import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.valhelsia.valhelsia_core.world.IValhelsiaStructure;
+import net.valhelsia.valhelsia_core.world.ValhelsiaJigsawStructure;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -40,19 +42,17 @@ import java.util.Objects;
  * but can be overridden if needed.
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.0.2
  * @since 2020-03-22
  */
-public abstract class AbstractValhelsiaStructure extends JigsawStructure {
+public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructure {
 
-    private final String name;
     private final int size;
 
     private final StructureConfigEntry structureConfigEntry;
 
     public AbstractValhelsiaStructure(Codec<VillageConfig> codec, String name, int size, StructureConfigEntry structureConfigEntry) {
-        super(codec, 0, true, true);
-        this.name = name;
+        super(codec, name);
         this.size = size;
         this.structureConfigEntry = structureConfigEntry;
     }
@@ -78,11 +78,19 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
         rand.nextInt();
 
         // Check for other structures
-        List<Structure<?>> structures = new ArrayList<>(ModStructures.STRUCTURES_MAP.get(getStructureType()));
+        List<Structure<?>> structures = new ArrayList<>();
 
-        if (getStructureType() == StructureType.SURFACE) {
+        for (IValhelsiaStructure iStructure : ModStructures.MOD_STRUCTURES) {
+            Structure<?> structure = iStructure.getStructure();
+
+            if (structure.getDecorationStage() == this.getDecorationStage() && !(structure instanceof RemovedStructure)) {
+                structures.add(structure);
+            }
+        }
+
+        if (this.getDecorationStage() == GenerationStage.Decoration.SURFACE_STRUCTURES) {
             structures.add(Structure.VILLAGE);
-        } else if (getStructureType() == StructureType.UNDERGROUND) {
+        } else if (this.getDecorationStage() == GenerationStage.Decoration.UNDERGROUND_STRUCTURES) {
             structures.addAll(Arrays.asList(Structure.MINESHAFT, Structure.STRONGHOLD));
         }
 
@@ -90,14 +98,13 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
             return false;
         }
 
-        return rand.nextDouble() < getSpawnChance();
-
+        return rand.nextDouble() < this.getSpawnChance();
     }
 
     @Override
     @Nonnull
     public String getStructureName() {
-        return new ResourceLocation(ValhelsiaStructures.MOD_ID, name).toString();
+        return new ResourceLocation(ValhelsiaStructures.MOD_ID, this.getName()).toString();
     }
 
     protected boolean isSurfaceFlat(@Nonnull ChunkGenerator generator, int chunkX, int chunkZ) {
@@ -117,8 +124,15 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
         return Math.abs(maxHeight - minHeight) <= StructureGenConfig.FLATNESS_DELTA.get();
     }
 
-    public String getName() {
-        return name;
+    @Nonnull
+    @Override
+    public GenerationStage.Decoration getDecorationStage() {
+        return GenerationStage.Decoration.SURFACE_STRUCTURES;
+    }
+
+    @Override
+    public boolean transformsSurroundingLand() {
+        return true;
     }
 
     public int getSize() {
@@ -139,12 +153,13 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
     public abstract int getSeedModifier();
 
-    public double getSpawnChance() {
-        return getStructureConfigEntry().configuredSpawnChance.get();
+    @Override
+    public StructureSeparationSettings getSeparationSettings() {
+        return new StructureSeparationSettings(this.getSpacing(), this.getSeparation(), this.getSeedModifier());
     }
 
-    public StructureType getStructureType() {
-        return StructureType.SURFACE;
+    public double getSpawnChance() {
+        return getStructureConfigEntry().configuredSpawnChance.get();
     }
 
     public abstract StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature();
@@ -193,9 +208,15 @@ public abstract class AbstractValhelsiaStructure extends JigsawStructure {
 
         @Override
         public void func_230364_a_(@Nonnull DynamicRegistries registries, @Nonnull ChunkGenerator generator, @Nonnull TemplateManager manager, int chunkX, int chunkZ, @Nonnull Biome biome, @Nonnull VillageConfig villageConfig) {
-            BlockPos blockpos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
+            BlockPos blockpos = new BlockPos((chunkX << 4) + 7, 0, (chunkZ << 4) + 7);
 
             JigsawManager.func_242837_a(registries, villageConfig, AbstractVillagePiece::new, generator, manager, blockpos, this.components, this.rand, false, true);
+
+            this.components.forEach(structurePiece -> {
+                BlockPos pos = new BlockPos(0, 0, -((AbstractValhelsiaStructure) structure).getSize() * 16 / 2).rotate(structurePiece.getRotation());
+                structurePiece.offset(pos.getX(), pos.getY(), pos.getZ());
+            });
+
             this.recalculateStructureSize();
 
             if (this.height != -1) {

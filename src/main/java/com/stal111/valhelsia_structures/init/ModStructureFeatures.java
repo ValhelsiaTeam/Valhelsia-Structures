@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.init;
 
 import com.stal111.valhelsia_structures.world.structures.pools.*;
 import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.world.gen.FlatGenerationSettings;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -12,7 +13,7 @@ import net.minecraft.world.gen.feature.structure.VillageConfig;
  * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModStructureFeatures
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.0.2
  * @since 2020-09-17
  */
 public class ModStructureFeatures {
@@ -28,6 +29,10 @@ public class ModStructureFeatures {
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> BIG_TREE = register("big_tree", ModStructures.BIG_TREE.get().withConfiguration(new VillageConfig(() -> BigTreePools.PATTERN, 7)));
 
     private static <FC extends IFeatureConfig, F extends Structure<FC>> StructureFeature<FC, F> register(String name, StructureFeature<FC, F> structureFeature) {
+        if (!FlatGenerationSettings.STRUCTURES.containsKey(structureFeature.field_236268_b_)) {
+            FlatGenerationSettings.STRUCTURES.put(structureFeature.field_236268_b_, structureFeature);
+        }
+
         return WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, name, structureFeature);
     }
 }
