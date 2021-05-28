@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.utils;
 
-import com.stal111.valhelsia_structures.world.structures.RemovedStructure;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.SharedSeedRandom;
@@ -22,15 +21,16 @@ import java.util.Random;
 
 /**
  * Structure Utils
- * Valhelsia Structure - com.stal111.valhelsia_structures.utils.StructureUtils
+ * Valhelsia Structures - com.stal111.valhelsia_structures.utils.StructureUtils
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.0.2
  */
 public class StructureUtils {
 
     /**
      * Get Random Direction
+     *
      * @param rand Instance of Random to use.
      * @return A random cardinal direction, of N/S/E/W.
      */
@@ -40,9 +40,10 @@ public class StructureUtils {
 
     /**
      * Gets the lowest height of four corners.
+     *
      * @param world The world to use the heightmap from.
-     * @param x X Coordinate.
-     * @param z Y Coordinate.
+     * @param x     X Coordinate.
+     * @param z     Y Coordinate.
      * @param xSize X Size.
      * @param zSize Z Size.
      * @return The lowest height of the four corners.
@@ -81,19 +82,32 @@ public class StructureUtils {
         return new BlockPos(x + (xOffset / 2), 0, z + (zOffset / 2));
     }
 
+    /**
+     * Checks if other Structures are in the area around the given Structure
+     *
+     * @param structure  The structure to check the area around.
+     * @param generator  The Chunk Generator to get the Separation Settings from.
+     * @param seed       The Seed to use.
+     * @param rand       Instance of Random to use.
+     * @param chunkX     X Chunk Coordinate.
+     * @param chunkZ     Z Chunk Coordinate.
+     * @param structures Structures to check for.
+     * @return True if there are no structures from the list around the given structure.
+     */
     public static boolean checkForOtherStructures(Structure<?> structure, ChunkGenerator generator, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, List<Structure<?>> structures) {
-        for (int k = chunkX - 5; k <= chunkX + 5; ++k) {
-            for (int l = chunkZ - 5; l <= chunkZ + 5; ++l) {
-                for (Structure<?> structure1 : structures) {
-                    if (structure != structure1 && !(structure instanceof RemovedStructure)) {
-                        StructureSeparationSettings separationSettings = generator.func_235957_b_().func_236197_a_(structure1);
-                        if (separationSettings != null) {
-                            ChunkPos structurePos = structure1.getChunkPosForStructure(separationSettings, seed, rand, k, l);
+        for (Structure<?> structure1 : structures) {
+            StructureSeparationSettings separationSettings = generator.func_235957_b_().func_236197_a_(structure1);
 
-                            if (k == structurePos.x && l == structurePos.z) {
-                                return false;
-                            }
-                        }
+            if (separationSettings == null || structure == structure1) {
+                continue;
+            }
+
+            for (int x = chunkX - 5; x <= chunkX + 5; x++) {
+                for (int z = chunkZ - 5; z <= chunkZ + 5; z++) {
+                    ChunkPos structurePos = structure1.getChunkPosForStructure(separationSettings, seed, rand, x, z);
+
+                    if (x == structurePos.x && z == structurePos.z) {
+                        return false;
                     }
                 }
             }
