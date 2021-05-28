@@ -83,7 +83,7 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         for (IValhelsiaStructure iStructure : ModStructures.MOD_STRUCTURES) {
             Structure<?> structure = iStructure.getStructure();
 
-            if (structure.getDecorationStage() == this.getDecorationStage() && !(structure instanceof RemovedStructure)) {
+            if (structure.getDecorationStage() == this.getDecorationStage()) {
                 structures.add(structure);
             }
         }
