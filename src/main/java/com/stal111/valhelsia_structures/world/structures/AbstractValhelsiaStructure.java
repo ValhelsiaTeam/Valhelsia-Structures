@@ -209,10 +209,13 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
 
             JigsawManager.func_242837_a(registries, villageConfig, AbstractVillagePiece::new, generator, manager, blockpos, this.components, this.rand, false, true);
 
-            this.components.forEach(structurePiece -> {
-                BlockPos pos = new BlockPos(0, 0, -((AbstractValhelsiaStructure) structure).getSize() * 16 / 2).rotate(structurePiece.getRotation());
-                structurePiece.offset(pos.getX(), pos.getY(), pos.getZ());
-            });
+            BlockPos pos = null;
+            for (StructurePiece piece : this.components) {
+                if (pos == null) {
+                    pos = new BlockPos(0, 0, -((AbstractValhelsiaStructure) structure).getSize() * 16 / 2).rotate(piece.getRotation());
+                }
+                piece.offset(pos.getX(), pos.getY(), pos.getZ());
+            }
 
             this.recalculateStructureSize();
 
