@@ -30,7 +30,6 @@ import net.valhelsia.valhelsia_core.world.ValhelsiaJigsawStructure;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -78,24 +77,22 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         rand.nextInt();
 
         // Check for other structures
-        List<Structure<?>> structures = new ArrayList<>();
-
-        for (IValhelsiaStructure iStructure : ModStructures.MOD_STRUCTURES) {
-            Structure<?> structure = iStructure.getStructure();
-
-            if (structure.getDecorationStage() == this.getDecorationStage()) {
-                structures.add(structure);
-            }
-        }
-
         if (this.getDecorationStage() == GenerationStage.Decoration.SURFACE_STRUCTURES) {
-            structures.add(Structure.VILLAGE);
-        } else if (this.getDecorationStage() == GenerationStage.Decoration.UNDERGROUND_STRUCTURES) {
-            structures.addAll(Arrays.asList(Structure.MINESHAFT, Structure.STRONGHOLD));
-        }
+            List<Structure<?>> structures = new ArrayList<>();
 
-        if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkX, chunkZ, structures)) {
-            return false;
+            for (IValhelsiaStructure iStructure : ModStructures.MOD_STRUCTURES) {
+                Structure<?> structure = iStructure.getStructure();
+
+                if (structure.getDecorationStage() == this.getDecorationStage()) {
+                    structures.add(structure);
+                }
+            }
+
+            structures.add(Structure.VILLAGE);
+
+            if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkX, chunkZ, structures)) {
+                return false;
+            }
         }
 
         return rand.nextDouble() < this.getSpawnChance();
@@ -223,7 +220,7 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
                 int offset = this.height - this.bounds.minY;
                 this.bounds.offset(0, offset, 0);
 
-                for(StructurePiece structurepiece : this.components) {
+                for (StructurePiece structurepiece : this.components) {
                     structurepiece.offset(0, offset, 0);
                 }
             }
