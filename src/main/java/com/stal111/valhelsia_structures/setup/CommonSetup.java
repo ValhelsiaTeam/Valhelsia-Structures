@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.setup;
 
+import com.stal111.valhelsia_structures.init.ModStructureFeatures;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.init.other.CompostableRegistry;
 import com.stal111.valhelsia_structures.init.other.FlammableRegistry;
@@ -21,6 +22,7 @@ public class CommonSetup {
             CompostableRegistry.register();
 
             ModStructures.setupStructures();
+            ModStructureFeatures.registerStructureFeatures();
         });
     }
 }
