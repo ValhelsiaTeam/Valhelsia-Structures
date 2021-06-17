@@ -30,6 +30,7 @@ import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,8 +69,9 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         return state.get(PART) == DungeonDoorPart.MIDDLE_1;
     }
 
+    @Nonnull
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader world, BlockPos pos, ISelectionContext context) {
+    public VoxelShape getShape(BlockState state, @Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
         VoxelShape shape = state.get(OPEN) ? SHAPE_OPEN : SHAPE;
         if (state.get(OPEN) && state.get(PART).isRight()) {
             shape = VoxelShapeHelper.add(-12.0D, 0.0D, 0.0D, -12.0D, 0.0D, 0.0D, shape);
@@ -77,8 +79,9 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         return state.get(OPEN) && state.get(PART).isMiddle() ? VoxelShapes.empty() : VoxelShapeHelper.rotateShapeDirection(shape, state.get(FACING));
     }
 
+    @Nonnull
     @Override
-    public BlockRenderType getRenderType(BlockState state) {
+    public BlockRenderType getRenderType(@Nonnull BlockState state) {
         return BlockRenderType.INVISIBLE;
     }
 
@@ -102,20 +105,21 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
                 }
             }
         }
-        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
-        boolean flag = fluidstate.getFluid() == Fluids.WATER;
+        FluidState fluidState = context.getWorld().getFluidState(context.getPos());
+        boolean flag = fluidState.getFluid() == Fluids.WATER;
 
         return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite()).with(WATERLOGGED, flag);
     }
 
+    @Nonnull
     @Override
-    public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updatePostPlacement(BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld world, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
         if (state.get(WATERLOGGED)) {
             world.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
         }
 
         if (!state.isValidPosition(world, currentPos)) {
-            this.breakDoor((World) world, currentPos, state, null);
+            this.breakDoor(world, currentPos, state, null);
             return Blocks.AIR.getDefaultState();
         }
 
@@ -123,7 +127,7 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+    public void onBlockPlacedBy(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
         for (Position position : Position.values()) {
             for (int i = 0; i < 4; i++) {
                 BlockPos pos1 = pos.up(i);
@@ -142,8 +146,9 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         }
     }
 
+    @Nonnull
     @Override
-    public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockRayTraceResult hit) {
+    public ActionResultType onBlockActivated(BlockState state, World world, @Nonnull BlockPos pos, @Nonnull PlayerEntity player, @Nonnull Hand hand, @Nonnull BlockRayTraceResult hit) {
         boolean open = !state.get(OPEN);
 
         Map<BlockPos, BlockState> map = new HashMap<>();
@@ -186,7 +191,7 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
     }
 
     @Override
-    public void onBlockHarvested(World world, BlockPos pos, BlockState state, PlayerEntity player) {
+    public void onBlockHarvested(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull PlayerEntity player) {
         this.breakDoor(world, pos, state, player);
     }
 
@@ -204,11 +209,13 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         return stateDown.isIn(this);
     }
 
+    @Nonnull
     @Override
     public BlockState rotate(BlockState state, Rotation rot) {
         return state.with(FACING, rot.rotate(state.get(FACING)));
     }
 
+    @Nonnull
     @Override
     public BlockState mirror(BlockState state, Mirror mirror) {
         return state.rotate(mirror.toRotation(state.get(FACING)));
@@ -234,7 +241,7 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         return true;
     }
 
-    private void breakDoor(World world, BlockPos pos, BlockState state, @Nullable PlayerEntity player) {
+    private void breakDoor(IWorld world, BlockPos pos, BlockState state, @Nullable PlayerEntity player) {
         BlockPos mainPos = getMainBlock(pos, state);
 
         if (world.isRemote() || (player != null && !player.abilities.isCreativeMode)) {
@@ -266,8 +273,9 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         }
     }
 
+    @Nonnull
     @Override
-    public PushReaction getPushReaction(BlockState state) {
+    public PushReaction getPushReaction(@Nonnull BlockState state) {
         return PushReaction.BLOCK;
     }
 
@@ -286,6 +294,7 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         builder.add(FACING, PART, OPEN, WATERLOGGED);
     }
 
+    @Nonnull
     @Override
     public FluidState getFluidState(BlockState state) {
         return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
