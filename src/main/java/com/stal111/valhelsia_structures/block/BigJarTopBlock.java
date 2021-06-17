@@ -51,7 +51,7 @@ public class BigJarTopBlock extends Block implements IWaterLoggable {
     @Nonnull
     @Override
     public BlockRenderType getRenderType(@Nonnull BlockState state) {
-        return BlockRenderType.INVISIBLE;
+        return BlockRenderType.MODEL;
     }
 
     @Nonnull
