@@ -35,11 +35,21 @@ import javax.annotation.Nullable;
 @Mixin(BucketItem.class)
 public abstract class BucketItemMixin {
 
-    @Shadow protected abstract void playEmptySound(@Nullable PlayerEntity player, IWorld worldIn, BlockPos pos);
+    @Shadow(remap = false)
+    @Final
+    private Fluid containedBlock;
 
-    @Shadow @Final private Fluid containedBlock;
+    @Shadow(remap = false)
+    protected abstract void playEmptySound(@Nullable PlayerEntity player, IWorld worldIn, BlockPos pos);
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/block/material/Material;isLiquid()Z", shift = At.Shift.BEFORE), method = "tryPlaceContainedLiquid", cancellable = true)
+    @Inject(
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/block/material/Material;isLiquid()Z",
+                    shift = At.Shift.BEFORE), method = "tryPlaceContainedLiquid",
+            remap = false,
+            cancellable = true
+    )
     private void valhelsia_placeDousedTorch(PlayerEntity player, World world, BlockPos pos, BlockRayTraceResult rayTrace, CallbackInfoReturnable<Boolean> cir) {
         BlockState state = world.getBlockState(pos);
 
