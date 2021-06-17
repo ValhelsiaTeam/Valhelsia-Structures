@@ -83,5 +83,9 @@ public class ModStructures {
                 }
             });
         }
+
+        // Fix missing Structure Start log spam
+        Structure.NAME_STRUCTURE_BIMAP.put(Objects.requireNonNull(ModStructures.SMALL_CASTLE.get().getRegistryName()).toString(), SMALL_CASTLE.get());
+        Structure.NAME_STRUCTURE_BIMAP.put(Objects.requireNonNull(ModStructures.SMALL_DUNGEON.get().getRegistryName()).toString(), SMALL_DUNGEON.get());
     }
 }
