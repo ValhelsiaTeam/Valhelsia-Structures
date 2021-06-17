@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.BigJarBlock
  *
  * @author Valhelsia Team
- * @version 0.1.1
+ * @version 0.1.3
  * @since 2021-04-17
  */
 public class BigJarBlock extends Block implements IWaterLoggable {
@@ -62,13 +62,14 @@ public class BigJarBlock extends Block implements IWaterLoggable {
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         BlockPos pos = context.getPos();
+        World world = context.getWorld();
 
-        if (pos.getY() > context.getWorld().getHeight() - 2) {
+        if (pos.getY() > world.getHeight() - 2 || !world.getBlockState(pos.up()).isAir()) {
             return null;
         }
 
-        FluidState fluidstate = context.getWorld().getFluidState(pos);
-        boolean flag = fluidstate.getFluid() == Fluids.WATER;
+        FluidState fluidState = world.getFluidState(pos);
+        boolean flag = fluidState.getFluid() == Fluids.WATER;
         return this.getDefaultState().with(WATERLOGGED, flag).with(ROTATION, MathHelper.floor((double) ((180.0F + context.getPlacementYaw()) * 8.0F / 360.0F) + 0.5D) & 7);
     }
 
