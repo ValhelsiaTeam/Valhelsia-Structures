@@ -5,11 +5,8 @@ import com.stal111.valhelsia_structures.config.ConfigValidator;
 import com.stal111.valhelsia_structures.init.ModRecipes;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
-import com.stal111.valhelsia_structures.init.other.FireExtinguishRegistry;
-import com.stal111.valhelsia_structures.init.other.FlintAndSteelRegistry;
 import com.stal111.valhelsia_structures.setup.ClientSetup;
 import com.stal111.valhelsia_structures.setup.CommonSetup;
-import com.stal111.valhelsia_structures.world.structures.pools.*;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -17,7 +14,6 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLPaths;
 import net.valhelsia.valhelsia_core.registry.EntityRegistryHelper;
@@ -58,7 +54,6 @@ public class ValhelsiaStructures {
         REGISTRY_MANAGER.register(eventBus);
 
         // Event Listeners
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonSetup::setup);
 
         // Config
@@ -68,16 +63,5 @@ public class ValhelsiaStructures {
         Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MOD_ID + "-common.toml").toString());
 
         MinecraftForge.EVENT_BUS.register(this);
-    }
-
-    private void setup(final FMLCommonSetupEvent event) {
-        FlintAndSteelRegistry.register();
-        FireExtinguishRegistry.register();
-
-        SpawnerDungeonPools.load();
-        MobPools.load();
-        PlayerHousePools.load();
-        DesertHousePools.load();
-        BigTreePools.load();
     }
 }
