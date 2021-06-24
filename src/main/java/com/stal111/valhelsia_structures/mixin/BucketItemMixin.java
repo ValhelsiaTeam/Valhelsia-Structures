@@ -29,17 +29,17 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.mixin.BucketItemMixin
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 0.1.3
  * @since 2021-01-09
  */
 @Mixin(BucketItem.class)
 public abstract class BucketItemMixin {
 
-    @Shadow(remap = false)
+    @Shadow
     @Final
     private Fluid containedBlock;
 
-    @Shadow(remap = false)
+    @Shadow
     protected abstract void playEmptySound(@Nullable PlayerEntity player, IWorld worldIn, BlockPos pos);
 
     @Inject(
@@ -47,7 +47,6 @@ public abstract class BucketItemMixin {
                     value = "INVOKE",
                     target = "Lnet/minecraft/block/material/Material;isLiquid()Z",
                     shift = At.Shift.BEFORE), method = "tryPlaceContainedLiquid",
-            remap = false,
             cancellable = true
     )
     private void valhelsia_placeDousedTorch(PlayerEntity player, World world, BlockPos pos, BlockRayTraceResult rayTrace, CallbackInfoReturnable<Boolean> cir) {
