@@ -7,12 +7,14 @@ import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
 import com.stal111.valhelsia_structures.world.structures.start.ValhelsiaStructureStart;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.util.registry.DynamicRegistries;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.provider.BiomeProvider;
@@ -31,7 +33,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Abstract Valhelsia Structure
@@ -62,18 +63,22 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
             return false;
         }
 
-        // Check the entire size of the structure to see if it's all a viable biome & check for blacklisted biomes
-        for (Biome biome1 : provider.getBiomes(chunkX * 16 + 9, generator.getSeaLevel(), chunkZ * 16 + 9, getSize() * 16 / 2)) {
-            if (biome1.getRegistryName() != null) {
-                if (!biome1.getGenerationSettings().hasStructure(this) || StructureGenConfig.BLACKLISTED_BIOMES.get().contains(Objects.requireNonNull(biome1.getRegistryName()).toString())) {
-                    return false;
-                }
+        int x = chunkX >> 4;
+        int z = chunkZ >> 4;
+
+        if (!this.canGenerateOnWater()) {
+            BlockPos centerOfChunk = new BlockPos(x + 7, 0, z + 7);
+            int landHeight = generator.getHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Type.WORLD_SURFACE_WG);
+
+            IBlockReader columnOfBlocks = generator.func_230348_a_(centerOfChunk.getX(), centerOfChunk.getZ());
+            BlockState topBlock = columnOfBlocks.getBlockState(centerOfChunk.up(landHeight));
+
+            if (!topBlock.getFluidState().isEmpty()) {
+                return false;
             }
         }
 
-        int i = chunkX >> 4;
-        int j = chunkZ >> 4;
-        rand.setSeed((long) (i ^ j << 4) ^ seed);
+        rand.setSeed((long) (x ^ z << 4) ^ seed);
         rand.nextInt();
 
         // Check for other structures
@@ -163,6 +168,10 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
 
     public boolean checkSurface() {
         return true;
+    }
+
+    public boolean canGenerateOnWater() {
+        return false;
     }
 
     @Nullable

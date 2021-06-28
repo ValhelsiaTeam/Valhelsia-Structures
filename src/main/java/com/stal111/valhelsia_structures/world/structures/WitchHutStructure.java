@@ -55,4 +55,9 @@ public class WitchHutStructure extends AbstractValhelsiaStructure {
     public int getMargin() {
         return 3;
     }
+
+    @Override
+    public boolean canGenerateOnWater() {
+        return true;
+    }
 }
