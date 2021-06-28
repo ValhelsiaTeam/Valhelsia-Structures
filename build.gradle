@@ -49,8 +49,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
             arg "-mixin.config=valhelsia_structures.mixins.json"
-            jvmArg "-Dmixin.env.disableRefMap=true"
 
             mods {
                 valhelsia_structures {
@@ -68,8 +70,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
             arg "-mixin.config=valhelsia_structures.mixins.json"
-            jvmArg "-Dmixin.env.disableRefMap=true"
 
             mods {
                 valhelsia_structures {
