@@ -19,10 +19,9 @@ import java.util.List;
  * Valhelsia Structures - com.stal111.valhelsia_structures.event.BiomeLoadingListener
  *
  * @author Valhelsia Team
- * @version 16.0.3
+ * @version 0.1.3
  * @since 2020-09-17
  */
-
 @Mod.EventBusSubscriber
 public class BiomeLoadingListener {
 
@@ -32,9 +31,12 @@ public class BiomeLoadingListener {
         Biome.Category category = event.getCategory();
 
         if (name != null) {
+
             // Check Blacklist
-            if (StructureGenConfig.BLACKLISTED_BIOMES.get().contains(name.toString())) {
-                return;
+            for (String biome : StructureGenConfig.BLACKLISTED_BIOMES.get()) {
+                if (biome.equals(name.toString()) || checkWildcard(biome, name.toString())) {
+                    return;
+                }
             }
 
             // Add Structures
@@ -51,11 +53,31 @@ public class BiomeLoadingListener {
         }
     }
 
+    private static boolean checkWildcard(String blacklistedBiome, String biome) {
+        if (blacklistedBiome.startsWith("*") && blacklistedBiome.endsWith("*")) {
+            return biome.contains(blacklistedBiome.substring(1, blacklistedBiome.length() - 1));
+        } else if (blacklistedBiome.startsWith("*")) {
+            return biome.endsWith(blacklistedBiome.substring(1));
+        } else if (blacklistedBiome.endsWith("*")) {
+            return biome.startsWith(blacklistedBiome.substring(0, blacklistedBiome.length() - 1));
+        }
+        return false;
+    }
+
     private static boolean checkBiome(List<? extends String> allowedBiomeCategories, List<? extends String> blacklistedBiomes, ResourceLocation name, Biome.Category category) {
         boolean flag = allowedBiomeCategories.contains(category.getName());
 
         if (!blacklistedBiomes.isEmpty() && flag) {
             flag = !blacklistedBiomes.contains(name.toString());
+
+            if (flag) {
+                for (String biome : blacklistedBiomes) {
+                    if (checkWildcard(biome, name.toString())) {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
         }
 
         return flag;

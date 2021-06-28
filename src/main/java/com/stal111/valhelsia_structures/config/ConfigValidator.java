@@ -16,7 +16,7 @@ import java.util.Arrays;
  * Valhelsia Structures - com.stal111.valhelsia_structures.config.ConfigValidator
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 0.1.3
  * @since 2021-02-16
  */
 public class ConfigValidator extends AbstractConfigValidator {
@@ -28,19 +28,25 @@ public class ConfigValidator extends AbstractConfigValidator {
             StructureConfigEntry configEntry = structure.getStructureConfigEntry();
 
             if ((configEntry.configuredSpacing.get() - configEntry.configuredSeparation.get()) <= 0) {
-                addError(new TranslationTextComponent("gui.valhelsia_structures.config.spacing_error"), "structures." + structure.getName() + ".spacing", new TranslationTextComponent("gui.valhelsia_structures.config.spacing_solution", configEntry.configuredSeparation.get() + 1));
+                this.addError(new TranslationTextComponent("gui.valhelsia_structures.config.spacing_error"), "structures." + structure.getName() + ".spacing", new TranslationTextComponent("gui.valhelsia_structures.config.spacing_solution", configEntry.configuredSeparation.get() + 1));
             }
 
             for (String string : configEntry.configuredBiomeCategories.get()) {
                 if (Arrays.stream(Biome.Category.values()).noneMatch(category -> category.getName().equals(string))) {
-                    addError(new TranslationTextComponent("gui.valhelsia_structures.config.invalid_biome_category").appendString(" " + string), "structures." + structure.getName() + ".biome_categories", new TranslationTextComponent("gui.valhelsia_core.config.ignoring"));
+                    this.addError(new TranslationTextComponent("gui.valhelsia_structures.config.invalid_biome_category").appendString(" " + string), "structures." + structure.getName() + ".biome_categories", new TranslationTextComponent("gui.valhelsia_core.config.ignoring"));
                 }
             }
 
-            for (String string : configEntry.configuredBlacklistedBiomes.get()) {
-                if (!ForgeRegistries.BIOMES.containsKey(new ResourceLocation(string))) {
-                    addError(new TranslationTextComponent("gui.valhelsia_structures.config.invalid_blacklisted_biome").appendString(" " + string), "structures." + structure.getName() + ".blacklisted_biomes", new TranslationTextComponent("gui.valhelsia_core.config.ignoring"));
+            for (String biome : configEntry.configuredBlacklistedBiomes.get()) {
+                if (!biome.contains("*") && !ForgeRegistries.BIOMES.containsKey(new ResourceLocation(biome))) {
+                    this.addError(new TranslationTextComponent("gui.valhelsia_structures.config.invalid_blacklisted_biome").appendString(" " + biome), "structures." + structure.getName() + ".blacklisted_biomes", new TranslationTextComponent("gui.valhelsia_core.config.ignoring"));
                 }
+            }
+        }
+
+        for (String biome : StructureGenConfig.BLACKLISTED_BIOMES.get()) {
+            if (!biome.contains("*") && !ForgeRegistries.BIOMES.containsKey(new ResourceLocation(biome))) {
+                this.addError(new TranslationTextComponent("gui.valhelsia_structures.config.invalid_blacklisted_biome").appendString(" " + biome), "structures.global.blacklisted_biomes", new TranslationTextComponent("gui.valhelsia_core.config.ignoring"));
             }
         }
     }

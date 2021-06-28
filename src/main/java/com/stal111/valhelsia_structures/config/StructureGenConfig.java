@@ -18,7 +18,7 @@ import java.util.Locale;
  * Valhelsia Structures - com.stal111.valhelsia_structures.config.StructureGenConfig
  *
  * @author Valhelsia Team
- * @version 1.0.2
+ * @version 0.1.3
  * @since 2020-05-29
  */
 
@@ -52,6 +52,6 @@ public class StructureGenConfig {
     }
 
     private static boolean validateBiome(Object o) {
-        return o == null || ForgeRegistries.BIOMES.containsKey(new ResourceLocation((String) o));
+        return o == null || ((String) o).contains("*") || ForgeRegistries.BIOMES.containsKey(new ResourceLocation((String) o));
     }
 }
