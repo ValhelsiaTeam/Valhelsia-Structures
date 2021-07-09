@@ -63,11 +63,8 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
             return false;
         }
 
-        int x = chunkX >> 4;
-        int z = chunkZ >> 4;
-
         if (!this.canGenerateOnWater()) {
-            BlockPos centerOfChunk = new BlockPos(x + 7, 0, z + 7);
+            BlockPos centerOfChunk = new BlockPos(chunkX << 4 + 7, 0, chunkZ << 4 + 7);
             int landHeight = generator.getHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Type.WORLD_SURFACE_WG);
 
             IBlockReader columnOfBlocks = generator.func_230348_a_(centerOfChunk.getX(), centerOfChunk.getZ());
@@ -78,7 +75,7 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
             }
         }
 
-        rand.setSeed((long) (x ^ z << 4) ^ seed);
+        rand.setSeed((long) ((chunkX >> 4) ^ (chunkZ >> 4) << 4) ^ seed);
         rand.nextInt();
 
         // Check for other structures
