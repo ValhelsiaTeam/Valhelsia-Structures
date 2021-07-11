@@ -39,14 +39,8 @@ public class ModStructures {
     public static final RegistryObject<WitchHutStructure> WITCH_HUT = register(new WitchHutStructure(VillageConfig.field_236533_a_));
     public static final RegistryObject<BigTreeStructure> BIG_TREE = register(new BigTreeStructure(VillageConfig.field_236533_a_));
 
-    // Removed Structures - these prevent crashes related to a vanilla bug.
-    public static final RegistryObject<RemovedStructure> SMALL_CASTLE = register(new RemovedStructure(VillageConfig.field_236533_a_, "small_castle"));
-    public static final RegistryObject<RemovedStructure> SMALL_DUNGEON = register(new RemovedStructure(VillageConfig.field_236533_a_, "small_dungeon"));
-
     private static <T extends AbstractValhelsiaStructure> RegistryObject<T> register(T structure) {
-        if (!(structure instanceof RemovedStructure)) {
-            MOD_STRUCTURES.add(structure);
-        }
+        MOD_STRUCTURES.add(structure);
         return STRUCTURES.register(structure.getName(), () -> structure);
     }
 
@@ -83,9 +77,5 @@ public class ModStructures {
                 }
             });
         }
-
-        // Fix missing Structure Start log spam
-        Structure.NAME_STRUCTURE_BIMAP.put(Objects.requireNonNull(ModStructures.SMALL_CASTLE.get().getRegistryName()).toString(), SMALL_CASTLE.get());
-        Structure.NAME_STRUCTURE_BIMAP.put(Objects.requireNonNull(ModStructures.SMALL_DUNGEON.get().getRegistryName()).toString(), SMALL_DUNGEON.get());
     }
 }
