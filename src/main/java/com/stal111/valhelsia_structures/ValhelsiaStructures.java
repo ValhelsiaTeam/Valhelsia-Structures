@@ -7,6 +7,7 @@ import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.init.ModTileEntities;
 import com.stal111.valhelsia_structures.setup.ClientSetup;
 import com.stal111.valhelsia_structures.setup.CommonSetup;
+import com.stal111.valhelsia_structures.utils.LogFilter;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -63,5 +64,12 @@ public class ValhelsiaStructures {
         Config.loadConfig(Config.COMMON_CONFIG, FMLPaths.CONFIGDIR.get().resolve(MOD_ID + "-common.toml").toString());
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        Logger rootLogger = LogManager.getRootLogger();
+        if (rootLogger instanceof org.apache.logging.log4j.core.Logger) {
+            ((org.apache.logging.log4j.core.Logger) rootLogger).addFilter(new LogFilter());
+        } else {
+            LOGGER.error("Log Filter registration failed with unexpected class: {}", rootLogger.getClass());
+        }
     }
 }
