@@ -98,10 +98,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> DIORITE = HELPER.register("diorite", new ValhelsiaStoneBlock(() -> Blocks.DIORITE, AbstractBlock.Properties.from(Blocks.DIORITE).lootFrom(Blocks.DIORITE)));
     public static final RegistryObject<Block> ANDESITE = HELPER.register("andesite", new ValhelsiaStoneBlock(() -> Blocks.ANDESITE, AbstractBlock.Properties.from(Blocks.ANDESITE).lootFrom(Blocks.ANDESITE)));
     // grass block on which features cannot generate
-    public static final RegistryObject<Block> GRASS_BLOCK = HELPER.register("grass_block", new ValhelsiaGrassBlock(Block.Properties.from(Blocks.GRASS_BLOCK).lootFrom(Blocks.GRASS_BLOCK)), ValhelsiaRenderType.CUTOUT);
+    public static final RegistryObject<Block> GRASS_BLOCK = HELPER.register("grass_block", new ValhelsiaGrassBlock(Block.Properties.from(Blocks.GRASS_BLOCK).harvestTool(ToolType.SHOVEL).lootFrom(Blocks.GRASS_BLOCK)), ValhelsiaRenderType.CUTOUT);
     // dirt that wont transform into grass blocks
-    public static final RegistryObject<Block> DIRT = HELPER.register("dirt", new ValhelsiaStoneBlock(() -> Blocks.DIRT, Block.Properties.from(Blocks.DIRT).lootFrom(Blocks.DIRT)));
-    public static final RegistryObject<Block> COARSE_DIRT = HELPER.register("coarse_dirt", new ValhelsiaStoneBlock(() -> Blocks.COARSE_DIRT, Block.Properties.from(Blocks.COARSE_DIRT).lootFrom(Blocks.COARSE_DIRT)));
+    public static final RegistryObject<Block> DIRT = HELPER.register("dirt", new ValhelsiaStoneBlock(() -> Blocks.DIRT, Block.Properties.from(Blocks.DIRT).harvestTool(ToolType.SHOVEL).lootFrom(Blocks.DIRT)));
+    public static final RegistryObject<Block> COARSE_DIRT = HELPER.register("coarse_dirt", new ValhelsiaStoneBlock(() -> Blocks.COARSE_DIRT, Block.Properties.from(Blocks.COARSE_DIRT).harvestTool(ToolType.SHOVEL).lootFrom(Blocks.COARSE_DIRT)));
 
     private static List<RegistryObject<JarBlock>> registerColoredGlazedJars() {
         List<RegistryObject<JarBlock>> list = new ArrayList<>();
