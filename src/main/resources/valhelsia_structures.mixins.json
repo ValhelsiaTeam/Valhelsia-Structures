@@ -6,7 +6,6 @@
   "refmap": "valhelsia_structures.refmap.json",
   "mixins": [
     "AbstractBlockStateMixin",
-    "BeehiveBlockMixin",
     "BucketItemMixin",
     "CatEntityMixin",
     "DoublePlantBlockPlacerMixin",
