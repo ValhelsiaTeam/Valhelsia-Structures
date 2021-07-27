@@ -154,36 +154,32 @@ public class DungeonDoorBlock extends Block implements IWaterLoggable {
         Map<BlockPos, BlockState> map = new HashMap<>();
         boolean canOpen = true;
 
-        BlockPos mainPos = this.getMainBlock(pos, state);
-
         if (!world.isRemote()) {
             for (Position position : Position.values()) {
-                for (int k = 0; k < 4; k++) {
-                    BlockPos pos1 = mainPos.up(k);
-                    if (position != Position.MIDDLE) {
-                        pos1 = pos1.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
+                for (int i = 0; i < 4; i++) {
+                    BlockPos offsetPos = this.getMainBlock(pos, state).up(i);
 
-                        BlockPos pos2 = pos1.offset(state.get(FACING));
+                    if (position != Position.MIDDLE) {
+                        offsetPos = offsetPos.offset(Direction.fromAngle(state.get(FACING).getHorizontalAngle() + position.getDirection().getHorizontalAngle()));
+                        BlockPos leafPos = offsetPos.offset(state.get(FACING));
+
                         if (open) {
-                            if (!world.getBlockState(pos2).isReplaceable(new BlockItemUseContext(player, hand, new ItemStack(ModBlocks.DUNGEON_DOOR.get()), hit))) {
+                            if (!world.getBlockState(leafPos).isReplaceable(new BlockItemUseContext(player, hand, new ItemStack(ModBlocks.DUNGEON_DOOR.get()), hit))) {
                                 canOpen = false;
                             }
-                            map.put(pos2, ModBlocks.DUNGEON_DOOR_LEAF.get().getDefaultState()
+                            map.put(leafPos, ModBlocks.DUNGEON_DOOR_LEAF.get().getDefaultState()
                                     .with(HorizontalBlock.HORIZONTAL_FACING, state.get(FACING))
                                     .with(ModBlockStateProperties.MIRRORED, position == Position.RIGHT)
-                                    .with(BlockStateProperties.WATERLOGGED, world.getBlockState(pos2).getBlock() == Blocks.WATER));
+                                    .with(BlockStateProperties.WATERLOGGED, world.getBlockState(leafPos).getBlock() == Blocks.WATER));
                         } else {
-                            map.put(pos2, world.getBlockState(pos2).get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState());
+                            map.put(leafPos, world.getBlockState(leafPos).get(WATERLOGGED) ? Blocks.WATER.getDefaultState() : Blocks.AIR.getDefaultState());
                         }
                     }
-                    if (pos1 != pos) {
-                        map.put(pos1, world.getBlockState(pos1).with(OPEN, open));
-                    }
+                    map.put(offsetPos, world.getBlockState(offsetPos).with(OPEN, open));
                 }
             }
         }
         if (canOpen) {
-            world.setBlockState(pos, state, 10);
             map.forEach((blockPos, blockState) -> world.setBlockState(blockPos, blockState, blockState == Blocks.AIR.getDefaultState() ? 35 : 10));
         }
 
