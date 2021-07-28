@@ -16,6 +16,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 
+import javax.annotation.Nonnull;
+
 /**
  * Giant Fern Tile Entity Renderer
  * Valhelsia Structures - com.stal111.valhelsia_structures.tileentity.renderer.GiantFernTileEntityRenderer
@@ -35,7 +37,7 @@ public class DungeonDoorTileEntityRenderer extends TileEntityRenderer<DungeonDoo
     }
 
     @Override
-    public void render(DungeonDoorTileEntity tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
+    public void render(DungeonDoorTileEntity tileEntity, float partialTicks, @Nonnull MatrixStack matrixStack, @Nonnull IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
         if (tileEntity.getBlockState().get(ModBlockStateProperties.DUNGEON_DOOR_PART) != DungeonDoorPart.MIDDLE_1) return;
 
         boolean flag = tileEntity.getWorld() != null;
@@ -56,5 +58,10 @@ public class DungeonDoorTileEntityRenderer extends TileEntityRenderer<DungeonDoo
         model.render(matrixStack, buffer.getBuffer(model.getRenderType(TEXTURE)), combinedLight, combinedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
 
         matrixStack.pop();
+    }
+
+    @Override
+    public boolean isGlobalRenderer(@Nonnull DungeonDoorTileEntity tileEntity) {
+        return true;
     }
 }
