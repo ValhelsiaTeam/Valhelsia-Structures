@@ -13,6 +13,7 @@ import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
+import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
@@ -64,7 +65,7 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         }
 
         if (!this.canGenerateOnWater()) {
-            BlockPos centerOfChunk = new BlockPos(chunkX << 4 + 7, 0, chunkZ << 4 + 7);
+            BlockPos centerOfChunk = new BlockPos(chunkX << 4, 0, chunkZ << 4);
             int landHeight = generator.getHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Type.WORLD_SURFACE_WG);
 
             IBlockReader columnOfBlocks = generator.func_230348_a_(centerOfChunk.getX(), centerOfChunk.getZ());
@@ -110,8 +111,8 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         // Size of the area to check.
         int offset = getSize() * 16 / 2;
 
-        int xStart = (chunkX << 4);
-        int zStart = (chunkZ << 4);
+        int xStart = chunkX << 4;
+        int zStart = chunkZ << 4;
 
         int i1 = generator.getNoiseHeightMinusOne(xStart, zStart, Heightmap.Type.WORLD_SURFACE_WG);
         int j1 = generator.getNoiseHeightMinusOne(xStart, zStart + offset, Heightmap.Type.WORLD_SURFACE_WG);
@@ -211,16 +212,14 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
 
         @Override
         public void func_230364_a_(@Nonnull DynamicRegistries registries, @Nonnull ChunkGenerator generator, @Nonnull TemplateManager manager, int chunkX, int chunkZ, @Nonnull Biome biome, @Nonnull VillageConfig villageConfig) {
-            BlockPos blockpos = new BlockPos((chunkX << 4) + 7, 0, (chunkZ << 4) + 7);
+            BlockPos pos = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
-            JigsawManager.func_242837_a(registries, villageConfig, AbstractVillagePiece::new, generator, manager, blockpos, this.components, this.rand, false, true);
+            JigsawManager.func_242837_a(registries, villageConfig, AbstractVillagePiece::new, generator, manager, pos, this.components, this.rand, false, true);
 
-            BlockPos pos = null;
-            for (StructurePiece piece : this.components) {
-                if (pos == null) {
-                    pos = new BlockPos(0, 0, -((AbstractValhelsiaStructure) structure).getSize() * 16 / 2).rotate(piece.getRotation());
-                }
-                piece.offset(pos.getX(), pos.getY(), pos.getZ());
+            Vector3i structureCenter = this.components.get(0).getBoundingBox().func_215126_f();
+
+            for (StructurePiece piece : this.components){
+                piece.offset(pos.getX() - structureCenter.getX(), 0, pos.getZ() - structureCenter.getZ());
             }
 
             this.recalculateStructureSize();
