@@ -1,6 +1,10 @@
 package com.stal111.valhelsia_structures.event;
 
+import com.stal111.valhelsia_structures.config.StructureConfigEntry;
+import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.init.ModStructures;
+import com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -13,7 +17,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.valhelsia.valhelsia_core.world.IValhelsiaStructure;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * World Load Listener
@@ -37,11 +43,57 @@ public class WorldLoadListener {
 
             Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkProvider().generator.func_235957_b_().func_236195_a_());
 
-            for (IValhelsiaStructure structure : ModStructures.MOD_STRUCTURES) {
-                tempMap.putIfAbsent(structure.getStructure(), DimensionStructuresSettings.field_236191_b_.get(structure.getStructure()));
+            ResourceLocation currDimension = serverWorld.getDimensionKey().getLocation();
+            for (String dimension : StructureGenConfig.BLACKLISTED_DIMENSIONS.get()) {
+                if (dimension.equals(currDimension.toString()) || checkWildcard(dimension, currDimension.toString())) {
+                    tempMap.keySet().removeAll(ModStructures.MOD_STRUCTURES.stream().map((structure) -> structure.getStructure()).collect(Collectors.toList()));
+                    serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
+                    return;
+                }
+            }
+
+            for (IValhelsiaStructure iStructure : ModStructures.MOD_STRUCTURES) {
+                AbstractValhelsiaStructure structure = (AbstractValhelsiaStructure) iStructure.getStructure();
+                StructureConfigEntry configEntry = structure.getStructureConfigEntry();
+
+                if (checkDimension(configEntry.configuredBlacklistedDimensions.get(), currDimension)) {
+                    tempMap.putIfAbsent(structure.getStructure(), DimensionStructuresSettings.field_236191_b_.get(iStructure.getStructure()));
+                } else {
+                    tempMap.keySet().remove(structure.getStructure());
+                }
             }
 
             serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
         }
+    }
+
+    private static boolean checkWildcard(String blacklistedDimension, String dimension) {
+        if (blacklistedDimension.startsWith("*") && blacklistedDimension.endsWith("*")) {
+            return dimension.contains(blacklistedDimension.substring(1, blacklistedDimension.length() - 1));
+        } else if (blacklistedDimension.startsWith("*")) {
+            return dimension.endsWith(blacklistedDimension.substring(1));
+        } else if (blacklistedDimension.endsWith("*")) {
+            return dimension.startsWith(blacklistedDimension.substring(0, blacklistedDimension.length() - 1));
+        }
+        return false;
+    }
+
+    private static boolean checkDimension(List<? extends String> blacklistedDimensions, ResourceLocation name) {
+        boolean flag = true;
+
+        if (!blacklistedDimensions.isEmpty() && flag) {
+            flag = !blacklistedDimensions.contains(name.toString());
+
+            if (flag) {
+                for (String dimension : blacklistedDimensions) {
+                    if (checkWildcard(dimension, name.toString())) {
+                        flag = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return flag;
     }
 }
