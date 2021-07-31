@@ -60,6 +60,6 @@ public class StructureGenConfig {
     }
 
     private static boolean validateString(Object o) {
-        return o == null || ((String) o).contains("*");
+        return o == null || ((String) o).contains("*") || ((String) o).indexOf(":") >= 0;
     }
 }
