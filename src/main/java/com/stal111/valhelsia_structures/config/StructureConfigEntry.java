@@ -27,6 +27,8 @@ public class StructureConfigEntry {
 
     private final List<String> defaultBiomeCategories;
     public ForgeConfigSpec.ConfigValue<List<? extends String>> configuredBiomeCategories;
+    private final List<String> defaultBlacklistedDimensions;
+    public ForgeConfigSpec.ConfigValue<List<? extends String>> configuredBlacklistedDimensions;
     private final List<String> defaultBlacklistedBiomes;
     public ForgeConfigSpec.ConfigValue<List<? extends String>> configuredBlacklistedBiomes;
 
@@ -36,14 +38,16 @@ public class StructureConfigEntry {
         this.defaultSeparation = separation;
         this.defaultBiomeCategories = Arrays.asList(biomeCategories);
         this.defaultBlacklistedBiomes = Collections.emptyList();
+        this.defaultBlacklistedDimensions = Collections.emptyList();
     }
 
-    public StructureConfigEntry(double spawnChance, int spacing, int separation, List<String> biomeCategories, List<String> blacklistedBiomes) {
+    public StructureConfigEntry(double spawnChance, int spacing, int separation, List<String> biomeCategories, List<String> blacklistedBiomes, List<String> blacklistedDimensions) {
         this.defaultSpawnChance = spawnChance;
         this.defaultSpacing = spacing;
         this.defaultSeparation = separation;
         this.defaultBiomeCategories = biomeCategories;
         this.defaultBlacklistedBiomes = blacklistedBiomes;
+        this.defaultBlacklistedDimensions = blacklistedDimensions;
     }
 
     public double getDefaultSpawnChance() {
@@ -60,6 +64,10 @@ public class StructureConfigEntry {
 
     public List<String> getDefaultBiomeCategories() {
         return defaultBiomeCategories;
+    }
+
+    public List<String> getDefaultBlacklistedDimensions() {
+        return defaultBlacklistedDimensions;
     }
 
     public List<String> getDefaultBlacklistedBiomes() {
