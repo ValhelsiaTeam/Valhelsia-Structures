@@ -23,7 +23,7 @@ public class AbstractBlockStateMixin {
 
     @Inject(at = @At(value = "HEAD"), method = "getOffset", cancellable = true)
     private void valhelsia_placeDousedTorch(IBlockReader access, BlockPos pos, CallbackInfoReturnable<Vector3d> cir) {
-        if (access.getBlockState(pos).getBlock() == ModBlocks.BONE_PILE.get()) {
+        if (access != null && access.getBlockState(pos).getBlock() == ModBlocks.BONE_PILE.get()) {
             cir.setReturnValue(new Vector3d(0.0D, -0.46875D, 0.0D));
         }
     }
