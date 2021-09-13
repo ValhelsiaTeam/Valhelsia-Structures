@@ -11,12 +11,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockReader;
 
+import javax.annotation.Nonnull;
+
 /**
  * Valhelsia Grass Block
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 0.1.6
  * @since 2021-01-06
  */
 public class ValhelsiaGrassBlock extends GrassBlock {
@@ -25,12 +27,18 @@ public class ValhelsiaGrassBlock extends GrassBlock {
         super(properties);
     }
 
+    @Nonnull
+    @Override
+    public String getTranslationKey() {
+        return Blocks.GRASS_BLOCK.getTranslationKey();
+    }
+
     @Override
     public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
         return new ItemStack(Blocks.GRASS_BLOCK);
     }
 
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemGroup(@Nonnull ItemGroup group, @Nonnull NonNullList<ItemStack> items) {
     }
 }

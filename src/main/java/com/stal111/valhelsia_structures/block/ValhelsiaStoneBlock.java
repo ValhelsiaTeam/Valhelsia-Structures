@@ -10,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockReader;
 
+import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
 /**
@@ -17,7 +18,7 @@ import java.util.function.Supplier;
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 0.1.6
  */
 
 public class ValhelsiaStoneBlock extends Block {
@@ -29,16 +30,18 @@ public class ValhelsiaStoneBlock extends Block {
         this.pickBlock = pickBlock;
     }
 
+    @Nonnull
+    @Override
+    public String getTranslationKey() {
+        return this.pickBlock.get().getTranslationKey();
+    }
+
     @Override
     public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
         return new ItemStack(pickBlock.get());
     }
 
-    public Supplier<Block> getPickBlock() {
-        return pickBlock;
-    }
-
     @Override
-    public void fillItemGroup(ItemGroup group, NonNullList<ItemStack> items) {
+    public void fillItemGroup(@Nonnull ItemGroup group, @Nonnull NonNullList<ItemStack> items) {
     }
 }
