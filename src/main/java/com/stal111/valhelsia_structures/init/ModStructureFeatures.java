@@ -34,10 +34,6 @@ public class ModStructureFeatures {
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> BIG_TREE = register(ModStructures.BIG_TREE.get().withConfiguration(new VillageConfig(() -> BigTreePools.PATTERN, 7)));
 
     private static <FC extends IFeatureConfig, F extends Structure<FC>> StructureFeature<FC, F> register(StructureFeature<FC, F> structureFeature) {
-        if (!FlatGenerationSettings.STRUCTURES.containsKey(structureFeature.field_236268_b_)) {
-            FlatGenerationSettings.STRUCTURES.put(structureFeature.field_236268_b_, structureFeature);
-        }
-
         MOD_STRUCTURE_FEATURES.add(structureFeature);
 
         return structureFeature;
@@ -46,6 +42,8 @@ public class ModStructureFeatures {
     public static void registerStructureFeatures() {
         for (StructureFeature<?, ?> structureFeature : MOD_STRUCTURE_FEATURES) {
             WorldGenRegistries.register(WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE, structureFeature.field_236268_b_.getStructureName(), structureFeature);
+
+            FlatGenerationSettings.STRUCTURES.put(structureFeature.field_236268_b_, structureFeature);
         }
     }
 }

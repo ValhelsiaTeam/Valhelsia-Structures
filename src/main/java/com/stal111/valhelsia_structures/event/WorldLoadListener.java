@@ -22,11 +22,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * World Load Listener
+ * World Load Listener <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.event.WorldLoadListener
  *
  * @author Valhelsia Team
- * @version 1.0.2
+ * @version 0.1.6
  * @since 2021-05-28
  */
 @Mod.EventBusSubscriber
@@ -46,7 +46,7 @@ public class WorldLoadListener {
             ResourceLocation currDimension = serverWorld.getDimensionKey().getLocation();
             for (String dimension : StructureGenConfig.BLACKLISTED_DIMENSIONS.get()) {
                 if (dimension.equals(currDimension.toString()) || checkWildcard(dimension, currDimension.toString())) {
-                    tempMap.keySet().removeAll(ModStructures.MOD_STRUCTURES.stream().map((structure) -> structure.getStructure()).collect(Collectors.toList()));
+                    ModStructures.MOD_STRUCTURES.stream().map(IValhelsiaStructure::getStructure).collect(Collectors.toList()).forEach(tempMap.keySet()::remove);
                     serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
                     return;
                 }
@@ -57,9 +57,9 @@ public class WorldLoadListener {
                 StructureConfigEntry configEntry = structure.getStructureConfigEntry();
 
                 if (checkDimension(configEntry.configuredBlacklistedDimensions.get(), currDimension)) {
-                    tempMap.putIfAbsent(structure.getStructure(), DimensionStructuresSettings.field_236191_b_.get(iStructure.getStructure()));
+                    tempMap.putIfAbsent(structure, DimensionStructuresSettings.field_236191_b_.get(structure));
                 } else {
-                    tempMap.keySet().remove(structure.getStructure());
+                    tempMap.keySet().remove(structure);
                 }
             }
 
@@ -81,7 +81,7 @@ public class WorldLoadListener {
     private static boolean checkDimension(List<? extends String> blacklistedDimensions, ResourceLocation name) {
         boolean flag = true;
 
-        if (!blacklistedDimensions.isEmpty() && flag) {
+        if (!blacklistedDimensions.isEmpty()) {
             flag = !blacklistedDimensions.contains(name.toString());
 
             if (flag) {

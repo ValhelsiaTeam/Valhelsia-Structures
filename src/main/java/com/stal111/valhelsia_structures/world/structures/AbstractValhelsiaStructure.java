@@ -36,14 +36,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Abstract Valhelsia Structure
+ * Abstract Valhelsia Structure <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure
  * <p>
  * Serves as a way to reduce duplicate code in structures - this has sensible defaults for most surface structures
  * but can be overridden if needed.
  *
  * @author Valhelsia Team
- * @version 1.0.2
+ * @version 0.1.6
  * @since 2020-03-22
  */
 public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructure {
@@ -60,12 +60,13 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
 
     @Override
     protected boolean func_230363_a_(@Nonnull ChunkGenerator generator, @Nonnull BiomeProvider provider, long seed, @Nonnull SharedSeedRandom rand, int chunkX, int chunkZ, @Nonnull Biome biome, @Nonnull ChunkPos pos, @Nonnull VillageConfig config) {
-        if (this.checkSurface() && !this.isSurfaceFlat(generator, chunkX, chunkZ)) {
+        BlockPos centerOfChunk = new BlockPos(chunkX << 4, 0, chunkZ << 4);
+
+        if (this.checkSurface() && !this.isSurfaceFlat(generator, centerOfChunk.getX(), centerOfChunk.getZ())) {
             return false;
         }
 
         if (!this.canGenerateOnWater()) {
-            BlockPos centerOfChunk = new BlockPos(chunkX << 4, 0, chunkZ << 4);
             int landHeight = generator.getHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Type.WORLD_SURFACE_WG);
 
             IBlockReader columnOfBlocks = generator.func_230348_a_(centerOfChunk.getX(), centerOfChunk.getZ());
@@ -107,19 +108,17 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         return new ResourceLocation(ValhelsiaStructures.MOD_ID, this.getName()).toString();
     }
 
-    protected boolean isSurfaceFlat(@Nonnull ChunkGenerator generator, int chunkX, int chunkZ) {
+    protected boolean isSurfaceFlat(@Nonnull ChunkGenerator generator, int posX, int posZ) {
         // Size of the area to check.
         int offset = getSize() * 16 / 2;
 
-        int xStart = chunkX << 4;
-        int zStart = chunkZ << 4;
+        int height1 = generator.getHeight(posX, posZ, Heightmap.Type.WORLD_SURFACE_WG);
+        int height2 = generator.getHeight(posX, posZ + offset, Heightmap.Type.WORLD_SURFACE_WG);
+        int height3 = generator.getHeight(posX + offset, posZ, Heightmap.Type.WORLD_SURFACE_WG);
+        int height4 = generator.getHeight(posX + offset, posZ + offset, Heightmap.Type.WORLD_SURFACE_WG);
 
-        int i1 = generator.getNoiseHeightMinusOne(xStart, zStart, Heightmap.Type.WORLD_SURFACE_WG);
-        int j1 = generator.getNoiseHeightMinusOne(xStart, zStart + offset, Heightmap.Type.WORLD_SURFACE_WG);
-        int k1 = generator.getNoiseHeightMinusOne(xStart + offset, zStart, Heightmap.Type.WORLD_SURFACE_WG);
-        int l1 = generator.getNoiseHeightMinusOne(xStart + offset, zStart + offset, Heightmap.Type.WORLD_SURFACE_WG);
-        int minHeight = Math.min(Math.min(i1, j1), Math.min(k1, l1));
-        int maxHeight = Math.max(Math.max(i1, j1), Math.max(k1, l1));
+        int minHeight = Math.min(Math.min(height1, height2), Math.min(height3, height4));
+        int maxHeight = Math.max(Math.max(height1, height2), Math.max(height3, height4));
 
         return Math.abs(maxHeight - minHeight) <= StructureGenConfig.FLATNESS_DELTA.get();
     }
@@ -170,12 +169,6 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
 
     public boolean canGenerateOnWater() {
         return false;
-    }
-
-    @Nullable
-    @Override
-    public BlockPos func_236388_a_(@Nonnull IWorldReader world, @Nonnull StructureManager structureManager, @Nonnull BlockPos startPos, int searchRadius, boolean skipExistingChunks, long seed, @Nonnull StructureSeparationSettings settings) {
-        return super.func_236388_a_(world, structureManager, startPos, searchRadius, skipExistingChunks, seed, new StructureSeparationSettings(this.getSpacing(), this.getSeparation(), this.getSeedModifier()));
     }
 
     public boolean hasMargin() {
