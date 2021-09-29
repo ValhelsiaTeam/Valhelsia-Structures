@@ -4,15 +4,18 @@ import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 
 import java.util.Random;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 
 /**
  * Hanging Vines Block
@@ -22,7 +25,7 @@ import java.util.Random;
  * @version 16.0.4
  * @since 2020-10-16
  */
-public class HangingVinesBlock extends AbstractTopPlantBlock {
+public class HangingVinesBlock extends GrowingPlantHeadBlock {
 
     public static final BooleanProperty ATTACHED = ModBlockStateProperties.ATTACHED;
 

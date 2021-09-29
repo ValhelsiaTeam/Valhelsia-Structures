@@ -5,8 +5,8 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.Model;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.model.geom.ModelPart;
 
 /**
  * Tent Model
@@ -17,15 +17,15 @@ import net.minecraft.client.renderer.model.ModelRenderer;
  * @since 2020-12-10
  */
 public class ExplorersTentModel extends Model {
-    public ModelRenderer stick;
-    public ModelRenderer frontStick;
-    public ModelRenderer backStick;
-    public ModelRenderer rightBackHook;
-    public ModelRenderer leftBackHook;
-    public ModelRenderer rightFrontHook;
-    public ModelRenderer leftFrontHook;
-    public ModelRenderer leftSlope;
-    public ModelRenderer rightSlope;
+    public ModelPart stick;
+    public ModelPart frontStick;
+    public ModelPart backStick;
+    public ModelPart rightBackHook;
+    public ModelPart leftBackHook;
+    public ModelPart rightFrontHook;
+    public ModelPart leftFrontHook;
+    public ModelPart leftSlope;
+    public ModelPart rightSlope;
 
     public ExplorersTentModel() {
         super(RenderType::getEntityCutoutNoCull);

@@ -7,6 +7,8 @@ import org.apache.logging.log4j.core.config.plugins.Plugin;
 import org.apache.logging.log4j.core.filter.AbstractFilter;
 import org.apache.logging.log4j.message.Message;
 
+import org.apache.logging.log4j.core.Filter.Result;
+
 /**
  * Log Filter
  * Valhelsia Structures  - com.stal111.valhelsia_structures.utils.LogFilter

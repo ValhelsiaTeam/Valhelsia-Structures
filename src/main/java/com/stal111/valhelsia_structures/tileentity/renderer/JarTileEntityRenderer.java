@@ -1,13 +1,13 @@
 package com.stal111.valhelsia_structures.tileentity.renderer;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.stal111.valhelsia_structures.tileentity.JarTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 
 /**
  * Jar Tile Entity Renderer
@@ -17,14 +17,14 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
  * @version 16.1.0
  * @since 2020-11-13
  */
-public class JarTileEntityRenderer extends TileEntityRenderer<JarTileEntity> {
+public class JarTileEntityRenderer extends BlockEntityRenderer<JarTileEntity> {
 
-    public JarTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
+    public JarTileEntityRenderer(BlockEntityRenderDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
     @Override
-    public void render(JarTileEntity tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer renderTypeBuffer, int combinedLight, int combinedOverlay) {
+    public void render(JarTileEntity tileEntity, float partialTicks, PoseStack matrixStack, MultiBufferSource renderTypeBuffer, int combinedLight, int combinedOverlay) {
         if (tileEntity.hasPlant()) {
             matrixStack.push();
             matrixStack.translate(0.2, 0.45, 0.2);

@@ -3,7 +3,7 @@ package com.stal111.valhelsia_structures.world.structures.pools;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.stal111.valhelsia_structures.utils.JigsawHelper;
-import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
+import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
 
 /**
  * Big Tree Pools
@@ -15,9 +15,9 @@ import net.minecraft.world.gen.feature.jigsaw.JigsawPattern;
  */
 public class BigTreePools {
 
-    public static final JigsawPattern PATTERN = JigsawHelper.register("vegetations/big_trees", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("vegetations/big_tree", 1)));
+    public static final StructureTemplatePool PATTERN = JigsawHelper.register("vegetations/big_trees", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("vegetations/big_tree", 1)));
 
     public static void load() {
-        JigsawHelper.register("vegetations/big_tree/underside", JigsawPattern.PlacementBehaviour.RIGID, ImmutableList.of(Pair.of("vegetations/big_tree_underside", 1)));
+        JigsawHelper.register("vegetations/big_tree/underside", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("vegetations/big_tree_underside", 1)));
     }
 }

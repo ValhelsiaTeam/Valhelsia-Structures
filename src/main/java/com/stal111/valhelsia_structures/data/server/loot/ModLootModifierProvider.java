@@ -3,9 +3,9 @@ package com.stal111.valhelsia_structures.data.server.loot;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.utils.ModTags;
-import net.minecraft.advancements.criterion.StatePropertiesPredicate;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.loot.conditions.ILootCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.valhelsia.valhelsia_core.init.ValhelsiaLootModifiers;
@@ -30,7 +30,7 @@ public class ModLootModifierProvider extends GlobalLootModifierProvider {
     protected void start() {
         add("jar_treasure",
                 ValhelsiaLootModifiers.APPEND_LOOT_MODIFIER.get(),
-                new AppendLootTableModifier(new ILootCondition[] {
+                new AppendLootTableModifier(new LootItemCondition[] {
                         MatchBlockCondition.builder(null, ModTags.Blocks.JARS, StatePropertiesPredicate.Builder.newBuilder().withBoolProp(ModBlockStateProperties.TREASURE, true).build()).build()
                 }, new ResourceLocation(ValhelsiaStructures.MOD_ID, "treasure/jar_treasure"))
         );

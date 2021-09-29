@@ -4,9 +4,9 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.stal111.valhelsia_structures.entity.MossySkeletonEntity;
 import com.stal111.valhelsia_structures.entity.model.MossySkeletonModel;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.LivingRenderer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.projectile.ArrowEntity;
 
@@ -20,11 +20,11 @@ import java.util.Random;
  * @version 16.1.0
  * @since 2021-02-21
  */
-public class MossySkeletonArrowLayer<T extends MossySkeletonEntity> extends LayerRenderer<T, MossySkeletonModel<T>> {
+public class MossySkeletonArrowLayer<T extends MossySkeletonEntity> extends RenderLayer<T, MossySkeletonModel<T>> {
 
-    private final EntityRendererManager entityRendererManager;
+    private final EntityRenderDispatcher entityRendererManager;
 
-    public MossySkeletonArrowLayer(LivingRenderer<T, MossySkeletonModel<T>> entityRenderer) {
+    public MossySkeletonArrowLayer(LivingEntityRenderer<T, MossySkeletonModel<T>> entityRenderer) {
         super(entityRenderer);
         this.entityRendererManager = entityRenderer.getRenderManager();
     }

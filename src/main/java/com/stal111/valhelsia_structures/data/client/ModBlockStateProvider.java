@@ -6,7 +6,7 @@ import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -15,6 +15,9 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.valhelsia.valhelsia_core.data.ValhelsiaBlockStateProvider;
 
 import java.util.Objects;
+
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.IronBarsBlock;
 
 /**
  * Mod Block State Provider
@@ -38,8 +41,8 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
         forEach(block -> block instanceof PostBlock, this::postBlock);
         forEach(block -> block instanceof CutPostBlock, this::cutPostBlock);
-        take(block -> paneBlock((PaneBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);
-        take(block -> paneBlock((PaneBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
+        take(block -> paneBlock((IronBarsBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);
+        take(block -> paneBlock((IronBarsBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
         take(this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);
         forEach(block -> block instanceof JarBlock, this::jarBlock);
         forEach(block -> block instanceof BigJarBlock, this::bigJarBlock);

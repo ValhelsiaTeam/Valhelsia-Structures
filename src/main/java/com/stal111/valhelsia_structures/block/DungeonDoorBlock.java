@@ -13,7 +13,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
@@ -35,6 +35,9 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+
 /**
  * Dungeon Door Block
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.DungeonDoorBlock
@@ -43,7 +46,7 @@ import java.util.Map;
  * @version 16.1.0
  * @since 2021-01-13
  */
-public class DungeonDoorBlock extends Block implements IWaterLoggable {
+public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     public static final EnumProperty<DungeonDoorPart> PART = ModBlockStateProperties.DUNGEON_DOOR_PART;

@@ -1,9 +1,9 @@
 package com.stal111.valhelsia_structures.entity.model;
 
-import net.minecraft.client.renderer.entity.model.SkeletonModel;
+import net.minecraft.client.model.SkeletonModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.IRangedAttackMob;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.world.entity.monster.RangedAttackMob;
+import net.minecraft.world.entity.Mob;
 
 /**
  * Mossy Skeleton Model
@@ -13,7 +13,7 @@ import net.minecraft.entity.MobEntity;
  * @version 16.1.0
  * @since 2021-02-20
  */
-public class MossySkeletonModel<T extends MobEntity & IRangedAttackMob> extends SkeletonModel<T> {
+public class MossySkeletonModel<T extends Mob & RangedAttackMob> extends SkeletonModel<T> {
 
     public MossySkeletonModel() {
         this(0.0F, false);

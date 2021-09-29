@@ -1,16 +1,18 @@
 package com.stal111.valhelsia_structures.mixin;
 
 import com.stal111.valhelsia_structures.utils.TorchTransformationHandler;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.TorchBlock;
-import net.minecraft.fluid.FluidState;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.TorchBlock;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.state.properties.BlockStateProperties;
 import org.spongepowered.asm.mixin.Mixin;
 
 import javax.annotation.Nullable;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 /**
  * Torch Block Mixin
@@ -29,7 +31,7 @@ public class TorchBlockMixin extends Block {
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
         FluidState fluidState = context.getWorld().getFluidState(context.getPos());
         if (fluidState.getFluid() == Fluids.WATER && TorchTransformationHandler.hasDousedVersion(this)) {
             return TorchTransformationHandler.getDousedTorchFor(this).getDefaultState().with(BlockStateProperties.WATERLOGGED, true);

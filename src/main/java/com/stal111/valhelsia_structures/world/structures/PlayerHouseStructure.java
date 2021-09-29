@@ -3,10 +3,10 @@ package com.stal111.valhelsia_structures.world.structures;
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.init.ModStructureFeatures;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 
 /**
  * Player House Structure
@@ -19,13 +19,13 @@ import net.minecraft.world.gen.feature.structure.VillageConfig;
 
 public class PlayerHouseStructure extends AbstractValhelsiaStructure {
 
-    public PlayerHouseStructure(Codec<VillageConfig> villageConfigCodec) {
+    public PlayerHouseStructure(Codec<JigsawConfiguration> villageConfigCodec) {
         super(villageConfigCodec, "player_house", 2,
                 new StructureConfigEntry(0.7D, 30, 8,
-                        Biome.Category.PLAINS.getName(),
-                        Biome.Category.FOREST.getName(),
-                        Biome.Category.EXTREME_HILLS.getName(),
-                        Biome.Category.TAIGA.getName()
+                        Biome.BiomeCategory.PLAINS.getName(),
+                        Biome.BiomeCategory.FOREST.getName(),
+                        Biome.BiomeCategory.EXTREME_HILLS.getName(),
+                        Biome.BiomeCategory.TAIGA.getName()
                 ));
     }
 
@@ -35,7 +35,7 @@ public class PlayerHouseStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature() {
+    public ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> getStructureFeature() {
         return ModStructureFeatures.PLAYER_HOUSE;
     }
 }

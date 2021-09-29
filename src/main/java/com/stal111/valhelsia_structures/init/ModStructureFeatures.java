@@ -4,9 +4,9 @@ import com.stal111.valhelsia_structures.world.structures.pools.*;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.FlatGenerationSettings;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,9 +21,9 @@ import java.util.List;
  */
 public class ModStructureFeatures {
 
-    private static final List<StructureFeature<?, ?>> MOD_STRUCTURE_FEATURES = new ArrayList<>();
+    private static final List<ConfiguredStructureFeature<?, ?>> MOD_STRUCTURE_FEATURES = new ArrayList<>();
 
-    public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> CASTLE = register(ModStructures.CASTLE.get().withConfiguration(new VillageConfig(() -> SimpleStructurePools.CASTLE_PATTERN, 7)));
+    public static final ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> CASTLE = register(ModStructures.CASTLE.get().withConfiguration(new VillageConfig(() -> SimpleStructurePools.CASTLE_PATTERN, 7)));
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> CASTLE_RUIN = register(ModStructures.CASTLE_RUIN.get().withConfiguration(new VillageConfig(() -> SimpleStructurePools.CASTLE_RUIN_PATTERN, 7)));
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> DESERT_HOUSE = register(ModStructures.DESERT_HOUSE.get().withConfiguration(new VillageConfig(() -> DesertHousePools.PATTERN, 7)));
     public static final StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> FORGE = register(ModStructures.FORGE.get().withConfiguration(new VillageConfig(() -> SimpleStructurePools.FORGE_PATTERN, 7)));

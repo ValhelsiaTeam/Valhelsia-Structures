@@ -2,8 +2,14 @@ package com.stal111.valhelsia_structures.world.template;
 
 import com.google.common.collect.ImmutableList;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.gen.feature.template.*;
+
+import net.minecraft.world.level.levelgen.structure.templatesystem.AlwaysTrueTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.ProcessorRule;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleProcessor;
 
 /**
  * Additional Processors for Valhelsia Structures
@@ -18,13 +24,13 @@ public class Processors {
     /**
      * Processor that causes red glass to be ignored when placing the structure.
      */
-    public static final BlockIgnoreStructureProcessor RED_GLASS = new BlockIgnoreStructureProcessor(ImmutableList.of(Blocks.RED_STAINED_GLASS));
+    public static final BlockIgnoreProcessor RED_GLASS = new BlockIgnoreProcessor(ImmutableList.of(Blocks.RED_STAINED_GLASS));
 
     /**
      * Processor that causes obsidian to be replaced with the special spawner when placing the structure.
      */
-    public static final RuleStructureProcessor OBSIDIAN_REPLACEMENT_PROCESSOR = new RuleStructureProcessor(ImmutableList.of(
-            new RuleEntry(new BlockMatchRuleTest(Blocks.OBSIDIAN), AlwaysTrueRuleTest.INSTANCE, ModBlocks.SPECIAL_SPAWNER.get().getDefaultState())
+    public static final RuleProcessor OBSIDIAN_REPLACEMENT_PROCESSOR = new RuleProcessor(ImmutableList.of(
+            new ProcessorRule(new BlockMatchTest(Blocks.OBSIDIAN), AlwaysTrueTest.INSTANCE, ModBlocks.SPECIAL_SPAWNER.get().getDefaultState())
     ));
 
     /**

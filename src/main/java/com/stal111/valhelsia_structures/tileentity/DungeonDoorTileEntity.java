@@ -5,8 +5,8 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 
@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
  * @version 16.1.0
  * @since 2021-01-13
  */
-public class DungeonDoorTileEntity extends TileEntity implements ITickableTileEntity {
+public class DungeonDoorTileEntity extends BlockEntity implements TickableBlockEntity {
 
     private float prevLeafAngle;
     private float leafAngle;

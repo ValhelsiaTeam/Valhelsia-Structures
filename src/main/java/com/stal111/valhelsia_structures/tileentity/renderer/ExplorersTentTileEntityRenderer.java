@@ -1,14 +1,14 @@
 package com.stal111.valhelsia_structures.tileentity.renderer;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.block.ExplorersTentBlock;
 import com.stal111.valhelsia_structures.tileentity.ExplorersTentTileEntity;
 import com.stal111.valhelsia_structures.tileentity.model.ExplorersTentModel;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 
 /**
@@ -19,19 +19,19 @@ import net.minecraft.util.math.vector.Vector3f;
  * @version 16.1.0
  * @since 2020-12-10
  */
-public class ExplorersTentTileEntityRenderer extends TileEntityRenderer<ExplorersTentTileEntity> {
+public class ExplorersTentTileEntityRenderer extends BlockEntityRenderer<ExplorersTentTileEntity> {
 
     private static final ResourceLocation TENT_TEXTURE = new ResourceLocation(ValhelsiaStructures.MOD_ID, "textures/block/explorers_tent.png");
     private static final ResourceLocation TENT_STICKS_TEXTURE = new ResourceLocation(ValhelsiaStructures.MOD_ID, "textures/block/explorers_tent_sticks.png");
 
     private final ExplorersTentModel tentModel = new ExplorersTentModel();
 
-    public ExplorersTentTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
+    public ExplorersTentTileEntityRenderer(BlockEntityRenderDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
     @Override
-    public void render(ExplorersTentTileEntity tileEntity, float partialTicks, MatrixStack matrixStack, IRenderTypeBuffer buffer, int combinedLight, int combinedOverlay) {
+    public void render(ExplorersTentTileEntity tileEntity, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         matrixStack.push();
 
         matrixStack.translate(0.5, 1.8, 0.5);

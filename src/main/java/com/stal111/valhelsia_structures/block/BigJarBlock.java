@@ -2,24 +2,24 @@ package com.stal111.valhelsia_structures.block;
 
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
@@ -35,7 +35,7 @@ import javax.annotation.Nullable;
  * @version 0.1.3
  * @since 2021-04-17
  */
-public class BigJarBlock extends Block implements IWaterLoggable {
+public class BigJarBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final BooleanProperty TREASURE = ModBlockStateProperties.TREASURE;
     public static final IntegerProperty ROTATION = ModBlockStateProperties.ROTATION_0_7;

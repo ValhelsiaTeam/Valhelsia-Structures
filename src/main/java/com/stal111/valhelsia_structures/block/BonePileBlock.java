@@ -1,21 +1,21 @@
 package com.stal111.valhelsia_structures.block;
 
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.IWaterLoggable;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.IntegerProperty;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
  * @version 16.1.0
  * @since 2021-03-18
  */
-public class BonePileBlock extends Block implements IWaterLoggable {
+public class BonePileBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final IntegerProperty LAYERS = ModBlockStateProperties.LAYERS_1_5;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;

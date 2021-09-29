@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.tileentity;
 
 import com.stal111.valhelsia_structures.init.ModTileEntities;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 /**
  * Giant Fern Tile Entity
@@ -11,7 +11,7 @@ import net.minecraft.tileentity.TileEntity;
  * @version 16.1.0
  * @since 2020-12-22
  */
-public class GiantFernTileEntity extends TileEntity {
+public class GiantFernTileEntity extends BlockEntity {
 
     public GiantFernTileEntity() {
         super(null);

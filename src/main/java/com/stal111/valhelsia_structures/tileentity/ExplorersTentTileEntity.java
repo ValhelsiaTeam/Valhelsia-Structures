@@ -1,9 +1,9 @@
 package com.stal111.valhelsia_structures.tileentity;
 
 import com.stal111.valhelsia_structures.init.ModTileEntities;
-import net.minecraft.block.BlockState;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 /**
  * Explorers Tent Tile Entity
@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
  * @version 16.1.0
  * @since 2020-12-10
  */
-public class ExplorersTentTileEntity extends TileEntity implements IDyeableTileEntity {
+public class ExplorersTentTileEntity extends BlockEntity implements IDyeableTileEntity {
 
     private int color = 10511680;
 
@@ -32,7 +32,7 @@ public class ExplorersTentTileEntity extends TileEntity implements IDyeableTileE
     }
 
     @Override
-    public void read(BlockState state, CompoundNBT compound) {
+    public void read(BlockState state, CompoundTag compound) {
         super.read(state, compound);
         this.color =  compound.contains("Color") ? compound.getInt("Color") : 10511680;
     }

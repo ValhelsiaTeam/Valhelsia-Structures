@@ -7,8 +7,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.entity.TickableBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.util.WeightedSpawnerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -23,7 +23,7 @@ import javax.annotation.Nullable;
  * @author Valhelsia Team
  * @version 16.1.0
  */
-public class SpecialMobSpawnerTileEntity extends TileEntity implements ITickableTileEntity {
+public class SpecialMobSpawnerTileEntity extends BlockEntity implements TickableBlockEntity {
 
     private final SpecialAbstractSpawner spawnerLogic = new SpecialAbstractSpawner() {
         public void broadcastEvent(int id) {

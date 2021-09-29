@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.block.properties;
 
-import net.minecraft.block.AbstractBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.block.DirectionalBlock;
 import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.block.SoundType;
@@ -19,7 +19,7 @@ import net.minecraftforge.common.ToolType;
  */
 public class BlockProperties {
 
-    public static final AbstractBlock.Properties LAPIDIFIED_JUNGLE_LOG = AbstractBlock.Properties.create(Material.WOOD, MaterialColor.DIRT).setRequiresTool().harvestTool(ToolType.AXE).harvestLevel(2).hardnessAndResistance(3.0F).sound(SoundType.WOOD);
+    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_LOG = BlockBehaviour.Properties.create(Material.WOOD, MaterialColor.DIRT).setRequiresTool().harvestTool(ToolType.AXE).harvestLevel(2).hardnessAndResistance(3.0F).sound(SoundType.WOOD);
     public static final AbstractBlock.Properties LAPIDIFIED_JUNGLE_PLANKS = AbstractBlock.Properties.create(Material.WOOD, MaterialColor.DIRT).setRequiresTool().harvestTool(ToolType.AXE).harvestLevel(2).hardnessAndResistance(3.0F, 4.0F).sound(SoundType.WOOD);
 
     public static AbstractBlock.Properties createCutPostBlock(MaterialColor topColor, MaterialColor barkColor) {

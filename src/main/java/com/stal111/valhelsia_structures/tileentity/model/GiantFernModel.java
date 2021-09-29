@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.Model;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.model.geom.ModelPart;
 
 /**
  * Giant Fern Model
@@ -16,20 +16,20 @@ import net.minecraft.client.renderer.model.ModelRenderer;
  * @since 2020-12-22
  */
 public class GiantFernModel extends Model {
-    public ModelRenderer fernBottom1;
-    public ModelRenderer fernBottom2;
-    public ModelRenderer fernBottom3;
-    public ModelRenderer fernBottom4;
-    public ModelRenderer fern1;
-    public ModelRenderer fern2;
-    public ModelRenderer fern3;
-    public ModelRenderer fern4;
-    public ModelRenderer stem1;
-    public ModelRenderer stem2;
-    public ModelRenderer fernTop1;
-    public ModelRenderer fernTop2;
-    public ModelRenderer fernTop3;
-    public ModelRenderer fernTop4;
+    public ModelPart fernBottom1;
+    public ModelPart fernBottom2;
+    public ModelPart fernBottom3;
+    public ModelPart fernBottom4;
+    public ModelPart fern1;
+    public ModelPart fern2;
+    public ModelPart fern3;
+    public ModelPart fern4;
+    public ModelPart stem1;
+    public ModelPart stem2;
+    public ModelPart fernTop1;
+    public ModelPart fernTop2;
+    public ModelPart fernTop3;
+    public ModelPart fernTop4;
 
     public GiantFernModel() {
         super(RenderType::getEntityCutoutNoCull);

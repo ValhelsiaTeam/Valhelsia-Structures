@@ -3,7 +3,7 @@ package com.stal111.valhelsia_structures.init;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.entity.MossySkeletonEntity;
 import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.valhelsia.valhelsia_core.registry.EntityRegistryHelper;

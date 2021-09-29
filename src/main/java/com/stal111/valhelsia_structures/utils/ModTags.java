@@ -1,25 +1,25 @@
 package com.stal111.valhelsia_structures.utils;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ITag;
+import net.minecraft.tags.Tag;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 
 public class ModTags {
 
     public static class Blocks {
-        public static final ITag.INamedTag<Block> BRAZIERS = forgeTag("braziers");
-        public static final ITag.INamedTag<Block> POSTS = modTag("posts");
-        public static final ITag.INamedTag<Block> CUT_POSTS = modTag("cut_posts");
-        public static final ITag.INamedTag<Block> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
-        public static final ITag.INamedTag<Block> COLORED_JARS = modTag("colored_jars");
-        public static final ITag.INamedTag<Block> JARS = modTag("jars");
-        public static final ITag.INamedTag<Block> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
+        public static final Tag.Named<Block> BRAZIERS = forgeTag("braziers");
+        public static final Tag.Named<Block> POSTS = modTag("posts");
+        public static final Tag.Named<Block> CUT_POSTS = modTag("cut_posts");
+        public static final Tag.Named<Block> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
+        public static final Tag.Named<Block> COLORED_JARS = modTag("colored_jars");
+        public static final Tag.Named<Block> JARS = modTag("jars");
+        public static final Tag.Named<Block> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
 
-        private static ITag.INamedTag<Block> forgeTag(String name) {
+        private static Tag.Named<Block> forgeTag(String name) {
             return BlockTags.makeWrapperTag(new ResourceLocation("forge", name).toString());
         }
 

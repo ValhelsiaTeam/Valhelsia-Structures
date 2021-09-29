@@ -5,13 +5,16 @@ import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.world.template.Processors;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.jigsaw.*;
-import net.minecraft.world.gen.feature.template.StructureProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
 import net.minecraft.world.gen.feature.template.StructureProcessorList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
+
+import net.minecraft.world.level.levelgen.feature.structures.StructurePoolElement;
+import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
 
 /**
  * Jigsaw Helper
@@ -22,16 +25,16 @@ import java.util.function.Function;
  */
 public class JigsawHelper {
 
-    public static JigsawPattern register(String name, JigsawPattern.PlacementBehaviour placementBehaviour, List<Pair<String, Integer>> list, StructureProcessor... processors) {
+    public static StructureTemplatePool register(String name, StructureTemplatePool.Projection placementBehaviour, List<Pair<String, Integer>> list, StructureProcessor... processors) {
         return register(name, placementBehaviour, list, false, processors);
     }
 
-    public static JigsawPattern register(String name, JigsawPattern.PlacementBehaviour placementBehaviour, List<Pair<String, Integer>> list, boolean replaceStone, StructureProcessor... processors) {
+    public static StructureTemplatePool register(String name, StructureTemplatePool.Projection placementBehaviour, List<Pair<String, Integer>> list, boolean replaceStone, StructureProcessor... processors) {
         return register(name, placementBehaviour, list, replaceStone, false, processors);
     }
 
-    public static JigsawPattern register(String name, JigsawPattern.PlacementBehaviour placementBehaviour, List<Pair<String, Integer>> list, boolean replaceStone, boolean legacyPiece, StructureProcessor... processors) {
-        List<Pair<Function<JigsawPattern.PlacementBehaviour, ? extends JigsawPiece>, Integer>> newList = new ArrayList<>();
+    public static StructureTemplatePool register(String name, StructureTemplatePool.Projection placementBehaviour, List<Pair<String, Integer>> list, boolean replaceStone, boolean legacyPiece, StructureProcessor... processors) {
+        List<Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer>> newList = new ArrayList<>();
 
         List<StructureProcessor> processorList = new ArrayList<>(Arrays.asList(processors));
         processorList.add(Processors.RED_GLASS);
@@ -43,7 +46,7 @@ public class JigsawHelper {
 
         for (Pair<String, Integer> pair : list) {
             if (!legacyPiece) {
-                newList.add(Pair.of(JigsawPiece.func_242861_b (ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), new StructureProcessorList(processorList)), pair.getSecond()));
+                newList.add(Pair.of(StructurePoolElement.func_242861_b (ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), new StructureProcessorList(processorList)), pair.getSecond()));
             } else {
                 newList.add(Pair.of(JigsawPiece.func_242851_a (ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), new StructureProcessorList(processorList)), pair.getSecond()));
             }

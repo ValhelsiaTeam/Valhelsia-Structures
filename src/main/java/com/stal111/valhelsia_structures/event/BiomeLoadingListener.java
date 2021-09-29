@@ -4,8 +4,8 @@ import com.stal111.valhelsia_structures.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,7 +28,7 @@ public class BiomeLoadingListener {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void onBiomeLoad(BiomeLoadingEvent event) {
         ResourceLocation name = event.getName();
-        Biome.Category category = event.getCategory();
+        Biome.BiomeCategory category = event.getCategory();
 
         if (name != null) {
 

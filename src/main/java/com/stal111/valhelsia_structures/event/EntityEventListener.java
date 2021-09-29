@@ -3,11 +3,11 @@ package com.stal111.valhelsia_structures.event;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.init.ModEntities;
 import com.stal111.valhelsia_structures.init.ModStructures;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.merchant.villager.VillagerProfession;
 import net.minecraft.entity.monster.AbstractSkeletonEntity;
-import net.minecraft.entity.monster.PillagerEntity;
+import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.MerchantOffer;
@@ -36,7 +36,7 @@ public class EntityEventListener {
     @SubscribeEvent
     public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
         Entity entity = event.getEntity();
-        if (entity instanceof PillagerEntity && !event.getWorld().isRemote()) {
+        if (entity instanceof Pillager && !event.getWorld().isRemote()) {
             PillagerEntity pillagerEntity = (PillagerEntity) entity;
             pillagerEntity.goalSelector.addGoal(5, new MeleeAttackGoal(pillagerEntity, 1.0D, true));
         }

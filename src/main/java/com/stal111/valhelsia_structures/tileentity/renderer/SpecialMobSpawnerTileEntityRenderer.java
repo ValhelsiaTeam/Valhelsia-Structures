@@ -1,23 +1,23 @@
 package com.stal111.valhelsia_structures.tileentity.renderer;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.stal111.valhelsia_structures.block.SpecialAbstractSpawner;
 import com.stal111.valhelsia_structures.tileentity.SpecialMobSpawnerTileEntity;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
 
-public class SpecialMobSpawnerTileEntityRenderer extends TileEntityRenderer<SpecialMobSpawnerTileEntity> {
+public class SpecialMobSpawnerTileEntityRenderer extends BlockEntityRenderer<SpecialMobSpawnerTileEntity> {
 
-    public SpecialMobSpawnerTileEntityRenderer(TileEntityRendererDispatcher p_i226016_1_) {
+    public SpecialMobSpawnerTileEntityRenderer(BlockEntityRenderDispatcher p_i226016_1_) {
         super(p_i226016_1_);
     }
 
-    public void render(SpecialMobSpawnerTileEntity p_225616_1_, float p_225616_2_, MatrixStack p_225616_3_, IRenderTypeBuffer p_225616_4_, int p_225616_5_, int p_225616_6_) {
+    public void render(SpecialMobSpawnerTileEntity p_225616_1_, float p_225616_2_, PoseStack p_225616_3_, MultiBufferSource p_225616_4_, int p_225616_5_, int p_225616_6_) {
         p_225616_3_.push();
         p_225616_3_.translate(0.5D, 0.0D, 0.5D);
         SpecialAbstractSpawner abstractspawner = p_225616_1_.getSpawnerBaseLogic();

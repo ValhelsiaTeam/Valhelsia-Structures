@@ -1,18 +1,20 @@
 package com.stal111.valhelsia_structures.item.block;
 
 import com.stal111.valhelsia_structures.tileentity.IDyeableTileEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.IDyeableArmorItem;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeableLeatherItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 import java.util.Objects;
+
+import net.minecraft.world.item.Item.Properties;
 
 /**
  * Dyeable Block Item
@@ -22,14 +24,14 @@ import java.util.Objects;
  * @version 16.1.0
  * @since 2020-12-12
  */
-public class DyeableBlockItem extends BlockItem implements IDyeableArmorItem {
+public class DyeableBlockItem extends BlockItem implements DyeableLeatherItem {
 
     public DyeableBlockItem(Block block, Properties builder) {
         super(block, builder);
     }
 
     @Override
-    protected boolean onBlockPlaced(BlockPos pos, World world, @Nullable PlayerEntity player, ItemStack stack, BlockState state) {
+    protected boolean onBlockPlaced(BlockPos pos, Level world, @Nullable Player player, ItemStack stack, BlockState state) {
         boolean flag = super.onBlockPlaced(pos, world, player, stack, state);
 
         TileEntity tileEntity = world.getTileEntity(pos);

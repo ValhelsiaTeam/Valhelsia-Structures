@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.block;
 
-import net.minecraft.block.Block;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
@@ -12,6 +12,8 @@ import net.minecraft.world.IBlockReader;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
+
+import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 
 /**
  * Valhelsia Stone Block

@@ -19,6 +19,8 @@ import net.valhelsia.valhelsia_core.util.ValhelsiaRenderType;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.world.level.block.Block;
+
 /**
  * Blocks
  * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModBlocks

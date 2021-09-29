@@ -3,10 +3,10 @@ package com.stal111.valhelsia_structures.world.structures;
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.init.ModStructureFeatures;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 
 import java.util.Arrays;
 
@@ -21,12 +21,12 @@ import java.util.Arrays;
 
 public class CastleStructure extends AbstractValhelsiaStructure {
 
-    public CastleStructure(Codec<VillageConfig> villageConfigCodec) {
+    public CastleStructure(Codec<JigsawConfiguration> villageConfigCodec) {
         super(villageConfigCodec, "castle", 3,
                 new StructureConfigEntry(0.5D, 40, 8,
-                        Biome.Category.PLAINS.getName(),
-                        Biome.Category.FOREST.getName(),
-                        Biome.Category.TAIGA.getName()
+                        Biome.BiomeCategory.PLAINS.getName(),
+                        Biome.BiomeCategory.FOREST.getName(),
+                        Biome.BiomeCategory.TAIGA.getName()
                 ));
     }
 
@@ -36,7 +36,7 @@ public class CastleStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature() {
+    public ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> getStructureFeature() {
         return ModStructureFeatures.CASTLE;
     }
 }

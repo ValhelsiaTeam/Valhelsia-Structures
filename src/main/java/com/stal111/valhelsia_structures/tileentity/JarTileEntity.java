@@ -2,11 +2,11 @@ package com.stal111.valhelsia_structures.tileentity;
 
 import com.stal111.valhelsia_structures.init.ModTileEntities;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
  * @version 16.1.0
  * @since 2020-11-13
  */
-public class JarTileEntity extends TileEntity {
+public class JarTileEntity extends BlockEntity {
 
     private ItemStack plant = ItemStack.EMPTY;
 

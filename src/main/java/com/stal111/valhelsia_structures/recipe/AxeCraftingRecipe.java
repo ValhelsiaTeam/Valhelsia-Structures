@@ -4,17 +4,20 @@ import com.google.gson.JsonObject;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.init.ModRecipes;
 import com.stal111.valhelsia_structures.utils.ModTags;
-import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.item.crafting.*;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.ForgeRegistryEntry;
+
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
 
 /**
  * Axe Crafting Recipe
@@ -27,7 +30,7 @@ import net.minecraftforge.registries.ForgeRegistryEntry;
  * @version 16.0.4
  * @since 2020-06-01
  */
-public class AxeCraftingRecipe extends SpecialRecipe {
+public class AxeCraftingRecipe extends CustomRecipe {
 
     private final Ingredient input;
     private final ItemStack output;
@@ -41,7 +44,7 @@ public class AxeCraftingRecipe extends SpecialRecipe {
     }
 
     @Override
-    public boolean matches(CraftingInventory inv, World worldIn) {
+    public boolean matches(CraftingContainer inv, Level worldIn) {
         int axeSlot = -1;
         ItemStack stack = null;
 

@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.block.properties;
 
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringRepresentable;
 
 /**
  * Dungeon Door Part
@@ -10,7 +10,7 @@ import net.minecraft.util.IStringSerializable;
  * @version 16.1.0
  * @since 2021-01-18
  */
-public enum DungeonDoorPart implements IStringSerializable {
+public enum DungeonDoorPart implements StringRepresentable {
     LEFT_1("left_1"),
     LEFT_2("left_2"),
     LEFT_3("left_3"),

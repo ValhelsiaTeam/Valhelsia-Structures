@@ -5,7 +5,7 @@ import com.stal111.valhelsia_structures.block.CutPostBlock;
 import com.stal111.valhelsia_structures.block.PostBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.ModTags;
-import net.minecraft.data.BlockTagsProvider;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;

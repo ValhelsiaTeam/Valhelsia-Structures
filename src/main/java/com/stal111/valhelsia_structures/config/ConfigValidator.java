@@ -3,8 +3,8 @@ package com.stal111.valhelsia_structures.config;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.util.AbstractConfigValidator;
 import net.valhelsia.valhelsia_core.world.IValhelsiaStructure;
@@ -28,12 +28,12 @@ public class ConfigValidator extends AbstractConfigValidator {
             StructureConfigEntry configEntry = structure.getStructureConfigEntry();
 
             if ((configEntry.configuredSpacing.get() - configEntry.configuredSeparation.get()) <= 0) {
-                this.addError(new TranslationTextComponent("gui.valhelsia_structures.config.spacing_error"), "structures." + structure.getName() + ".spacing", new TranslationTextComponent("gui.valhelsia_structures.config.spacing_solution", configEntry.configuredSeparation.get() + 1));
+                this.addError(new TranslatableComponent("gui.valhelsia_structures.config.spacing_error"), "structures." + structure.getName() + ".spacing", new TranslatableComponent("gui.valhelsia_structures.config.spacing_solution", configEntry.configuredSeparation.get() + 1));
             }
 
             for (String string : configEntry.configuredBiomeCategories.get()) {
-                if (Arrays.stream(Biome.Category.values()).noneMatch(category -> category.getName().equals(string))) {
-                    this.addError(new TranslationTextComponent("gui.valhelsia_structures.config.invalid_biome_category").appendString(" " + string), "structures." + structure.getName() + ".biome_categories", new TranslationTextComponent("gui.valhelsia_core.config.ignoring"));
+                if (Arrays.stream(Biome.BiomeCategory.values()).noneMatch(category -> category.getName().equals(string))) {
+                    this.addError(new TranslatableComponent("gui.valhelsia_structures.config.invalid_biome_category").appendString(" " + string), "structures." + structure.getName() + ".biome_categories", new TranslationTextComponent("gui.valhelsia_core.config.ignoring"));
                 }
             }
 

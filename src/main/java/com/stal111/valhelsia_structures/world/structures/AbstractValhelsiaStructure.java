@@ -9,17 +9,17 @@ import com.stal111.valhelsia_structures.utils.StructureUtils;
 import com.stal111.valhelsia_structures.world.structures.start.ValhelsiaStructureStart;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SharedSeedRandom;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ChunkPos;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.BiomeSource;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.gen.GenerationStage;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.StructureFeature;
@@ -34,6 +34,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 
 /**
  * Abstract Valhelsia Structure <br>
@@ -52,14 +54,14 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
 
     private final StructureConfigEntry structureConfigEntry;
 
-    public AbstractValhelsiaStructure(Codec<VillageConfig> codec, String name, int size, StructureConfigEntry structureConfigEntry) {
+    public AbstractValhelsiaStructure(Codec<JigsawConfiguration> codec, String name, int size, StructureConfigEntry structureConfigEntry) {
         super(codec, name);
         this.size = size;
         this.structureConfigEntry = structureConfigEntry;
     }
 
     @Override
-    protected boolean func_230363_a_(@Nonnull ChunkGenerator generator, @Nonnull BiomeProvider provider, long seed, @Nonnull SharedSeedRandom rand, int chunkX, int chunkZ, @Nonnull Biome biome, @Nonnull ChunkPos pos, @Nonnull VillageConfig config) {
+    protected boolean func_230363_a_(@Nonnull ChunkGenerator generator, @Nonnull BiomeSource provider, long seed, @Nonnull WorldgenRandom rand, int chunkX, int chunkZ, @Nonnull Biome biome, @Nonnull ChunkPos pos, @Nonnull JigsawConfiguration config) {
         BlockPos centerOfChunk = new BlockPos(chunkX << 4, 0, chunkZ << 4);
 
         if (this.checkSurface() && !this.isSurfaceFlat(generator, centerOfChunk.getX(), centerOfChunk.getZ())) {

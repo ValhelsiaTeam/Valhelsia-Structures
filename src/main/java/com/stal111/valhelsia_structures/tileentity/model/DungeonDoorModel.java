@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.model.Model;
-import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.client.model.Model;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -19,12 +19,12 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  */
 @OnlyIn(Dist.CLIENT)
 public class DungeonDoorModel extends Model {
-    public ModelRenderer rightDoor;
-    public ModelRenderer leftDoor;
-    public ModelRenderer rightKnobFront;
-    public ModelRenderer rightKnobBack;
-    public ModelRenderer rightKnobFront_1;
-    public ModelRenderer rightKnobBack_1;
+    public ModelPart rightDoor;
+    public ModelPart leftDoor;
+    public ModelPart rightKnobFront;
+    public ModelPart rightKnobBack;
+    public ModelPart rightKnobFront_1;
+    public ModelPart rightKnobBack_1;
 
     public DungeonDoorModel() {
         super(RenderType::getEntityCutout);

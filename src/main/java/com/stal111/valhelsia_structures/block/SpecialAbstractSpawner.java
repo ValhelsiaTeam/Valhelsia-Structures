@@ -3,7 +3,7 @@ package com.stal111.valhelsia_structures.block;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SpawnReason;
@@ -27,11 +27,14 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.SpawnData;
+
 public abstract class SpecialAbstractSpawner {
 
-    private final List<WeightedSpawnerEntity> potentialSpawns = new ArrayList<>();
+    private final List<SpawnData> potentialSpawns = new ArrayList<>();
     private int spawnDelay = 20;
-    private WeightedSpawnerEntity spawnData = new WeightedSpawnerEntity();
+    private SpawnData spawnData = new SpawnData();
     private double mobRotation;
     private double prevMobRotation;
     private int minSpawnDelay = 80;

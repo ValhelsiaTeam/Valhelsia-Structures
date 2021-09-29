@@ -3,11 +3,11 @@ package com.stal111.valhelsia_structures.world.structures;
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.init.ModStructureFeatures;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 
 import javax.annotation.Nonnull;
 
@@ -21,20 +21,20 @@ import javax.annotation.Nonnull;
  */
 public class SpawnerDungeonStructure extends AbstractValhelsiaStructure {
 
-    public SpawnerDungeonStructure(Codec<VillageConfig> villageConfigCodec) {
+    public SpawnerDungeonStructure(Codec<JigsawConfiguration> villageConfigCodec) {
         super(villageConfigCodec, "spawner_dungeon", 3,
                 new StructureConfigEntry(0.7D, 30, 8,
-                        Biome.Category.PLAINS.getName(),
-                        Biome.Category.FOREST.getName(),
-                        Biome.Category.EXTREME_HILLS.getName(),
-                        Biome.Category.TAIGA.getName(),
-                        Biome.Category.DESERT.getName(),
-                        Biome.Category.MESA.getName(),
-                        Biome.Category.SAVANNA.getName(),
-                        Biome.Category.JUNGLE.getName(),
-                        Biome.Category.ICY.getName(),
-                        Biome.Category.SWAMP.getName(),
-                        Biome.Category.MUSHROOM.getName()
+                        Biome.BiomeCategory.PLAINS.getName(),
+                        Biome.BiomeCategory.FOREST.getName(),
+                        Biome.BiomeCategory.EXTREME_HILLS.getName(),
+                        Biome.BiomeCategory.TAIGA.getName(),
+                        Biome.BiomeCategory.DESERT.getName(),
+                        Biome.BiomeCategory.MESA.getName(),
+                        Biome.BiomeCategory.SAVANNA.getName(),
+                        Biome.BiomeCategory.JUNGLE.getName(),
+                        Biome.BiomeCategory.ICY.getName(),
+                        Biome.BiomeCategory.SWAMP.getName(),
+                        Biome.BiomeCategory.MUSHROOM.getName()
                 ));
     }
 
@@ -44,14 +44,14 @@ public class SpawnerDungeonStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public StructureFeature<VillageConfig, ? extends Structure<VillageConfig>> getStructureFeature() {
+    public ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> getStructureFeature() {
         return ModStructureFeatures.SPAWNER_DUNGEON;
     }
 
     @Nonnull
     @Override
-    public GenerationStage.Decoration getDecorationStage() {
-        return GenerationStage.Decoration.UNDERGROUND_STRUCTURES;
+    public GenerationStep.Decoration getDecorationStage() {
+        return GenerationStep.Decoration.UNDERGROUND_STRUCTURES;
     }
 
     @Override

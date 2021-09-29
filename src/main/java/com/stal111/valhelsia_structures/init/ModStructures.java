@@ -5,7 +5,7 @@ import com.google.common.collect.ImmutableMap;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.world.structures.*;
 import net.minecraft.util.registry.WorldGenRegistries;
-import net.minecraft.world.gen.feature.structure.Structure;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
@@ -27,7 +27,7 @@ public class ModStructures {
 
     public static final List<IValhelsiaStructure> MOD_STRUCTURES = new ArrayList<>();
 
-    public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, ValhelsiaStructures.MOD_ID);
+    public static final DeferredRegister<StructureFeature<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, ValhelsiaStructures.MOD_ID);
 
     public static final RegistryObject<CastleStructure> CASTLE = register(new CastleStructure(VillageConfig.field_236533_a_));
     public static final RegistryObject<CastleRuinStructure> CASTLE_RUIN = register(new CastleRuinStructure(VillageConfig.field_236533_a_));

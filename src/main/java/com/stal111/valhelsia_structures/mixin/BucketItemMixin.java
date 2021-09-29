@@ -3,18 +3,18 @@ package com.stal111.valhelsia_structures.mixin;
 import com.stal111.valhelsia_structures.block.DousedWallTorchBlock;
 import com.stal111.valhelsia_structures.utils.TorchTransformationHandler;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.TorchBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BucketItem;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -40,7 +40,7 @@ public abstract class BucketItemMixin {
     private Fluid containedBlock;
 
     @Shadow
-    protected abstract void playEmptySound(@Nullable PlayerEntity player, IWorld worldIn, BlockPos pos);
+    protected abstract void playEmptySound(@Nullable Player player, LevelAccessor worldIn, BlockPos pos);
 
     @Inject(
             at = @At(
@@ -49,7 +49,7 @@ public abstract class BucketItemMixin {
                     shift = At.Shift.BEFORE), method = "tryPlaceContainedLiquid",
             cancellable = true
     )
-    private void valhelsia_placeDousedTorch(PlayerEntity player, World world, BlockPos pos, BlockRayTraceResult rayTrace, CallbackInfoReturnable<Boolean> cir) {
+    private void valhelsia_placeDousedTorch(Player player, Level world, BlockPos pos, BlockHitResult rayTrace, CallbackInfoReturnable<Boolean> cir) {
         BlockState state = world.getBlockState(pos);
 
         if (this.containedBlock == Fluids.WATER) {

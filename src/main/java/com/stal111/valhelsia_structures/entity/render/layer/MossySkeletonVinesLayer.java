@@ -7,11 +7,11 @@ import com.stal111.valhelsia_structures.entity.MossySkeletonEntity;
 import com.stal111.valhelsia_structures.entity.model.MossySkeletonModel;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.IEntityRenderer;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.LivingRenderer;
-import net.minecraft.client.renderer.entity.layers.LayerRenderer;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Mossy Skeleton Vines Layer
@@ -21,16 +21,16 @@ import net.minecraft.util.ResourceLocation;
  * @version 16.1.0
  * @since 2021-02-20
  */
-public class MossySkeletonVinesLayer<T extends MossySkeletonEntity> extends LayerRenderer<T, MossySkeletonModel<T>> {
+public class MossySkeletonVinesLayer<T extends MossySkeletonEntity> extends RenderLayer<T, MossySkeletonModel<T>> {
 
     private static final ResourceLocation VINES_TEXTURE = new ResourceLocation(ValhelsiaStructures.MOD_ID, "textures/entity/mossy_skeleton_overlay.png");
     private static final ResourceLocation HANGING_VINES_TEXTURE = new ResourceLocation(ValhelsiaStructures.MOD_ID, "textures/entity/mossy_skeleton_hanging_vines.png");
 
     private final MossySkeletonModel<T> layerModel = new MossySkeletonModel<>(0.25F, true);
 
-    public ModelRenderer vines = new ModelRenderer(32, 32, 0, 0);
+    public ModelPart vines = new ModelPart(32, 32, 0, 0);
 
-    public MossySkeletonVinesLayer(IEntityRenderer<T, MossySkeletonModel<T>> entityRenderer) {
+    public MossySkeletonVinesLayer(RenderLayerParent<T, MossySkeletonModel<T>> entityRenderer) {
         super(entityRenderer);
         this.vines.addBox(-4.0F, 0.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
         this.vines.setRotationPoint(0.0F, 0.0F, 0.0F);

@@ -10,7 +10,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.*;
@@ -26,6 +26,9 @@ import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+
 /**
  * Dungeon Door Leaf Block
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.DungeonDoorLeafBlock
@@ -34,7 +37,7 @@ import javax.annotation.Nullable;
  * @version 16.1.0
  * @since 2021-01-22
  */
-public class DungeonDoorLeafBlock extends Block implements IWaterLoggable {
+public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     public static final BooleanProperty MIRRORED = ModBlockStateProperties.MIRRORED;

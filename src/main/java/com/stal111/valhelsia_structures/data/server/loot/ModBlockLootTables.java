@@ -4,12 +4,12 @@ import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.block.*;
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.minecraft.block.SlabBlock;
+import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.item.Items;
 import net.minecraft.loot.ConstantRange;
 import net.minecraft.loot.ItemLootEntry;
 import net.minecraft.loot.LootPool;
-import net.minecraft.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.loot.functions.SetCount;
 import net.valhelsia.valhelsia_core.data.ValhelsiaBlockLootTables;
 
