@@ -1,32 +1,30 @@
 package com.stal111.valhelsia_structures.block.properties;
 
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.block.DirectionalBlock;
-import net.minecraft.block.RotatedPillarBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.util.Direction;
-import net.minecraftforge.common.ToolType;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 
 /**
- * Block Properties
+ * Block Properties <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.properties.BlockProperties
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2020-11-22
  */
 public class BlockProperties {
 
-    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_LOG = BlockBehaviour.Properties.create(Material.WOOD, MaterialColor.DIRT).setRequiresTool().harvestTool(ToolType.AXE).harvestLevel(2).hardnessAndResistance(3.0F).sound(SoundType.WOOD);
-    public static final AbstractBlock.Properties LAPIDIFIED_JUNGLE_PLANKS = AbstractBlock.Properties.create(Material.WOOD, MaterialColor.DIRT).setRequiresTool().harvestTool(ToolType.AXE).harvestLevel(2).hardnessAndResistance(3.0F, 4.0F).sound(SoundType.WOOD);
+    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_LOG = BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.DIRT).requiresCorrectToolForDrops().strength(3.0F).sound(SoundType.WOOD);
+    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_PLANKS = BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.DIRT).requiresCorrectToolForDrops().strength(3.0F, 4.0F).sound(SoundType.WOOD);
 
-    public static AbstractBlock.Properties createCutPostBlock(MaterialColor topColor, MaterialColor barkColor) {
-        return AbstractBlock.Properties.create(Material.WOOD, (state) -> state.get(DirectionalBlock.FACING).getAxis() == Direction.Axis.Y ? topColor : barkColor).hardnessAndResistance(2.0F).sound(SoundType.WOOD).notSolid();
+    public static BlockBehaviour.Properties createCutPostBlock(MaterialColor topColor, MaterialColor barkColor) {
+        return BlockBehaviour.Properties.of(Material.WOOD, (state) -> state.getValue(DirectionalBlock.FACING).getAxis() == Direction.Axis.Y ? topColor : barkColor).strength(2.0F).sound(SoundType.WOOD).noOcclusion();
     }
 
-    public static AbstractBlock.Properties createCutNetherPostBlock(MaterialColor color) {
-        return AbstractBlock.Properties.create(Material.NETHER_WOOD, color).hardnessAndResistance(2.0F).sound(SoundType.HYPHAE).notSolid();
+    public static BlockBehaviour.Properties createCutNetherPostBlock(MaterialColor color) {
+        return BlockBehaviour.Properties.of(Material.NETHER_WOOD, color).strength(2.0F).sound(SoundType.STEM).noOcclusion();
     }
 }

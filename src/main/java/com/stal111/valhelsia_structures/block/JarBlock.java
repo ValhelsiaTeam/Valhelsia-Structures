@@ -3,166 +3,176 @@ package com.stal111.valhelsia_structures.block;
 import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.tileentity.JarTileEntity;
 import com.stal111.valhelsia_structures.utils.ModTags;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.inventory.InventoryHelper;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.Mth;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.valhelsia.valhelsia_core.helper.VoxelShapeHelper;
+import net.valhelsia.valhelsia_core.common.helper.VoxelShapeHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 /**
- * Jar Block
+ * Jar Block <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.JarBlock
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2020-11-13
  */
-public class JarBlock extends Block implements SimpleWaterloggedBlock {
+public class JarBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
 
     public static final BooleanProperty TREASURE = ModBlockStateProperties.TREASURE;
     public static final BooleanProperty ROTATED = ModBlockStateProperties.ROTATED;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     private static final VoxelShape SHAPE = VoxelShapeHelper.combineAll(
-            Block.makeCuboidShape(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D),
-            Block.makeCuboidShape(7.0D, 4.0D, 7.0D, 9.0D, 7.0D, 9.0D),
-            Block.makeCuboidShape(6.0D, 7.0D, 6.0D, 10.0D, 8.0D, 10.0D)
+            Block.box(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D),
+            Block.box(7.0D, 4.0D, 7.0D, 9.0D, 7.0D, 9.0D),
+            Block.box(6.0D, 7.0D, 6.0D, 10.0D, 8.0D, 10.0D)
     );
 
     public JarBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(TREASURE, false).with(ROTATED, false).with(WATERLOGGED, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(TREASURE, false).setValue(ROTATED, false).setValue(WATERLOGGED, false));
     }
 
     @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
         return new JarTileEntity();
-    }
-
-    @Override
-    public boolean hasTileEntity(BlockState state) {
-        return true;
     }
 
     @Nonnull
     @Override
-    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull IBlockReader world, @Nonnull BlockPos pos, @Nonnull ISelectionContext context) {
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         return SHAPE;
     }
 
     @Nonnull
     @Override
-    public ActionResultType onBlockActivated(@Nonnull BlockState state, World world, @Nonnull BlockPos pos, PlayerEntity player, @Nonnull Hand hand, @Nonnull BlockRayTraceResult hit) {
-        ItemStack stack = player.getHeldItem(hand);
-        TileEntity tileEntity = world.getTileEntity(pos);
+    public RenderShape getRenderShape(@Nonnull BlockState state) {
+        return RenderShape.MODEL;
+    }
 
-        if (!(tileEntity instanceof JarTileEntity)) {
-            return ActionResultType.PASS;
+    @Nonnull
+    @Override
+    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+        ItemStack stack = player.getItemInHand(hand);
+
+
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+
+        if (!(blockEntity instanceof JarTileEntity jarBlockEntity)) {
+            return InteractionResult.PASS;
         }
-        JarTileEntity jarTileEntity = (JarTileEntity) tileEntity;
 
-        if (!canBePotted((Block.getBlockFromItem(stack.getItem()))) && jarTileEntity.hasPlant()) {
-            ItemStack flowerStack = jarTileEntity.getPlant();
+        boolean canBePotted = this.canBePotted(Block.byItem(stack.getItem()));
+
+        if (!canBePotted && jarBlockEntity.hasPlant()) {
+            ItemStack flowerStack = jarBlockEntity.getPlant();
 
             if (stack.isEmpty()) {
-                player.setHeldItem(hand, flowerStack);
-            } else if (!player.addItemStackToInventory(flowerStack)) {
-                player.dropItem(flowerStack, false);
+                player.setItemInHand(hand, flowerStack);
+            } else if (!player.addItem(flowerStack)) {
+                player.drop(flowerStack, false);
             }
-            jarTileEntity.setPlant(ItemStack.EMPTY);
+            jarBlockEntity.setPlant(ItemStack.EMPTY);
 
-        } else if (canBePotted((Block.getBlockFromItem(stack.getItem()))) && !jarTileEntity.hasPlant()) {
-            jarTileEntity.setPlant(stack.copy().split(1));
+        } else if (canBePotted && !jarBlockEntity.hasPlant()) {
+            jarBlockEntity.setPlant(stack.copy().split(1));
 
-            player.addStat(Stats.POT_FLOWER);
+            player.awardStat(Stats.POT_FLOWER);
 
-            if (!player.abilities.isCreativeMode) {
+            if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
         } else {
-            return ActionResultType.PASS;
+            return InteractionResult.PASS;
         }
 
-        return ActionResultType.func_233537_a_(world.isRemote);
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     private boolean canBePotted(Block block) {
-        ResourceLocation registryName = block.getRegistryName();
-        if (registryName == null) {
-            return false;
-        }
-        boolean flag = BlockTags.FLOWER_POTS.getAllElements().contains(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(block.getRegistryName().getNamespace(), "potted_" + block.getRegistryName().getPath())));
+        ResourceLocation registryName = Objects.requireNonNull(block.getRegistryName());
+        boolean flag = BlockTags.FLOWER_POTS.getValues().contains(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(registryName.getNamespace(), "potted_" + registryName.getPath())));
 
         return flag && !ModTags.Items.JAR_BLACKLISTED.contains(block.asItem());
     }
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        FluidState fluidstate = context.getWorld().getFluidState(context.getPos());
-        boolean flag = fluidstate.getFluid() == Fluids.WATER;
-        return this.getDefaultState().with(WATERLOGGED, flag).with(ROTATED, (MathHelper.floor((double) ((180.0F + context.getPlacementYaw()) * 8.0F / 360.0F) + 0.5D) & 7) % 2 != 0);
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        boolean flag = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
+
+        return this.defaultBlockState().setValue(WATERLOGGED, flag).setValue(ROTATED, (Mth.floor((double) ((180.0F + context.getRotation()) * 8.0F / 360.0F) + 0.5D) & 7) % 2 != 0);
+    }
+
+    private void dropPlant(Level level, BlockPos pos) {
+        if (level.isClientSide()) {
+            return;
+        }
+        BlockEntity blockEntity = level.getBlockEntity(pos);
+
+        if (blockEntity instanceof JarTileEntity jarBlockEntity && jarBlockEntity.hasPlant()) {
+            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), jarBlockEntity.getPlant());
+        }
     }
 
     @Override
-    public void onReplaced(BlockState state, @Nonnull World world, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
-        if (!state.isIn(newState.getBlock())) {
-            TileEntity tileentity = world.getTileEntity(pos);
-            if (tileentity instanceof JarTileEntity) {
-                JarTileEntity jarTileEntity = (JarTileEntity) tileentity;
-                if (jarTileEntity.hasPlant()) {
-                    InventoryHelper.spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), jarTileEntity.getPlant());
-                }
-            }
+    public void onRemove(BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            this.dropPlant(level, pos);
+            super.onRemove(state, level, pos, newState, isMoving);
         }
-        super.onReplaced(state, world, pos, newState, isMoving);
     }
 
     @Nonnull
     @Override
-    public BlockState updatePostPlacement(BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull IWorld world, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
-        if (state.get(WATERLOGGED)) {
-            world.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(world));
+    public BlockState updateShape(@Nonnull BlockState state, @Nonnull Direction direction, @Nonnull BlockState neighborState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos neighborPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        return super.updatePostPlacement(state, facing, facingState, world, currentPos, facingPos);
+
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TREASURE, ROTATED, WATERLOGGED);
     }
 
     @Nonnull
     @Override
     public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 }

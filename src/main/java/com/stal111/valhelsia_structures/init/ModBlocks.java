@@ -10,9 +10,12 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fmllegacy.RegistryObject;
+import net.valhelsia.valhelsia_core.core.registry.block.BlockRegistryHelper;
 import net.valhelsia.valhelsia_core.registry.block.BlockRegistryHelper;
 import net.valhelsia.valhelsia_core.util.ValhelsiaRenderType;
 
@@ -22,11 +25,11 @@ import java.util.List;
 import net.minecraft.world.level.block.Block;
 
 /**
- * Blocks
+ * Blocks <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModBlocks
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 0.1.6
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
@@ -69,7 +72,7 @@ public class ModBlocks {
     public static final RegistryObject<BigJarBlock> BIG_GLAZED_JAR = HELPER.register("big_glazed_jar", new BigJarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<BigJarBlock> CRACKED_BIG_GLAZED_JAR = HELPER.register("cracked_big_glazed_jar", new BigJarBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()), ValhelsiaRenderType.CUTOUT);
     public static final List<RegistryObject<BigJarBlock>> BIG_COLORED_GLAZED_JARS = registerBigColoredGlazedJars();
-    public static final RegistryObject<BigJarTopBlock> BIG_JAR_TOP = HELPER.registerNoItem("big_jar_top", new BigJarTopBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()), ValhelsiaRenderType.CUTOUT);
+    //public static final RegistryObject<BigJarTopBlock> BIG_JAR_TOP = HELPER.registerNoItem("big_jar_top", new BigJarTopBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()), ValhelsiaRenderType.CUTOUT);
     //    public static final RegistryObject<RotatedPillarBlock> LAPIDIFIED_JUNGLE_LOG = HELPER.register("lapidified_jungle_log", new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG));
 //    public static final RegistryObject<RotatedPillarBlock> LAPIDIFIED_JUNGLE_WOOD = HELPER.register("lapidified_jungle_wood", new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG));
 //    public static final RegistryObject<Block> LAPIDIFIED_JUNGLE_PLANKS = HELPER.register("lapidified_jungle_planks", new Block(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS));

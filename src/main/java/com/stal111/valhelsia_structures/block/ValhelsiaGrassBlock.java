@@ -1,26 +1,24 @@
 package com.stal111.valhelsia_structures.block;
 
-import net.minecraft.block.BlockState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.GrassBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.HitResult;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 /**
- * Valhelsia Grass Block
+ * Valhelsia Grass Block <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock
  *
  * @author Valhelsia Team
- * @version 0.1.6
+ * @version 1.17.1-0.1.0
  * @since 2021-01-06
  */
 public class ValhelsiaGrassBlock extends GrassBlock {
@@ -31,16 +29,16 @@ public class ValhelsiaGrassBlock extends GrassBlock {
 
     @Nonnull
     @Override
-    public String getTranslationKey() {
-        return Blocks.GRASS_BLOCK.getTranslationKey();
+    public String getDescriptionId() {
+        return Blocks.GRASS_BLOCK.getDescriptionId();
     }
 
     @Override
-    public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
+    public ItemStack getPickBlock(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
         return new ItemStack(Blocks.GRASS_BLOCK);
     }
 
     @Override
-    public void fillItemGroup(@Nonnull ItemGroup group, @Nonnull NonNullList<ItemStack> items) {
+    public void fillItemCategory(@Nonnull CreativeModeTab tab, @Nonnull NonNullList<ItemStack> items) {
     }
 }

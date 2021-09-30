@@ -2,12 +2,14 @@ package com.stal111.valhelsia_structures.block.properties;
 
 import net.minecraft.util.StringRepresentable;
 
+import javax.annotation.Nonnull;
+
 /**
- * Dungeon Door Part
+ * Dungeon Door Part <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.properties.DungeonDoorPart
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2021-01-18
  */
 public enum DungeonDoorPart implements StringRepresentable {
@@ -30,8 +32,9 @@ public enum DungeonDoorPart implements StringRepresentable {
         this.name = name;
     }
 
+    @Nonnull
     @Override
-    public String getString() {
+    public String getSerializedName() {
         return this.name;
     }
 

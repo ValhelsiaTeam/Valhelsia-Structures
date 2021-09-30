@@ -1,26 +1,24 @@
 package com.stal111.valhelsia_structures.block;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.HitResult;
 
 import javax.annotation.Nonnull;
 import java.util.function.Supplier;
 
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-
 /**
- * Valhelsia Stone Block
+ * Valhelsia Stone Block <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock
  *
  * @author Valhelsia Team
- * @version 0.1.6
+ * @version 1.17.1-0.1.0
  */
 
 public class ValhelsiaStoneBlock extends Block {
@@ -34,16 +32,16 @@ public class ValhelsiaStoneBlock extends Block {
 
     @Nonnull
     @Override
-    public String getTranslationKey() {
-        return this.pickBlock.get().getTranslationKey();
+    public String getDescriptionId() {
+        return this.pickBlock.get().getDescriptionId();
     }
 
     @Override
-    public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player) {
+    public ItemStack getPickBlock(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
         return new ItemStack(pickBlock.get());
     }
 
     @Override
-    public void fillItemGroup(@Nonnull ItemGroup group, @Nonnull NonNullList<ItemStack> items) {
+    public void fillItemCategory(@Nonnull CreativeModeTab tab, @Nonnull NonNullList<ItemStack> items) {
     }
 }

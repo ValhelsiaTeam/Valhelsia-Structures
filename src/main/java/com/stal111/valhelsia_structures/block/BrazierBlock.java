@@ -1,71 +1,81 @@
 package com.stal111.valhelsia_structures.block;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.fluid.Fluids;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.pathfinding.PathType;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.state.StateContainer;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.shapes.IBooleanFunction;
-import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
-import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+/**
+ * Brazier Block <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.block.BrazierBlock
+ *
+ * @author Valhelsia Team
+ * @version 1.17.1-0.1.0
+ */
 public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    protected static final VoxelShape SHAPE = Block.makeCuboidShape(1.0D, 5.0D, 1.0D, 15.0D, 14.0D, 15.0D);
-    protected static final VoxelShape INNER_SHAPE = Block.makeCuboidShape(2.0D, 8.0D, 2.0D, 14.0D, 14.0D, 14.0D);
+    protected static final VoxelShape INNER_SHAPE = Block.box(2.0D, 8.0D, 2.0D, 14.0D, 14.0D, 14.0D);
+    protected static final VoxelShape SHAPE = Shapes.join(Block.box(1.0D, 5.0D, 1.0D, 15.0D, 14.0D, 15.0D), INNER_SHAPE, BooleanOp.ONLY_FIRST);
 
-    private final boolean smokey;
+    private final boolean spawnParticles;
     private final int fireDamage;
 
-    public BrazierBlock(boolean smokey, int fireDamage, Properties properties) {
+    public BrazierBlock(boolean spawnParticles, int fireDamage, Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateContainer.getBaseState().with(LIT, true).with(WATERLOGGED, false));
-        this.smokey = smokey;
+        this.registerDefaultState(this.getStateDefinition().any().setValue(LIT, true).setValue(WATERLOGGED, false));
+        this.spawnParticles = spawnParticles;
         this.fireDamage = fireDamage;
     }
 
+    @Nonnull
     @Override
-    public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entity) {
-        super.onEntityCollision(state, worldIn, pos, entity);
+    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+        return SHAPE;
+    }
 
-        if (state.get(LIT)) {
-            if (entity.isImmuneToFire() || !(entity instanceof LivingEntity) || EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
+    @Override
+    public void entityInside(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Entity entity) {
+        super.entityInside(state, level, pos, entity);
+
+        if (state.getValue(LIT)) {
+            if (entity.fireImmune() || !(entity instanceof LivingEntity) || EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
                 return;
             }
 
-            if (entity.getPosX() >= pos.getX() + 0.1D && entity.getPosZ() >= pos.getZ() + 0.1D && entity.getPosX() <= pos.getX() + 0.9D && entity.getPosZ() <= pos.getZ() + 0.9D) {
-                if (entity.getPosY() >= pos.getY() + 0.5D) {
-                    entity.attackEntityFrom(DamageSource.IN_FIRE, this.fireDamage);
+            if (entity.getX() >= pos.getX() + 0.1D && entity.getZ() >= pos.getZ() + 0.1D && entity.getX() <= pos.getX() + 0.9D && entity.getZ() <= pos.getZ() + 0.9D) {
+                if (entity.getY() >= pos.getY() + 0.5D) {
+                    entity.hurt(DamageSource.IN_FIRE, this.fireDamage);
                 }
             }
         }
@@ -73,90 +83,73 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
 
     @Nullable
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context) {
-        IWorld world = context.getWorld();
-        BlockPos blockpos = context.getPos();
-        boolean flag = world.getFluidState(blockpos).getFluid() == Fluids.WATER;
-        return this.getDefaultState().with(WATERLOGGED, flag).with(LIT, !flag);
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        boolean flag = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
+
+        return this.defaultBlockState().setValue(WATERLOGGED, flag).setValue(LIT, !flag);
     }
 
+    @Nonnull
     @Override
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (stateIn.get(WATERLOGGED)) {
-            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+    public BlockState updateShape(@Nonnull BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
+        if (state.getValue(WATERLOGGED)) {
+            level.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return VoxelShapes.combineAndSimplify(SHAPE, INNER_SHAPE, IBooleanFunction.ONLY_FIRST);
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand) {
-        if (stateIn.get(LIT)) {
+    public void animateTick(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Random rand) {
+        if (state.getValue(LIT)) {
             if (rand.nextInt(10) == 0) {
-                worldIn.playSound((float) pos.getX() + 0.5F, (float) pos.getY() + 0.5F, (float) pos.getZ() + 0.5F, SoundEvents.BLOCK_CAMPFIRE_CRACKLE, SoundCategory.BLOCKS, 0.5F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.6F, false);
+                level.playLocalSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.6F, false);
             }
 
-            if (this.smokey && rand.nextInt(5) == 0) {
-                for (int i = 0; i < rand.nextInt(1) + 1; ++i) {
-                    worldIn.addParticle(ParticleTypes.LAVA, (float) pos.getX() + 0.5F, (float) pos.getY() + 0.5F, (float) pos.getZ() + 0.5F, rand.nextFloat() / 2.0F, 5.0E-5D, rand.nextFloat() / 2.0F);
+            if (this.spawnParticles && rand.nextInt(5) == 0) {
+                for (int i = 0; i < rand.nextInt(1) + 1; i++) {
+                    level.addParticle(ParticleTypes.LAVA, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, rand.nextFloat() / 2.0F, 5.0E-5D, rand.nextFloat() / 2.0F);
                 }
             }
         }
     }
 
     @Override
-    public boolean receiveFluid(IWorld world, BlockPos pos, BlockState state, FluidState fluidState) {
-        if (!state.get(BlockStateProperties.WATERLOGGED) && fluidState.getFluid() == Fluids.WATER) {
-            boolean flag = state.get(LIT);
-            if (flag) {
-                if (!world.isRemote()) {
-                    world.playSound(null, pos, SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                }
+    public boolean placeLiquid(@Nonnull LevelAccessor level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull FluidState fluidState) {
+        if (!state.getValue(BlockStateProperties.WATERLOGGED) && fluidState.getType() == Fluids.WATER) {
+            if (state.getValue(LIT) && !level.isClientSide()) {
+                level.playSound(null, pos, SoundEvents.GENERIC_EXTINGUISH_FIRE, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
 
-            world.setBlockState(pos, state.with(WATERLOGGED, true).with(LIT, false), 3);
-            world.getPendingFluidTicks().scheduleTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(world));
+            level.setBlock(pos, state.setValue(WATERLOGGED, true).setValue(LIT, false), 3);
+            level.getLiquidTicks().scheduleTick(pos, fluidState.getType(), fluidState.getType().getTickDelay(level));
+
             return true;
-        } else {
-            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public void onProjectileHit(@Nonnull Level level, @Nonnull BlockState state, @Nonnull BlockHitResult hit, @Nonnull Projectile projectile) {
+        BlockPos pos = hit.getBlockPos();
+        if (!level.isClientSide && projectile.isOnFire() && projectile.mayInteract(level, pos) && !state.getValue(LIT) && !state.getValue(WATERLOGGED)) {
+            level.setBlock(pos, state.setValue(BlockStateProperties.LIT, true), 11);
         }
     }
 
     @Override
-    public void onProjectileCollision(World world, BlockState state, BlockRayTraceResult hit, ProjectileEntity projectile) {
-        if (!world.isRemote() && projectile.isBurning()) {
-            Entity entity = projectile.func_234616_v_();
-            boolean flag = entity == null || entity instanceof PlayerEntity || net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(world, entity);
-            if (flag && !state.get(LIT) && !state.get(WATERLOGGED)) {
-                BlockPos blockpos = hit.getPos();
-                world.setBlockState(blockpos, state.with(BlockStateProperties.LIT, true), 11);
-            }
-        }
-
-    }
-
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
-    }
-
-    @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(LIT, WATERLOGGED);
     }
 
     @Override
-    public boolean allowsMovement(BlockState state, IBlockReader worldIn, BlockPos pos, PathType type) {
+    public boolean isPathfindable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull PathComputationType type) {
         return false;
+    }
+
+    @Nonnull
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 }
