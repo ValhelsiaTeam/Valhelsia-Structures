@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.setup;
+package com.stal111.valhelsia_structures.common;
 
 import com.stal111.valhelsia_structures.init.ModStructureFeatures;
 import com.stal111.valhelsia_structures.init.ModStructures;
@@ -10,11 +10,11 @@ import com.stal111.valhelsia_structures.world.structures.pools.*;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 /**
- * Common Setup
- * Valhelsia Structures - com.stal111.valhelsia_structures.setup.CommonSetup
+ * Common Setup <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.CommonSetup
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2021-02-14
  */
 public class CommonSetup {
