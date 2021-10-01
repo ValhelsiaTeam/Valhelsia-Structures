@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.integration;
 
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.recipe.AxeCraftingRecipe;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.client.Minecraft;

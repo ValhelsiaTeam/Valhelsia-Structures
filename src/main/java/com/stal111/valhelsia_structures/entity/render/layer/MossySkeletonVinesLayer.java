@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.entity.render.layer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.entity.MossySkeletonEntity;
 import com.stal111.valhelsia_structures.entity.model.MossySkeletonModel;
 import net.minecraft.client.renderer.IRenderTypeBuffer;

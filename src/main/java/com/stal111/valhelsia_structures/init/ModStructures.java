@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.init;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.world.structures.*;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
@@ -10,18 +10,20 @@ import net.minecraft.world.gen.feature.structure.VillageConfig;
 import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.valhelsia.valhelsia_core.common.world.IValhelsiaStructure;
 import net.valhelsia.valhelsia_core.world.IValhelsiaStructure;
 
 import java.util.*;
 
 /**
- * Structures
+ * Structures <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModStructures
  *
  * @author Valhelsia Team
- * @version 1.0.2
+ * @version 1.17.1-0.1.0
  */
 public class ModStructures {
 

@@ -1,7 +1,6 @@
 package com.stal111.valhelsia_structures.recipe;
 
 import com.google.gson.JsonObject;
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.init.ModRecipes;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.world.inventory.CraftingContainer;

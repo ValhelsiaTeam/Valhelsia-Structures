@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.tileentity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.block.ExplorersTentBlock;
 import com.stal111.valhelsia_structures.tileentity.ExplorersTentTileEntity;
 import com.stal111.valhelsia_structures.tileentity.model.ExplorersTentModel;

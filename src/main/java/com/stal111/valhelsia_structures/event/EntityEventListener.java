@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.event;
 
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.init.ModEntities;
 import com.stal111.valhelsia_structures.init.ModStructures;
 import net.minecraft.world.entity.Entity;

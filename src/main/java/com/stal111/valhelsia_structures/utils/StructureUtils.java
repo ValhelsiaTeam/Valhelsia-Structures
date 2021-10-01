@@ -11,6 +11,7 @@ import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -116,12 +117,12 @@ public class StructureUtils {
         return true;
     }
 
-    public static List<String> getAllBiomesForCategory(Biome.Category... categories) {
+    public static List<String> getAllBiomesForCategory(Biome.BiomeCategory... categories) {
         List<String> biomes = new ArrayList<>();
 
         for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
-            for (Biome.Category category : categories) {
-                if (biome.getCategory() == category) {
+            for (Biome.BiomeCategory category : categories) {
+                if (biome.getBiomeCategory() == category) {
                     biomes.add(Objects.requireNonNull(biome.getRegistryName()).toString());
                 }
             }

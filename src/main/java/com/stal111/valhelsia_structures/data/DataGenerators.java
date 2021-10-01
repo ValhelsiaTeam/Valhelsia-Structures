@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.data;
 
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.data.client.ModBlockStateProvider;
 import com.stal111.valhelsia_structures.data.client.ModItemModelProvider;
 import com.stal111.valhelsia_structures.data.server.ModBlockTagsProvider;

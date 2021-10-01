@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.common.block;
 
-//import com.stal111.valhelsia_structures.ValhelsiaStructures;
+//import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 //import net.minecraft.ResourceLocationException;
 //import net.minecraft.block.Block;
 //import net.minecraft.block.Blocks;

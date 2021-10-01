@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.data.server;
 
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.block.JarBlock;
 import com.stal111.valhelsia_structures.common.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.common.block.ValhelsiaStoneBlock;

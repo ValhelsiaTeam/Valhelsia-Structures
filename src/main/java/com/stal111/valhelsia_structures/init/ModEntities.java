@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.init;
 
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.entity.MossySkeletonEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.entity.EntityType;

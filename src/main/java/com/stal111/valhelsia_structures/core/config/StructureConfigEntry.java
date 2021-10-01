@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.config;
+package com.stal111.valhelsia_structures.core.config;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 
@@ -7,11 +7,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Structure Config Entry
- * Valhelsia Structures - com.stal111.valhelsia_structures.config.StructureConfigEntry
+ * Structure Config Entry <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.config.StructureConfigEntry
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2021-02-08
  */
 public class StructureConfigEntry {

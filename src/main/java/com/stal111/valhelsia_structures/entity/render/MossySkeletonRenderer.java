@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.entity.render;
 
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.entity.MossySkeletonEntity;
 import com.stal111.valhelsia_structures.entity.model.MossySkeletonModel;
 import com.stal111.valhelsia_structures.entity.render.layer.MossySkeletonArrowLayer;

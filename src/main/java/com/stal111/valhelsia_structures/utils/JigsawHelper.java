@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.utils;
 
 import com.mojang.datafixers.util.Pair;
-import com.stal111.valhelsia_structures.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.world.template.Processors;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.gen.feature.jigsaw.*;
