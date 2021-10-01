@@ -2,8 +2,8 @@ package com.stal111.valhelsia_structures.tileentity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.properties.DungeonDoorPart;
-import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
+import com.stal111.valhelsia_structures.common.block.properties.DungeonDoorPart;
+import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.tileentity.DungeonDoorTileEntity;
 import com.stal111.valhelsia_structures.tileentity.model.DungeonDoorModel;

@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.block;
+package com.stal111.valhelsia_structures.common.block;
 
 //import net.minecraft.block.*;
 //import net.minecraft.entity.player.PlayerEntity;
@@ -29,7 +29,7 @@ package com.stal111.valhelsia_structures.block;
 //
 ///**
 // * Big Jar Top Block
-// * Valhelsia Structures - com.stal111.valhelsia_structures.block.BigJarTopBlock
+// * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.BigJarTopBlock
 // *
 // * @author Valhelsia Team
 // * @version 0.1.1

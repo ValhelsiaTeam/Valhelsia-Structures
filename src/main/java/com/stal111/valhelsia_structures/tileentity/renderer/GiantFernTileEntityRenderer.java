@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.tileentity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
+import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.tileentity.GiantFernTileEntity;
 import com.stal111.valhelsia_structures.tileentity.model.GiantFernModel;
 import net.minecraft.client.renderer.MultiBufferSource;

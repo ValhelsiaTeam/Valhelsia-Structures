@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.block.properties;
+package com.stal111.valhelsia_structures.common.block.properties;
 
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 
 /**
  * Mod Block State Properties
- * Valhelsia Structures - com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties
  *
  * @author Valhelsia Team
  * @version 16.0.4

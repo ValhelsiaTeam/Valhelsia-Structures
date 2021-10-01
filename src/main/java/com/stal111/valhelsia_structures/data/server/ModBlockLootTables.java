@@ -1,9 +1,9 @@
 package com.stal111.valhelsia_structures.data.server;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.JarBlock;
-import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
-import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
+import com.stal111.valhelsia_structures.common.block.JarBlock;
+import com.stal111.valhelsia_structures.common.block.ValhelsiaGrassBlock;
+import com.stal111.valhelsia_structures.common.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;

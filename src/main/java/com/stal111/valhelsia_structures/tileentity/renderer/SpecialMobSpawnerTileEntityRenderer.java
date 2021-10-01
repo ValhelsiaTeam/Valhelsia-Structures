@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.tileentity.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.stal111.valhelsia_structures.block.SpecialAbstractSpawner;
+import com.stal111.valhelsia_structures.common.block.SpecialBaseSpawner;
 import com.stal111.valhelsia_structures.tileentity.SpecialMobSpawnerTileEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -20,7 +20,7 @@ public class SpecialMobSpawnerTileEntityRenderer extends BlockEntityRenderer<Spe
     public void render(SpecialMobSpawnerTileEntity p_225616_1_, float p_225616_2_, PoseStack p_225616_3_, MultiBufferSource p_225616_4_, int p_225616_5_, int p_225616_6_) {
         p_225616_3_.push();
         p_225616_3_.translate(0.5D, 0.0D, 0.5D);
-        SpecialAbstractSpawner abstractspawner = p_225616_1_.getSpawnerBaseLogic();
+        SpecialBaseSpawner abstractspawner = p_225616_1_.getSpawnerBaseLogic();
         Entity entity = abstractspawner.getCachedEntity();
         if (entity != null) {
             float f = 0.53125F;

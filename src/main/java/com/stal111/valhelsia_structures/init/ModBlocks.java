@@ -1,9 +1,8 @@
 package com.stal111.valhelsia_structures.init;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.*;
-import com.stal111.valhelsia_structures.block.properties.BlockProperties;
-import com.stal111.valhelsia_structures.item.block.DyeableBlockItem;
+import com.stal111.valhelsia_structures.common.block.*;
+import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;

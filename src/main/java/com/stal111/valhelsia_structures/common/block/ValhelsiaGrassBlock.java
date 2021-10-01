@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.block;
+package com.stal111.valhelsia_structures.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -15,7 +15,7 @@ import javax.annotation.Nonnull;
 
 /**
  * Valhelsia Grass Block <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.ValhelsiaGrassBlock
  *
  * @author Valhelsia Team
  * @version 1.17.1-0.1.0

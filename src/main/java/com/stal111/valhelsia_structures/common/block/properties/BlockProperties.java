@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.block.properties;
+package com.stal111.valhelsia_structures.common.block.properties;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.DirectionalBlock;
@@ -9,7 +9,7 @@ import net.minecraft.world.level.material.MaterialColor;
 
 /**
  * Block Properties <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.block.properties.BlockProperties
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.properties.BlockProperties
  *
  * @author Valhelsia Team
  * @version 1.17.1-0.1.0

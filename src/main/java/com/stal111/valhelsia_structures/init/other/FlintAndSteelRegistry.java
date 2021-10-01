@@ -1,8 +1,8 @@
 package com.stal111.valhelsia_structures.init.other;
 
-import com.stal111.valhelsia_structures.block.BrazierBlock;
-import com.stal111.valhelsia_structures.block.DousedTorchBlock;
-import com.stal111.valhelsia_structures.block.DousedWallTorchBlock;
+import com.stal111.valhelsia_structures.common.block.BrazierBlock;
+import com.stal111.valhelsia_structures.common.block.DousedTorchBlock;
+import com.stal111.valhelsia_structures.common.block.DousedWallTorchBlock;
 import com.stal111.valhelsia_structures.utils.TorchTransformationHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;

@@ -1,6 +1,6 @@
-package com.stal111.valhelsia_structures.block;
+package com.stal111.valhelsia_structures.common.block;
 
-import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
+import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 
 /**
  * Big Jar Block <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.block.BigJarBlock
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.BigJarBlock
  *
  * @author Valhelsia Team
  * @version 1.17.1-0.1.0

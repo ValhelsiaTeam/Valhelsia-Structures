@@ -1,6 +1,6 @@
-package com.stal111.valhelsia_structures.block;
+package com.stal111.valhelsia_structures.common.block;
 
-import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
+import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.tileentity.JarTileEntity;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.BlockPos;
@@ -41,7 +41,7 @@ import java.util.Objects;
 
 /**
  * Jar Block <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.block.JarBlock
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.JarBlock
  *
  * @author Valhelsia Team
  * @version 1.17.1-0.1.0

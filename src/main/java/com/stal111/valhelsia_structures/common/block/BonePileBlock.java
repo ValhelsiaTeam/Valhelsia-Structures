@@ -1,6 +1,6 @@
-package com.stal111.valhelsia_structures.block;
+package com.stal111.valhelsia_structures.common.block;
 
-import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
+import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -26,7 +26,7 @@ import javax.annotation.Nullable;
 
 /**
  * Bone Pile Block <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.block.BonePileBlock
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.BonePileBlock
  *
  * @author Valhelsia Team
  * @version 1.17.1-0.1.0

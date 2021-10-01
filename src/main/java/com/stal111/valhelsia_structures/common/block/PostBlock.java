@@ -1,7 +1,7 @@
-package com.stal111.valhelsia_structures.block;
+package com.stal111.valhelsia_structures.common.block;
 
 import com.google.common.collect.ImmutableMap;
-import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
+import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -34,7 +34,7 @@ import java.util.function.Supplier;
 
 /**
  * Post Block <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.block.PostBlock
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.PostBlock
  *
  * @author Valhelsia Team
  * @version 1.17.1-0.1.0

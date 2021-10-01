@@ -1,9 +1,9 @@
 package com.stal111.valhelsia_structures.data.client;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.CutPostBlock;
-import com.stal111.valhelsia_structures.block.ValhelsiaGrassBlock;
-import com.stal111.valhelsia_structures.block.ValhelsiaStoneBlock;
+import com.stal111.valhelsia_structures.common.block.CutPostBlock;
+import com.stal111.valhelsia_structures.common.block.ValhelsiaGrassBlock;
+import com.stal111.valhelsia_structures.common.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.init.ModItems;
 import net.minecraft.data.DataGenerator;

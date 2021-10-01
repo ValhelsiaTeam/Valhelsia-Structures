@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.block.properties;
+package com.stal111.valhelsia_structures.common.block.properties;
 
 import net.minecraft.util.StringRepresentable;
 
@@ -6,7 +6,7 @@ import javax.annotation.Nonnull;
 
 /**
  * Dungeon Door Part <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.block.properties.DungeonDoorPart
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.properties.DungeonDoorPart
  *
  * @author Valhelsia Team
  * @version 1.17.1-0.1.0

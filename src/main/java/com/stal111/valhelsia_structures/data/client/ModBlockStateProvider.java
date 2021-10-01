@@ -1,8 +1,8 @@
 package com.stal111.valhelsia_structures.data.client;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.*;
-import com.stal111.valhelsia_structures.block.properties.ModBlockStateProperties;
+import com.stal111.valhelsia_structures.common.block.*;
+import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import net.minecraft.block.*;
 import net.minecraft.data.DataGenerator;

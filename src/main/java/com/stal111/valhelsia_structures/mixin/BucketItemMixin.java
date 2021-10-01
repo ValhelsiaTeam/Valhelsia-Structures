@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.mixin;
 
-import com.stal111.valhelsia_structures.block.DousedWallTorchBlock;
+import com.stal111.valhelsia_structures.common.block.DousedWallTorchBlock;
 import com.stal111.valhelsia_structures.utils.TorchTransformationHandler;
 import net.minecraft.block.Block;
 import net.minecraft.world.level.block.state.BlockState;

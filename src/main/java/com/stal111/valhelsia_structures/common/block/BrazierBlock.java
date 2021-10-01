@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.block;
+package com.stal111.valhelsia_structures.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -35,7 +35,7 @@ import java.util.Random;
 
 /**
  * Brazier Block <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.block.BrazierBlock
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.BrazierBlock
  *
  * @author Valhelsia Team
  * @version 1.17.1-0.1.0

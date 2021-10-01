@@ -4,6 +4,7 @@ import com.stal111.valhelsia_structures.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.tileentity.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 

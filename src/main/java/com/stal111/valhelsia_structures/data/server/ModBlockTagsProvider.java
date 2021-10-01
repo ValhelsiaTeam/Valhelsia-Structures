@@ -1,8 +1,8 @@
 package com.stal111.valhelsia_structures.data.server;
 
 import com.stal111.valhelsia_structures.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.block.CutPostBlock;
-import com.stal111.valhelsia_structures.block.PostBlock;
+import com.stal111.valhelsia_structures.common.block.CutPostBlock;
+import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.data.tags.BlockTagsProvider;
