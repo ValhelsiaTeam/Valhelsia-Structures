@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.world.structures;
+package com.stal111.valhelsia_structures.common.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
@@ -12,11 +12,11 @@ import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfigura
 import javax.annotation.Nonnull;
 
 /**
- * Spawner Dungeon Structure
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.SpawnerDungeonStructure
+ * Spawner Dungeon Structure <br>
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.SpawnerDungeonStructure
  *
  * @author Valhelsia Team
- * @version 1.0.2
+ * @version 1.17.1-0.1.0
  * @since 2020-05-27
  */
 public class SpawnerDungeonStructure extends AbstractValhelsiaStructure {
@@ -50,7 +50,7 @@ public class SpawnerDungeonStructure extends AbstractValhelsiaStructure {
 
     @Nonnull
     @Override
-    public GenerationStep.Decoration getDecorationStage() {
+    public GenerationStep.Decoration step() {
         return GenerationStep.Decoration.UNDERGROUND_STRUCTURES;
     }
 

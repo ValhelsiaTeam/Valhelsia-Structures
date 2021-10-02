@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.world.structures;
+package com.stal111.valhelsia_structures.common.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
@@ -9,19 +9,19 @@ import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 
 /**
- * Tower Ruin Structure
- * Valhelsia-Structures - com.stal111.valhelsia_structure.world.structures.TowerRuinStructure
+ * Forge Structure <br>
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.ForgeStructure
  *
  * @author Valhelsia Team
- * @version 16.0.3
- * @since 2019-10-31
+ * @version 1.17.1-0.1.0
+ * @since 2020-05-27
  */
 
-public class TowerRuinStructure extends AbstractValhelsiaStructure {
+public class ForgeStructure extends AbstractValhelsiaStructure {
 
-    public TowerRuinStructure(Codec<JigsawConfiguration> villageConfigCodec) {
-        super(villageConfigCodec, "tower_ruin", 1,
-                new StructureConfigEntry(0.8D, 25, 8,
+    public ForgeStructure(Codec<JigsawConfiguration> villageConfigCodec) {
+        super(villageConfigCodec, "forge", 2,
+                new StructureConfigEntry(0.7D, 30, 8,
                         Biome.BiomeCategory.PLAINS.getName(),
                         Biome.BiomeCategory.FOREST.getName(),
                         Biome.BiomeCategory.EXTREME_HILLS.getName(),
@@ -31,11 +31,11 @@ public class TowerRuinStructure extends AbstractValhelsiaStructure {
 
     @Override
     public int getSeedModifier() {
-        return 24357670;
+        return 12857691;
     }
 
     @Override
     public ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> getStructureFeature() {
-        return ModStructureFeatures.TOWER_RUIN;
+        return ModStructureFeatures.FORGE;
     }
 }

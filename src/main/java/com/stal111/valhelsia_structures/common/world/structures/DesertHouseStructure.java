@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.world.structures;
+package com.stal111.valhelsia_structures.common.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
@@ -9,11 +9,11 @@ import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 
 /**
- * Desert House Structure
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.DesertHouseStructure
+ * Desert House Structure <br>
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.DesertHouseStructure
  *
  * @author Valhelsia Team
- * @version 16.0.3
+ * @version 1.17.1-0.1.0
  * @since 2020-05-27
  */
 

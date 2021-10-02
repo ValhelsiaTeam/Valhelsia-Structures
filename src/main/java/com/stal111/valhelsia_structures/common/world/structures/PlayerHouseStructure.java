@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.world.structures;
+package com.stal111.valhelsia_structures.common.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
@@ -9,32 +9,33 @@ import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 
 /**
- * Castle Structure
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.CastleStructure
+ * Player House Structure <br>
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.PlayerHouseStructure
  *
  * @author Valhelsia Team
- * @version 16.0.3
+ * @version 1.17.1-0.1.0
  * @since 2020-05-27
  */
 
-public class CastleStructure extends AbstractValhelsiaStructure {
+public class PlayerHouseStructure extends AbstractValhelsiaStructure {
 
-    public CastleStructure(Codec<JigsawConfiguration> villageConfigCodec) {
-        super(villageConfigCodec, "castle", 3,
-                new StructureConfigEntry(0.5D, 40, 8,
+    public PlayerHouseStructure(Codec<JigsawConfiguration> villageConfigCodec) {
+        super(villageConfigCodec, "player_house", 2,
+                new StructureConfigEntry(0.7D, 30, 8,
                         Biome.BiomeCategory.PLAINS.getName(),
                         Biome.BiomeCategory.FOREST.getName(),
+                        Biome.BiomeCategory.EXTREME_HILLS.getName(),
                         Biome.BiomeCategory.TAIGA.getName()
                 ));
     }
 
     @Override
     public int getSeedModifier() {
-        return 16987356;
+        return 17357645;
     }
 
     @Override
     public ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> getStructureFeature() {
-        return ModStructureFeatures.CASTLE;
+        return ModStructureFeatures.PLAYER_HOUSE;
     }
 }

@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.world.structures;
+package com.stal111.valhelsia_structures.common.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
@@ -9,31 +9,32 @@ import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 
 /**
- * Big Tree Structure
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.BigTreeStructure
+ * Castle Structure <br>
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.CastleStructure
  *
  * @author Valhelsia Team
- * @version 16.0.3
- * @since 2021-05-14
+ * @version 1.17.1-0.1.0
+ * @since 2020-05-27
  */
 
-public class BigTreeStructure extends AbstractValhelsiaStructure {
+public class CastleStructure extends AbstractValhelsiaStructure {
 
-    public BigTreeStructure(Codec<JigsawConfiguration> villageConfigCodec) {
-        super(villageConfigCodec, "big_tree", 2,
-                new StructureConfigEntry(0.7D, 30, 8,
+    public CastleStructure(Codec<JigsawConfiguration> villageConfigCodec) {
+        super(villageConfigCodec, "castle", 3,
+                new StructureConfigEntry(0.5D, 40, 8,
                         Biome.BiomeCategory.PLAINS.getName(),
-                        Biome.BiomeCategory.FOREST.getName()
+                        Biome.BiomeCategory.FOREST.getName(),
+                        Biome.BiomeCategory.TAIGA.getName()
                 ));
     }
 
     @Override
     public int getSeedModifier() {
-        return 35122018;
+        return 16987356;
     }
 
     @Override
     public ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> getStructureFeature() {
-        return ModStructureFeatures.BIG_TREE;
+        return ModStructureFeatures.CASTLE;
     }
 }

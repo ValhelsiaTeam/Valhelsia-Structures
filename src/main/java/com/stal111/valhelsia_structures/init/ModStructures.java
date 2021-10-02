@@ -2,19 +2,17 @@ package com.stal111.valhelsia_structures.init;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.stal111.valhelsia_structures.common.world.structures.*;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.world.structures.*;
-import net.minecraft.util.registry.WorldGenRegistries;
+import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.world.level.levelgen.StructureSettings;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.gen.feature.structure.VillageConfig;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
-import net.minecraft.world.gen.settings.StructureSeparationSettings;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.common.world.IValhelsiaStructure;
-import net.valhelsia.valhelsia_core.world.IValhelsiaStructure;
 
 import java.util.*;
 
@@ -31,15 +29,15 @@ public class ModStructures {
 
     public static final DeferredRegister<StructureFeature<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, ValhelsiaStructures.MOD_ID);
 
-    public static final RegistryObject<CastleStructure> CASTLE = register(new CastleStructure(VillageConfig.field_236533_a_));
-    public static final RegistryObject<CastleRuinStructure> CASTLE_RUIN = register(new CastleRuinStructure(VillageConfig.field_236533_a_));
-    public static final RegistryObject<DesertHouseStructure> DESERT_HOUSE = register(new DesertHouseStructure(VillageConfig.field_236533_a_));
-    public static final RegistryObject<ForgeStructure> FORGE = register(new ForgeStructure(VillageConfig.field_236533_a_));
-    public static final RegistryObject<PlayerHouseStructure> PLAYER_HOUSE = register(new PlayerHouseStructure(VillageConfig.field_236533_a_));
-    public static final RegistryObject<SpawnerDungeonStructure> SPAWNER_DUNGEON = register(new SpawnerDungeonStructure(VillageConfig.field_236533_a_));
-    public static final RegistryObject<TowerRuinStructure> TOWER_RUIN = register(new TowerRuinStructure(VillageConfig.field_236533_a_));
-    public static final RegistryObject<WitchHutStructure> WITCH_HUT = register(new WitchHutStructure(VillageConfig.field_236533_a_));
-    public static final RegistryObject<BigTreeStructure> BIG_TREE = register(new BigTreeStructure(VillageConfig.field_236533_a_));
+    public static final RegistryObject<CastleStructure> CASTLE = register(new CastleStructure(JigsawConfiguration.CODEC));
+    public static final RegistryObject<CastleRuinStructure> CASTLE_RUIN = register(new CastleRuinStructure(JigsawConfiguration.CODEC));
+    public static final RegistryObject<DesertHouseStructure> DESERT_HOUSE = register(new DesertHouseStructure(JigsawConfiguration.CODEC));
+    public static final RegistryObject<ForgeStructure> FORGE = register(new ForgeStructure(JigsawConfiguration.CODEC));
+    public static final RegistryObject<PlayerHouseStructure> PLAYER_HOUSE = register(new PlayerHouseStructure(JigsawConfiguration.CODEC));
+    public static final RegistryObject<SpawnerDungeonStructure> SPAWNER_DUNGEON = register(new SpawnerDungeonStructure(JigsawConfiguration.CODEC));
+    public static final RegistryObject<TowerRuinStructure> TOWER_RUIN = register(new TowerRuinStructure(JigsawConfiguration.CODEC));
+    public static final RegistryObject<WitchHutStructure> WITCH_HUT = register(new WitchHutStructure(JigsawConfiguration.CODEC));
+    public static final RegistryObject<BigTreeStructure> BIG_TREE = register(new BigTreeStructure(JigsawConfiguration.CODEC));
 
     private static <T extends AbstractValhelsiaStructure> RegistryObject<T> register(T structure) {
         MOD_STRUCTURES.add(structure);
@@ -47,35 +45,35 @@ public class ModStructures {
     }
 
     public static void setupStructures() {
-        for (IValhelsiaStructure iStructure : MOD_STRUCTURES) {
-            Structure<?> structure = iStructure.getStructure();
-            StructureSeparationSettings separationSettings = iStructure.getSeparationSettings();
+        for (IValhelsiaStructure structure : MOD_STRUCTURES) {
+            StructureFeature<?> structureFeature = structure.getStructure();
+            StructureFeatureConfiguration featureConfiguration = structure.getFeatureConfiguration();
 
-            Structure.NAME_STRUCTURE_BIMAP.put(Objects.requireNonNull(structure.getRegistryName()).toString(), structure);
+            StructureFeature.STRUCTURES_REGISTRY.put(Objects.requireNonNull(structureFeature.getRegistryName()).toString(), structureFeature);
 
-            if (iStructure.transformsSurroundingLand()) {
-                Structure.field_236384_t_ =
-                        ImmutableList.<Structure<?>>builder()
-                                .addAll(Structure.field_236384_t_)
-                                .add(structure)
+            if (structure.transformsSurroundingLand()) {
+                StructureFeature.NOISE_AFFECTING_FEATURES =
+                        ImmutableList.<StructureFeature<?>>builder()
+                                .addAll(StructureFeature.NOISE_AFFECTING_FEATURES)
+                                .add(structureFeature)
                                 .build();
             }
 
-            DimensionStructuresSettings.field_236191_b_ =
-                    ImmutableMap.<Structure<?>, StructureSeparationSettings>builder()
-                            .putAll(DimensionStructuresSettings.field_236191_b_)
-                            .put(structure, separationSettings)
+            StructureSettings.DEFAULTS =
+                    ImmutableMap.<StructureFeature<?>, StructureFeatureConfiguration>builder()
+                            .putAll(StructureSettings.DEFAULTS)
+                            .put(structureFeature, featureConfiguration)
                             .build();
 
-            WorldGenRegistries.NOISE_SETTINGS.getEntries().forEach(settings -> {
-                Map<Structure<?>, StructureSeparationSettings> structureMap = settings.getValue().getStructures().func_236195_a_();
+            BuiltinRegistries.NOISE_GENERATOR_SETTINGS.entrySet().forEach(settings -> {
+                Map<StructureFeature<?>, StructureFeatureConfiguration> structureMap = settings.getValue().structureSettings().structureConfig();
 
                 if (structureMap instanceof ImmutableMap) {
-                    Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(structureMap);
-                    tempMap.put(structure, separationSettings);
-                    settings.getValue().getStructures().field_236193_d_ = tempMap;
+                    Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(structureMap);
+                    tempMap.put(structureFeature, featureConfiguration);
+                    settings.getValue().structureSettings().structureConfig = tempMap;
                 } else {
-                    structureMap.put(structure, separationSettings);
+                    structureMap.put(structureFeature, featureConfiguration);
                 }
             });
         }

@@ -3,7 +3,7 @@ package com.stal111.valhelsia_structures.event;
 import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.config.StructureGenConfig;
 import com.stal111.valhelsia_structures.init.ModStructures;
-import com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure;
+import com.stal111.valhelsia_structures.common.world.structures.AbstractValhelsiaStructure;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.event.world.BiomeLoadingEvent;

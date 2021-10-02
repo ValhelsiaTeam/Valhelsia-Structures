@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.world.structures;
+package com.stal111.valhelsia_structures.common.world.structures;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
@@ -14,11 +14,11 @@ import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfigura
 import java.util.List;
 
 /**
- * Witch Hut Structure
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.WitchHutStructure
+ * Witch Hut Structure <br>
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.WitchHutStructure
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2021-04-23
  */
 public class WitchHutStructure extends AbstractValhelsiaStructure {

@@ -6,7 +6,7 @@ import com.stal111.valhelsia_structures.init.other.CompostableRegistry;
 import com.stal111.valhelsia_structures.init.other.FireExtinguishRegistry;
 import com.stal111.valhelsia_structures.init.other.FlammableRegistry;
 import com.stal111.valhelsia_structures.init.other.FlintAndSteelRegistry;
-import com.stal111.valhelsia_structures.world.structures.pools.*;
+import com.stal111.valhelsia_structures.common.world.structures.pools.*;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 /**

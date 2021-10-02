@@ -12,6 +12,9 @@ import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.structure.Structure;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -95,7 +98,7 @@ public class StructureUtils {
      * @param structures Structures to check for.
      * @return True if there are no structures from the list around the given structure.
      */
-    public static boolean checkForOtherStructures(Structure<?> structure, ChunkGenerator generator, long seed, SharedSeedRandom rand, int chunkX, int chunkZ, List<Structure<?>> structures) {
+    public static boolean checkForOtherStructures(StructureFeature<?> structure, ChunkGenerator generator, long seed, WorldgenRandom rand, int chunkX, int chunkZ, List<StructureFeature<?>> structures) {
         for (Structure<?> structure1 : structures) {
             StructureSeparationSettings separationSettings = generator.func_235957_b_().func_236197_a_(structure1);
 

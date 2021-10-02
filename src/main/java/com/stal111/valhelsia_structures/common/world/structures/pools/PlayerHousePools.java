@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.world.structures.pools;
+package com.stal111.valhelsia_structures.common.world.structures.pools;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
@@ -6,11 +6,11 @@ import com.stal111.valhelsia_structures.utils.JigsawHelper;
 import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
 
 /**
- * Player House Pools
- * Valhelsia Structures - com.stal111.valhelsia_structures.world.structures.pools.PlayerHousePools
+ * Player House Pools <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.world.structures.pools.PlayerHousePools
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2021-04-27
  */
 public class PlayerHousePools {

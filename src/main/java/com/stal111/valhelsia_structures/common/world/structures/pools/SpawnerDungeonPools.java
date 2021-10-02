@@ -1,17 +1,16 @@
-package com.stal111.valhelsia_structures.world.structures.pools;
+package com.stal111.valhelsia_structures.common.world.structures.pools;
 
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.stal111.valhelsia_structures.utils.JigsawHelper;
-import com.stal111.valhelsia_structures.world.template.Processors;
 import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
 
 /**
- * Spawner Dungeon Pools
- * Valhelsia-Structures - com.stal111.valhelsia_structures.world.structures.pools.SpawnerDungeonPieces
+ * Spawner Dungeon Pools <br>
+ * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.pools.SpawnerDungeonPieces
  *
  * @author Valhelsia Team
- * @version 16.0.5
+ * @version 1.17.1-0.1.0
  */
 public class SpawnerDungeonPools {
 

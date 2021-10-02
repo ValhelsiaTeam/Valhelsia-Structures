@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.core.config;
 
 import com.stal111.valhelsia_structures.init.ModStructures;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
-import com.stal111.valhelsia_structures.world.structures.AbstractValhelsiaStructure;
+import com.stal111.valhelsia_structures.common.world.structures.AbstractValhelsiaStructure;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraftforge.common.ForgeConfigSpec;
