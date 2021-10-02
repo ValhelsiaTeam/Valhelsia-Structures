@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(BlockBehaviour.BlockStateBase.class)
 public class AbstractBlockStateMixin {
 
-    @Inject(at = @At(value = "HEAD"), method = "getOffset", cancellable = true)
+    //@Inject(at = @At(value = "HEAD"), method = "getOffset", cancellable = true)
     private void valhelsia_getOffset(BlockGetter access, BlockPos pos, CallbackInfoReturnable<Vec3> cir) {
         if (access != null && access.getBlockState(pos).getBlock() == ModBlocks.BONE_PILE.get()) {
             cir.setReturnValue(new Vec3(0.0D, -0.46875D, 0.0D));

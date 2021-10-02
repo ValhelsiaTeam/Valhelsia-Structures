@@ -76,7 +76,7 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
 
     @Override
     public void setPlacedBy(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
-        if (shouldAttach(level, pos)) {
+        if (this.shouldAttach(level, pos)) {
             level.setBlock(pos, state.setValue(ATTACHED, true), 2);
         }
         super.setPlacedBy(level, pos, state, placer, stack);
@@ -98,7 +98,7 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
-    public static boolean shouldAttach(Level world, BlockPos pos) {
+    private boolean shouldAttach(Level world, BlockPos pos) {
         return world.getBlockState(pos.below()).isFaceSturdy(world, pos.below(), Direction.UP) && world.getBlockState(pos).getValue(AXIS) != Direction.Axis.Y;
     }
 

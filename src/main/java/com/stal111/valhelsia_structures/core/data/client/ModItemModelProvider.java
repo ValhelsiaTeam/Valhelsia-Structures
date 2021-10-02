@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.data.client;
+package com.stal111.valhelsia_structures.core.data.client;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
@@ -8,16 +8,16 @@ import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.core.init.ModItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.valhelsia.valhelsia_core.data.ValhelsiaItemModelProvider;
+import net.valhelsia.valhelsia_core.core.data.ValhelsiaItemModelProvider;
 
 import java.util.Objects;
 
 /**
- * Mod Item Model Provider
- * Valhelsia Structures - com.stal111.valhelsia_structures.data.client.ModItemModelProvider
+ * Mod Item Model Provider <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.client.ModItemModelProvider
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2020-11-13
  */
 public class ModItemModelProvider extends ValhelsiaItemModelProvider {

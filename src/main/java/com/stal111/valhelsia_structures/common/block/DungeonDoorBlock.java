@@ -79,7 +79,8 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
         if (open && state.getValue(PART).isRight()) {
             shape = VoxelShapeHelper.add(-12.0D, 0.0D, 0.0D, -12.0D, 0.0D, 0.0D, shape);
         }
-        return open && state.getValue(PART).isMiddle() ? Shapes.empty() : VoxelShapeHelper.rotateShapeDirection(shape, state.getValue(FACING));
+       // return open && state.getValue(PART).isMiddle() ? Shapes.empty() : VoxelShapeHelper.rotateShapeDirection(shape, state.getValue(FACING));
+        return shape;
     }
 
     @Nonnull

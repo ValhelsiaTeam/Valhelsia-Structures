@@ -1,25 +1,25 @@
-package com.stal111.valhelsia_structures.data;
+package com.stal111.valhelsia_structures.core.data;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.data.client.ModBlockStateProvider;
-import com.stal111.valhelsia_structures.data.client.ModItemModelProvider;
-import com.stal111.valhelsia_structures.data.server.ModBlockTagsProvider;
-import com.stal111.valhelsia_structures.data.server.ModItemTagsProvider;
-import com.stal111.valhelsia_structures.data.server.loot.ModLootModifierProvider;
-import com.stal111.valhelsia_structures.data.server.loot.ModLootTableProvider;
-import com.stal111.valhelsia_structures.data.server.ModRecipeProvider;
+import com.stal111.valhelsia_structures.core.data.client.ModBlockStateProvider;
+import com.stal111.valhelsia_structures.core.data.client.ModItemModelProvider;
+import com.stal111.valhelsia_structures.core.data.server.ModBlockTagsProvider;
+import com.stal111.valhelsia_structures.core.data.server.ModItemTagsProvider;
+import com.stal111.valhelsia_structures.core.data.server.loot.ModLootModifierProvider;
+import com.stal111.valhelsia_structures.core.data.server.loot.ModLootTableProvider;
+import com.stal111.valhelsia_structures.core.data.server.ModRecipeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 /**
- * Data Generators
- * Valhelsia Structures - com.stal111.valhelsia_structures.data.DataGenerators
+ * Data Generators <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.DataGenerators
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2020-11-13
  */
 @Mod.EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

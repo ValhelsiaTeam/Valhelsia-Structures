@@ -1,24 +1,24 @@
-package com.stal111.valhelsia_structures.data.server;
+package com.stal111.valhelsia_structures.core.data.server;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.item.Items;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
 
 /**
- * Mod Item Tags Provider
- * Valhelsia Structures - com.stal111.valhelsia_structures.data.data.ModItemTagsProvider
+ * Mod Item Tags Provider <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.data.ModItemTagsProvider
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2021-01-12
  */
 public class ModItemTagsProvider extends ItemTagsProvider {
@@ -28,7 +28,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
-    protected void registerTags() {
+    protected void addTags() {
         this.copy(ModTags.Blocks.POSTS, ModTags.Items.POSTS);
         this.copy(ModTags.Blocks.CUT_POSTS, ModTags.Items.CUT_POSTS);
         this.copy(ModTags.Blocks.NON_FLAMMABLE_POSTS, ModTags.Items.NON_FLAMMABLE_POSTS);
@@ -52,6 +52,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         this.copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS);
 
-        this.getOrCreateBuilder(ModTags.Items.JAR_BLACKLISTED).add(Items.CACTUS, Items.CRIMSON_ROOTS, Items.WARPED_ROOTS);
+        this.tag(ModTags.Items.JAR_BLACKLISTED).add(Items.CACTUS, Items.CRIMSON_ROOTS, Items.WARPED_ROOTS);
     }
 }

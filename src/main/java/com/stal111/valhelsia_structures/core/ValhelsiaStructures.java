@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.core;
 
-import com.stal111.valhelsia_structures.ValhelsiaStructuresItemGroups;
+import com.stal111.valhelsia_structures.common.item.ModCreativeModeTabs;
 import com.stal111.valhelsia_structures.core.config.ConfigValidator;
 import com.stal111.valhelsia_structures.core.config.ModConfig;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
@@ -48,7 +48,7 @@ public class ValhelsiaStructures {
         ModBlockEntities.TILE_ENTITIES.register(eventBus);
         ModStructures.STRUCTURES.register(eventBus);
 
-        REGISTRY_MANAGER.getBlockHelper().setDefaultGroup(ValhelsiaStructuresItemGroups.MAIN);
+        REGISTRY_MANAGER.getBlockHelper().setDefaultGroup(ModCreativeModeTabs.MAIN);
         REGISTRY_MANAGER.registerConfigValidator(new ConfigValidator());
 
         REGISTRY_MANAGER.register(eventBus);

@@ -72,7 +72,7 @@ public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     public void setPlacedBy(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
-        if (PostBlock.shouldAttach(level, pos)) {
+        if (this.shouldAttach(level, pos)) {
             level.setBlock(pos, state.setValue(ATTACHED, true), 2);
         }
         super.setPlacedBy(level, pos, state, placer, stack);
@@ -104,6 +104,10 @@ public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     public boolean canBeReplaced(@Nonnull BlockState state, @Nonnull BlockPlaceContext context) {
         return !context.isSecondaryUseActive() && context.getItemInHand().is(this.asItem()) && state.getValue(PARTS) < 4 || super.canBeReplaced(state, context);
+    }
+
+    private boolean shouldAttach(Level world, BlockPos pos) {
+        return world.getBlockState(pos.below()).isFaceSturdy(world, pos.below(), Direction.UP) && world.getBlockState(pos).getValue(FACING).getAxis() != Direction.Axis.Y;
     }
 
     @Nonnull

@@ -37,9 +37,9 @@ import java.util.Random;
 @Mixin(ModelBlockRenderer.class)
 public abstract class BlockModelRendererMixin {
 
-    @Shadow public abstract boolean tesselateWithAO(BlockAndTintGetter pLevel, BakedModel pModel, BlockState pState, BlockPos pPos, PoseStack pMatrixStack, VertexConsumer pBuffer, boolean pCheckSides, Random pRandom, long pRand, int pCombinedOverlay, IModelData modelData);
+    @Shadow(remap = false) public abstract boolean tesselateWithAO(BlockAndTintGetter pLevel, BakedModel pModel, BlockState pState, BlockPos pPos, PoseStack pMatrixStack, VertexConsumer pBuffer, boolean pCheckSides, Random pRandom, long pRand, int pCombinedOverlay, IModelData modelData);
 
-    @Shadow public abstract boolean tesselateWithoutAO(BlockAndTintGetter pLevel, BakedModel pModel, BlockState pState, BlockPos pPos, PoseStack pMatrixStack, VertexConsumer pBuffer, boolean pCheckSides, Random pRandom, long pRand, int pCombinedOverlay, IModelData modelData);
+    @Shadow(remap = false) public abstract boolean tesselateWithoutAO(BlockAndTintGetter pLevel, BakedModel pModel, BlockState pState, BlockPos pPos, PoseStack pMatrixStack, VertexConsumer pBuffer, boolean pCheckSides, Random pRandom, long pRand, int pCombinedOverlay, IModelData modelData);
 
     @Inject(at = @At(value = "RETURN"), method = "tesselateBlock(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZLjava/util/Random;JILnet/minecraftforge/client/model/data/IModelData;)Z", remap = false, cancellable = true)
     private void valhelsia_placeDousedTorch(BlockAndTintGetter level, BakedModel model, BlockState state, BlockPos pos, PoseStack matrix, VertexConsumer buffer, boolean checkSides, Random randomIn, long rand, int combinedOverlay, IModelData modelData, CallbackInfoReturnable<Boolean> cir) {

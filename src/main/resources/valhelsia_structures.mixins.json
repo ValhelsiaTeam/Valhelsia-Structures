@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_16",
   "package": "com.stal111.valhelsia_structures.core.mixin",
   "refmap": "valhelsia_structures.refmap.json",
   "mixins": [

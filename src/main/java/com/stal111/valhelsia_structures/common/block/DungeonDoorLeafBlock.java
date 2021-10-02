@@ -60,9 +60,10 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
     public VoxelShape getShape(BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         VoxelShape shape = SHAPE;
         if (state.getValue(MIRRORED)) {
-            shape = VoxelShapeHelper.rotateShape(shape, VoxelShapeHelper.RotationAmount.HUNDRED_EIGHTY);
+            //shape = VoxelShapeHelper.rotateShape(shape, VoxelShapeHelper.RotationAmount.HUNDRED_EIGHTY);
         }
-        return VoxelShapeHelper.rotateShapeDirection(shape, state.getValue(FACING));
+        //return VoxelShapeHelper.rotateShapeDirection(shape, state.getValue(FACING));
+        return shape;
     }
 
     @Nonnull

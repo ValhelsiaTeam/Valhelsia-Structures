@@ -31,7 +31,7 @@ public class MossySkeletonRenderer extends HumanoidMobRenderer<MossySkeletonEnti
 
     public MossySkeletonRenderer(EntityRendererProvider.Context context, ModelLayerLocation layer, ModelLayerLocation innerArmorLayer, ModelLayerLocation outerArmorLayer) {
         super(context, new MossySkeletonModel<>(context.bakeLayer(layer)), 0.5F);
-        this.addLayer(new HumanoidArmorLayer<>(this, new MossySkeletonModel<>(context.bakeLayer(innerArmorLayer)), new MossySkeletonModel(context.bakeLayer(outerArmorLayer))));
+        this.addLayer(new HumanoidArmorLayer<>(this, new MossySkeletonModel<>(context.bakeLayer(innerArmorLayer)), new MossySkeletonModel<>(context.bakeLayer(outerArmorLayer))));
 
 //        this.addLayer(new MossySkeletonVinesLayer<>(this));
 //        this.addLayer(new MossySkeletonArrowLayer<>(this));

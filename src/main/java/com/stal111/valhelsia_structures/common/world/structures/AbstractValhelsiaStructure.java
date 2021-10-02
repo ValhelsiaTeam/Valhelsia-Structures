@@ -91,7 +91,7 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
 
             structures.add(StructureFeature.VILLAGE);
 
-            if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkPos.x, chunkPos.z, structures)) {
+            if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkPos, structures)) {
                 return false;
             }
         }
