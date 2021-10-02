@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.config.ModConfig;
 import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
-import com.stal111.valhelsia_structures.init.ModStructures;
+import com.stal111.valhelsia_structures.core.init.ModStructures;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.RegistryAccess;

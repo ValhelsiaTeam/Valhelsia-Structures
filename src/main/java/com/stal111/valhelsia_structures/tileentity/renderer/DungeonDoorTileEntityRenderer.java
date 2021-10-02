@@ -4,8 +4,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.block.properties.DungeonDoorPart;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
-import com.stal111.valhelsia_structures.init.ModBlocks;
-import com.stal111.valhelsia_structures.tileentity.DungeonDoorTileEntity;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
+import com.stal111.valhelsia_structures.common.block.entity.DungeonDoorBlockEntity;
 import com.stal111.valhelsia_structures.tileentity.model.DungeonDoorModel;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -26,7 +26,7 @@ import javax.annotation.Nonnull;
  * @version 16.1.0
  * @since 2020-12-22
  */
-public class DungeonDoorTileEntityRenderer extends BlockEntityRenderer<DungeonDoorTileEntity> {
+public class DungeonDoorTileEntityRenderer extends BlockEntityRenderer<DungeonDoorBlockEntity> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(ValhelsiaStructures.MOD_ID, "textures/block/dungeon_door.png");
 
@@ -37,7 +37,7 @@ public class DungeonDoorTileEntityRenderer extends BlockEntityRenderer<DungeonDo
     }
 
     @Override
-    public void render(DungeonDoorTileEntity tileEntity, float partialTicks, @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(DungeonDoorBlockEntity tileEntity, float partialTicks, @Nonnull PoseStack matrixStack, @Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         if (tileEntity.getBlockState().get(ModBlockStateProperties.DUNGEON_DOOR_PART) != DungeonDoorPart.MIDDLE_1) return;
 
         boolean flag = tileEntity.getWorld() != null;
@@ -61,7 +61,7 @@ public class DungeonDoorTileEntityRenderer extends BlockEntityRenderer<DungeonDo
     }
 
     @Override
-    public boolean isGlobalRenderer(@Nonnull DungeonDoorTileEntity tileEntity) {
+    public boolean isGlobalRenderer(@Nonnull DungeonDoorBlockEntity tileEntity) {
         return true;
     }
 }

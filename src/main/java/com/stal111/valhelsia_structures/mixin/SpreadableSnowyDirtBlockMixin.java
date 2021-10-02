@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.mixin;
 
-import com.stal111.valhelsia_structures.init.ModBlocks;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SpreadingSnowyDirtBlock;

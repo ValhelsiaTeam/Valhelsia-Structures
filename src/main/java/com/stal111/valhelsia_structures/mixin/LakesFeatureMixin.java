@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.mixin;
 
-import com.stal111.valhelsia_structures.init.ModStructures;
+import com.stal111.valhelsia_structures.core.init.ModStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.math.SectionPos;
 import net.minecraft.world.level.WorldGenLevel;

@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.init;
+package com.stal111.valhelsia_structures.core.init;
 
 import com.stal111.valhelsia_structures.common.world.structures.pools.*;
 import net.minecraft.data.BuiltinRegistries;
@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * Structure Features <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModStructureFeatures
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.init.ModStructureFeatures
  *
  * @author Valhelsia Team
  * @version 1.17.1-0.1.0

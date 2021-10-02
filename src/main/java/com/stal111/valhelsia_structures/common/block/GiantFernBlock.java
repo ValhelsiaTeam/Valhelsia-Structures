@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.common.block;
 
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
-import com.stal111.valhelsia_structures.tileentity.GiantFernTileEntity;
+import com.stal111.valhelsia_structures.common.block.entity.GiantFernBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -37,7 +37,7 @@ public class GiantFernBlock extends BushBlock implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-        return new GiantFernTileEntity();
+        return new GiantFernBlockEntity(pos, state);
     }
 
     @Nonnull

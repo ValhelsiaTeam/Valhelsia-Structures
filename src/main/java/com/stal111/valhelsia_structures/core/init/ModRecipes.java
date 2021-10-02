@@ -1,21 +1,21 @@
-package com.stal111.valhelsia_structures.init;
+package com.stal111.valhelsia_structures.core.init;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.recipe.AxeCraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 
 /**
- * Recipes
- * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModRecipes
+ * Recipes <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.init.ModRecipes
  *
  * @author Valhelsia Team
- * @version 15.0.3
+ * @version 1.17.1-0.1.0
  * @since 2020-06-01
  */
 

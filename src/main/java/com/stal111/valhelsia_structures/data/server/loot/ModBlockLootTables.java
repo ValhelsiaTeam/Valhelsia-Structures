@@ -3,7 +3,7 @@ package com.stal111.valhelsia_structures.data.server.loot;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.block.*;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
-import com.stal111.valhelsia_structures.init.ModBlocks;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.item.Items;
 import net.minecraft.loot.ConstantRange;

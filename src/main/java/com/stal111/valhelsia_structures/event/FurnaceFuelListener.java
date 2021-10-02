@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.event;
 
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
-import com.stal111.valhelsia_structures.init.ModBlocks;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;

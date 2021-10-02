@@ -1,8 +1,8 @@
 package com.stal111.valhelsia_structures.event;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.init.ModEntities;
-import com.stal111.valhelsia_structures.init.ModStructures;
+import com.stal111.valhelsia_structures.core.init.ModEntities;
+import com.stal111.valhelsia_structures.core.init.ModStructures;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.merchant.villager.VillagerProfession;

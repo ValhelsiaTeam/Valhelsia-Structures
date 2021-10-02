@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.mixin;
 
-import com.stal111.valhelsia_structures.init.ModBlocks;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import org.spongepowered.asm.mixin.Mixin;

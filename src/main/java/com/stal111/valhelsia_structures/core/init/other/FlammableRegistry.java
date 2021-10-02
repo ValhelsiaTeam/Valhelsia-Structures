@@ -1,15 +1,15 @@
-package com.stal111.valhelsia_structures.init.other;
+package com.stal111.valhelsia_structures.core.init.other;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.valhelsia.valhelsia_core.registry.block.FlammableHelper;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
+import net.valhelsia.valhelsia_core.core.registry.block.FlammableHelper;
 
 /**
- * Flammable Registry
- * Valhelsia Structures - com.stal111.valhelsia_structures.init.other.FlammableRegistry
+ * Flammable Registry <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.init.other.FlammableRegistry
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2021-02-14
  */
 public class FlammableRegistry {

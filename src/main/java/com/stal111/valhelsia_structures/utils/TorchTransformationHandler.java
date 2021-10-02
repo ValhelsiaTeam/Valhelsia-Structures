@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.utils;
 
 import com.google.common.collect.ImmutableMap;
 import com.stal111.valhelsia_structures.common.block.DousedTorchBlock;
-import com.stal111.valhelsia_structures.init.ModBlocks;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.TorchBlock;

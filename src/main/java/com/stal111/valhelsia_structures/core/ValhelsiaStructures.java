@@ -3,9 +3,9 @@ package com.stal111.valhelsia_structures.core;
 import com.stal111.valhelsia_structures.ValhelsiaStructuresItemGroups;
 import com.stal111.valhelsia_structures.core.config.ConfigValidator;
 import com.stal111.valhelsia_structures.core.config.ModConfig;
-import com.stal111.valhelsia_structures.init.ModRecipes;
-import com.stal111.valhelsia_structures.init.ModStructures;
-import com.stal111.valhelsia_structures.init.ModTileEntities;
+import com.stal111.valhelsia_structures.core.init.ModRecipes;
+import com.stal111.valhelsia_structures.core.init.ModStructures;
+import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import com.stal111.valhelsia_structures.client.ClientSetup;
 import com.stal111.valhelsia_structures.common.CommonSetup;
 import com.stal111.valhelsia_structures.utils.LogFilter;
@@ -45,7 +45,7 @@ public class ValhelsiaStructures {
 
         // Deferred Registration
         ModRecipes.SERIALIZERS.register(eventBus);
-        ModTileEntities.TILE_ENTITIES.register(eventBus);
+        ModBlockEntities.TILE_ENTITIES.register(eventBus);
         ModStructures.STRUCTURES.register(eventBus);
 
         REGISTRY_MANAGER.getBlockHelper().setDefaultGroup(ValhelsiaStructuresItemGroups.MAIN);

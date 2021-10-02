@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.recipe;
 
 import com.google.gson.JsonObject;
-import com.stal111.valhelsia_structures.init.ModRecipes;
+import com.stal111.valhelsia_structures.core.init.ModRecipes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.ICriterionInstance;

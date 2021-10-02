@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.common.block.entity;
 
-import com.stal111.valhelsia_structures.init.ModTileEntities;
+import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -52,7 +52,7 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
     private int waveCount = 0;
 
     public SpecialSpawnerBlockEntity(BlockPos pos, BlockState state) {
-        super(ModTileEntities.SPECIAL_SPAWNER.get(), pos, state);
+        super(ModBlockEntities.SPECIAL_SPAWNER.get(), pos, state);
     }
 
     public static void clientTick(Level level, BlockPos pos, BlockState state, SpecialSpawnerBlockEntity blockEntity) {

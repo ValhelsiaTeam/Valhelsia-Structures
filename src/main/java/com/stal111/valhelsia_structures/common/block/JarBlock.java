@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.common.block;
 
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
-import com.stal111.valhelsia_structures.tileentity.JarTileEntity;
+import com.stal111.valhelsia_structures.common.block.entity.JarBlockEntity;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -67,7 +67,7 @@ public class JarBlock extends BaseEntityBlock implements SimpleWaterloggedBlock 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-        return new JarTileEntity();
+        return new JarBlockEntity(pos, state);
     }
 
     @Nonnull
@@ -87,10 +87,7 @@ public class JarBlock extends BaseEntityBlock implements SimpleWaterloggedBlock 
     public InteractionResult use(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
         ItemStack stack = player.getItemInHand(hand);
 
-
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-
-        if (!(blockEntity instanceof JarTileEntity jarBlockEntity)) {
+        if (!(level.getBlockEntity(pos) instanceof JarBlockEntity jarBlockEntity)) {
             return InteractionResult.PASS;
         }
 
@@ -142,7 +139,7 @@ public class JarBlock extends BaseEntityBlock implements SimpleWaterloggedBlock 
         }
         BlockEntity blockEntity = level.getBlockEntity(pos);
 
-        if (blockEntity instanceof JarTileEntity jarBlockEntity && jarBlockEntity.hasPlant()) {
+        if (blockEntity instanceof JarBlockEntity jarBlockEntity && jarBlockEntity.hasPlant()) {
             Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), jarBlockEntity.getPlant());
         }
     }

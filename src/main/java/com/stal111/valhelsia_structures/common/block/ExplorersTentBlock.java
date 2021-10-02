@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.common.block;
 
-import com.stal111.valhelsia_structures.tileentity.ExplorersTentTileEntity;
+import com.stal111.valhelsia_structures.common.block.entity.ExplorersTentBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -44,7 +44,7 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
     @Nullable
     @Override
     public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-        return new ExplorersTentTileEntity();
+        return new ExplorersTentBlockEntity(pos, state);
     }
 
     @Nonnull

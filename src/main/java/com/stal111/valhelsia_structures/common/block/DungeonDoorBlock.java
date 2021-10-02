@@ -2,8 +2,9 @@ package com.stal111.valhelsia_structures.common.block;
 
 import com.stal111.valhelsia_structures.common.block.properties.DungeonDoorPart;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
-import com.stal111.valhelsia_structures.init.ModBlocks;
-import com.stal111.valhelsia_structures.tileentity.DungeonDoorTileEntity;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
+import com.stal111.valhelsia_structures.common.block.entity.DungeonDoorBlockEntity;
+import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -18,6 +19,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -64,7 +67,7 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
     @Nullable
     @Override
     public BlockEntity newBlockEntity(@Nonnull BlockPos pos, @Nonnull BlockState state) {
-        return state.getValue(PART) == DungeonDoorPart.MIDDLE_1 ? new DungeonDoorTileEntity() : null;
+        return state.getValue(PART) == DungeonDoorPart.MIDDLE_1 ? new DungeonDoorBlockEntity(pos, state) : null;
     }
 
     @Nonnull
@@ -264,6 +267,15 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
                 }
             }
         }
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@Nonnull Level level, @Nonnull BlockState state, @Nonnull BlockEntityType<T> blockEntityType) {
+        if (level.isClientSide()) {
+            return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.DUNGEON_DOOR.get(), DungeonDoorBlockEntity::clientTick);
+        }
+        return null;
     }
 
     @Nonnull

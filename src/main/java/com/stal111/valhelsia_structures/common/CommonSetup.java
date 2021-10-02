@@ -1,11 +1,11 @@
 package com.stal111.valhelsia_structures.common;
 
-import com.stal111.valhelsia_structures.init.ModStructureFeatures;
-import com.stal111.valhelsia_structures.init.ModStructures;
-import com.stal111.valhelsia_structures.init.other.CompostableRegistry;
-import com.stal111.valhelsia_structures.init.other.FireExtinguishRegistry;
-import com.stal111.valhelsia_structures.init.other.FlammableRegistry;
-import com.stal111.valhelsia_structures.init.other.FlintAndSteelRegistry;
+import com.stal111.valhelsia_structures.core.init.ModStructureFeatures;
+import com.stal111.valhelsia_structures.core.init.ModStructures;
+import com.stal111.valhelsia_structures.core.init.other.CompostableRegistry;
+import com.stal111.valhelsia_structures.core.init.other.FireExtinguishRegistry;
+import com.stal111.valhelsia_structures.core.init.other.FlammableRegistry;
+import com.stal111.valhelsia_structures.core.init.other.FlintAndSteelRegistry;
 import com.stal111.valhelsia_structures.common.world.structures.pools.*;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 

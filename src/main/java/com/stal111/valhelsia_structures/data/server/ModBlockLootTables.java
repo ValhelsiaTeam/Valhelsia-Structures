@@ -4,7 +4,7 @@ import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.block.JarBlock;
 import com.stal111.valhelsia_structures.common.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.common.block.ValhelsiaStoneBlock;
-import com.stal111.valhelsia_structures.init.ModBlocks;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.advancements.criterion.EnchantmentPredicate;
 import net.minecraft.advancements.criterion.ItemPredicate;
 import net.minecraft.advancements.criterion.MinMaxBounds;

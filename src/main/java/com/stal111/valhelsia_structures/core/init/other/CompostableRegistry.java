@@ -1,15 +1,15 @@
-package com.stal111.valhelsia_structures.init.other;
+package com.stal111.valhelsia_structures.core.init.other;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.init.ModBlocks;
-import net.valhelsia.valhelsia_core.registry.block.CompostableHelper;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
+import net.valhelsia.valhelsia_core.core.registry.block.CompostableHelper;
 
 /**
- * Compostable Registry
- * Valhelsia Structures - com.stal111.valhelsia_structures.init.other.CompostableRegistry
+ * Compostable Registry <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.init.other.CompostableRegistry
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2021-02-18
  */
 public class CompostableRegistry {

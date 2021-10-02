@@ -3,7 +3,7 @@ package com.stal111.valhelsia_structures.tileentity.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
-import com.stal111.valhelsia_structures.tileentity.GiantFernTileEntity;
+import com.stal111.valhelsia_structures.common.block.entity.GiantFernBlockEntity;
 import com.stal111.valhelsia_structures.tileentity.model.GiantFernModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -19,7 +19,7 @@ import net.minecraft.util.math.vector.Vector3f;
  * @version 16.1.0
  * @since 2020-12-22
  */
-public class GiantFernTileEntityRenderer extends BlockEntityRenderer<GiantFernTileEntity> {
+public class GiantFernTileEntityRenderer extends BlockEntityRenderer<GiantFernBlockEntity> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(ValhelsiaStructures.MOD_ID, "textures/block/giant_fern.png");
 
@@ -30,7 +30,7 @@ public class GiantFernTileEntityRenderer extends BlockEntityRenderer<GiantFernTi
     }
 
     @Override
-    public void render(GiantFernTileEntity tileEntity, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(GiantFernBlockEntity tileEntity, float partialTicks, PoseStack matrixStack, MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         matrixStack.push();
 
         matrixStack.translate(0.5, 1.5, 0.5);

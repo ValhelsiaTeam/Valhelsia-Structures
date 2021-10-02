@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.core.config;
 
-import com.stal111.valhelsia_structures.init.ModStructures;
+import com.stal111.valhelsia_structures.core.init.ModStructures;
 import com.stal111.valhelsia_structures.common.world.structures.AbstractValhelsiaStructure;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;

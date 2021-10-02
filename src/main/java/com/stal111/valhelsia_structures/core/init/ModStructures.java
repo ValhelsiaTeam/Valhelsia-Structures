@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.init;
+package com.stal111.valhelsia_structures.core.init;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -18,7 +18,7 @@ import java.util.*;
 
 /**
  * Structures <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.init.ModStructures
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.init.ModStructures
  *
  * @author Valhelsia Team
  * @version 1.17.1-0.1.0

@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.event;
 
-import com.stal111.valhelsia_structures.init.ModBlocks;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.color.block.BlockColors;
