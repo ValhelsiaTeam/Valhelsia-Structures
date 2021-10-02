@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.mixin;
+package com.stal111.valhelsia_structures.core.mixin;
 
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
@@ -12,11 +12,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Random;
 
 /**
- * Double Plant Block Placer Mixin
- * Valhelsia Structures - com.stal111.valhelsia_structures.mixin.DoublePlantBlockPlacerMixin
+ * Double Plant Block Placer Mixin <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.mixin.DoublePlantBlockPlacerMixin
  *
  * @author Valhelsia Team
- * @version 0.1.1
+ * @version 1.17.1-0.1.0
  * @since 2021-05-15
  */
 @Mixin(DoublePlantPlacer.class)
@@ -24,7 +24,7 @@ public class DoublePlantBlockPlacerMixin {
 
     @Inject(at = @At(value = "HEAD"), method = "place", cancellable = true)
     private void valhelsia_checkForAir(LevelAccessor world, BlockPos pos, BlockState state, Random random, CallbackInfo ci) {
-        if (!world.getBlockState(pos.up()).isAir()) {
+        if (!world.getBlockState(pos.above()).isAir()) {
             ci.cancel();
         }
     }

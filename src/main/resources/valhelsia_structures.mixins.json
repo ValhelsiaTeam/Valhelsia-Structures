@@ -2,7 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
-  "package": "com.stal111.valhelsia_structures.mixin",
+  "package": "com.stal111.valhelsia_structures.core.mixin",
   "refmap": "valhelsia_structures.refmap.json",
   "mixins": [
     "AbstractBlockStateMixin",
@@ -13,7 +13,7 @@
     "FlowingFluidMixin",
     "LakesFeatureMixin",
     "PillagerEntityMixin",
-    "SpreadableSnowyDirtBlockMixin",
+    "SpreadingSnowyDirtBlockMixin",
     "TorchBlockMixin",
     "WallTorchBlockMixin"
   ],

@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.mixin;
+package com.stal111.valhelsia_structures.core.mixin;
 
 import com.stal111.valhelsia_structures.core.init.ModStructures;
 import net.minecraft.world.entity.EntityType;
@@ -10,18 +10,17 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.server.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Cat Entity Mixin
- * Valhelsia Structures - com.stal111.valhelsia_structures.mixin.CatEntityMixin
+ * Cat Entity Mixin <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.core.mixin.CatEntityMixin
  *
  * @author Valhelsia Team
- * @version 16.1.0
+ * @version 1.17.1-0.1.0
  * @since 2021-04-26
  */
 @Mixin(Cat.class)
@@ -31,10 +30,10 @@ public abstract class CatEntityMixin extends TamableAnimal {
         super(type, world);
     }
 
-    @Inject(at = @At(value = "HEAD"), method = "onInitialSpawn", cancellable = true)
-    private void valhelsia_avoidOverridingType(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, SpawnGroupData spawnData, CompoundTag dataTag, CallbackInfoReturnable<SpawnGroupData> cir) {
-        if (reason == MobSpawnType.STRUCTURE && world.getWorld().func_241112_a_().getStructureStart(this.getPosition(), true, ModStructures.WITCH_HUT.get()).isValid()) {
-            cir.setReturnValue(super.onInitialSpawn(world, difficulty, reason, spawnData, dataTag));
+    @Inject(at = @At(value = "HEAD"), method = "finalizeSpawn", cancellable = true)
+    private void valhelsia_avoidOverridingType(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, SpawnGroupData spawnData, CompoundTag dataTag, CallbackInfoReturnable<SpawnGroupData> cir) {
+        if (reason == MobSpawnType.STRUCTURE && level.getLevel().structureFeatureManager().getStructureAt(this.blockPosition(), true, ModStructures.WITCH_HUT.get()).isValid()) {
+            cir.setReturnValue(super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag));
         }
     }
 }

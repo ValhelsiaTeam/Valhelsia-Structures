@@ -45,7 +45,7 @@ public class EntityEventListener {
                 VillagerProfession.CARTOGRAPHER,
                 1,
                 (trader, rand) -> {
-                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.getOnPos(), ModStructures.SPAWNER_DUNGEON.get(), MapDecoration.Type.RED_X);
+                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModStructures.SPAWNER_DUNGEON.get(), MapDecoration.Type.RED_X);
                     if (stack == null) {
                         return null;
                     }
@@ -56,7 +56,7 @@ public class EntityEventListener {
                 VillagerProfession.CARTOGRAPHER,
                 2,
                 (trader, rand) -> {
-                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.getOnPos(), ModStructures.CASTLE.get(), MapDecoration.Type.RED_X);
+                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModStructures.CASTLE.get(), MapDecoration.Type.RED_X);
                     if (stack == null) {
                         return null;
                     }
