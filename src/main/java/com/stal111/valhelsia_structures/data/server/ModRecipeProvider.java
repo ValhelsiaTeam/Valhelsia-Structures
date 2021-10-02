@@ -4,7 +4,7 @@ import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
-import com.stal111.valhelsia_structures.recipe.AxeCraftingRecipeBuilder;
+import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;

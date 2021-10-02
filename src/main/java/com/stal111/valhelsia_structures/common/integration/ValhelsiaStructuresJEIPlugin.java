@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.integration;
+package com.stal111.valhelsia_structures.common.integration;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import mezz.jei.api.IModPlugin;
@@ -10,11 +10,11 @@ import net.minecraft.resources.ResourceLocation;
 import javax.annotation.Nonnull;
 
 /**
- * Valhelsia Structures JEI Plugin
- * Valhelsia Structures - com.stal111.valhelsia_structures.integration.ValhelsiaStructuresJEIPlugin
+ * Valhelsia Structures JEI Plugin <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.integration.ValhelsiaStructuresJEIPlugin
  *
  * @author Valhelsia Team
- * @version 16.0.4
+ * @version 1.17.1-0.1.0
  * @since 2020.08.12
  */
 @JeiPlugin

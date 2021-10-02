@@ -1,20 +1,21 @@
-package com.stal111.valhelsia_structures.event;
+package com.stal111.valhelsia_structures.common.event;
 
-import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
-import com.stal111.valhelsia_structures.config.StructureGenConfig;
-import com.stal111.valhelsia_structures.core.init.ModStructures;
 import com.stal111.valhelsia_structures.common.world.structures.AbstractValhelsiaStructure;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.FlatChunkGenerator;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.settings.DimensionStructuresSettings;
-import net.minecraft.world.gen.settings.StructureSeparationSettings;
+import com.stal111.valhelsia_structures.core.config.ModConfig;
+import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
+import com.stal111.valhelsia_structures.core.init.ModStructures;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.ChunkGenerator;
+import net.minecraft.world.level.levelgen.FlatLevelSource;
+import net.minecraft.world.level.levelgen.StructureSettings;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.valhelsia.valhelsia_core.world.IValhelsiaStructure;
+import net.valhelsia.valhelsia_core.common.world.IValhelsiaStructure;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,10 +24,10 @@ import java.util.stream.Collectors;
 
 /**
  * World Load Listener <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.event.WorldLoadListener
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.event.WorldLoadListener
  *
  * @author Valhelsia Team
- * @version 0.1.6
+ * @version 1.17.1-0.1.0
  * @since 2021-05-28
  */
 @Mod.EventBusSubscriber
@@ -34,20 +35,20 @@ public class WorldLoadListener {
 
     @SubscribeEvent
     public static void onWorldLoad(WorldEvent.Load event) {
-        if (event.getWorld() instanceof ServerLevel) {
-            ServerLevel serverWorld = (ServerLevel) event.getWorld();
+        if (event.getWorld() instanceof ServerLevel level) {
+            ChunkGenerator generator = level.getChunkSource().getGenerator();
 
-            if (serverWorld.getChunkProvider().getChunkGenerator() instanceof FlatChunkGenerator && serverWorld.getDimensionKey().equals(World.OVERWORLD)) {
+            if (generator instanceof FlatLevelSource && level.dimension().equals(Level.OVERWORLD)) {
                 return;
             }
 
-            Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkProvider().generator.func_235957_b_().func_236195_a_());
+            Map<StructureFeature<?>, StructureFeatureConfiguration> tempMap = new HashMap<>(generator.getSettings().structureConfig());
 
-            ResourceLocation currDimension = serverWorld.getDimensionKey().getLocation();
-            for (String dimension : StructureGenConfig.BLACKLISTED_DIMENSIONS.get()) {
+            ResourceLocation currDimension = level.dimension().location();
+            for (String dimension : ModConfig.COMMON.blacklistedDimensions.get()) {
                 if (dimension.equals(currDimension.toString()) || checkWildcard(dimension, currDimension.toString())) {
                     ModStructures.MOD_STRUCTURES.stream().map(IValhelsiaStructure::getStructure).collect(Collectors.toList()).forEach(tempMap.keySet()::remove);
-                    serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
+                    generator.getSettings().structureConfig = tempMap;
                     return;
                 }
             }
@@ -57,13 +58,13 @@ public class WorldLoadListener {
                 StructureConfigEntry configEntry = structure.getStructureConfigEntry();
 
                 if (checkDimension(configEntry.configuredBlacklistedDimensions.get(), currDimension)) {
-                    tempMap.putIfAbsent(structure, DimensionStructuresSettings.field_236191_b_.get(structure));
+                    tempMap.putIfAbsent(structure, StructureSettings.DEFAULTS.get(structure));
                 } else {
                     tempMap.keySet().remove(structure);
                 }
             }
 
-            serverWorld.getChunkProvider().generator.func_235957_b_().field_236193_d_ = tempMap;
+            generator.getSettings().structureConfig = tempMap;
         }
     }
 

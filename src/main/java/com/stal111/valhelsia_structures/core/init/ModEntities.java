@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.core.init;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.entity.MossySkeletonEntity;
+import com.stal111.valhelsia_structures.common.entity.MossySkeletonEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.fml.common.Mod;

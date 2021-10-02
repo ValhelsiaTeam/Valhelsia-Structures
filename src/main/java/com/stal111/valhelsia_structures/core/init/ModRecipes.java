@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.core.init;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.recipe.AxeCraftingRecipe;
+import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.fmllegacy.RegistryObject;
