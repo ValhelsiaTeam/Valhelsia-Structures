@@ -5,7 +5,7 @@
   "package": "com.stal111.valhelsia_structures.core.mixin",
   "refmap": "valhelsia_structures.refmap.json",
   "mixins": [
-    "AbstractBlockStateMixin",
+    "BlockStateBaseMixin",
     "BucketItemMixin",
     "CatEntityMixin",
     "DoublePlantBlockPlacerMixin",
