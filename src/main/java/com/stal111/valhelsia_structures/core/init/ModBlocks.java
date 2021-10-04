@@ -2,8 +2,10 @@ package com.stal111.valhelsia_structures.core.init;
 
 import com.stal111.valhelsia_structures.common.block.*;
 import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
+import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -73,10 +75,10 @@ public class ModBlocks {
 //    public static final RegistryObject<WoodButtonBlock> LAPIDIFIED_JUNGLE_BUTTON = HELPER.register("lapidified_jungle_button", new WoodButtonBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.hardnessAndResistance(0.5F)));
 //    public static final RegistryObject<FenceBlock> LAPIDIFIED_JUNGLE_FENCE = HELPER.register("lapidified_jungle_fence", new FenceBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS));
 //    public static final RegistryObject<FenceGateBlock> LAPIDIFIED_JUNGLE_FENCE_GATE = HELPER.register("lapidified_jungle_fence_gate", new FenceGateBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS));
-//    private static final ExplorersTentBlock EXPLORERS_TENT_BLOCK = new ExplorersTentBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.doesNotBlockMovement());
-//    public static final RegistryObject<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", EXPLORERS_TENT_BLOCK, new DyeableBlockItem(EXPLORERS_TENT_BLOCK, new Item.Properties().group(HELPER.getDefaultGroup())));
+    private static final ExplorersTentBlock EXPLORERS_TENT_BLOCK = new ExplorersTentBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.noCollission());
+    public static final RegistryObject<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", EXPLORERS_TENT_BLOCK, new DyeableBlockItem(EXPLORERS_TENT_BLOCK, new Item.Properties().tab(HELPER.getDefaultCreativeTab())));
 //    public static final RegistryObject<BushBlock> HIBISCUS = HELPER.register("hibiscus", new BushBlock(AbstractBlock.Properties.from(Blocks.POPPY)), ValhelsiaRenderType.CUTOUT);
- //   public static final RegistryObject<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", new GiantFernBlock(AbstractBlock.Properties.from(Blocks.POPPY)));
+    public static final RegistryObject<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", new GiantFernBlock(Block.Properties.copy(Blocks.POPPY)));
     public static final RegistryObject<DousedTorchBlock> DOUSED_TORCH = HELPER.registerNoItem("doused_torch", new DousedTorchBlock((TorchBlock) Blocks.TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak()), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<DousedWallTorchBlock> DOUSED_WALL_TORCH = HELPER.registerNoItem("doused_wall_torch", new DousedWallTorchBlock((TorchBlock) Blocks.WALL_TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak()), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<DousedTorchBlock> DOUSED_SOUL_TORCH = HELPER.registerNoItem("doused_soul_torch", new DousedTorchBlock((TorchBlock) Blocks.SOUL_TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak()), ValhelsiaRenderType.CUTOUT);

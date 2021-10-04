@@ -32,7 +32,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.valhelsia.valhelsia_core.common.helper.VoxelShapeHelper;
 
@@ -102,7 +101,7 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
             for (int i = 0; i < 4; i++) {
                 BlockPos offsetPos = pos.above(i);
                 if (position != Position.MIDDLE) {
-                    offsetPos = position.offsetBlockPos(offsetPos, context.getHorizontalDirection().getOpposite());
+                    offsetPos = position.offsetBlockPos(offsetPos, context.getHorizontalDirection(), true);
                 }
                 if (!context.getLevel().getBlockState(offsetPos).canBeReplaced(context)) {
                     return null;
@@ -135,7 +134,7 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
             for (int i = 0; i < 4; i++) {
                 BlockPos offsetPos = pos.above(i);
                 if (position != Position.MIDDLE) {
-                    offsetPos = position.offsetBlockPos(offsetPos,state.getValue(FACING));
+                    offsetPos = position.offsetBlockPos(offsetPos,state.getValue(FACING), false);
                 }
                 if (offsetPos != pos) {
                     DungeonDoorPart part = DungeonDoorPart.valueOf(position + "_" + (i + 1));
@@ -161,7 +160,7 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
                     BlockPos offsetPos = this.getMainBlock(pos, state).above(i);
 
                     if (position != Position.MIDDLE) {
-                        offsetPos = position.offsetBlockPos(offsetPos, state.getValue(FACING));
+                        offsetPos = position.offsetBlockPos(offsetPos, state.getValue(FACING), false);
                         BlockPos leafPos = offsetPos.relative(state.getValue(FACING));
 
                         if (open) {
@@ -229,7 +228,7 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
         for (Position position : Position.values()) {
             BlockPos posDown = pos.below();
             if (position != Position.MIDDLE) {
-                posDown = position.offsetBlockPos(posDown, context.getHorizontalDirection().getOpposite());
+                posDown = position.offsetBlockPos(posDown, context.getHorizontalDirection(), true);
             }
             if (!level.getBlockState(posDown).isFaceSturdy(level, pos.below(), Direction.UP)) {
                 return false;
@@ -249,15 +248,15 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
             for (int k = 0; k < 4; k++) {
                 BlockPos offsetPos = mainPos.above(k);
                 if (position != Position.MIDDLE) {
-                    offsetPos = position.offsetBlockPos(offsetPos, state.getValue(FACING));
+                    offsetPos = position.offsetBlockPos(offsetPos, state.getValue(FACING), false);
 
                     if (state.getValue(OPEN)) {
-                        offsetPos = offsetPos.relative(state.getValue(FACING));
-                        BlockState offsetState = level.getBlockState(offsetPos);
+                        BlockPos pos2 = offsetPos.relative(state.getValue(FACING));
+                        BlockState offsetState = level.getBlockState(pos2);
 
                         if (offsetState.getBlock() == ModBlocks.DUNGEON_DOOR_LEAF.get()) {
-                            level.levelEvent(player, 2001, offsetPos, Block.getId(offsetState));
-                            level.setBlock(offsetPos, offsetState.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), 35);
+                            level.levelEvent(player, 2001, pos2, Block.getId(offsetState));
+                            level.setBlock(pos2, offsetState.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), 35);
                         }
                     }
                 }
@@ -289,7 +288,7 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
         DungeonDoorPart part = state.getValue(PART);
 
         if (!part.isMiddle()) {
-            pos = Position.getPositionFromPart(part).offsetBlockPos(pos, state.getValue(BlockStateProperties.HORIZONTAL_FACING).getOpposite());
+            pos = Position.getPositionFromPart(part).offsetBlockPos(pos, state.getValue(BlockStateProperties.HORIZONTAL_FACING), true);
         }
 
         return pos.below(Integer.parseInt(String.valueOf(part.getSerializedName().charAt(part.getSerializedName().length() - 1))) - 1);
@@ -325,7 +324,10 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
             return part.isLeft() ? Position.LEFT : part.isRight() ? Position.RIGHT : Position.MIDDLE;
         }
 
-        public BlockPos offsetBlockPos(BlockPos pos, Direction direction) {
+        public BlockPos offsetBlockPos(BlockPos pos, Direction direction, boolean opposite) {
+            if (opposite) {
+                return pos.relative(Direction.fromYRot(direction.toYRot() + this.getDirection().toYRot()).getOpposite());
+            }
             return pos.relative(Direction.fromYRot(direction.toYRot() + this.getDirection().toYRot()));
         }
     }

@@ -73,9 +73,7 @@ public class JarBlockEntity extends BlockEntity implements Clearable {
 
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet) {
-        if (this.level != null) {
-            this.load(packet.getTag());
-        }
+        this.load(packet.getTag());
     }
 
     @Override
