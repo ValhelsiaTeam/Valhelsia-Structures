@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantBodyBlock;
@@ -51,6 +52,13 @@ public class HangingVinesBodyBlock extends GrowingPlantBodyBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         boolean flag = context.getLevel().getBlockState(context.getClickedPos().above()).getBlock() != this.getBodyBlock();
         return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(ATTACHED, flag);
+    }
+
+    @Nonnull
+    @Override
+    public BlockState updateShape(@Nonnull BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, LevelAccessor level, BlockPos currentPos, @Nonnull BlockPos facingPos) {
+        boolean flag = !level.getBlockState(currentPos.above()).is(this.getBodyBlock());
+        return super.updateShape(state, facing, facingState, level, currentPos, facingPos).setValue(ATTACHED, flag);
     }
 
     @Nonnull
