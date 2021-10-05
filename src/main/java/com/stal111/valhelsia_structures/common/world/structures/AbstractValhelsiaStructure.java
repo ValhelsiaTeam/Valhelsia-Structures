@@ -191,7 +191,7 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         private final int height;
 
         public Start(StructureFeature<JigsawConfiguration> structure, ChunkPos chunkPos, int reference, long seed) {
-            this(structure, chunkPos, reference, seed, -1);
+            this(structure, chunkPos, reference, seed, ((AbstractValhelsiaStructure) structure).getGenerationHeight());
         }
 
         public Start(StructureFeature<JigsawConfiguration> structure, ChunkPos chunkPos, int reference, long seed, int height) {
