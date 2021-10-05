@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.core.init;
 
 import com.stal111.valhelsia_structures.common.block.*;
 import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
+import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
 import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.world.item.DyeColor;
@@ -62,10 +63,14 @@ public class ModBlocks {
     public static final RegistryObject<JarBlock> GLAZED_JAR = HELPER.register("glazed_jar", new JarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()));
     public static final RegistryObject<JarBlock> CRACKED_GLAZED_JAR = HELPER.register("cracked_glazed_jar", new JarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.0F).noOcclusion()));
     public static final List<RegistryObject<JarBlock>> COLORED_GLAZED_JARS = registerColoredGlazedJars();
-    public static final RegistryObject<BigJarBlock> BIG_GLAZED_JAR = HELPER.register("big_glazed_jar", new BigJarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()), ValhelsiaRenderType.CUTOUT);
-    public static final RegistryObject<BigJarBlock> CRACKED_BIG_GLAZED_JAR = HELPER.register("cracked_big_glazed_jar", new BigJarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()), ValhelsiaRenderType.CUTOUT);
+    public static final RegistryObject<BigJarBlock> BIG_GLAZED_JAR = HELPER.register("big_glazed_jar", new BigJarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()), (block) -> new BigJarBlockItem(block, new Item.Properties().tab(HELPER.getDefaultCreativeTab())), ValhelsiaRenderType.CUTOUT);
+    public static final RegistryObject<BigJarTopBlock> BIG_GLAZED_JAR_TOP = HELPER.registerNoItem("big_glazed_jar_top", new BigJarTopBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()), ValhelsiaRenderType.CUTOUT);
+
+    public static final RegistryObject<BigJarBlock> CRACKED_BIG_GLAZED_JAR = HELPER.register("cracked_big_glazed_jar", new BigJarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()), (block) -> new BigJarBlockItem(block, new Item.Properties().tab(HELPER.getDefaultCreativeTab())), ValhelsiaRenderType.CUTOUT);
+    public static final RegistryObject<BigJarTopBlock> CRACKED_BIG_GLAZED_JAR_TOP = HELPER.registerNoItem("cracked_big_glazed_jar_top", new BigJarTopBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()), ValhelsiaRenderType.CUTOUT);
+
     public static final List<RegistryObject<BigJarBlock>> BIG_COLORED_GLAZED_JARS = registerBigColoredGlazedJars();
-    //public static final RegistryObject<BigJarTopBlock> BIG_JAR_TOP = HELPER.registerNoItem("big_jar_top", new BigJarTopBlock(Block.Properties.create(Material.ROCK, MaterialColor.BROWN).setRequiresTool().hardnessAndResistance(1.4F).notSolid()), ValhelsiaRenderType.CUTOUT);
+   // public static final List<RegistryObject<BigJarTopBlock>> BIG_JAR_TOP = registerBigColoredGlazedJarTops();
     //    public static final RegistryObject<RotatedPillarBlock> LAPIDIFIED_JUNGLE_LOG = HELPER.register("lapidified_jungle_log", new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG));
 //    public static final RegistryObject<RotatedPillarBlock> LAPIDIFIED_JUNGLE_WOOD = HELPER.register("lapidified_jungle_wood", new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG));
 //    public static final RegistryObject<Block> LAPIDIFIED_JUNGLE_PLANKS = HELPER.register("lapidified_jungle_planks", new Block(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS));
@@ -75,8 +80,7 @@ public class ModBlocks {
 //    public static final RegistryObject<WoodButtonBlock> LAPIDIFIED_JUNGLE_BUTTON = HELPER.register("lapidified_jungle_button", new WoodButtonBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.hardnessAndResistance(0.5F)));
 //    public static final RegistryObject<FenceBlock> LAPIDIFIED_JUNGLE_FENCE = HELPER.register("lapidified_jungle_fence", new FenceBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS));
 //    public static final RegistryObject<FenceGateBlock> LAPIDIFIED_JUNGLE_FENCE_GATE = HELPER.register("lapidified_jungle_fence_gate", new FenceGateBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS));
-    private static final ExplorersTentBlock EXPLORERS_TENT_BLOCK = new ExplorersTentBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.noCollission());
-    public static final RegistryObject<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", EXPLORERS_TENT_BLOCK, new DyeableBlockItem(EXPLORERS_TENT_BLOCK, new Item.Properties().tab(HELPER.getDefaultCreativeTab())));
+    public static final RegistryObject<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", new ExplorersTentBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.noCollission()), block -> new DyeableBlockItem(block, new Item.Properties().tab(HELPER.getDefaultCreativeTab())));
 //    public static final RegistryObject<BushBlock> HIBISCUS = HELPER.register("hibiscus", new BushBlock(AbstractBlock.Properties.from(Blocks.POPPY)), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", new GiantFernBlock(Block.Properties.copy(Blocks.POPPY)));
     public static final RegistryObject<DousedTorchBlock> DOUSED_TORCH = HELPER.registerNoItem("doused_torch", new DousedTorchBlock((TorchBlock) Blocks.TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak()), ValhelsiaRenderType.CUTOUT);
@@ -111,8 +115,10 @@ public class ModBlocks {
 
     private static List<RegistryObject<BigJarBlock>> registerBigColoredGlazedJars() {
         List<RegistryObject<BigJarBlock>> list = new ArrayList<>();
+
         for (DyeColor color : DyeColor.values()) {
-            list.add(HELPER.register("big_" + color.getName() + "_glazed_jar", new BigJarBlock(Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()), ValhelsiaRenderType.CUTOUT));
+            list.add(HELPER.register("big_" + color.getName() + "_glazed_jar", new BigJarBlock(Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()), (block) -> new BigJarBlockItem(block, new Item.Properties().tab(HELPER.getDefaultCreativeTab())), ValhelsiaRenderType.CUTOUT));
+            HELPER.registerNoItem("big_" + color.getName() + "_glazed_jar_top", new BigJarTopBlock(Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()), ValhelsiaRenderType.CUTOUT);
         }
         return list;
     }

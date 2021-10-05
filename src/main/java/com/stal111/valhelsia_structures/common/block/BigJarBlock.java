@@ -1,17 +1,19 @@
 package com.stal111.valhelsia_structures.common.block;
 
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -19,10 +21,12 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.common.helper.VoxelShapeHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 /**
  * Big Jar Block <br>
@@ -36,7 +40,6 @@ public class BigJarBlock extends Block implements SimpleWaterloggedBlock {
 
     public static final BooleanProperty TREASURE = ModBlockStateProperties.TREASURE;
     public static final IntegerProperty ROTATION = ModBlockStateProperties.ROTATION_0_7;
-    public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public static final VoxelShape SHAPE = VoxelShapeHelper.combineAll(
@@ -45,9 +48,11 @@ public class BigJarBlock extends Block implements SimpleWaterloggedBlock {
             Block.box(5.0D, 18.0D, 5.0D, 11.0D, 20.0D, 11.0D)
     );
 
+    private BigJarTopBlock topBlock;
+
     public BigJarBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.getStateDefinition().any().setValue(TREASURE, false).setValue(ROTATION, 0).setValue(HALF, DoubleBlockHalf.LOWER).setValue(WATERLOGGED, false));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(TREASURE, false).setValue(ROTATION, 0).setValue(WATERLOGGED, false));
     }
 
     @Nonnull
@@ -62,18 +67,36 @@ public class BigJarBlock extends Block implements SimpleWaterloggedBlock {
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
 
-        if (pos.getY() > level.getHeight() - 2 || !level.getBlockState(pos.above()).isAir()) {
+        if (pos.getY() > level.getHeight() - 2 || !level.getBlockState(pos.above()).canBeReplaced(context)) {
             return null;
         }
 
-        FluidState fluidState = level.getFluidState(pos);
-        boolean flag = fluidState.getType() == Fluids.WATER;
+        boolean flag = level.getFluidState(pos).getType() == Fluids.WATER;
         return this.defaultBlockState().setValue(WATERLOGGED, flag).setValue(ROTATION, Mth.floor((double) ((180.0F + context.getRotation()) * 8.0F / 360.0F) + 0.5D) & 7);
+    }
+
+    @Nonnull
+    @Override
+    public BlockState updateShape(@Nonnull BlockState state, @Nonnull Direction direction, @Nonnull BlockState neighborState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos neighborPos) {
+        return direction == Direction.UP && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+    }
+
+    @Override
+    public boolean canSurvive(@Nonnull BlockState state, @Nonnull LevelReader level, BlockPos pos) {
+        return level.getBlockState(pos.above()).is(this.getTopBlock());
     }
 
     @Override
     public void setPlacedBy(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
-        level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), 3);
+        boolean flag = level.getFluidState(pos.above()).getType() == Fluids.WATER;
+        level.setBlock(pos.above(), this.getTopBlock().defaultBlockState().setValue(ROTATION, state.getValue(ROTATION)).setValue(WATERLOGGED, flag), 3);
+    }
+
+    private BigJarTopBlock getTopBlock() {
+        if (this.topBlock == null) {
+            this.topBlock = (BigJarTopBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(this.getRegistryName()).getPath() + "_top"));
+        }
+        return this.topBlock;
     }
 
     @Nonnull
@@ -90,7 +113,7 @@ public class BigJarBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(TREASURE, ROTATION, HALF, WATERLOGGED);
+        builder.add(TREASURE, ROTATION, WATERLOGGED);
     }
 
     @Nonnull
