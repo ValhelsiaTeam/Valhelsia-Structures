@@ -32,6 +32,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.valhelsia.valhelsia_core.common.helper.VoxelShapeHelper;
 
@@ -55,8 +56,8 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 12.0D);
-    protected static final VoxelShape SHAPE_OPEN = Block.box(12.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
+    protected static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D);
+    protected static final VoxelShape SHAPE_OPEN = Block.box(8.0D, 0.0D, 12.0D, 16.0D, 16.0D, 16.0D);
 
     public DungeonDoorBlock(Properties properties) {
         super(properties);
@@ -76,10 +77,9 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
         VoxelShape shape = open ? SHAPE_OPEN : SHAPE;
 
         if (open && state.getValue(PART).isRight()) {
-            shape = VoxelShapeHelper.add(-12.0D, 0.0D, 0.0D, -12.0D, 0.0D, 0.0D, shape);
+            shape = VoxelShapeHelper.add(0.0D, 0.0D, -12.0D, 0.0D, 0.0D, -12.0D, shape);
         }
-       // return open && state.getValue(PART).isMiddle() ? Shapes.empty() : VoxelShapeHelper.rotateShapeDirection(shape, state.getValue(FACING));
-        return shape;
+        return open && state.getValue(PART).isMiddle() ? Shapes.empty() : VoxelShapeHelper.rotateShape(shape, state.getValue(FACING));
     }
 
     @Nonnull

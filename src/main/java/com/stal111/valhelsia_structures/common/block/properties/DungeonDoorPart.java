@@ -18,7 +18,7 @@ public enum DungeonDoorPart implements StringRepresentable {
     LEFT_3("left_3"),
     LEFT_4("left_4"),
     MIDDLE_1("middle_1"),
-    MIDDLE_2("middle2"),
+    MIDDLE_2("middle_2"),
     MIDDLE_3("middle_3"),
     MIDDLE_4("middle_4"),
     RIGHT_1("right_1"),

@@ -42,7 +42,8 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
     public static final BooleanProperty MIRRORED = ModBlockStateProperties.MIRRORED;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    protected static final VoxelShape SHAPE = Block.box(12.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 12.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape MIRRORED_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 4.0D);
 
     public DungeonDoorLeafBlock(Properties properties) {
         super(properties);
@@ -58,12 +59,8 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
-        VoxelShape shape = SHAPE;
-        if (state.getValue(MIRRORED)) {
-            //shape = VoxelShapeHelper.rotateShape(shape, VoxelShapeHelper.RotationAmount.HUNDRED_EIGHTY);
-        }
-        //return VoxelShapeHelper.rotateShapeDirection(shape, state.getValue(FACING));
-        return shape;
+        VoxelShape shape = state.getValue(MIRRORED) ? MIRRORED_SHAPE : SHAPE;
+        return VoxelShapeHelper.rotateShape(shape, state.getValue(FACING));
     }
 
     @Nonnull
