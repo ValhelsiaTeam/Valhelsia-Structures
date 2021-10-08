@@ -1,12 +1,12 @@
 package com.stal111.valhelsia_structures.common.block.entity;
 
+import com.stal111.valhelsia_structures.common.block.SpecialBaseSpawner;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SpawnData;
 import net.minecraft.world.level.block.Blocks;
@@ -27,11 +27,10 @@ import java.util.Objects;
  */
 public class SpecialSpawnerBlockEntity extends BlockEntity {
 
-    private final BaseSpawner spawner = new BaseSpawner() {
+    private final SpecialBaseSpawner spawner = new SpecialBaseSpawner() {
         @Override
         public void broadcastEvent(Level level, @Nonnull BlockPos pos, int i) {
             level.blockEvent(pos, Blocks.SPAWNER, i, 0);
-            SpecialSpawnerBlockEntity.this.waveCount++;
         }
 
         @Override
@@ -49,8 +48,6 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
         }
     };
 
-    private int waveCount = 0;
-
     public SpecialSpawnerBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.SPECIAL_SPAWNER.get(), pos, state);
     }
@@ -61,26 +58,19 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, SpecialSpawnerBlockEntity blockEntity) {
         blockEntity.spawner.serverTick((ServerLevel) level, pos);
-
-        if ((blockEntity.waveCount >= 1 && level.random.nextDouble() <= 0.15D) || blockEntity.waveCount >= 3) {
-            level.destroyBlock(pos, false);
-        }
     }
 
     @Override
     public void load(@Nonnull CompoundTag compound) {
         super.load(compound);
         this.spawner.load(this.level, this.worldPosition, compound);
-        this.waveCount = compound.getInt("WaveCount");
     }
 
     @Nonnull
     @Override
     public CompoundTag save(@Nonnull CompoundTag compound) {
-        super.save(compound);
         this.spawner.save(this.level, this.worldPosition, compound);
-        compound.putInt("WaveCount", this.waveCount);
-        return compound;
+        return super.save(compound);
     }
 
     @Nullable
@@ -112,7 +102,7 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
         return true;
     }
 
-    public BaseSpawner getSpawner() {
+    public SpecialBaseSpawner getSpawner() {
         return this.spawner;
     }
 }

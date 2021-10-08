@@ -18,10 +18,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -47,7 +44,7 @@ import java.util.Objects;
  * @version 1.17.1-0.1.0
  * @since 2020-11-13
  */
-public class JarBlock extends BaseEntityBlock implements SimpleWaterloggedBlock {
+public class JarBlock extends Block implements SimpleWaterloggedBlock, EntityBlock {
 
     public static final BooleanProperty TREASURE = ModBlockStateProperties.TREASURE;
     public static final BooleanProperty ROTATED = ModBlockStateProperties.ROTATED;
@@ -74,12 +71,6 @@ public class JarBlock extends BaseEntityBlock implements SimpleWaterloggedBlock 
     @Override
     public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         return SHAPE;
-    }
-
-    @Nonnull
-    @Override
-    public RenderShape getRenderShape(@Nonnull BlockState state) {
-        return RenderShape.MODEL;
     }
 
     @Nonnull
