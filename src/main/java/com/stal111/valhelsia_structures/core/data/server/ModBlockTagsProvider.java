@@ -48,6 +48,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.CLIMBABLE).add(ModBlocks.HANGING_VINES_BODY.get(), ModBlocks.HANGING_VINES.get());
         ModBlocks.COLORED_GLAZED_JARS.forEach(registryObject -> this.tag(ModTags.Blocks.COLORED_JARS).add(registryObject.get()));
         this.tag(ModTags.Blocks.JARS).add(ModBlocks.GLAZED_JAR.get(), ModBlocks.CRACKED_GLAZED_JAR.get()).addTag(ModTags.Blocks.COLORED_JARS);
+        ModBlocks.BIG_COLORED_GLAZED_JARS.forEach(registryObject -> this.tag(ModTags.Blocks.BIG_COLORED_JARS).add(registryObject.get()).add(registryObject.get().getTopBlock()));
+        this.tag(ModTags.Blocks.BIG_JARS).add(ModBlocks.BIG_GLAZED_JAR.get(), ModBlocks.BIG_GLAZED_JAR_TOP.get(), ModBlocks.CRACKED_BIG_GLAZED_JAR.get(), ModBlocks.CRACKED_BIG_GLAZED_JAR_TOP.get()).addTag(ModTags.Blocks.BIG_COLORED_JARS);
         this.tag(ModTags.Blocks.LAPIDIFIED_JUNGLE_LOGS).add(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get(), ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get());
         this.tag(BlockTags.LOGS).add(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get(), ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get()).addTag(ModTags.Blocks.LAPIDIFIED_JUNGLE_LOGS);
         this.tag(BlockTags.PLANKS).add(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get());
@@ -71,5 +73,14 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.VALID_SPAWN).add(ModBlocks.GRASS_BLOCK.get());
         this.tag(BlockTags.BAMBOO_PLANTABLE_ON).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get());
         this.tag(BlockTags.ENDERMAN_HOLDABLE).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get(), ModBlocks.COARSE_DIRT.get());
+
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+                .addTag(ModTags.Blocks.POSTS).addTag(ModTags.Blocks.CUT_POSTS)
+                .add(ModBlocks.HANGING_VINES.get(), ModBlocks.HANGING_VINES_BODY.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .addTag(ModTags.Blocks.BRAZIERS).addTag(ModTags.Blocks.JARS).addTag(ModTags.Blocks.BIG_JARS)
+                .add(ModBlocks.DUNGEON_DOOR.get(), ModBlocks.DUNGEON_DOOR_LEAF.get(), ModBlocks.BONE_PILE.get(), ModBlocks.BONE_PILE_BLOCK.get());
+        this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(ModBlocks.DUNGEON_DOOR.get(), ModBlocks.DUNGEON_DOOR_LEAF.get());
     }
 }

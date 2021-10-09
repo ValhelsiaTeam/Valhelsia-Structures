@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "valhelsia_structures:big_glazed_jar",
+    "valhelsia_structures:cracked_big_glazed_jar",
+    "#valhelsia_structures:big_colored_jars"
+  ]
+}

@@ -92,7 +92,7 @@ public class BigJarBlock extends Block implements SimpleWaterloggedBlock {
         level.setBlock(pos.above(), this.getTopBlock().defaultBlockState().setValue(ROTATION, state.getValue(ROTATION)).setValue(WATERLOGGED, flag), 3);
     }
 
-    private BigJarTopBlock getTopBlock() {
+    public BigJarTopBlock getTopBlock() {
         if (this.topBlock == null) {
             this.topBlock = (BigJarTopBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(this.getRegistryName()).getPath() + "_top"));
         }

@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#valhelsia_structures:posts",
+    "#valhelsia_structures:cut_posts",
+    "valhelsia_structures:hanging_vines",
+    "valhelsia_structures:hanging_vines_body"
+  ]
+}

@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.core.data.server;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
@@ -38,6 +39,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.copy(Tags.Blocks.GLASS_PANES_COLORLESS, Tags.Items.GLASS_PANES_COLORLESS);
         this.copy(ModTags.Blocks.COLORED_JARS, ModTags.Items.COLORED_JARS);
         this.copy(ModTags.Blocks.JARS, ModTags.Items.JARS);
+        ModBlocks.BIG_COLORED_GLAZED_JARS.forEach(registryObject -> this.tag(ModTags.Items.BIG_COLORED_JARS).add(registryObject.get().asItem()));
+        this.tag(ModTags.Items.BIG_JARS).add(ModBlocks.BIG_GLAZED_JAR.get().asItem(), ModBlocks.CRACKED_BIG_GLAZED_JAR.get().asItem()).addTag(ModTags.Items.BIG_COLORED_JARS);
         this.copy(ModTags.Blocks.LAPIDIFIED_JUNGLE_LOGS, ModTags.Items.LAPIDIFIED_JUNGLE_LOGS);
         this.copy(BlockTags.LOGS, ItemTags.LOGS);
         this.copy(BlockTags.PLANKS, ItemTags.PLANKS);
