@@ -26,7 +26,7 @@ public class DesertHouseStructure extends AbstractValhelsiaStructure {
 
     @Override
     public int getSeedModifier() {
-        return 14862926;
+        return 572792859;
     }
 
     @Override

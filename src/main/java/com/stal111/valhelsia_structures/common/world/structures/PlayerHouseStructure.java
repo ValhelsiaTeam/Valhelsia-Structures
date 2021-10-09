@@ -31,7 +31,7 @@ public class PlayerHouseStructure extends AbstractValhelsiaStructure {
 
     @Override
     public int getSeedModifier() {
-        return 17357645;
+        return 292107367;
     }
 
     @Override

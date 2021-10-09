@@ -30,7 +30,7 @@ public class CastleRuinStructure extends AbstractValhelsiaStructure {
 
     @Override
     public int getSeedModifier() {
-        return 14357618;
+        return 436946199;
     }
 
     @Override
