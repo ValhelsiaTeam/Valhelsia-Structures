@@ -30,7 +30,7 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
     @Override
     public void addTables() {
         getRemainingBlocks().removeIf(block ->
-                block.get() instanceof ValhelsiaStoneBlock || block.get() instanceof ValhelsiaGrassBlock || block.get() == ModBlocks.DUNGEON_DOOR_LEAF.get() || block.get() instanceof JarBlock
+                block.get() instanceof ValhelsiaStoneBlock || block.get() instanceof ValhelsiaGrassBlock || block.get() == ModBlocks.DUNGEON_DOOR_LEAF.get() || block.get() instanceof BigJarTopBlock
         );
 
         forEach(block -> block instanceof SlabBlock, block -> registerLootTable(block, ValhelsiaBlockLootTables::droppingSlab));

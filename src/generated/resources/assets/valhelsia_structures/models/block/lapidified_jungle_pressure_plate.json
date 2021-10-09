@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/pressure_plate_up",
+  "textures": {
+    "texture": "valhelsia_structures:block/lapidified_jungle_planks"
+  }
+}

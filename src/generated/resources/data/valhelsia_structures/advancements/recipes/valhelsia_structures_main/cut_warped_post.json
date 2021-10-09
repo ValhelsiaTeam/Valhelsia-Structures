@@ -11,7 +11,9 @@
       "conditions": {
         "items": [
           {
-            "item": "valhelsia_structures:warped_post"
+            "items": [
+              "valhelsia_structures:warped_post"
+            ]
           }
         ]
       }

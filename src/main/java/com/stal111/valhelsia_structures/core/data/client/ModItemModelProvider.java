@@ -40,8 +40,8 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
                 ModBlocks.PAPER_WALL
         );
         takeBlockItem(this::withParentInventory,
-          //     ModBlocks.LAPIDIFIED_JUNGLE_BUTTON,
-            //    ModBlocks.LAPIDIFIED_JUNGLE_FENCE,
+                ModBlocks.LAPIDIFIED_JUNGLE_BUTTON,
+                ModBlocks.LAPIDIFIED_JUNGLE_FENCE,
                 ModBlocks.BONE_PILE
         );
 
