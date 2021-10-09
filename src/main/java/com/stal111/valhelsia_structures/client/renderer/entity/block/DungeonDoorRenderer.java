@@ -3,10 +3,7 @@ package com.stal111.valhelsia_structures.client.renderer.entity.block;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Vector3f;
 import com.stal111.valhelsia_structures.client.model.block.DungeonDoorModel;
-import com.stal111.valhelsia_structures.client.model.block.GiantFernModel;
 import com.stal111.valhelsia_structures.common.block.entity.DungeonDoorBlockEntity;
-import com.stal111.valhelsia_structures.common.block.entity.GiantFernBlockEntity;
-import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -48,5 +45,10 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
         this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TEXTURE)), combinedLight, combinedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
 
         poseStack.popPose();
+    }
+
+    @Override
+    public boolean shouldRenderOffScreen(@Nonnull DungeonDoorBlockEntity blockEntity) {
+        return true;
     }
 }
