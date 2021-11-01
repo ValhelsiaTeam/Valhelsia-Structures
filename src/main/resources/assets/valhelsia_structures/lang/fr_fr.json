@@ -1,6 +1,7 @@
 {
     "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
-    "comment_blocks": "Blocks",
+
+    "comment.blocks": "---Blocks---",
     "block.valhelsia_structures.special_spawner": "Générateur spécial",
     "block.valhelsia_structures.brazier": "Braséro",
     "block.valhelsia_structures.soul_brazier": "Braséro des âmes",
@@ -12,6 +13,7 @@
     "block.valhelsia_structures.dark_oak_post": "Poteau de chêne noir",
     "block.valhelsia_structures.warped_post": "Poteau biscornu",
     "block.valhelsia_structures.crimson_post": "Poteau carmin",
+
     "block.valhelsia_structures.cut_oak_post": "Poteau de chêne coupé",
     "block.valhelsia_structures.cut_spruce_post": "Poteau de sapin coupé",
     "block.valhelsia_structures.cut_birch_post": "Poteau de bouleau coupé",
@@ -20,6 +22,7 @@
     "block.valhelsia_structures.cut_dark_oak_post": "Poteau de chêne noir coupé",
     "block.valhelsia_structures.cut_warped_post": "Poteau biscornu coupé",
     "block.valhelsia_structures.cut_crimson_post": "Poteau carmin coupé",
+
     "block.valhelsia_structures.lapidified_jungle_post": "Poteau d'acajou lapidifié",
     "block.valhelsia_structures.metal_framed_glass": "Verre encadré de métal",
     "block.valhelsia_structures.metal_framed_glass_pane": "Vitre encadrée de métal",
@@ -81,8 +84,13 @@
     "block.valhelsia_structures.dungeon_door": "Porte de donjon",
     "block.valhelsia_structures.bone_pile": "Tas d'os",
     "block.valhelsia_structures.bone_pile_block": "Bloc de tas d'os",
+
     "gui.valhelsia_structures.config.spacing_error": "La valeur d'espacement de la structure requiert d'être supérieure à la valeur de séparation !",
     "gui.valhelsia_structures.config.spacing_solution": "Utiliser %s comme valeur d'espacement au lieu de (Séparation + 1)",
     "gui.valhelsia_structures.config.invalid_biome_category": "La liste contient une catégorie de biome invalide :",
-    "gui.valhelsia_structures.config.invalid_blacklisted_biome": "La liste contient un biome invalide :"
+    "gui.valhelsia_structures.config.invalid_blacklisted_biome": "La liste contient un biome invalide :",
+    
+    "comment.filled_maps": "---Filled Maps---",
+    "filled_map.valhelsia_structures:spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures:castle": "Castle Explorer Map"
 }
