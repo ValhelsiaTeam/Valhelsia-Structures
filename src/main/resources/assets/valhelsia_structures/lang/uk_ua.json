@@ -1,6 +1,7 @@
 {
     "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
-    "comment_blocks": "Blocks",
+
+    "comment.blocks": "---Blocks---",
     "block.valhelsia_structures.special_spawner": "Особливий спавнер",
     "block.valhelsia_structures.brazier": "Жаровня",
     "block.valhelsia_structures.soul_brazier": "Жаровня душ",
@@ -12,6 +13,7 @@
     "block.valhelsia_structures.dark_oak_post": "Стовп з темного дубу",
     "block.valhelsia_structures.warped_post": "Химерний стовп",
     "block.valhelsia_structures.crimson_post": "Багряний стовп",
+
     "block.valhelsia_structures.cut_oak_post": "Різаний дубовий стовп",
     "block.valhelsia_structures.cut_spruce_post": "Різаний смерековий стовп",
     "block.valhelsia_structures.cut_birch_post": "Різаний березовий стовп",
@@ -20,6 +22,7 @@
     "block.valhelsia_structures.cut_dark_oak_post": "Різаний стовп з темного дубу",
     "block.valhelsia_structures.cut_warped_post": "Різаний химерний стовп",
     "block.valhelsia_structures.cut_crimson_post": "Різаний багряний стовп",
+
     "block.valhelsia_structures.lapidified_jungle_post": "Скам'янілий стовп с тропічного дерева",
     "block.valhelsia_structures.metal_framed_glass": "Металеве обрамлене скло",
     "block.valhelsia_structures.metal_framed_glass_pane": "Металева обрамлена скляна панель",
@@ -81,8 +84,13 @@
     "block.valhelsia_structures.dungeon_door": "Двері підземелля",
     "block.valhelsia_structures.bone_pile": "Купа кісток",
     "block.valhelsia_structures.bone_pile_block": "Блок купи кісток",
+
     "gui.valhelsia_structures.config.spacing_error": "Значення інтервалу структури повинно бути більше ніж значення розлуки!",
     "gui.valhelsia_structures.config.spacing_solution": "Використання %s як значення інтервалу (Розлука + 1)",
     "gui.valhelsia_structures.config.invalid_biome_category": "Список містить недійсні категорії біомів:",
-    "gui.valhelsia_structures.config.invalid_blacklisted_biome": "Список містить недійсні біоми:"
+    "gui.valhelsia_structures.config.invalid_blacklisted_biome": "Список містить недійсні біоми:",
+    
+    "comment.filled_maps": "---Filled Maps---",
+    "filled_map.valhelsia_structures:spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures:castle": "Castle Explorer Map"
 }
