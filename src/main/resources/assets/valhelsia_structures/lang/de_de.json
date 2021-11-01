@@ -1,6 +1,7 @@
 {
     "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
-    "comment_blocks": "Blocks",
+
+    "comment.blocks": "---Blocks---",
     "block.valhelsia_structures.special_spawner": "Spezieller Spawner",
     "block.valhelsia_structures.brazier": "Feuerschale",
     "block.valhelsia_structures.soul_brazier": "Seelenfeuerschale",
@@ -12,6 +13,7 @@
     "block.valhelsia_structures.dark_oak_post": "Schwarzeichenholzpfosten",
     "block.valhelsia_structures.warped_post": "Wirrpfosten",
     "block.valhelsia_structures.crimson_post": "Karmesinpfosten",
+    
     "block.valhelsia_structures.cut_oak_post": "Geschnittener Eichenholzpfosten",
     "block.valhelsia_structures.cut_spruce_post": "Geschnittener Fichtenholzpfosten",
     "block.valhelsia_structures.cut_birch_post": "Geschnittener Birkenholzpfosten",
@@ -21,6 +23,7 @@
     "block.valhelsia_structures.cut_warped_post": "Geschnittener Wirrpfosten",
     "block.valhelsia_structures.cut_crimson_post": "Geschnittener Karmesinpfosten",
     "block.valhelsia_structures.lapidified_jungle_post": "Lapidified Jungle Post",
+
     "block.valhelsia_structures.metal_framed_glass": "Metallgerahmtes Glas",
     "block.valhelsia_structures.metal_framed_glass_pane": "Metallgerahmte Glasscheibe",
     "block.valhelsia_structures.paper_wall": "Papierwand",
@@ -81,8 +84,13 @@
     "block.valhelsia_structures.dungeon_door": "Dungeon Door",
     "block.valhelsia_structures.bone_pile": "Knochenhaufen",
     "block.valhelsia_structures.bone_pile_block": "Knochenhaufenblock",
+
     "gui.valhelsia_structures.config.spacing_error": "The Spacing Value of the Structure needs to be greater than the Separation Value!",
     "gui.valhelsia_structures.config.spacing_solution": "Using %s as Spacing Value instead (Separation + 1)",
     "gui.valhelsia_structures.config.invalid_biome_category": "List contains invalid Biome Category:",
-    "gui.valhelsia_structures.config.invalid_blacklisted_biome": "List contains invalid Biome:"
+    "gui.valhelsia_structures.config.invalid_blacklisted_biome": "List contains invalid Biome:",
+
+    "comment.filled_maps": "---Filled Maps---",
+    "filled_map.valhelsia_structures:spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures:castle": "Castle Explorer Map"
 }
