@@ -1,6 +1,7 @@
 {
     "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
-    "comment_blocks": "Blocks",
+
+    "comment.blocks": "---Blocks---",
     "block.valhelsia_structures.special_spawner": "Specjalny spawner",
     "block.valhelsia_structures.brazier": "Kocioł",
     "block.valhelsia_structures.soul_brazier": "Kocioł dusz",
@@ -12,6 +13,7 @@
     "block.valhelsia_structures.dark_oak_post": "Ciemnodębowy słupek",
     "block.valhelsia_structures.warped_post": "Spaczony słupek",
     "block.valhelsia_structures.crimson_post": "Szkarłatny słupek",
+
     "block.valhelsia_structures.cut_oak_post": "Cięty dębowy słupek",
     "block.valhelsia_structures.cut_spruce_post": "Cięty świerkowy słupek",
     "block.valhelsia_structures.cut_birch_post": "Cięty brzozowy słupek",
@@ -20,6 +22,7 @@
     "block.valhelsia_structures.cut_dark_oak_post": "Cięty ciemnodębowy słupek",
     "block.valhelsia_structures.cut_warped_post": "Cięty spaczony słupek",
     "block.valhelsia_structures.cut_crimson_post": "Cięty szkarłatny słupek",
+
     "block.valhelsia_structures.lapidified_jungle_post": "Skamieniały dżunglowy słupek",
     "block.valhelsia_structures.metal_framed_glass": "Szkło w metalowej ramie",
     "block.valhelsia_structures.metal_framed_glass_pane": "Szyba w metalowej ramie",
@@ -81,8 +84,13 @@
     "block.valhelsia_structures.dungeon_door": "Drzwi do lochów",
     "block.valhelsia_structures.bone_pile": "Stos kości",
     "block.valhelsia_structures.bone_pile_block": "Blok stosów kości",
+
     "gui.valhelsia_structures.config.spacing_error": "Wartość odstępu struktury musi być większa niż wartość separacji!",
     "gui.valhelsia_structures.config.spacing_solution": "Używanie %s jako wartości odstępu zamiast (Separacja + 1)",
     "gui.valhelsia_structures.config.invalid_biome_category": "Lista zawiera niepoprawną kategorię biomu:",
-    "gui.valhelsia_structures.config.invalid_blacklisted_biome": "Lista zawiera niepoprawny biom:"
+    "gui.valhelsia_structures.config.invalid_blacklisted_biome": "Lista zawiera niepoprawny biom:",
+    
+    "comment.filled_maps": "---Filled Maps---",
+    "filled_map.valhelsia_structures:spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures:castle": "Castle Explorer Map"
 }
