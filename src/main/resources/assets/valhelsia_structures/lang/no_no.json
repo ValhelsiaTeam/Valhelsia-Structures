@@ -1,6 +1,7 @@
 {
     "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
-    "comment_blocks": "Blocks",
+
+    "comment.blocks": "---Blocks---",
     "block.valhelsia_structures.special_spawner": "Spesiell Fremkaller",
     "block.valhelsia_structures.brazier": "Fyrfat",
     "block.valhelsia_structures.soul_brazier": "Sjelefyrfat",
@@ -12,6 +13,7 @@
     "block.valhelsia_structures.dark_oak_post": "Mørkeikestolpe",
     "block.valhelsia_structures.warped_post": "Forvridd Stolpe",
     "block.valhelsia_structures.crimson_post": "Karmosinstolpe",
+
     "block.valhelsia_structures.cut_oak_post": "Kuttet Eikestolpe",
     "block.valhelsia_structures.cut_spruce_post": "Kuttet Granstolpe",
     "block.valhelsia_structures.cut_birch_post": "Kuttet Bjørkestolpe",
@@ -20,6 +22,7 @@
     "block.valhelsia_structures.cut_dark_oak_post": "Kuttet Mørkeikestolpe",
     "block.valhelsia_structures.cut_warped_post": "Kuttet Forvridd Stolpe",
     "block.valhelsia_structures.cut_crimson_post": "Kuttet Karmosinstolpe",
+
     "block.valhelsia_structures.lapidified_jungle_post": "Forsteinet Jungeltrestolpe",
     "block.valhelsia_structures.metal_framed_glass": "Metallinnrammet Glass",
     "block.valhelsia_structures.metal_framed_glass_pane": "Metallinnrammet Glassrute",
@@ -81,8 +84,13 @@
     "block.valhelsia_structures.dungeon_door": "Fangehull-dør",
     "block.valhelsia_structures.bone_pile": "Benhaug",
     "block.valhelsia_structures.bone_pile_block": "Benhaug Blokk",
+
     "gui.valhelsia_structures.config.spacing_error": "Verdien for Spacing for strukturen må være større enn Separation-verdien!",
     "gui.valhelsia_structures.config.spacing_solution": "Bruk %s som Spacing-verdi i stedet (Separation-verdi + 1)",
     "gui.valhelsia_structures.config.invalid_biome_category": "Liste inneholder ugyldig biom-kategori:",
-    "gui.valhelsia_structures.config.invalid_blacklisted_biome": "Liste inneholder ugyldig biom:"
+    "gui.valhelsia_structures.config.invalid_blacklisted_biome": "Liste inneholder ugyldig biom:",
+    
+    "comment.filled_maps": "---Filled Maps---",
+    "filled_map.valhelsia_structures:spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures:castle": "Castle Explorer Map"
 }
