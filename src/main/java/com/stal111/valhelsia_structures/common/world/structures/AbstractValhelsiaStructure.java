@@ -204,7 +204,7 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         public void generatePieces(@Nonnull RegistryAccess registryAccess, @Nonnull ChunkGenerator chunkGenerator, @Nonnull StructureManager structureManager, @Nonnull ChunkPos chunkPos, @Nonnull Biome biome, @Nonnull JigsawConfiguration config, @Nonnull LevelHeightAccessor level) {
             BlockPos pos = chunkPos.getWorldPosition();
 
-            JigsawPlacement.addPieces(registryAccess, config, PoolElementStructurePiece::new, chunkGenerator, structureManager, pos, this, this.random, false, true, level);
+            JigsawPlacement.addPieces(registryAccess, config, PoolElementStructurePiece::new, chunkGenerator, structureManager, pos, this, this.random, true, true, level);
 
             BlockPos structureCenter = this.pieces.get(0).getBoundingBox().getCenter();
 
