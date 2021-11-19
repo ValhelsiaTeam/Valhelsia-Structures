@@ -59,18 +59,18 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
     }
 
     @Override
-    protected boolean isFeatureChunk(@Nonnull ChunkGenerator generator, @Nonnull BiomeSource provider, long seed, @Nonnull WorldgenRandom rand, @Nonnull ChunkPos chunkPos, @Nonnull Biome biome, @Nonnull ChunkPos potentialPos, @Nonnull JigsawConfiguration config, @Nonnull LevelHeightAccessor level) {
-        BlockPos centerOfChunk = chunkPos.getWorldPosition();
+    protected boolean isFeatureChunk(@Nonnull ChunkGenerator generator, @Nonnull BiomeSource provider, long seed, @Nonnull WorldgenRandom rand, @Nonnull ChunkPos chunkPos, @Nonnull Biome biome, @Nonnull ChunkPos potentialPos, @Nonnull JigsawConfiguration config, @Nonnull LevelHeightAccessor heightAccessor) {
+        BlockPos pos = chunkPos.getWorldPosition();
 
-        if (this.checkSurface() && !this.isSurfaceFlat(generator, centerOfChunk.getX(), centerOfChunk.getZ(), level)) {
+        if (this.checkSurface() && !this.isSurfaceFlat(generator, pos.getX(), pos.getZ(), heightAccessor)) {
             return false;
         }
 
         if (!this.canGenerateOnWater()) {
-            int landHeight = generator.getBaseHeight(centerOfChunk.getX(), centerOfChunk.getZ(), Heightmap.Types.WORLD_SURFACE_WG, level);
+            int landHeight = generator.getFirstOccupiedHeight(pos.getX(), pos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, heightAccessor);
 
-            NoiseColumn columnOfBlocks = generator.getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ(), level);
-            BlockState topBlock = columnOfBlocks.getBlockState(centerOfChunk.above(landHeight));
+            NoiseColumn columnOfBlocks = generator.getBaseColumn(pos.getX(), pos.getZ(), heightAccessor);
+            BlockState topBlock = columnOfBlocks.getBlockState(pos.above(landHeight));
 
             if (!topBlock.getFluidState().isEmpty()) {
                 return false;
