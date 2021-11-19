@@ -31,15 +31,15 @@ import java.util.Random;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.mixin.BlockModelRendererMixin
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.17.1-0.1.1
  * @since 2021-03-25
  */
 @Mixin(ModelBlockRenderer.class)
 public abstract class BlockModelRendererMixin {
 
-    @Shadow(remap = false) public abstract boolean tesselateWithAO(BlockAndTintGetter pLevel, BakedModel pModel, BlockState pState, BlockPos pPos, PoseStack pMatrixStack, VertexConsumer pBuffer, boolean pCheckSides, Random pRandom, long pRand, int pCombinedOverlay, IModelData modelData);
+    @Shadow public abstract boolean tesselateWithAO(BlockAndTintGetter pLevel, BakedModel pModel, BlockState pState, BlockPos pPos, PoseStack pMatrixStack, VertexConsumer pBuffer, boolean pCheckSides, Random pRandom, long pRand, int pCombinedOverlay);
 
-    @Shadow(remap = false) public abstract boolean tesselateWithoutAO(BlockAndTintGetter pLevel, BakedModel pModel, BlockState pState, BlockPos pPos, PoseStack pMatrixStack, VertexConsumer pBuffer, boolean pCheckSides, Random pRandom, long pRand, int pCombinedOverlay, IModelData modelData);
+    @Shadow public abstract boolean tesselateWithoutAO(BlockAndTintGetter pLevel, BakedModel pModel, BlockState pState, BlockPos pPos, PoseStack pMatrixStack, VertexConsumer pBuffer, boolean pCheckSides, Random pRandom, long pRand, int pCombinedOverlay);
 
     @Inject(at = @At(value = "RETURN"), method = "tesselateBlock(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZLjava/util/Random;JILnet/minecraftforge/client/model/data/IModelData;)Z", remap = false, cancellable = true)
     private void valhelsia_placeDousedTorch(BlockAndTintGetter level, BakedModel model, BlockState state, BlockPos pos, PoseStack matrix, VertexConsumer buffer, boolean checkSides, Random randomIn, long rand, int combinedOverlay, IModelData modelData, CallbackInfoReturnable<Boolean> cir) {
@@ -54,7 +54,7 @@ public abstract class BlockModelRendererMixin {
                     modelData = model.getModelData(level, pos, state, modelData);
 
                     try {
-                        cir.setReturnValue(flag ? this.tesselateWithAO(level, model, state, pos, matrix, buffer, checkSides, randomIn, rand, combinedOverlay, modelData) : this.tesselateWithoutAO(level, model, state, pos, matrix, buffer, checkSides, randomIn, rand, combinedOverlay, modelData));
+                        cir.setReturnValue(flag ? this.tesselateWithAO(level, model, state, pos, matrix, buffer, checkSides, randomIn, rand, combinedOverlay) : this.tesselateWithoutAO(level, model, state, pos, matrix, buffer, checkSides, randomIn, rand, combinedOverlay));
                     } catch (Throwable throwable) {
                         CrashReport crashreport = CrashReport.forThrowable(throwable, "Tesselating block model");
                         CrashReportCategory crashreportcategory = crashreport.addCategory("Block model being tesselated");
