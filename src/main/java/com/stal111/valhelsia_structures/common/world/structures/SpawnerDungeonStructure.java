@@ -61,7 +61,7 @@ public class SpawnerDungeonStructure extends AbstractValhelsiaStructure {
 
     @Override
     public int getGenerationHeight() {
-        return 20;
+        return 15;
     }
 
     @Override
