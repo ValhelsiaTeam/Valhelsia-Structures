@@ -1,13 +1,11 @@
 {
   "variants": {
     "face=floor,facing=north,powered=false": {
-      "model": "valhelsia_structures:block/lapidified_jungle_button",
-      "y": 360
+      "model": "valhelsia_structures:block/lapidified_jungle_button"
     },
     "face=wall,facing=north,powered=false": {
       "model": "valhelsia_structures:block/lapidified_jungle_button",
       "x": 90,
-      "y": 360,
       "uvlock": true
     },
     "face=ceiling,facing=north,powered=false": {
@@ -57,16 +55,14 @@
     "face=ceiling,facing=east,powered=false": {
       "model": "valhelsia_structures:block/lapidified_jungle_button",
       "x": 180,
-      "y": -90
+      "y": 270
     },
     "face=floor,facing=north,powered=true": {
-      "model": "valhelsia_structures:block/lapidified_jungle_button_pressed",
-      "y": 360
+      "model": "valhelsia_structures:block/lapidified_jungle_button_pressed"
     },
     "face=wall,facing=north,powered=true": {
       "model": "valhelsia_structures:block/lapidified_jungle_button_pressed",
       "x": 90,
-      "y": 360,
       "uvlock": true
     },
     "face=ceiling,facing=north,powered=true": {
@@ -116,7 +112,7 @@
     "face=ceiling,facing=east,powered=true": {
       "model": "valhelsia_structures:block/lapidified_jungle_button_pressed",
       "x": 180,
-      "y": -90
+      "y": 270
     }
   }
 }

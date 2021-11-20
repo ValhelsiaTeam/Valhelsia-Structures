@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.DungeonDoorLeafBlock
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.17.1-0.1.1
  * @since 2021-01-22
  */
 public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBlock {
@@ -81,6 +81,10 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
     public BlockState updateShape(BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
         if (state.getValue(WATERLOGGED)) {
             level.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
+
+        if (!level.getBlockState(currentPos.relative(Direction.fromYRot(state.getValue(FACING).toYRot()).getOpposite())).is(ModBlocks.DUNGEON_DOOR.get())) {
+            return Blocks.AIR.defaultBlockState();
         }
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
