@@ -109,10 +109,10 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         // Size of the area to check.
         int offset = getSize() * 16 / 2;
 
-        int height1 = generator.getBaseHeight(posX, posZ, Heightmap.Types.WORLD_SURFACE_WG, level);
-        int height2 = generator.getBaseHeight(posX, posZ + offset, Heightmap.Types.WORLD_SURFACE_WG, level);
-        int height3 = generator.getBaseHeight(posX + offset, posZ, Heightmap.Types.WORLD_SURFACE_WG, level);
-        int height4 = generator.getBaseHeight(posX + offset, posZ + offset, Heightmap.Types.WORLD_SURFACE_WG, level);
+        int height1 = generator.getFirstOccupiedHeight(posX, posZ, Heightmap.Types.WORLD_SURFACE_WG, level);
+        int height2 = generator.getFirstOccupiedHeight(posX, posZ + offset, Heightmap.Types.WORLD_SURFACE_WG, level);
+        int height3 = generator.getFirstOccupiedHeight(posX + offset, posZ, Heightmap.Types.WORLD_SURFACE_WG, level);
+        int height4 = generator.getFirstOccupiedHeight(posX + offset, posZ + offset, Heightmap.Types.WORLD_SURFACE_WG, level);
 
         int minHeight = Math.min(Math.min(height1, height2), Math.min(height3, height4));
         int maxHeight = Math.max(Math.max(height1, height2), Math.max(height3, height4));
