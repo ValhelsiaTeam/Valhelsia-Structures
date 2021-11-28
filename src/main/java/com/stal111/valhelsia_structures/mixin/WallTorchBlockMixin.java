@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.mixin;
 
+import com.stal111.valhelsia_structures.config.BlockConfig;
 import com.stal111.valhelsia_structures.utils.TorchTransformationHandler;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.TorchBlock;
@@ -31,7 +32,7 @@ public class WallTorchBlockMixin extends TorchBlock {
     @Inject(at = @At(value = "HEAD"), method = "getStateForPlacement", cancellable = true)
     public void valhelsia_getStateForPlacement(BlockItemUseContext context, CallbackInfoReturnable<BlockState> cir) {
         FluidState fluidState = context.getWorld().getFluidState(context.getPos());
-        if (fluidState.getFluid() == Fluids.WATER && TorchTransformationHandler.hasDousedVersion(this)) {
+        if (fluidState.getFluid() == Fluids.WATER && TorchTransformationHandler.hasDousedVersion(this) && !BlockConfig.DISABLE_DOUSED_TORCH.get()) {
             cir.setReturnValue(TorchTransformationHandler.getDousedTorchFor(this).getStateForPlacement(context));
         }
     }

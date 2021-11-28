@@ -17,12 +17,12 @@ import java.util.List;
  */
 public class BlockConfig {
 
-    public static ForgeConfigSpec.ConfigValue<List<? extends String>> JAR_BLACKLIST;
+    public static ForgeConfigSpec.BooleanValue DISABLE_DOUSED_TORCH;
 
     public static void init(ForgeConfigSpec.Builder COMMON_BUILDER, ForgeConfigSpec.Builder CLIENT_BUILDER) {
         COMMON_BUILDER.comment("Block Config");
 
-        JAR_BLACKLIST = COMMON_BUILDER.comment("Plants that should not be able to be placed in a jar").defineList("blocks.jar.plant_blacklist", Arrays.asList("minecraft:cactus", "minecraft:crimson_roots", "minecraft:warped_roots"), BlockConfig::validateItem);
+        DISABLE_DOUSED_TORCH = COMMON_BUILDER.comment("Enable/Disable the Doused Torch Feature. If disabled Water will no longer transform normal Torches into Doused Torches. \n Doused Torches will however still generate in structures. [default: false]").define("blocks.doused_torch.disable", false);
     }
 
     private static boolean validateItem(Object o) {

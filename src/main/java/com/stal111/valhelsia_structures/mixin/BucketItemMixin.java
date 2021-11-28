@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.mixin;
 
 import com.stal111.valhelsia_structures.block.DousedWallTorchBlock;
+import com.stal111.valhelsia_structures.config.BlockConfig;
 import com.stal111.valhelsia_structures.utils.TorchTransformationHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -52,7 +53,7 @@ public abstract class BucketItemMixin {
     private void valhelsia_placeDousedTorch(PlayerEntity player, World world, BlockPos pos, BlockRayTraceResult rayTrace, CallbackInfoReturnable<Boolean> cir) {
         BlockState state = world.getBlockState(pos);
 
-        if (this.containedBlock == Fluids.WATER) {
+        if (this.containedBlock == Fluids.WATER && !BlockConfig.DISABLE_DOUSED_TORCH.get()) {
             if (TorchTransformationHandler.hasDousedVersion(state.getBlock())) {
                 BlockState newState = TorchTransformationHandler.getDousedTorchFor(state.getBlock()).getDefaultState().with(BlockStateProperties.WATERLOGGED, true);
 
@@ -73,7 +74,7 @@ public abstract class BucketItemMixin {
     @Inject(at = @At(value = "HEAD"), method = "canBlockContainFluid", cancellable = true, remap = false)
     private void valhelsia_canBlockContainFluid(World world, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
         Block block = state.getBlock();
-        if (block instanceof TorchBlock && containedBlock == Fluids.WATER) {
+        if (block instanceof TorchBlock && containedBlock == Fluids.WATER && !BlockConfig.DISABLE_DOUSED_TORCH.get()) {
             cir.setReturnValue(true);
         }
     }
