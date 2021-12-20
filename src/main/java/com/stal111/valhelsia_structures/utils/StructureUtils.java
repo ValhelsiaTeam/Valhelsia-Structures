@@ -3,7 +3,6 @@ package com.stal111.valhelsia_structures.utils;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -17,7 +16,7 @@ import java.util.Objects;
  * Valhelsia Structures - com.stal111.valhelsia_structures.utils.StructureUtils
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.17.1 - 0.1.0
  */
 public class StructureUtils {
 
@@ -27,7 +26,6 @@ public class StructureUtils {
      * @param structure  the structure to check the area around.
      * @param generator  the Chunk Generator to get the Separation Settings from.
      * @param seed       the Seed to use.
-     * @param rand       Instance of {@link WorldgenRandom} to use.
      * @param pos        The ChunkPos of the structure.
      * @param structures Structures to check for.
      * @return True if there are no structures from the list around the given structure.

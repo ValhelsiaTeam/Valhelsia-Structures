@@ -5,6 +5,8 @@ import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.config.ModConfig;
 import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
+import com.stal111.valhelsia_structures.core.init.ModStructures;
+import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ChunkPos;
@@ -24,9 +26,12 @@ import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
+import net.valhelsia.valhelsia_core.common.world.IValhelsiaStructure;
 import net.valhelsia.valhelsia_core.common.world.ValhelsiaJigsawStructure;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -72,25 +77,21 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         }
 
         // Check for other structures
+        if (this.step() == GenerationStep.Decoration.SURFACE_STRUCTURES) {
+            List<StructureFeature<?>> structures = new ArrayList<>();
 
-        // TODO do we still need this check?
-//        if (this.step() == GenerationStep.Decoration.SURFACE_STRUCTURES) {
-//            List<StructureFeature<?>> structures = new ArrayList<>();
-//
-//            for (IValhelsiaStructure iStructure : ModStructures.MOD_STRUCTURES) {
-//                StructureFeature<?> structure = iStructure.getStructure();
-//
-//                if (structure.step() == this.step()) {
-//                    structures.add(structure);
-//                }
-//            }
-//
-//            structures.add(StructureFeature.VILLAGE);
-//
-//            if (!StructureUtils.checkForOtherStructures(this, generator, context.seed(), context.chunkPos(), structures)) {
-//                return false;
-//            }
-//        }
+            for (IValhelsiaStructure iStructure : ModStructures.MOD_STRUCTURES) {
+                StructureFeature<?> structure = iStructure.getStructure();
+
+                if (structure.step() == this.step()) {
+                    structures.add(structure);
+                }
+            }
+
+            structures.add(StructureFeature.VILLAGE);
+
+            return StructureUtils.checkForOtherStructures(this, generator, context.seed(), context.chunkPos(), structures);
+        }
 
         return true;
       //  return random.nextDouble() < this.getSpawnChance();
