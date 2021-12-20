@@ -33,7 +33,7 @@ public class AxeCraftingRecipeMaker {
         if (Minecraft.getInstance().level != null) {
             Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING).forEach(craftingRecipe -> {
                 if (craftingRecipe instanceof AxeCraftingRecipe axeRecipe) {
-                    Ingredient axeIngredient = Ingredient.of(ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof AxeItem && ModTags.Items.AXE_CRAFTING_BLACKLISTED.contains(item)).map(ItemStack::new));
+                    Ingredient axeIngredient = Ingredient.of(ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof AxeItem && !ModTags.Items.AXE_CRAFTING_BLACKLISTED.contains(item)).map(ItemStack::new));
                     ItemStack output = axeRecipe.getOutput();
                     ResourceLocation id = new ResourceLocation(ValhelsiaStructures.MOD_ID, "jei.axe_crafting." + output.getDescriptionId());
 
