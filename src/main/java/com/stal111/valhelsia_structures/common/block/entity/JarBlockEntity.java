@@ -3,7 +3,6 @@ package com.stal111.valhelsia_structures.common.block.entity;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
@@ -50,30 +49,23 @@ public class JarBlockEntity extends BlockEntity implements Clearable {
         }
     }
 
-    @Nonnull
     @Override
-    public CompoundTag save(@Nonnull CompoundTag tag) {
+    public void saveAdditional(@Nonnull CompoundTag tag) {
         if (this.hasPlant()) {
             tag.put("Plant", this.getPlant().save(new CompoundTag()));
         }
-        return super.save(tag);
     }
 
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return new ClientboundBlockEntityDataPacket(this.worldPosition, 0, this.getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
         return this.save(new CompoundTag());
-    }
-
-    @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet) {
-        this.load(packet.getTag());
     }
 
     @Override

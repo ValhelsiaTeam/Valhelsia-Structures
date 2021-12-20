@@ -3,7 +3,6 @@ package com.stal111.valhelsia_structures.common.block.entity;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -45,27 +44,20 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
         }
     }
 
-    @Nonnull
     @Override
-    public CompoundTag save(@Nonnull CompoundTag tag) {
+    public void saveAdditional(@Nonnull CompoundTag tag) {
         tag.putInt("Color", this.getColor());
-        return super.save(tag);
     }
 
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return new ClientboundBlockEntityDataPacket(this.worldPosition, 0, this.getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
         return this.save(new CompoundTag());
-    }
-
-    @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet) {
-        this.load(packet.getTag());
     }
 }

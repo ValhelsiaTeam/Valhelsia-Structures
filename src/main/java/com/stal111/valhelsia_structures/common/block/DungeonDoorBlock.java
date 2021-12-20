@@ -118,11 +118,11 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
     @Override
     public BlockState updateShape(BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
         if (state.getValue(WATERLOGGED)) {
-            level.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
         if (!state.canSurvive(level, currentPos)) {
-            level.getBlockTicks().scheduleTick(this.getMainBlock(currentPos, state), this, 1);
+            level.scheduleTick(this.getMainBlock(currentPos, state), this, 1);
 
             return Blocks.AIR.defaultBlockState();
         }

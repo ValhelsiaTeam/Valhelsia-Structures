@@ -32,7 +32,7 @@ public class StructureUtils {
      * @param structures Structures to check for.
      * @return True if there are no structures from the list around the given structure.
      */
-    public static boolean checkForOtherStructures(StructureFeature<?> structure, ChunkGenerator generator, long seed, WorldgenRandom rand, ChunkPos pos, List<StructureFeature<?>> structures) {
+    public static boolean checkForOtherStructures(StructureFeature<?> structure, ChunkGenerator generator, long seed, ChunkPos pos, List<StructureFeature<?>> structures) {
         for (StructureFeature<?> structure1 : structures) {
             StructureFeatureConfiguration featureConfiguration = generator.getSettings().getConfig(structure1);
 
@@ -42,7 +42,7 @@ public class StructureUtils {
 
             for (int x = pos.x - 5; x <= pos.x + 5; x++) {
                 for (int z = pos.z - 5; z <= pos.z + 5; z++) {
-                    ChunkPos structurePos = structure1.getPotentialFeatureChunk(featureConfiguration, seed, rand, x, z);
+                    ChunkPos structurePos = structure1.getPotentialFeatureChunk(featureConfiguration, seed, x, z);
 
                     if (x == structurePos.x && z == structurePos.z) {
                         return false;

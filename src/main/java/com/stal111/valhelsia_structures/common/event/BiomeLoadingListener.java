@@ -46,7 +46,7 @@ public class BiomeLoadingListener {
 
                 if (configEntry.generate.get()) {
                     if (checkBiome(configEntry.configuredBiomeCategories.get(), configEntry.configuredBlacklistedBiomes.get(), name, category)) {
-                        event.getGeneration().addStructureStart(structure.getStructureFeature());
+                       // event.getGeneration().addStructureStart(structure.getStructureFeature());
                     }
                 }
             }

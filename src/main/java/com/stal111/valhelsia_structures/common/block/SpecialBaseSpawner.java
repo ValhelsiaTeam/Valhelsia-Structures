@@ -1,16 +1,14 @@
 package com.stal111.valhelsia_structures.common.block;
 
- import com.google.common.collect.Lists;
+import com.google.common.collect.Lists;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import net.minecraft.ResourceLocationException;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.StringUtil;
-import net.minecraft.util.random.WeightedRandomList;
+import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
@@ -19,13 +17,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SpawnData;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Random;
 import java.util.function.Function;
 
 /**
@@ -37,8 +35,10 @@ import java.util.function.Function;
  */
 public abstract class SpecialBaseSpawner {
 
+    private static final Logger LOGGER = ValhelsiaStructures.LOGGER;
+
     private int spawnDelay = 20;
-    private WeightedRandomList<SpawnData> spawnPotentials = WeightedRandomList.create();
+    private SimpleWeightedRandomList<SpawnData> spawnPotentials = SimpleWeightedRandomList.empty();
     private SpawnData nextSpawnData = new SpawnData();
     private double spin;
     private double oSpin;
@@ -53,20 +53,8 @@ public abstract class SpecialBaseSpawner {
     private int spawnRange = 4;
     private short waveCount = 0;
 
-    @Nullable
-    private ResourceLocation getEntityId(@Nullable Level level, BlockPos pos) {
-        String s = this.nextSpawnData.getTag().getString("id");
-
-        try {
-            return StringUtil.isNullOrEmpty(s) ? null : new ResourceLocation(s);
-        } catch (ResourceLocationException resourcelocationexception) {
-            ValhelsiaStructures.LOGGER.warn("Invalid entity id '{}' at spawner {}:[{},{},{}]", s, level != null ? level.dimension().location() : "<null>", pos.getX(), pos.getY(), pos.getZ());
-            return null;
-        }
-    }
-
     public void setEntityId(EntityType<?> type) {
-        this.nextSpawnData.getTag().putString("id", Objects.requireNonNull(ForgeRegistries.ENTITIES.getKey(type)).toString());
+        this.nextSpawnData.getEntityToSpawn().putString("id", Objects.requireNonNull(ForgeRegistries.ENTITIES.getKey(type)).toString());
     }
 
     private boolean isNearPlayer(Level pLevel, BlockPos pPos) {
@@ -103,22 +91,24 @@ public abstract class SpecialBaseSpawner {
                 boolean flag = false;
 
                 for(int i = 0; i < this.spawnCount; ++i) {
-                    CompoundTag compoundtag = this.nextSpawnData.getTag();
+                    CompoundTag compoundtag = this.nextSpawnData.getEntityToSpawn();
                     Optional<EntityType<?>> optional = EntityType.by(compoundtag);
-                    if (!optional.isPresent()) {
+
+                    if (optional.isEmpty()) {
                         this.delay(serverLevel, pos);
                         return;
                     }
 
-                    ListTag listtag = compoundtag.getList("Pos", 6);
-                    int j = listtag.size();
-                    double d0 = j >= 1 ? listtag.getDouble(0) : (double)pos.getX() + (serverLevel.random.nextDouble() - serverLevel.random.nextDouble()) * (double)this.spawnRange + 0.5D;
-                    double d1 = j >= 2 ? listtag.getDouble(1) : (double)(pos.getY() + serverLevel.random.nextInt(3) - 1);
-                    double d2 = j >= 3 ? listtag.getDouble(2) : (double)pos.getZ() + (serverLevel.random.nextDouble() - serverLevel.random.nextDouble()) * (double)this.spawnRange + 0.5D;
+                    ListTag listTag = compoundtag.getList("Pos", 6);
+                    int j = listTag.size();
+                    double d0 = j >= 1 ? listTag.getDouble(0) : (double)pos.getX() + (serverLevel.random.nextDouble() - serverLevel.random.nextDouble()) * (double)this.spawnRange + 0.5D;
+                    double d1 = j >= 2 ? listTag.getDouble(1) : (double)(pos.getY() + serverLevel.random.nextInt(3) - 1);
+                    double d2 = j >= 3 ? listTag.getDouble(2) : (double)pos.getZ() + (serverLevel.random.nextDouble() - serverLevel.random.nextDouble()) * (double)this.spawnRange + 0.5D;
+
                     if (serverLevel.noCollision(optional.get().getAABB(d0, d1, d2))) {
-                        Entity entity = EntityType.loadEntityRecursive(compoundtag, serverLevel, (p_151310_) -> {
-                            p_151310_.moveTo(d0, d1, d2, p_151310_.getYRot(), p_151310_.getXRot());
-                            return p_151310_;
+                        Entity entity = EntityType.loadEntityRecursive(compoundtag, serverLevel, (e) -> {
+                            e.moveTo(d0, d1, d2, e.getYRot(), e.getXRot());
+                            return e;
                         });
                         if (entity == null) {
                             this.delay(serverLevel, pos);
@@ -132,9 +122,10 @@ public abstract class SpecialBaseSpawner {
                         }
 
                         entity.moveTo(entity.getX(), entity.getY(), entity.getZ(), serverLevel.random.nextFloat() * 360.0F, 0.0F);
-                        if (entity instanceof Mob) {
-                            if (this.nextSpawnData.getTag().size() == 1 && this.nextSpawnData.getTag().contains("id", 8)) {
-                                ((Mob)entity).finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.SPAWNER, null, null);
+
+                        if (entity instanceof Mob mob) {
+                            if (this.nextSpawnData.getEntityToSpawn().size() == 1 && this.nextSpawnData.getEntityToSpawn().contains("id", 8)) {
+                                mob.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.SPAWNER, null, null);
                             }
                         }
 
@@ -144,13 +135,12 @@ public abstract class SpecialBaseSpawner {
                         }
 
                         serverLevel.levelEvent(2004, pos, 0);
-                        if (entity instanceof Mob) {
-                            ((Mob) entity).spawnAnim();
+                        if (entity instanceof Mob mob) {
+                            mob.spawnAnim();
                         }
 
                         flag = true;
 
-                        System.out.println(0.15D * this.waveCount + "  " +  this.waveCount);
                         if ((serverLevel.getRandom().nextDouble() <= 0.1D * (this.waveCount + 1) && this.waveCount >= 1) || this.waveCount >= 3) {
                             serverLevel.destroyBlock(pos, true);
                        }
@@ -173,7 +163,7 @@ public abstract class SpecialBaseSpawner {
         }
 
         this.spawnPotentials.getRandom(level.getRandom()).ifPresent((spawnData) -> {
-            this.setNextSpawnData(level, pos, spawnData);
+            this.setNextSpawnData(level, pos, spawnData.getData());
         });
         this.broadcastEvent(level, pos, 1);
     }
@@ -181,21 +171,37 @@ public abstract class SpecialBaseSpawner {
     public void load(@Nullable Level level, BlockPos pos, CompoundTag tag) {
         this.spawnDelay = tag.getShort("Delay");
         List<SpawnData> list = Lists.newArrayList();
-        if (tag.contains("SpawnPotentials", 9)) {
-            ListTag listTag = tag.getList("SpawnPotentials", 10);
 
-            for(int i = 0; i < listTag.size(); ++i) {
-                list.add(new SpawnData(listTag.getCompound(i)));
+        boolean flag = tag.contains("SpawnPotentials", 9);
+        boolean flag1 = tag.contains("SpawnData", 10);
+
+        if (!flag) {
+            SpawnData spawndata;
+            if (flag1) {
+                spawndata = SpawnData.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("SpawnData")).resultOrPartial((p_186391_) -> {
+                    LOGGER.warn("Invalid SpawnData: {}", (Object)p_186391_);
+                }).orElseGet(SpawnData::new);
+            } else {
+                spawndata = new SpawnData();
             }
-        }
 
-        this.spawnPotentials = WeightedRandomList.create(list);
-        if (tag.contains("SpawnData", 10)) {
-            this.setNextSpawnData(level, pos, new SpawnData(1, tag.getCompound("SpawnData")));
-        } else if (!list.isEmpty()) {
-            this.spawnPotentials.getRandom(level != null ? level.getRandom() : new Random()).ifPresent((p_151338_) -> {
-                this.setNextSpawnData(level, pos, p_151338_);
-            });
+            this.spawnPotentials = SimpleWeightedRandomList.single(spawndata);
+            this.setNextSpawnData(level, pos, spawndata);
+        } else {
+            ListTag listtag = tag.getList("SpawnPotentials", 10);
+            this.spawnPotentials = SpawnData.LIST_CODEC.parse(NbtOps.INSTANCE, listtag).resultOrPartial((p_186388_) -> {
+                LOGGER.warn("Invalid SpawnPotentials list: {}", p_186388_);
+            }).orElseGet(SimpleWeightedRandomList::empty);
+            if (flag1) {
+                SpawnData spawnData = SpawnData.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("SpawnData")).resultOrPartial((p_186380_) -> {
+                    LOGGER.warn("Invalid SpawnData: {}", p_186380_);
+                }).orElseGet(SpawnData::new);
+                this.setNextSpawnData(level, pos, spawnData);
+            } else {
+                this.spawnPotentials.getRandom(Objects.requireNonNull(level).getRandom()).ifPresent((p_186378_) -> {
+                    this.setNextSpawnData(level, pos, p_186378_.getData());
+                });
+            }
         }
 
         if (tag.contains("MinSpawnDelay", 99)) {
@@ -221,35 +227,23 @@ public abstract class SpecialBaseSpawner {
     }
 
     public CompoundTag save(@Nullable Level level, BlockPos pos, CompoundTag tag) {
-        if (this.getEntityId(level, pos) != null) {
-            tag.putShort("Delay", (short) this.spawnDelay);
-            tag.putShort("MinSpawnDelay", (short) this.minSpawnDelay);
-            tag.putShort("MaxSpawnDelay", (short) this.maxSpawnDelay);
-            tag.putShort("SpawnCount", (short) this.spawnCount);
-            tag.putShort("MaxNearbyEntities", (short) this.maxNearbyEntities);
-            tag.putShort("RequiredPlayerRange", (short) this.requiredPlayerRange);
-            tag.putShort("SpawnRange", (short) this.spawnRange);
-            tag.put("SpawnData", this.nextSpawnData.getTag().copy());
-            tag.putShort("WaveCount", this.waveCount);
+        tag.putShort("Delay", (short) this.spawnDelay);
+        tag.putShort("MinSpawnDelay", (short) this.minSpawnDelay);
+        tag.putShort("MaxSpawnDelay", (short) this.maxSpawnDelay);
+        tag.putShort("SpawnCount", (short) this.spawnCount);
+        tag.putShort("MaxNearbyEntities", (short) this.maxNearbyEntities);
+        tag.putShort("RequiredPlayerRange", (short) this.requiredPlayerRange);
+        tag.putShort("SpawnRange", (short) this.spawnRange);
+        tag.put("SpawnData", SpawnData.CODEC.encodeStart(NbtOps.INSTANCE, this.nextSpawnData).result().orElseThrow(() -> new IllegalStateException("Invalid SpawnData")));        tag.putShort("WaveCount", this.waveCount);
+        tag.put("SpawnPotentials", SpawnData.LIST_CODEC.encodeStart(NbtOps.INSTANCE, this.spawnPotentials).result().orElseThrow());
 
-            ListTag listTag = new ListTag();
-            if (this.spawnPotentials.isEmpty()) {
-                listTag.add(this.nextSpawnData.save());
-            } else {
-                for (SpawnData spawndata : this.spawnPotentials.unwrap()) {
-                    listTag.add(spawndata.save());
-                }
-            }
-
-            tag.put("SpawnPotentials", listTag);
-        }
         return tag;
     }
 
     @Nullable
     public Entity getOrCreateDisplayEntity(Level level) {
         if (this.displayEntity == null) {
-            this.displayEntity = EntityType.loadEntityRecursive(this.nextSpawnData.getTag(), level, Function.identity());
+            this.displayEntity = EntityType.loadEntityRecursive(this.nextSpawnData.getEntityToSpawn(), level, Function.identity());
         }
 
         return this.displayEntity;

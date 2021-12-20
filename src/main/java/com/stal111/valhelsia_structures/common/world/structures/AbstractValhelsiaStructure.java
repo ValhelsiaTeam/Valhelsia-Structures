@@ -1,39 +1,35 @@
 package com.stal111.valhelsia_structures.common.world.structures;
 
+import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.config.ModConfig;
 import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
-import com.stal111.valhelsia_structures.core.init.ModStructures;
-import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeSource;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.structures.JigsawPlacement;
-import net.minecraft.world.level.levelgen.structure.NoiseAffectingStructureStart;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
-import net.minecraft.world.level.levelgen.structure.StructurePiece;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureManager;
-import net.valhelsia.valhelsia_core.common.world.IValhelsiaStructure;
+import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
+import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
 import net.valhelsia.valhelsia_core.common.world.ValhelsiaJigsawStructure;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Abstract Valhelsia Structure <br>
@@ -43,34 +39,32 @@ import java.util.List;
  * but can be overridden if needed.
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.1-0.1.0
  * @since 2020-03-22
  */
-public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructure {
-
-    private final int size;
+public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructure<JigsawConfiguration> {
 
     private final StructureConfigEntry structureConfigEntry;
 
-    public AbstractValhelsiaStructure(Codec<JigsawConfiguration> codec, String name, int size, StructureConfigEntry structureConfigEntry) {
-        super(codec, name);
-        this.size = size;
+    public AbstractValhelsiaStructure(Codec<JigsawConfiguration> codec, String name, Predicate<PieceGeneratorSupplier.Context<JigsawConfiguration>> locationCheckPredicate, Function<PieceGeneratorSupplier.Context<JigsawConfiguration>, Optional<PieceGenerator<JigsawConfiguration>>> pieceCreationPredicate, StructureConfigEntry structureConfigEntry) {
+        super(codec, name, locationCheckPredicate, pieceCreationPredicate);
         this.structureConfigEntry = structureConfigEntry;
     }
 
-    @Override
-    protected boolean isFeatureChunk(@Nonnull ChunkGenerator generator, @Nonnull BiomeSource provider, long seed, @Nonnull WorldgenRandom rand, @Nonnull ChunkPos chunkPos, @Nonnull Biome biome, @Nonnull ChunkPos potentialPos, @Nonnull JigsawConfiguration config, @Nonnull LevelHeightAccessor heightAccessor) {
-        BlockPos pos = chunkPos.getWorldPosition();
+    protected boolean isFeatureChunk(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
+        BlockPos pos = context.chunkPos().getWorldPosition();
+        ChunkGenerator generator = context.chunkGenerator();
+        WorldgenRandom random = new WorldgenRandom(new LegacyRandomSource(0L));
 
-        if (this.checkSurface() && !this.isSurfaceFlat(generator, pos.getX(), pos.getZ(), heightAccessor)) {
+        if (this.checkSurface() && !this.isSurfaceFlat(context)) {
             return false;
         }
 
         if (!this.canGenerateOnWater()) {
-            int landHeight = generator.getFirstOccupiedHeight(pos.getX(), pos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, heightAccessor);
+            int landHeight = generator.getFirstOccupiedHeight(pos.getX(), pos.getZ(), Heightmap.Types.WORLD_SURFACE_WG, context.heightAccessor());
 
-            NoiseColumn columnOfBlocks = generator.getBaseColumn(pos.getX(), pos.getZ(), heightAccessor);
-            BlockState topBlock = columnOfBlocks.getBlockState(pos.above(landHeight));
+            NoiseColumn columnOfBlocks = generator.getBaseColumn(pos.getX(), pos.getZ(), context.heightAccessor());
+            BlockState topBlock = columnOfBlocks.getBlock(landHeight);
 
             if (!topBlock.getFluidState().isEmpty()) {
                 return false;
@@ -78,25 +72,28 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         }
 
         // Check for other structures
-        if (this.step() == GenerationStep.Decoration.SURFACE_STRUCTURES) {
-            List<StructureFeature<?>> structures = new ArrayList<>();
 
-            for (IValhelsiaStructure iStructure : ModStructures.MOD_STRUCTURES) {
-                StructureFeature<?> structure = iStructure.getStructure();
+        // TODO do we still need this check?
+//        if (this.step() == GenerationStep.Decoration.SURFACE_STRUCTURES) {
+//            List<StructureFeature<?>> structures = new ArrayList<>();
+//
+//            for (IValhelsiaStructure iStructure : ModStructures.MOD_STRUCTURES) {
+//                StructureFeature<?> structure = iStructure.getStructure();
+//
+//                if (structure.step() == this.step()) {
+//                    structures.add(structure);
+//                }
+//            }
+//
+//            structures.add(StructureFeature.VILLAGE);
+//
+//            if (!StructureUtils.checkForOtherStructures(this, generator, context.seed(), context.chunkPos(), structures)) {
+//                return false;
+//            }
+//        }
 
-                if (structure.step() == this.step()) {
-                    structures.add(structure);
-                }
-            }
-
-            structures.add(StructureFeature.VILLAGE);
-
-            if (!StructureUtils.checkForOtherStructures(this, generator, seed, rand, chunkPos, structures)) {
-                return false;
-            }
-        }
-
-        return rand.nextDouble() < this.getSpawnChance();
+        return true;
+      //  return random.nextDouble() < this.getSpawnChance();
     }
 
     @Nonnull
@@ -105,17 +102,12 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         return new ResourceLocation(ValhelsiaStructures.MOD_ID, this.getName()).toString();
     }
 
-    protected boolean isSurfaceFlat(@Nonnull ChunkGenerator generator, int posX, int posZ, LevelHeightAccessor level) {
-        // Size of the area to check.
-        int offset = getSize() * 16 / 2;
+    private boolean isSurfaceFlat(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
+        ChunkPos pos = context.chunkPos();
+        int[] cornerHeights = context.getCornerHeights(pos.getMiddleBlockX(), this.getSize().getFirst(), pos.getMiddleBlockZ(), this.getSize().getSecond());
 
-        int height1 = generator.getFirstOccupiedHeight(posX, posZ, Heightmap.Types.WORLD_SURFACE_WG, level);
-        int height2 = generator.getFirstOccupiedHeight(posX, posZ + offset, Heightmap.Types.WORLD_SURFACE_WG, level);
-        int height3 = generator.getFirstOccupiedHeight(posX + offset, posZ, Heightmap.Types.WORLD_SURFACE_WG, level);
-        int height4 = generator.getFirstOccupiedHeight(posX + offset, posZ + offset, Heightmap.Types.WORLD_SURFACE_WG, level);
-
-        int minHeight = Math.min(Math.min(height1, height2), Math.min(height3, height4));
-        int maxHeight = Math.max(Math.max(height1, height2), Math.max(height3, height4));
+        int minHeight = Math.min(Math.min(cornerHeights[0], cornerHeights[1]), Math.min(cornerHeights[2], cornerHeights[3]));
+        int maxHeight = Math.max(Math.max(cornerHeights[0], cornerHeights[1]), Math.max(cornerHeights[2], cornerHeights[3]));
 
         return Math.abs(maxHeight - minHeight) <= ModConfig.COMMON.flatnessDelta.get();
     }
@@ -131,9 +123,7 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         return true;
     }
 
-    public int getSize() {
-        return size;
-    }
+    public abstract Pair<Integer, Integer> getSize();
 
     public StructureConfigEntry getStructureConfigEntry() {
         return structureConfigEntry;
@@ -176,52 +166,26 @@ public abstract class AbstractValhelsiaStructure extends ValhelsiaJigsawStructur
         return 12;
     }
 
-    @Override
     @Nonnull
-    public StructureStartFactory<JigsawConfiguration> getStartFactory() {
-        return AbstractValhelsiaStructure.Start::new;
+    @Override
+    public BoundingBox adjustBoundingBox(@Nonnull BoundingBox boundingBox) {
+        return super.adjustBoundingBox(boundingBox).inflatedBy(this.hasMargin() ? this.getMargin() : 0);
     }
 
     public int getGenerationHeight() {
         return -1;
     }
 
-    public static class Start extends NoiseAffectingStructureStart<JigsawConfiguration> {
-        private final StructureFeature<JigsawConfiguration> structure;
-        private final int height;
+    public Optional<PieceGenerator<JigsawConfiguration>> generatePieces(PieceGeneratorSupplier.Context<JigsawConfiguration> context) {
+        boolean flag = this.getGenerationHeight() == -1;
+        BlockPos pos = context.chunkPos().getMiddleBlockPosition(flag ? 0 : this.getGenerationHeight());
 
-        public Start(StructureFeature<JigsawConfiguration> structure, ChunkPos chunkPos, int reference, long seed) {
-            this(structure, chunkPos, reference, seed, ((AbstractValhelsiaStructure) structure).getGenerationHeight());
-        }
-
-        public Start(StructureFeature<JigsawConfiguration> structure, ChunkPos chunkPos, int reference, long seed, int height) {
-            super(structure, chunkPos, reference, seed);
-            this.structure = structure;
-            this.height = height;
-        }
-
-        @Override
-        public void generatePieces(@Nonnull RegistryAccess registryAccess, @Nonnull ChunkGenerator chunkGenerator, @Nonnull StructureManager structureManager, @Nonnull ChunkPos chunkPos, @Nonnull Biome biome, @Nonnull JigsawConfiguration config, @Nonnull LevelHeightAccessor level) {
-            BlockPos pos = chunkPos.getWorldPosition();
-
-            JigsawPlacement.addPieces(registryAccess, config, PoolElementStructurePiece::new, chunkGenerator, structureManager, pos, this, this.random, true, true, level);
-
-            BlockPos structureCenter = this.pieces.get(0).getBoundingBox().getCenter();
-
-            for (StructurePiece piece : this.pieces){
-                piece.move(pos.getX() - structureCenter.getX(), 0, pos.getZ() - structureCenter.getZ());
-            }
-
-            this.getBoundingBox();
-
-            if (this.height != -1) {
-                int offset = this.height - this.getBoundingBox().minY();
-                this.getBoundingBox().move(0, offset, 0);
-
-                for (StructurePiece piece : this.pieces) {
-                    piece.move(0, offset, 0);
-                }
-            }
-        }
+        return JigsawPlacement.addPieces(
+                context,
+                PoolElementStructurePiece::new,
+                pos,
+                true,
+                flag
+        );
     }
 }

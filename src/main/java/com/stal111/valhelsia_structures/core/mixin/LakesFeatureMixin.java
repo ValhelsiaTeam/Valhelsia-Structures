@@ -30,7 +30,7 @@ public class LakesFeatureMixin {
             StructureFeature<?> structure = iStructure.getStructure();
 
             if (structure.step() == GenerationStep.Decoration.SURFACE_STRUCTURES) {
-                if (context.level().startsForFeature(SectionPos.of(context.origin()), structure).findAny().isPresent()) {
+                if (!context.level().startsForFeature(SectionPos.of(context.origin()), structure).isEmpty()) {
                     cir.setReturnValue(false);
                 }
             }

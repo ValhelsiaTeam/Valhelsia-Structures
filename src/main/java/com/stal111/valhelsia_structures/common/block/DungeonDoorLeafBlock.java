@@ -80,7 +80,7 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
     @Override
     public BlockState updateShape(BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
         if (state.getValue(WATERLOGGED)) {
-            level.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
         if (!level.getBlockState(currentPos.relative(Direction.fromYRot(state.getValue(FACING).toYRot()).getOpposite())).is(ModBlocks.DUNGEON_DOOR.get())) {

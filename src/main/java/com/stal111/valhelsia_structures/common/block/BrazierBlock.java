@@ -93,7 +93,7 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     public BlockState updateShape(@Nonnull BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
         if (state.getValue(WATERLOGGED)) {
-            level.getLiquidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
@@ -122,7 +122,7 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
             }
 
             level.setBlock(pos, state.setValue(WATERLOGGED, true).setValue(LIT, false), 3);
-            level.getLiquidTicks().scheduleTick(pos, fluidState.getType(), fluidState.getType().getTickDelay(level));
+            level.scheduleTick(pos, fluidState.getType(), fluidState.getType().getTickDelay(level));
 
             return true;
         }

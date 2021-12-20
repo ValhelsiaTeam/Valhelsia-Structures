@@ -1,12 +1,13 @@
 package com.stal111.valhelsia_structures.core.init;
 
 import com.stal111.valhelsia_structures.common.world.structures.pools.*;
+import net.minecraft.core.Registry;
 import net.minecraft.data.BuiltinRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
-import net.minecraft.world.level.levelgen.flat.FlatLevelGeneratorSettings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +42,11 @@ public class ModStructureFeatures {
 
     public static void registerStructureFeatures() {
         for (ConfiguredStructureFeature<?, ?> structureFeature : MOD_STRUCTURE_FEATURES) {
-            BuiltinRegistries.register(BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE, structureFeature.feature.getFeatureName(), structureFeature);
+            Registry<ConfiguredStructureFeature<?, ?>> registry = BuiltinRegistries.CONFIGURED_STRUCTURE_FEATURE;
+            System.out.println(structureFeature.feature.getFeatureName());
+            Registry.register(registry, structureFeature.feature.getFeatureName(), structureFeature);
 
-            FlatLevelGeneratorSettings.STRUCTURE_FEATURES.put(structureFeature.feature, structureFeature);
+           // FlatLevelGeneratorSettings.STRUCTURE_FEATURES.put(structureFeature.feature, structureFeature);
         }
     }
 }

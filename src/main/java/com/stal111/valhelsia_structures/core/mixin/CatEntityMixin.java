@@ -32,7 +32,7 @@ public abstract class CatEntityMixin extends TamableAnimal {
 
     @Inject(at = @At(value = "HEAD"), method = "finalizeSpawn", cancellable = true)
     private void valhelsia_avoidOverridingType(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, SpawnGroupData spawnData, CompoundTag dataTag, CallbackInfoReturnable<SpawnGroupData> cir) {
-        if (reason == MobSpawnType.STRUCTURE && level.getLevel().structureFeatureManager().getStructureAt(this.blockPosition(), true, ModStructures.WITCH_HUT.get()).isValid()) {
+        if (reason == MobSpawnType.STRUCTURE && level.getLevel().structureFeatureManager().getStructureWithPieceAt(this.blockPosition(), ModStructures.WITCH_HUT.get()).isValid()) {
             cir.setReturnValue(super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag));
         }
     }

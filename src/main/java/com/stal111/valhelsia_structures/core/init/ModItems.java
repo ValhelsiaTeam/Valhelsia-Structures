@@ -5,7 +5,7 @@ import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.valhelsia.valhelsia_core.core.registry.ItemRegistryHelper;
 
 /**

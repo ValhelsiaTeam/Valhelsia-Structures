@@ -16,7 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.ForgeModelBakery;
 import net.minecraftforge.client.model.data.IModelData;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -45,7 +45,7 @@ public abstract class BlockModelRendererMixin {
     private void valhelsia_placeDousedTorch(BlockAndTintGetter level, BakedModel model, BlockState state, BlockPos pos, PoseStack matrix, VertexConsumer buffer, boolean checkSides, Random randomIn, long rand, int combinedOverlay, IModelData modelData, CallbackInfoReturnable<Boolean> cir) {
         if (state.getBlock() == ModBlocks.BONE_PILE.get()) {
             for (int i = 1; i < state.getValue(ModBlockStateProperties.LAYERS_1_5); i++) {
-                model = ModelLoader.instance().bake(new ResourceLocation(ValhelsiaStructures.MOD_ID, "block/bone_pile"), BlockModelRotation.by(90, 90 * i));
+                model = ForgeModelBakery.instance().bake(new ResourceLocation(ValhelsiaStructures.MOD_ID, "block/bone_pile"), BlockModelRotation.by(90, 90 * i));
 
                 if (model != null) {
                     boolean flag = Minecraft.useAmbientOcclusion() && state.getLightEmission(level, pos) == 0 && model.useAmbientOcclusion();

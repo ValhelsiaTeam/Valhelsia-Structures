@@ -37,13 +37,11 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
         forEach(block -> block instanceof SlabBlock, block -> add(block, ValhelsiaBlockLootTables::droppingSlab));
         take(this::dropWhenSilkTouch, ModBlocks.METAL_FRAMED_GLASS, ModBlocks.METAL_FRAMED_GLASS_PANE);
         forEach(block -> block instanceof JarBlock || block instanceof BigJarBlock, this::dropWhenSilkTouch);
-        take(block -> add(block, onlyWithShears(ModBlocks.HANGING_VINES.get())), ModBlocks.HANGING_VINES, ModBlocks.HANGING_VINES_BODY);
+        take(block -> add(block, createShearsOnlyDrop(ModBlocks.HANGING_VINES.get())), ModBlocks.HANGING_VINES, ModBlocks.HANGING_VINES_BODY);
         take(block -> add(block, bonePile ->
-                        LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(setCountFromIntegerProperty(bonePile, LootItem.lootTableItem(bonePile), ModBlockStateProperties.LAYERS_1_5).when(SILK_TOUCH).otherwise(setCountFromIntegerProperty(bonePile, LootItem.lootTableItem(Items.BONE), ModBlockStateProperties.LAYERS_1_5))))),
+                        LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(setCountFromIntegerProperty(bonePile, LootItem.lootTableItem(bonePile), ModBlockStateProperties.LAYERS_1_5).when(HAS_SILK_TOUCH).otherwise(setCountFromIntegerProperty(bonePile, LootItem.lootTableItem(Items.BONE), ModBlockStateProperties.LAYERS_1_5))))),
                 ModBlocks.BONE_PILE);
-        take(block -> add(block, bonePile ->
-                        droppingWithSilkTouch(bonePile, withSurvivesExplosion(bonePile, LootItem.lootTableItem(Items.BONE).apply(SetItemCountFunction.setCount(ConstantValue.exactly(9)))))),
-                ModBlocks.BONE_PILE_BLOCK);
+        take(block -> add(block, createSilkTouchDispatchTable(block, withSurvivesExplosion(block, LootItem.lootTableItem(Items.BONE).apply(SetItemCountFunction.setCount(ConstantValue.exactly(9)))))), ModBlocks.BONE_PILE_BLOCK);
         forEach(block -> block instanceof CutPostBlock, block -> add(block, cutPostBlock -> LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(setCountFromIntegerProperty(block, LootItem.lootTableItem(block), ModBlockStateProperties.PARTS_1_4)))));
         take(block -> add(block, createSinglePropConditionTable(block, DungeonDoorBlock.PART, DungeonDoorPart.MIDDLE_1)), ModBlocks.DUNGEON_DOOR);
 

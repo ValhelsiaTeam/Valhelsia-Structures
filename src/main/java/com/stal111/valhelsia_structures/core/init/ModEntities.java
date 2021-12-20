@@ -5,7 +5,7 @@ import com.stal111.valhelsia_structures.common.entity.MossySkeletonEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.RegistryObject;
+import net.minecraftforge.registries.RegistryObject;
 import net.valhelsia.valhelsia_core.core.registry.EntityRegistryHelper;
 
 /**

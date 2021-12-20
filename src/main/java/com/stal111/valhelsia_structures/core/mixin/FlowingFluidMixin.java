@@ -50,7 +50,7 @@ public class FlowingFluidMixin {
                         newState = newState.setValue(HorizontalDirectionalBlock.FACING, state.getValue(HorizontalDirectionalBlock.FACING));
                     }
                     world.setBlock(pos, newState, 3);
-                    world.getLiquidTicks().scheduleTick(pos, fluidState.getType(), fluidState.getType().getTickDelay(world));
+                    world.scheduleTick(pos, fluidState.getType(), fluidState.getType().getTickDelay(world));
                 }
                 ci.cancel();
             }

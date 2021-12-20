@@ -3,9 +3,9 @@ package com.stal111.valhelsia_structures.core.init;
 import com.stal111.valhelsia_structures.common.block.entity.*;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
 

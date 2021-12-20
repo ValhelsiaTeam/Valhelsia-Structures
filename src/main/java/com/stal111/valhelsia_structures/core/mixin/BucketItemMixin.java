@@ -59,7 +59,7 @@ public abstract class BucketItemMixin {
                 }
                 if (!level.isClientSide()) {
                     level.setBlock(pos, newState.setValue(BlockStateProperties.WATERLOGGED, true), 3);
-                    level.getLiquidTicks().scheduleTick(pos, this.content, this.content.getTickDelay(level));
+                    level.scheduleTick(pos, this.content, this.content.getTickDelay(level));
                 }
                 playEmptySound(player, level, pos);
 

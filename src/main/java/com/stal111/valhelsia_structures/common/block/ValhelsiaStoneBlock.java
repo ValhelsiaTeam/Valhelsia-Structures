@@ -37,8 +37,8 @@ public class ValhelsiaStoneBlock extends Block {
     }
 
     @Override
-    public ItemStack getPickBlock(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
-        return new ItemStack(pickBlock.get());
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter world, BlockPos pos, Player player) {
+        return new ItemStack(this.pickBlock.get());
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.stal111.valhelsia_structures.common.block.SpecialBaseSpawner;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
@@ -66,17 +65,15 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
         this.spawner.load(this.level, this.worldPosition, compound);
     }
 
-    @Nonnull
     @Override
-    public CompoundTag save(@Nonnull CompoundTag compound) {
+    public void saveAdditional(@Nonnull CompoundTag compound) {
         this.spawner.save(this.level, this.worldPosition, compound);
-        return super.save(compound);
     }
 
     @Nullable
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return new ClientboundBlockEntityDataPacket(this.worldPosition, 1, this.getUpdateTag());
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Nonnull
@@ -85,11 +82,6 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
         CompoundTag compoundtag = this.save(new CompoundTag());
         compoundtag.remove("SpawnPotentials");
         return compoundtag;
-    }
-
-    @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket packet) {
-        this.load(packet.getTag());
     }
 
     @Override

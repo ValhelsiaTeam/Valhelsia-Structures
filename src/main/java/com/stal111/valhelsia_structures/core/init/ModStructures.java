@@ -9,9 +9,9 @@ import net.minecraft.world.level.levelgen.StructureSettings;
 import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
-import net.minecraftforge.fmllegacy.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import net.valhelsia.valhelsia_core.common.world.IValhelsiaStructure;
 
 import java.util.*;
@@ -29,15 +29,15 @@ public class ModStructures {
 
     public static final DeferredRegister<StructureFeature<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, ValhelsiaStructures.MOD_ID);
 
-    public static final RegistryObject<CastleStructure> CASTLE = register(new CastleStructure(JigsawConfiguration.CODEC));
-    public static final RegistryObject<CastleRuinStructure> CASTLE_RUIN = register(new CastleRuinStructure(JigsawConfiguration.CODEC));
-    public static final RegistryObject<DesertHouseStructure> DESERT_HOUSE = register(new DesertHouseStructure(JigsawConfiguration.CODEC));
-    public static final RegistryObject<ForgeStructure> FORGE = register(new ForgeStructure(JigsawConfiguration.CODEC));
-    public static final RegistryObject<PlayerHouseStructure> PLAYER_HOUSE = register(new PlayerHouseStructure(JigsawConfiguration.CODEC));
-    public static final RegistryObject<SpawnerDungeonStructure> SPAWNER_DUNGEON = register(new SpawnerDungeonStructure(JigsawConfiguration.CODEC));
-    public static final RegistryObject<TowerRuinStructure> TOWER_RUIN = register(new TowerRuinStructure(JigsawConfiguration.CODEC));
-    public static final RegistryObject<WitchHutStructure> WITCH_HUT = register(new WitchHutStructure(JigsawConfiguration.CODEC));
-    public static final RegistryObject<BigTreeStructure> BIG_TREE = register(new BigTreeStructure(JigsawConfiguration.CODEC));
+    public static final RegistryObject<CastleStructure> CASTLE = register(CastleStructure.create(JigsawConfiguration.CODEC));
+    public static final RegistryObject<CastleRuinStructure> CASTLE_RUIN = register(CastleRuinStructure.create(JigsawConfiguration.CODEC));
+    public static final RegistryObject<DesertHouseStructure> DESERT_HOUSE = register(DesertHouseStructure.create(JigsawConfiguration.CODEC));
+    public static final RegistryObject<ForgeStructure> FORGE = register(ForgeStructure.create(JigsawConfiguration.CODEC));
+    public static final RegistryObject<PlayerHouseStructure> PLAYER_HOUSE = register(PlayerHouseStructure.create(JigsawConfiguration.CODEC));
+    public static final RegistryObject<SpawnerDungeonStructure> SPAWNER_DUNGEON = register(SpawnerDungeonStructure.create(JigsawConfiguration.CODEC));
+    public static final RegistryObject<TowerRuinStructure> TOWER_RUIN = register(TowerRuinStructure.create(JigsawConfiguration.CODEC));
+    public static final RegistryObject<WitchHutStructure> WITCH_HUT = register(WitchHutStructure.create(JigsawConfiguration.CODEC));
+    public static final RegistryObject<BigTreeStructure> BIG_TREE = register(BigTreeStructure.create(JigsawConfiguration.CODEC));
 
     private static <T extends AbstractValhelsiaStructure> RegistryObject<T> register(T structure) {
         MOD_STRUCTURES.add(structure);
