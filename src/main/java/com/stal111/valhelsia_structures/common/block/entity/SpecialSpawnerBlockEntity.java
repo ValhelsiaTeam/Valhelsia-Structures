@@ -60,14 +60,14 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void load(@Nonnull CompoundTag compound) {
-        super.load(compound);
-        this.spawner.load(this.level, this.worldPosition, compound);
+    public void load(@Nonnull CompoundTag tag) {
+        super.load(tag);
+        this.spawner.load(this.level, this.worldPosition, tag);
     }
 
     @Override
-    public void saveAdditional(@Nonnull CompoundTag compound) {
-        this.spawner.save(this.level, this.worldPosition, compound);
+    public void saveAdditional(@Nonnull CompoundTag tag) {
+        this.spawner.save(this.level, this.worldPosition, tag);
     }
 
     @Nullable
@@ -79,9 +79,9 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
     @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
-        CompoundTag compoundtag = this.save(new CompoundTag());
-        compoundtag.remove("SpawnPotentials");
-        return compoundtag;
+        CompoundTag tag = this.saveWithoutMetadata();
+        tag.remove("SpawnPotentials");
+        return tag;
     }
 
     @Override

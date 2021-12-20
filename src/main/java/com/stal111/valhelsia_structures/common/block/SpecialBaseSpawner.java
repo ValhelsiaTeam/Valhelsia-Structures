@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.common.block;
 
-import com.google.common.collect.Lists;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,7 +20,6 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -170,7 +168,6 @@ public abstract class SpecialBaseSpawner {
 
     public void load(@Nullable Level level, BlockPos pos, CompoundTag tag) {
         this.spawnDelay = tag.getShort("Delay");
-        List<SpawnData> list = Lists.newArrayList();
 
         boolean flag = tag.contains("SpawnPotentials", 9);
         boolean flag1 = tag.contains("SpawnData", 10);
@@ -234,8 +231,9 @@ public abstract class SpecialBaseSpawner {
         tag.putShort("MaxNearbyEntities", (short) this.maxNearbyEntities);
         tag.putShort("RequiredPlayerRange", (short) this.requiredPlayerRange);
         tag.putShort("SpawnRange", (short) this.spawnRange);
-        tag.put("SpawnData", SpawnData.CODEC.encodeStart(NbtOps.INSTANCE, this.nextSpawnData).result().orElseThrow(() -> new IllegalStateException("Invalid SpawnData")));        tag.putShort("WaveCount", this.waveCount);
+        tag.put("SpawnData", SpawnData.CODEC.encodeStart(NbtOps.INSTANCE, this.nextSpawnData).result().orElseThrow(() -> new IllegalStateException("Invalid SpawnData")));
         tag.put("SpawnPotentials", SpawnData.LIST_CODEC.encodeStart(NbtOps.INSTANCE, this.spawnPotentials).result().orElseThrow());
+        tag.putShort("WaveCount", this.waveCount);
 
         return tag;
     }
