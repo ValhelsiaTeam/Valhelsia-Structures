@@ -23,7 +23,7 @@ import java.util.List;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.init.ModBlocks
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.1-0.2.0
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
@@ -33,7 +33,27 @@ public class ModBlocks {
     public static final RegistryObject<SpecialSpawnerBlock> SPECIAL_SPAWNER = HELPER.register("special_spawner", new SpecialSpawnerBlock(Block.Properties.copy(Blocks.SPAWNER).strength(-1.0F, 3600000.0F).noDrops()), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<BrazierBlock> BRAZIER = HELPER.register("brazier", new BrazierBlock(true, 1, Block.Properties.copy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 15 : 0)), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<BrazierBlock> SOUL_BRAZIER = HELPER.register("soul_brazier", new BrazierBlock(false, 2, Block.Properties.copy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 11 : 0)), ValhelsiaRenderType.CUTOUT);
-    //Posts
+
+    // Double Logs
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_STRIPPED_OAK_LOGS = HELPER.registerStrippedLogBlock("double_stripped_oak_logs", MaterialColor.WOOD, MaterialColor.WOOD);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_STRIPPED_SPRUCE_LOGS = HELPER.registerStrippedLogBlock("double_stripped_spruce_logs", MaterialColor.PODZOL, MaterialColor.PODZOL);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_STRIPPED_BIRCH_LOGS = HELPER.registerStrippedLogBlock("double_stripped_birch_logs", MaterialColor.SAND, MaterialColor.SAND);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_STRIPPED_JUNGLE_LOGS = HELPER.registerStrippedLogBlock("double_stripped_jungle_logs", MaterialColor.DIRT, MaterialColor.DIRT);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_STRIPPED_ACACIA_LOGS = HELPER.registerStrippedLogBlock("double_stripped_acacia_logs", MaterialColor.COLOR_ORANGE, MaterialColor.COLOR_ORANGE);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_STRIPPED_DARK_OAK_LOGS = HELPER.registerStrippedLogBlock("double_stripped_dark_oak_logs", MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_STRIPPED_CRIMSON_LOGS = HELPER.registerStrippedLogBlock("double_stripped_crimson_logs", MaterialColor.CRIMSON_STEM, MaterialColor.CRIMSON_STEM);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_STRIPPED_WARPED_LOGS = HELPER.registerStrippedLogBlock("double_stripped_warped_logs", MaterialColor.WARPED_STEM, MaterialColor.WARPED_STEM);
+
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_OAK_LOGS = HELPER.registerLogBlock("double_oak_logs", DOUBLE_STRIPPED_OAK_LOGS, MaterialColor.WOOD, MaterialColor.PODZOL);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_SPRUCE_LOGS = HELPER.registerLogBlock("double_spruce_logs", DOUBLE_STRIPPED_SPRUCE_LOGS, MaterialColor.PODZOL, MaterialColor.COLOR_BROWN);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_BIRCH_LOGS = HELPER.registerLogBlock("double_birch_logs", DOUBLE_STRIPPED_BIRCH_LOGS, MaterialColor.SAND, MaterialColor.QUARTZ);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_JUNGLE_LOGS = HELPER.registerLogBlock("double_jungle_logs", DOUBLE_STRIPPED_JUNGLE_LOGS, MaterialColor.DIRT, MaterialColor.PODZOL);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_ACACIA_LOGS = HELPER.registerLogBlock("double_acacia_logs", DOUBLE_STRIPPED_ACACIA_LOGS, MaterialColor.COLOR_ORANGE, MaterialColor.STONE);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_DARK_OAK_LOGS = HELPER.registerLogBlock("double_dark_oak_logs", DOUBLE_STRIPPED_DARK_OAK_LOGS, MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_CRIMSON_LOGS = HELPER.registerLogBlock("double_crimson_logs", DOUBLE_STRIPPED_CRIMSON_LOGS, MaterialColor.CRIMSON_STEM, MaterialColor.CRIMSON_STEM);
+    public static final RegistryObject<RotatedPillarBlock> DOUBLE_WARPED_LOGS = HELPER.registerLogBlock("double_warped_logs", DOUBLE_STRIPPED_WARPED_LOGS, MaterialColor.WARPED_STEM, MaterialColor.WARPED_STEM);
+
+    // Posts
     public static final RegistryObject<PostBlock> OAK_POST = HELPER.register("oak_post", new PostBlock(() -> Blocks.OAK_LOG));
     public static final RegistryObject<PostBlock> SPRUCE_POST = HELPER.register("spruce_post", new PostBlock(() -> Blocks.SPRUCE_LOG));
     public static final RegistryObject<PostBlock> BIRCH_POST = HELPER.register("birch_post", new PostBlock(() -> Blocks.BIRCH_LOG));

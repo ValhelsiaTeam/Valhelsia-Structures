@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "side": "valhelsia_structures:block/double_logs/double_birch_logs",
+    "end": "valhelsia_structures:block/double_logs/double_birch_logs_top"
+  }
+}

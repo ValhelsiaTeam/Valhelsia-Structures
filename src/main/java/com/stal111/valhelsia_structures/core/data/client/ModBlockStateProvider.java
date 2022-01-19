@@ -19,7 +19,7 @@ import net.valhelsia.valhelsia_core.core.data.ValhelsiaBlockStateProvider;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.client.ModBlockStateProvider
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.1-0.2.0
  * @since 2020-11-13
  */
 public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
@@ -34,6 +34,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
        // getRemainingBlocks().remove(ModBlocks.JUNGLE_HEAD);
 
         forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
+        forEach(block -> getName(block).contains("double"), block -> axisBlock((RotatedPillarBlock) block, modLoc("block/double_logs/" + getName(block)), modLoc("block/double_logs/" + getName(block) + "_top")));
         forEach(block -> block instanceof PostBlock, this::postBlock);
         forEach(block -> block instanceof CutPostBlock, this::cutPostBlock);
         take(block -> paneBlock((IronBarsBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);

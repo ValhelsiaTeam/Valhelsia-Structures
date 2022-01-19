@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "side": "valhelsia_structures:block/double_logs/double_stripped_acacia_logs",
+    "end": "valhelsia_structures:block/double_logs/double_stripped_acacia_logs_top"
+  }
+}

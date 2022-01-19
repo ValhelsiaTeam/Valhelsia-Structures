@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
@@ -85,8 +86,21 @@ public class ModRecipeProvider extends RecipeProvider {
             ShapedRecipeBuilder.shaped(blockRegistryObject.get()).pattern("# #").pattern("# #").pattern(" # ").define('#', block).group("big_jar").unlockedBy("has_item", has(block)).save(consumer);
         });
 
+        this.addSimple2x2Recipe(ModBlocks.DOUBLE_OAK_LOGS.get(), ModBlocks.OAK_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.DOUBLE_SPRUCE_LOGS.get(), ModBlocks.SPRUCE_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.DOUBLE_BIRCH_LOGS.get(), ModBlocks.BIRCH_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.DOUBLE_JUNGLE_LOGS.get(), ModBlocks.JUNGLE_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.DOUBLE_ACACIA_LOGS.get(), ModBlocks.ACACIA_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.DOUBLE_DARK_OAK_LOGS.get(), ModBlocks.DARK_OAK_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.DOUBLE_CRIMSON_LOGS.get(), ModBlocks.CRIMSON_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.DOUBLE_WARPED_LOGS.get(), ModBlocks.WARPED_POST.get(), consumer);
+
         //Smelting Recipes
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.GLAZED_JAR.get()), ModBlocks.CRACKED_GLAZED_JAR.get(), 0.1F, 200).unlockedBy("has_item", has(ModBlocks.GLAZED_JAR.get())).save(consumer, "valhelsia_structures:smelting/cracked_glazed_jar");
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.BIG_GLAZED_JAR.get()), ModBlocks.CRACKED_BIG_GLAZED_JAR.get(), 0.1F, 200).unlockedBy("has_item", has(ModBlocks.BIG_GLAZED_JAR.get())).save(consumer, "valhelsia_structures:smelting/cracked_big_glazed_jar");
+    }
+
+    private void addSimple2x2Recipe(ItemLike result, ItemLike item, @Nonnull Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(result).pattern("##").pattern("##").define('#', item).unlockedBy("has_item", has(item)).save(consumer);
     }
 }
