@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "valhelsia_structures:block/unlit_soul_lantern"
+    },
+    "hanging=true": {
+      "model": "valhelsia_structures:block/unlit_soul_lantern_hanging"
+    }
+  }
+}

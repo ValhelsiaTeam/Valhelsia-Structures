@@ -110,6 +110,8 @@ public class ModBlocks {
     public static final RegistryObject<DungeonDoorLeafBlock> DUNGEON_DOOR_LEAF = HELPER.registerNoItem("dungeon_door_leaf", new DungeonDoorLeafBlock(Block.Properties.of(Material.METAL).strength(50.0F, 100.0F).requiresCorrectToolForDrops().noOcclusion().lootFrom(ModBlocks.DUNGEON_DOOR)));
     public static final RegistryObject<BonePileBlock> BONE_PILE = HELPER.register("bone_pile", new BonePileBlock(Block.Properties.copy(Blocks.BONE_BLOCK).noOcclusion()), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<Block> BONE_PILE_BLOCK = HELPER.register("bone_pile_block", new Block(Block.Properties.copy(Blocks.BONE_BLOCK)));
+    public static final RegistryObject<UnlitLanternBlock> UNLIT_LANTERN = HELPER.register("unlit_lantern", new UnlitLanternBlock(() -> Blocks.LANTERN, Block.Properties.copy(Blocks.LANTERN).lightLevel(value -> 0)), ValhelsiaRenderType.CUTOUT);
+    public static final RegistryObject<UnlitLanternBlock> UNLIT_SOUL_LANTERN = HELPER.register("unlit_soul_lantern", new UnlitLanternBlock(() -> Blocks.SOUL_LANTERN, Block.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(value -> 0)), ValhelsiaRenderType.CUTOUT);
 
     // Workarounds for structures:
 

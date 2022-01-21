@@ -51,7 +51,9 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
         );
 
         takeBlockItem(this::simpleModel,
-                ModBlocks.DUNGEON_DOOR
+                ModBlocks.DUNGEON_DOOR,
+                ModBlocks.UNLIT_LANTERN,
+                ModBlocks.UNLIT_SOUL_LANTERN
         );
 
         forEachBlockItem(this::withParent);

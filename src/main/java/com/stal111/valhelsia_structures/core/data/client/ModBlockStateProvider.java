@@ -64,6 +64,8 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         forEach(block -> block instanceof BigJarTopBlock, block -> simpleBlock(block, getExistingModel(modLoc("block/big_jar_top"))));
         take(block -> simpleBlock(block, getExistingModel(modLoc("block/explorers_tent"))), ModBlocks.EXPLORERS_TENT);
 
+        forEach(block -> block instanceof LanternBlock, this::lanternBlock);
+
         forEach(this::simpleBlock);
     }
 
@@ -157,7 +159,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
     }
 
     private void torchBlock(Block block) {
-        torchBlock(block, modLoc("blocks/" + this.getName(block)));
+        torchBlock(block, modLoc("block/" + this.getName(block)));
     }
 
     private void torchBlock(Block block, ResourceLocation texture) {
@@ -192,5 +194,14 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         getVariantBuilder(block).partialState().modelForState().modelFile(model).rotationX(90).addModel();
 
         this.models().withExistingParent(name + "_inventory", this.mcLoc("block/pressure_plate_up")).texture("texture", modLoc("block/" + name));
+    }
+
+    private void lanternBlock(Block block) {
+        ModelFile model = models().withExistingParent(getName(block), mcLoc("template_lantern")).texture("lantern", modLoc("block/" + this.getName(block)));
+        ModelFile hangingModel = models().withExistingParent(getName(block) + "_hanging", mcLoc("template_hanging_lantern")).texture("lantern", modLoc("block/" + this.getName(block)));
+
+        getVariantBuilder(block)
+                .partialState().with(BlockStateProperties.HANGING, false).modelForState().modelFile(model).addModel()
+                .partialState().with(BlockStateProperties.HANGING, true).modelForState().modelFile(hangingModel).addModel();
     }
 }

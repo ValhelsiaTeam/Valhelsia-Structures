@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.core.init.other;
 import com.stal111.valhelsia_structures.common.block.BrazierBlock;
 import com.stal111.valhelsia_structures.common.block.DousedTorchBlock;
 import com.stal111.valhelsia_structures.common.block.DousedWallTorchBlock;
+import com.stal111.valhelsia_structures.common.block.UnlitLanternBlock;
 import com.stal111.valhelsia_structures.utils.TorchTransformationHandler;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,7 +14,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.valhelsia.valhelsia_core.common.helper.FlintAndSteelHelper;
 
 import java.util.Objects;
-import java.util.Random;
 
 /**
  * Flint And Steel Registry <br>
@@ -29,8 +29,8 @@ public class FlintAndSteelRegistry {
         FlintAndSteelHelper.addUse(
                 state -> state.getBlock() instanceof BrazierBlock && !state.getValue(BlockStateProperties.LIT) && !state.getValue(BlockStateProperties.WATERLOGGED),
                 state -> state.getBlock().defaultBlockState(),
-                (playerEntity, world, blockPos) -> world.playSound(playerEntity, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F),
-                world -> InteractionResult.sidedSuccess(world.isClientSide())
+                (player, level, blockPos) -> level.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F),
+                level -> InteractionResult.sidedSuccess(level.isClientSide())
         );
 
         FlintAndSteelHelper.addUse(
@@ -42,8 +42,15 @@ public class FlintAndSteelRegistry {
                     }
                     return newState;
                 },
-                (playerEntity, world, blockPos) -> world.playSound(playerEntity, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, new Random().nextFloat() * 0.4F + 0.8F),
-                world -> InteractionResult.sidedSuccess(world.isClientSide())
+                (player, level, blockPos) -> level.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F),
+                level -> InteractionResult.sidedSuccess(level.isClientSide())
+        );
+
+        FlintAndSteelHelper.addUse(
+                state -> state.getBlock() instanceof UnlitLanternBlock,
+                state -> ((UnlitLanternBlock) state.getBlock()).getLitLantern().defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, state.getValue(BlockStateProperties.WATERLOGGED)),
+                (player, level, blockPos) -> level.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F),
+                level -> InteractionResult.sidedSuccess(level.isClientSide())
         );
     }
 }
