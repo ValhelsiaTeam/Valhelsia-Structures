@@ -14,11 +14,12 @@
         {
           "condition": "minecraft:match_tool",
           "predicate": {
-            "tag": "forge:shears"
+            "items": [
+              "minecraft:shears"
+            ]
           }
         }
-      ],
-      "functions": []
+      ]
     }
   ]
 }

@@ -62,7 +62,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.FENCE_GATES).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get());
         this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get());
         this.tag(BlockTags.FLOWERS).add(ModBlocks.HIBISCUS.get());
-        this.tag(Tags.Blocks.DIRT).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get(), ModBlocks.COARSE_DIRT.get());
+        this.tag(BlockTags.DIRT).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get(), ModBlocks.COARSE_DIRT.get());
 
         this.tag(BlockTags.PIGLIN_REPELLENTS).add(ModBlocks.SOUL_BRAZIER.get());
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(
