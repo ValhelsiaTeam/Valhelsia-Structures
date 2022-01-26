@@ -17,7 +17,7 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.entity.JarBlockEntity
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.1-0.1.1
  * @since 2020-11-13
  */
 public class JarBlockEntity extends BlockEntity implements Clearable {
@@ -29,11 +29,11 @@ public class JarBlockEntity extends BlockEntity implements Clearable {
     }
 
     public boolean hasPlant() {
-        return !getPlant().isEmpty();
+        return !this.getPlant().isEmpty();
     }
 
     public ItemStack getPlant() {
-        return plant;
+        return this.plant;
     }
 
     public void setPlant(ItemStack plant) {
@@ -65,7 +65,7 @@ public class JarBlockEntity extends BlockEntity implements Clearable {
     @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
-        return this.save(new CompoundTag());
+        return this.saveWithoutMetadata();
     }
 
     @Override

@@ -58,6 +58,6 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
     @Nonnull
     @Override
     public CompoundTag getUpdateTag() {
-        return this.save(new CompoundTag());
+        return this.saveWithoutMetadata();
     }
 }
