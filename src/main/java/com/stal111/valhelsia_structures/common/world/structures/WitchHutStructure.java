@@ -6,6 +6,7 @@ import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.core.init.ModStructureFeatures;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
@@ -25,7 +26,7 @@ import java.util.function.Predicate;
  * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.WitchHutStructure
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.1-0.1.1
  * @since 2021-04-23
  */
 public class WitchHutStructure extends AbstractValhelsiaStructure {
@@ -68,16 +69,15 @@ public class WitchHutStructure extends AbstractValhelsiaStructure {
         return ModStructureFeatures.WITCH_HUT;
     }
 
-    // TODO Fix Entity Spawning
-//    @Override
-//    public List<MobSpawnSettings.SpawnerData> getDefaultSpawnList() {
-//        return MONSTER_SPAWN_LIST;
-//    }
-//
-//    @Override
-//    public List<MobSpawnSettings.SpawnerData> getDefaultCreatureSpawnList() {
-//        return CREATURE_SPAWN_LIST;
-//    }
+    @Override
+    public List<MobSpawnSettings.SpawnerData> getDefaultSpawnList(MobCategory category) {
+        if (category == MobCategory.MONSTER) {
+            return MONSTER_SPAWN_LIST;
+        } else if (category == MobCategory.CREATURE) {
+            return CREATURE_SPAWN_LIST;
+        }
+        return super.getDefaultSpawnList(category);
+    }
 
     @Override
     public int getMargin() {
