@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.common.block;
 
+import com.mojang.datafixers.util.Pair;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -27,13 +28,14 @@ import net.valhelsia.valhelsia_core.common.helper.VoxelShapeHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.EnumMap;
 
 /**
  * Dungeon Door Leaf Block <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.DungeonDoorLeafBlock
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.1
+ * @version 1.18.1-0.1.1
  * @since 2021-01-22
  */
 public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBlock {
@@ -42,12 +44,25 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
     public static final BooleanProperty MIRRORED = ModBlockStateProperties.MIRRORED;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 12.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape MIRRORED_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 4.0D);
+    private static final VoxelShape SHAPE = Block.box(12.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    private static final VoxelShape MIRRORED_SHAPE = Block.box(0.0D, 0.0D, 0.0D, 4.0D, 16.0D, 16.0D);
+
+    private final EnumMap<Direction, Pair<VoxelShape, VoxelShape>> shapesCache;
 
     public DungeonDoorLeafBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(MIRRORED, false).setValue(WATERLOGGED, false));
+        this.shapesCache = this.buildShapes();
+    }
+
+    private EnumMap<Direction, Pair<VoxelShape, VoxelShape>> buildShapes() {
+        EnumMap<Direction, Pair<VoxelShape, VoxelShape>> map = new EnumMap<>(Direction.class);
+
+        VoxelShapeHelper.getHorizontalRotatedShapes(SHAPE).forEach((direction, voxelShape) -> {
+            map.put(direction, Pair.of(voxelShape, VoxelShapeHelper.rotateShapeHorizontal(MIRRORED_SHAPE, direction)));
+        });
+
+        return map;
     }
 
     @Nonnull
@@ -59,8 +74,9 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
-        VoxelShape shape = state.getValue(MIRRORED) ? MIRRORED_SHAPE : SHAPE;
-        return VoxelShapeHelper.rotateShape(shape, state.getValue(FACING));
+        Pair<VoxelShape, VoxelShape> pair = this.shapesCache.get(state.getValue(FACING));
+
+        return state.getValue(MIRRORED) ? pair.getSecond() : pair.getFirst();
     }
 
     @Nonnull

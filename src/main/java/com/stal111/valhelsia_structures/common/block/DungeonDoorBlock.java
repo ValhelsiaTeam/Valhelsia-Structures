@@ -1,10 +1,11 @@
 package com.stal111.valhelsia_structures.common.block;
 
+import com.mojang.datafixers.util.Pair;
+import com.stal111.valhelsia_structures.common.block.entity.DungeonDoorBlockEntity;
 import com.stal111.valhelsia_structures.common.block.properties.DungeonDoorPart;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
-import com.stal111.valhelsia_structures.core.init.ModBlocks;
-import com.stal111.valhelsia_structures.common.block.entity.DungeonDoorBlockEntity;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -39,6 +40,7 @@ import net.valhelsia.valhelsia_core.common.helper.VoxelShapeHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -48,7 +50,7 @@ import java.util.Random;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.DungeonDoorBlock
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.1
+ * @version 1.18.1-0.1.1
  * @since 2021-01-13
  */
 public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, EntityBlock {
@@ -58,12 +60,27 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    protected static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D);
-    protected static final VoxelShape SHAPE_OPEN = Block.box(8.0D, 0.0D, 12.0D, 16.0D, 16.0D, 16.0D);
+    private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 12.0D);
+    private static final VoxelShape OPEN_SHAPE = Block.box(12.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
+    private static final VoxelShape OPEN_SHAPE_MIRRORED = Block.box(0.0D, 0.0D, 0.0D, 4.0D, 16.0D, 8.0D);
+
+    private final Map<Direction, VoxelShape> shapesCache = VoxelShapeHelper.getHorizontalRotatedShapes(SHAPE);
+    private final EnumMap<Direction, Pair<VoxelShape, VoxelShape>> openShapesCache;
 
     public DungeonDoorBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(PART, DungeonDoorPart.MIDDLE_1).setValue(OPEN, false).setValue(WATERLOGGED, false));
+        this.openShapesCache = this.buildOpenShapes();
+    }
+
+    private EnumMap<Direction, Pair<VoxelShape, VoxelShape>> buildOpenShapes() {
+        EnumMap<Direction, Pair<VoxelShape, VoxelShape>> map = new EnumMap<>(Direction.class);
+
+        VoxelShapeHelper.getHorizontalRotatedShapes(OPEN_SHAPE).forEach((direction, shape) -> {
+            map.put(direction, Pair.of(shape, VoxelShapeHelper.rotateShapeHorizontal(OPEN_SHAPE_MIRRORED, direction)));
+        });
+
+        return map;
     }
 
     @Nullable
@@ -75,13 +92,19 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
     @Nonnull
     @Override
     public VoxelShape getShape(BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+        Direction direction = state.getValue(FACING);
+        DungeonDoorPart part = state.getValue(PART);
         boolean open = state.getValue(OPEN);
-        VoxelShape shape = open ? SHAPE_OPEN : SHAPE;
 
-        if (open && state.getValue(PART).isRight()) {
-            shape = VoxelShapeHelper.add(0.0D, 0.0D, -12.0D, 0.0D, 0.0D, -12.0D, shape);
+        if (open && part.isMiddle()) {
+            return Shapes.empty();
         }
-        return open && state.getValue(PART).isMiddle() ? Shapes.empty() : VoxelShapeHelper.rotateShape(shape, state.getValue(FACING));
+
+        if (open) {
+            return part.isRight() ? this.openShapesCache.get(direction).getSecond() : this.openShapesCache.get(direction).getFirst();
+        }
+
+        return this.shapesCache.get(direction);
     }
 
     @Nonnull
