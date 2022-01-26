@@ -27,6 +27,7 @@ public class CommonConfig {
     public final ForgeConfigSpec.IntValue flatnessDelta;
     public final ForgeConfigSpec.ConfigValue<List<? extends String>> blacklistedDimensions;
     public final ForgeConfigSpec.ConfigValue<List<? extends String>> blacklistedBiomes;
+    public final ForgeConfigSpec.BooleanValue disableDousedTorch;
 
     public CommonConfig(ForgeConfigSpec.Builder builder) {
         builder.push("structures");
@@ -49,6 +50,12 @@ public class CommonConfig {
             structureConfigEntry.configuredBlacklistedDimensions = builder.comment("Dimensions the structure can NOT generate in").defineList(structure.getName() + ".blacklisted_dimensions", structureConfigEntry.getDefaultBlacklistedDimensions(), this::validateDimension);
             structureConfigEntry.configuredBlacklistedBiomes = builder.comment("Biomes the structure can NOT generate in").defineList(structure.getName() + ".blacklisted_biomes", structureConfigEntry.getDefaultBlacklistedBiomes(), this::validateBiome);
         }
+
+        builder.pop();
+
+        builder.push("blocks");
+
+        this.disableDousedTorch = builder.comment("Enable/Disable the Doused Torch Feature. If disabled Water will no longer transform normal Torches into Doused Torches. \\n Doused Torches will however still generate in structures. [default: false]").define("doused_torch.disable", false);
 
         builder.pop();
     }
