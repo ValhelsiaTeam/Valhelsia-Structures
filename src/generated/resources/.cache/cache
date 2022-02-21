@@ -439,7 +439,6 @@ b4132db05e7f89673d0e8ff6f8f1bb1febbb2ec5 assets/valhelsia_structures/models/item
 6c693e66ace6785090a0e7ef3bf5334313d597b7 assets/valhelsia_structures/models/item/yellow_glazed_jar.json
 f728166bc969083b70cbfe252a28596aa706e2f7 data/forge/loot_modifiers/global_loot_modifiers.json
 765f7dae58a1e8648c97f591c9e92d9dc8e6da1e data/forge/tags/blocks/braziers.json
-8b4abbaab689e3a39f61e6897ed080014988b447 data/forge/tags/blocks/dirt.json
 ed85f4b2bba699de468930e71770f58ce7d0f641 data/forge/tags/blocks/fence_gates/wooden.json
 62a5f269cb94b47e7d1a52f517b264f37bf402d4 data/forge/tags/blocks/fences/wooden.json
 b3eaabfb8bfaa648304ce3d38bb9cb544081c543 data/forge/tags/blocks/glass.json
@@ -458,6 +457,7 @@ f7b22fcb44f97e178586ff36dfa14c68e4edbc5f data/minecraft/recipes/bone_pile_block_
 d3be7c7d19f757d146dbb5a63479f08cd26ea8ab data/minecraft/recipes/bone_pile_from_bone_pile_block.json
 72d86fee2fe827a7962168f416dee788d9895b7c data/minecraft/tags/blocks/bamboo_plantable_on.json
 8f26a1c7b2ba881f3c98f5a0e990313aa35f16bc data/minecraft/tags/blocks/climbable.json
+8b4abbaab689e3a39f61e6897ed080014988b447 data/minecraft/tags/blocks/dirt.json
 8b4abbaab689e3a39f61e6897ed080014988b447 data/minecraft/tags/blocks/enderman_holdable.json
 ed85f4b2bba699de468930e71770f58ce7d0f641 data/minecraft/tags/blocks/fence_gates.json
 d31c613350cfbcc820fdc54b89b932d957202af2 data/minecraft/tags/blocks/flowers.json
