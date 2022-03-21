@@ -102,6 +102,6 @@
     "gui.valhelsia_structures.config.invalid_biome_category": "List contains invalid Biome Category:",
     "gui.valhelsia_structures.config.invalid_blacklisted_biome": "List contains invalid Biome:",
     "comment.filled_maps": "---Filled Maps---",
-    "filled_map.valhelsia_structures:spawner_dungeon": "Spawner Dungeon Explorer Map",
-    "filled_map.valhelsia_structures:castle": "Castle Explorer Map"
+    "filled_map.valhelsia_structures.spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures.castle": "Castle Explorer Map"
 }
