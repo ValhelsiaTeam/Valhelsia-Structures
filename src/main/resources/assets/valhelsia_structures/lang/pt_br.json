@@ -102,6 +102,6 @@
     "gui.valhelsia_structures.config.invalid_biome_category": "Lista contém categoria de bioma inválida:",
     "gui.valhelsia_structures.config.invalid_blacklisted_biome": "A lista contém bioma inválido:",
     "comment.filled_maps": "---Filled Maps---",
-    "filled_map.valhelsia_structures:spawner_dungeon": "Mapa do Explorador de Masmorras com Invocadores",
-    "filled_map.valhelsia_structures:castle": "Mapa do Explorador de Castelos"
+    "filled_map.valhelsia_structures.spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures.castle": "Castle Explorer Map"
 }
