@@ -41,7 +41,7 @@ import java.util.Objects;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.JarBlock
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.1.0
  * @since 2020-11-13
  */
 public class JarBlock extends Block implements SimpleWaterloggedBlock, EntityBlock {
@@ -111,9 +111,15 @@ public class JarBlock extends Block implements SimpleWaterloggedBlock, EntityBlo
 
     private boolean canBePotted(Block block) {
         ResourceLocation registryName = Objects.requireNonNull(block.getRegistryName());
-        boolean flag = BlockTags.FLOWER_POTS.getValues().contains(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(registryName.getNamespace(), "potted_" + registryName.getPath())));
+        ResourceLocation pottedName = new ResourceLocation(registryName.getNamespace(), "potted_" + registryName.getPath());
 
-        return flag && !ModTags.Items.JAR_BLACKLISTED.contains(block.asItem());
+        if (!ForgeRegistries.BLOCKS.containsKey(pottedName)) {
+            return false;
+        }
+
+        boolean flag = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(pottedName)).builtInRegistryHolder().is(BlockTags.FLOWER_POTS);
+
+        return flag && !block.asItem().builtInRegistryHolder().is(ModTags.Items.JAR_BLACKLISTED);
     }
 
     @Nullable

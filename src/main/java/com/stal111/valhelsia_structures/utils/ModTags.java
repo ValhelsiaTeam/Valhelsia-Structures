@@ -1,12 +1,16 @@
 package com.stal111.valhelsia_structures.utils;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
 
 /**
  * Mod Tags <br>
@@ -18,44 +22,76 @@ import net.minecraft.world.level.block.Block;
 public class ModTags {
 
     public static class Blocks {
-        public static final Tag.Named<Block> BRAZIERS = forgeTag("braziers");
-        public static final Tag.Named<Block> POSTS = modTag("posts");
-        public static final Tag.Named<Block> CUT_POSTS = modTag("cut_posts");
-        public static final Tag.Named<Block> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
-        public static final Tag.Named<Block> COLORED_JARS = modTag("colored_jars");
-        public static final Tag.Named<Block> JARS = modTag("jars");
-        public static final Tag.Named<Block> BIG_COLORED_JARS = modTag("big_colored_jars");
-        public static final Tag.Named<Block> BIG_JARS = modTag("big_jars");
-        public static final Tag.Named<Block> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
+        public static final TagKey<Block> BRAZIERS = forgeTag("braziers");
+        public static final TagKey<Block> POSTS = modTag("posts");
+        public static final TagKey<Block> CUT_POSTS = modTag("cut_posts");
+        public static final TagKey<Block> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
+        public static final TagKey<Block> COLORED_JARS = modTag("colored_jars");
+        public static final TagKey<Block> JARS = modTag("jars");
+        public static final TagKey<Block> BIG_COLORED_JARS = modTag("big_colored_jars");
+        public static final TagKey<Block> BIG_JARS = modTag("big_jars");
+        public static final TagKey<Block> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
 
-        private static Tag.Named<Block> forgeTag(String name) {
-            return BlockTags.bind(new ResourceLocation("forge", name).toString());
+        private static TagKey<Block> forgeTag(String name) {
+            return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation("forge", name));
         }
 
-        private static Tag.Named<Block> modTag(String name) {
-            return BlockTags.bind(new ResourceLocation(ValhelsiaStructures.MOD_ID, name).toString());
+        private static TagKey<Block> modTag(String name) {
+            return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
         }
     }
 
     public static class Items {
-        public static final Tag.Named<Item> POSTS = modTag("posts");
-        public static final Tag.Named<Item> CUT_POSTS = modTag("cut_posts");
-        public static final Tag.Named<Item> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
-        public static final Tag.Named<Item> COLORED_JARS = modTag("colored_jars");
-        public static final Tag.Named<Item> JARS = modTag("jars");
-        public static final Tag.Named<Item> JAR_BLACKLISTED = modTag("jar_blacklisted");
-        public static final Tag.Named<Item> BIG_COLORED_JARS = modTag("big_colored_jars");
-        public static final Tag.Named<Item> BIG_JARS = modTag("big_jars");
-        public static final Tag.Named<Item> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
+        public static final TagKey<Item> POSTS = modTag("posts");
+        public static final TagKey<Item> CUT_POSTS = modTag("cut_posts");
+        public static final TagKey<Item> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
+        public static final TagKey<Item> COLORED_JARS = modTag("colored_jars");
+        public static final TagKey<Item> JARS = modTag("jars");
+        public static final TagKey<Item> JAR_BLACKLISTED = modTag("jar_blacklisted");
+        public static final TagKey<Item> BIG_COLORED_JARS = modTag("big_colored_jars");
+        public static final TagKey<Item> BIG_JARS = modTag("big_jars");
+        public static final TagKey<Item> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
 
-        public static final Tag.Named<Item> AXE_CRAFTING_BLACKLISTED = modTag( "axe_crafting_blacklisted");
+        public static final TagKey<Item> AXE_CRAFTING_BLACKLISTED = modTag( "axe_crafting_blacklisted");
 
-        private static Tag.Named<Item> forgeTag(String name) {
-            return ItemTags.bind(new ResourceLocation("forge", name).toString());
+        private static TagKey<Item> forgeTag(String name) {
+            return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("forge", name));
         }
 
-        private static Tag.Named<Item> modTag(String name) {
-            return ItemTags.bind(new ResourceLocation(ValhelsiaStructures.MOD_ID, name).toString());
+        private static TagKey<Item> modTag(String name) {
+            return TagKey.create(Registry.ITEM_REGISTRY,new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
+        }
+    }
+
+    public static class ConfiguredStructures {
+        public static final TagKey<ConfiguredStructureFeature<?, ?>> ON_SPAWNER_DUNGEON_EXPLORER_MAPS = modTag("on_spawner_dungeon_explorer_maps");
+        public static final TagKey<ConfiguredStructureFeature<?, ?>> ON_CASTLE_EXPLORER_MAPS = modTag("on_castle_explorer_maps");
+
+        private static TagKey<ConfiguredStructureFeature<?, ?>> modTag(String name) {
+            return TagKey.create(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
+        }
+    }
+
+    public static class Biomes {
+        public static final TagKey<Biome> IS_PLAINS = forgeTag("is_plains");
+        public static final TagKey<Biome> IS_DESERT = forgeTag("is_desert");
+
+        public static final TagKey<Biome> HAS_CASTLE = modTag("has_structure/castle");
+        public static final TagKey<Biome> HAS_CASTLE_RUIN = modTag("has_structure/castle_ruin");
+        public static final TagKey<Biome> HAS_DESERT_HOUSE = modTag("has_structure/has_desert_house");
+        public static final TagKey<Biome> HAS_FORGE = modTag("has_structure/has_forge");
+        public static final TagKey<Biome> HAS_PLAYER_HOUSE = modTag("has_structure/player_house");
+        public static final TagKey<Biome> HAS_SPAWNER_DUNGEON = modTag("has_structure/spawner_dungeon");
+        public static final TagKey<Biome> HAS_TOWER_RUIN = modTag("has_structure/tower_ruin");
+        public static final TagKey<Biome> HAS_WITCH_HUT = modTag("has_structure/witch_hut");
+        public static final TagKey<Biome> HAS_BIG_TREE = modTag("has_structure/big_tree");
+
+        private static TagKey<Biome> forgeTag(String name) {
+            return TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation("forge", name));
+        }
+
+        private static TagKey<Biome> modTag(String name) {
+            return TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
         }
     }
 }

@@ -2,11 +2,11 @@ package com.stal111.valhelsia_structures.common.world.structures;
 
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
-import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.core.init.ModStructureFeatures;
-import net.minecraft.world.level.biome.Biome;
+import com.stal111.valhelsia_structures.utils.ConfigurableValue;
+import com.stal111.valhelsia_structures.utils.ModTags;
+import net.minecraft.core.Holder;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
@@ -21,7 +21,7 @@ import java.util.function.Predicate;
  * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.CastleRuinStructure
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.1.0
  * @since 2020-05-27
  */
 
@@ -31,11 +31,7 @@ public class CastleRuinStructure extends AbstractValhelsiaStructure {
         super(villageConfigCodec, "castle_ruin",
                 locationCheckPredicate,
                 pieceCreationPredicate,
-                new StructureConfigEntry(0.6D, 35, 8,
-                        Biome.BiomeCategory.PLAINS.getName(),
-                        Biome.BiomeCategory.FOREST.getName(),
-                        Biome.BiomeCategory.TAIGA.getName()
-                ));
+                new StructureSettings(ConfigurableValue.of(0.6D), ConfigurableValue.of(33), ConfigurableValue.of(7), ModTags.Biomes.HAS_CASTLE_RUIN));
     }
 
     public static CastleRuinStructure create(Codec<JigsawConfiguration> codec) {
@@ -62,7 +58,7 @@ public class CastleRuinStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> getStructureFeature() {
+    public Holder<ConfiguredStructureFeature<?, ?>> getStructureFeature() {
         return ModStructureFeatures.CASTLE_RUIN;
     }
 }

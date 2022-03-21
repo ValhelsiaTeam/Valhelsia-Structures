@@ -1,68 +1,64 @@
 package com.stal111.valhelsia_structures.utils;
 
+import com.mojang.datafixers.util.Pair;
+import com.stal111.valhelsia_structures.core.config.ModConfig;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.StructureFeatureConfiguration;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
+import net.minecraft.world.level.levelgen.structure.StructureSet;
+import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Structure Utils <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.utils.StructureUtils
  *
+ * Some utilities needed for structure placement.
+ *
  * @author Valhelsia Team
- * @version 1.17.1 - 0.1.0
+ * @version 1.18.2 - 0.1.0
  */
 public class StructureUtils {
 
     /**
-     * Checks if other Structures are in the area around the given Structure.
+     * Checks whether any of the specified structures is near the given position.
      *
-     * @param structure  the structure to check the area around.
-     * @param generator  the Chunk Generator to get the Separation Settings from.
-     * @param seed       the Seed to use.
-     * @param pos        The ChunkPos of the structure.
-     * @param structures Structures to check for.
-     * @return True if there are no structures from the list around the given structure.
+     * @param generator  the chunk generator
+     * @param seed       the seed to use
+     * @param pos        the position to check around
+     * @param structures list of structures that should be checked for
+     * @return <code>true</code> if any of the specified structures is near the given position
      */
-    public static boolean checkForOtherStructures(StructureFeature<?> structure, ChunkGenerator generator, long seed, ChunkPos pos, List<StructureFeature<?>> structures) {
-        for (StructureFeature<?> structure1 : structures) {
-            StructureFeatureConfiguration featureConfiguration = generator.getSettings().getConfig(structure1);
+    public static boolean isStructureInDistance(ChunkGenerator generator, long seed, ChunkPos pos, List<ResourceKey<StructureSet>> structures) {
+        if (ModConfig.COMMON.minStructureDistance.get() == 0) {
+            return false;
+        }
 
-            if (featureConfiguration == null || structure == structure1) {
-                continue;
-            }
-
-            for (int x = pos.x - 5; x <= pos.x + 5; x++) {
-                for (int z = pos.z - 5; z <= pos.z + 5; z++) {
-                    ChunkPos structurePos = structure1.getPotentialFeatureChunk(featureConfiguration, seed, x, z);
-
-                    if (x == structurePos.x && z == structurePos.z) {
-                        return false;
-                    }
-                }
+        for (ResourceKey<StructureSet> structure : structures) {
+            if (generator.hasFeatureChunkInRange(structure, seed, pos.x, pos.z, ModConfig.COMMON.minStructureDistance.get())) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
-    public static List<String> getAllBiomesForCategory(Biome.BiomeCategory... categories) {
-        List<String> biomes = new ArrayList<>();
+    /**
+     * Checks whether the height difference of the four corners of the structure is smaller than the flatness delta set in the {@link com.stal111.valhelsia_structures.core.config.CommonConfig}.
+     *
+     * @param context the piece generator context
+     * @param size    the size of the structure
+     * @return <code>true</code> if the surface is flat at the position
+     */
+    public static boolean isSurfaceFlat(PieceGeneratorSupplier.Context<JigsawConfiguration> context, Pair<Integer, Integer> size) {
+        ChunkPos pos = context.chunkPos();
+        int[] cornerHeights = context.getCornerHeights(pos.getMiddleBlockX(), size.getFirst(), pos.getMiddleBlockZ(), size.getSecond());
 
-        for (Biome biome : ForgeRegistries.BIOMES.getValues()) {
-            for (Biome.BiomeCategory category : categories) {
-                if (biome.getBiomeCategory() == category) {
-                    biomes.add(Objects.requireNonNull(biome.getRegistryName()).toString());
-                }
-            }
-        }
+        int minHeight = Math.min(Math.min(cornerHeights[0], cornerHeights[1]), Math.min(cornerHeights[2], cornerHeights[3]));
+        int maxHeight = Math.max(Math.max(cornerHeights[0], cornerHeights[1]), Math.max(cornerHeights[2], cornerHeights[3]));
 
-        return biomes;
+        return Math.abs(maxHeight - minHeight) <= ModConfig.COMMON.flatnessDelta.get();
     }
 }

@@ -9,7 +9,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -29,7 +28,7 @@ import javax.annotation.Nullable;
  * form. The axe loses one durability per craft but is returned.
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.1.0
  * @since 2020-06-01
  */
 public class AxeCraftingRecipe extends CustomRecipe {
@@ -51,8 +50,9 @@ public class AxeCraftingRecipe extends CustomRecipe {
         ItemStack stack = null;
 
         for (int slot = 0; slot < inv.getContainerSize(); slot++) {
-            Item item = inv.getItem(slot).getItem();
-            if (item instanceof AxeItem && !ModTags.Items.AXE_CRAFTING_BLACKLISTED.contains(item)) {
+            ItemStack item = inv.getItem(slot);
+
+            if (item.getItem() instanceof AxeItem && !item.is(ModTags.Items.AXE_CRAFTING_BLACKLISTED)) {
                 axeSlot = slot;
                 break;
             }
