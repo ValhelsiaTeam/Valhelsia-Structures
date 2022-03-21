@@ -102,6 +102,6 @@
     "gui.valhelsia_structures.config.invalid_biome_category": "목록에 잘못된 Biome 카테고리가 있습니다:",
     "gui.valhelsia_structures.config.invalid_blacklisted_biome": "목록에 잘못된 생물 군계가 포함되어 있습니다.",
     "comment.filled_maps": "---Filled Maps---",
-    "filled_map.valhelsia_structures:spawner_dungeon": "스포너 던전 탐험가 지도",
-    "filled_map.valhelsia_structures:castle": "성 탐험가 지도"
+    "filled_map.valhelsia_structures.spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures.castle": "Castle Explorer Map"
 }
