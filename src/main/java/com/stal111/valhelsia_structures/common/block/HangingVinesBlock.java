@@ -24,7 +24,7 @@ import java.util.Random;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.HangingVinesBlock
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.1.0
  * @since 2020-10-16
  */
 public class HangingVinesBlock extends GrowingPlantHeadBlock {
@@ -42,10 +42,11 @@ public class HangingVinesBlock extends GrowingPlantHeadBlock {
     public boolean canSurvive(@Nonnull BlockState state, LevelReader level, BlockPos pos) {
         BlockPos offsetPos = pos.relative(this.growthDirection.getOpposite());
         BlockState offsetState = level.getBlockState(offsetPos);
+
         if (!this.canAttachTo(offsetState)) {
             return false;
         }
-        return offsetState.is(this.getHeadBlock()) || offsetState.is(this.getBodyBlock()) || offsetState.isFaceSturdy(level, offsetPos, this.growthDirection) || BlockTags.LEAVES.contains(offsetState.getBlock());
+        return offsetState.is(this.getHeadBlock()) || offsetState.is(this.getBodyBlock()) || offsetState.isFaceSturdy(level, offsetPos, this.growthDirection) || offsetState.is(BlockTags.LEAVES);
     }
 
     @Override

@@ -21,7 +21,7 @@ import java.util.List;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.integration.AxeCraftingRecipeMaker
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.1.0
  * @since 2020.08.12
  */
 public class AxeCraftingRecipeMaker {
@@ -33,7 +33,7 @@ public class AxeCraftingRecipeMaker {
         if (Minecraft.getInstance().level != null) {
             Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING).forEach(craftingRecipe -> {
                 if (craftingRecipe instanceof AxeCraftingRecipe axeRecipe) {
-                    Ingredient axeIngredient = Ingredient.of(ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof AxeItem && !ModTags.Items.AXE_CRAFTING_BLACKLISTED.contains(item)).map(ItemStack::new));
+                    Ingredient axeIngredient = Ingredient.of(ForgeRegistries.ITEMS.getValues().stream().filter(item -> item instanceof AxeItem && !item.builtInRegistryHolder().is(ModTags.Items.AXE_CRAFTING_BLACKLISTED)).map(ItemStack::new));
                     ItemStack output = axeRecipe.getOutput();
                     ResourceLocation id = new ResourceLocation(ValhelsiaStructures.MOD_ID, "jei.axe_crafting." + output.getDescriptionId());
 

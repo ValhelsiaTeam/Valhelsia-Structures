@@ -3,11 +3,9 @@ package com.stal111.valhelsia_structures.core.data;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.data.client.ModBlockStateProvider;
 import com.stal111.valhelsia_structures.core.data.client.ModItemModelProvider;
-import com.stal111.valhelsia_structures.core.data.server.ModBlockTagsProvider;
-import com.stal111.valhelsia_structures.core.data.server.ModItemTagsProvider;
+import com.stal111.valhelsia_structures.core.data.server.*;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModLootModifierProvider;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModLootTableProvider;
-import com.stal111.valhelsia_structures.core.data.server.ModRecipeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,6 +37,8 @@ public class DataGenerators {
             ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(generator, existingFileHelper);
             generator.addProvider(blockTagsProvider);
             generator.addProvider(new ModItemTagsProvider(generator, blockTagsProvider, existingFileHelper));
+            generator.addProvider(new ModStructureTagsProvider(generator, existingFileHelper));
+            generator.addProvider(new ModBiomeTagsProvider(generator, existingFileHelper));
 
             generator.addProvider(new ModLootTableProvider(generator));
             generator.addProvider(new ModRecipeProvider(generator));

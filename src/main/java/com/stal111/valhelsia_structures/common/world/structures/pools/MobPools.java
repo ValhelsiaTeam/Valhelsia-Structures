@@ -3,7 +3,7 @@ package com.stal111.valhelsia_structures.common.world.structures.pools;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.stal111.valhelsia_structures.utils.JigsawHelper;
-import net.minecraft.world.level.levelgen.feature.structures.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 /**
  * Mob Pools <br>

@@ -1,70 +1,44 @@
 package com.stal111.valhelsia_structures.core.config;
 
-import com.stal111.valhelsia_structures.core.init.ModStructures;
-import com.stal111.valhelsia_structures.utils.StructureUtils;
 import com.stal111.valhelsia_structures.common.world.structures.AbstractValhelsiaStructure;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.biome.Biome;
+import com.stal111.valhelsia_structures.common.world.structures.StructureSettings;
+import com.stal111.valhelsia_structures.core.init.ModStructures;
 import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.valhelsia.valhelsia_core.common.world.IValhelsiaStructure;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
 
 /**
  * Common Config <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.config.CommonConfig
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.1.0
  * @since 2021-10-01
  */
 public class CommonConfig {
 
     public final ForgeConfigSpec.IntValue flatnessDelta;
-    public final ForgeConfigSpec.ConfigValue<List<? extends String>> blacklistedDimensions;
-    public final ForgeConfigSpec.ConfigValue<List<? extends String>> blacklistedBiomes;
+    public final ForgeConfigSpec.IntValue minStructureDistance;
+
     public final ForgeConfigSpec.BooleanValue disableDousedTorch;
 
     public CommonConfig(ForgeConfigSpec.Builder builder) {
         builder.push("structures");
         this.flatnessDelta = builder.comment("How flat does terrain need to be for surface structures to spawn? (in blocks) [default: 4]").defineInRange("global.flatness_delta", 4, 0, 64);
-        this.blacklistedDimensions = builder.comment("Dimensions in which Structures can NOT generate in").defineList("global.blacklisted_dimensions", Collections.emptyList(), this::validateDimension);
-        this.blacklistedBiomes = builder.comment("Biomes in which Structures can NOT generate in").defineList("global.blacklisted_biomes", StructureUtils.getAllBiomesForCategory(Biome.BiomeCategory.RIVER, Biome.BiomeCategory.OCEAN, Biome.BiomeCategory.BEACH), this::validateBiome);
+        this.minStructureDistance = builder.comment("How many chunks need to be at least between two structures? (in chunks) [default: 5]").defineInRange("global.min_structure_distance", 5, 0, 64);
 
-        for (IValhelsiaStructure iStructure : ModStructures.MOD_STRUCTURES) {
-            AbstractValhelsiaStructure structure = (AbstractValhelsiaStructure) iStructure.getStructure();
+        for (AbstractValhelsiaStructure structure : ModStructures.MOD_STRUCTURES) {
+            StructureSettings structureSettings = structure.getStructureSettings();
 
-            StructureConfigEntry structureConfigEntry = structure.getStructureConfigEntry();
-
-            structureConfigEntry.generate = builder.comment("Generate? [default: true]").define(structure.getName() + ".generate", true);
-
-            structureConfigEntry.configuredSpawnChance = builder.comment("Spawn Chance [default: " + structureConfigEntry.getDefaultSpawnChance() + "]").defineInRange(structure.getName() + ".spawn_chance", structureConfigEntry.getDefaultSpawnChance(), 0.0, 1.0);
-            structureConfigEntry.configuredSpacing = builder.comment("Spacing (in chunks) [default: " + structureConfigEntry.getDefaultSpacing() + "]").defineInRange(structure.getName() + ".spacing", structureConfigEntry.getDefaultSpacing(), 0, 200);
-            structureConfigEntry.configuredSeparation = builder.comment("Minimum Separation (in chunks) [default: " + structureConfigEntry.getDefaultSeparation() + "]").defineInRange(structure.getName() + ".separation", structureConfigEntry.getDefaultSeparation(), 0, 200);
-
-            structureConfigEntry.configuredBiomeCategories = builder.comment("Biome Categories the structure can generate in \nAllowed Values: " + Arrays.toString(Biome.BiomeCategory.values()).toLowerCase(Locale.ROOT)).defineList(structure.getName() + ".biome_categories", structureConfigEntry.getDefaultBiomeCategories(), o -> o instanceof String);
-            structureConfigEntry.configuredBlacklistedDimensions = builder.comment("Dimensions the structure can NOT generate in").defineList(structure.getName() + ".blacklisted_dimensions", structureConfigEntry.getDefaultBlacklistedDimensions(), this::validateDimension);
-            structureConfigEntry.configuredBlacklistedBiomes = builder.comment("Biomes the structure can NOT generate in").defineList(structure.getName() + ".blacklisted_biomes", structureConfigEntry.getDefaultBlacklistedBiomes(), this::validateBiome);
+            structureSettings.spawnChance().setConfiguredValue(defaultValue -> builder.comment("Spawn Chance [default: " + defaultValue + "]. \n 1.0 = generate the structure always, 0.0 = never generate the structure").defineInRange(structure.getName() + ".spawn_chance", defaultValue, 0.0, 1.0));
+            structureSettings.spacing().setConfiguredValue(defaultValue -> builder.comment("Spacing (in chunks) [default: " + defaultValue + "]").defineInRange(structure.getName() + ".spacing", defaultValue, 0, 200));
+            structureSettings.separation().setConfiguredValue(defaultValue -> builder.comment("Minimum Separation (in chunks) [default: " + defaultValue + "]").defineInRange(structure.getName() + ".separation", defaultValue, 0, 200));
         }
 
         builder.pop();
 
         builder.push("blocks");
 
-        this.disableDousedTorch = builder.comment("Enable/Disable the Doused Torch Feature. If disabled Water will no longer transform normal Torches into Doused Torches. \\n Doused Torches will however still generate in structures. [default: false]").define("doused_torch.disable", false);
+        this.disableDousedTorch = builder.comment("Enable/Disable the Doused Torch Feature. If disabled Water will no longer transform normal Torches into Doused Torches. \n Doused Torches will however still generate in structures. [default: false]").define("doused_torch.disable", false);
 
         builder.pop();
-    }
-
-    private boolean validateBiome(Object o) {
-        return o == null || ((String) o).contains("*") || ForgeRegistries.BIOMES.containsKey(new ResourceLocation((String) o));
-    }
-
-    private boolean validateDimension(Object o) {
-        return o == null || ((String) o).contains("*") || ((String) o).contains(":");
     }
 }
