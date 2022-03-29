@@ -1,10 +1,25 @@
 {
     "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
-
     "comment.blocks": "---Blocks---",
     "block.valhelsia_structures.special_spawner": "Spesiell Fremkaller",
     "block.valhelsia_structures.brazier": "Fyrfat",
     "block.valhelsia_structures.soul_brazier": "Sjelefyrfat",
+    "block.valhelsia_structures.double_oak_logs": "Double Oak Logs",
+    "block.valhelsia_structures.double_spruce_logs": "Double Spruce Logs",
+    "block.valhelsia_structures.double_birch_logs": "Double Birch Logs",
+    "block.valhelsia_structures.double_jungle_logs": "Double Jungle Logs",
+    "block.valhelsia_structures.double_acacia_logs": "Double Acacia Logs",
+    "block.valhelsia_structures.double_dark_oak_logs": "Double Dark Oak Logs",
+    "block.valhelsia_structures.double_crimson_logs": "Double Crimson Logs",
+    "block.valhelsia_structures.double_warped_logs": "Double Warped Logs",
+    "block.valhelsia_structures.double_stripped_oak_logs": "Double Stripped Oak Logs",
+    "block.valhelsia_structures.double_stripped_spruce_logs": "Double Stripped Spruce Logs",
+    "block.valhelsia_structures.double_stripped_birch_logs": "Double Stripped Birch Logs",
+    "block.valhelsia_structures.double_stripped_jungle_logs": "Double Stripped Jungle Logs",
+    "block.valhelsia_structures.double_stripped_acacia_logs": "Double Stripped Acacia Logs",
+    "block.valhelsia_structures.double_stripped_dark_oak_logs": "Double Stripped Dark Oak Logs",
+    "block.valhelsia_structures.double_stripped_crimson_logs": "Double Stripped Crimson Logs",
+    "block.valhelsia_structures.double_stripped_warped_logs": "Double Stripped Warped Logs",
     "block.valhelsia_structures.oak_post": "Eikestolpe",
     "block.valhelsia_structures.spruce_post": "Granstolpe",
     "block.valhelsia_structures.birch_post": "Bjørkestolpe",
@@ -13,7 +28,6 @@
     "block.valhelsia_structures.dark_oak_post": "Mørkeikestolpe",
     "block.valhelsia_structures.warped_post": "Forvridd Stolpe",
     "block.valhelsia_structures.crimson_post": "Karmosinstolpe",
-
     "block.valhelsia_structures.cut_oak_post": "Kuttet Eikestolpe",
     "block.valhelsia_structures.cut_spruce_post": "Kuttet Granstolpe",
     "block.valhelsia_structures.cut_birch_post": "Kuttet Bjørkestolpe",
@@ -22,7 +36,6 @@
     "block.valhelsia_structures.cut_dark_oak_post": "Kuttet Mørkeikestolpe",
     "block.valhelsia_structures.cut_warped_post": "Kuttet Forvridd Stolpe",
     "block.valhelsia_structures.cut_crimson_post": "Kuttet Karmosinstolpe",
-
     "block.valhelsia_structures.lapidified_jungle_post": "Forsteinet Jungeltrestolpe",
     "block.valhelsia_structures.metal_framed_glass": "Metallinnrammet Glass",
     "block.valhelsia_structures.metal_framed_glass_pane": "Metallinnrammet Glassrute",
@@ -78,19 +91,17 @@
     "block.valhelsia_structures.hibiscus": "Hibiskus",
     "block.valhelsia_structures.giant_fern": "Massiv Bregne",
     "block.valhelsia_structures.doused_torch": "Dynket Fakkel",
-    "block.valhelsia_structures.doused_wall_torch": "Doused Wall Torch",
     "block.valhelsia_structures.doused_soul_torch": "Dynket Sjelefakkel",
-    "block.valhelsia_structures.doused_soul_wall_torch": "Doused Soul Wall Torch",
     "block.valhelsia_structures.dungeon_door": "Fangehull-dør",
     "block.valhelsia_structures.bone_pile": "Benhaug",
     "block.valhelsia_structures.bone_pile_block": "Benhaug Blokk",
-
+    "block.valhelsia_structures.unlit_lantern": "Unlit Lantern",
+    "block.valhelsia_structures.unlit_soul_lantern": "Unlit Soul Lantern",
     "gui.valhelsia_structures.config.spacing_error": "Verdien for Spacing for strukturen må være større enn Separation-verdien!",
     "gui.valhelsia_structures.config.spacing_solution": "Bruk %s som Spacing-verdi i stedet (Separation-verdi + 1)",
     "gui.valhelsia_structures.config.invalid_biome_category": "Liste inneholder ugyldig biom-kategori:",
     "gui.valhelsia_structures.config.invalid_blacklisted_biome": "Liste inneholder ugyldig biom:",
-    
     "comment.filled_maps": "---Filled Maps---",
-    "filled_map.valhelsia_structures:spawner_dungeon": "Spawner Dungeon Explorer Map",
-    "filled_map.valhelsia_structures:castle": "Castle Explorer Map"
+    "filled_map.valhelsia_structures.spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures.castle": "Castle Explorer Map"
 }

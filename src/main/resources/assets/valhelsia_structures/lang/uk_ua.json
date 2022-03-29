@@ -1,10 +1,25 @@
 {
     "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
-
     "comment.blocks": "---Blocks---",
     "block.valhelsia_structures.special_spawner": "Особливий спавнер",
     "block.valhelsia_structures.brazier": "Жаровня",
     "block.valhelsia_structures.soul_brazier": "Жаровня душ",
+    "block.valhelsia_structures.double_oak_logs": "Double Oak Logs",
+    "block.valhelsia_structures.double_spruce_logs": "Double Spruce Logs",
+    "block.valhelsia_structures.double_birch_logs": "Double Birch Logs",
+    "block.valhelsia_structures.double_jungle_logs": "Double Jungle Logs",
+    "block.valhelsia_structures.double_acacia_logs": "Double Acacia Logs",
+    "block.valhelsia_structures.double_dark_oak_logs": "Double Dark Oak Logs",
+    "block.valhelsia_structures.double_crimson_logs": "Double Crimson Logs",
+    "block.valhelsia_structures.double_warped_logs": "Double Warped Logs",
+    "block.valhelsia_structures.double_stripped_oak_logs": "Double Stripped Oak Logs",
+    "block.valhelsia_structures.double_stripped_spruce_logs": "Double Stripped Spruce Logs",
+    "block.valhelsia_structures.double_stripped_birch_logs": "Double Stripped Birch Logs",
+    "block.valhelsia_structures.double_stripped_jungle_logs": "Double Stripped Jungle Logs",
+    "block.valhelsia_structures.double_stripped_acacia_logs": "Double Stripped Acacia Logs",
+    "block.valhelsia_structures.double_stripped_dark_oak_logs": "Double Stripped Dark Oak Logs",
+    "block.valhelsia_structures.double_stripped_crimson_logs": "Double Stripped Crimson Logs",
+    "block.valhelsia_structures.double_stripped_warped_logs": "Double Stripped Warped Logs",
     "block.valhelsia_structures.oak_post": "Дубовий стовп",
     "block.valhelsia_structures.spruce_post": "Смерековий стовп",
     "block.valhelsia_structures.birch_post": "Березовий стовп",
@@ -13,7 +28,6 @@
     "block.valhelsia_structures.dark_oak_post": "Стовп з темного дубу",
     "block.valhelsia_structures.warped_post": "Химерний стовп",
     "block.valhelsia_structures.crimson_post": "Багряний стовп",
-
     "block.valhelsia_structures.cut_oak_post": "Різаний дубовий стовп",
     "block.valhelsia_structures.cut_spruce_post": "Різаний смерековий стовп",
     "block.valhelsia_structures.cut_birch_post": "Різаний березовий стовп",
@@ -22,7 +36,6 @@
     "block.valhelsia_structures.cut_dark_oak_post": "Різаний стовп з темного дубу",
     "block.valhelsia_structures.cut_warped_post": "Різаний химерний стовп",
     "block.valhelsia_structures.cut_crimson_post": "Різаний багряний стовп",
-
     "block.valhelsia_structures.lapidified_jungle_post": "Скам'янілий стовп с тропічного дерева",
     "block.valhelsia_structures.metal_framed_glass": "Металеве обрамлене скло",
     "block.valhelsia_structures.metal_framed_glass_pane": "Металева обрамлена скляна панель",
@@ -78,19 +91,17 @@
     "block.valhelsia_structures.hibiscus": "Гібіскус",
     "block.valhelsia_structures.giant_fern": "Гігантська папороть",
     "block.valhelsia_structures.doused_torch": "Загашений смолоскип",
-    "block.valhelsia_structures.doused_wall_torch": "Doused Wall Torch",
     "block.valhelsia_structures.doused_soul_torch": "Загашений смолоскип душ",
-    "block.valhelsia_structures.doused_soul_wall_torch": "Doused Soul Wall Torch",
     "block.valhelsia_structures.dungeon_door": "Двері підземелля",
     "block.valhelsia_structures.bone_pile": "Купа кісток",
     "block.valhelsia_structures.bone_pile_block": "Блок купи кісток",
-
+    "block.valhelsia_structures.unlit_lantern": "Unlit Lantern",
+    "block.valhelsia_structures.unlit_soul_lantern": "Unlit Soul Lantern",
     "gui.valhelsia_structures.config.spacing_error": "Значення інтервалу структури повинно бути більше ніж значення розлуки!",
     "gui.valhelsia_structures.config.spacing_solution": "Використання %s як значення інтервалу (Розлука + 1)",
     "gui.valhelsia_structures.config.invalid_biome_category": "Список містить недійсні категорії біомів:",
     "gui.valhelsia_structures.config.invalid_blacklisted_biome": "Список містить недійсні біоми:",
-    
     "comment.filled_maps": "---Filled Maps---",
-    "filled_map.valhelsia_structures:spawner_dungeon": "Spawner Dungeon Explorer Map",
-    "filled_map.valhelsia_structures:castle": "Castle Explorer Map"
+    "filled_map.valhelsia_structures.spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures.castle": "Castle Explorer Map"
 }

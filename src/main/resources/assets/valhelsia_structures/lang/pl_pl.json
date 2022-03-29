@@ -1,10 +1,25 @@
 {
     "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
-
     "comment.blocks": "---Blocks---",
     "block.valhelsia_structures.special_spawner": "Specjalny spawner",
     "block.valhelsia_structures.brazier": "Kocioł",
     "block.valhelsia_structures.soul_brazier": "Kocioł dusz",
+    "block.valhelsia_structures.double_oak_logs": "Double Oak Logs",
+    "block.valhelsia_structures.double_spruce_logs": "Double Spruce Logs",
+    "block.valhelsia_structures.double_birch_logs": "Double Birch Logs",
+    "block.valhelsia_structures.double_jungle_logs": "Double Jungle Logs",
+    "block.valhelsia_structures.double_acacia_logs": "Double Acacia Logs",
+    "block.valhelsia_structures.double_dark_oak_logs": "Double Dark Oak Logs",
+    "block.valhelsia_structures.double_crimson_logs": "Double Crimson Logs",
+    "block.valhelsia_structures.double_warped_logs": "Double Warped Logs",
+    "block.valhelsia_structures.double_stripped_oak_logs": "Double Stripped Oak Logs",
+    "block.valhelsia_structures.double_stripped_spruce_logs": "Double Stripped Spruce Logs",
+    "block.valhelsia_structures.double_stripped_birch_logs": "Double Stripped Birch Logs",
+    "block.valhelsia_structures.double_stripped_jungle_logs": "Double Stripped Jungle Logs",
+    "block.valhelsia_structures.double_stripped_acacia_logs": "Double Stripped Acacia Logs",
+    "block.valhelsia_structures.double_stripped_dark_oak_logs": "Double Stripped Dark Oak Logs",
+    "block.valhelsia_structures.double_stripped_crimson_logs": "Double Stripped Crimson Logs",
+    "block.valhelsia_structures.double_stripped_warped_logs": "Double Stripped Warped Logs",
     "block.valhelsia_structures.oak_post": "Dębowy słupek",
     "block.valhelsia_structures.spruce_post": "Świerkowy słupek",
     "block.valhelsia_structures.birch_post": "Brzozowy słupek",
@@ -13,7 +28,6 @@
     "block.valhelsia_structures.dark_oak_post": "Ciemnodębowy słupek",
     "block.valhelsia_structures.warped_post": "Spaczony słupek",
     "block.valhelsia_structures.crimson_post": "Szkarłatny słupek",
-
     "block.valhelsia_structures.cut_oak_post": "Cięty dębowy słupek",
     "block.valhelsia_structures.cut_spruce_post": "Cięty świerkowy słupek",
     "block.valhelsia_structures.cut_birch_post": "Cięty brzozowy słupek",
@@ -22,7 +36,6 @@
     "block.valhelsia_structures.cut_dark_oak_post": "Cięty ciemnodębowy słupek",
     "block.valhelsia_structures.cut_warped_post": "Cięty spaczony słupek",
     "block.valhelsia_structures.cut_crimson_post": "Cięty szkarłatny słupek",
-
     "block.valhelsia_structures.lapidified_jungle_post": "Skamieniały dżunglowy słupek",
     "block.valhelsia_structures.metal_framed_glass": "Szkło w metalowej ramie",
     "block.valhelsia_structures.metal_framed_glass_pane": "Szyba w metalowej ramie",
@@ -78,19 +91,17 @@
     "block.valhelsia_structures.hibiscus": "Hibiskus",
     "block.valhelsia_structures.giant_fern": "Olbrzymia paproć",
     "block.valhelsia_structures.doused_torch": "Zatopiona pochodnia",
-    "block.valhelsia_structures.doused_wall_torch": "Doused Wall Torch",
     "block.valhelsia_structures.doused_soul_torch": "Zatopiona eteryczna pochodnia",
-    "block.valhelsia_structures.doused_soul_wall_torch": "Doused Soul Wall Torch",
     "block.valhelsia_structures.dungeon_door": "Drzwi do lochów",
     "block.valhelsia_structures.bone_pile": "Stos kości",
     "block.valhelsia_structures.bone_pile_block": "Blok stosów kości",
-
+    "block.valhelsia_structures.unlit_lantern": "Unlit Lantern",
+    "block.valhelsia_structures.unlit_soul_lantern": "Unlit Soul Lantern",
     "gui.valhelsia_structures.config.spacing_error": "Wartość odstępu struktury musi być większa niż wartość separacji!",
     "gui.valhelsia_structures.config.spacing_solution": "Używanie %s jako wartości odstępu zamiast (Separacja + 1)",
     "gui.valhelsia_structures.config.invalid_biome_category": "Lista zawiera niepoprawną kategorię biomu:",
     "gui.valhelsia_structures.config.invalid_blacklisted_biome": "Lista zawiera niepoprawny biom:",
-    
     "comment.filled_maps": "---Filled Maps---",
-    "filled_map.valhelsia_structures:spawner_dungeon": "Spawner Dungeon Explorer Map",
-    "filled_map.valhelsia_structures:castle": "Castle Explorer Map"
+    "filled_map.valhelsia_structures.spawner_dungeon": "Spawner Dungeon Explorer Map",
+    "filled_map.valhelsia_structures.castle": "Castle Explorer Map"
 }
