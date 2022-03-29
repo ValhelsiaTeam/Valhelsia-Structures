@@ -3,20 +3,23 @@ package com.stal111.valhelsia_structures.common.world.structures;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
-import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.core.init.ModStructureFeatures;
+import com.stal111.valhelsia_structures.utils.ConfigurableValue;
+import com.stal111.valhelsia_structures.utils.ModTags;
+import net.minecraft.core.Holder;
+import net.minecraft.util.random.WeightedRandomList;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
+import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
 import org.apache.commons.lang3.mutable.MutableObject;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -26,7 +29,7 @@ import java.util.function.Predicate;
  * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.WitchHutStructure
  *
  * @author Valhelsia Team
- * @version 1.18.1-0.1.1
+ * @version 1.18.2 - 0.1.0
  * @since 2021-04-23
  */
 public class WitchHutStructure extends AbstractValhelsiaStructure {
@@ -38,7 +41,11 @@ public class WitchHutStructure extends AbstractValhelsiaStructure {
         super(villageConfigCodec, "witch_hut",
                 locationCheckPredicate,
                 pieceCreationPredicate,
-                new StructureConfigEntry(0.85D, 25, 7, Biome.BiomeCategory.SWAMP.getName()));
+                new StructureSettings(ConfigurableValue.of(0.85D), ConfigurableValue.of(23), ConfigurableValue.of(6), ModTags.Biomes.HAS_WITCH_HUT, Map.of(
+                        MobCategory.MONSTER, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, WeightedRandomList.create(MONSTER_SPAWN_LIST)),
+                        MobCategory.CREATURE, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.STRUCTURE, WeightedRandomList.create(CREATURE_SPAWN_LIST))
+                ))
+        );
     }
 
     public static WitchHutStructure create(Codec<JigsawConfiguration> codec) {
@@ -65,18 +72,8 @@ public class WitchHutStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> getStructureFeature() {
+    public Holder<ConfiguredStructureFeature<?, ?>> getStructureFeature() {
         return ModStructureFeatures.WITCH_HUT;
-    }
-
-    @Override
-    public List<MobSpawnSettings.SpawnerData> getDefaultSpawnList(MobCategory category) {
-        if (category == MobCategory.MONSTER) {
-            return MONSTER_SPAWN_LIST;
-        } else if (category == MobCategory.CREATURE) {
-            return CREATURE_SPAWN_LIST;
-        }
-        return super.getDefaultSpawnList(category);
     }
 
     @Override

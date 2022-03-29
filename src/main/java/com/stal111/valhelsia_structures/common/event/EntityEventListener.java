@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.common.event;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModEntities;
-import com.stal111.valhelsia_structures.core.init.ModStructures;
+import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Pillager;
@@ -26,7 +26,7 @@ import net.valhelsia.valhelsia_core.common.util.ItemStackUtils;
  * For all entity-related event handling.
  * </p>
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.1.0
  * @since 2021-05-11
  */
 @Mod.EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID)
@@ -45,7 +45,7 @@ public class EntityEventListener {
                 VillagerProfession.CARTOGRAPHER,
                 1,
                 (trader, rand) -> {
-                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModStructures.SPAWNER_DUNGEON.get(), MapDecoration.Type.RED_X);
+                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModTags.ConfiguredStructures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.spawner_dungeon");
                     if (stack == null) {
                         return null;
                     }
@@ -56,7 +56,7 @@ public class EntityEventListener {
                 VillagerProfession.CARTOGRAPHER,
                 2,
                 (trader, rand) -> {
-                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModStructures.CASTLE.get(), MapDecoration.Type.RED_X);
+                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModTags.ConfiguredStructures.ON_CASTLE_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.castle");
                     if (stack == null) {
                         return null;
                     }

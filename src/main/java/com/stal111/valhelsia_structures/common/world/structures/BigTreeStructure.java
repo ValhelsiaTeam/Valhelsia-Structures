@@ -2,11 +2,11 @@ package com.stal111.valhelsia_structures.common.world.structures;
 
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
-import com.stal111.valhelsia_structures.core.config.StructureConfigEntry;
 import com.stal111.valhelsia_structures.core.init.ModStructureFeatures;
-import net.minecraft.world.level.biome.Biome;
+import com.stal111.valhelsia_structures.utils.ConfigurableValue;
+import com.stal111.valhelsia_structures.utils.ModTags;
+import net.minecraft.core.Holder;
 import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
-import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.JigsawConfiguration;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGenerator;
 import net.minecraft.world.level.levelgen.structure.pieces.PieceGeneratorSupplier;
@@ -21,7 +21,7 @@ import java.util.function.Predicate;
  * Valhelsia-Structures - com.stal111.valhelsia_structures.common.world.structures.BigTreeStructure
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.1.0
  * @since 2021-05-14
  */
 
@@ -31,10 +31,7 @@ public class BigTreeStructure extends AbstractValhelsiaStructure {
         super(configurationCodec, "big_tree",
                 locationCheckPredicate,
                 pieceCreationPredicate,
-                new StructureConfigEntry(0.7D, 30, 8,
-                        Biome.BiomeCategory.PLAINS.getName(),
-                        Biome.BiomeCategory.FOREST.getName()
-                ));
+                new StructureSettings(ConfigurableValue.of(0.7D), ConfigurableValue.of(28), ConfigurableValue.of(7), ModTags.Biomes.HAS_BIG_TREE));
     }
 
     public static BigTreeStructure create(Codec<JigsawConfiguration> codec) {
@@ -61,7 +58,7 @@ public class BigTreeStructure extends AbstractValhelsiaStructure {
     }
 
     @Override
-    public ConfiguredStructureFeature<JigsawConfiguration, ? extends StructureFeature<JigsawConfiguration>> getStructureFeature() {
+    public Holder<ConfiguredStructureFeature<?, ?>> getStructureFeature() {
         return ModStructureFeatures.BIG_TREE;
     }
 }

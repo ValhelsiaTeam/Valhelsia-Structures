@@ -1,0 +1,50 @@
+name: Bug Report
+description: Report an issue with the mod.
+title: "[Bug]: "
+labels: ["Type: Bug"]
+assignees: 
+  - stal111
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Describe the issue
+      description: Provide a clear and concise description of what the issue is.
+      placeholder: Tell us what you see!
+      value: "..."
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Minecraft Version
+      description: What version of Minecraft are you using?
+      options:
+        - 1.18.2 (Default)
+        - 1.17.1
+        - 1.16.5
+    validations:
+      required: true
+  - type: textarea
+    id: mods-version
+    attributes:
+      label: Mods Version
+      description: What version of the mods and Forge are you using?
+      value: |
+        - Forge:
+        - Valhelsia Structures:
+        - Valhelsia Core:
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log
+      description: Upload the log to Gist (https://gist.github.com/) and if relevant, crash report, so that we can diagnose the issue.
+      render: shell
+    validations:
+      required: true
