@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "side": "valhelsia_structures:block/double_logs/double_warped_logs",
-    "end": "valhelsia_structures:block/double_logs/double_warped_logs_top"
-  }
-}

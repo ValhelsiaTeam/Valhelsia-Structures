@@ -86,14 +86,14 @@ public class ModRecipeProvider extends RecipeProvider {
             ShapedRecipeBuilder.shaped(blockRegistryObject.get()).pattern("# #").pattern("# #").pattern(" # ").define('#', block).group("big_jar").unlockedBy("has_item", has(block)).save(consumer);
         });
 
-        this.addSimple2x2Recipe(ModBlocks.DOUBLE_OAK_LOGS.get(), ModBlocks.OAK_POST.get(), consumer);
-        this.addSimple2x2Recipe(ModBlocks.DOUBLE_SPRUCE_LOGS.get(), ModBlocks.SPRUCE_POST.get(), consumer);
-        this.addSimple2x2Recipe(ModBlocks.DOUBLE_BIRCH_LOGS.get(), ModBlocks.BIRCH_POST.get(), consumer);
-        this.addSimple2x2Recipe(ModBlocks.DOUBLE_JUNGLE_LOGS.get(), ModBlocks.JUNGLE_POST.get(), consumer);
-        this.addSimple2x2Recipe(ModBlocks.DOUBLE_ACACIA_LOGS.get(), ModBlocks.ACACIA_POST.get(), consumer);
-        this.addSimple2x2Recipe(ModBlocks.DOUBLE_DARK_OAK_LOGS.get(), ModBlocks.DARK_OAK_POST.get(), consumer);
-        this.addSimple2x2Recipe(ModBlocks.DOUBLE_CRIMSON_LOGS.get(), ModBlocks.CRIMSON_POST.get(), consumer);
-        this.addSimple2x2Recipe(ModBlocks.DOUBLE_WARPED_LOGS.get(), ModBlocks.WARPED_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.BUNDLED_OAK_POSTS.get(), ModBlocks.OAK_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.BUNDLED_SPRUCE_POSTS.get(), ModBlocks.SPRUCE_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.BUNDLED_BIRCH_POSTS.get(), ModBlocks.BIRCH_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.BUNDLED_JUNGLE_POSTS.get(), ModBlocks.JUNGLE_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.BUNDLED_ACACIA_POSTS.get(), ModBlocks.ACACIA_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.BUNDLED_DARK_OAK_POSTS.get(), ModBlocks.DARK_OAK_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.BUNDLED_CRIMSON_POSTS.get(), ModBlocks.CRIMSON_POST.get(), consumer);
+        this.addSimple2x2Recipe(ModBlocks.BUNDLED_WARPED_POSTS.get(), ModBlocks.WARPED_POST.get(), consumer);
 
         //Smelting Recipes
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.GLAZED_JAR.get()), ModBlocks.CRACKED_GLAZED_JAR.get(), 0.1F, 200).unlockedBy("has_item", has(ModBlocks.GLAZED_JAR.get())).save(consumer, "valhelsia_structures:smelting/cracked_glazed_jar");

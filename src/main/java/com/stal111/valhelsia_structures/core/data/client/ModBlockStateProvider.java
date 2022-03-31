@@ -34,7 +34,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
        // getRemainingBlocks().remove(ModBlocks.JUNGLE_HEAD);
 
         forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
-        forEach(block -> getName(block).contains("double"), block -> axisBlock((RotatedPillarBlock) block, modLoc("block/double_logs/" + getName(block)), modLoc("block/double_logs/" + getName(block) + "_top")));
+        forEach(block -> getName(block).contains("bundled"), block -> axisBlock((RotatedPillarBlock) block, modLoc("block/bundled_posts/" + getName(block)), modLoc("block/bundled_posts/" + getName(block) + "_top")));
         forEach(block -> block instanceof PostBlock, this::postBlock);
         forEach(block -> block instanceof CutPostBlock, this::cutPostBlock);
         take(block -> paneBlock((IronBarsBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);
