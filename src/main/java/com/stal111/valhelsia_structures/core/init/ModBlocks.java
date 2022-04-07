@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
 import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
 import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import net.minecraft.world.item.BedItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -16,6 +17,7 @@ import net.valhelsia.valhelsia_core.client.util.ValhelsiaRenderType;
 import net.valhelsia.valhelsia_core.core.registry.block.BlockRegistryHelper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ import java.util.List;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.init.ModBlocks
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.1.0
+ * @version 1.18.2 - 0.2.0
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks {
@@ -113,13 +115,16 @@ public class ModBlocks {
     public static final RegistryObject<UnlitLanternBlock> UNLIT_LANTERN = HELPER.register("unlit_lantern", () -> new UnlitLanternBlock(() -> Blocks.LANTERN, Block.Properties.copy(Blocks.LANTERN).lightLevel(value -> 0)), ValhelsiaRenderType.CUTOUT);
     public static final RegistryObject<UnlitLanternBlock> UNLIT_SOUL_LANTERN = HELPER.register("unlit_soul_lantern", () -> new UnlitLanternBlock(() -> Blocks.SOUL_LANTERN, Block.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(value -> 0)), ValhelsiaRenderType.CUTOUT);
 
+    //Sleeping Bags
+    public static final List<RegistryObject<SleepingBagBlock>> SLEEPING_BAGS = registerSleepingBags();
+
     // Workarounds for structures:
 
     // stone that can't be replaced during later generation steps
     public static final RegistryObject<Block> STONE = HELPER.register("stone", () -> new ValhelsiaStoneBlock(() -> Blocks.STONE, Block.Properties.copy(Blocks.STONE).lootFrom(() -> Blocks.STONE)));
     public static final RegistryObject<Block> GRANITE = HELPER.register("granite", () -> new ValhelsiaStoneBlock(() -> Blocks.GRANITE, Block.Properties.copy(Blocks.GRANITE).lootFrom(() -> Blocks.GRANITE)));
     public static final RegistryObject<Block> DIORITE = HELPER.register("diorite", () -> new ValhelsiaStoneBlock(() -> Blocks.DIORITE, Block.Properties.copy(Blocks.DIORITE).lootFrom(() -> Blocks.DIORITE)));
-    public static final RegistryObject<Block> ANDESITE = HELPER.register("andesite", () -> new ValhelsiaStoneBlock(() -> Blocks.ANDESITE, Block.Properties.copy(Blocks.ANDESITE).lootFrom(() ->Blocks.ANDESITE)));
+    public static final RegistryObject<Block> ANDESITE = HELPER.register("andesite", () -> new ValhelsiaStoneBlock(() -> Blocks.ANDESITE, Block.Properties.copy(Blocks.ANDESITE).lootFrom(() -> Blocks.ANDESITE)));
     // grass block on which features cannot generate
     public static final RegistryObject<Block> GRASS_BLOCK = HELPER.register("grass_block", () -> new ValhelsiaGrassBlock(Block.Properties.copy(Blocks.GRASS_BLOCK).lootFrom(() -> Blocks.GRASS_BLOCK)), ValhelsiaRenderType.CUTOUT);
     // dirt that wont transform into grass blocks
@@ -142,5 +147,13 @@ public class ModBlocks {
             HELPER.registerNoItem("big_" + color.getName() + "_glazed_jar_top", () -> new BigJarTopBlock(Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()), ValhelsiaRenderType.CUTOUT);
         }
         return list;
+    }
+
+    private static List<RegistryObject<SleepingBagBlock>> registerSleepingBags() {
+        return Arrays.stream(DyeColor.values())
+                .map(color -> HELPER.register(color.getName() + "_sleeping_bag",
+                        () -> new SleepingBagBlock(Block.Properties.of(Material.WOOL, color).strength(0.2F).noOcclusion()),
+                        registryObject -> new BedItem(registryObject.get(), new Item.Properties().tab(HELPER.getDefaultCreativeTab()))))
+                .toList();
     }
 }

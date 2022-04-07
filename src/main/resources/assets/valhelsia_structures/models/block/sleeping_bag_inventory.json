@@ -1,0 +1,99 @@
+{
+	"credit": "Model created by Zorak Design - Contact me on discord for work: CesarZorak#0808",
+	"parent": "block/block",
+	"texture_size": [64, 64],
+	"textures": {
+		"particle": "#0"
+	},
+	"elements": [
+		{
+			"name": "inventory_layer_r",
+			"from": [10.75, 4.75, 3.75],
+			"to": [14.25, 11.25, 12.25],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [12.5, 14.5, 13.25, 16], "texture": "#0"},
+				"east": {"uv": [10.5, 14.5, 12.5, 16], "texture": "#0"},
+				"south": {"uv": [15.25, 14.5, 16, 16], "texture": "#0"},
+				"west": {"uv": [13.25, 14.5, 15.25, 16], "texture": "#0"},
+				"up": {"uv": [13.25, 14.5, 12.5, 12.5], "texture": "#0"},
+				"down": {"uv": [14, 12.5, 13.25, 14.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "inventory_layer_l",
+			"from": [1.75, 4.75, 3.75],
+			"to": [5.25, 11.25, 12.25],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [12.5, 14.5, 13.25, 16], "texture": "#0"},
+				"east": {"uv": [10.5, 14.5, 12.5, 16], "texture": "#0"},
+				"south": {"uv": [15.25, 14.5, 16, 16], "texture": "#0"},
+				"west": {"uv": [13.25, 14.5, 15.25, 16], "texture": "#0"},
+				"up": {"uv": [13.25, 14.5, 12.5, 12.5], "texture": "#0"},
+				"down": {"uv": [14, 12.5, 13.25, 14.5], "texture": "#0"}
+			}
+		},
+		{
+			"name": "inventory",
+			"from": [1, 5, 4],
+			"to": [15, 11, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [2, 11.5, 5.5, 13], "texture": "#0"},
+				"east": {"uv": [0, 11.5, 2, 13], "texture": "#0"},
+				"south": {"uv": [7.5, 11.5, 11, 13], "texture": "#0"},
+				"west": {"uv": [5.5, 11.5, 7.5, 13], "texture": "#0"},
+				"up": {"uv": [5.5, 11.5, 2, 9.5], "texture": "#0"},
+				"down": {"uv": [9, 9.5, 5.5, 11.5], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"translation": [0, 1.5, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"translation": [0, 1.5, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 2, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"gui": {
+			"rotation": [25, -135, 0],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"head": {
+			"translation": [0, 9.5, 0]
+		},
+		"fixed": {
+			"rotation": [-90, -180, 0],
+			"scale": [0.9, 0.9, -0.9]
+		}
+	},
+	"groups": [
+		{
+			"name": "inventory",
+			"origin": [8, 0, 8],
+			"color": 0,
+			"nbt": "{}",
+			"armAnimationEnabled": false,
+			"children": [0, 1, 2]
+		}
+	]
+}

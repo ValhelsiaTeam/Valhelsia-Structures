@@ -1,0 +1,6 @@
+{
+  "parent": "valhelsia_structures:block/sleeping_bag_inventory",
+  "textures": {
+    "0": "valhelsia_structures:block/sleeping_bag/gray_sleeping_bag"
+  }
+}

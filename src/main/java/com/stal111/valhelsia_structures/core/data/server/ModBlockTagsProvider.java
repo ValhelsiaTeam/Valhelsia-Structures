@@ -1,12 +1,12 @@
 package com.stal111.valhelsia_structures.core.data.server;
 
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.ModTags;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -18,7 +18,7 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.server.ModBlockTagsProvider
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.2.0
  * @since 2021-01-11
  */
 public class ModBlockTagsProvider extends BlockTagsProvider {
@@ -38,7 +38,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             }
         });
         this.tag(ModTags.Blocks.NON_FLAMMABLE_POSTS).add(ModBlocks.WARPED_POST.get(), ModBlocks.CRIMSON_POST.get()
-            //    , ModBlocks.LAPIDIFIED_JUNGLE_POST.get()
+                //    , ModBlocks.LAPIDIFIED_JUNGLE_POST.get()
         );
         this.tag(BlockTags.IMPERMEABLE).add(ModBlocks.METAL_FRAMED_GLASS.get());
         this.tag(Tags.Blocks.GLASS).add(ModBlocks.METAL_FRAMED_GLASS.get());
@@ -73,6 +73,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.VALID_SPAWN).add(ModBlocks.GRASS_BLOCK.get());
         this.tag(BlockTags.BAMBOO_PLANTABLE_ON).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get());
         this.tag(BlockTags.ENDERMAN_HOLDABLE).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get(), ModBlocks.COARSE_DIRT.get());
+
+        ModBlocks.SLEEPING_BAGS.forEach(block -> this.tag(ModTags.Blocks.SLEEPING_BAGS).add(block.get()));
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .addTag(ModTags.Blocks.POSTS).addTag(ModTags.Blocks.CUT_POSTS)

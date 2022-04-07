@@ -1,0 +1,25 @@
+{
+	"credit": "Model created by Zorak Design - Contact me on discord for work: CesarZorak#0808",
+	"ambientocclusion": false,
+	"texture_size": [64, 64],
+	"textures": {
+		"particle": "#0"
+	},
+	"elements": [
+		{
+			"name": "down",
+			"from": [1, 0, 1],
+			"to": [15, 4, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"shade": false,
+			"faces": {
+				"north": {"uv": [3.75, 8.5, 7.25, 9.5], "texture": "#0"},
+				"east": {"uv": [0, 8.5, 3.75, 9.5], "texture": "#0"},
+				"south": {"uv": [11, 8.5, 14.5, 9.5], "texture": "#0"},
+				"west": {"uv": [7.25, 8.5, 11, 9.5], "texture": "#0"},
+				"up": {"uv": [7.25, 8.5, 3.75, 4.75], "texture": "#0"},
+				"down": {"uv": [10.75, 4.75, 7.25, 8.5], "texture": "#0"}
+			}
+		}
+	]
+}

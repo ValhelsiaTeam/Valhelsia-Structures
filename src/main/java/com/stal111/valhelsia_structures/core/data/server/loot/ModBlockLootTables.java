@@ -7,6 +7,8 @@ import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -19,7 +21,7 @@ import net.valhelsia.valhelsia_core.core.data.ValhelsiaBlockLootTables;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.server.loot.ModBlockLootTables
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.2.0
  * @since 2020-11-22
  */
 public class ModBlockLootTables extends ValhelsiaBlockLootTables {
@@ -44,6 +46,8 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
         take(block -> add(block, createSilkTouchDispatchTable(block, withSurvivesExplosion(block, LootItem.lootTableItem(Items.BONE).apply(SetItemCountFunction.setCount(ConstantValue.exactly(9)))))), ModBlocks.BONE_PILE_BLOCK);
         forEach(block -> block instanceof CutPostBlock, block -> add(block, cutPostBlock -> LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(setCountFromIntegerProperty(block, LootItem.lootTableItem(block), ModBlockStateProperties.PARTS_1_4)))));
         take(block -> add(block, createSinglePropConditionTable(block, DungeonDoorBlock.PART, DungeonDoorPart.MIDDLE_1)), ModBlocks.DUNGEON_DOOR);
+
+        forEach(block -> block instanceof SleepingBagBlock, block -> createSinglePropConditionTable(block, BlockStateProperties.BED_PART, BedPart.HEAD));
 
         forEach(this::registerDropSelfLootTable);
     }

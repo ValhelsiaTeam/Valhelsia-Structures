@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.data.ModItemTagsProvider
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.2.0
  * @since 2021-01-12
  */
 public class ModItemTagsProvider extends ItemTagsProvider {
@@ -52,6 +52,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.copy(Tags.Blocks.FENCES_WOODEN, Tags.Items.FENCES_WOODEN);
         this.copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
         this.copy(BlockTags.FLOWERS, ItemTags.FLOWERS);
+        this.copy(ModTags.Blocks.SLEEPING_BAGS, ModTags.Items.SLEEPING_BAGS);
 
         this.copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS);
 

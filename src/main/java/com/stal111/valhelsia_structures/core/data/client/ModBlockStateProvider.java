@@ -8,6 +8,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -19,7 +21,7 @@ import net.valhelsia.valhelsia_core.core.data.ValhelsiaBlockStateProvider;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.client.ModBlockStateProvider
  *
  * @author Valhelsia Team
- * @version 1.18.1-0.2.0
+ * @version 1.18.2 - 0.2.0
  * @since 2020-11-13
  */
 public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
@@ -65,6 +67,7 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         take(block -> simpleBlock(block, getExistingModel(modLoc("block/explorers_tent"))), ModBlocks.EXPLORERS_TENT);
 
         forEach(block -> block instanceof LanternBlock, this::lanternBlock);
+        forEach(block -> block instanceof SleepingBagBlock, this::sleepingBagBlock);
 
         forEach(this::simpleBlock);
     }
@@ -203,5 +206,18 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         getVariantBuilder(block)
                 .partialState().with(BlockStateProperties.HANGING, false).modelForState().modelFile(model).addModel()
                 .partialState().with(BlockStateProperties.HANGING, true).modelForState().modelFile(hangingModel).addModel();
+    }
+
+    private void sleepingBagBlock(Block block) {
+        ModelFile footModel = models().withExistingParent(getName(block) + "_foot", modLoc("sleeping_bag_foot")).texture("0", modLoc("block/sleeping_bag/" + this.getName(block)));
+        ModelFile headModel = models().withExistingParent(getName(block) + "_head", modLoc("sleeping_bag_head")).texture("0", modLoc("block/sleeping_bag/" + this.getName(block)));
+        models().withExistingParent(getName(block) + "_inventory", modLoc("sleeping_bag_inventory")).texture("0", modLoc("block/sleeping_bag/" + this.getName(block)));
+
+        getVariantBuilder(block).forAllStatesExcept(state -> {
+            return ConfiguredModel.builder()
+                    .modelFile(state.getValue(BlockStateProperties.BED_PART) == BedPart.FOOT ? footModel : headModel)
+                    .rotationY((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() % 360)
+                    .build();
+        }, BlockStateProperties.WATERLOGGED);
     }
 }

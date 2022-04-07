@@ -17,7 +17,7 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
  * Valhelsia Structures - com.stal111.valhelsia_structures.utils.ModTags
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.2.0
  */
 public class ModTags {
 
@@ -31,6 +31,7 @@ public class ModTags {
         public static final TagKey<Block> BIG_COLORED_JARS = modTag("big_colored_jars");
         public static final TagKey<Block> BIG_JARS = modTag("big_jars");
         public static final TagKey<Block> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
+        public static final TagKey<Block> SLEEPING_BAGS = modTag("sleeping_bags");
 
         private static TagKey<Block> forgeTag(String name) {
             return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation("forge", name));
@@ -51,6 +52,7 @@ public class ModTags {
         public static final TagKey<Item> BIG_COLORED_JARS = modTag("big_colored_jars");
         public static final TagKey<Item> BIG_JARS = modTag("big_jars");
         public static final TagKey<Item> LAPIDIFIED_JUNGLE_LOGS = modTag("lapidified_jungle_logs");
+        public static final TagKey<Item> SLEEPING_BAGS = modTag("sleeping_bags");
 
         public static final TagKey<Item> AXE_CRAFTING_BLACKLISTED = modTag( "axe_crafting_blacklisted");
 
