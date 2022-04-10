@@ -72,7 +72,7 @@ public abstract class BlockModelRendererMixin {
         }
     }
 
-    @ModifyVariable(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/ModelBlockRenderer;putQuadData(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/block/model/BakedQuad;FFFFIIIII)V"), method = "renderModelFaceFlat", name = "pPackedLight")
+    @ModifyVariable(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/ModelBlockRenderer;putQuadData(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/block/model/BakedQuad;FFFFIIIII)V"), method = "renderModelFaceFlat", ordinal = 0, argsOnly = true)
     private int valhelsia_renderModelFaceFlat(int value, BlockAndTintGetter level, BlockState state, BlockPos pos) {
         if (state.is(ModTags.Blocks.SLEEPING_BAGS)) {
             DoubleBlockCombiner.NeighborCombineResult<BlockPos> neighborCombineResult = BrightnessCombinerUtils.combineWithNeigbour(BedBlock::getBlockType, BedBlock::getConnectedDirection, ChestBlock.FACING, state, level, pos, (p_112202_, p_112203_) -> false);
@@ -82,5 +82,4 @@ public abstract class BlockModelRendererMixin {
 
         return value;
     }
-
 }
