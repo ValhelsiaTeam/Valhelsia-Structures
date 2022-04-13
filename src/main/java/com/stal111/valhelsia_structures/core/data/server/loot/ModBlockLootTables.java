@@ -47,7 +47,7 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
         forEach(block -> block instanceof CutPostBlock, block -> add(block, cutPostBlock -> LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1)).add(setCountFromIntegerProperty(block, LootItem.lootTableItem(block), ModBlockStateProperties.PARTS_1_4)))));
         take(block -> add(block, createSinglePropConditionTable(block, DungeonDoorBlock.PART, DungeonDoorPart.MIDDLE_1)), ModBlocks.DUNGEON_DOOR);
 
-        forEach(block -> block instanceof SleepingBagBlock, block -> createSinglePropConditionTable(block, BlockStateProperties.BED_PART, BedPart.HEAD));
+        forEach(block -> block instanceof SleepingBagBlock, block -> add(block, createSinglePropConditionTable(block, BlockStateProperties.BED_PART, BedPart.HEAD)));
 
         forEach(this::registerDropSelfLootTable);
     }
