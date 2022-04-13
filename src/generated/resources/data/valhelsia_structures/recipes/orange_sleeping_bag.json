@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:orange_wool"
+    }
+  },
+  "result": {
+    "item": "valhelsia_structures:orange_sleeping_bag"
+  }
+}

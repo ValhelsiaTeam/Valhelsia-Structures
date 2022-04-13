@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "valhelsia_structures:light_gray_sleeping_bag_from_white_sleeping_bag"
+    ]
+  },
+  "criteria": {
+    "has_item": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "valhelsia_structures:white_sleeping_bag"
+            ]
+          }
+        ]
+      }
+    },
+    "has_color": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dyes/light_gray"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "valhelsia_structures:light_gray_sleeping_bag_from_white_sleeping_bag"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_item",
+      "has_color",
+      "has_the_recipe"
+    ]
+  ]
+}

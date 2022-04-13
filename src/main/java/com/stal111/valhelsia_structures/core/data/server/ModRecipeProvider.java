@@ -10,6 +10,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -27,7 +28,7 @@ import java.util.function.Consumer;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.server.ModRecipeProvider
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.2.0
  * @since 2020-11-16
  */
 public class ModRecipeProvider extends RecipeProvider {
@@ -95,6 +96,20 @@ public class ModRecipeProvider extends RecipeProvider {
         this.addSimple2x2Recipe(ModBlocks.BUNDLED_CRIMSON_POSTS.get(), ModBlocks.CRIMSON_POST.get(), consumer);
         this.addSimple2x2Recipe(ModBlocks.BUNDLED_WARPED_POSTS.get(), ModBlocks.WARPED_POST.get(), consumer);
 
+        Block whiteSleepingBag = ModBlocks.SLEEPING_BAGS.get(DyeColor.WHITE).get();
+
+        ModBlocks.SLEEPING_BAGS.forEach((color, registryObject) -> {
+            Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getName() + "_wool"));
+
+            if (block != null) {
+                this.addSingleRowRecipe(registryObject.get(), block, consumer);
+            }
+
+            if (color != DyeColor.WHITE) {
+                ShapelessRecipeBuilder.shapeless(registryObject.get()).requires(whiteSleepingBag).requires(color.getTag()).unlockedBy("has_item", has(whiteSleepingBag)).unlockedBy("has_color", has(color.getTag())).save(consumer, new ResourceLocation(ValhelsiaStructures.MOD_ID, registryObject.get().getRegistryName().getPath() + "_from_white_sleeping_bag"));
+            }
+        });
+
         //Smelting Recipes
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.GLAZED_JAR.get()), ModBlocks.CRACKED_GLAZED_JAR.get(), 0.1F, 200).unlockedBy("has_item", has(ModBlocks.GLAZED_JAR.get())).save(consumer, "valhelsia_structures:smelting/cracked_glazed_jar");
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.BIG_GLAZED_JAR.get()), ModBlocks.CRACKED_BIG_GLAZED_JAR.get(), 0.1F, 200).unlockedBy("has_item", has(ModBlocks.BIG_GLAZED_JAR.get())).save(consumer, "valhelsia_structures:smelting/cracked_big_glazed_jar");
@@ -102,5 +117,9 @@ public class ModRecipeProvider extends RecipeProvider {
 
     private void addSimple2x2Recipe(ItemLike result, ItemLike item, @Nonnull Consumer<FinishedRecipe> consumer) {
         ShapedRecipeBuilder.shaped(result).pattern("##").pattern("##").define('#', item).unlockedBy("has_item", has(item)).save(consumer);
+    }
+
+    private void addSingleRowRecipe(ItemLike result, ItemLike item, @Nonnull Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(result).pattern("###").define('#', item).unlockedBy("has_item", has(item)).save(consumer);
     }
 }

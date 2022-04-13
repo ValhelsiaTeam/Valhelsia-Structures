@@ -74,7 +74,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.BAMBOO_PLANTABLE_ON).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get());
         this.tag(BlockTags.ENDERMAN_HOLDABLE).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get(), ModBlocks.COARSE_DIRT.get());
 
-        ModBlocks.SLEEPING_BAGS.forEach(block -> this.tag(ModTags.Blocks.SLEEPING_BAGS).add(block.get()));
+        ModBlocks.SLEEPING_BAGS.values().forEach(block -> this.tag(ModTags.Blocks.SLEEPING_BAGS).add(block.get()));
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .addTag(ModTags.Blocks.POSTS).addTag(ModTags.Blocks.CUT_POSTS)

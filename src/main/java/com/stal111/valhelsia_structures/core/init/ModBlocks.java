@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.core.init;
 
+import com.mojang.datafixers.util.Pair;
 import com.stal111.valhelsia_structures.common.block.*;
 import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
 import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
@@ -19,6 +20,8 @@ import net.valhelsia.valhelsia_core.core.registry.block.BlockRegistryHelper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Blocks <br>
@@ -116,7 +119,7 @@ public class ModBlocks {
     public static final RegistryObject<UnlitLanternBlock> UNLIT_SOUL_LANTERN = HELPER.register("unlit_soul_lantern", () -> new UnlitLanternBlock(() -> Blocks.SOUL_LANTERN, Block.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(value -> 0)), ValhelsiaRenderType.CUTOUT);
 
     //Sleeping Bags
-    public static final List<RegistryObject<SleepingBagBlock>> SLEEPING_BAGS = registerSleepingBags();
+    public static final Map<DyeColor, RegistryObject<SleepingBagBlock>> SLEEPING_BAGS = registerSleepingBags();
 
     // Workarounds for structures:
 
@@ -149,11 +152,11 @@ public class ModBlocks {
         return list;
     }
 
-    private static List<RegistryObject<SleepingBagBlock>> registerSleepingBags() {
+    private static Map<DyeColor, RegistryObject<SleepingBagBlock>> registerSleepingBags() {
         return Arrays.stream(DyeColor.values())
-                .map(color -> HELPER.register(color.getName() + "_sleeping_bag",
-                        () -> new SleepingBagBlock(Block.Properties.of(Material.WOOL, color).strength(0.2F).noOcclusion()),
-                        registryObject -> new BedItem(registryObject.get(), new Item.Properties().tab(HELPER.getDefaultCreativeTab()))))
-                .toList();
+                .map(color -> Pair.of(color, HELPER.register(color.getName() + "_sleeping_bag",
+                        () -> new SleepingBagBlock(Block.Properties.of(Material.WOOL, color).strength(0.2F).noOcclusion().sound(SoundType.WOOL)),
+                        registryObject -> new BedItem(registryObject.get(), new Item.Properties().tab(HELPER.getDefaultCreativeTab())))))
+                .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
     }
 }
