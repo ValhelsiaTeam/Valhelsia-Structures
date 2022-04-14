@@ -96,8 +96,8 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
         }
 
         if (state.getValue(OCCUPIED)) {
-            if (!this.kickVillagerOutOfBed(level, pos)) {
-                player.displayClientMessage(new TranslatableComponent("block.minecraft.bed.occupied"), true);
+            if (!kickVillagerOutOfBed(level, pos)) {
+                player.displayClientMessage(new TranslatableComponent("block.minecraft.sleeping_bag.occupied"), true);
             }
 
             return InteractionResult.SUCCESS;
@@ -113,7 +113,7 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
     }
 
 
-    private boolean kickVillagerOutOfBed(Level level, BlockPos pos) {
+    public static boolean kickVillagerOutOfBed(Level level, BlockPos pos) {
         List<Villager> list = level.getEntitiesOfClass(Villager.class, new AABB(pos), LivingEntity::isSleeping);
 
         if (list.isEmpty()) {

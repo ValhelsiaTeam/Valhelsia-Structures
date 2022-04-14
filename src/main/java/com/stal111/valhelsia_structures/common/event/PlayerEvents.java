@@ -1,8 +1,10 @@
 package com.stal111.valhelsia_structures.common.event;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,7 +28,9 @@ public class PlayerEvents {
             return;
         }
 
-        if (event.getEntityLiving().getLevel().getBlockState(pos).is(ModTags.Blocks.SLEEPING_BAGS)) {
+        BlockState state = event.getEntityLiving().getLevel().getBlockState(pos);
+
+        if (state.is(ModTags.Blocks.SLEEPING_BAGS) || state.is(ModBlocks.EXPLORERS_TENT.get())) {
             event.setCanceled(true);
         }
     }

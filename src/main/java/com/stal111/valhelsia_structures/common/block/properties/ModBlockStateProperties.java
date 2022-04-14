@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties
  *
  * @author Valhelsia Team
- * @version 16.0.4
+ * @version 1.18.2 - 0.2.0
  * @since 2020-10-16
  */
 public class ModBlockStateProperties {
@@ -17,6 +17,7 @@ public class ModBlockStateProperties {
     public static final BooleanProperty TREASURE = BooleanProperty.create("treasure");
     public static final BooleanProperty ROTATED = BooleanProperty.create("rotated");
     public static final BooleanProperty MIRRORED = BooleanProperty.create("mirrored");
+    public static final BooleanProperty SLEEPING_BAG = BooleanProperty.create("sleeping_bag");
 
     public static final IntegerProperty LAYERS_1_5 = IntegerProperty.create("layers", 1, 5);
     public static final IntegerProperty ROTATION_0_7 = IntegerProperty.create("rotation", 0, 7);
