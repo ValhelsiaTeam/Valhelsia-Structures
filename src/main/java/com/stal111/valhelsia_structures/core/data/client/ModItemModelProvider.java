@@ -29,7 +29,6 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
 
     @Override
     protected void registerModels() {
-        getRemainingBlockItems().removeIf(item -> item.get().getRegistryName().getPath().contains("lapidified_jungle_post"));
        // getRemainingBlockItems().remove(ModBlocks.JUNGLE_HEAD);
 
         forEachBlockItem(item -> item.getBlock() instanceof ValhelsiaGrassBlock || item.getBlock() instanceof ValhelsiaStoneBlock, item -> withParent(item, true));

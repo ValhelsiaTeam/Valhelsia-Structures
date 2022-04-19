@@ -6,6 +6,7 @@ import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
 import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
 import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BedItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -48,7 +50,8 @@ public class ModBlocks {
     public static final RegistryObject<PostBlock> DARK_OAK_POST = HELPER.register("dark_oak_post", () -> new PostBlock(() -> Blocks.DARK_OAK_LOG));
     public static final RegistryObject<PostBlock> WARPED_POST = HELPER.register("warped_post", () -> new PostBlock(() -> Blocks.WARPED_STEM));
     public static final RegistryObject<PostBlock> CRIMSON_POST = HELPER.register("crimson_post", () -> new PostBlock(() -> Blocks.CRIMSON_STEM));
-    //public static final RegistryObject<PostBlock> LAPIDIFIED_JUNGLE_POST = HELPER.register("lapidified_jungle_post", new PostBlock(new ResourceLocation(ValhelsiaStructures.MOD_ID, "lapidified_jungle_log"), BlockProperties.LAPIDIFIED_JUNGLE_LOG));
+    public static final RegistryObject<PostBlock> LAPIDIFIED_JUNGLE_POST = HELPER.register("lapidified_jungle_post", () -> new PostBlock(new ResourceLocation(ValhelsiaStructures.MOD_ID, "lapidified_jungle_log"), BlockProperties.LAPIDIFIED_JUNGLE_LOG));
+
     //Cut Posts
     public static final RegistryObject<CutPostBlock> CUT_OAK_POST = HELPER.register("cut_oak_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.WOOD, MaterialColor.PODZOL)));
     public static final RegistryObject<CutPostBlock> CUT_SPRUCE_POST = HELPER.register("cut_spruce_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN)));
@@ -58,7 +61,7 @@ public class ModBlocks {
     public static final RegistryObject<CutPostBlock> CUT_DARK_OAK_POST = HELPER.register("cut_dark_oak_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN)));
     public static final RegistryObject<CutPostBlock> CUT_WARPED_POST = HELPER.register("cut_warped_post", () -> new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.WARPED_STEM)));
     public static final RegistryObject<CutPostBlock> CUT_CRIMSON_POST = HELPER.register("cut_crimson_post", () -> new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.CRIMSON_STEM)));
-    //public static final RegistryObject<CutPostBlock> CUT_LAPIDIFIED_JUNGLE_POST = HELPER.register("cut_lapidified_jungle_post", new CutPostBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG.notSolid()));
+    public static final RegistryObject<CutPostBlock> CUT_LAPIDIFIED_JUNGLE_POST = HELPER.register("cut_lapidified_jungle_post", () -> new CutPostBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG.noOcclusion()));
 
     // Bundled Posts
     public static final RegistryObject<RotatedPillarBlock> BUNDLED_STRIPPED_OAK_POSTS = HELPER.registerStrippedLogBlock("bundled_stripped_oak_posts", MaterialColor.WOOD, MaterialColor.WOOD);

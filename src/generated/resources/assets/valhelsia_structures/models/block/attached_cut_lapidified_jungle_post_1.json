@@ -1,0 +1,7 @@
+{
+  "parent": "valhelsia_structures:block/attached_cut_post_1",
+  "textures": {
+    "post_side": "valhelsia_structures:block/post/lapidified_jungle_post",
+    "post_end": "valhelsia_structures:block/post/lapidified_jungle_post_top"
+  }
+}

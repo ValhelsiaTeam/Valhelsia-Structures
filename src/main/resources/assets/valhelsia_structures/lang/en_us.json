@@ -14,6 +14,7 @@
     "block.valhelsia_structures.dark_oak_post": "Dark Oak Post",
     "block.valhelsia_structures.warped_post": "Warped Post",
     "block.valhelsia_structures.crimson_post": "Crimson Post",
+    "block.valhelsia_structures.lapidified_jungle_post": "Lapidified Jungle Post",
 
     "block.valhelsia_structures.cut_oak_post": "Cut Oak Post",
     "block.valhelsia_structures.cut_spruce_post": "Cut Spruce Post",
@@ -23,6 +24,7 @@
     "block.valhelsia_structures.cut_dark_oak_post": "Cut Dark Oak Post",
     "block.valhelsia_structures.cut_warped_post": "Cut Warped Post",
     "block.valhelsia_structures.cut_crimson_post": "Cut Crimson Post",
+    "block.valhelsia_structures.cut_lapidified_jungle_post": "Cut Lapidified Jungle Post",
 
     "block.valhelsia_structures.bundled_oak_posts": "Bundled Oak Posts",
     "block.valhelsia_structures.bundled_spruce_posts": "Bundled Spruce Posts",
@@ -42,7 +44,6 @@
     "block.valhelsia_structures.bundled_stripped_crimson_posts": "Bundled Stripped Crimson Posts",
     "block.valhelsia_structures.bundled_stripped_warped_posts": "Bundled Stripped Warped Posts",
 
-    "block.valhelsia_structures.lapidified_jungle_post": "Lapidified Jungle Post",
     "block.valhelsia_structures.metal_framed_glass": "Metal Framed Glass",
     "block.valhelsia_structures.metal_framed_glass_pane": "Metal Framed Glass Pane",
     "block.valhelsia_structures.paper_wall": "Paper Wall",

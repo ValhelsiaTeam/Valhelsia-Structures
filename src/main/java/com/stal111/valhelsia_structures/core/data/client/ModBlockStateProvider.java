@@ -8,7 +8,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -32,7 +31,6 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        getRemainingBlocks().removeIf(block -> this.getName(block.get()).contains("lapidified_jungle_post"));
        // getRemainingBlocks().remove(ModBlocks.JUNGLE_HEAD);
 
         forEach(block -> block instanceof BrazierBlock, this::brazierBlock);

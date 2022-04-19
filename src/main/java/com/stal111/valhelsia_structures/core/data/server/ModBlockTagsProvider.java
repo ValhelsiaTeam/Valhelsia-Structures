@@ -37,9 +37,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 this.tag(ModTags.Blocks.CUT_POSTS).add(registryObject.get());
             }
         });
-        this.tag(ModTags.Blocks.NON_FLAMMABLE_POSTS).add(ModBlocks.WARPED_POST.get(), ModBlocks.CRIMSON_POST.get()
-                //    , ModBlocks.LAPIDIFIED_JUNGLE_POST.get()
-        );
+        this.tag(ModTags.Blocks.NON_FLAMMABLE_POSTS).add(ModBlocks.WARPED_POST.get(), ModBlocks.CRIMSON_POST.get(), ModBlocks.LAPIDIFIED_JUNGLE_POST.get());
         this.tag(BlockTags.IMPERMEABLE).add(ModBlocks.METAL_FRAMED_GLASS.get());
         this.tag(Tags.Blocks.GLASS).add(ModBlocks.METAL_FRAMED_GLASS.get());
         this.tag(Tags.Blocks.GLASS_COLORLESS).add(ModBlocks.METAL_FRAMED_GLASS.get());
