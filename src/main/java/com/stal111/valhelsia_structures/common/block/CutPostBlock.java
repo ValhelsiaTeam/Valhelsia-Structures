@@ -4,7 +4,9 @@ import com.google.common.collect.ImmutableMap;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -22,6 +24,9 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.common.helper.VoxelShapeHelper;
 
 import javax.annotation.Nonnull;
@@ -29,6 +34,7 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Cut Post Block <br>
@@ -108,6 +114,26 @@ public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
 
     private boolean shouldAttach(Level world, BlockPos pos) {
         return world.getBlockState(pos.below()).isFaceSturdy(world, pos.below(), Direction.UP) && world.getBlockState(pos).getValue(FACING).getAxis() != Direction.Axis.Y;
+    }
+
+    @Nullable
+    @Override
+    public BlockState getToolModifiedState(BlockState state, Level level, BlockPos pos, Player player, ItemStack stack, ToolAction toolAction) {
+        ResourceLocation location = state.getBlock().getRegistryName();
+
+        if (!stack.canPerformAction(toolAction) || Objects.requireNonNull(location).getPath().contains("stripped")) {
+            return null;
+        }
+
+        if (toolAction == ToolActions.AXE_STRIP) {
+            return Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(location.getNamespace(), "cut_stripped_" + location.getPath().substring(4)))).defaultBlockState()
+                    .setValue(FACING, state.getValue(FACING))
+                    .setValue(ATTACHED, state.getValue(ATTACHED))
+                    .setValue(PARTS, state.getValue(PARTS))
+                    .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
+        }
+
+        return null;
     }
 
     @Nonnull

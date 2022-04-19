@@ -1,11 +1,11 @@
 package com.stal111.valhelsia_structures.common.block;
 
-import com.google.common.collect.ImmutableMap;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -23,6 +23,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.ToolAction;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.common.helper.VoxelShapeHelper;
 
@@ -37,7 +39,7 @@ import java.util.function.Supplier;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.PostBlock
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.18.2 - 0.2.0
  */
 public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBlock {
 
@@ -46,10 +48,7 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
 
     private final Supplier<? extends Block> logBlock;
 
-    public static final Map<Direction.Axis, VoxelShape> SHAPES = ImmutableMap.of(
-            Direction.Axis.Y, Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D),
-            Direction.Axis.Z, Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 16.0D),
-            Direction.Axis.X, Block.box(0.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D));
+    public static final Map<Direction.Axis, VoxelShape> SHAPES = VoxelShapeHelper.rotateAxis(Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D));
 
     public PostBlock(Supplier<? extends Block> logBlock) {
         super(Properties.copy(logBlock.get()).noOcclusion());
@@ -100,6 +99,25 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
 
     private boolean shouldAttach(Level world, BlockPos pos) {
         return world.getBlockState(pos.below()).isFaceSturdy(world, pos.below(), Direction.UP) && world.getBlockState(pos).getValue(AXIS) != Direction.Axis.Y;
+    }
+
+    @Nullable
+    @Override
+    public BlockState getToolModifiedState(BlockState state, Level level, BlockPos pos, Player player, ItemStack stack, ToolAction toolAction) {
+        ResourceLocation location = state.getBlock().getRegistryName();
+
+        if (!stack.canPerformAction(toolAction) || Objects.requireNonNull(location).getPath().contains("stripped")) {
+            return null;
+        }
+
+        if (toolAction == ToolActions.AXE_STRIP) {
+            return Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(location.getNamespace(), "stripped_" + location.getPath()))).defaultBlockState()
+                    .setValue(AXIS, state.getValue(AXIS))
+                    .setValue(ATTACHED, state.getValue(ATTACHED))
+                    .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
+        }
+
+        return null;
     }
 
     @Override

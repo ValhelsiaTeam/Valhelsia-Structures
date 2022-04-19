@@ -1,0 +1,73 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "valhelsia_structures:cut_stripped_spruce_post",
+                  "properties": {
+                    "parts": "1"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "add": false
+            },
+            {
+              "function": "minecraft:set_count",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "valhelsia_structures:cut_stripped_spruce_post",
+                  "properties": {
+                    "parts": "2"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "add": false
+            },
+            {
+              "function": "minecraft:set_count",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "valhelsia_structures:cut_stripped_spruce_post",
+                  "properties": {
+                    "parts": "3"
+                  }
+                }
+              ],
+              "count": 3.0,
+              "add": false
+            },
+            {
+              "function": "minecraft:set_count",
+              "conditions": [
+                {
+                  "condition": "minecraft:block_state_property",
+                  "block": "valhelsia_structures:cut_stripped_spruce_post",
+                  "properties": {
+                    "parts": "4"
+                  }
+                }
+              ],
+              "count": 4.0,
+              "add": false
+            }
+          ],
+          "name": "valhelsia_structures:cut_stripped_spruce_post"
+        }
+      ]
+    }
+  ]
+}

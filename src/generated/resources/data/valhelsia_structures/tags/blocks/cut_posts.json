@@ -9,6 +9,15 @@
     "valhelsia_structures:cut_dark_oak_post",
     "valhelsia_structures:cut_warped_post",
     "valhelsia_structures:cut_crimson_post",
-    "valhelsia_structures:cut_lapidified_jungle_post"
+    "valhelsia_structures:cut_lapidified_jungle_post",
+    "valhelsia_structures:cut_stripped_oak_post",
+    "valhelsia_structures:cut_stripped_spruce_post",
+    "valhelsia_structures:cut_stripped_birch_post",
+    "valhelsia_structures:cut_stripped_jungle_post",
+    "valhelsia_structures:cut_stripped_acacia_post",
+    "valhelsia_structures:cut_stripped_dark_oak_post",
+    "valhelsia_structures:cut_stripped_warped_post",
+    "valhelsia_structures:cut_stripped_crimson_post",
+    "valhelsia_structures:cut_stripped_lapidified_jungle_post"
   ]
 }

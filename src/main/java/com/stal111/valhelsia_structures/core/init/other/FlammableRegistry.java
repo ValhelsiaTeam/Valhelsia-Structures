@@ -23,6 +23,14 @@ public class FlammableRegistry {
         HELPER.registerLog(ModBlocks.JUNGLE_POST.get());
         HELPER.registerLog(ModBlocks.ACACIA_POST.get());
         HELPER.registerLog(ModBlocks.DARK_OAK_POST.get());
+
+        HELPER.registerLog(ModBlocks.STRIPPED_OAK_POST.get());
+        HELPER.registerLog(ModBlocks.STRIPPED_SPRUCE_POST.get());
+        HELPER.registerLog(ModBlocks.STRIPPED_BIRCH_POST.get());
+        HELPER.registerLog(ModBlocks.STRIPPED_JUNGLE_POST.get());
+        HELPER.registerLog(ModBlocks.STRIPPED_ACACIA_POST.get());
+        HELPER.registerLog(ModBlocks.STRIPPED_DARK_OAK_POST.get());
+
         HELPER.registerLog(ModBlocks.CUT_OAK_POST.get());
         HELPER.registerLog(ModBlocks.CUT_SPRUCE_POST.get());
         HELPER.registerLog(ModBlocks.CUT_BIRCH_POST.get());

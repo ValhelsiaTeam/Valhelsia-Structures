@@ -33,6 +33,9 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
     protected void registerStatesAndModels() {
        // getRemainingBlocks().remove(ModBlocks.JUNGLE_HEAD);
 
+        getRemainingBlocks().remove(ModBlocks.STRIPPED_LAPIDIFIED_JUNGLE_POST);
+        getRemainingBlocks().remove(ModBlocks.CUT_STRIPPED_LAPIDIFIED_JUNGLE_POST);
+
         forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
         forEach(block -> getName(block).contains("bundled"), block -> axisBlock((RotatedPillarBlock) block, modLoc("block/bundled_posts/" + getName(block)), modLoc("block/bundled_posts/" + getName(block) + "_top")));
         forEach(block -> block instanceof PostBlock, this::postBlock);

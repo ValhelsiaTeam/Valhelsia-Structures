@@ -52,6 +52,16 @@ public class ModBlocks {
     public static final RegistryObject<PostBlock> CRIMSON_POST = HELPER.register("crimson_post", () -> new PostBlock(() -> Blocks.CRIMSON_STEM));
     public static final RegistryObject<PostBlock> LAPIDIFIED_JUNGLE_POST = HELPER.register("lapidified_jungle_post", () -> new PostBlock(new ResourceLocation(ValhelsiaStructures.MOD_ID, "lapidified_jungle_log"), BlockProperties.LAPIDIFIED_JUNGLE_LOG));
 
+    public static final RegistryObject<PostBlock> STRIPPED_OAK_POST = HELPER.register("stripped_oak_post", () -> new PostBlock(() -> Blocks.OAK_LOG));
+    public static final RegistryObject<PostBlock> STRIPPED_SPRUCE_POST = HELPER.register("stripped_spruce_post", () -> new PostBlock(() -> Blocks.SPRUCE_LOG));
+    public static final RegistryObject<PostBlock> STRIPPED_BIRCH_POST = HELPER.register("stripped_birch_post", () -> new PostBlock(() -> Blocks.BIRCH_LOG));
+    public static final RegistryObject<PostBlock> STRIPPED_JUNGLE_POST = HELPER.register("stripped_jungle_post", () -> new PostBlock(() -> Blocks.JUNGLE_LOG));
+    public static final RegistryObject<PostBlock> STRIPPED_ACACIA_POST = HELPER.register("stripped_acacia_post", () -> new PostBlock(() -> Blocks.ACACIA_LOG));
+    public static final RegistryObject<PostBlock> STRIPPED_DARK_OAK_POST = HELPER.register("stripped_dark_oak_post", () -> new PostBlock(() -> Blocks.DARK_OAK_LOG));
+    public static final RegistryObject<PostBlock> STRIPPED_WARPED_POST = HELPER.register("stripped_warped_post", () -> new PostBlock(() -> Blocks.WARPED_STEM));
+    public static final RegistryObject<PostBlock> STRIPPED_CRIMSON_POST = HELPER.register("stripped_crimson_post", () -> new PostBlock(() -> Blocks.CRIMSON_STEM));
+    public static final RegistryObject<PostBlock> STRIPPED_LAPIDIFIED_JUNGLE_POST = HELPER.register("stripped_lapidified_jungle_post", () -> new PostBlock(new ResourceLocation(ValhelsiaStructures.MOD_ID, "lapidified_jungle_log"), BlockProperties.LAPIDIFIED_JUNGLE_LOG));
+
     //Cut Posts
     public static final RegistryObject<CutPostBlock> CUT_OAK_POST = HELPER.register("cut_oak_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.WOOD, MaterialColor.PODZOL)));
     public static final RegistryObject<CutPostBlock> CUT_SPRUCE_POST = HELPER.register("cut_spruce_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN)));
@@ -62,6 +72,16 @@ public class ModBlocks {
     public static final RegistryObject<CutPostBlock> CUT_WARPED_POST = HELPER.register("cut_warped_post", () -> new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.WARPED_STEM)));
     public static final RegistryObject<CutPostBlock> CUT_CRIMSON_POST = HELPER.register("cut_crimson_post", () -> new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.CRIMSON_STEM)));
     public static final RegistryObject<CutPostBlock> CUT_LAPIDIFIED_JUNGLE_POST = HELPER.register("cut_lapidified_jungle_post", () -> new CutPostBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG.noOcclusion()));
+
+    public static final RegistryObject<CutPostBlock> CUT_STRIPPED_OAK_POST = HELPER.register("cut_stripped_oak_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.WOOD, MaterialColor.PODZOL)));
+    public static final RegistryObject<CutPostBlock> CUT_STRIPPED_SPRUCE_POST = HELPER.register("cut_stripped_spruce_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN)));
+    public static final RegistryObject<CutPostBlock> CUT_STRIPPED_BIRCH_POST = HELPER.register("cut_stripped_birch_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.SAND, MaterialColor.QUARTZ)));
+    public static final RegistryObject<CutPostBlock> CUT_STRIPPED_JUNGLE_POST = HELPER.register("cut_stripped_jungle_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.DIRT, MaterialColor.PODZOL)));
+    public static final RegistryObject<CutPostBlock> CUT_STRIPPED_ACACIA_POST = HELPER.register("cut_stripped_acacia_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.COLOR_ORANGE, MaterialColor.STONE)));
+    public static final RegistryObject<CutPostBlock> CUT_STRIPPED_DARK_OAK_POST = HELPER.register("cut_stripped_dark_oak_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN)));
+    public static final RegistryObject<CutPostBlock> CUT_STRIPPED_WARPED_POST = HELPER.register("cut_stripped_warped_post", () -> new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.WARPED_STEM)));
+    public static final RegistryObject<CutPostBlock> CUT_STRIPPED_CRIMSON_POST = HELPER.register("cut_stripped_crimson_post", () -> new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.CRIMSON_STEM)));
+    public static final RegistryObject<CutPostBlock> CUT_STRIPPED_LAPIDIFIED_JUNGLE_POST = HELPER.register("cut_stripped_lapidified_jungle_post", () -> new CutPostBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG.noOcclusion()));
 
     // Bundled Posts
     public static final RegistryObject<RotatedPillarBlock> BUNDLED_STRIPPED_OAK_POSTS = HELPER.registerStrippedLogBlock("bundled_stripped_oak_posts", MaterialColor.WOOD, MaterialColor.WOOD);
