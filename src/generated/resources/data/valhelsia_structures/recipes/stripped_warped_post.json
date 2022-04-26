@@ -1,7 +1,7 @@
 {
   "type": "valhelsia_structures:axe_crafting",
   "input": {
-    "item": "minecraft:warped_stem"
+    "item": "minecraft:stripped_warped_stem"
   },
   "output": {
     "item": "valhelsia_structures:stripped_warped_post",

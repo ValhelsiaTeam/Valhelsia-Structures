@@ -1,7 +1,7 @@
 {
   "type": "valhelsia_structures:axe_crafting",
   "input": {
-    "item": "minecraft:birch_log"
+    "item": "minecraft:stripped_birch_log"
   },
   "output": {
     "item": "valhelsia_structures:stripped_birch_post",

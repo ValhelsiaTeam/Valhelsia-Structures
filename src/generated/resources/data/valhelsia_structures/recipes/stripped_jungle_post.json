@@ -1,7 +1,7 @@
 {
   "type": "valhelsia_structures:axe_crafting",
   "input": {
-    "item": "minecraft:jungle_log"
+    "item": "minecraft:stripped_jungle_log"
   },
   "output": {
     "item": "valhelsia_structures:stripped_jungle_post",
