@@ -5,7 +5,8 @@ import com.stal111.valhelsia_structures.common.block.properties.ModBlockStatePro
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -42,7 +43,7 @@ import java.util.Map;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.TentBlock
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.2.0
+ * @version 1.19 - 0.2.0
  * @since 2020-12-10
  */
 public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock, EntityBlock {
@@ -141,15 +142,15 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
 
             if (state.getValue(OCCUPIED)) {
                 if (!SleepingBagBlock.kickVillagerOutOfBed(level, pos)) {
-                    player.displayClientMessage(new TranslatableComponent("block.minecraft.sleeping_bag.occupied"), true);
+                    player.displayClientMessage(Component.translatable("block.minecraft.sleeping_bag.occupied"), true);
                 }
 
                 return InteractionResult.SUCCESS;
             }
 
             player.startSleepInBed(pos).ifLeft((problem) -> {
-                if (problem != null && problem.getMessage() instanceof TranslatableComponent component) {
-                    player.displayClientMessage(new TranslatableComponent("block.valhelsia_structures.sleeping_bag." + component.getKey().split("\\.")[3]), true);
+                if (problem != null && problem.getMessage().getContents() instanceof TranslatableContents contents) {
+                    player.displayClientMessage(Component.translatable("block.valhelsia_structures.sleeping_bag." + contents.getKey().split("\\.")[3]), true);
                 }
             });
 

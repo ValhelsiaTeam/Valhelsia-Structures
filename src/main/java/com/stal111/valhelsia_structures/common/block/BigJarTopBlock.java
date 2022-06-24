@@ -31,7 +31,7 @@ import java.util.Objects;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.BigJarTopBlock
  *
  * @author Valhelsia Team
- * @version 0.1.1
+ * @version 1.19 - 0.2.0
  * @since 2021-05-15
  */
 public class BigJarTopBlock extends Block implements SimpleWaterloggedBlock {
@@ -86,7 +86,7 @@ public class BigJarTopBlock extends Block implements SimpleWaterloggedBlock {
 
     private BigJarBlock getJarBlock() {
         if (this.bigJarBlock == null) {
-            this.bigJarBlock = (BigJarBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(this.getRegistryName()).getPath().replace("_top", "")));
+            this.bigJarBlock = (BigJarBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(this)).getPath().replace("_top", "")));
         }
         return this.bigJarBlock;
     }

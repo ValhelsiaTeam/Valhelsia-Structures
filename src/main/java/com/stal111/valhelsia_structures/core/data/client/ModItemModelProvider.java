@@ -8,7 +8,9 @@ import com.stal111.valhelsia_structures.common.block.ValhelsiaStoneBlock;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.core.init.ModItems;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.core.data.ValhelsiaItemModelProvider;
 
 import java.util.Objects;
@@ -18,7 +20,7 @@ import java.util.Objects;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.client.ModItemModelProvider
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.2.0
+ * @version 1.19 - 0.2.0
  * @since 2020-11-13
  */
 public class ModItemModelProvider extends ValhelsiaItemModelProvider {
@@ -34,9 +36,9 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
         getRemainingBlockItems().remove(ModBlocks.CUT_STRIPPED_LAPIDIFIED_JUNGLE_POST);
 
         forEachBlockItem(item -> item.getBlock() instanceof ValhelsiaGrassBlock || item.getBlock() instanceof ValhelsiaStoneBlock, item -> withParent(item, true));
-        takeBlockItem(item -> withParent(item, Objects.requireNonNull(item.getRegistryName()).getPath() + "_off"), ModBlocks.BRAZIER, ModBlocks.SOUL_BRAZIER);
+        takeBlockItem(item -> withParent(item, getName(item) + "_off"), ModBlocks.BRAZIER, ModBlocks.SOUL_BRAZIER);
         takeBlockItem(item -> simpleModelBlockTexture(item, "metal_framed_glass"), ModBlocks.METAL_FRAMED_GLASS_PANE);
-        forEachBlockItem(item -> item.getBlock() instanceof CutPostBlock, item -> withParent(item, item.getRegistryName().getPath() + "_1"));
+        forEachBlockItem(item -> item.getBlock() instanceof CutPostBlock, item -> withParent(item, getName(item) + "_1"));
         takeBlockItem(this::simpleModelBlockTexture,
                 ModBlocks.HANGING_VINES,
                 ModBlocks.PAPER_WALL
@@ -63,5 +65,9 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
         forEachBlockItem(this::withParent);
 
         forEachItem(this::simpleModel);
+    }
+
+    private String getName(Item item) {
+        return Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item)).getPath();
     }
 }

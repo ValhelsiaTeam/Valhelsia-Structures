@@ -1,11 +1,11 @@
 package com.stal111.valhelsia_structures.common;
 
 import com.stal111.valhelsia_structures.common.world.structures.pools.*;
-import com.stal111.valhelsia_structures.core.init.ModStructures;
 import com.stal111.valhelsia_structures.core.init.other.CompostableRegistry;
 import com.stal111.valhelsia_structures.core.init.other.FireExtinguishRegistry;
 import com.stal111.valhelsia_structures.core.init.other.FlammableRegistry;
 import com.stal111.valhelsia_structures.core.init.other.FlintAndSteelRegistry;
+import com.stal111.valhelsia_structures.core.init.world.ModStructures;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 /**
@@ -13,7 +13,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.CommonSetup
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.19 - 0.2.0
  * @since 2021-02-14
  */
 public class CommonSetup {
@@ -22,9 +22,9 @@ public class CommonSetup {
         event.enqueueWork(() -> {
             FlammableRegistry.register();
             CompostableRegistry.register();
-
-            ModStructures.setupStructures();
         });
+
+        ModStructures.setup();
 
         FlintAndSteelRegistry.register();
         FireExtinguishRegistry.register();

@@ -3,21 +3,18 @@ package com.stal111.valhelsia_structures.utils;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.levelgen.feature.ConfiguredStructureFeature;
+import net.minecraft.world.level.levelgen.structure.Structure;
 
 /**
  * Mod Tags <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.utils.ModTags
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.2.0
+ * @version 1.19 - 0.2.0
  */
 public class ModTags {
 
@@ -65,12 +62,12 @@ public class ModTags {
         }
     }
 
-    public static class ConfiguredStructures {
-        public static final TagKey<ConfiguredStructureFeature<?, ?>> ON_SPAWNER_DUNGEON_EXPLORER_MAPS = modTag("on_spawner_dungeon_explorer_maps");
-        public static final TagKey<ConfiguredStructureFeature<?, ?>> ON_CASTLE_EXPLORER_MAPS = modTag("on_castle_explorer_maps");
+    public static class Structures {
+        public static final TagKey<Structure> ON_SPAWNER_DUNGEON_EXPLORER_MAPS = modTag("on_spawner_dungeon_explorer_maps");
+        public static final TagKey<Structure> ON_CASTLE_EXPLORER_MAPS = modTag("on_castle_explorer_maps");
 
-        private static TagKey<ConfiguredStructureFeature<?, ?>> modTag(String name) {
-            return TagKey.create(Registry.CONFIGURED_STRUCTURE_FEATURE_REGISTRY, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
+        private static TagKey<Structure> modTag(String name) {
+            return TagKey.create(Registry.STRUCTURE_REGISTRY, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
         }
     }
 

@@ -7,10 +7,12 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Mod Creative Mode Tabs <br>
@@ -40,7 +42,7 @@ public class ModCreativeModeTabs {
             items.removeIf(itemStack -> {
                 Item item = itemStack.getItem();
 
-                if (item.getRegistryName().toString().contains("lapidified") || (item instanceof BlockItem blockItem && (blockItem.getBlock() == ModBlocks.EXPLORERS_TENT.get() || blockItem.getBlock() == ModBlocks.GIANT_FERN.get() || blockItem.getBlock() == ModBlocks.HIBISCUS.get()))) {
+                if (Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item)).toString().contains("lapidified") || (item instanceof BlockItem blockItem && (blockItem.getBlock() == ModBlocks.EXPLORERS_TENT.get() || blockItem.getBlock() == ModBlocks.GIANT_FERN.get() || blockItem.getBlock() == ModBlocks.HIBISCUS.get()))) {
                     HIDDEN_ITEMS.add(itemStack);
                     return true;
                 }

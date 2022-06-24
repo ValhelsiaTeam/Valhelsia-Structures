@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.common.block;
 import com.stal111.valhelsia_structures.common.block.entity.SpecialSpawnerBlockEntity;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -28,7 +29,7 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.SpecialSpawnerBlock
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.19 - 0.2.0
  */
 public class SpecialSpawnerBlock extends Block implements EntityBlock {
 
@@ -43,8 +44,8 @@ public class SpecialSpawnerBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public int getExpDrop(BlockState state, LevelReader world, BlockPos pos, int fortune, int silktouch) {
-        return 10 + RANDOM.nextInt(15) + RANDOM.nextInt(15);
+    public int getExpDrop(BlockState state, LevelReader level, RandomSource random, BlockPos pos, int fortuneLevel, int silkTouchLevel) {
+        return 10 + random.nextInt(15) + random.nextInt(15);
     }
 
     @Nonnull

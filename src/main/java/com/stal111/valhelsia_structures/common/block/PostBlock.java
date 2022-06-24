@@ -5,9 +5,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -101,12 +101,11 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
         return world.getBlockState(pos.below()).isFaceSturdy(world, pos.below(), Direction.UP) && world.getBlockState(pos).getValue(AXIS) != Direction.Axis.Y;
     }
 
-    @Nullable
     @Override
-    public BlockState getToolModifiedState(BlockState state, Level level, BlockPos pos, Player player, ItemStack stack, ToolAction toolAction) {
-        ResourceLocation location = state.getBlock().getRegistryName();
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+        ResourceLocation location = ForgeRegistries.BLOCKS.getKey(this);
 
-        if (!stack.canPerformAction(toolAction) || Objects.requireNonNull(location).getPath().contains("stripped")) {
+        if (!context.getItemInHand().canPerformAction(toolAction) || Objects.requireNonNull(location).getPath().contains("stripped")) {
             return null;
         }
 
@@ -117,8 +116,7 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
                     .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
         }
 
-        return null;
-    }
+        return null;    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

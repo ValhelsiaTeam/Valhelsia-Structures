@@ -19,7 +19,7 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.server.ModBlockTagsProvider
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.2.0
+ * @version 1.19 - 0.2.0
  * @since 2021-01-11
  */
 public class ModBlockTagsProvider extends BlockTagsProvider {
@@ -31,7 +31,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
     @Override
     protected void addTags() {
         this.tag(ModTags.Blocks.BRAZIERS).add(ModBlocks.BRAZIER.get(), ModBlocks.SOUL_BRAZIER.get());
-        ModBlocks.HELPER.getDeferredRegister().getEntries().forEach(registryObject -> {
+        ModBlocks.HELPER.getRegistryObjects().forEach(registryObject -> {
             if (registryObject.get() instanceof PostBlock) {
                 this.tag(ModTags.Blocks.POSTS).add(registryObject.get());
             } else if (registryObject.get() instanceof CutPostBlock) {

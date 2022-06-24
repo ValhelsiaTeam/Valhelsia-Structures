@@ -6,9 +6,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -41,7 +41,7 @@ import java.util.Objects;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.CutPostBlock
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.19 - 0.2.0
  */
 public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
 
@@ -116,12 +116,11 @@ public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
         return world.getBlockState(pos.below()).isFaceSturdy(world, pos.below(), Direction.UP) && world.getBlockState(pos).getValue(FACING).getAxis() != Direction.Axis.Y;
     }
 
-    @Nullable
     @Override
-    public BlockState getToolModifiedState(BlockState state, Level level, BlockPos pos, Player player, ItemStack stack, ToolAction toolAction) {
-        ResourceLocation location = state.getBlock().getRegistryName();
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+        ResourceLocation location = ForgeRegistries.BLOCKS.getKey(this);
 
-        if (!stack.canPerformAction(toolAction) || Objects.requireNonNull(location).getPath().contains("stripped")) {
+        if (!context.getItemInHand().canPerformAction(toolAction) || Objects.requireNonNull(location).getPath().contains("stripped")) {
             return null;
         }
 

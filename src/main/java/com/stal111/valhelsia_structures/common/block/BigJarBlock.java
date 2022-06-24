@@ -16,7 +16,9 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -33,7 +35,7 @@ import java.util.Objects;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.BigJarBlock
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.19 - 0.2.0
  * @since 2021-04-17
  */
 public class BigJarBlock extends Block implements SimpleWaterloggedBlock {
@@ -94,7 +96,7 @@ public class BigJarBlock extends Block implements SimpleWaterloggedBlock {
 
     public BigJarTopBlock getTopBlock() {
         if (this.topBlock == null) {
-            this.topBlock = (BigJarTopBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(this.getRegistryName()).getPath() + "_top"));
+            this.topBlock = (BigJarTopBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(this)).getPath() + "_top"));
         }
         return this.topBlock;
     }

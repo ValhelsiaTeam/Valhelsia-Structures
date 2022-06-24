@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -31,14 +32,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
 
 /**
  * Brazier Block <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.BrazierBlock
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
+ * @version 1.19 - 0.2.0
  */
 public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
 
@@ -100,16 +100,18 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public void animateTick(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Random rand) {
-        if (state.getValue(LIT)) {
-            if (rand.nextInt(10) == 0) {
-                level.playLocalSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.6F, false);
-            }
+    public void animateTick(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
+        if (!state.getValue(LIT)) {
+            return;
+        }
 
-            if (this.spawnParticles && rand.nextInt(5) == 0) {
-                for (int i = 0; i < rand.nextInt(1) + 1; i++) {
-                    level.addParticle(ParticleTypes.LAVA, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, rand.nextFloat() / 2.0F, 5.0E-5D, rand.nextFloat() / 2.0F);
-                }
+        if (random.nextInt(10) == 0) {
+            level.playLocalSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, SoundEvents.CAMPFIRE_CRACKLE, SoundSource.BLOCKS, 0.5F + random.nextFloat(), random.nextFloat() * 0.7F + 0.6F, false);
+        }
+
+        if (this.spawnParticles && random.nextInt(5) == 0) {
+            for (int i = 0; i < random.nextInt(1) + 1; i++) {
+                level.addParticle(ParticleTypes.LAVA, pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, random.nextFloat() / 2.0F, 5.0E-5D, random.nextFloat() / 2.0F);
             }
         }
     }

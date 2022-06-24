@@ -22,9 +22,9 @@ mixin {
     add sourceSets.main, "valhelsia_structures.refmap.json"
 }
 
-version = '1.18.2-0.1.0'
+version = '1.19-0.1.0'
 group = 'com.stal111.valhelsia_structures' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'valhelsia_structures'
+archivesBaseName = 'valhelsia_structures-forge'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
@@ -35,7 +35,7 @@ minecraft {
     // stable_#            Stables are built at the discretion of the MCP team.
     // Use non-default mappings at your own risk. they may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'parchment', version: '2022.04.23-nightly-SNAPSHOT-1.18.2'
+    mappings channel: 'parchment', version: '1.18.2-2022.06.05-1.19'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -51,9 +51,6 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             arg "-mixin.config=valhelsia_structures.mixins.json"
 
@@ -72,9 +69,6 @@ minecraft {
 
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
-
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             arg "-mixin.config=valhelsia_structures.mixins.json"
 
@@ -132,16 +126,18 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.0'
+    minecraft 'net.minecraftforge:forge:1.19-41.0.45'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 
-    implementation fg.deobf(files("libs/valhelsia_core-${valhelsia_core_version}-dev.jar"))
+    implementation fg.deobf(files("libs/valhelsia_core-forge-${valhelsia_core_version}-dev.jar"))
 
     // compile against the JEI API but do not include it at runtime
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"

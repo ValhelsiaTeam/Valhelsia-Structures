@@ -2,7 +2,8 @@ package com.stal111.valhelsia_structures.common.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -42,7 +43,7 @@ import java.util.Map;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.SleepingBagBlock
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.2.0
+ * @version 1.19 - 0.2.0
  * @since 2022-04-02
  */
 public class SleepingBagBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
@@ -97,15 +98,15 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
 
         if (state.getValue(OCCUPIED)) {
             if (!kickVillagerOutOfBed(level, pos)) {
-                player.displayClientMessage(new TranslatableComponent("block.minecraft.sleeping_bag.occupied"), true);
+                player.displayClientMessage(Component.translatable("block.minecraft.sleeping_bag.occupied"), true);
             }
 
             return InteractionResult.SUCCESS;
         }
 
         player.startSleepInBed(pos).ifLeft((problem) -> {
-            if (problem != null && problem.getMessage() instanceof TranslatableComponent component) {
-                player.displayClientMessage(new TranslatableComponent("block.valhelsia_structures.sleeping_bag." + component.getKey().split("\\.")[3]), true);
+            if (problem != null && problem.getMessage().getContents() instanceof TranslatableContents contents) {
+                player.displayClientMessage(Component.translatable("block.valhelsia_structures.sleeping_bag." + contents.getKey().split("\\.")[3]), true);
             }
         });
 

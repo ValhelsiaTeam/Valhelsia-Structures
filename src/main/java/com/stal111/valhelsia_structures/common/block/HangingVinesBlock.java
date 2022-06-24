@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -17,14 +18,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
-import java.util.Random;
 
 /**
  * Hanging Vines Block <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.HangingVinesBlock
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.1.0
+ * @version 1.19 - 0.2.0
  * @since 2020-10-16
  */
 public class HangingVinesBlock extends GrowingPlantHeadBlock {
@@ -69,7 +69,7 @@ public class HangingVinesBlock extends GrowingPlantHeadBlock {
     }
 
     @Override
-    protected int getBlocksToGrowWhenBonemealed(@Nonnull Random random) {
+    protected int getBlocksToGrowWhenBonemealed(@Nonnull RandomSource random) {
         return random.nextInt(2) + 1;
     }
 

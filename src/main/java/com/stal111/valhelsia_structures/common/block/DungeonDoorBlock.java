@@ -9,6 +9,7 @@ import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -43,14 +44,13 @@ import javax.annotation.Nullable;
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Dungeon Door Block <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.DungeonDoorBlock
  *
  * @author Valhelsia Team
- * @version 1.18.1-0.1.1
+ * @version 1.19 - 0.2.0
  * @since 2021-01-13
  */
 public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, EntityBlock {
@@ -171,7 +171,7 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
     }
 
     @Override
-    public void tick(@Nonnull BlockState state, @Nonnull ServerLevel level, @Nonnull BlockPos pos, @Nonnull Random random) {
+    public void tick(@Nonnull BlockState state, @Nonnull ServerLevel level, @Nonnull BlockPos pos, @Nonnull RandomSource random) {
         this.breakDoor(level, pos, state, null, true);
     }
 

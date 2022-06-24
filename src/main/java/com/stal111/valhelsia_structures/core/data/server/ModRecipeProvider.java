@@ -28,7 +28,7 @@ import java.util.function.Consumer;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.server.ModRecipeProvider
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.2.0
+ * @version 1.19 - 0.2.0
  * @since 2020-11-16
  */
 public class ModRecipeProvider extends RecipeProvider {
@@ -43,11 +43,11 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(ModBlocks.BRAZIER.get()).pattern("*X*").pattern("###").define('#', Items.IRON_INGOT).define('X', ItemTags.COALS).define('*', Items.IRON_BARS).unlockedBy("has_item", has(ItemTags.COALS)).save(consumer);
         ShapedRecipeBuilder.shaped(ModBlocks.SOUL_BRAZIER.get()).pattern("*X*").pattern("###").define('#', Items.IRON_INGOT).define('X', ItemTags.SOUL_FIRE_BASE_BLOCKS).define('*', Items.IRON_BARS).unlockedBy("has_item", has(ItemTags.SOUL_FIRE_BASE_BLOCKS)).save(consumer);
 
-        ModBlocks.HELPER.getDeferredRegister().getEntries().forEach(registryObject -> {
+        ModBlocks.HELPER.getRegistryObjects().forEach(registryObject -> {
             if (registryObject.get() instanceof PostBlock postBlock) {
                 new AxeCraftingRecipeBuilder(Ingredient.of(postBlock.getLogBlock()), postBlock.asItem(), 2).unlocks("has_item", has(postBlock.getLogBlock())).save(consumer);
-            } else  if (registryObject.get() instanceof CutPostBlock) {
-                Block postBlock = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(registryObject.get().getRegistryName()).getPath().substring(4)));
+            } else if (registryObject.get() instanceof CutPostBlock block) {
+                Block postBlock = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block)).getPath().substring(4)));
 
                 if (postBlock != null) {
                     new AxeCraftingRecipeBuilder(Ingredient.of(postBlock), registryObject.get().asItem(), 4).unlocks("has_item", has(postBlock)).save(consumer);
@@ -76,13 +76,13 @@ public class ModRecipeProvider extends RecipeProvider {
         ShapedRecipeBuilder.shaped(ModBlocks.BIG_GLAZED_JAR.get()).pattern("# #").pattern("# #").pattern(" # ").define('#', Blocks.TERRACOTTA).group("big_jar").unlockedBy("has_item", has(Blocks.TERRACOTTA)).save(consumer);
 
         ModBlocks.COLORED_GLAZED_JARS.forEach(blockRegistryObject -> {
-            String name = blockRegistryObject.get().getRegistryName().getPath();
+            String name = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get())).getPath();
             Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name.substring(0, name.length() - 11) + "_terracotta")));
             ShapedRecipeBuilder.shaped(blockRegistryObject.get()).pattern("# #").pattern(" # ").define('#', block).group("jar").unlockedBy("has_item", has(block)).save(consumer);
         });
 
         ModBlocks.BIG_COLORED_GLAZED_JARS.forEach(blockRegistryObject -> {
-            String name = blockRegistryObject.get().getRegistryName().getPath();
+            String name = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get())).getPath();
             Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name.substring(4, name.length() - 11) + "_terracotta")));
             ShapedRecipeBuilder.shaped(blockRegistryObject.get()).pattern("# #").pattern("# #").pattern(" # ").define('#', block).group("big_jar").unlockedBy("has_item", has(block)).save(consumer);
         });
@@ -106,7 +106,7 @@ public class ModRecipeProvider extends RecipeProvider {
             }
 
             if (color != DyeColor.WHITE) {
-                ShapelessRecipeBuilder.shapeless(registryObject.get()).requires(whiteSleepingBag).requires(color.getTag()).unlockedBy("has_item", has(whiteSleepingBag)).unlockedBy("has_color", has(color.getTag())).save(consumer, new ResourceLocation(ValhelsiaStructures.MOD_ID, registryObject.get().getRegistryName().getPath() + "_from_white_sleeping_bag"));
+                ShapelessRecipeBuilder.shapeless(registryObject.get()).requires(whiteSleepingBag).requires(color.getTag()).unlockedBy("has_item", has(whiteSleepingBag)).unlockedBy("has_color", has(color.getTag())).save(consumer, new ResourceLocation(ValhelsiaStructures.MOD_ID, registryObject.getId() + "_from_white_sleeping_bag"));
             }
         });
 

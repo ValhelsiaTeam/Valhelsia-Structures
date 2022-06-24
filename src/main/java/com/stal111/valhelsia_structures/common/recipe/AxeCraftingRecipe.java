@@ -15,7 +15,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -28,7 +27,7 @@ import javax.annotation.Nullable;
  * form. The axe loses one durability per craft but is returned.
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.1.0
+ * @version 1.19 - 0.2.0
  * @since 2020-06-01
  */
 public class AxeCraftingRecipe extends CustomRecipe {
@@ -139,7 +138,7 @@ public class AxeCraftingRecipe extends CustomRecipe {
         return output;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<AxeCraftingRecipe> {
+    public static class Serializer implements RecipeSerializer<AxeCraftingRecipe> {
 
         @Nonnull
         @Override

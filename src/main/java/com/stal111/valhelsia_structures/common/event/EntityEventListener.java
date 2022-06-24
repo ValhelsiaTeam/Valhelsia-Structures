@@ -45,7 +45,7 @@ public class EntityEventListener {
                 VillagerProfession.CARTOGRAPHER,
                 1,
                 (trader, rand) -> {
-                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModTags.ConfiguredStructures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.spawner_dungeon");
+                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModTags.Structures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.spawner_dungeon");
                     if (stack == null) {
                         return null;
                     }
@@ -56,7 +56,7 @@ public class EntityEventListener {
                 VillagerProfession.CARTOGRAPHER,
                 2,
                 (trader, rand) -> {
-                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModTags.ConfiguredStructures.ON_CASTLE_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.castle");
+                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModTags.Structures.ON_CASTLE_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.castle");
                     if (stack == null) {
                         return null;
                     }

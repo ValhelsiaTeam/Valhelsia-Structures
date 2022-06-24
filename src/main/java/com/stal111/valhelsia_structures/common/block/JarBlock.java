@@ -110,7 +110,7 @@ public class JarBlock extends Block implements SimpleWaterloggedBlock, EntityBlo
     }
 
     private boolean canBePotted(Block block) {
-        ResourceLocation registryName = Objects.requireNonNull(block.getRegistryName());
+        ResourceLocation registryName = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block));
         ResourceLocation pottedName = new ResourceLocation(registryName.getNamespace(), "potted_" + registryName.getPath());
 
         if (!ForgeRegistries.BLOCKS.containsKey(pottedName)) {
