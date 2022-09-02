@@ -28,7 +28,7 @@ public class PlayerEvents {
             return;
         }
 
-        BlockState state = event.getEntityLiving().getLevel().getBlockState(pos);
+        BlockState state = event.getEntity().getLevel().getBlockState(pos);
 
         if (state.is(ModTags.Blocks.SLEEPING_BAGS) || state.is(ModBlocks.EXPLORERS_TENT.get())) {
             event.setCanceled(true);

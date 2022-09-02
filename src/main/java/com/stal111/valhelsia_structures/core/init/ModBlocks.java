@@ -17,8 +17,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 import net.valhelsia.valhelsia_core.client.util.ValhelsiaRenderType;
 import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.block.BlockRegistryHelper;
-import net.valhelsia.valhelsia_core.core.registry.block.RenderType;
+import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryHelper;
+import net.valhelsia.valhelsia_core.core.registry.helper.block.RenderType;
 
 import java.util.ArrayList;
 import java.util.Arrays;

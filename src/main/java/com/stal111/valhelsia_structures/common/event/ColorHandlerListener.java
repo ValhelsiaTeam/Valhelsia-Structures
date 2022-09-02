@@ -9,7 +9,7 @@ import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -18,14 +18,13 @@ import net.minecraftforge.fml.common.Mod;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.event.ColorHandlerListener
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2020-10-16
  */
 @Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ColorHandlerListener {
 
     @SubscribeEvent
-    public static void onBlockColor(ColorHandlerEvent.Block event) {
+    public static void onBlockColor(RegisterColorHandlersEvent.Block event) {
         BlockColors blockColors = event.getBlockColors();
 
         blockColors.register(
@@ -36,7 +35,7 @@ public class ColorHandlerListener {
     }
 
     @SubscribeEvent
-    public static void onItemColor(ColorHandlerEvent.Item event) {
+    public static void onItemColor(RegisterColorHandlersEvent.Item event) {
         BlockColors blockColors = event.getBlockColors();
         ItemColors itemColors = event.getItemColors();
 

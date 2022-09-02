@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.core.init.other;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
-import net.valhelsia.valhelsia_core.core.registry.block.CompostableHelper;
+import net.valhelsia.valhelsia_core.core.registry.helper.block.CompostableHelper;
 
 /**
  * Compostable Registry <br>

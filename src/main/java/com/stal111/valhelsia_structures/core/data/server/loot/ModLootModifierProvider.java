@@ -10,7 +10,6 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.valhelsia.valhelsia_core.common.loot.conditions.MatchBlockCondition;
 import net.valhelsia.valhelsia_core.common.loot.modifiers.AppendLootTableModifier;
-import net.valhelsia.valhelsia_core.core.init.ValhelsiaLootModifiers;
 
 /**
  * Mod Loot Modifiers <br>
@@ -29,7 +28,6 @@ public class ModLootModifierProvider extends GlobalLootModifierProvider {
     @Override
     protected void start() {
         add("jar_treasure",
-                ValhelsiaLootModifiers.APPEND_LOOT_MODIFIER.get(),
                 new AppendLootTableModifier(new LootItemCondition[] {
                         MatchBlockCondition.builder(null, ModTags.Blocks.JARS, StatePropertiesPredicate.Builder.properties().hasProperty(ModBlockStateProperties.TREASURE, true).build()).build()
                 }, new ResourceLocation(ValhelsiaStructures.MOD_ID, "treasure/jar_treasure"))

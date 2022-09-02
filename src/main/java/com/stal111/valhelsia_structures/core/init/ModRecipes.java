@@ -1,33 +1,25 @@
 package com.stal111.valhelsia_structures.core.init;
 
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipe;
-import net.minecraft.world.item.crafting.Recipe;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import javax.annotation.Nonnull;
+import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
+import net.valhelsia.valhelsia_core.core.registry.helper.RegistryHelper;
 
 /**
  * Recipes <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.init.ModRecipes
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2020-06-01
  */
 
-public class ModRecipes {
+public class ModRecipes implements RegistryClass {
 
-    public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, ValhelsiaStructures.MOD_ID);
+    public static final RegistryHelper<RecipeSerializer<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(ForgeRegistries.Keys.RECIPE_SERIALIZERS);
 
-    public static final RegistryObject<RecipeSerializer<AxeCraftingRecipe>> AXE_CRAFTING_SERIALIZER = register("axe_crafting", new AxeCraftingRecipe.Serializer());
+    public static final RegistryObject<RecipeSerializer<AxeCraftingRecipe>> AXE_CRAFTING_SERIALIZER = HELPER.register("axe_crafting", AxeCraftingRecipe.Serializer::new);
 
-    @SuppressWarnings("SameParameterValue")
-    @Nonnull
-    private static <T extends Recipe<?>> RegistryObject<RecipeSerializer<T>> register(@Nonnull String name, @Nonnull RecipeSerializer<T> serializer) {
-        return SERIALIZERS.register(name, () -> serializer);
-    }
 }

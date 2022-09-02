@@ -8,16 +8,15 @@ import com.stal111.valhelsia_structures.core.data.server.loot.ModLootModifierPro
 import com.stal111.valhelsia_structures.core.data.server.loot.ModLootTableProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 /**
  * Data Generators <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.DataGenerators
  *
  * @author Valhelsia Team
- * @version 1.19 - 0.2.0
  * @since 2020-11-13
  */
 @Mod.EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

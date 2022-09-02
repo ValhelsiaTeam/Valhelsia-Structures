@@ -52,7 +52,7 @@ public abstract class SpecialBaseSpawner {
     private short waveCount = 0;
 
     public void setEntityId(EntityType<?> type) {
-        this.nextSpawnData.getEntityToSpawn().putString("id", Objects.requireNonNull(ForgeRegistries.ENTITIES.getKey(type)).toString());
+        this.nextSpawnData.getEntityToSpawn().putString("id", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(type)).toString());
     }
 
     private boolean isNearPlayer(Level pLevel, BlockPos pPos) {

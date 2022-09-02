@@ -12,7 +12,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,15 +26,14 @@ import net.valhelsia.valhelsia_core.common.util.ItemStackUtils;
  * For all entity-related event handling.
  * </p>
  * @author Valhelsia Team
- * @version 1.18.2 - 0.1.0
  * @since 2021-05-11
  */
 @Mod.EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID)
 public class EntityEventListener {
 
     @SubscribeEvent
-    public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
-        if (event.getEntity() instanceof Pillager entity && !event.getWorld().isClientSide()) {
+    public static void onEntityJoinWorld(EntityJoinLevelEvent event) {
+        if (event.getEntity() instanceof Pillager entity && !event.getLevel().isClientSide()) {
             entity.goalSelector.addGoal(5, new MeleeAttackGoal(entity, 1.0D, true));
         }
     }

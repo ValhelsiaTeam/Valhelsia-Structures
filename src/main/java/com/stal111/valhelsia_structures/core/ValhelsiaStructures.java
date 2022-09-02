@@ -19,9 +19,9 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.valhelsia.valhelsia_core.core.registry.RegistryHelper;
 import net.valhelsia.valhelsia_core.core.registry.RegistryManager;
-import net.valhelsia.valhelsia_core.core.registry.block.BlockRegistryHelper;
+import net.valhelsia.valhelsia_core.core.registry.helper.RegistryHelper;
+import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -47,6 +47,8 @@ public class ValhelsiaStructures {
             .addHelper(Registry.STRUCTURE_TYPE_REGISTRY, new RegistryHelper<>(ModStructureTypes::new))
             .addHelper(Registry.STRUCTURE_REGISTRY, new RegistryHelper<>(ModStructures::new))
             .addHelper(Registry.STRUCTURE_SET_REGISTRY, new RegistryHelper<>(ModStructureSets::new))
+            .addHelper(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, new RegistryHelper<>(ModBlockEntities::new))
+            .addHelper(ForgeRegistries.Keys.RECIPE_SERIALIZERS, new RegistryHelper<>(ModRecipes::new))
             .setConfigValidator(new ConfigValidator())
             .create();
 
@@ -54,10 +56,6 @@ public class ValhelsiaStructures {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSetup::new);
-
-        // Deferred Registration
-        ModRecipes.SERIALIZERS.register(eventBus);
-        ModBlockEntities.TILE_ENTITIES.register(eventBus);
 
         REGISTRY_MANAGER.register(eventBus);
 

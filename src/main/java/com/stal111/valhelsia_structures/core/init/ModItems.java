@@ -7,7 +7,7 @@ import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
 import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.RegistryHelper;
+import net.valhelsia.valhelsia_core.core.registry.helper.RegistryHelper;
 
 /**
  * Items <br>
