@@ -1,7 +1,7 @@
 {
   "parent": "valhelsia_structures:block/cut_post_1",
   "textures": {
-    "post_side": "valhelsia_structures:block/post/dark_oak_post",
-    "post_end": "valhelsia_structures:block/post/dark_oak_post_top"
+    "post_end": "valhelsia_structures:block/post/dark_oak_post_top",
+    "post_side": "valhelsia_structures:block/post/dark_oak_post"
   }
 }

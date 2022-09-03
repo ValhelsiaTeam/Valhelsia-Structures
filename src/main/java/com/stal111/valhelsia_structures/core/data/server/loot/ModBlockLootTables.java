@@ -6,6 +6,8 @@ import com.stal111.valhelsia_structures.common.block.properties.ModBlockStatePro
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.GlassBlock;
+import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -21,7 +23,6 @@ import net.valhelsia.valhelsia_core.core.data.ValhelsiaBlockLootTables;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.server.loot.ModBlockLootTables
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.2.0
  * @since 2020-11-22
  */
 public class ModBlockLootTables extends ValhelsiaBlockLootTables {
@@ -37,7 +38,7 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
         );
 
         forEach(block -> block instanceof SlabBlock, block -> add(block, ValhelsiaBlockLootTables::droppingSlab));
-        take(this::dropWhenSilkTouch, ModBlocks.METAL_FRAMED_GLASS, ModBlocks.METAL_FRAMED_GLASS_PANE);
+        forEach(block -> block instanceof GlassBlock || block instanceof IronBarsBlock, this::dropWhenSilkTouch);
         forEach(block -> block instanceof JarBlock || block instanceof BigJarBlock, this::dropWhenSilkTouch);
         take(block -> add(block, createShearsOnlyDrop(ModBlocks.HANGING_VINES.get())), ModBlocks.HANGING_VINES, ModBlocks.HANGING_VINES_BODY);
         take(block -> add(block, bonePile ->

@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "##"
-  ],
   "key": {
     "#": {
       "item": "valhelsia_structures:lapidified_jungle_planks"
     }
   },
+  "pattern": [
+    "##"
+  ],
   "result": {
     "item": "valhelsia_structures:lapidified_jungle_pressure_plate"
   }

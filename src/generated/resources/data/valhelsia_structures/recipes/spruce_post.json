@@ -4,7 +4,7 @@
     "item": "minecraft:spruce_log"
   },
   "output": {
-    "item": "valhelsia_structures:spruce_post",
-    "count": 2
+    "count": 2,
+    "item": "valhelsia_structures:spruce_post"
   }
 }

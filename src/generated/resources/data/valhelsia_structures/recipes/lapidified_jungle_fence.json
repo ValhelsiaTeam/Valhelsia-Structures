@@ -1,9 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#X#",
-    "#X#"
-  ],
   "key": {
     "#": {
       "item": "valhelsia_structures:lapidified_jungle_planks"
@@ -12,8 +8,12 @@
       "tag": "forge:rods/wooden"
     }
   },
+  "pattern": [
+    "#X#",
+    "#X#"
+  ],
   "result": {
-    "item": "valhelsia_structures:lapidified_jungle_fence",
-    "count": 3
+    "count": 3,
+    "item": "valhelsia_structures:lapidified_jungle_fence"
   }
 }

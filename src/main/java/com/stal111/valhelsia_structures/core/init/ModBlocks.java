@@ -110,6 +110,11 @@ public class ModBlocks implements RegistryClass {
     public static final RegistryObject<GlassBlock> METAL_FRAMED_GLASS = HELPER.register("metal_framed_glass", () -> new GlassBlock(Block.Properties.copy(Blocks.GLASS)));
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final RegistryObject<IronBarsBlock> METAL_FRAMED_GLASS_PANE = HELPER.register("metal_framed_glass_pane", () -> new IronBarsBlock(Block.Properties.copy(Blocks.GLASS_PANE)));
+    @RenderType(ValhelsiaRenderType.TRANSLUCENT)
+    public static final Map<DyeColor, RegistryObject<StainedGlassBlock>> COLORED_METAL_FRAMED_GLASS = registerColoredMetalFramedGlass();
+    @RenderType(ValhelsiaRenderType.TRANSLUCENT)
+    public static final Map<DyeColor, RegistryObject<StainedGlassPaneBlock>> COLORED_METAL_FRAMED_GLASS_PANES = registerColoredMetalFramedGlassPanes();
+
     public static final RegistryObject<IronBarsBlock> PAPER_WALL = HELPER.register("paper_wall", () -> new IronBarsBlock(Block.Properties.of(Material.DECORATION).strength(0.3F).sound(SoundType.WOOL).noOcclusion()));
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final RegistryObject<HangingVinesBodyBlock> HANGING_VINES_BODY = HELPER.registerNoItem("hanging_vines_body", () -> new HangingVinesBodyBlock(Block.Properties.of(Material.REPLACEABLE_PLANT).noCollission().strength(0.2F).sound(SoundType.VINE)));
@@ -200,6 +205,20 @@ public class ModBlocks implements RegistryClass {
                 .map(color -> Pair.of(color, HELPER.register(color.getName() + "_sleeping_bag",
                         () -> new SleepingBagBlock(Block.Properties.of(Material.WOOL, color).strength(0.2F).noOcclusion().sound(SoundType.WOOL)),
                         registryObject -> new BedItem(registryObject.get(), new Item.Properties().tab(HELPER.getDefaultCreativeTab())))))
+                .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
+    }
+
+    private static Map<DyeColor, RegistryObject<StainedGlassBlock>> registerColoredMetalFramedGlass() {
+        return Arrays.stream(DyeColor.values())
+                .map(color -> Pair.of(color, HELPER.register(color.getName() + "_metal_framed_glass",
+                        () -> new StainedGlassBlock(color, Block.Properties.copy(Blocks.RED_STAINED_GLASS)))))
+                .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
+    }
+
+    private static Map<DyeColor, RegistryObject<StainedGlassPaneBlock>> registerColoredMetalFramedGlassPanes() {
+        return Arrays.stream(DyeColor.values())
+                .map(color -> Pair.of(color, HELPER.register(color.getName() + "_metal_framed_glass_pane",
+                        () -> new StainedGlassPaneBlock(color, Block.Properties.copy(Blocks.RED_STAINED_GLASS_PANE)))))
                 .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
     }
 }

@@ -4,7 +4,7 @@
     "item": "valhelsia_structures:stripped_birch_post"
   },
   "output": {
-    "item": "valhelsia_structures:cut_stripped_birch_post",
-    "count": 4
+    "count": 4,
+    "item": "valhelsia_structures:cut_stripped_birch_post"
   }
 }

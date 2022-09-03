@@ -2,7 +2,6 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
@@ -27,74 +26,74 @@
               ],
               "functions": [
                 {
-                  "function": "minecraft:set_count",
+                  "add": false,
                   "conditions": [
                     {
-                      "condition": "minecraft:block_state_property",
                       "block": "valhelsia_structures:bone_pile",
+                      "condition": "minecraft:block_state_property",
                       "properties": {
                         "layers": "1"
                       }
                     }
                   ],
                   "count": 1.0,
-                  "add": false
+                  "function": "minecraft:set_count"
                 },
                 {
-                  "function": "minecraft:set_count",
+                  "add": false,
                   "conditions": [
                     {
-                      "condition": "minecraft:block_state_property",
                       "block": "valhelsia_structures:bone_pile",
+                      "condition": "minecraft:block_state_property",
                       "properties": {
                         "layers": "2"
                       }
                     }
                   ],
                   "count": 2.0,
-                  "add": false
+                  "function": "minecraft:set_count"
                 },
                 {
-                  "function": "minecraft:set_count",
+                  "add": false,
                   "conditions": [
                     {
-                      "condition": "minecraft:block_state_property",
                       "block": "valhelsia_structures:bone_pile",
+                      "condition": "minecraft:block_state_property",
                       "properties": {
                         "layers": "3"
                       }
                     }
                   ],
                   "count": 3.0,
-                  "add": false
+                  "function": "minecraft:set_count"
                 },
                 {
-                  "function": "minecraft:set_count",
+                  "add": false,
                   "conditions": [
                     {
-                      "condition": "minecraft:block_state_property",
                       "block": "valhelsia_structures:bone_pile",
+                      "condition": "minecraft:block_state_property",
                       "properties": {
                         "layers": "4"
                       }
                     }
                   ],
                   "count": 4.0,
-                  "add": false
+                  "function": "minecraft:set_count"
                 },
                 {
-                  "function": "minecraft:set_count",
+                  "add": false,
                   "conditions": [
                     {
-                      "condition": "minecraft:block_state_property",
                       "block": "valhelsia_structures:bone_pile",
+                      "condition": "minecraft:block_state_property",
                       "properties": {
                         "layers": "5"
                       }
                     }
                   ],
                   "count": 5.0,
-                  "add": false
+                  "function": "minecraft:set_count"
                 }
               ],
               "name": "valhelsia_structures:bone_pile"
@@ -103,81 +102,82 @@
               "type": "minecraft:item",
               "functions": [
                 {
-                  "function": "minecraft:set_count",
+                  "add": false,
                   "conditions": [
                     {
-                      "condition": "minecraft:block_state_property",
                       "block": "valhelsia_structures:bone_pile",
+                      "condition": "minecraft:block_state_property",
                       "properties": {
                         "layers": "1"
                       }
                     }
                   ],
                   "count": 1.0,
-                  "add": false
+                  "function": "minecraft:set_count"
                 },
                 {
-                  "function": "minecraft:set_count",
+                  "add": false,
                   "conditions": [
                     {
-                      "condition": "minecraft:block_state_property",
                       "block": "valhelsia_structures:bone_pile",
+                      "condition": "minecraft:block_state_property",
                       "properties": {
                         "layers": "2"
                       }
                     }
                   ],
                   "count": 2.0,
-                  "add": false
+                  "function": "minecraft:set_count"
                 },
                 {
-                  "function": "minecraft:set_count",
+                  "add": false,
                   "conditions": [
                     {
-                      "condition": "minecraft:block_state_property",
                       "block": "valhelsia_structures:bone_pile",
+                      "condition": "minecraft:block_state_property",
                       "properties": {
                         "layers": "3"
                       }
                     }
                   ],
                   "count": 3.0,
-                  "add": false
+                  "function": "minecraft:set_count"
                 },
                 {
-                  "function": "minecraft:set_count",
+                  "add": false,
                   "conditions": [
                     {
-                      "condition": "minecraft:block_state_property",
                       "block": "valhelsia_structures:bone_pile",
+                      "condition": "minecraft:block_state_property",
                       "properties": {
                         "layers": "4"
                       }
                     }
                   ],
                   "count": 4.0,
-                  "add": false
+                  "function": "minecraft:set_count"
                 },
                 {
-                  "function": "minecraft:set_count",
+                  "add": false,
                   "conditions": [
                     {
-                      "condition": "minecraft:block_state_property",
                       "block": "valhelsia_structures:bone_pile",
+                      "condition": "minecraft:block_state_property",
                       "properties": {
                         "layers": "5"
                       }
                     }
                   ],
                   "count": 5.0,
-                  "add": false
+                  "function": "minecraft:set_count"
                 }
               ],
               "name": "minecraft:bone"
             }
           ]
         }
-      ]
+      ],
+      "rolls": 1.0
     }
   ]
 }

@@ -4,7 +4,7 @@
     "item": "minecraft:stripped_oak_log"
   },
   "output": {
-    "item": "valhelsia_structures:stripped_oak_post",
-    "count": 2
+    "count": 2,
+    "item": "valhelsia_structures:stripped_oak_post"
   }
 }

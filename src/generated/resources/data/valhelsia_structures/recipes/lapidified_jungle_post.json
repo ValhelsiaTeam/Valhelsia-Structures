@@ -4,7 +4,7 @@
     "item": "valhelsia_structures:lapidified_jungle_log"
   },
   "output": {
-    "item": "valhelsia_structures:lapidified_jungle_post",
-    "count": 2
+    "count": 2,
+    "item": "valhelsia_structures:lapidified_jungle_post"
   }
 }

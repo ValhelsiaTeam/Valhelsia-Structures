@@ -56,7 +56,16 @@ public class ModRecipeProvider extends RecipeProvider {
         });
 
         ShapedRecipeBuilder.shaped(ModBlocks.METAL_FRAMED_GLASS.get(), 8).pattern("###").pattern("#X#").pattern("###").define('#', Blocks.GLASS).define('X', Tags.Items.INGOTS_IRON).unlockedBy("has_item", has(Blocks.GLASS)).save(consumer);
+        ModBlocks.COLORED_METAL_FRAMED_GLASS.forEach((color, registryObject) -> {
+            Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getName() + "_stained_glass")));
+            ShapedRecipeBuilder.shaped(registryObject.get(), 8).pattern("###").pattern("#X#").pattern("###").define('#', block).define('X', Tags.Items.INGOTS_IRON).unlockedBy("has_item", has(block)).save(consumer);
+
+        });
         ShapedRecipeBuilder.shaped(ModBlocks.METAL_FRAMED_GLASS_PANE.get(), 16).pattern("###").pattern("###").define('#', ModBlocks.METAL_FRAMED_GLASS.get()).unlockedBy("has_item", has(ModBlocks.METAL_FRAMED_GLASS.get())).save(consumer);
+        ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.forEach((color, registryObject) -> {
+            Block block = ModBlocks.COLORED_METAL_FRAMED_GLASS.get(color).get();
+            ShapedRecipeBuilder.shaped(registryObject.get(), 16).pattern("###").pattern("###").define('#', block).unlockedBy("has_item", has(block)).save(consumer);
+        });
         ShapedRecipeBuilder.shaped(ModBlocks.PAPER_WALL.get(), 2).pattern("#X#").pattern("#X#").pattern("#X#").define('#', Items.BAMBOO).define('X', Items.PAPER).unlockedBy("has_item", has(Items.BAMBOO)).save(consumer);
         ShapedRecipeBuilder.shaped(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get(), 8).pattern("###").pattern("#X#").pattern("###").define('#', Blocks.JUNGLE_LOG).define('X', Ingredient.of(Blocks.VINE, ModBlocks.HANGING_VINES.get())).unlockedBy("has_item", has(Blocks.VINE)).save(consumer);
         ShapedRecipeBuilder.shaped(ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get(), 3).pattern("##").pattern("##").define('#', ModBlocks.LAPIDIFIED_JUNGLE_LOG.get()).unlockedBy("has_item", has(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get())).save(consumer);
@@ -106,7 +115,7 @@ public class ModRecipeProvider extends RecipeProvider {
             }
 
             if (color != DyeColor.WHITE) {
-                ShapelessRecipeBuilder.shapeless(registryObject.get()).requires(whiteSleepingBag).requires(color.getTag()).unlockedBy("has_item", has(whiteSleepingBag)).unlockedBy("has_color", has(color.getTag())).save(consumer, new ResourceLocation(ValhelsiaStructures.MOD_ID, registryObject.getId() + "_from_white_sleeping_bag"));
+                ShapelessRecipeBuilder.shapeless(registryObject.get()).requires(whiteSleepingBag).requires(color.getTag()).unlockedBy("has_item", has(whiteSleepingBag)).unlockedBy("has_color", has(color.getTag())).save(consumer, new ResourceLocation(ValhelsiaStructures.MOD_ID, registryObject.getId().getPath() + "_from_white_sleeping_bag"));
             }
         });
 

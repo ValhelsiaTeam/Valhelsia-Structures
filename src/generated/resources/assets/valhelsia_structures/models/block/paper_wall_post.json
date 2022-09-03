@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/template_glass_pane_post",
   "textures": {
-    "pane": "valhelsia_structures:block/paper_wall",
-    "edge": "valhelsia_structures:block/paper_wall_top"
+    "edge": "valhelsia_structures:block/paper_wall_top",
+    "pane": "valhelsia_structures:block/paper_wall"
   }
 }

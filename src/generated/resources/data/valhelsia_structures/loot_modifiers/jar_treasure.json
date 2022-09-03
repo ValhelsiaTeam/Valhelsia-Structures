@@ -1,13 +1,13 @@
 {
-  "add_loot": "valhelsia_structures:treasure/jar_treasure",
+  "type": "valhelsia_core:append_loot",
   "conditions": [
     {
       "condition": "valhelsia_core:match_block",
-      "tag": "valhelsia_structures:jars",
       "properties": {
         "treasure": "true"
-      }
+      },
+      "tag": "valhelsia_structures:jars"
     }
   ],
-  "type": "valhelsia_core:append_loot"
+  "loot_addition": "valhelsia_structures:treasure/jar_treasure"
 }

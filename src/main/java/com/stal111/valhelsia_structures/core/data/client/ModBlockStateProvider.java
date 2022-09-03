@@ -41,6 +41,9 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         forEach(block -> block instanceof PostBlock, this::postBlock);
         forEach(block -> block instanceof CutPostBlock, this::cutPostBlock);
         take(block -> paneBlock((IronBarsBlock) block, modLoc("block/metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), ModBlocks.METAL_FRAMED_GLASS_PANE);
+        ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.forEach((color, registryObject) -> {
+            take(block -> paneBlock((IronBarsBlock) block, modLoc("block/" + color.getName() + "_metal_framed_glass"), modLoc("block/metal_framed_glass_pane_top")), registryObject);
+        });
         take(block -> paneBlock((IronBarsBlock) block, modLoc("block/paper_wall"), modLoc("block/paper_wall_top")), ModBlocks.PAPER_WALL);
         take(this::hangingVinesBlock, ModBlocks.HANGING_VINES_BODY, ModBlocks.HANGING_VINES);
         forEach(block -> block instanceof JarBlock, this::jarBlock);

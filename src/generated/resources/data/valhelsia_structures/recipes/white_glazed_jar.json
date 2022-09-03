@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "jar",
-  "pattern": [
-    "# #",
-    " # "
-  ],
   "key": {
     "#": {
       "item": "minecraft:white_terracotta"
     }
   },
+  "pattern": [
+    "# #",
+    " # "
+  ],
   "result": {
     "item": "valhelsia_structures:white_glazed_jar"
   }

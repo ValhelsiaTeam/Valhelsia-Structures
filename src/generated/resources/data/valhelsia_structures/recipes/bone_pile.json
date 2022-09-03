@@ -1,16 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "bone_pile",
-  "pattern": [
-    "###"
-  ],
   "key": {
     "#": {
       "item": "minecraft:bone"
     }
   },
+  "pattern": [
+    "###"
+  ],
   "result": {
-    "item": "valhelsia_structures:bone_pile",
-    "count": 3
+    "count": 3,
+    "item": "valhelsia_structures:bone_pile"
   }
 }

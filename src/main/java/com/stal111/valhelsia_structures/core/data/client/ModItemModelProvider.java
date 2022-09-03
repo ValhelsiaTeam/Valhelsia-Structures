@@ -20,7 +20,6 @@ import java.util.Objects;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.client.ModItemModelProvider
  *
  * @author Valhelsia Team
- * @version 1.19 - 0.2.0
  * @since 2020-11-13
  */
 public class ModItemModelProvider extends ValhelsiaItemModelProvider {
@@ -38,6 +37,9 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
         forEachBlockItem(item -> item.getBlock() instanceof ValhelsiaGrassBlock || item.getBlock() instanceof ValhelsiaStoneBlock, item -> withParent(item, true));
         takeBlockItem(item -> withParent(item, getName(item) + "_off"), ModBlocks.BRAZIER, ModBlocks.SOUL_BRAZIER);
         takeBlockItem(item -> simpleModelBlockTexture(item, "metal_framed_glass"), ModBlocks.METAL_FRAMED_GLASS_PANE);
+        ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.forEach((color, registryObject) -> {
+            takeBlockItem(item -> simpleModelBlockTexture(item, color.getName() + "_metal_framed_glass"), registryObject);
+        });
         forEachBlockItem(item -> item.getBlock() instanceof CutPostBlock, item -> withParent(item, getName(item) + "_1"));
         takeBlockItem(this::simpleModelBlockTexture,
                 ModBlocks.HANGING_VINES,

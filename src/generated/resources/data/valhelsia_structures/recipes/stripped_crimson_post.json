@@ -4,7 +4,7 @@
     "item": "minecraft:stripped_crimson_stem"
   },
   "output": {
-    "item": "valhelsia_structures:stripped_crimson_post",
-    "count": 2
+    "count": 2,
+    "item": "valhelsia_structures:stripped_crimson_post"
   }
 }

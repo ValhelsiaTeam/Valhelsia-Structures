@@ -4,7 +4,7 @@
     "item": "minecraft:dark_oak_log"
   },
   "output": {
-    "item": "valhelsia_structures:dark_oak_post",
-    "count": 2
+    "count": 2,
+    "item": "valhelsia_structures:dark_oak_post"
   }
 }

@@ -8,8 +8,11 @@ import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.StainedGlassBlock;
+import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.RegistryObject;
 import net.valhelsia.valhelsia_core.core.init.ValhelsiaTags;
 
 import javax.annotation.Nullable;
@@ -19,7 +22,6 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.server.ModBlockTagsProvider
  *
  * @author Valhelsia Team
- * @version 1.19 - 0.2.0
  * @since 2021-01-11
  */
 public class ModBlockTagsProvider extends BlockTagsProvider {
@@ -39,10 +41,19 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
             }
         });
         this.tag(ModTags.Blocks.NON_FLAMMABLE_POSTS).add(ModBlocks.WARPED_POST.get(), ModBlocks.CRIMSON_POST.get(), ModBlocks.LAPIDIFIED_JUNGLE_POST.get());
+
         this.tag(BlockTags.IMPERMEABLE).add(ModBlocks.METAL_FRAMED_GLASS.get());
-        this.tag(Tags.Blocks.GLASS).add(ModBlocks.METAL_FRAMED_GLASS.get());
+        for (RegistryObject<StainedGlassBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS.values()) {
+            this.tag(BlockTags.IMPERMEABLE).add(registryObject.get());
+            this.tag(Tags.Blocks.STAINED_GLASS).add(registryObject.get());
+        }
+
         this.tag(Tags.Blocks.GLASS_COLORLESS).add(ModBlocks.METAL_FRAMED_GLASS.get());
         this.tag(Tags.Blocks.GLASS_PANES).add(ModBlocks.METAL_FRAMED_GLASS_PANE.get());
+        for (RegistryObject<StainedGlassPaneBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.values()) {
+            this.tag(Tags.Blocks.GLASS_PANES).add(registryObject.get());
+            this.tag(Tags.Blocks.STAINED_GLASS_PANES).add(registryObject.get());
+        }
         this.tag(Tags.Blocks.GLASS_PANES_COLORLESS).add(ModBlocks.METAL_FRAMED_GLASS_PANE.get());
         this.tag(BlockTags.CLIMBABLE).add(ModBlocks.HANGING_VINES_BODY.get(), ModBlocks.HANGING_VINES.get());
         ModBlocks.COLORED_GLAZED_JARS.forEach(registryObject -> this.tag(ModTags.Blocks.COLORED_JARS).add(registryObject.get()));

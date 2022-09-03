@@ -1,7 +1,7 @@
 {
   "parent": "valhelsia_structures:block/cut_post_3",
   "textures": {
-    "post_side": "valhelsia_structures:block/post/birch_post",
-    "post_end": "valhelsia_structures:block/post/birch_post_top"
+    "post_end": "valhelsia_structures:block/post/birch_post_top",
+    "post_side": "valhelsia_structures:block/post/birch_post"
   }
 }

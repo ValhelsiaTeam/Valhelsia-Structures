@@ -1,7 +1,6 @@
 {
     "itemGroup.valhelsia_structures_main": "Valhelsia Structures",
 
-    "comment.blocks": "---Blocks---",
     "block.valhelsia_structures.special_spawner": "Special Spawner",
     "block.valhelsia_structures.brazier": "Brazier",
     "block.valhelsia_structures.soul_brazier": "Soul Brazier",
@@ -66,6 +65,41 @@
 
     "block.valhelsia_structures.metal_framed_glass": "Metal Framed Glass",
     "block.valhelsia_structures.metal_framed_glass_pane": "Metal Framed Glass Pane",
+
+    "block.valhelsia_structures.white_metal_framed_glass": "White Metal Framed Glass",
+    "block.valhelsia_structures.orange_metal_framed_glass": "Orange Metal Framed Glass",
+    "block.valhelsia_structures.magenta_metal_framed_glass": "Magenta Metal Framed Glass",
+    "block.valhelsia_structures.light_blue_metal_framed_glass": "Light Blue Metal Framed Glass",
+    "block.valhelsia_structures.yellow_metal_framed_glass": "Yellow Metal Framed Glass",
+    "block.valhelsia_structures.lime_metal_framed_glass": "Lime Metal Framed Glass",
+    "block.valhelsia_structures.pink_metal_framed_glass": "Pink Metal Framed Glass",
+    "block.valhelsia_structures.gray_metal_framed_glass": "Gray Metal Framed Glass",
+    "block.valhelsia_structures.light_gray_metal_framed_glass": "Light Gray Metal Framed Glass",
+    "block.valhelsia_structures.cyan_metal_framed_glass": "Cyan Metal Framed Glass",
+    "block.valhelsia_structures.purple_metal_framed_glass": "Purple Metal Framed Glass",
+    "block.valhelsia_structures.blue_metal_framed_glass": "Blue Metal Framed Glass",
+    "block.valhelsia_structures.brown_metal_framed_glass": "Brown Metal Framed Glass",
+    "block.valhelsia_structures.green_metal_framed_glass": "Green Metal Framed Glass",
+    "block.valhelsia_structures.red_metal_framed_glass": "Red Metal Framed Glass",
+    "block.valhelsia_structures.black_metal_framed_glass": "Black Metal Framed Glass",
+
+    "block.valhelsia_structures.white_metal_framed_glass_pane": "White Metal Framed Glass Pane",
+    "block.valhelsia_structures.orange_metal_framed_glass_pane": "Orange Metal Framed Glass Pane",
+    "block.valhelsia_structures.magenta_metal_framed_glass_pane": "Magenta Metal Framed Glass Pane",
+    "block.valhelsia_structures.light_blue_metal_framed_glass_pane": "Light Blue Metal Framed Glass Pane",
+    "block.valhelsia_structures.yellow_metal_framed_glass_pane": "Yellow Metal Framed Glass Pane",
+    "block.valhelsia_structures.lime_metal_framed_glass_pane": "Lime Metal Framed Glass Pane",
+    "block.valhelsia_structures.pink_metal_framed_glass_pane": "Pink Metal Framed Glass Pane",
+    "block.valhelsia_structures.gray_metal_framed_glass_pane": "Gray Metal Framed Glass Pane",
+    "block.valhelsia_structures.light_gray_metal_framed_glass_pane": "Light Gray Metal Framed Glass Pane",
+    "block.valhelsia_structures.cyan_metal_framed_glass_pane": "Cyan Metal Framed Glass Pane",
+    "block.valhelsia_structures.purple_metal_framed_glass_pane": "Purple Metal Framed Glass Pane",
+    "block.valhelsia_structures.blue_metal_framed_glass_pane": "Blue Metal Framed Glass Pane",
+    "block.valhelsia_structures.brown_metal_framed_glass_pane": "Brown Metal Framed Glass Pane",
+    "block.valhelsia_structures.green_metal_framed_glass_pane": "Green Metal Framed Glass Pane",
+    "block.valhelsia_structures.red_metal_framed_glass_pane": "Red Metal Framed Glass Pane",
+    "block.valhelsia_structures.black_metal_framed_glass_pane": "Black Metal Framed Glass Pane",
+
     "block.valhelsia_structures.paper_wall": "Paper Wall",
     "block.valhelsia_structures.hanging_vines": "Hanging Vines",
     "block.valhelsia_structures.glazed_jar": "Glazed Jar",
@@ -153,7 +187,6 @@
     "gui.valhelsia_structures.config.invalid_biome_category": "List contains invalid Biome Category:",
     "gui.valhelsia_structures.config.invalid_blacklisted_biome": "List contains invalid Biome:",
 
-    "comment.filled_maps": "---Filled Maps---",
     "filled_map.valhelsia_structures.spawner_dungeon": "Spawner Dungeon Explorer Map",
     "filled_map.valhelsia_structures.castle": "Castle Explorer Map"
 }

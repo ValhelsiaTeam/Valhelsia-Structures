@@ -1,6 +1,21 @@
 {
-  "replace": false,
   "values": [
-    "valhelsia_structures:metal_framed_glass_pane"
+    "valhelsia_structures:metal_framed_glass_pane",
+    "valhelsia_structures:black_metal_framed_glass_pane",
+    "valhelsia_structures:yellow_metal_framed_glass_pane",
+    "valhelsia_structures:blue_metal_framed_glass_pane",
+    "valhelsia_structures:white_metal_framed_glass_pane",
+    "valhelsia_structures:gray_metal_framed_glass_pane",
+    "valhelsia_structures:magenta_metal_framed_glass_pane",
+    "valhelsia_structures:red_metal_framed_glass_pane",
+    "valhelsia_structures:green_metal_framed_glass_pane",
+    "valhelsia_structures:light_blue_metal_framed_glass_pane",
+    "valhelsia_structures:purple_metal_framed_glass_pane",
+    "valhelsia_structures:light_gray_metal_framed_glass_pane",
+    "valhelsia_structures:cyan_metal_framed_glass_pane",
+    "valhelsia_structures:brown_metal_framed_glass_pane",
+    "valhelsia_structures:orange_metal_framed_glass_pane",
+    "valhelsia_structures:pink_metal_framed_glass_pane",
+    "valhelsia_structures:lime_metal_framed_glass_pane"
   ]
 }

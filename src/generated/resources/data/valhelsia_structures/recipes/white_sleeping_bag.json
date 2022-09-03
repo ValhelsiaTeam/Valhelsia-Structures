@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###"
-  ],
   "key": {
     "#": {
       "item": "minecraft:white_wool"
     }
   },
+  "pattern": [
+    "###"
+  ],
   "result": {
     "item": "valhelsia_structures:white_sleeping_bag"
   }

@@ -1,13 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "###"
-  ],
   "key": {
     "#": {
       "item": "minecraft:light_gray_wool"
     }
   },
+  "pattern": [
+    "###"
+  ],
   "result": {
     "item": "valhelsia_structures:light_gray_sleeping_bag"
   }
