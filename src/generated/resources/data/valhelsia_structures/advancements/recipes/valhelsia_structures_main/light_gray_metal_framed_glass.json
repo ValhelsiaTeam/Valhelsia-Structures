@@ -1,7 +1,17 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item": {
+    "has_ingots/iron": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_light_gray_stained_glass": {
       "conditions": {
         "items": [
           {
@@ -22,7 +32,8 @@
   },
   "requirements": [
     [
-      "has_item",
+      "has_ingots/iron",
+      "has_light_gray_stained_glass",
       "has_the_recipe"
     ]
   ],

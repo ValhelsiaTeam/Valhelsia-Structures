@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_magenta_terracotta": {
+    "has_item": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:magenta_terracotta"
+              "valhelsia_structures:bone_pile_block"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "valhelsia_structures:big_magenta_glazed_jar"
+        "recipe": "valhelsia_structures:bone_from_bone_pile_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_magenta_terracotta",
+      "has_item",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "valhelsia_structures:big_magenta_glazed_jar"
+      "valhelsia_structures:bone_from_bone_pile_block"
     ]
   }
 }

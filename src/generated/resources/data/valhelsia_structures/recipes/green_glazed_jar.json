@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "jar",
+  "group": "glazedJar",
   "key": {
     "#": {
       "item": "minecraft:green_terracotta"

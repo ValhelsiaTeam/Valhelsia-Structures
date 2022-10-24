@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item": {
+    "has_ingots/iron": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:white_stained_glass"
-            ]
+            "tag": "forge:ingots/iron"
           }
         ]
       },
@@ -18,11 +16,24 @@
         "recipe": "valhelsia_structures:white_metal_framed_glass"
       },
       "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_stained_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:white_stained_glass"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
     [
-      "has_item",
+      "has_ingots/iron",
+      "has_white_stained_glass",
       "has_the_recipe"
     ]
   ],

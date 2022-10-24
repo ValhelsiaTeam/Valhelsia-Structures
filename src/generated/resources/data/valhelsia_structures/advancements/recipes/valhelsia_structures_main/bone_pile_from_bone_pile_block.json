@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_item": {
+    "has_bone_pile_block": {
       "conditions": {
         "items": [
           {
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:bone_pile_from_bone_pile_block"
+        "recipe": "valhelsia_structures:bone_pile_from_bone_pile_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_item",
+      "has_bone_pile_block",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:bone_pile_from_bone_pile_block"
+      "valhelsia_structures:bone_pile_from_bone_pile_block"
     ]
   }
 }
