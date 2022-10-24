@@ -11,6 +11,7 @@ import net.minecraft.world.item.BedItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.fml.common.Mod;
@@ -143,7 +144,7 @@ public class ModBlocks implements RegistryClass {
     public static final RegistryObject<WoodButtonBlock> LAPIDIFIED_JUNGLE_BUTTON = HELPER.register("lapidified_jungle_button", () -> new WoodButtonBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F)));
     public static final RegistryObject<FenceBlock> LAPIDIFIED_JUNGLE_FENCE = HELPER.register("lapidified_jungle_fence", () -> new FenceBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS));
     public static final RegistryObject<FenceGateBlock> LAPIDIFIED_JUNGLE_FENCE_GATE = HELPER.register("lapidified_jungle_fence_gate", () -> new FenceGateBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS));
-    public static final RegistryObject<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", () -> new ExplorersTentBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.noOcclusion()), block -> new DyeableBlockItem(block.get(), new Item.Properties().tab(HELPER.getDefaultCreativeTab())));
+    public static final RegistryObject<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", () -> new ExplorersTentBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_WOOL).noOcclusion()), block -> new DyeableBlockItem(block.get(), new Item.Properties().tab(HELPER.getDefaultCreativeTab())));
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final RegistryObject<BushBlock> HIBISCUS = HELPER.register("hibiscus", () -> new BushBlock(Block.Properties.copy(Blocks.POPPY)));
     public static final RegistryObject<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", () -> new GiantFernBlock(Block.Properties.copy(Blocks.POPPY)));

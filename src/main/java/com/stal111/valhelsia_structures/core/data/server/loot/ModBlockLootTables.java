@@ -14,7 +14,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.functions.CopyNbtFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.valhelsia.valhelsia_core.core.data.ValhelsiaBlockLootTables;
 
@@ -49,6 +51,8 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
         take(block -> add(block, createSinglePropConditionTable(block, DungeonDoorBlock.PART, DungeonDoorPart.MIDDLE_1)), ModBlocks.DUNGEON_DOOR);
 
         forEach(block -> block instanceof SleepingBagBlock, block -> add(block, createSinglePropConditionTable(block, BlockStateProperties.BED_PART, BedPart.HEAD)));
+
+        take(block -> this.add(block, LootTable.lootTable().withPool(applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("Color", "display.color")))))), ModBlocks.EXPLORERS_TENT);
 
         forEach(this::registerDropSelfLootTable);
     }

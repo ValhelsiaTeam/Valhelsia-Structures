@@ -11,6 +11,19 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "ops": [
+                {
+                  "op": "replace",
+                  "source": "Color",
+                  "target": "display.color"
+                }
+              ],
+              "source": "block_entity"
+            }
+          ],
           "name": "valhelsia_structures:explorers_tent"
         }
       ],

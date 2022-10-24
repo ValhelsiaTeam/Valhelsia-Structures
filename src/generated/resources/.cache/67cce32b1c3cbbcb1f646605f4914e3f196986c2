@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-03T11:50:25.937503	LootTables
+// 1.19.2	2022-10-24T14:20:59.108678	LootTables
 62a390a728914e38769d9458602b66eb790aeac9 data/valhelsia_structures/loot_tables/blocks/acacia_post.json
 fe9e1b4ef668860527cfc13faae1fc79c679b4be data/valhelsia_structures/loot_tables/blocks/big_black_glazed_jar.json
 c4e9af562e096c76543c3aa53db1634c23fd5e0c data/valhelsia_structures/loot_tables/blocks/big_blue_glazed_jar.json
@@ -80,7 +80,7 @@ cb8691aae4abe2413a09ef2e15ea246e212495a1 data/valhelsia_structures/loot_tables/b
 f89c7b7714aac02ab28f6a29b96fa338a8684c99 data/valhelsia_structures/loot_tables/blocks/doused_torch.json
 f89c7b7714aac02ab28f6a29b96fa338a8684c99 data/valhelsia_structures/loot_tables/blocks/doused_wall_torch.json
 d7520993324f42ca3b8e353f249888f546493f05 data/valhelsia_structures/loot_tables/blocks/dungeon_door.json
-d403ea9ccedcabefcab547a78f1afb7983d0d5d2 data/valhelsia_structures/loot_tables/blocks/explorers_tent.json
+fd5d9bfc6e2eb31edb04f353818119bec9ec3a6f data/valhelsia_structures/loot_tables/blocks/explorers_tent.json
 b6f50877452ae2fcf0e4f0a034b595b1a3741cc7 data/valhelsia_structures/loot_tables/blocks/giant_fern.json
 dad77799d210b03361ae55169f212077876ed2c6 data/valhelsia_structures/loot_tables/blocks/glazed_jar.json
 4e1c67716e818571f4f9fbfbd95322871656273f data/valhelsia_structures/loot_tables/blocks/gray_glazed_jar.json
