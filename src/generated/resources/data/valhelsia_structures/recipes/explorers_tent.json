@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "tag": "forge:leather"
+    },
+    "X": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#X#",
+    "#X#"
+  ],
+  "result": {
+    "item": "valhelsia_structures:explorers_tent"
+  }
+}

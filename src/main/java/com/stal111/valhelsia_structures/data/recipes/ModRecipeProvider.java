@@ -72,6 +72,8 @@ public class ModRecipeProvider extends ValhelsiaRecipeProvider {
         this.storageRecipe(Items.BONE, ModBlocks.BONE_PILE_BLOCK.get());
         this.shaped(ModBlocks.BONE_PILE_BLOCK.get(), builder -> builder.pattern("###").pattern("###").pattern("###").define('#', ModBlocks.BONE_PILE.get()).group("bone_pile_block").unlockedBy(this, ModBlocks.BONE_PILE.get()), "bone_pile_block_from_bone_piles");
 
+        this.shaped(ModBlocks.EXPLORERS_TENT.get(), builder -> builder.pattern(" # ").pattern("#X#").pattern("#X#").define('#', Tags.Items.LEATHER).define('X', Tags.Items.RODS_WOODEN).unlockedBy(this, RecipePart.of(Tags.Items.LEATHER)));
+
         this.glazedJar(ModBlocks.GLAZED_JAR.get(), Blocks.TERRACOTTA);
         this.bigGlazedJar(ModBlocks.BIG_GLAZED_JAR.get(), Blocks.TERRACOTTA);
 
