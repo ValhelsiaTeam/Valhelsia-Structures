@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-03T11:50:25.9604396	Item Models: valhelsia_structures
+// 1.19.2	2022-10-24T12:28:49.2910083	Item Models: valhelsia_structures
 32e8ec8070b43b34379155db78179e0416d04c18 assets/valhelsia_structures/models/item/acacia_post.json
 6764e2e3b5bb5c516a67c459bf635062a6e2f125 assets/valhelsia_structures/models/item/andesite.json
 8a064420a192a5fb25223218e77e741a12b2aa04 assets/valhelsia_structures/models/item/big_black_glazed_jar.json
@@ -81,7 +81,7 @@ c4007f7e3bc7e5dfd3cb9d3999835bd4b597fc28 assets/valhelsia_structures/models/item
 cce86a4a4d79e7d88bc900dd2100236c3061ec44 assets/valhelsia_structures/models/item/doused_soul_torch.json
 cce86a4a4d79e7d88bc900dd2100236c3061ec44 assets/valhelsia_structures/models/item/doused_torch.json
 bc667209ee6b962f6d7f5a4397d84439d160b84d assets/valhelsia_structures/models/item/dungeon_door.json
-8abf3bee75a5ecb37712035eccfb6bdd8c44793c assets/valhelsia_structures/models/item/explorers_tent.json
+aed50342592801b111569cbd19e44e31b3670c78 assets/valhelsia_structures/models/item/explorers_tent.json
 d3f4227cce311c6c73b539c869ec35e7943513d6 assets/valhelsia_structures/models/item/giant_fern.json
 f10d257a547c997bd45b5944d1c2d8903a185917 assets/valhelsia_structures/models/item/glazed_jar.json
 7ef6d0ff66833448bd3a6088067aaefc647f944f assets/valhelsia_structures/models/item/granite.json

@@ -13,18 +13,14 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- * Explorers Tent Block Entity <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.entity.ExplorersTentBlockEntity
- *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.2.0
  * @since 2020-12-10
  */
 public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBlockEntity, Clearable {
 
     private static final int DEFAULT_COLOR = 10511680;
 
-    private Integer color;
+    private int color = DEFAULT_COLOR;
 
     private ItemStack sleepingBag = ItemStack.EMPTY;
 
@@ -34,7 +30,7 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
 
     @Override
     public int getColor() {
-        return this.color == null ? DEFAULT_COLOR : this.color;
+        return this.color;
     }
 
     @Override
@@ -65,7 +61,7 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
 
     @Override
     public void saveAdditional(@Nonnull CompoundTag tag) {
-        if (this.color != null) {
+        if (this.color != DEFAULT_COLOR) {
             tag.putInt("Color", this.getColor());
         }
 

@@ -64,6 +64,10 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
 
         forEachBlockItem(item -> item.getBlock() instanceof SleepingBagBlock, this::withParentInventory);
 
+        takeBlockItem(blockItem -> this.getBuilder(this.getName(blockItem)).parent(this.getExistingFile(this.mcLoc("item/generated")))
+                .texture("layer0", "item/explorers_tent")
+                .texture("layer1", "item/explorers_tent_layer"), ModBlocks.EXPLORERS_TENT);
+
         forEachBlockItem(this::withParent);
 
         forEachItem(this::simpleModel);
