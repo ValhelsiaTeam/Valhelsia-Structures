@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "#": {
+      "item": "valhelsia_structures:stripped_spruce_post"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "item": "valhelsia_structures:bundled_stripped_spruce_posts"
+  }
+}

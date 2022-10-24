@@ -1,19 +1,19 @@
-// 1.19.2	2022-10-24T21:20:38.8065546	Tags for minecraft:block
+// 1.19.2	2022-10-24T21:39:24.7306689	Tags for minecraft:block
 be4770091b89d612dfac964ba86728eb69bad56e data/forge/tags/blocks/braziers.json
 c1b9692433dd32870e79d99f49aec1c73e2e5e96 data/forge/tags/blocks/fences/wooden.json
 62daf4915ef2309fd7d4cb1768cdbc4f481f16dd data/forge/tags/blocks/fence_gates/wooden.json
 abdd65528eb416d6d6ad1f020d97714ff861bf25 data/forge/tags/blocks/glass/colorless.json
-fab2b2b03593e0955b125c09f5242ff6f6c5db8a data/forge/tags/blocks/glass_panes.json
+9c65f94f57fe5c8b4b304b6521b20303c4b0c24b data/forge/tags/blocks/glass_panes.json
 f0770b509280d280ac69080c30cd3c138c2b18a6 data/forge/tags/blocks/glass_panes/colorless.json
-b7552a814be0647ac9a7313666644d1ece946038 data/forge/tags/blocks/stained_glass.json
-eb91ff678ae098fca701c2b986b30da7b42dc305 data/forge/tags/blocks/stained_glass_panes.json
+ab461cbcfe4d38a853dfcb013952469f4d8a7b0b data/forge/tags/blocks/stained_glass.json
+6513a130043a7c461c093ed855bca513cdc1265c data/forge/tags/blocks/stained_glass_panes.json
 718d29e1a851b39737ad188f0b94b904bb17f3bd data/minecraft/tags/blocks/bamboo_plantable_on.json
 8782980469a6a7109cdc309bcf141aff18c32ce9 data/minecraft/tags/blocks/climbable.json
 38a8dc4c99fdc39cb4140a653d17df03766f9044 data/minecraft/tags/blocks/dirt.json
 38a8dc4c99fdc39cb4140a653d17df03766f9044 data/minecraft/tags/blocks/enderman_holdable.json
 62daf4915ef2309fd7d4cb1768cdbc4f481f16dd data/minecraft/tags/blocks/fence_gates.json
 217f315b489efedaa2a266116cd7422acacfe8c7 data/minecraft/tags/blocks/flowers.json
-6d4f90bbca0a44eaa6ea487d4f8120ee1806d718 data/minecraft/tags/blocks/impermeable.json
+2ef0634ead61f85c98d0459f5e4173aa5028c2f8 data/minecraft/tags/blocks/impermeable.json
 ec7cc527615bef71f6e499971eaac359586cf984 data/minecraft/tags/blocks/logs.json
 9ae1e319e45f5d2afc1a220ac8b10cbe34e0fe72 data/minecraft/tags/blocks/mineable/axe.json
 4b051ec8bd9d79db4254b219ba5f814bbc100c40 data/minecraft/tags/blocks/mineable/pickaxe.json
@@ -36,4 +36,4 @@ c2d09418105ee61c6f3bf6822cc6ccdd29284322 data/valhelsia_core/tags/blocks/offset_
 52c58f15453c231473cb8d86a678db23d03f996e data/valhelsia_structures/tags/blocks/lapidified_jungle_logs.json
 0f46cfd4365169d69b7f1c9bc75c8c558cea3191 data/valhelsia_structures/tags/blocks/non_flammable_posts.json
 7eb5832ba43c8dc9f5bf17e6d7fe9cb67b32c321 data/valhelsia_structures/tags/blocks/posts.json
-8f4977a1441c1335d0596466bbdfde6cd40281cd data/valhelsia_structures/tags/blocks/sleeping_bags.json
+0d204ddf91d3a073adbf81e9afa66d6cde4fb2ce data/valhelsia_structures/tags/blocks/sleeping_bags.json

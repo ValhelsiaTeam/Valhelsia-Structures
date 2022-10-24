@@ -108,6 +108,15 @@ public class ModRecipeProvider extends ValhelsiaRecipeProvider {
         this.simple2x2(ModBlocks.BUNDLED_CRIMSON_POSTS.get(), ModBlocks.CRIMSON_POST.get());
         this.simple2x2(ModBlocks.BUNDLED_WARPED_POSTS.get(), ModBlocks.WARPED_POST.get());
 
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_OAK_POSTS.get(), ModBlocks.STRIPPED_OAK_POST.get());
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_SPRUCE_POSTS.get(), ModBlocks.STRIPPED_SPRUCE_POST.get());
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_BIRCH_POSTS.get(), ModBlocks.STRIPPED_BIRCH_POST.get());
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_JUNGLE_POSTS.get(), ModBlocks.STRIPPED_JUNGLE_POST.get());
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_ACACIA_POSTS.get(), ModBlocks.STRIPPED_ACACIA_POST.get());
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_DARK_OAK_POSTS.get(), ModBlocks.STRIPPED_DARK_OAK_POST.get());
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_CRIMSON_POSTS.get(), ModBlocks.STRIPPED_CRIMSON_POST.get());
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_WARPED_POSTS.get(), ModBlocks.STRIPPED_WARPED_POST.get());
+
         Block whiteSleepingBag = ModBlocks.SLEEPING_BAGS.get(DyeColor.WHITE).get();
 
         ModBlocks.SLEEPING_BAGS.forEach((color, registryObject) -> {
