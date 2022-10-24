@@ -15,11 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Mod Creative Mode Tabs <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.common.item.ValhelsiaStructuresItemGroups
- *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2020-06-01
  */
 public class ModCreativeModeTabs {
@@ -42,7 +38,7 @@ public class ModCreativeModeTabs {
             items.removeIf(itemStack -> {
                 Item item = itemStack.getItem();
 
-                if (Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item)).toString().contains("lapidified") || (item instanceof BlockItem blockItem && (blockItem.getBlock() == ModBlocks.EXPLORERS_TENT.get() || blockItem.getBlock() == ModBlocks.GIANT_FERN.get() || blockItem.getBlock() == ModBlocks.HIBISCUS.get()))) {
+                if (Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(item)).toString().contains("lapidified") || (item instanceof BlockItem blockItem && (blockItem.getBlock() == ModBlocks.GIANT_FERN.get() || blockItem.getBlock() == ModBlocks.HIBISCUS.get()))) {
                     HIDDEN_ITEMS.add(itemStack);
                     return true;
                 }
