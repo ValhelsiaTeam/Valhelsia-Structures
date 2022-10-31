@@ -21,7 +21,7 @@ public class DesertHousePools {
     public static void load() {
         JigsawHelper.register("desert_house/oasis_plate", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("desert_house/oasis_plate", 1)));
         JigsawHelper.register("desert_house/well_or_oasis_plate", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("desert_house/well_or_oasis_plate", 1)));
-        JigsawHelper.register("desert_house/oasis", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("desert_house/feature_oasis", 1)));
+        JigsawHelper.register("desert_house/oasis", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("desert_house/feature_oasis_1", 1), Pair.of("desert_house/feature_oasis_2", 1)));
         JigsawHelper.register("desert_house/wells_and_oasis", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("desert_house/feature_oasis", 1), Pair.of("desert_house/feature_well_1", 1), Pair.of("desert_house/feature_well_2", 1)));
     }
 }
