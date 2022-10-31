@@ -6,11 +6,7 @@ import com.stal111.valhelsia_structures.utils.JigsawHelper;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 /**
- * Mob Pools <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.common.world.structures.pools.MobPools
- *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2021-04-26
  */
 public class MobPools {
@@ -26,7 +22,7 @@ public class MobPools {
         JigsawHelper.register("mobs/villagers", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/villagers/villager", 5), Pair.of("mobs/villagers/villager_khytwel", 1), Pair.of("mobs/villagers/villager_vaelzan", 1), Pair.of("mobs/villagers/villager_stal", 1), Pair.of("mobs/villagers/villager_cynthal", 1), Pair.of("mobs/villagers/villager_kanadet", 1)));
 
         //Spawners
-        JigsawHelper.register("mobs/spawners", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/spawners/zombie", 1), Pair.of("mobs/spawners/skeleton", 1), Pair.of("mobs/spawners/spider", 1)));
+        JigsawHelper.register("mobs/spawners/zombie_or_skeleton_or_spider", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/spawners/zombie", 1), Pair.of("mobs/spawners/skeleton", 1), Pair.of("mobs/spawners/spider", 1)));
         JigsawHelper.register("mobs/spawners/zombie", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/spawners/zombie", 1)));
         JigsawHelper.register("mobs/spawners/skeleton", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/spawners/skeleton", 1)));
         JigsawHelper.register("mobs/spawners/spider", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/spawners/spider", 1)));

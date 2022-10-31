@@ -3,14 +3,17 @@ package com.stal111.valhelsia_structures.core;
 import com.stal111.valhelsia_structures.client.ClientSetup;
 import com.stal111.valhelsia_structures.common.CommonSetup;
 import com.stal111.valhelsia_structures.common.item.ModCreativeModeTabs;
+import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProviderType;
 import com.stal111.valhelsia_structures.core.config.ConfigValidator;
 import com.stal111.valhelsia_structures.core.config.ModConfig;
 import com.stal111.valhelsia_structures.core.init.*;
+import com.stal111.valhelsia_structures.core.init.world.ModStructureHeightProviderTypes;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureSets;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureTypes;
 import com.stal111.valhelsia_structures.core.init.world.ModStructures;
 import com.stal111.valhelsia_structures.utils.LogFilter;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,11 +22,15 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryBuilder;
 import net.valhelsia.valhelsia_core.core.registry.RegistryManager;
 import net.valhelsia.valhelsia_core.core.registry.helper.RegistryHelper;
 import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.function.Supplier;
 
 /**
  * Valhelsia Structures Main <br>
@@ -52,12 +59,19 @@ public class ValhelsiaStructures {
             .setConfigValidator(new ConfigValidator())
             .create();
 
+    public static final Supplier<IForgeRegistry<StructureHeightProviderType<?>>> STRUCTURE_HEIGHT_PROVIDER_TYPES = ModStructureHeightProviderTypes.TYPES.makeRegistry(() ->
+            new RegistryBuilder<StructureHeightProviderType<?>>().setMaxID(Integer.MAX_VALUE - 1).onAdd((owner, stage, id, key, obj, old) -> {}
+            ).setDefaultKey(new ResourceLocation(ValhelsiaStructures.MOD_ID, "null")));
+
+    private IForgeRegistry<StructureHeightProviderType<?>> structureHeightProviderTypes;
+
     public ValhelsiaStructures() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> ClientSetup::new);
 
-        REGISTRY_MANAGER.register(eventBus);
+       ModStructureHeightProviderTypes.TYPES.register(eventBus);
+       REGISTRY_MANAGER.register(eventBus);
 
         // Event Listeners
         FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonSetup::setup);

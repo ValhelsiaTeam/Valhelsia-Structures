@@ -1,4 +1,4 @@
-// 1.19.2	2022-09-03T11:50:25.9554594	Tags for minecraft:worldgen/biome
+// 1.19.2	2022-10-28T18:26:24.5527026	Tags for minecraft:worldgen/biome
 f3ef2895c49e29111297e950661e5bc71a79989e data/forge/tags/worldgen/biome/is_desert.json
 50625c35926cbad9442439f8a7d1745418e77a3d data/forge/tags/worldgen/biome/is_plains.json
 5c0d6417dc8d9501750754f0547746a8f45239a0 data/valhelsia_structures/tags/worldgen/biome/has_structure/big_tree.json
@@ -8,5 +8,6 @@ f3ef2895c49e29111297e950661e5bc71a79989e data/forge/tags/worldgen/biome/is_deser
 a9004cb282a10f87578085c70f320238a442bcd1 data/valhelsia_structures/tags/worldgen/biome/has_structure/has_forge.json
 a9004cb282a10f87578085c70f320238a442bcd1 data/valhelsia_structures/tags/worldgen/biome/has_structure/player_house.json
 16bb97217249f974bb5b75f0a17afb33599bcab3 data/valhelsia_structures/tags/worldgen/biome/has_structure/spawner_dungeon.json
+b020f6cdcd2d955793278b2f89a178a1d31e599a data/valhelsia_structures/tags/worldgen/biome/has_structure/spawner_room.json
 a9004cb282a10f87578085c70f320238a442bcd1 data/valhelsia_structures/tags/worldgen/biome/has_structure/tower_ruin.json
 a2c17e9189d16e11b26ac0a0c170a0bc41bf1093 data/valhelsia_structures/tags/worldgen/biome/has_structure/witch_hut.json

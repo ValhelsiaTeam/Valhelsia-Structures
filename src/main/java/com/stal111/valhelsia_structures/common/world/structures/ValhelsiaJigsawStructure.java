@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.common.world.structures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProvider;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureTypes;
 import com.stal111.valhelsia_structures.core.init.world.ModStructures;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
@@ -13,8 +14,10 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.NoiseColumn;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
-import net.minecraft.world.level.levelgen.*;
-import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
+import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.LegacyRandomSource;
+import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureType;
@@ -41,7 +44,7 @@ public class ValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
             return structure.startJigsawName;
         }), Codec.intRange(0, 7).fieldOf("size").forGetter((structure) -> {
             return structure.maxDepth;
-        }), HeightProvider.CODEC.fieldOf("start_height").forGetter((structure) -> {
+        }), StructureHeightProvider.CODEC.fieldOf("start_height").forGetter((structure) -> {
             return structure.startHeight;
         }), Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter((structure) -> {
             return structure.projectStartToHeightmap;
@@ -66,7 +69,7 @@ public class ValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
     private final Holder<StructureTemplatePool> startPool;
     private final Optional<ResourceLocation> startJigsawName;
     private final int maxDepth;
-    private final HeightProvider startHeight;
+    private final StructureHeightProvider startHeight;
     private final Optional<Heightmap.Types> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
 
@@ -76,7 +79,7 @@ public class ValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
         this.structureSetResourceKey = ResourceKey.create(Registry.STRUCTURE_SET_REGISTRY, new ResourceLocation(ValhelsiaStructures.MOD_ID, name + "s"));
     }*/
 
-    public ValhelsiaJigsawStructure(Structure.StructureSettings settings, String name, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int maxDepth, HeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter) {
+    public ValhelsiaJigsawStructure(Structure.StructureSettings settings, String name, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int maxDepth, StructureHeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter) {
         super(settings, name);
         this.startPool = startPool;
         this.startJigsawName = startJigsawName;
@@ -86,11 +89,11 @@ public class ValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
         this.maxDistanceFromCenter = maxDistanceFromCenter;
     }
 
-    public ValhelsiaJigsawStructure(Structure.StructureSettings p_227620_, String name, Holder<StructureTemplatePool> p_227621_, int p_227622_, HeightProvider p_227623_, Heightmap.Types p_227625_) {
+    public ValhelsiaJigsawStructure(Structure.StructureSettings p_227620_, String name, Holder<StructureTemplatePool> p_227621_, int p_227622_, StructureHeightProvider p_227623_, Heightmap.Types p_227625_) {
         this(p_227620_, name, p_227621_, Optional.empty(), p_227622_, p_227623_, Optional.of(p_227625_), 80);
     }
 
-    public ValhelsiaJigsawStructure(Structure.StructureSettings p_227614_, String name, Holder<StructureTemplatePool> p_227615_, int p_227616_, HeightProvider p_227617_) {
+    public ValhelsiaJigsawStructure(Structure.StructureSettings p_227614_, String name, Holder<StructureTemplatePool> p_227615_, int p_227616_, StructureHeightProvider p_227617_) {
         this(p_227614_, name, p_227615_, Optional.empty(), p_227616_, p_227617_, Optional.empty(), 80);
     }
 
@@ -132,22 +135,60 @@ public class ValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
         return random.nextDouble() < this.getStructureSettings().spawnChance().get();
     }
 
+    private Optional<Integer> findSuitableY(ChunkGenerator generator, GenerationContext context, BlockPos pos, StructureHeightProvider heightProvider) {
+        NoiseColumn columnOfBlocks = generator.getBaseColumn(pos.getX(), pos.getZ(), context.heightAccessor(), context.randomState());
+
+        int maxY = heightProvider.maxY(pos, context, Heightmap.Types.WORLD_SURFACE);
+        int minY = heightProvider.minY(pos, context, Heightmap.Types.WORLD_SURFACE);
+
+        int airCount = 0;
+
+        while (maxY > minY) {
+            if (columnOfBlocks.getBlock(maxY).isAir()) {
+                airCount++;
+            } else {
+                if (airCount != 0 && airCount <= 8) {
+                    return Optional.of(maxY);
+                }
+
+                airCount = 0;
+            }
+            maxY--;
+        }
+
+        return Optional.empty();
+    }
+
     @Nonnull
     @Override
     public Optional<GenerationStub> findGenerationPoint(@Nonnull GenerationContext context) {
+        ChunkPos chunkPos = context.chunkPos();
+
         if (!this.canGenerate(context)) {
             return Optional.empty();
         }
 
-        ChunkPos chunkPos = context.chunkPos();
-        BlockPos pos = new BlockPos(chunkPos.getMinBlockX(), this.startHeight.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor())), chunkPos.getMinBlockZ());
+        BlockPos pos = chunkPos.getWorldPosition();
+
+        int y = this.startHeight.sample(pos, context, Heightmap.Types.WORLD_SURFACE);
+
+        // Check for air
+        if (this.step() == GenerationStep.Decoration.UNDERGROUND_STRUCTURES) {
+            Optional<Integer> optional = this.findSuitableY(context.chunkGenerator(), context, chunkPos.getMiddleBlockPosition(0), startHeight);
+
+            if (optional.isEmpty()) {
+                return Optional.empty();
+            }
+
+            y = optional.get();
+        }
 
         return JigsawPlacement.addPieces(
                 context,
                 this.startPool,
                 this.startJigsawName,
                 this.maxDepth,
-                pos,
+                pos.atY(y),
                 true,
                 this.projectStartToHeightmap,
                 this.maxDistanceFromCenter
@@ -169,7 +210,7 @@ public class ValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
     }
 
     public boolean canGenerateOnWater() {
-        return false;
+        return this.step() == GenerationStep.Decoration.UNDERGROUND_STRUCTURES;
     }
 
     public boolean hasMargin() {
