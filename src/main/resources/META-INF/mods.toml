@@ -37,3 +37,10 @@ mandatory=true
 versionRange="[1.19.2-0.4.0,)"
 ordering="AFTER"
 side="BOTH"
+
+[[dependencies.valhelsia_structures]]
+modId="valhelsia_furniture"
+mandatory=true
+versionRange="[1.19.2-1.0.0,)"
+ordering="AFTER"
+side="BOTH"
