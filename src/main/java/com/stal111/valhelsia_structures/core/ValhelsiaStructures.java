@@ -7,10 +7,7 @@ import com.stal111.valhelsia_structures.common.world.structures.height.Structure
 import com.stal111.valhelsia_structures.core.config.ConfigValidator;
 import com.stal111.valhelsia_structures.core.config.ModConfig;
 import com.stal111.valhelsia_structures.core.init.*;
-import com.stal111.valhelsia_structures.core.init.world.ModStructureHeightProviderTypes;
-import com.stal111.valhelsia_structures.core.init.world.ModStructureSets;
-import com.stal111.valhelsia_structures.core.init.world.ModStructureTypes;
-import com.stal111.valhelsia_structures.core.init.world.ModStructures;
+import com.stal111.valhelsia_structures.core.init.world.*;
 import com.stal111.valhelsia_structures.utils.LogFilter;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -56,6 +53,7 @@ public class ValhelsiaStructures {
             .addHelper(Registry.STRUCTURE_SET_REGISTRY, new RegistryHelper<>(ModStructureSets::new))
             .addHelper(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, new RegistryHelper<>(ModBlockEntities::new))
             .addHelper(ForgeRegistries.Keys.RECIPE_SERIALIZERS, new RegistryHelper<>(ModRecipes::new))
+            .addHelper(Registry.STRUCTURE_PROCESSOR_REGISTRY, new RegistryHelper<>(ModStructureProcessors::new))
             .setConfigValidator(new ConfigValidator())
             .create();
 

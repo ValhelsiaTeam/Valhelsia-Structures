@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.utils;
 
 import com.mojang.datafixers.util.Pair;
-import com.stal111.valhelsia_structures.common.world.template.Processors;
+import com.stal111.valhelsia_structures.common.world.structures.processor.ModProcessors;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.Holder;
 import net.minecraft.data.BuiltinRegistries;
@@ -38,10 +38,10 @@ public class JigsawHelper {
         List<Pair<Function<StructureTemplatePool.Projection, ? extends StructurePoolElement>, Integer>> newList = new ArrayList<>();
 
         List<StructureProcessor> processorList = new ArrayList<>(Arrays.asList(processors));
-        processorList.add(Processors.GRASS_BLOCK_REPLACEMENT_PROCESSOR);
+        processorList.add(ModProcessors.GRASS_BLOCK_REPLACEMENT_PROCESSOR);
 
         if (replaceStone) {
-            processorList.add(Processors.STONE_REPLACEMENT_PROCESSOR);
+            processorList.add(ModProcessors.STONE_REPLACEMENT_PROCESSOR);
         }
 
         ResourceLocation resourceLocation = new ResourceLocation(ValhelsiaStructures.MOD_ID, name);

@@ -1,4 +1,4 @@
-package com.stal111.valhelsia_structures.common.world.template;
+package com.stal111.valhelsia_structures.common.world.structures.processor;
 
 import com.google.common.collect.ImmutableList;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
@@ -9,14 +9,12 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.ProcessorRule
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleProcessor;
 
 /**
- * Additional Processors for Valhelsia Structures <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.common.world.template.Processors
+ * Additional Processors for Valhelsia Structures
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2019-10-31
  */
-public class Processors {
+public class ModProcessors {
 
     /**
      * Processor that causes stone to be replaced with a different type to prevent it being overwritten by other generation.
@@ -34,4 +32,9 @@ public class Processors {
     public static final RuleProcessor GRASS_BLOCK_REPLACEMENT_PROCESSOR = new RuleProcessor(ImmutableList.of(
             new ProcessorRule(new BlockMatchTest(Blocks.GRASS_BLOCK), AlwaysTrueTest.INSTANCE, ModBlocks.GRASS_BLOCK.get().defaultBlockState())
     ));
+
+    /**
+     * Processor that removes all water blocks near the structure to ensure it isn't flooded.
+     */
+    public static final RemoveWaterProcessor REMOVE_WATER_PROCESSOR = RemoveWaterProcessor.INSTANCE;
 }
