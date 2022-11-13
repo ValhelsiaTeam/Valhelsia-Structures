@@ -15,7 +15,6 @@ import javax.annotation.Nullable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.data.ModBiomeTagsProvider
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.1.0
  * @since 2022-03-20
  */
 public class ModBiomeTagsProvider extends BiomeTagsProvider {
@@ -39,5 +38,6 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
         this.tag(ModTags.Biomes.HAS_WITCH_HUT).add(Biomes.SWAMP);
         this.tag(ModTags.Biomes.HAS_BIG_TREE).addTag(ModTags.Biomes.IS_PLAINS).addTag(BiomeTags.IS_FOREST);
         this.tag(ModTags.Biomes.HAS_SPAWNER_ROOM).addTag(BiomeTags.IS_OVERWORLD);
+        this.tag(ModTags.Biomes.HAS_DEEP_SPAWNER_ROOM).addTag(BiomeTags.IS_OVERWORLD);
     }
 }

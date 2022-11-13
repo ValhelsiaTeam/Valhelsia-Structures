@@ -10,30 +10,32 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.structure.Structure;
 
+import java.util.OptionalInt;
+
 /**
  * @author Valhelsia Team
  * @since 2022-10-28
  */
-public class BelowSurfaceHeight extends StructureHeightProvider {
+public class BelowSurfaceHeightProvider extends StructureHeightProvider {
 
-    public static final Codec<BelowSurfaceHeight> CODEC = RecordCodecBuilder.create((instance) -> {
-        return instance.group(VerticalAnchor.CODEC.fieldOf("min_inclusive").forGetter(height -> {
-            return height.minInclusive;
-        })).apply(instance, BelowSurfaceHeight::new);
+    public static final Codec<BelowSurfaceHeightProvider> CODEC = RecordCodecBuilder.create((instance) -> {
+        return instance.group(VerticalAnchor.CODEC.fieldOf("min_inclusive").forGetter(provider -> {
+            return provider.minInclusive;
+        })).apply(instance, BelowSurfaceHeightProvider::new);
     });
 
     private final VerticalAnchor minInclusive;
 
-    public BelowSurfaceHeight(VerticalAnchor minInclusive) {
+    public BelowSurfaceHeightProvider(VerticalAnchor minInclusive) {
         this.minInclusive = minInclusive;
     }
 
     @Override
-    public int sample(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
+    public OptionalInt sample(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
         int min = this.minY(pos, context, heightmapType);
         int max = this.maxY(pos, context, heightmapType);
 
-        return Mth.randomBetweenInclusive(context.random(), min, max);
+        return OptionalInt.of(Mth.randomBetweenInclusive(context.random(), min, max));
     }
 
     @Override
@@ -48,6 +50,10 @@ public class BelowSurfaceHeight extends StructureHeightProvider {
 
     @Override
     public StructureHeightProviderType<?> getType() {
-        return ModStructureHeightProviderTypes.BELOW_SURFACE.get();
+        return ModStructureHeightProviderTypes.BELOW_SURFACE_HEIGHT.get();
+    }
+
+    protected VerticalAnchor getMinInclusive() {
+        return this.minInclusive;
     }
 }

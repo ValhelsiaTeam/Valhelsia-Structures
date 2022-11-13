@@ -85,6 +85,7 @@ public class ModTags {
         public static final TagKey<Biome> HAS_WITCH_HUT = modTag("has_structure/witch_hut");
         public static final TagKey<Biome> HAS_BIG_TREE = modTag("has_structure/big_tree");
         public static final TagKey<Biome> HAS_SPAWNER_ROOM = modTag("has_structure/spawner_room");
+        public static final TagKey<Biome> HAS_DEEP_SPAWNER_ROOM = modTag("has_structure/deep_spawner_room");
 
         private static TagKey<Biome> forgeTag(String name) {
             return TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation("forge", name));

@@ -21,5 +21,6 @@ public class SimpleStructurePools {
     public static final Holder<StructureTemplatePool> TOWER_RUIN_PATTERN = JigsawHelper.register("tower_ruins", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("ruins/tower_ruin_1", 1), Pair.of("ruins/tower_ruin_2", 1), Pair.of("ruins/tower_ruin_3", 1)), true);
     public static final Holder<StructureTemplatePool> WITCH_HUT_PATTERN = JigsawHelper.register("witch_huts", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("witch_hut/witch_hut_1", 1), Pair.of("witch_hut/witch_hut_2", 1)), true);
     public static final Holder<StructureTemplatePool> SPAWNER_ROOM_PATTERN = JigsawBuilder.builder("spawner_room", "spawner_rooms").element("spawner_room_1").element("spawner_room_2").removeWater().build();
+    public static final Holder<StructureTemplatePool> DEEP_SPAWNER_ROOM_PATTERN = JigsawBuilder.builder("deep_spawner_room", "deep_spawner_rooms").element("deep_spawner_room_1").removeWater().build();
 
 }

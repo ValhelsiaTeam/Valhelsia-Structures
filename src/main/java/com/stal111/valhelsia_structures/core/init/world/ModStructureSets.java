@@ -31,5 +31,6 @@ public class ModStructureSets implements RegistryClass {
     public static final RegistryObject<StructureSet> WITCH_HUTS = HELPER.register("witch_huts", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.WITCH_HUT)), new RandomSpreadStructurePlacement(23, 6, RandomSpreadType.LINEAR, 70882951)));
     public static final RegistryObject<StructureSet> BIG_TREES = HELPER.register("big_trees", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.BIG_TREE)), new RandomSpreadStructurePlacement(28, 7, RandomSpreadType.LINEAR, 35122018)));
     public static final RegistryObject<StructureSet> SPAWNER_ROOMS = HELPER.register("spawner_rooms", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.SPAWNER_ROOM)), new RandomSpreadStructurePlacement(3, 2, RandomSpreadType.LINEAR, 820846813)));
+    public static final RegistryObject<StructureSet> DEEP_SPAWNER_ROOMS = HELPER.register("deep_spawner_rooms", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.DEEP_SPAWNER_ROOM)), new RandomSpreadStructurePlacement(3, 2, RandomSpreadType.LINEAR, 601654390)));
 
 }

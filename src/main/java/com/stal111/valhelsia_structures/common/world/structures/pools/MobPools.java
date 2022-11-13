@@ -26,7 +26,7 @@ public class MobPools {
         JigsawHelper.register("mobs/spawners/zombie", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/spawners/zombie", 1)));
         JigsawHelper.register("mobs/spawners/skeleton", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/spawners/skeleton", 1)));
         JigsawHelper.register("mobs/spawners/spider", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/spawners/spider", 1)));
-        JigsawHelper.register("mobs/special_spawners/zombie_or_skeleton", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/special_spawners/zombie", 1), Pair.of("mobs/special_spawners/skeleton", 1)));
+        JigsawHelper.register("mobs/special_spawners/zombie_or_skeleton_or_spider", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/special_spawners/zombie", 1), Pair.of("mobs/special_spawners/skeleton", 1), Pair.of("mobs/special_spawners/spider", 1)));
         JigsawHelper.register("mobs/special_spawners/drowned", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/special_spawners/drowned", 1)));
     }
 }

@@ -9,6 +9,8 @@ import net.minecraft.world.level.levelgen.WorldGenerationContext;
 import net.minecraft.world.level.levelgen.heightproviders.HeightProvider;
 import net.minecraft.world.level.levelgen.structure.Structure;
 
+import java.util.OptionalInt;
+
 /**
  * @author Valhelsia Team
  * @since 2022-10-28
@@ -28,18 +30,18 @@ public class DefaultHeightProvider extends StructureHeightProvider {
     }
 
     @Override
-    public int sample(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
-        return this.heightProvider.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor()));
+    public OptionalInt sample(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
+        return OptionalInt.of(this.heightProvider.sample(context.random(), new WorldGenerationContext(context.chunkGenerator(), context.heightAccessor())));
     }
 
     @Override
     public int minY(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
-        return 0;
+        throw new UnsupportedOperationException("Cannot get minY on the default provider");
     }
 
     @Override
     public int maxY(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
-        return 0;
+        throw new UnsupportedOperationException("Cannot get maxY on the default provider");
     }
 
     @Override

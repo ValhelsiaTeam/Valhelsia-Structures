@@ -27,6 +27,7 @@ import net.valhelsia.valhelsia_core.common.world.SimpleValhelsiaStructure;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.function.Function;
 
 /**
@@ -170,17 +171,10 @@ public class ValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
 
         BlockPos pos = chunkPos.getWorldPosition();
 
-        int y = this.startHeight.sample(pos, context, Heightmap.Types.WORLD_SURFACE);
+        OptionalInt y = this.startHeight.sample(pos, context, Heightmap.Types.WORLD_SURFACE);
 
-        // Check for air
-        if (this.step() == GenerationStep.Decoration.UNDERGROUND_STRUCTURES) {
-            Optional<Integer> optional = this.findSuitableY(context.chunkGenerator(), context, chunkPos.getMiddleBlockPosition(0), startHeight);
-
-            if (optional.isEmpty()) {
-                return Optional.empty();
-            }
-
-            y = optional.get();
+        if (y.isEmpty()) {
+            return Optional.empty();
         }
 
         return JigsawPlacement.addPieces(
@@ -188,7 +182,7 @@ public class ValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
                 this.startPool,
                 this.startJigsawName,
                 this.maxDepth,
-                pos.atY(y),
+                pos.atY(y.getAsInt()),
                 true,
                 this.projectStartToHeightmap,
                 this.maxDistanceFromCenter
