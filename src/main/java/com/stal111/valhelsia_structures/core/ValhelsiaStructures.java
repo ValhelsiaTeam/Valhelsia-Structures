@@ -54,6 +54,7 @@ public class ValhelsiaStructures {
             .addHelper(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES, new RegistryHelper<>(ModBlockEntities::new))
             .addHelper(ForgeRegistries.Keys.RECIPE_SERIALIZERS, new RegistryHelper<>(ModRecipes::new))
             .addHelper(Registry.STRUCTURE_PROCESSOR_REGISTRY, new RegistryHelper<>(ModStructureProcessors::new))
+            .addHelper(Registry.STRUCTURE_POOL_ELEMENT_REGISTRY, new RegistryHelper<>(ModStructurePoolElementTypes::new))
             .setConfigValidator(new ConfigValidator())
             .create();
 

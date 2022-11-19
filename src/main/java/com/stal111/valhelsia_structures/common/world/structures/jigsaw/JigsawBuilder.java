@@ -1,6 +1,8 @@
 package com.stal111.valhelsia_structures.common.world.structures.jigsaw;
 
+import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Pair;
+import com.stal111.valhelsia_structures.common.world.structures.pools.ValhelsiaSinglePoolElement;
 import com.stal111.valhelsia_structures.common.world.structures.processor.ModProcessors;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.Holder;
@@ -25,7 +27,7 @@ import java.util.function.Function;
 public class JigsawBuilder {
 
     @Nullable
-    private final String group;
+    private final String folder;
     private final String path;
 
     private StructureTemplatePool.Projection projection = StructureTemplatePool.Projection.RIGID;
@@ -33,18 +35,18 @@ public class JigsawBuilder {
     private final List<Pair<String, Integer>> elements = new ArrayList<>();
     private final List<StructureProcessor> processors = new ArrayList<>();
 
-    private JigsawBuilder(@NotNull String group, String name) {
-        this.group = group;
-        this.path = group + "/" + name;
-    }
-
-    private JigsawBuilder(String name) {
-        this.group = null;
+    private JigsawBuilder(@NotNull String folder, String name) {
+        this.folder = folder;
         this.path = name;
     }
 
-    public static JigsawBuilder builder(String group, String name) {
-        return new JigsawBuilder(group, name).processor(ModProcessors.STONE_REPLACEMENT_PROCESSOR).processor(ModProcessors.GRASS_BLOCK_REPLACEMENT_PROCESSOR);
+    private JigsawBuilder(String name) {
+        this.folder = null;
+        this.path = name;
+    }
+
+    public static JigsawBuilder builder(String folder, String name) {
+        return new JigsawBuilder(folder, name).processor(ModProcessors.STONE_REPLACEMENT_PROCESSOR).processor(ModProcessors.GRASS_BLOCK_REPLACEMENT_PROCESSOR);
     }
 
     public static JigsawBuilder builder(String name) {
@@ -62,7 +64,7 @@ public class JigsawBuilder {
     }
 
     public JigsawBuilder element(String location, int weight) {
-        this.elements.add(Pair.of(this.group != null ? this.group + "/" + location : location, weight));
+        this.elements.add(Pair.of(this.folder != null ? this.folder + "/" + location : location, weight));
 
         return this;
     }
@@ -87,7 +89,7 @@ public class JigsawBuilder {
         Holder<StructureProcessorList> holder = BuiltinRegistries.register(BuiltinRegistries.PROCESSOR_LIST, location, new StructureProcessorList(this.processors));
 
         for (Pair<String, Integer> pair : this.elements) {
-            list.add(Pair.of(StructurePoolElement.single(ValhelsiaStructures.MOD_ID + ":" + pair.getFirst(), holder), pair.getSecond()));
+            list.add(Pair.of(projection -> new ValhelsiaSinglePoolElement(Either.left(new ResourceLocation(ValhelsiaStructures.MOD_ID, pair.getFirst())), holder, projection), pair.getSecond()));
         }
 
         return Pools.register(new StructureTemplatePool(new ResourceLocation(ValhelsiaStructures.MOD_ID, this.path), new ResourceLocation("empty"), list, this.projection));
