@@ -68,7 +68,7 @@ public class ModStructures implements RegistryClass {
             ValhelsiaStructureSettings.of(ConfigurableValue.of(0.7D), ConfigurableValue.of(25)));
     public static final Holder<? extends Structure> SPAWNER_ROOM = register("spawner_room",
             () -> new ValhelsiaJigsawStructure(structure(ModTags.Biomes.HAS_SPAWNER_ROOM, GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), "spawner_room", SimpleStructurePools.SPAWNER_ROOM_PATTERN, 7, StructureHeightProvider.spawnerRoom(VerticalAnchor.absolute(0))),
-            ValhelsiaStructureSettings.of(ConfigurableValue.of(1.0D), null, ConfigurableValue.of(0)));
+            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.9D), null, ConfigurableValue.of(0)));
     public static final Holder<? extends Structure> DEEP_SPAWNER_ROOM = register("deep_spawner_room",
             () -> new ValhelsiaJigsawStructure(structure(ModTags.Biomes.HAS_DEEP_SPAWNER_ROOM, GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), "deep_spawner_room", SimpleStructurePools.DEEP_SPAWNER_ROOM_PATTERN, 7, StructureHeightProvider.deepSpawnerRoom(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(-1))),
             ValhelsiaStructureSettings.of(ConfigurableValue.of(1.0D), null, ConfigurableValue.of(0)));
