@@ -5,7 +5,6 @@ import com.stal111.valhelsia_structures.core.init.other.CompostableRegistry;
 import com.stal111.valhelsia_structures.core.init.other.FireExtinguishRegistry;
 import com.stal111.valhelsia_structures.core.init.other.FlammableRegistry;
 import com.stal111.valhelsia_structures.core.init.other.FlintAndSteelRegistry;
-import com.stal111.valhelsia_structures.core.init.world.ModStructures;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 /**
@@ -23,8 +22,6 @@ public class CommonSetup {
             FlammableRegistry.register();
             CompostableRegistry.register();
         });
-
-        ModStructures.setup();
 
         FlintAndSteelRegistry.register();
         FireExtinguishRegistry.register();

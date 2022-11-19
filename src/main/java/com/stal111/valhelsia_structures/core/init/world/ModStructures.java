@@ -81,15 +81,6 @@ public class ModStructures implements RegistryClass {
         return registryObject.getHolder().get();
     }
 
-    public static void setup() {
-//        HELPER.getRegistryObjects().forEach(structureRegistryObject -> {
-//            if (structureRegistryObject.get() instanceof ValhelsiaJigsawStructure structure) {
-//                structure.setStructureSettings(STRUCTURE_SETTINGS_MAP.get(structureRegistryObject));
-//                System.out.println(structureRegistryObject.getId());
-//            }
-//        });
-    }
-
     private static Structure.StructureSettings structure(TagKey<Biome> tagKey, Map<MobCategory, StructureSpawnOverride> spawnOverrideMap, GenerationStep.Decoration decoration, TerrainAdjustment terrainAdjustment) {
         return new Structure.StructureSettings(biomes(tagKey), spawnOverrideMap, decoration, terrainAdjustment);
     }
