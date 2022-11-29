@@ -54,7 +54,7 @@ public class ModRecipeProvider extends ValhelsiaRecipeProvider {
         });
 
         this.metalFramedGlass(ModBlocks.METAL_FRAMED_GLASS.get(), RecipePart.of(Tags.Items.GLASS_COLORLESS));
-        this.glassPane(ModBlocks.METAL_FRAMED_GLASS_PANE.get(), ModBlocks.METAL_FRAMED_GLASS.get());
+        this.glassPane(ModBlocks.METAL_FRAMED_GLASS_PANE.get(), RecipePart.of(ModBlocks.METAL_FRAMED_GLASS.get()));
 
         ModBlocks.COLORED_METAL_FRAMED_GLASS.forEach((color, registryObject) -> {
             Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getName() + "_stained_glass")));
@@ -63,7 +63,7 @@ public class ModRecipeProvider extends ValhelsiaRecipeProvider {
 
         ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.forEach((color, registryObject) -> {
             Block block = ModBlocks.COLORED_METAL_FRAMED_GLASS.get(color).get();
-            this.glassPane(registryObject.get(), block);
+            this.glassPane(registryObject.get(), RecipePart.of(ModBlocks.METAL_FRAMED_GLASS.get()));
         });
 
         this.shaped(ModBlocks.PAPER_WALL.get(), 2, builder -> builder.pattern("#X#").pattern("#X#").pattern("#X#").define('#', Items.BAMBOO).define('X', Items.PAPER).unlockedBy(this, Items.BAMBOO));
@@ -90,32 +90,32 @@ public class ModRecipeProvider extends ValhelsiaRecipeProvider {
         });
 
         this.surroundingItem(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get(), RecipePart.of(Ingredient.of(Blocks.VINE, ModBlocks.HANGING_VINES.get())), RecipePart.of(Blocks.JUNGLE_LOG), 8);
-        this.wood(ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get(), ModBlocks.LAPIDIFIED_JUNGLE_LOG.get());
+        this.wood(ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get()));
         this.planks(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get(), ModTags.Items.LAPIDIFIED_JUNGLE_LOGS);
-        this.slab(ModBlocks.LAPIDIFIED_JUNGLE_SLAB.get(), ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get());
-        this.stairs(ModBlocks.LAPIDIFIED_JUNGLE_STAIRS.get(), ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get());
-        this.pressurePlate(ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE.get(), ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get());
+        this.slab(ModBlocks.LAPIDIFIED_JUNGLE_SLAB.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()));
+        this.stairs(ModBlocks.LAPIDIFIED_JUNGLE_STAIRS.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()));
+        this.pressurePlate(ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()));
         this.button(ModBlocks.LAPIDIFIED_JUNGLE_BUTTON.get(), ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get());
-        this.fence(ModBlocks.LAPIDIFIED_JUNGLE_FENCE.get(), ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get());
-        this.fenceGate(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get(), ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get());
+        this.fence(ModBlocks.LAPIDIFIED_JUNGLE_FENCE.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()));
+        this.fenceGate(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()));
 
-        this.simple2x2(ModBlocks.BUNDLED_OAK_POSTS.get(), ModBlocks.OAK_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_SPRUCE_POSTS.get(), ModBlocks.SPRUCE_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_BIRCH_POSTS.get(), ModBlocks.BIRCH_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_JUNGLE_POSTS.get(), ModBlocks.JUNGLE_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_ACACIA_POSTS.get(), ModBlocks.ACACIA_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_DARK_OAK_POSTS.get(), ModBlocks.DARK_OAK_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_CRIMSON_POSTS.get(), ModBlocks.CRIMSON_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_WARPED_POSTS.get(), ModBlocks.WARPED_POST.get());
+        this.simple2x2(ModBlocks.BUNDLED_OAK_POSTS.get(), RecipePart.of(ModBlocks.OAK_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_SPRUCE_POSTS.get(), RecipePart.of(ModBlocks.SPRUCE_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_BIRCH_POSTS.get(), RecipePart.of(ModBlocks.BIRCH_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_JUNGLE_POSTS.get(), RecipePart.of(ModBlocks.JUNGLE_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_ACACIA_POSTS.get(), RecipePart.of(ModBlocks.ACACIA_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_DARK_OAK_POSTS.get(), RecipePart.of(ModBlocks.DARK_OAK_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_CRIMSON_POSTS.get(), RecipePart.of(ModBlocks.CRIMSON_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_WARPED_POSTS.get(), RecipePart.of(ModBlocks.WARPED_POST.get()));
 
-        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_OAK_POSTS.get(), ModBlocks.STRIPPED_OAK_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_SPRUCE_POSTS.get(), ModBlocks.STRIPPED_SPRUCE_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_BIRCH_POSTS.get(), ModBlocks.STRIPPED_BIRCH_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_JUNGLE_POSTS.get(), ModBlocks.STRIPPED_JUNGLE_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_ACACIA_POSTS.get(), ModBlocks.STRIPPED_ACACIA_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_DARK_OAK_POSTS.get(), ModBlocks.STRIPPED_DARK_OAK_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_CRIMSON_POSTS.get(), ModBlocks.STRIPPED_CRIMSON_POST.get());
-        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_WARPED_POSTS.get(), ModBlocks.STRIPPED_WARPED_POST.get());
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_OAK_POSTS.get(), RecipePart.of(ModBlocks.STRIPPED_OAK_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_SPRUCE_POSTS.get(), RecipePart.of(ModBlocks.STRIPPED_SPRUCE_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_BIRCH_POSTS.get(), RecipePart.of(ModBlocks.STRIPPED_BIRCH_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_JUNGLE_POSTS.get(), RecipePart.of(ModBlocks.STRIPPED_JUNGLE_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_ACACIA_POSTS.get(), RecipePart.of(ModBlocks.STRIPPED_ACACIA_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_DARK_OAK_POSTS.get(), RecipePart.of(ModBlocks.STRIPPED_DARK_OAK_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_CRIMSON_POSTS.get(), RecipePart.of(ModBlocks.STRIPPED_CRIMSON_POST.get()));
+        this.simple2x2(ModBlocks.BUNDLED_STRIPPED_WARPED_POSTS.get(), RecipePart.of(ModBlocks.STRIPPED_WARPED_POST.get()));
 
         Block whiteSleepingBag = ModBlocks.SLEEPING_BAGS.get(DyeColor.WHITE).get();
 
@@ -123,7 +123,7 @@ public class ModRecipeProvider extends ValhelsiaRecipeProvider {
             Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getName() + "_wool"));
 
             if (block != null) {
-                this.singleRow(registryObject.get(), block);
+                this.singleRow(registryObject.get(), RecipePart.of(block));
             }
 
             if (color != DyeColor.WHITE) {

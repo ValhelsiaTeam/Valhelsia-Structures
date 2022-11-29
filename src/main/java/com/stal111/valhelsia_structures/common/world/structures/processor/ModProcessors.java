@@ -32,9 +32,4 @@ public class ModProcessors {
     public static final RuleProcessor GRASS_BLOCK_REPLACEMENT_PROCESSOR = new RuleProcessor(ImmutableList.of(
             new ProcessorRule(new BlockMatchTest(Blocks.GRASS_BLOCK), AlwaysTrueTest.INSTANCE, ModBlocks.GRASS_BLOCK.get().defaultBlockState())
     ));
-
-    /**
-     * Processor that removes all water blocks near the structure to ensure it isn't flooded.
-     */
-    public static final RemoveWaterProcessor REMOVE_WATER_PROCESSOR = RemoveWaterProcessor.INSTANCE;
 }

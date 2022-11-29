@@ -2,6 +2,8 @@ package com.stal111.valhelsia_structures.common.world.structures.pools;
 
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.common.block.entity.SpecialSpawnerBlockEntity;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
@@ -20,6 +22,7 @@ import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
 import net.minecraft.world.level.block.state.properties.StructureMode;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElementType;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
@@ -27,10 +30,12 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlac
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -39,18 +44,39 @@ import java.util.function.Function;
  */
 public class ValhelsiaSinglePoolElement extends SinglePoolElement {
 
-    private static final List<EntityType<?>> SPAWNER_ENTITY = List.of(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER);
+    private static final Codec<Either<ResourceLocation, StructureTemplate>> TEMPLATE_CODEC = Codec.of(ValhelsiaSinglePoolElement::encodeTemplate, ResourceLocation.CODEC.map(Either::left));
 
     public static final Codec<ValhelsiaSinglePoolElement> CODEC = RecordCodecBuilder.create((instance) -> {
-        return instance.group(templateCodec(), processorsCodec(), projectionCodec()).apply(instance, ValhelsiaSinglePoolElement::new);
+        return instance.group(valhelsiaTemplateCodec(), processorsCodec(), projectionCodec(), TerrainAdjustment.CODEC.optionalFieldOf("terrain_adjustment").forGetter(element -> {
+            return Optional.ofNullable(element.terrainAdjustment);
+        })).apply(instance, (either, processorListHolder, projection, terrainAdjustment) -> {
+            return new ValhelsiaSinglePoolElement(either, processorListHolder, projection, terrainAdjustment.orElse(null));
+        });
     });
 
-    public ValhelsiaSinglePoolElement(Either<ResourceLocation, StructureTemplate> resourceLocation, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection) {
+    private static final List<EntityType<?>> SPAWNER_ENTITY = List.of(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER);
+
+    private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> either, DynamicOps<T> dynamicOps, T t) {
+        Optional<ResourceLocation> optional = either.left();
+        return optional.isEmpty() ? DataResult.error("Can not serialize a runtime pool element") : ResourceLocation.CODEC.encode(optional.get(), dynamicOps, t);
+    }
+
+
+    protected static <E extends ValhelsiaSinglePoolElement> RecordCodecBuilder<E, Either<ResourceLocation, StructureTemplate>> valhelsiaTemplateCodec() {
+        return TEMPLATE_CODEC.fieldOf("location").forGetter((element) -> {
+            return element.template;
+        });
+    }
+
+    private final TerrainAdjustment terrainAdjustment;
+
+    public ValhelsiaSinglePoolElement(Either<ResourceLocation, StructureTemplate> resourceLocation, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, @Nullable TerrainAdjustment terrainAdjustment) {
         super(resourceLocation, processors, projection);
+        this.terrainAdjustment = terrainAdjustment;
     }
 
     @Override
-    public boolean place(StructureTemplateManager templateManager, @Nonnull WorldGenLevel level, @Nonnull StructureManager structureManager, @Nonnull ChunkGenerator generator, @Nonnull BlockPos offset, @Nonnull BlockPos pos, @Nonnull Rotation rotation, @Nonnull BoundingBox box, @Nonnull RandomSource random, boolean keepJigsaws) {
+    public boolean place(StructureTemplateManager templateManager, @NotNull WorldGenLevel level, @NotNull StructureManager structureManager, @NotNull ChunkGenerator generator, @NotNull BlockPos offset, @NotNull BlockPos pos, @NotNull Rotation rotation, @NotNull BoundingBox box, @NotNull RandomSource random, boolean keepJigsaws) {
         StructureTemplate structuretemplate = this.template.map(templateManager::getOrCreate, Function.identity());
         StructurePlaceSettings structureplacesettings = this.getSettings(rotation, box, keepJigsaws);
 
@@ -70,7 +96,7 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
     }
 
     @Override
-    public void handleDataMarker(@Nonnull LevelAccessor level, @Nonnull StructureTemplate.StructureBlockInfo blockInfo, @Nonnull BlockPos pos, @Nonnull Rotation rotation, @Nonnull RandomSource random, @Nonnull BoundingBox box) {
+    public void handleDataMarker(@NotNull LevelAccessor level, @NotNull StructureTemplate.StructureBlockInfo blockInfo, @NotNull BlockPos pos, @NotNull Rotation rotation, @NotNull RandomSource random, @NotNull BoundingBox box) {
         String data = blockInfo.nbt.getString("metadata");
 
         if (data.startsWith("spawner:")) {
@@ -108,9 +134,8 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
         super.handleDataMarker(level, blockInfo, pos, rotation, random, box);
     }
 
-    @Nonnull
-    @Override
-    public List<StructureTemplate.StructureBlockInfo> getDataMarkers(StructureTemplateManager templateManager, @Nonnull BlockPos pos, @Nonnull Rotation rotation, boolean relativePosition) {
+    @NotNull
+    public List<StructureTemplate.StructureBlockInfo> getDataMarkers(StructureTemplateManager templateManager, @NotNull BlockPos pos, @NotNull Rotation rotation, boolean relativePosition) {
         StructureTemplate structuretemplate = this.template.map(templateManager::getOrCreate, Function.identity());
         List<StructureTemplate.StructureBlockInfo> structureBlockInfos = structuretemplate.filterBlocks(pos, new StructurePlaceSettings().setRotation(rotation), Blocks.STRUCTURE_BLOCK, relativePosition);
         List<StructureTemplate.StructureBlockInfo> markers = new ArrayList<>();
@@ -126,7 +151,11 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
         return markers;
     }
 
-    @Nonnull
+    public TerrainAdjustment getTerrainAdjustment() {
+        return this.terrainAdjustment != null ? this.terrainAdjustment : TerrainAdjustment.NONE;
+    }
+
+    @NotNull
     @Override
     public StructurePoolElementType<?> getType() {
         return ModStructurePoolElementTypes.VALHELSIA_SINGLE.get();

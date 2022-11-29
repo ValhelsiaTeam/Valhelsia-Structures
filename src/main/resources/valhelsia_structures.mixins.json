@@ -5,6 +5,7 @@
   "package": "com.stal111.valhelsia_structures.core.mixin",
   "refmap": "valhelsia_structures.refmap.json",
   "mixins": [
+    "BeardifierMixin",
     "BucketItemMixin",
     "CatEntityMixin",
     "FlowingFluidMixin",

@@ -26,7 +26,6 @@ public class CommonSetup {
         FlintAndSteelRegistry.register();
         FireExtinguishRegistry.register();
 
-        SpawnerDungeonPools.load();
         MobPools.load();
         PlayerHousePools.load();
         DesertHousePools.load();

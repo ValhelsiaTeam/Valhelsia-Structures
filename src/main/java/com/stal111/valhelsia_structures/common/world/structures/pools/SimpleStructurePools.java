@@ -1,26 +1,21 @@
 package com.stal111.valhelsia_structures.common.world.structures.pools;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
-import com.stal111.valhelsia_structures.common.world.structures.jigsaw.JigsawBuilder;
-import com.stal111.valhelsia_structures.utils.JigsawHelper;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
+import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHelper;
 
 /**
- * Simple Structure Pools
- *
  * @author Valhelsia Team
- * @since 2021-03-21
+ * @since 2022-11-26
  */
-public class SimpleStructurePools {
+public class SimpleStructurePools implements RegistryClass {
 
-    public static final Holder<StructureTemplatePool> CASTLE_PATTERN = JigsawHelper.register("castles", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("castle", 1)), true);
-    public static final Holder<StructureTemplatePool> CASTLE_RUIN_PATTERN = JigsawHelper.register("castle_ruins", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("ruins/castle_ruin", 1)), true);
-    public static final Holder<StructureTemplatePool> FORGE_PATTERN = JigsawHelper.register("forges", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("forge/forge_1", 1), Pair.of("forge/forge_2", 1)), true);
-    public static final Holder<StructureTemplatePool> TOWER_RUIN_PATTERN = JigsawHelper.register("tower_ruins", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("ruins/tower_ruin_1", 1), Pair.of("ruins/tower_ruin_2", 1), Pair.of("ruins/tower_ruin_3", 1)), true);
-    public static final Holder<StructureTemplatePool> WITCH_HUT_PATTERN = JigsawHelper.register("witch_huts", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("witch_hut/witch_hut_1", 1), Pair.of("witch_hut/witch_hut_2", 1)), true);
-    public static final Holder<StructureTemplatePool> SPAWNER_ROOM_PATTERN = JigsawBuilder.builder("spawner_room", "spawner_rooms").element("spawner_room_1").element("spawner_room_2").removeWater().build();
-    public static final Holder<StructureTemplatePool> DEEP_SPAWNER_ROOM_PATTERN = JigsawBuilder.builder("deep_spawner_room", "deep_spawner_rooms").element("deep_spawner_room_1").removeWater().build();
+    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registry.TEMPLATE_POOL_REGISTRY);
+
+    public static final Holder<StructureTemplatePool> SPAWNER_ROOM_PATTERN = HELPER.register("spawner_room", "spawner_rooms", builder -> builder.element("spawner_room_1").element("spawner_room_2").removeWater());
+    public static final Holder<StructureTemplatePool> DEEP_SPAWNER_ROOM_PATTERN = HELPER.register("deep_spawner_room", "deep_spawner_rooms", builder -> builder.element("deep_spawner_room_1").removeWater());
 
 }
