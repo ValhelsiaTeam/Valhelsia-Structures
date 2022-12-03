@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Beardifier.class)
 public class BeardifierMixin {
 
-    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/Structure;terrainAdaptation()Lnet/minecraft/world/level/levelgen/structure/TerrainAdjustment;"), method = "lambda$forStructuresInChunk$1", remap = false)
+    @Redirect(at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/Structure;terrainAdaptation()Lnet/minecraft/world/level/levelgen/structure/TerrainAdjustment;"), method = {"lambda$forStructuresInChunk$1", "m_223940_"})
     private static TerrainAdjustment valhelsia_forStructuresInChunk(Structure structure) {
         if (structure instanceof ValhelsiaJigsawStructure valhelsiaJigsawStructure && valhelsiaJigsawStructure.hasIndividualTerrainAdjustment()) {
             return TerrainAdjustment.BEARD_THIN;
@@ -30,7 +30,7 @@ public class BeardifierMixin {
         return structure.terrainAdaptation();
     }
 
-    @Inject(at = @At(value = "HEAD"), method = "lambda$forStructuresInChunk$2", cancellable = true, remap = false)
+    @Inject(at = @At(value = "HEAD"), method = {"lambda$forStructuresInChunk$2", "m_223930_"}, cancellable = true, remap = false)
     private static void valhelsia_forStructuresInChunk(ChunkPos chunkPos, ObjectList<Beardifier.Rigid> rigids, int minX, int minZ, ObjectList<JigsawJunction> junctions, StructureStart start, CallbackInfo ci) {
         if (start.getStructure() instanceof ValhelsiaJigsawStructure valhelsiaJigsawStructure && valhelsiaJigsawStructure.hasIndividualTerrainAdjustment()) {
             TerrainAdjustment terrainAdjustment = start.getStructure().terrainAdaptation();
