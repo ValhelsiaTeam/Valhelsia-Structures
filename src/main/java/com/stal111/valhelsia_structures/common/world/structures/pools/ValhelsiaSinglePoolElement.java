@@ -26,13 +26,11 @@ import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.SinglePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElementType;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplateManager;
+import net.minecraft.world.level.levelgen.structure.templatesystem.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -56,23 +54,22 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
 
     private static final List<EntityType<?>> SPAWNER_ENTITY = List.of(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.SPIDER);
 
-    private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> either, DynamicOps<T> dynamicOps, T t) {
-        Optional<ResourceLocation> optional = either.left();
-        return optional.isEmpty() ? DataResult.error("Can not serialize a runtime pool element") : ResourceLocation.CODEC.encode(optional.get(), dynamicOps, t);
-    }
-
-
-    protected static <E extends ValhelsiaSinglePoolElement> RecordCodecBuilder<E, Either<ResourceLocation, StructureTemplate>> valhelsiaTemplateCodec() {
-        return TEMPLATE_CODEC.fieldOf("location").forGetter((element) -> {
-            return element.template;
-        });
-    }
-
     private final TerrainAdjustment terrainAdjustment;
 
     public ValhelsiaSinglePoolElement(Either<ResourceLocation, StructureTemplate> resourceLocation, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, @Nullable TerrainAdjustment terrainAdjustment) {
         super(resourceLocation, processors, projection);
         this.terrainAdjustment = terrainAdjustment;
+    }
+
+    private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> either, DynamicOps<T> dynamicOps, T t) {
+        Optional<ResourceLocation> optional = either.left();
+        return optional.isEmpty() ? DataResult.error("Can not serialize a runtime pool element") : ResourceLocation.CODEC.encode(optional.get(), dynamicOps, t);
+    }
+
+    protected static <E extends ValhelsiaSinglePoolElement> RecordCodecBuilder<E, Either<ResourceLocation, StructureTemplate>> valhelsiaTemplateCodec() {
+        return TEMPLATE_CODEC.fieldOf("location").forGetter((element) -> {
+            return element.template;
+        });
     }
 
     @Override
@@ -84,7 +81,7 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
             return false;
         }
 
-        for(StructureTemplate.StructureBlockInfo info : structuretemplate.filterBlocks(offset, this.getSettings(rotation, box, keepJigsaws), Blocks.STRUCTURE_BLOCK)) {
+        for (StructureTemplate.StructureBlockInfo info : structuretemplate.filterBlocks(offset, this.getSettings(rotation, box, keepJigsaws), Blocks.STRUCTURE_BLOCK)) {
             StructureMode mode = StructureMode.valueOf(info.nbt.getString("mode"));
 
             if (mode == StructureMode.DATA) {
@@ -100,11 +97,13 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
         String data = blockInfo.nbt.getString("metadata");
 
         if (data.startsWith("spawner:")) {
+            level.removeBlock(pos, false);
             level.setBlock(pos, Blocks.SPAWNER.defaultBlockState(), 2);
 
             if (level.getBlockEntity(pos) instanceof SpawnerBlockEntity blockEntity) {
                 EntityType<?> entityType = switch (data) {
-                    case "spawner:zombie_or_skeleton_or_spider" -> SPAWNER_ENTITY.get(random.nextInt(SPAWNER_ENTITY.size()));
+                    case "spawner:zombie_or_skeleton_or_spider" ->
+                            SPAWNER_ENTITY.get(random.nextInt(SPAWNER_ENTITY.size()));
                     case "spawner:zombie" -> EntityType.ZOMBIE;
                     case "spawner:skeleton" -> EntityType.SKELETON;
                     case "spawner:spider" -> EntityType.SPIDER;
@@ -116,11 +115,13 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
                 }
             }
         } else if (data.startsWith("special_spawner:")) {
+            level.removeBlock(pos, false);
             level.setBlock(pos, ModBlocks.SPECIAL_SPAWNER.get().defaultBlockState(), 2);
 
             if (level.getBlockEntity(pos) instanceof SpecialSpawnerBlockEntity blockEntity) {
                 EntityType<?> entityType = switch (data) {
-                    case "special_spawner:zombie_or_skeleton_or_spider" -> SPAWNER_ENTITY.get(random.nextInt(SPAWNER_ENTITY.size()));
+                    case "special_spawner:zombie_or_skeleton_or_spider" ->
+                            SPAWNER_ENTITY.get(random.nextInt(SPAWNER_ENTITY.size()));
                     case "special_spawner:drowned" -> EntityType.DROWNED;
                     default -> null;
                 };
@@ -140,15 +141,21 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
         List<StructureTemplate.StructureBlockInfo> structureBlockInfos = structuretemplate.filterBlocks(pos, new StructurePlaceSettings().setRotation(rotation), Blocks.STRUCTURE_BLOCK, relativePosition);
         List<StructureTemplate.StructureBlockInfo> markers = new ArrayList<>();
 
-        for(StructureTemplate.StructureBlockInfo info : structureBlockInfos) {
-            StructureMode structuremode = StructureMode.valueOf(info.nbt.getString("mode"));
+        for (StructureTemplate.StructureBlockInfo info : structureBlockInfos) {
+            StructureMode mode = StructureMode.valueOf(info.nbt.getString("mode"));
 
-            if (structuremode == StructureMode.DATA) {
+            if (mode == StructureMode.DATA) {
                 markers.add(info);
             }
         }
 
         return markers;
+    }
+
+    @Nonnull
+    @Override
+    protected StructurePlaceSettings getSettings(@Nonnull Rotation rotation, @Nonnull BoundingBox box, boolean keepJigsawBlocks) {
+        return super.getSettings(rotation, box, keepJigsawBlocks).popProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
     }
 
     public TerrainAdjustment getTerrainAdjustment() {

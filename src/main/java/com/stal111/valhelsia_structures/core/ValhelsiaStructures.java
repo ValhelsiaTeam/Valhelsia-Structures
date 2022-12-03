@@ -61,6 +61,7 @@ public class ValhelsiaStructures extends ValhelsiaMod {
             .addHelper(ForgeRegistries.Keys.RECIPE_SERIALIZERS, ModRecipes::new)
             .addHelper(Registry.STRUCTURE_POOL_ELEMENT_REGISTRY, ModStructurePoolElementTypes::new)
             .addHelper(Registry.TEMPLATE_POOL_REGISTRY, new TemplatePoolRegistryHelper(() -> List.of(ModProcessors.STONE_REPLACEMENT_PROCESSOR, ModProcessors.GRASS_BLOCK_REPLACEMENT_PROCESSOR), (resourceLocation, holder, projection, terrainAdjustment) -> projection1 -> new ValhelsiaSinglePoolElement(Either.left(resourceLocation), holder, projection1, terrainAdjustment), SpawnerDungeonPools::new, SimpleStructurePools::new))
+            .addHelper(Registry.STRUCTURE_PROCESSOR_REGISTRY, ModStructureProcessors::new)
             .setConfigValidator(new ConfigValidator())
             .create();
 
