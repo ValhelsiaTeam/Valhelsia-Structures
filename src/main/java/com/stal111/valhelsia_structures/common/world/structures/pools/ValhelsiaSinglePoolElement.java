@@ -19,6 +19,7 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.StructureMode;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
@@ -130,6 +131,12 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
                     blockEntity.getSpawner().setEntityId(entityType);
                 }
             }
+        } else if (data.equals("sculk_sensor")) {
+            level.removeBlock(pos, false);
+            level.setBlock(pos, Blocks.SCULK_SENSOR.defaultBlockState(), 2);
+        } else if (data.equals("sculk_shrieker")) {
+            level.removeBlock(pos, false);
+            level.setBlock(pos, Blocks.SCULK_SHRIEKER.defaultBlockState().setValue(BlockStateProperties.CAN_SUMMON, true), 2);
         }
 
         super.handleDataMarker(level, blockInfo, pos, rotation, random, box);
