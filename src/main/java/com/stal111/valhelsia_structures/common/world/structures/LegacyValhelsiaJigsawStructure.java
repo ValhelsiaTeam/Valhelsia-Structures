@@ -19,12 +19,16 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraftforge.registries.RegistryObject;
 import net.valhelsia.valhelsia_core.common.world.structure.SimpleValhelsiaStructure;
 
 import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.function.Function;
@@ -50,6 +54,8 @@ public class LegacyValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
             return structure.projectStartToHeightmap;
         }), Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter((structure) -> {
             return structure.maxDistanceFromCenter;
+        }), Codec.list(StructureSet.CODEC).fieldOf("requires_distance_to").forGetter(structure -> {
+            return structure.requiresDistanceTo;
         })).apply(instance, LegacyValhelsiaJigsawStructure::new);
     }).flatXmap(verifyRange(), verifyRange()).codec();
 
@@ -72,6 +78,7 @@ public class LegacyValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
     private final StructureHeightProvider startHeight;
     private final Optional<Heightmap.Types> projectStartToHeightmap;
     private final int maxDistanceFromCenter;
+    private final List<Holder<StructureSet>> requiresDistanceTo;
 
 /*    public AbstractValhelsiaStructure(Structure.StructureSettings settings, String name, Holder<StructureTemplatePool> startPool, int size, ValhelsiaStructureSettings structureSettings) {
         super(settings, name);
@@ -79,7 +86,7 @@ public class LegacyValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
         this.structureSetResourceKey = ResourceKey.create(Registry.STRUCTURE_SET_REGISTRY, new ResourceLocation(ValhelsiaStructures.MOD_ID, name + "s"));
     }*/
 
-    public LegacyValhelsiaJigsawStructure(StructureSettings settings, String name, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int maxDepth, StructureHeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter) {
+    public LegacyValhelsiaJigsawStructure(StructureSettings settings, String name, Holder<StructureTemplatePool> startPool, Optional<ResourceLocation> startJigsawName, int maxDepth, StructureHeightProvider startHeight, Optional<Heightmap.Types> projectStartToHeightmap, int maxDistanceFromCenter, List<Holder<StructureSet>> requiresDistanceTo) {
         super(settings, name);
         this.startPool = startPool;
         this.startJigsawName = startJigsawName;
@@ -87,14 +94,15 @@ public class LegacyValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
         this.startHeight = startHeight;
         this.projectStartToHeightmap = projectStartToHeightmap;
         this.maxDistanceFromCenter = maxDistanceFromCenter;
+        this.requiresDistanceTo = requiresDistanceTo;
     }
 
-    public LegacyValhelsiaJigsawStructure(StructureSettings p_227620_, String name, Holder<StructureTemplatePool> startPool, int p_227622_, StructureHeightProvider p_227623_, Heightmap.Types p_227625_) {
-        this(p_227620_, name, startPool, Optional.empty(), p_227622_, p_227623_, Optional.of(p_227625_), 80);
+    public LegacyValhelsiaJigsawStructure(StructureSettings p_227620_, String name, Holder<StructureTemplatePool> startPool, int p_227622_, StructureHeightProvider p_227623_, Heightmap.Types p_227625_, RegistryObject<StructureSet>... requiresDistanceTo) {
+        this(p_227620_, name, startPool, Optional.empty(), p_227622_, p_227623_, Optional.of(p_227625_), 80, Arrays.stream(requiresDistanceTo).map(registryObject -> registryObject.getHolder().get()).toList());
     }
 
-    public LegacyValhelsiaJigsawStructure(StructureSettings p_227614_, String name, Holder<StructureTemplatePool> startPool, int p_227616_, StructureHeightProvider p_227617_) {
-        this(p_227614_, name, startPool, Optional.empty(), p_227616_, p_227617_, Optional.empty(), 80);
+    public LegacyValhelsiaJigsawStructure(StructureSettings p_227614_, String name, Holder<StructureTemplatePool> startPool, int p_227616_, StructureHeightProvider p_227617_, RegistryObject<StructureSet>... requiresDistanceTo) {
+        this(p_227614_, name, startPool, Optional.empty(), p_227616_, p_227617_, Optional.empty(), 80, Arrays.stream(requiresDistanceTo).map(registryObject -> registryObject.getHolder().get()).toList());
     }
 
     private boolean canGenerate(GenerationContext context) {
@@ -121,42 +129,14 @@ public class LegacyValhelsiaJigsawStructure extends SimpleValhelsiaStructure {
         }
 
         // Check for other structures
-//        List<Holder<StructureSet>> structures = ModStructures.MOD_STRUCTURES.stream()
-//                .filter(structure -> structure.step() == this.step() && structure.getStructureSetResourceKey() != this.getStructureSetResourceKey())
-//                .map(AbstractValhelsiaStructure::getStructureSetResourceKey).toList();
-//
-//        if (StructureUtils.isStructureInDistance(generator, context.randomState(), context.seed(), context.chunkPos(), structures)) {
-//            return false;
-//        }
+        if (StructureUtils.isStructureInDistance(generator, context.randomState(), context.seed(), context.chunkPos(), this.requiresDistanceTo)) {
+            return false;
+        }
 
         // Check the spawn chance
         random.setSeed((long) (chunkPos.x >> 4 ^ chunkPos.z >> 4 << 4) ^ context.seed());
 
         return random.nextDouble() < this.getStructureSettings().spawnChance().get();
-    }
-
-    private Optional<Integer> findSuitableY(ChunkGenerator generator, GenerationContext context, BlockPos pos, StructureHeightProvider heightProvider) {
-        NoiseColumn columnOfBlocks = generator.getBaseColumn(pos.getX(), pos.getZ(), context.heightAccessor(), context.randomState());
-
-        int maxY = heightProvider.maxY(pos, context, Heightmap.Types.WORLD_SURFACE);
-        int minY = heightProvider.minY(pos, context, Heightmap.Types.WORLD_SURFACE);
-
-        int airCount = 0;
-
-        while (maxY > minY) {
-            if (columnOfBlocks.getBlock(maxY).isAir()) {
-                airCount++;
-            } else {
-                if (airCount != 0 && airCount <= 8) {
-                    return Optional.of(maxY);
-                }
-
-                airCount = 0;
-            }
-            maxY--;
-        }
-
-        return Optional.empty();
     }
 
     @Nonnull
