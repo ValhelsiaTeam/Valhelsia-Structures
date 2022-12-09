@@ -39,5 +39,8 @@ public class ModBiomeTagsProvider extends BiomeTagsProvider {
         this.tag(ModTags.Biomes.HAS_BIG_TREE).addTag(ModTags.Biomes.IS_PLAINS).addTag(BiomeTags.IS_FOREST);
         this.tag(ModTags.Biomes.HAS_SPAWNER_ROOM).addTag(BiomeTags.IS_OVERWORLD);
         this.tag(ModTags.Biomes.HAS_DEEP_SPAWNER_ROOM).addTag(BiomeTags.IS_OVERWORLD);
+
+        this.tag(BiomeTags.HAS_SWAMP_HUT).getInternalBuilder().replace();
+
     }
 }

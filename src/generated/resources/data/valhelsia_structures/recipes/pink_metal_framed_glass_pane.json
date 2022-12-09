@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "#": {
-      "item": "valhelsia_structures:pink_metal_framed_glass"
+      "item": "valhelsia_structures:metal_framed_glass"
     }
   },
   "pattern": [
