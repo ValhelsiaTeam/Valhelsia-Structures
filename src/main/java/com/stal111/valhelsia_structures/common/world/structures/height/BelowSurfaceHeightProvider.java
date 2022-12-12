@@ -45,7 +45,7 @@ public class BelowSurfaceHeightProvider extends StructureHeightProvider {
 
     @Override
     public int maxY(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
-        return Math.max(this.minY(pos, context, heightmapType), context.chunkGenerator().getFirstOccupiedHeight(pos.getX(), pos.getZ(), heightmapType, context.heightAccessor(), context.randomState()) - 5);
+        return Math.max(this.minY(pos, context, heightmapType), context.chunkGenerator().getFirstOccupiedHeight(pos.getX(), pos.getZ(), heightmapType, context.heightAccessor(), context.randomState()) - 8);
     }
 
     @Override
