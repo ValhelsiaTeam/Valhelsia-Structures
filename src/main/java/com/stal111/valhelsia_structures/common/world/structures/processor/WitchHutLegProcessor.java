@@ -65,6 +65,18 @@ public class WitchHutLegProcessor extends StructureProcessor {
                             .setValue(BlockStateProperties.WATERLOGGED, level.getBlockState(relativeBlockInfo.pos).hasProperty(BlockStateProperties.WATERLOGGED) && level.getBlockState(relativeBlockInfo.pos).getValue(BlockStateProperties.WATERLOGGED))
                             .setValue(BlockStateProperties.AXIS, Direction.Axis.Y),
                             null);
+                } else if (data.equals("support_leg:log")) {
+                    BlockPos.MutableBlockPos mutable = relativeBlockInfo.pos.below().mutable();
+                    BlockState currentState = level.getBlockState(mutable);
+
+                    while (mutable.getY() > level.getMinBuildHeight() && mutable.getY() < level.getMaxBuildHeight() && (currentState.isAir() || !currentState.getFluidState().isEmpty())) {
+                        level.getChunk(mutable).setBlockState(mutable, Blocks.OAK_LOG.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y), false);
+
+                        mutable.move(Direction.DOWN);
+                        currentState = level.getBlockState(mutable);
+                    }
+
+                    return new StructureTemplate.StructureBlockInfo(relativeBlockInfo.pos, Blocks.OAK_LOG.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y), null);
                 }
             }
         }
