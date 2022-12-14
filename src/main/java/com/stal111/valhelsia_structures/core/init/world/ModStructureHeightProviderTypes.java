@@ -21,6 +21,7 @@ public class ModStructureHeightProviderTypes implements RegistryClass {
     public static final RegistryObject<StructureHeightProviderType<UniformHeightProvider>> UNIFORM_HEIGHT = register("uniform_height", UniformHeightProvider.CODEC);
     public static final RegistryObject<StructureHeightProviderType<SpawnerRoomHeightProvider>> SPAWNER_ROOM_HEIGHT = register("spawner_room_height", SpawnerRoomHeightProvider.CODEC);
     public static final RegistryObject<StructureHeightProviderType<DeepSpawnerRoomHeightProvider>> DEEP_SPAWNER_ROOM_HEIGHT = register("deep_spawner_room_height", DeepSpawnerRoomHeightProvider.CODEC);
+    public static final RegistryObject<StructureHeightProviderType<SurfaceHeightProvider>> SURFACE_HEIGHT = register("surface_height", SurfaceHeightProvider.CODEC);
 
     private static <P extends StructureHeightProvider> RegistryObject<StructureHeightProviderType<P>> register(String name, Codec<P> codec) {
         return TYPES.register(name, () -> () -> codec);

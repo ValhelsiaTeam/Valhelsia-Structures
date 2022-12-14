@@ -55,8 +55,8 @@ public class ModStructures implements RegistryClass {
             () -> new LegacyValhelsiaJigsawStructure(structure(ModTags.Biomes.HAS_PLAYER_HOUSE, TerrainAdjustment.BEARD_THIN), "player_house", PlayerHousePools.PATTERN, 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG,ModStructureSets.CASTLE_RUINS, ModStructureSets.FORGES, ModStructureSets.CASTLES, ModStructureSets.TOWER_RUINS, ModStructureSets.BIG_TREES),
             ValhelsiaStructureSettings.of(ConfigurableValue.of(0.7D), ConfigurableValue.of(18)));
     public static final Holder<? extends Structure> SPAWNER_DUNGEON = register("spawner_dungeon",
-            () -> new ValhelsiaJigsawStructure(structure(ModTags.Biomes.HAS_SPAWNER_DUNGEON, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE), "spawner_dungeon", SpawnerDungeonPools.PATTERN, 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG, true),
-            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.7D), ConfigurableValue.of(18), ConfigurableValue.of(0)));
+            () -> new ValhelsiaJigsawStructure(structure(ModTags.Biomes.HAS_SPAWNER_DUNGEON, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE), "spawner_dungeon", SpawnerDungeonPools.PATTERN, 7, StructureHeightProvider.surfaceBetween(VerticalAnchor.absolute(0), VerticalAnchor.absolute(75)), true),
+            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.8D), ConfigurableValue.of(18), ConfigurableValue.of(0)));
     public static final Holder<? extends Structure> TOWER_RUIN = register("tower_ruin",
             () -> new LegacyValhelsiaJigsawStructure(structure(ModTags.Biomes.HAS_TOWER_RUIN, TerrainAdjustment.BEARD_THIN), "tower_ruin", LegacySimpleStructurePools.TOWER_RUIN_PATTERN, 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG, ModStructureSets.CASTLE_RUINS, ModStructureSets.FORGES, ModStructureSets.PLAYER_HOUSES, ModStructureSets.CASTLES, ModStructureSets.BIG_TREES),
             ValhelsiaStructureSettings.of(ConfigurableValue.of(0.8D), ConfigurableValue.of(22)));

@@ -51,4 +51,8 @@ public abstract class StructureHeightProvider {
     public static DeepSpawnerRoomHeightProvider deepSpawnerRoom(VerticalAnchor minInclusive, VerticalAnchor maxInclusive) {
         return new DeepSpawnerRoomHeightProvider(minInclusive, maxInclusive);
     }
+
+    public static SurfaceHeightProvider surfaceBetween(VerticalAnchor minInclusive, VerticalAnchor maxInclusive) {
+        return new SurfaceHeightProvider(minInclusive, maxInclusive);
+    }
 }

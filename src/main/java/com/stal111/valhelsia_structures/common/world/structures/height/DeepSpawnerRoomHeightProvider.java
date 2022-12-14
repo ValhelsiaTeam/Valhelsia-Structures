@@ -18,7 +18,6 @@ public class DeepSpawnerRoomHeightProvider extends UniformHeightProvider {
 
     public static final Codec<DeepSpawnerRoomHeightProvider> CODEC = UniformHeightProvider.CODEC.xmap(provider -> new DeepSpawnerRoomHeightProvider(provider.getMinInclusive(), provider.getMaxInclusive()), provider -> provider);
 
-
     protected DeepSpawnerRoomHeightProvider(VerticalAnchor minInclusive, VerticalAnchor maxInclusive) {
         super(minInclusive, maxInclusive);
     }
@@ -45,7 +44,8 @@ public class DeepSpawnerRoomHeightProvider extends UniformHeightProvider {
             maxY--;
         }
 
-        return OptionalInt.empty();    }
+        return OptionalInt.empty();
+    }
 
     @Override
     public StructureHeightProviderType<?> getType() {
