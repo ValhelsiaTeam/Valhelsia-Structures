@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.core.init.world;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class ModStructureSets implements RegistryClass {
 
-    public static final RegistryHelper<StructureSet> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registry.STRUCTURE_SET_REGISTRY);
+    public static final RegistryHelper<StructureSet> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.STRUCTURE_SET);
 
     public static final RegistryObject<StructureSet> CASTLES = HELPER.register("castles", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.CASTLE)), placement(37, 7, 16987356)));
     public static final RegistryObject<StructureSet> CASTLE_RUINS = HELPER.register("castle_ruins", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.CASTLE_RUIN)), placement(33, 7, 436946199)));

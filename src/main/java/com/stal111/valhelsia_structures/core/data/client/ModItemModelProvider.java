@@ -1,13 +1,13 @@
 package com.stal111.valhelsia_structures.core.data.client;
 
-import com.stal111.valhelsia_structures.common.block.SleepingBagBlock;
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
+import com.stal111.valhelsia_structures.common.block.SleepingBagBlock;
 import com.stal111.valhelsia_structures.common.block.ValhelsiaGrassBlock;
 import com.stal111.valhelsia_structures.common.block.ValhelsiaStoneBlock;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.core.init.ModItems;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,8 +24,8 @@ import java.util.Objects;
  */
 public class ModItemModelProvider extends ValhelsiaItemModelProvider {
 
-    public ModItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, ValhelsiaStructures.REGISTRY_MANAGER, existingFileHelper);
+    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, ValhelsiaStructures.REGISTRY_MANAGER, existingFileHelper);
     }
 
     @Override

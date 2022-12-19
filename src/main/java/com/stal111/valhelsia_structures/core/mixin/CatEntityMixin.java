@@ -20,19 +20,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.mixin.CatEntityMixin
  *
  * @author Valhelsia Team
- * @version 1.19 - 0.2.0
  * @since 2021-04-26
  */
 @Mixin(Cat.class)
 public abstract class CatEntityMixin extends TamableAnimal {
 
-    protected CatEntityMixin(EntityType<? extends TamableAnimal> type, Level world) {
-        super(type, world);
+    protected CatEntityMixin(EntityType<? extends TamableAnimal> type, Level level) {
+        super(type, level);
     }
 
     @Inject(at = @At(value = "HEAD"), method = "finalizeSpawn", cancellable = true)
     private void valhelsia_avoidOverridingType(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, SpawnGroupData spawnData, CompoundTag dataTag, CallbackInfoReturnable<SpawnGroupData> cir) {
-        if (reason == MobSpawnType.STRUCTURE && level.getLevel().structureManager().getStructureWithPieceAt(this.blockPosition(), ModStructures.WITCH_HUT.get()).isValid()) {
+        if (reason == MobSpawnType.STRUCTURE && level.getLevel().structureManager().getStructureWithPieceAt(this.blockPosition(), ModStructures.WITCH_HUT).isValid()) {
             cir.setReturnValue(super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag));
         }
     }

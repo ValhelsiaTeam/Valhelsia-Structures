@@ -39,9 +39,10 @@ public class StructureUtils {
         }
 
         for (Holder<StructureSet> structure : structures) {
-            if (generator.hasStructureChunkInRange(structure, randomState, seed, pos.x, pos.z, ModConfig.COMMON.minStructureDistance.get())) {
-                return true;
-            }
+            //TODO
+            //if (generator.sta.hasStructureChunkInRange(structure, randomState, seed, pos.x, pos.z, ModConfig.COMMON.minStructureDistance.get())) {
+              //  return true;
+            //}
         }
 
         return false;

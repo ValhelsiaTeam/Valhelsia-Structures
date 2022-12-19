@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.client.renderer.entity.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.stal111.valhelsia_structures.client.model.block.ExplorersTentModel;
 import com.stal111.valhelsia_structures.common.block.ExplorersTentBlock;
 import com.stal111.valhelsia_structures.common.block.SleepingBagBlock;
@@ -47,8 +47,8 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
         poseStack.pushPose();
 
         poseStack.translate(0.5D, 1.8D, 0.5D);
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(rotation));
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
+        poseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
         int i = blockEntity.getColor();
         float red = (float) (i >> 16 & 255) / 255.0F;
@@ -58,7 +58,7 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
         this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TENT_TEXTURE)), combinedLight, combinedOverlay, red, green, blue, 1.0F);
 
         poseStack.translate(0.0D, 0.3D, 0.0D);
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(90));
+        poseStack.mulPose(Axis.YP.rotationDegrees(90));
 
         this.model.renderSticksToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TENT_STICKS_TEXTURE)), combinedLight, combinedOverlay);
 
@@ -68,7 +68,7 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
             poseStack.pushPose();
 
             poseStack.translate(0.5D, 0.0D, 0.5D);
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(rotation + 180));
+            poseStack.mulPose(Axis.YP.rotationDegrees(rotation + 180));
 
             poseStack.translate(-1.0D, 0.0D, -0.5D);
 

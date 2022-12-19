@@ -10,10 +10,7 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
 import javax.annotation.Nonnull;
@@ -22,12 +19,11 @@ import javax.annotation.Nullable;
 /**
  * Axe Crafting Recipe <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipe
- *
+ * <p>
  * A crafting recipe that can use any axe (that extends {@link AxeItem}) and a number of other ingredients in a shapeless
  * form. The axe loses one durability per craft but is returned.
  *
  * @author Valhelsia Team
- * @version 1.19 - 0.2.0
  * @since 2020-06-01
  */
 public class AxeCraftingRecipe extends CustomRecipe {
@@ -36,8 +32,8 @@ public class AxeCraftingRecipe extends CustomRecipe {
     private final ItemStack output;
     private final int count;
 
-    public AxeCraftingRecipe(ResourceLocation recipeId, Ingredient input, ItemStack output) {
-        super(recipeId);
+    public AxeCraftingRecipe(ResourceLocation recipeId, Ingredient input, ItemStack output, CraftingBookCategory category) {
+        super(recipeId, category);
         this.input = input;
         this.output = output;
         this.count = output.getCount();
@@ -143,20 +139,26 @@ public class AxeCraftingRecipe extends CustomRecipe {
         @Nonnull
         @Override
         public AxeCraftingRecipe fromJson(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject serializedRecipe) {
+            CraftingBookCategory category = CraftingBookCategory.CODEC.byName(GsonHelper.getAsString(serializedRecipe, "category", null), CraftingBookCategory.MISC);
+
             Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(serializedRecipe, "input"));
             ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(serializedRecipe, "output"));
-            return new AxeCraftingRecipe(recipeId, input, output);        }
+            return new AxeCraftingRecipe(recipeId, input, output, category);
+        }
 
         @Nullable
         @Override
         public AxeCraftingRecipe fromNetwork(@Nonnull ResourceLocation recipeId, @Nonnull FriendlyByteBuf buffer) {
+            CraftingBookCategory category = buffer.readEnum(CraftingBookCategory.class);
+
             Ingredient input = Ingredient.fromNetwork(buffer);
             ItemStack output = buffer.readItem();
-            return new AxeCraftingRecipe(recipeId, input, output);
+            return new AxeCraftingRecipe(recipeId, input, output, category);
         }
 
         @Override
         public void toNetwork(@Nonnull FriendlyByteBuf buffer, @Nonnull AxeCraftingRecipe recipe) {
+            buffer.writeEnum(recipe.category());
             recipe.input.toNetwork(buffer);
             buffer.writeItem(recipe.output);
         }

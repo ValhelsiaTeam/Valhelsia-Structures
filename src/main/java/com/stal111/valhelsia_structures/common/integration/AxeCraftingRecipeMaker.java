@@ -8,10 +8,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -23,7 +20,6 @@ import java.util.stream.Collectors;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.integration.AxeCraftingRecipeMaker
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.2.0
  * @since 2020.08.12
  */
 public class AxeCraftingRecipeMaker {
@@ -45,7 +41,7 @@ public class AxeCraftingRecipeMaker {
                     ItemStack output = recipe.getOutput();
                     ResourceLocation id = new ResourceLocation(ValhelsiaStructures.MOD_ID, "jei.axe_crafting." + output.getDescriptionId());
 
-                    return new ShapelessRecipe(id, group, output, NonNullList.of(Ingredient.EMPTY, axeIngredient, recipe.getInput()));
+                    return new ShapelessRecipe(id, group, CraftingBookCategory.BUILDING, output, NonNullList.of(Ingredient.EMPTY, axeIngredient, recipe.getInput()));
                 })
                 .collect(Collectors.toList());
     }

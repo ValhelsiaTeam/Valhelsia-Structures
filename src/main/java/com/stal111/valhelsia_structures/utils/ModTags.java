@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.utils;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -31,11 +31,11 @@ public class ModTags {
         public static final TagKey<Block> SLEEPING_BAGS = modTag("sleeping_bags");
 
         private static TagKey<Block> forgeTag(String name) {
-            return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation("forge", name));
+            return TagKey.create(Registries.BLOCK, new ResourceLocation("forge", name));
         }
 
         private static TagKey<Block> modTag(String name) {
-            return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
+            return TagKey.create(Registries.BLOCK, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
         }
     }
 
@@ -54,11 +54,11 @@ public class ModTags {
         public static final TagKey<Item> AXE_CRAFTING_BLACKLISTED = modTag( "axe_crafting_blacklisted");
 
         private static TagKey<Item> forgeTag(String name) {
-            return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("forge", name));
+            return TagKey.create(Registries.ITEM, new ResourceLocation("forge", name));
         }
 
         private static TagKey<Item> modTag(String name) {
-            return TagKey.create(Registry.ITEM_REGISTRY,new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
+            return TagKey.create(Registries.ITEM, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
         }
     }
 
@@ -67,7 +67,7 @@ public class ModTags {
         public static final TagKey<Structure> ON_CASTLE_EXPLORER_MAPS = modTag("on_castle_explorer_maps");
 
         private static TagKey<Structure> modTag(String name) {
-            return TagKey.create(Registry.STRUCTURE_REGISTRY, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
+            return TagKey.create(Registries.STRUCTURE, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
         }
     }
 
@@ -88,11 +88,11 @@ public class ModTags {
         public static final TagKey<Biome> HAS_DEEP_SPAWNER_ROOM = modTag("has_structure/deep_spawner_room");
 
         private static TagKey<Biome> forgeTag(String name) {
-            return TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation("forge", name));
+            return TagKey.create(Registries.BIOME, new ResourceLocation("forge", name));
         }
 
         private static TagKey<Biome> modTag(String name) {
-            return TagKey.create(Registry.BIOME_REGISTRY, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
+            return TagKey.create(Registries.BIOME, new ResourceLocation(ValhelsiaStructures.MOD_ID, name));
         }
     }
 }

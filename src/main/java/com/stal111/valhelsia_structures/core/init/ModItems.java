@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.core.init;
 
-import com.stal111.valhelsia_structures.common.item.ModCreativeModeTabs;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.minecraftforge.fml.common.Mod;
@@ -21,7 +21,7 @@ public class ModItems implements RegistryClass {
 
     public static final RegistryHelper<Item> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getItemHelper();
 
-    public static final RegistryObject<StandingAndWallBlockItem> DOUSED_TORCH = HELPER.register("doused_torch", () -> new StandingAndWallBlockItem(ModBlocks.DOUSED_TORCH.get(), ModBlocks.DOUSED_WALL_TORCH.get(), new Item.Properties().tab(ModCreativeModeTabs.MAIN)));
-    public static final RegistryObject<StandingAndWallBlockItem> DOUSED_SOUL_TORCH = HELPER.register("doused_soul_torch", () -> new StandingAndWallBlockItem(ModBlocks.DOUSED_SOUL_TORCH.get(), ModBlocks.DOUSED_SOUL_WALL_TORCH.get(), new Item.Properties().tab(ModCreativeModeTabs.MAIN)));
+    public static final RegistryObject<StandingAndWallBlockItem> DOUSED_TORCH = HELPER.register("doused_torch", () -> new StandingAndWallBlockItem(ModBlocks.DOUSED_TORCH.get(), ModBlocks.DOUSED_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryObject<StandingAndWallBlockItem> DOUSED_SOUL_TORCH = HELPER.register("doused_soul_torch", () -> new StandingAndWallBlockItem(ModBlocks.DOUSED_SOUL_TORCH.get(), ModBlocks.DOUSED_SOUL_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
 
 }

@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.client.renderer.entity.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.stal111.valhelsia_structures.client.model.block.GiantFernModel;
 import com.stal111.valhelsia_structures.common.block.entity.GiantFernBlockEntity;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
@@ -18,7 +18,6 @@ import javax.annotation.Nonnull;
  * Valhelsia Structures - com.stal111.valhelsia_structures.client.renderer.entity.block.GiantFernRenderer
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2021-10-03
  */
 public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEntity> {
@@ -36,10 +35,10 @@ public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEnti
         poseStack.pushPose();
 
         poseStack.translate(0.5D, 0.0D, 0.5D);
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
         if (blockEntity.getBlockState().getValue(ModBlockStateProperties.ROTATED)) {
-            poseStack.mulPose(Vector3f.YP.rotationDegrees(45));
+            poseStack.mulPose(Axis.YP.rotationDegrees(45));
         }
 
         this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TEXTURE)), combinedLight, combinedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);

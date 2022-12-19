@@ -5,7 +5,7 @@ import com.stal111.valhelsia_structures.common.block.properties.ModBlockStatePro
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.Direction;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BedPart;
@@ -20,13 +20,12 @@ import net.valhelsia.valhelsia_core.core.data.ValhelsiaBlockStateProvider;
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.client.ModBlockStateProvider
  *
  * @author Valhelsia Team
- * @version 1.18.2 - 0.2.0
  * @since 2020-11-13
  */
 public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
 
-    public ModBlockStateProvider(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, ValhelsiaStructures.REGISTRY_MANAGER, exFileHelper);
+    public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
+        super(output, ValhelsiaStructures.REGISTRY_MANAGER, exFileHelper);
     }
 
     @Override

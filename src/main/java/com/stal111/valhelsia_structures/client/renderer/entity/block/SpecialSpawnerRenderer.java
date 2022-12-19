@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.client.renderer.entity.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.stal111.valhelsia_structures.common.block.SpecialBaseSpawner;
 import com.stal111.valhelsia_structures.common.block.entity.SpecialSpawnerBlockEntity;
 import net.minecraft.client.Minecraft;
@@ -19,7 +19,6 @@ import java.util.Objects;
  * Valhelsia Structures - com.stal111.valhelsia_structures.client.renderer.entity.block.SpecialSpawnerRenderer
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2021-10-03
  */
 public class SpecialSpawnerRenderer implements BlockEntityRenderer<SpecialSpawnerBlockEntity> {
@@ -44,9 +43,9 @@ public class SpecialSpawnerRenderer implements BlockEntityRenderer<SpecialSpawne
             }
 
             poseStack.translate(0.0D, 0.4F, 0.0D);
-            poseStack.mulPose(Vector3f.YP.rotationDegrees((float) Mth.lerp(partialTicks, spawner.getOSpin(), spawner.getSpin()) * 10.0F));
+            poseStack.mulPose(Axis.YP.rotationDegrees((float) Mth.lerp(partialTicks, spawner.getOSpin(), spawner.getSpin()) * 10.0F));
             poseStack.translate(0.0D, -0.2F, 0.0D);
-            poseStack.mulPose(Vector3f.XP.rotationDegrees(-30.0F));
+            poseStack.mulPose(Axis.XP.rotationDegrees(-30.0F));
             poseStack.scale(f, f, f);
             Minecraft.getInstance().getEntityRenderDispatcher().render(entity, 0.0D, 0.0D, 0.0D, 0.0F, partialTicks, poseStack, buffer, combinedLight);
 

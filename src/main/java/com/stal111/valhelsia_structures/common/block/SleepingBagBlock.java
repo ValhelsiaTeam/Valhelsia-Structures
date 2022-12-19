@@ -14,7 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.*;
@@ -43,7 +42,6 @@ import java.util.Map;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.block.SleepingBagBlock
  *
  * @author Valhelsia Team
- * @version 1.19 - 0.2.0
  * @since 2022-04-02
  */
 public class SleepingBagBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
@@ -91,7 +89,7 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
                 level.removeBlock(pos, false);
             }
 
-            level.explode(null, DamageSource.badRespawnPointExplosion(), null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 5.0F, true, Explosion.BlockInteraction.DESTROY);
+            level.explode(null, DamageSource.badRespawnPointExplosion(pos.getCenter()), null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 5.0F, true, Level.ExplosionInteraction.BLOCK);
 
             return InteractionResult.SUCCESS;
         }

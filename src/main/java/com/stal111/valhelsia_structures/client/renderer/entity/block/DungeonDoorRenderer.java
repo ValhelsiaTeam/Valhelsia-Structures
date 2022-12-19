@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.client.renderer.entity.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.stal111.valhelsia_structures.client.model.block.DungeonDoorModel;
 import com.stal111.valhelsia_structures.common.block.entity.DungeonDoorBlockEntity;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
@@ -19,7 +19,6 @@ import javax.annotation.Nonnull;
  * Valhelsia Structures - com.stal111.valhelsia_structures.client.renderer.entity.block.DungeonDoorRenderer
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2021-10-03
  */
 public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlockEntity> {
@@ -38,8 +37,8 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
         poseStack.pushPose();
 
         poseStack.translate(0.5D, 1.5D, 0.5D);
-        poseStack.mulPose(Vector3f.YP.rotationDegrees(-state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180));
-        poseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
+        poseStack.mulPose(Axis.YP.rotationDegrees(-state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
         this.model.setupAnim(blockEntity, partialTicks);
         this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TEXTURE)), combinedLight, combinedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);

@@ -9,6 +9,7 @@ import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -26,13 +27,15 @@ import java.util.function.Consumer;
  */
 public class AxeCraftingRecipeBuilder implements RecipeBuilder {
 
+    private final RecipeCategory category;
     private final Ingredient input;
     private final Item result;
     private final int count;
 
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-    public AxeCraftingRecipeBuilder(Ingredient input, Item result, int count) {
+    public AxeCraftingRecipeBuilder(RecipeCategory category, Ingredient input, Item result, int count) {
+        this.category = category;
         this.input = input;
         this.result = result;
         this.count = count;
@@ -75,7 +78,7 @@ public class AxeCraftingRecipeBuilder implements RecipeBuilder {
     public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
         this.ensureValid(id);
         this.advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new AxeCraftingRecipeBuilder.Result(id, this.result, this.count, this.input, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + this.result.getItemCategory().getRecipeFolderName() + "/" + id.getPath())));
+        consumer.accept(new AxeCraftingRecipeBuilder.Result(id, this.result, this.count, this.input, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + this.category.getFolderName() + "/" + id.getPath())));
     }
 
     private void ensureValid(ResourceLocation pId) {

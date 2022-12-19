@@ -4,7 +4,7 @@ import com.stal111.valhelsia_structures.common.block.properties.ModBlockStatePro
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
@@ -16,13 +16,12 @@ import net.valhelsia.valhelsia_core.common.loot.modifiers.AppendLootTableModifie
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.server.loot.ModLootModifierProvider
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2021-05-07
  */
 public class ModLootModifierProvider extends GlobalLootModifierProvider {
 
-    public ModLootModifierProvider(DataGenerator gen) {
-        super(gen, ValhelsiaStructures.MOD_ID);
+    public ModLootModifierProvider(PackOutput output) {
+        super(output, ValhelsiaStructures.MOD_ID);
     }
 
     @Override

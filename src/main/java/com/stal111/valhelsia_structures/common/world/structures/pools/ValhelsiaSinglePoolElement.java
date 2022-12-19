@@ -112,7 +112,7 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
                 };
 
                 if (entityType != null) {
-                    blockEntity.getSpawner().setEntityId(entityType);
+                    blockEntity.getSpawner().setEntityId(entityType, null, random, pos);
                 }
             }
         } else if (data.startsWith("special_spawner:")) {

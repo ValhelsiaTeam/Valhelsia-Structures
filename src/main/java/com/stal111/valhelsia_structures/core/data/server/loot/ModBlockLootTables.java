@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.common.block.properties.DungeonDoorPart;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.GlassBlock;
 import net.minecraft.world.level.block.IronBarsBlock;
@@ -20,6 +21,8 @@ import net.minecraft.world.level.storage.loot.providers.nbt.ContextNbtProvider;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.valhelsia.valhelsia_core.core.data.ValhelsiaBlockLootTables;
 
+import java.util.Set;
+
 /**
  * Mod Block Loot Tables <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.data.server.loot.ModBlockLootTables
@@ -30,11 +33,11 @@ import net.valhelsia.valhelsia_core.core.data.ValhelsiaBlockLootTables;
 public class ModBlockLootTables extends ValhelsiaBlockLootTables {
 
     public ModBlockLootTables() {
-        super(ValhelsiaStructures.REGISTRY_MANAGER);
+        super(Set.of(), FeatureFlags.DEFAULT_FLAGS, ValhelsiaStructures.REGISTRY_MANAGER);
     }
 
     @Override
-    public void addTables() {
+    public void generate() {
         getRemainingBlocks().removeIf(block ->
                 block.get() instanceof ValhelsiaStoneBlock || block.get() instanceof ValhelsiaGrassBlock || block.get() == ModBlocks.DUNGEON_DOOR_LEAF.get() || block.get() instanceof BigJarTopBlock
         );
