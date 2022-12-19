@@ -24,7 +24,8 @@ body:
       label: Minecraft Version
       description: What version of Minecraft are you using?
       options:
-        - 1.18.2 (Default)
+        - 1.19.2 (Default)
+        - 1.18.2
         - 1.17.1
         - 1.16.5
     validations:
