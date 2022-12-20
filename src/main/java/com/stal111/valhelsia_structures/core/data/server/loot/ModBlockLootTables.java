@@ -39,7 +39,7 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
     @Override
     public void generate() {
         getRemainingBlocks().removeIf(block ->
-                block.get() instanceof ValhelsiaStoneBlock || block.get() instanceof ValhelsiaGrassBlock || block.get() == ModBlocks.DUNGEON_DOOR_LEAF.get() || block.get() instanceof BigJarTopBlock
+                block instanceof ValhelsiaStoneBlock || block instanceof ValhelsiaGrassBlock || block == ModBlocks.DUNGEON_DOOR_LEAF.get()
         );
 
         forEach(block -> block instanceof SlabBlock, block -> add(block, ValhelsiaBlockLootTables::droppingSlab));
@@ -56,6 +56,8 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
         forEach(block -> block instanceof SleepingBagBlock, block -> add(block, createSinglePropConditionTable(block, BlockStateProperties.BED_PART, BedPart.HEAD)));
 
         take(block -> this.add(block, LootTable.lootTable().withPool(applyExplosionCondition(block, LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F)).add(LootItem.lootTableItem(block).apply(CopyNbtFunction.copyData(ContextNbtProvider.BLOCK_ENTITY).copy("Color", "display.color")))))), ModBlocks.EXPLORERS_TENT);
+
+        forEach(block -> block instanceof BigJarTopBlock, block -> add(block, LootTable.lootTable()));
 
         forEach(this::registerDropSelfLootTable);
     }

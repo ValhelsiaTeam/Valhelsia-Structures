@@ -6,7 +6,6 @@ import com.stal111.valhelsia_structures.core.data.client.ModItemModelProvider;
 import com.stal111.valhelsia_structures.core.data.server.ModBiomeTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.ModBlockTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.ModItemTagsProvider;
-import com.stal111.valhelsia_structures.core.data.server.ModStructureTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModBlockLootTables;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModLootModifierProvider;
 import com.stal111.valhelsia_structures.data.recipes.ModRecipeProvider;
@@ -54,7 +53,7 @@ public class DataGenerators {
         ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(output, lookupProvider, existingFileHelper);
         generator.addProvider(event.includeServer(), blockTagsProvider);
         generator.addProvider(event.includeServer(), new ModItemTagsProvider(output, lookupProvider, blockTagsProvider, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ModStructureTagsProvider(output, lookupProvider, existingFileHelper));
+       // generator.addProvider(event.includeServer(), new ModStructureTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModBiomeTagsProvider(output, lookupProvider, existingFileHelper));
 
         generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTables::new, LootContextParamSets.BLOCK))));
@@ -62,7 +61,7 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(), new ModRecipeProvider(info));
 
-        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, new RegistrySetBuilder().add(ForgeRegistries.Keys.BIOME_MODIFIERS, context -> new ModBiomeModifiers(info, context))));
+        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookupProvider, new RegistrySetBuilder().add(ForgeRegistries.Keys.BIOME_MODIFIERS, context -> new ModBiomeModifiers(info, context)), Set.of(ValhelsiaStructures.MOD_ID)));
 
 //        generator.addProvider(event.includeServer(), JsonCodecProvider.forDatapackRegistry(
 //                generator, existingFileHelper, ValhelsiaStructures.MOD_ID, ops, ForgeRegistries.Keys.BIOME_MODIFIERS, new ModBiomeModifiers(info, ops).getModifiers()));
