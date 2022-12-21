@@ -1,24 +1,34 @@
 package com.stal111.valhelsia_structures.common.world.structures.pools;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
-import com.stal111.valhelsia_structures.utils.JigsawHelper;
-import net.minecraft.core.Holder;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
+import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
+import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHelper;
 
 /**
  * Big Tree Pools <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.world.structures.pools.BigTreePools
  *
  * @author Valhelsia Team
- * @version 1.18.2-0.1.0
  * @since 2021-04-27
  */
-public class BigTreePools {
+public class BigTreePools extends DatapackRegistryClass<StructureTemplatePool> {
 
-    public static final Holder<StructureTemplatePool> PATTERN = JigsawHelper.register("vegetations/big_trees", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("vegetations/big_tree", 1)));
+    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.TEMPLATE_POOL);
 
-    public static void load() {
-        JigsawHelper.register("vegetations/big_tree/underside", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("vegetations/big_tree_underside", 1)));
+    public static final ResourceKey<StructureTemplatePool> START = HELPER.createKey("vegetations/big_trees");
+
+    public BigTreePools(DataProviderInfo info, BootstapContext<StructureTemplatePool> context) {
+        super(info, context);
+    }
+
+    @Override
+    public void bootstrap(BootstapContext<StructureTemplatePool> context) {
+        HELPER.createPool(START, context, "vegetations", builder -> builder.element("big_tree"));
+        HELPER.createPool(HELPER.createKey("vegetations/big_tree_underside"), context, "vegetations", builder -> builder.element("big_tree_underside"));
     }
 }

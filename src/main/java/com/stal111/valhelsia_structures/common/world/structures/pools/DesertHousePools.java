@@ -1,27 +1,37 @@
 package com.stal111.valhelsia_structures.common.world.structures.pools;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.datafixers.util.Pair;
-import com.stal111.valhelsia_structures.utils.JigsawHelper;
-import net.minecraft.core.Holder;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
+import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
+import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHelper;
 
 /**
  * Player House Pools <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.world.structures.pools.PlayerHousePools
  *
  * @author Valhelsia Team
- * @version 1.18.2-0.1.0
  * @since 2021-04-27
  */
-public class DesertHousePools {
+public class DesertHousePools extends DatapackRegistryClass<StructureTemplatePool> {
 
-    public static final Holder<StructureTemplatePool> PATTERN = JigsawHelper.register("desert_house/houses", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("desert_house/desert_house", 1)));
+    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.TEMPLATE_POOL);
 
-    public static void load() {
-        JigsawHelper.register("desert_house/oasis_plate", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("desert_house/oasis_plate", 1)));
-        JigsawHelper.register("desert_house/well_or_oasis_plate", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("desert_house/well_or_oasis_plate", 1)));
-        JigsawHelper.register("desert_house/oasis", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("desert_house/feature_oasis_1", 1), Pair.of("desert_house/feature_oasis_2", 1)));
-        JigsawHelper.register("desert_house/wells_and_oasis", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("desert_house/feature_oasis", 1), Pair.of("desert_house/feature_well_1", 1), Pair.of("desert_house/feature_well_2", 1)));
+    public static final ResourceKey<StructureTemplatePool> START = HELPER.createKey("desert_house/houses");
+
+    public DesertHousePools(DataProviderInfo info, BootstapContext<StructureTemplatePool> context) {
+        super(info, context);
+    }
+
+    @Override
+    public void bootstrap(BootstapContext<StructureTemplatePool> context) {
+        HELPER.createPool(START, context, "desert_house", builder -> builder.element("desert_house"));
+        HELPER.createPool(HELPER.createKey("desert_house/oasis_plate"), context, "desert_house", builder -> builder.element("oasis_plate"));
+        HELPER.createPool(HELPER.createKey("desert_house/well_or_oasis_plate"), context, "desert_house", builder -> builder.element("well_or_oasis_plate"));
+        HELPER.createPool(HELPER.createKey("desert_house/oasis"), context, "desert_house", builder -> builder.element("feature_oasis_1").element("feature_oasis_2"));
+        HELPER.createPool(HELPER.createKey("desert_house/wells_and_oasis"), context, "desert_house", builder -> builder.element("feature_oasis_1").element("feature_oasis_2").element("feature_well_1").element("feature_well_2"));
     }
 }

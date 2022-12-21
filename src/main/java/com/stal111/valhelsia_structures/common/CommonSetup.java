@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.common;
 
-import com.stal111.valhelsia_structures.common.world.structures.pools.*;
 import com.stal111.valhelsia_structures.core.init.other.CompostableRegistry;
 import com.stal111.valhelsia_structures.core.init.other.FireExtinguishRegistry;
 import com.stal111.valhelsia_structures.core.init.other.FlammableRegistry;
@@ -12,7 +11,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
  * Valhelsia Structures - com.stal111.valhelsia_structures.common.CommonSetup
  *
  * @author Valhelsia Team
- * @version 1.19 - 0.2.0
  * @since 2021-02-14
  */
 public class CommonSetup {
@@ -25,10 +23,5 @@ public class CommonSetup {
 
         FlintAndSteelRegistry.register();
         FireExtinguishRegistry.register();
-
-        MobPools.load();
-        PlayerHousePools.load();
-        DesertHousePools.load();
-        BigTreePools.load();
     }
 }
