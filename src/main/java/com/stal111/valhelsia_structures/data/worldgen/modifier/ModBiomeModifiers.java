@@ -19,9 +19,16 @@ public class ModBiomeModifiers extends ValhelsiaBiomeModifierProvider {
 
     public ModBiomeModifiers(DataProviderInfo info, BootstapContext<BiomeModifier> context) {
         super(info, context);
+        System.out.println(context);
+
     }
 
+    @Override
     public void bootstrap(BootstapContext<BiomeModifier> context) {
+        System.out.println(context);
+        System.out.println(this.biomeRegistry);
+        System.out.println(this.featureRegistry);
+
         this.add("remove_monster_room", new ForgeBiomeModifiers.RemoveFeaturesBiomeModifier(this.isOverworld, HolderSet.direct(this.featureRegistry.getOrThrow(CavePlacements.MONSTER_ROOM), this.featureRegistry.getOrThrow(CavePlacements.MONSTER_ROOM_DEEP)), Collections.singleton(GenerationStep.Decoration.UNDERGROUND_STRUCTURES)));
     }
 }

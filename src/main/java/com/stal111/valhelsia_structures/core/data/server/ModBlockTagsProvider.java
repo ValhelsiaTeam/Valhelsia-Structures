@@ -13,8 +13,8 @@ import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
 import net.valhelsia.valhelsia_core.core.init.ValhelsiaTags;
+import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryObject;
 
 import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
@@ -45,14 +45,14 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(ModTags.Blocks.NON_FLAMMABLE_POSTS).add(ModBlocks.WARPED_POST.get(), ModBlocks.CRIMSON_POST.get(), ModBlocks.LAPIDIFIED_JUNGLE_POST.get());
 
         this.tag(BlockTags.IMPERMEABLE).add(ModBlocks.METAL_FRAMED_GLASS.get());
-        for (RegistryObject<StainedGlassBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS.values()) {
+        for (BlockRegistryObject<StainedGlassBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS.values()) {
             this.tag(BlockTags.IMPERMEABLE).add(registryObject.get());
             this.tag(Tags.Blocks.STAINED_GLASS).add(registryObject.get());
         }
 
         this.tag(Tags.Blocks.GLASS_COLORLESS).add(ModBlocks.METAL_FRAMED_GLASS.get());
         this.tag(Tags.Blocks.GLASS_PANES).add(ModBlocks.METAL_FRAMED_GLASS_PANE.get());
-        for (RegistryObject<StainedGlassPaneBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.values()) {
+        for (BlockRegistryObject<StainedGlassPaneBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.values()) {
             this.tag(Tags.Blocks.GLASS_PANES).add(registryObject.get());
             this.tag(Tags.Blocks.STAINED_GLASS_PANES).add(registryObject.get());
         }

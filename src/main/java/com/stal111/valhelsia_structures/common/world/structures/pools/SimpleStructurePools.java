@@ -12,26 +12,32 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
-import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
+import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
+import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
 import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHelper;
 
 /**
  * @author Valhelsia Team
  * @since 2022-11-26
  */
-public class SimpleStructurePools implements RegistryClass {
+public class SimpleStructurePools extends DatapackRegistryClass<StructureTemplatePool> {
 
-    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.TEMPLATE_POOL);
+    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.TEMPLATE_POOL);
 
     public static final ResourceKey<StructureTemplatePool> SPAWNER_ROOM = HELPER.createKey("spawner_rooms");
     public static final ResourceKey<StructureTemplatePool> DEEP_SPAWNER_ROOM = HELPER.createKey("deep_spawner_rooms");
     public static final ResourceKey<StructureTemplatePool> WITCH_HUT = HELPER.createKey("witch_huts");
 
-    public static void bootstrap(BootstapContext<StructureTemplatePool> context) {
+    public SimpleStructurePools(DataProviderInfo info, BootstapContext<StructureTemplatePool> context) {
+        super(info, context);
+    }
+
+    @Override
+    public void bootstrap(BootstapContext<StructureTemplatePool> context) {
         HolderGetter<StructureProcessorList> processorListRegistry = context.lookup(Registries.PROCESSOR_LIST);
 
-        HELPER.createPool(context, "spawner_room", "spawner_rooms", builder -> builder.element("spawner_room_1").element("spawner_room_2").processor(new SpawnerRoomLegProcessor(Blocks.COBBLESTONE.defaultBlockState(), Blocks.COBBLESTONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP))).removeWater());
-        HELPER.createPool(context, "deep_spawner_room", "deep_spawner_rooms", builder -> builder.element("deep_spawner_room_1").processor(new SpawnerRoomLegProcessor(Blocks.COBBLED_DEEPSLATE.defaultBlockState(), Blocks.COBBLED_DEEPSLATE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP))).removeWater());
-        HELPER.createPool(context, "witch_hut", "witch_huts", builder -> builder.element("witch_hut_1").element("witch_hut_2").processor(WitchHutLegProcessor.INSTANCE));
+        HELPER.createPool(SPAWNER_ROOM, context, "spawner_room", builder -> builder.element("spawner_room_1").element("spawner_room_2").processor(new SpawnerRoomLegProcessor(Blocks.COBBLESTONE.defaultBlockState(), Blocks.COBBLESTONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP))).removeWater());
+        HELPER.createPool(DEEP_SPAWNER_ROOM, context, "deep_spawner_room", builder -> builder.element("deep_spawner_room_1").processor(new SpawnerRoomLegProcessor(Blocks.COBBLED_DEEPSLATE.defaultBlockState(), Blocks.COBBLED_DEEPSLATE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP))).removeWater());
+        HELPER.createPool(WITCH_HUT, context, "witch_hut", builder -> builder.element("witch_hut_1").element("witch_hut_2").processor(WitchHutLegProcessor.INSTANCE));
     }
 }

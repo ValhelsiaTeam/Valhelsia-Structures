@@ -7,7 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraftforge.registries.RegistryObject;
 import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.RegistryHelper;
+import net.valhelsia.valhelsia_core.core.registry.helper.MappedRegistryHelper;
 
 /**
  * @author Valhelsia Team
@@ -15,7 +15,7 @@ import net.valhelsia.valhelsia_core.core.registry.helper.RegistryHelper;
  */
 public class ModStructureTypes implements RegistryClass {
 
-    public static final RegistryHelper<StructureType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.STRUCTURE_TYPE);
+    public static final MappedRegistryHelper<StructureType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getMappedHelper(Registries.STRUCTURE_TYPE);
 
     public static final RegistryObject<StructureType<ValhelsiaJigsawStructure>> VALHELSIA_JIGSAW_STRUCTURE = HELPER.register("valhelsia_jigsaw_structure", () -> () -> ValhelsiaJigsawStructure.CODEC);
     public static final RegistryObject<StructureType<LegacyValhelsiaJigsawStructure>> LEGACY_VALHELSIA_JIGSAW_STRUCTURE = HELPER.register("legacy_valhelsia_jigsaw_structure", () -> () -> LegacyValhelsiaJigsawStructure.CODEC);

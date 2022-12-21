@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 820846813,
+    "separation": 2,
+    "spacing": 3
+  },
+  "structures": [
+    {
+      "structure": "valhelsia_structures:spawner_room",
+      "weight": 1
+    }
+  ]
+}

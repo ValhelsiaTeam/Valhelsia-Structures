@@ -9,9 +9,7 @@ import com.stal111.valhelsia_structures.core.data.server.ModItemTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModBlockLootTables;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModLootModifierProvider;
 import com.stal111.valhelsia_structures.data.recipes.ModRecipeProvider;
-import com.stal111.valhelsia_structures.data.worldgen.modifier.ModBiomeModifiers;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -21,7 +19,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
 
 import java.util.List;
@@ -61,7 +58,7 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(), new ModRecipeProvider(info));
 
-        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookupProvider, new RegistrySetBuilder().add(ForgeRegistries.Keys.BIOME_MODIFIERS, context -> new ModBiomeModifiers(info, context)), Set.of(ValhelsiaStructures.MOD_ID)));
+        generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER.buildRegistrySet(info), Set.of(ValhelsiaStructures.MOD_ID)));
 
 //        generator.addProvider(event.includeServer(), JsonCodecProvider.forDatapackRegistry(
 //                generator, existingFileHelper, ValhelsiaStructures.MOD_ID, ops, ForgeRegistries.Keys.BIOME_MODIFIERS, new ModBiomeModifiers(info, ops).getModifiers()));

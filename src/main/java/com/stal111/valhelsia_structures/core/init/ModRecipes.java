@@ -6,7 +6,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.RegistryHelper;
+import net.valhelsia.valhelsia_core.core.registry.helper.MappedRegistryHelper;
 
 /**
  * Recipes <br>
@@ -18,7 +18,7 @@ import net.valhelsia.valhelsia_core.core.registry.helper.RegistryHelper;
 
 public class ModRecipes implements RegistryClass {
 
-    public static final RegistryHelper<RecipeSerializer<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(ForgeRegistries.Keys.RECIPE_SERIALIZERS);
+    public static final MappedRegistryHelper<RecipeSerializer<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getMappedHelper(ForgeRegistries.Keys.RECIPE_SERIALIZERS);
 
     public static final RegistryObject<RecipeSerializer<AxeCraftingRecipe>> AXE_CRAFTING_SERIALIZER = HELPER.register("axe_crafting", AxeCraftingRecipe.Serializer::new);
 

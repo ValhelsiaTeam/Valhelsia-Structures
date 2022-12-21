@@ -1,8 +1,6 @@
 package com.stal111.valhelsia_structures.core.data.server;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.core.init.world.ModStructures;
-import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.StructureTagsProvider;
@@ -27,7 +25,7 @@ public class ModStructureTagsProvider extends StructureTagsProvider {
 
     @Override
     protected void addTags(@NotNull HolderLookup.Provider provider) {
-        this.tag(ModTags.Structures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS).add(ModStructures.SPAWNER_DUNGEON);
-        this.tag(ModTags.Structures.ON_CASTLE_EXPLORER_MAPS).add(ModStructures.CASTLE);
+//        this.tag(ModTags.Structures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS).add(ModStructures.SPAWNER_DUNGEON);
+//        this.tag(ModTags.Structures.ON_CASTLE_EXPLORER_MAPS).add(ModStructures.CASTLE);
     }
 }

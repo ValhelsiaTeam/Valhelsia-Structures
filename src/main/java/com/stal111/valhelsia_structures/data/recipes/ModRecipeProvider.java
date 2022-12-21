@@ -128,7 +128,7 @@ public class ModRecipeProvider extends ValhelsiaRecipeProvider {
             }
 
             if (color != DyeColor.WHITE) {
-                this.shapeless(RecipeCategory.DECORATIONS, registryObject.get(), builder -> builder.requires(whiteSleepingBag).requires(color.getTag()).unlockedBy("has_item", has(whiteSleepingBag)).unlockedBy("has_color", has(color.getTag())), registryObject.getId().getPath() + "_from_white_sleeping_bag");
+                this.shapeless(RecipeCategory.DECORATIONS, registryObject.get(), builder -> builder.requires(whiteSleepingBag).requires(color.getTag()).unlockedBy("has_item", has(whiteSleepingBag)).unlockedBy("has_color", has(color.getTag())), registryObject.getRegistryObject().getId().getPath() + "_from_white_sleeping_bag");
             }
         });
 

@@ -31,8 +31,8 @@ public class ModItemModelProvider extends ValhelsiaItemModelProvider {
     @Override
     protected void registerModels() {
        // getRemainingBlockItems().remove(ModBlocks.JUNGLE_HEAD);
-        getRemainingBlockItems().remove(ModBlocks.STRIPPED_LAPIDIFIED_JUNGLE_POST);
-        getRemainingBlockItems().remove(ModBlocks.CUT_STRIPPED_LAPIDIFIED_JUNGLE_POST);
+        getRemainingBlockItems().remove(ModBlocks.STRIPPED_LAPIDIFIED_JUNGLE_POST.getRegistryObject());
+        getRemainingBlockItems().remove(ModBlocks.CUT_STRIPPED_LAPIDIFIED_JUNGLE_POST.getRegistryObject());
 
         forEachBlockItem(item -> item.getBlock() instanceof ValhelsiaGrassBlock || item.getBlock() instanceof ValhelsiaStoneBlock, item -> withParent(item, true));
         takeBlockItem(item -> withParent(item, getName(item) + "_off"), ModBlocks.BRAZIER, ModBlocks.SOUL_BRAZIER);

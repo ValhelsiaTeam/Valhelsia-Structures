@@ -1,40 +1,61 @@
 package com.stal111.valhelsia_structures.core.init.world;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadStructurePlacement;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadType;
-import net.minecraftforge.registries.RegistryObject;
-import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.RegistryHelper;
-
-import java.util.List;
+import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
+import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
+import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryHelper;
 
 /**
  * @author Valhelsia Team
  * @since 2022-06-24
  */
-public class ModStructureSets implements RegistryClass {
+public class ModStructureSets extends DatapackRegistryClass<StructureSet> {
 
-    public static final RegistryHelper<StructureSet> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.STRUCTURE_SET);
+    public static final DatapackRegistryHelper<StructureSet> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.STRUCTURE_SET);
 
-    public static final RegistryObject<StructureSet> CASTLES = HELPER.register("castles", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.CASTLE)), placement(37, 7, 16987356)));
-    public static final RegistryObject<StructureSet> CASTLE_RUINS = HELPER.register("castle_ruins", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.CASTLE_RUIN)), placement(33, 7, 436946199)));
-    public static final RegistryObject<StructureSet> DESERT_HOUSES = HELPER.register("desert_houses", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.DESERT_HOUSE)), placement(28, 7, 572792859)));
-    public static final RegistryObject<StructureSet> FORGES = HELPER.register("forges", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.FORGE)), placement(28, 7, 12857691)));
-    public static final RegistryObject<StructureSet> PLAYER_HOUSES = HELPER.register("player_houses", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.PLAYER_HOUSE)), placement(28, 7, 292107367)));
-    public static final RegistryObject<StructureSet> SPAWNER_DUNGEONS = HELPER.register("spawner_dungeons", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.SPAWNER_DUNGEON)), placement(28, 7, 23498567)));
-    public static final RegistryObject<StructureSet> TOWER_RUINS = HELPER.register("tower_ruins", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.TOWER_RUIN)), placement(23, 7, 24357670)));
-    public static final RegistryObject<StructureSet> WITCH_HUTS = HELPER.register("witch_huts", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.WITCH_HUT)), placement(23, 6, 70882951)));
-    public static final RegistryObject<StructureSet> BIG_TREES = HELPER.register("big_trees", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.BIG_TREE)), placement(28, 7, 35122018)));
-    public static final RegistryObject<StructureSet> SPAWNER_ROOMS = HELPER.register("spawner_rooms", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.SPAWNER_ROOM)), placement(3, 2, 820846813)));
-    public static final RegistryObject<StructureSet> DEEP_SPAWNER_ROOMS = HELPER.register("deep_spawner_rooms", () -> new StructureSet(List.of(StructureSet.entry((Holder<Structure>) ModStructures.DEEP_SPAWNER_ROOM)), placement(3, 2, 601654390)));
+//    public static final ResourceKey<StructureSet> CASTLES = HELPER.createKey("castles");
+//    public static final ResourceKey<StructureSet> CASTLE_RUINS = HELPER.createKey("castle_ruins");
+//    public static final ResourceKey<StructureSet> DESERT_HOUSES = HELPER.createKey("desert_houses");
+//    public static final ResourceKey<StructureSet> FORGES = HELPER.createKey("forges");
+//    public static final ResourceKey<StructureSet> PLAYER_HOUSES = HELPER.createKey("player_houses");
+//    public static final ResourceKey<StructureSet> SPAWNER_DUNGEONS = HELPER.createKey("spawner_dungeons");
+//    public static final ResourceKey<StructureSet> TOWER_RUINS = HELPER.createKey("tower_ruins");
+//    public static final ResourceKey<StructureSet> WITCH_HUTS = HELPER.createKey("witch_huts");
+//    public static final ResourceKey<StructureSet> BIG_TREES = HELPER.createKey("big_trees");
+    public static final ResourceKey<StructureSet> SPAWNER_ROOMS = HELPER.createKey("spawner_rooms");
+    public static final ResourceKey<StructureSet> DEEP_SPAWNER_ROOMS = HELPER.createKey("deep_spawner_rooms");
+
+    public ModStructureSets(DataProviderInfo info, BootstapContext<StructureSet> context) {
+        super(info, context);
+    }
 
 
     public static RandomSpreadStructurePlacement placement(int spacing, int separation, int seed) {
         return new RandomSpreadStructurePlacement(spacing, separation, RandomSpreadType.LINEAR, seed);
+    }
+
+    @Override
+    public void bootstrap(BootstapContext<StructureSet> context) {
+        HolderGetter<Structure> structureRegistry = context.lookup(Registries.STRUCTURE);
+
+//        context.register(CASTLES, new StructureSet(structureRegistry.getOrThrow(ModStructures.CASTLE), placement(37, 7, 16987356)));
+//        context.register(CASTLE_RUINS, new StructureSet(structureRegistry.getOrThrow(ModStructures.CASTLE_RUIN), placement(33, 7, 436946199)));
+//        context.register(DESERT_HOUSES, new StructureSet(structureRegistry.getOrThrow(ModStructures.DESERT_HOUSE), placement(28, 7, 572792859)));
+//        context.register(FORGES, new StructureSet(structureRegistry.getOrThrow(ModStructures.FORGE), placement(28, 7, 12857691)));
+//        context.register(PLAYER_HOUSES, new StructureSet(structureRegistry.getOrThrow(ModStructures.PLAYER_HOUSE), placement(28, 7, 292107367)));
+//        context.register(SPAWNER_DUNGEONS, new StructureSet(structureRegistry.getOrThrow(ModStructures.SPAWNER_DUNGEON), placement(28, 7, 23498567)));
+//        context.register(TOWER_RUINS, new StructureSet(structureRegistry.getOrThrow(ModStructures.TOWER_RUIN), placement(23, 7, 24357670)));
+//        context.register(WITCH_HUTS, new StructureSet(structureRegistry.getOrThrow(ModStructures.WITCH_HUT), placement(23, 6, 70882951)));
+//        context.register(BIG_TREES, new StructureSet(structureRegistry.getOrThrow(ModStructures.BIG_TREE), placement(28, 7, 35122018)));
+        context.register(SPAWNER_ROOMS, new StructureSet(structureRegistry.getOrThrow(ModStructures.SPAWNER_ROOM), placement(3, 2, 820846813)));
+        context.register(DEEP_SPAWNER_ROOMS, new StructureSet(structureRegistry.getOrThrow(ModStructures.DEEP_SPAWNER_ROOM), placement(3, 2, 601654390)));
     }
 }
