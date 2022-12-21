@@ -3,7 +3,6 @@
   "biomes": "#valhelsia_structures:has_structure/spawner_dungeon",
   "individual_terrain_adjustment": true,
   "max_distance_from_center": 80,
-  "name": "spawner_dungeon",
   "requires_distance_to": [],
   "size": 7,
   "spawn_overrides": {},

@@ -3,7 +3,6 @@
   "biomes": "#valhelsia_structures:has_structure/deep_spawner_room",
   "individual_terrain_adjustment": false,
   "max_distance_from_center": 80,
-  "name": "deep_spawner_room",
   "requires_distance_to": [],
   "size": 7,
   "spawn_overrides": {},
