@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 35122018,
+    "separation": 7,
+    "spacing": 28
+  },
+  "structures": [
+    {
+      "structure": "valhelsia_structures:big_tree",
+      "weight": 1
+    }
+  ]
+}

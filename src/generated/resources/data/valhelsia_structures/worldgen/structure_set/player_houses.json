@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 292107367,
+    "separation": 7,
+    "spacing": 28
+  },
+  "structures": [
+    {
+      "structure": "valhelsia_structures:player_house",
+      "weight": 1
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 12857691,
+    "separation": 7,
+    "spacing": 28
+  },
+  "structures": [
+    {
+      "structure": "valhelsia_structures:forge",
+      "weight": 1
+    }
+  ]
+}

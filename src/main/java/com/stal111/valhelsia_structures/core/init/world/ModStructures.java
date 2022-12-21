@@ -1,9 +1,10 @@
 package com.stal111.valhelsia_structures.core.init.world;
 
+import com.stal111.valhelsia_structures.common.world.structures.LegacyValhelsiaJigsawStructure;
 import com.stal111.valhelsia_structures.common.world.structures.ValhelsiaJigsawStructure;
 import com.stal111.valhelsia_structures.common.world.structures.ValhelsiaStructureSettings;
 import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProvider;
-import com.stal111.valhelsia_structures.common.world.structures.pools.SimpleStructurePools;
+import com.stal111.valhelsia_structures.common.world.structures.pools.*;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.HolderGetter;
@@ -14,6 +15,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
@@ -36,15 +38,15 @@ public class ModStructures extends DatapackRegistryClass<Structure> {
 
     public static final Map<String, ValhelsiaStructureSettings> STRUCTURE_SETTINGS_MAP = new HashMap<>();
 
-//    public static final ResourceKey<Structure> CASTLE = HELPER.createKey("castle");
-//    public static final ResourceKey<Structure> CASTLE_RUIN = HELPER.createKey("castle_ruin");
-//    public static final ResourceKey<Structure> DESERT_HOUSE = HELPER.createKey("desert_house");
-//    public static final ResourceKey<Structure> FORGE = HELPER.createKey("forge");
-//    public static final ResourceKey<Structure> PLAYER_HOUSE = HELPER.createKey("player_house");
-//    public static final ResourceKey<Structure> SPAWNER_DUNGEON = HELPER.createKey("spawner_dungeon");
-//    public static final ResourceKey<Structure> TOWER_RUIN = HELPER.createKey("tower_ruin");
-//    public static final ResourceKey<Structure> WITCH_HUT = HELPER.createKey("witch_hut");
-//    public static final ResourceKey<Structure> BIG_TREE = HELPER.createKey("big_tree");
+    public static final ResourceKey<Structure> CASTLE = HELPER.createKey("castle");
+    public static final ResourceKey<Structure> CASTLE_RUIN = HELPER.createKey("castle_ruin");
+    public static final ResourceKey<Structure> DESERT_HOUSE = HELPER.createKey("desert_house");
+    public static final ResourceKey<Structure> FORGE = HELPER.createKey("forge");
+    public static final ResourceKey<Structure> PLAYER_HOUSE = HELPER.createKey("player_house");
+    public static final ResourceKey<Structure> SPAWNER_DUNGEON = HELPER.createKey("spawner_dungeon");
+    public static final ResourceKey<Structure> TOWER_RUIN = HELPER.createKey("tower_ruin");
+    public static final ResourceKey<Structure> WITCH_HUT = HELPER.createKey("witch_hut");
+    public static final ResourceKey<Structure> BIG_TREE = HELPER.createKey("big_tree");
     public static final ResourceKey<Structure> SPAWNER_ROOM = HELPER.createKey("spawner_room");
     public static final ResourceKey<Structure> DEEP_SPAWNER_ROOM = HELPER.createKey("deep_spawner_room");
 
@@ -56,15 +58,15 @@ public class ModStructures extends DatapackRegistryClass<Structure> {
         HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
         HolderGetter<StructureTemplatePool> templatePoolRegistry = context.lookup(Registries.TEMPLATE_POOL);
 
-//        context.register(CASTLE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_CASTLE), TerrainAdjustment.BEARD_THIN), "castle", LegacySimpleStructurePools.CASTLE_PATTERN, 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
-//        context.register(CASTLE_RUIN, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_CASTLE_RUIN), TerrainAdjustment.BEARD_THIN), "castle_ruin", LegacySimpleStructurePools.CASTLE_RUIN_PATTERN, 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
-//        context.register(DESERT_HOUSE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_DESERT_HOUSE), TerrainAdjustment.BEARD_THIN), "desert_house", DesertHousePools.PATTERN, 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
-//        context.register(FORGE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_FORGE), TerrainAdjustment.BEARD_THIN), "forge", LegacySimpleStructurePools.FORGE_PATTERN, 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
-//        context.register(PLAYER_HOUSE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_PLAYER_HOUSE), TerrainAdjustment.BEARD_THIN), "player_house", PlayerHousePools.PATTERN, 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
-//        context.register(SPAWNER_DUNGEON, new ValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_SPAWNER_DUNGEON), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE), "spawner_dungeon", templatePoolRegistry.getOrThrow(SpawnerDungeonPools.START), 7, StructureHeightProvider.surfaceBetween(VerticalAnchor.absolute(0), VerticalAnchor.absolute(75)), true));
-//        context.register(TOWER_RUIN, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_TOWER_RUIN), TerrainAdjustment.BEARD_THIN), "tower_ruin", LegacySimpleStructurePools.TOWER_RUIN_PATTERN, 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
-//        context.register(WITCH_HUT, new ValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_WITCH_HUT), TerrainAdjustment.BEARD_THIN), "witch_hut", templatePoolRegistry.getOrThrow(SimpleStructurePools.WITCH_HUT), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG, false));
-//        context.register(BIG_TREE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_BIG_TREE), TerrainAdjustment.BEARD_THIN), "big_tree", BigTreePools.PATTERN, 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
+        context.register(CASTLE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_CASTLE), TerrainAdjustment.BEARD_THIN), "castle", templatePoolRegistry.getOrThrow(SimpleStructurePools.CASTLES), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
+        context.register(CASTLE_RUIN, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_CASTLE_RUIN), TerrainAdjustment.BEARD_THIN), "castle_ruin", templatePoolRegistry.getOrThrow(SimpleStructurePools.CASTLE_RUINS), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
+        context.register(DESERT_HOUSE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_DESERT_HOUSE), TerrainAdjustment.BEARD_THIN), "desert_house", templatePoolRegistry.getOrThrow(DesertHousePools.START), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
+        context.register(FORGE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_FORGE), TerrainAdjustment.BEARD_THIN), "forge", templatePoolRegistry.getOrThrow(SimpleStructurePools.FORGES), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
+        context.register(PLAYER_HOUSE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_PLAYER_HOUSE), TerrainAdjustment.BEARD_THIN), "player_house", templatePoolRegistry.getOrThrow(PlayerHousePools.START), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
+        context.register(SPAWNER_DUNGEON, new ValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_SPAWNER_DUNGEON), GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE), "spawner_dungeon", templatePoolRegistry.getOrThrow(SpawnerDungeonPools.START), 7, StructureHeightProvider.surfaceBetween(VerticalAnchor.absolute(0), VerticalAnchor.absolute(75)), true));
+        context.register(TOWER_RUIN, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_TOWER_RUIN), TerrainAdjustment.BEARD_THIN), "tower_ruin", templatePoolRegistry.getOrThrow(SimpleStructurePools.TOWER_RUINS), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
+        context.register(WITCH_HUT, new ValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_WITCH_HUT), TerrainAdjustment.BEARD_THIN), "witch_hut", templatePoolRegistry.getOrThrow(SimpleStructurePools.WITCH_HUTS), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG, false));
+        context.register(BIG_TREE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_BIG_TREE), TerrainAdjustment.BEARD_THIN), "big_tree", templatePoolRegistry.getOrThrow(BigTreePools.START), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
         context.register(SPAWNER_ROOM, new ValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_SPAWNER_ROOM), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), "spawner_room", templatePoolRegistry.getOrThrow(SimpleStructurePools.SPAWNER_ROOMS), 7, StructureHeightProvider.spawnerRoom(VerticalAnchor.absolute(0)), false));
         context.register(DEEP_SPAWNER_ROOM, new ValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_DEEP_SPAWNER_ROOM), GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE), "deep_spawner_room", templatePoolRegistry.getOrThrow(SimpleStructurePools.DEEP_SPAWNER_ROOMS), 7, StructureHeightProvider.deepSpawnerRoom(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(-1)), false));
     }

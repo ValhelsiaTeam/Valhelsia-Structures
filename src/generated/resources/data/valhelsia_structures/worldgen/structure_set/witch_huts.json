@@ -1,0 +1,14 @@
+{
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 70882951,
+    "separation": 6,
+    "spacing": 23
+  },
+  "structures": [
+    {
+      "structure": "valhelsia_structures:witch_hut",
+      "weight": 1
+    }
+  ]
+}
