@@ -5,7 +5,6 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProvider;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureTypes;
-import com.stal111.valhelsia_structures.core.init.world.ModStructures;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -40,25 +39,20 @@ import java.util.function.Function;
  */
 public class ValhelsiaJigsawStructure extends Structure {
 
-    public static final Codec<ValhelsiaJigsawStructure> CODEC = RecordCodecBuilder.<ValhelsiaJigsawStructure>mapCodec((instance) -> instance.group(settingsCodec(instance),
-            StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> {
-                return structure.startPool;
-            }), Codec.intRange(0, 7).fieldOf("size").forGetter(structure -> {
-                return structure.maxDepth;
-            }), StructureHeightProvider.CODEC.optionalFieldOf("start_height").forGetter(structure -> {
-                return Optional.ofNullable(structure.startHeight);
-            }), Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> {
-                return Optional.ofNullable(structure.projectStartToHeightmap);
-            }), Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> {
-                return structure.maxDistanceFromCenter;
-            }), Codec.BOOL.fieldOf("individual_terrain_adjustment").forGetter(structure -> {
-                return structure.individualTerrainAdjustment;
-            }), Codec.list(StructureSet.CODEC).fieldOf("requires_distance_to").forGetter(structure -> {
-                return structure.requiresDistanceTo;
-            })).apply(instance, (structureSettings, structureTemplatePoolHolder, integer, structureHeightProvider, types, integer2, aBoolean, holders) -> {
-                return new ValhelsiaJigsawStructure(structureSettings, structureTemplatePoolHolder, integer, structureHeightProvider.orElse(null), types.orElse(null), integer2, aBoolean, holders);
+    public static final Codec<ValhelsiaJigsawStructure> CODEC = RecordCodecBuilder.<ValhelsiaJigsawStructure>mapCodec((instance) -> instance.group(
+            settingsCodec(instance),
+            ValhelsiaStructureSettings.CODEC.forGetter(structure -> structure.settings),
+            StructureTemplatePool.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPool),
+            Codec.intRange(0, 7).fieldOf("size").forGetter(structure -> structure.maxDepth),
+            StructureHeightProvider.CODEC.optionalFieldOf("start_height").forGetter(structure -> Optional.ofNullable(structure.startHeight)),
+            Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> Optional.ofNullable(structure.projectStartToHeightmap)),
+            Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter),
+            Codec.list(StructureSet.CODEC).fieldOf("requires_distance_to").forGetter(structure -> structure.requiresDistanceTo)
+    ).apply(instance, (structureSettings, valhelsiaStructureSettings, structureTemplatePoolHolder, integer, structureHeightProvider, types, integer2, holders) -> {
+        return new ValhelsiaJigsawStructure(structureSettings, valhelsiaStructureSettings, structureTemplatePoolHolder, integer, structureHeightProvider.orElse(null), types.orElse(null), integer2, holders);
     })).flatXmap(verifyRange(), verifyRange()).codec();
 
+    private final ValhelsiaStructureSettings settings;
     private final Holder<StructureTemplatePool> startPool;
 
     private final int maxDepth;
@@ -67,18 +61,17 @@ public class ValhelsiaJigsawStructure extends Structure {
     @Nullable
     private final Heightmap.Types projectStartToHeightmap;
     private final int maxDistanceFromCenter;
-    private final boolean individualTerrainAdjustment;
 
     private final List<Holder<StructureSet>> requiresDistanceTo;
 
-    public ValhelsiaJigsawStructure(Structure.StructureSettings settings, Holder<StructureTemplatePool> startPool, int maxDepth, @Nullable StructureHeightProvider startHeight, @Nullable Heightmap.Types projectStartToHeightmap, int maxDistanceFromCenter, boolean individualTerrainAdjustment, List<Holder<StructureSet>> requiresDistanceTo) {
+    public ValhelsiaJigsawStructure(StructureSettings settings, ValhelsiaStructureSettings valhelsiaStructureSettings, Holder<StructureTemplatePool> startPool, int maxDepth, @Nullable StructureHeightProvider startHeight, @Nullable Heightmap.Types projectStartToHeightmap, int maxDistanceFromCenter, List<Holder<StructureSet>> requiresDistanceTo) {
         super(settings);
+        this.settings = valhelsiaStructureSettings;
         this.startPool = startPool;
         this.maxDepth = maxDepth;
         this.startHeight = startHeight;
         this.projectStartToHeightmap = projectStartToHeightmap;
         this.maxDistanceFromCenter = maxDistanceFromCenter;
-        this.individualTerrainAdjustment = individualTerrainAdjustment;
         this.requiresDistanceTo = requiresDistanceTo;
     }
 
@@ -103,9 +96,9 @@ public class ValhelsiaJigsawStructure extends Structure {
         WorldgenRandom random = new WorldgenRandom(new LegacyRandomSource(0L));
 
         // Check if the surface is flat
-        if (this.checkSurface() && !StructureUtils.isSurfaceFlat(context, this.getStructureSettings().size().get())) {
-            return false;
-        }
+//        if (this.step() == GenerationStep.Decoration.SURFACE_STRUCTURES && !StructureUtils.isSurfaceFlat(context, this.adjustBoundingBox())) {
+//            return false;
+//        }
 
         // Check for water
         if (!this.canGenerateOnWater()) {
@@ -127,7 +120,7 @@ public class ValhelsiaJigsawStructure extends Structure {
         // Check the spawn chance
         random.setSeed((long) (chunkPos.x >> 4 ^ chunkPos.z >> 4 << 4) ^ context.seed());
 
-        return random.nextDouble() < this.getStructureSettings().spawnChance().get();
+        return random.nextDouble() < this.getStructureSettings().spawnChance();
     }
 
 
@@ -142,7 +135,11 @@ public class ValhelsiaJigsawStructure extends Structure {
 
         BlockPos pos = chunkPos.getWorldPosition();
 
-        OptionalInt y = this.startHeight.sample(pos, context, Heightmap.Types.WORLD_SURFACE);
+        OptionalInt y = OptionalInt.of(0);
+
+        if (this.startHeight != null) {
+            y = this.startHeight.sample(pos, context, Heightmap.Types.WORLD_SURFACE);
+        }
 
         if (y.isEmpty()) {
             return Optional.empty();
@@ -167,33 +164,21 @@ public class ValhelsiaJigsawStructure extends Structure {
     }
 
     public ValhelsiaStructureSettings getStructureSettings() {
-        return ModStructures.STRUCTURE_SETTINGS_MAP.get("");
-    }
-
-    public boolean checkSurface() {
-        return this.getStructureSettings().size() != null;
+        return this.settings;
     }
 
     public boolean canGenerateOnWater() {
         return this.step() == GenerationStep.Decoration.UNDERGROUND_STRUCTURES;
     }
 
-    public boolean hasMargin() {
-        return this.getStructureSettings().margin().get() != 0;
-    }
-
-    public int getMargin() {
-        return this.getStructureSettings().margin().get();
-    }
-
     @Nonnull
     @Override
     public BoundingBox adjustBoundingBox(@Nonnull BoundingBox boundingBox) {
-        return this.hasMargin() ? boundingBox.inflatedBy(this.getMargin()) : boundingBox;
+        return boundingBox.inflatedBy(this.settings.customMargin());
     }
 
     public boolean hasIndividualTerrainAdjustment() {
-        return this.individualTerrainAdjustment;
+        return this.settings.individualTerrainAdjustment();
     }
 
     public static class Builder {
@@ -212,7 +197,12 @@ public class ValhelsiaJigsawStructure extends Structure {
         @Nullable
         private StructureHeightProvider heightProvider = null;
         private int maxDistanceFromCenter = 80;
-        private boolean individualTerrainAdjustment = false;
+        @Nullable
+        private Double spawnChance = null;
+        @Nullable
+        private Integer customMargin = null;
+        @Nullable
+        private Boolean individualTerrainAdjustment = null;
 
         private Builder(BootstapContext<Structure> context, TagKey<Biome> biomeTagKey, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, ResourceKey<StructureTemplatePool> startPool) {
             this.context = context;
@@ -254,8 +244,23 @@ public class ValhelsiaJigsawStructure extends Structure {
             return this;
         }
 
+        public Builder chance(double spawnChance) {
+            this.spawnChance = spawnChance;
+
+            return this;
+        }
+
+        public Builder margin(int customMargin) {
+            this.customMargin = customMargin;
+
+            return this;
+        }
+
         public ValhelsiaJigsawStructure build() {
-            return new ValhelsiaJigsawStructure(new StructureSettings(this.context.lookup(Registries.BIOME).getOrThrow(this.biomeTagKey), this.spawnOverrides, this.step, this.terrainAdjustment), this.context.lookup(Registries.TEMPLATE_POOL).getOrThrow(this.startPool), this.maxDepth, this.heightProvider, this.projectStartToHeightmap, this.maxDistanceFromCenter, this.individualTerrainAdjustment, List.of());
+            StructureSettings settings = new StructureSettings(this.context.lookup(Registries.BIOME).getOrThrow(this.biomeTagKey), this.spawnOverrides, this.step, this.terrainAdjustment);
+            ValhelsiaStructureSettings valhelsiaStructureSettings = new ValhelsiaStructureSettings(this.spawnChance, this.customMargin, this.individualTerrainAdjustment);
+
+            return new ValhelsiaJigsawStructure(settings, valhelsiaStructureSettings, this.context.lookup(Registries.TEMPLATE_POOL).getOrThrow(this.startPool), this.maxDepth, this.heightProvider, this.projectStartToHeightmap, this.maxDistanceFromCenter, List.of());
         }
     }
 }
