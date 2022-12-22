@@ -40,12 +40,12 @@ public class SimpleStructurePools extends DatapackRegistryClass<StructureTemplat
     public void bootstrap(BootstapContext<StructureTemplatePool> context) {
         HolderGetter<StructureProcessorList> processorListRegistry = context.lookup(Registries.PROCESSOR_LIST);
 
-        HELPER.createPool(CASTLES, context, builder -> builder.element("castle"));
-        HELPER.createPool(CASTLE_RUINS, context, "ruins", builder -> builder.element("castle_ruin"));
-        HELPER.createPool(FORGES, context, "forge", builder -> builder.element("forge_1").element("forge_2"));
-        HELPER.createPool(TOWER_RUINS, context, "ruins", builder -> builder.element("tower_ruin_1").element("tower_ruin_2").element("tower_ruin_3"));
-        HELPER.createPool(SPAWNER_ROOMS, context, "spawner_room", builder -> builder.element("spawner_room_1").element("spawner_room_2").processor(new SpawnerRoomLegProcessor(Blocks.COBBLESTONE.defaultBlockState(), Blocks.COBBLESTONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP))).removeWater());
-        HELPER.createPool(DEEP_SPAWNER_ROOMS, context, "deep_spawner_room", builder -> builder.element("deep_spawner_room_1").processor(new SpawnerRoomLegProcessor(Blocks.COBBLED_DEEPSLATE.defaultBlockState(), Blocks.COBBLED_DEEPSLATE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP))).removeWater());
-        HELPER.createPool(WITCH_HUTS, context, "witch_hut", builder -> builder.element("witch_hut_1").element("witch_hut_2").processor(WitchHutLegProcessor.INSTANCE));
+        HELPER.create(CASTLES, context, builder -> builder.element("castle"));
+        HELPER.create(CASTLE_RUINS, context, "ruins", builder -> builder.element("castle_ruin"));
+        HELPER.create(FORGES, context, "forge", builder -> builder.element("forge_1").element("forge_2"));
+        HELPER.create(TOWER_RUINS, context, "ruins", builder -> builder.element("tower_ruin_1").element("tower_ruin_2").element("tower_ruin_3"));
+        HELPER.create(SPAWNER_ROOMS, context, "spawner_room", builder -> builder.element("spawner_room_1").element("spawner_room_2").processor(new SpawnerRoomLegProcessor(Blocks.COBBLESTONE.defaultBlockState(), Blocks.COBBLESTONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP))).removeWater());
+        HELPER.create(DEEP_SPAWNER_ROOMS, context, "deep_spawner_room", builder -> builder.element("deep_spawner_room_1").processor(new SpawnerRoomLegProcessor(Blocks.COBBLED_DEEPSLATE.defaultBlockState(), Blocks.COBBLED_DEEPSLATE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP))).removeWater());
+        HELPER.create(WITCH_HUTS, context, "witch_hut", builder -> builder.element("witch_hut_1").element("witch_hut_2").processor(WitchHutLegProcessor.INSTANCE));
     }
 }

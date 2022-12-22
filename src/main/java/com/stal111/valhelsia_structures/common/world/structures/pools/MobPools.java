@@ -23,24 +23,24 @@ public class MobPools extends DatapackRegistryClass<StructureTemplatePool> {
     @Override
     public void bootstrap(BootstapContext<StructureTemplatePool> context) {
         // Entities
-        HELPER.createPool(HELPER.createKey("mobs/bee"), context, "mobs", builder -> builder.element("bee"));
-        HELPER.createPool(HELPER.createKey("mobs/skeleton"), context, "mobs", builder -> builder.element("skeleton"));
-        HELPER.createPool(HELPER.createKey("mobs/pillager_with_axe_1"), context, "mobs", builder -> builder.element("pillager_with_axe_1"));
-        HELPER.createPool(HELPER.createKey("mobs/pillager_with_crossbow_1"), context, "mobs", builder -> builder.element("pillager_with_crossbow_1"));
-        HELPER.createPool(HELPER.createKey("mobs/pillager_with_sword_1"), context, "mobs", builder -> builder.element("pillager_with_sword_1"));
-        HELPER.createPool(HELPER.createKey("mobs/witch_with_cat"), context, "mobs", builder -> builder.element("witch_with_cat"));
-        HELPER.createPool(HELPER.createKey("mobs/horse"), context, "mobs", builder -> builder.element("horse"));
-        HELPER.createPool(HELPER.createKey("mobs/villagers"), context, "mobs/villagers", builder -> builder.element("villager").element("villager_khytwel").element("villager_vaelzan").element("villager_stal").element("villager_cynthal").element("villager_kanadet"));
-        HELPER.createPool(HELPER.createKey("mobs/chickens"), context, "mobs/chickens", builder -> builder.element("chicken_1").element("chicken_2").element("chicken_3"));
+        HELPER.create("mobs/bee", context, "mobs", builder -> builder.element("bee"));
+        HELPER.create("mobs/skeleton", context, "mobs", builder -> builder.element("skeleton"));
+        HELPER.create("mobs/pillager_with_axe_1", context, "mobs", builder -> builder.element("pillager_with_axe_1"));
+        HELPER.create("mobs/pillager_with_crossbow_1", context, "mobs", builder -> builder.element("pillager_with_crossbow_1"));
+        HELPER.create("mobs/pillager_with_sword_1", context, "mobs", builder -> builder.element("pillager_with_sword_1"));
+        HELPER.create("mobs/witch_with_cat", context, "mobs", builder -> builder.element("witch_with_cat"));
+        HELPER.create("mobs/horse", context, "mobs", builder -> builder.element("horse"));
+        HELPER.create("mobs/villagers", context, "mobs/villagers", builder -> builder.element("villager").element("villager_khytwel").element("villager_vaelzan").element("villager_stal").element("villager_cynthal").element("villager_kanadet"));
+        HELPER.create("mobs/chickens", context, "mobs/chickens", builder -> builder.element("chicken_1").element("chicken_2").element("chicken_3"));
 
         // Spawners
-        HELPER.createPool(HELPER.createKey("mobs/spawners/zombie_or_skeleton_or_spider"), context, "mobs/spawners", builder -> builder.element("zombie").element("skeleton").element("spider"));
-        HELPER.createPool(HELPER.createKey("mobs/spawners/zombie"), context, "mobs/spawners", builder -> builder.element("zombie"));
-        HELPER.createPool(HELPER.createKey("mobs/spawners/skeleton"), context, "mobs/spawners", builder -> builder.element("skeleton"));
-        HELPER.createPool(HELPER.createKey("mobs/spawners/spider"), context, "mobs/spawners", builder -> builder.element("spider"));
+        HELPER.create("mobs/spawners/zombie_or_skeleton_or_spider", context, "mobs/spawners", builder -> builder.element("zombie").element("skeleton").element("spider"));
+        HELPER.create("mobs/spawners/zombie", context, "mobs/spawners", builder -> builder.element("zombie"));
+        HELPER.create("mobs/spawners/skeleton", context, "mobs/spawners", builder -> builder.element("skeleton"));
+        HELPER.create("mobs/spawners/spider", context, "mobs/spawners", builder -> builder.element("spider"));
 
         // Special Spawners
-        HELPER.createPool(HELPER.createKey("mobs/special_spawners/zombie_or_skeleton_or_spider"), context, "mobs/special_spawners", builder -> builder.element("zombie").element("skeleton").element("spider"));
-        HELPER.createPool(HELPER.createKey("mobs/special_spawners/drowned"), context, "mobs/special_spawners", builder -> builder.element("drowned"));
+        HELPER.create("mobs/special_spawners/zombie_or_skeleton_or_spider", context, "mobs/special_spawners", builder -> builder.element("zombie").element("skeleton").element("spider"));
+        HELPER.create("mobs/special_spawners/drowned", context, "mobs/special_spawners", builder -> builder.element("drowned"));
     }
 }

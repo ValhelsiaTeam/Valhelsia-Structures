@@ -28,9 +28,9 @@ public class PlayerHousePools extends DatapackRegistryClass<StructureTemplatePoo
 
     @Override
     public void bootstrap(BootstapContext<StructureTemplatePool> context) {
-        HELPER.createPool(START, context, "player_house", builder -> builder.element("house_1").element("house_2"));
-        HELPER.createPool(HELPER.createKey("player_house/feature_plates"), context, "player_house", builder -> builder.element("feature_plate_1"));
-        HELPER.createPool(HELPER.createKey("player_house/farms"), context, "player_house", builder -> builder.element("feature_farm_1").element("feature_farm_2").element("feature_farm_3").element("feature_bee").element("feature_chicken"));
-        HELPER.createPool(HELPER.createKey("player_house/portals_and_farms"), context, "player_house", builder -> builder.element("feature_farm_1").element("feature_farm_2").element("feature_farm_3").element("feature_bee").element("feature_chicken").element("feature_portal_1").element("feature_portal_2").element("feature_portal_3"));
+        HELPER.create(START, context, "player_house", builder -> builder.element("house_1").element("house_2"));
+        HELPER.create("player_house/feature_plates", context, "player_house", builder -> builder.element("feature_plate_1"));
+        HELPER.create("player_house/farms", context, "player_house", builder -> builder.element("feature_farm_1").element("feature_farm_2").element("feature_farm_3").element("feature_bee").element("feature_chicken"));
+        HELPER.create("player_house/portals_and_farms", context, "player_house", builder -> builder.element("feature_farm_1").element("feature_farm_2").element("feature_farm_3").element("feature_bee").element("feature_chicken").element("feature_portal_1").element("feature_portal_2").element("feature_portal_3"));
     }
 }

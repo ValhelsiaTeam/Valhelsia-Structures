@@ -28,10 +28,10 @@ public class DesertHousePools extends DatapackRegistryClass<StructureTemplatePoo
 
     @Override
     public void bootstrap(BootstapContext<StructureTemplatePool> context) {
-        HELPER.createPool(START, context, "desert_house", builder -> builder.element("desert_house"));
-        HELPER.createPool(HELPER.createKey("desert_house/oasis_plate"), context, "desert_house", builder -> builder.element("oasis_plate"));
-        HELPER.createPool(HELPER.createKey("desert_house/well_or_oasis_plate"), context, "desert_house", builder -> builder.element("well_or_oasis_plate"));
-        HELPER.createPool(HELPER.createKey("desert_house/oasis"), context, "desert_house", builder -> builder.element("feature_oasis_1").element("feature_oasis_2"));
-        HELPER.createPool(HELPER.createKey("desert_house/wells_and_oasis"), context, "desert_house", builder -> builder.element("feature_oasis_1").element("feature_oasis_2").element("feature_well_1").element("feature_well_2"));
+        HELPER.create(START, context, "desert_house", builder -> builder.element("desert_house"));
+        HELPER.create("desert_house/oasis_plate", context, "desert_house", builder -> builder.element("oasis_plate"));
+        HELPER.create("desert_house/well_or_oasis_plate", context, "desert_house", builder -> builder.element("well_or_oasis_plate"));
+        HELPER.create("desert_house/oasis", context, "desert_house", builder -> builder.element("feature_oasis_1").element("feature_oasis_2"));
+        HELPER.create("desert_house/wells_and_oasis", context, "desert_house", builder -> builder.element("feature_oasis_1").element("feature_oasis_2").element("feature_well_1").element("feature_well_2"));
     }
 }
