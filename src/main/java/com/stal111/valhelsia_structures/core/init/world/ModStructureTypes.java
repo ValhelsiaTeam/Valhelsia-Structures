@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.core.init.world;
 
-import com.stal111.valhelsia_structures.common.world.structures.LegacyValhelsiaJigsawStructure;
 import com.stal111.valhelsia_structures.common.world.structures.ValhelsiaJigsawStructure;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.registries.Registries;
@@ -18,5 +17,4 @@ public class ModStructureTypes implements RegistryClass {
     public static final MappedRegistryHelper<StructureType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getMappedHelper(Registries.STRUCTURE_TYPE);
 
     public static final RegistryObject<StructureType<ValhelsiaJigsawStructure>> VALHELSIA_JIGSAW_STRUCTURE = HELPER.register("valhelsia_jigsaw_structure", () -> () -> ValhelsiaJigsawStructure.CODEC);
-    public static final RegistryObject<StructureType<LegacyValhelsiaJigsawStructure>> LEGACY_VALHELSIA_JIGSAW_STRUCTURE = HELPER.register("legacy_valhelsia_jigsaw_structure", () -> () -> LegacyValhelsiaJigsawStructure.CODEC);
 }

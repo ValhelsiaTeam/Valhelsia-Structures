@@ -1,26 +1,18 @@
 package com.stal111.valhelsia_structures.core.init.world;
 
-import com.stal111.valhelsia_structures.common.world.structures.LegacyValhelsiaJigsawStructure;
 import com.stal111.valhelsia_structures.common.world.structures.ValhelsiaJigsawStructure;
 import com.stal111.valhelsia_structures.common.world.structures.ValhelsiaStructureSettings;
 import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProvider;
 import com.stal111.valhelsia_structures.common.world.structures.pools.*;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.ModTags;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
-import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
 import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
 import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryHelper;
@@ -55,18 +47,15 @@ public class ModStructures extends DatapackRegistryClass<Structure> {
     }
 
     public void bootstrap(BootstapContext<Structure> context) {
-        HolderGetter<Biome> biomeRegistry = context.lookup(Registries.BIOME);
-        HolderGetter<StructureTemplatePool> templatePoolRegistry = context.lookup(Registries.TEMPLATE_POOL);
-
-        context.register(CASTLE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_CASTLE), TerrainAdjustment.BEARD_THIN), "castle", templatePoolRegistry.getOrThrow(SimpleStructurePools.CASTLES), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
-        context.register(CASTLE_RUIN, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_CASTLE_RUIN), TerrainAdjustment.BEARD_THIN), "castle_ruin", templatePoolRegistry.getOrThrow(SimpleStructurePools.CASTLE_RUINS), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
-        context.register(DESERT_HOUSE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_DESERT_HOUSE), TerrainAdjustment.BEARD_THIN), "desert_house", templatePoolRegistry.getOrThrow(DesertHousePools.START), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
-        context.register(FORGE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_FORGE), TerrainAdjustment.BEARD_THIN), "forge", templatePoolRegistry.getOrThrow(SimpleStructurePools.FORGES), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
-        context.register(PLAYER_HOUSE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_PLAYER_HOUSE), TerrainAdjustment.BEARD_THIN), "player_house", templatePoolRegistry.getOrThrow(PlayerHousePools.START), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
+        context.register(CASTLE, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_CASTLE, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN, SimpleStructurePools.CASTLES).build());
+        context.register(CASTLE_RUIN, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_CASTLE_RUIN, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN, SimpleStructurePools.CASTLE_RUINS).build());
+        context.register(DESERT_HOUSE, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_DESERT_HOUSE, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN, DesertHousePools.START).build());
+        context.register(FORGE, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_FORGE, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN, SimpleStructurePools.FORGES).build());
+        context.register(PLAYER_HOUSE, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_PLAYER_HOUSE, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN, PlayerHousePools.START).build());
         context.register(SPAWNER_DUNGEON, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_SPAWNER_DUNGEON, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.NONE, SpawnerDungeonPools.START).startHeight(StructureHeightProvider.surfaceBetween(VerticalAnchor.absolute(0), VerticalAnchor.absolute(75))).individualTerrainAdjustment().build());
-        context.register(TOWER_RUIN, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_TOWER_RUIN), TerrainAdjustment.BEARD_THIN), "tower_ruin", templatePoolRegistry.getOrThrow(SimpleStructurePools.TOWER_RUINS), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
+        context.register(TOWER_RUIN, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_TOWER_RUIN, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN, SimpleStructurePools.TOWER_RUINS).build());
         context.register(WITCH_HUT, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_WITCH_HUT, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN, SimpleStructurePools.WITCH_HUTS).build());
-        context.register(BIG_TREE, new LegacyValhelsiaJigsawStructure(structure(biomeRegistry.getOrThrow(ModTags.Biomes.HAS_BIG_TREE), TerrainAdjustment.BEARD_THIN), "big_tree", templatePoolRegistry.getOrThrow(BigTreePools.START), 7, StructureHeightProvider.constant(VerticalAnchor.absolute(0)), Heightmap.Types.WORLD_SURFACE_WG));
+        context.register(BIG_TREE, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_BIG_TREE, GenerationStep.Decoration.SURFACE_STRUCTURES, TerrainAdjustment.BEARD_THIN, BigTreePools.START).build());
         context.register(SPAWNER_ROOM, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_SPAWNER_ROOM, GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE, SimpleStructurePools.SPAWNER_ROOMS).startHeight(StructureHeightProvider.spawnerRoom(VerticalAnchor.absolute(0))).build());
         context.register(DEEP_SPAWNER_ROOM, ValhelsiaJigsawStructure.builder(context, ModTags.Biomes.HAS_DEEP_SPAWNER_ROOM, GenerationStep.Decoration.UNDERGROUND_STRUCTURES, TerrainAdjustment.NONE, SimpleStructurePools.DEEP_SPAWNER_ROOMS).startHeight(StructureHeightProvider.deepSpawnerRoom(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(-1))).build());
     }
@@ -101,16 +90,4 @@ public class ModStructures extends DatapackRegistryClass<Structure> {
 //
 //        return registryObject.getHolder().get();
 //    }
-
-    private static Structure.StructureSettings structure(HolderSet<Biome> biomes, Map<MobCategory, StructureSpawnOverride> spawnOverrideMap, GenerationStep.Decoration decoration, TerrainAdjustment terrainAdjustment) {
-        return new Structure.StructureSettings(biomes, spawnOverrideMap, decoration, terrainAdjustment);
-    }
-
-    private static Structure.StructureSettings structure(HolderSet<Biome> biomes, GenerationStep.Decoration decoration, TerrainAdjustment terrainAdjustment) {
-        return structure(biomes, Map.of(), decoration, terrainAdjustment);
-    }
-
-    private static Structure.StructureSettings structure(HolderSet<Biome> biomes, TerrainAdjustment terrainAdjustment) {
-        return structure(biomes, Map.of(), GenerationStep.Decoration.SURFACE_STRUCTURES, terrainAdjustment);
-    }
 }
