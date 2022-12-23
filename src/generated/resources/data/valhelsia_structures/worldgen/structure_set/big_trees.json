@@ -1,6 +1,7 @@
 {
   "placement": {
-    "type": "minecraft:random_spread",
+    "type": "valhelsia_structures:valhelsia_random_spread",
+    "exclusion_zones": [],
     "salt": 35122018,
     "separation": 7,
     "spacing": 28

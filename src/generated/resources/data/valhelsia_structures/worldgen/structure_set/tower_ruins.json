@@ -1,6 +1,12 @@
 {
   "placement": {
-    "type": "minecraft:random_spread",
+    "type": "valhelsia_structures:valhelsia_random_spread",
+    "exclusion_zones": [
+      {
+        "chunk_count": 10,
+        "other_set": "valhelsia_structures:big_trees"
+      }
+    ],
     "salt": 24357670,
     "separation": 7,
     "spacing": 23
