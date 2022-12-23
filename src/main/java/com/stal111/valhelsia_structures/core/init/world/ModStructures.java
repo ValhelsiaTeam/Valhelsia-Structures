@@ -9,10 +9,15 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.random.WeightedRandomList;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
@@ -53,7 +58,10 @@ public class ModStructures extends DatapackRegistryClass<Structure> {
         this.surfaceStructure(context, PLAYER_HOUSE, ModTags.Biomes.HAS_PLAYER_HOUSE, TerrainAdjustment.BEARD_THIN, PlayerHousePools.START, builder -> builder.chance(0.75D));
         this.surfaceStructure(context, SPAWNER_DUNGEON, ModTags.Biomes.HAS_SPAWNER_DUNGEON, TerrainAdjustment.NONE, SpawnerDungeonPools.START, builder -> builder.chance(0.8D).startHeight(StructureHeightProvider.surfaceBetween(VerticalAnchor.absolute(0), VerticalAnchor.absolute(75))).individualTerrainAdjustment());
         this.surfaceStructure(context, TOWER_RUIN, ModTags.Biomes.HAS_TOWER_RUIN, TerrainAdjustment.BEARD_THIN, SimpleStructurePools.TOWER_RUINS, builder -> builder.chance(0.8D));
-        this.surfaceStructure(context, WITCH_HUT, ModTags.Biomes.HAS_WITCH_HUT, TerrainAdjustment.BEARD_THIN, SimpleStructurePools.WITCH_HUTS, builder -> builder.chance(0.85D).margin(3));
+        this.surfaceStructure(context, WITCH_HUT, ModTags.Biomes.HAS_WITCH_HUT, TerrainAdjustment.BEARD_THIN, SimpleStructurePools.WITCH_HUTS, builder -> builder.chance(0.85D).margin(3)
+                .addSpawnOverride(MobCategory.MONSTER, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.PIECE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(EntityType.WITCH, 1, 1, 1))))
+                .addSpawnOverride(MobCategory.CREATURE, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.PIECE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(EntityType.CAT, 1, 1, 1))))
+        );
         this.surfaceStructure(context, BIG_TREE, ModTags.Biomes.HAS_BIG_TREE, TerrainAdjustment.BEARD_THIN, BigTreePools.START, builder -> builder.chance(0.7D));
 
         this.undergroundStructure(context, SPAWNER_ROOM, ModTags.Biomes.HAS_SPAWNER_ROOM, TerrainAdjustment.NONE, SimpleStructurePools.SPAWNER_ROOMS, builder -> builder.chance(0.9D).startHeight(StructureHeightProvider.spawnerRoom(VerticalAnchor.absolute(0))));

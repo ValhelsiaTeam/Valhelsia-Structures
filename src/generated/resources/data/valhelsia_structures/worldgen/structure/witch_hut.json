@@ -6,7 +6,30 @@
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
   "size": 7,
   "spawn_chance": 0.85,
-  "spawn_overrides": {},
+  "spawn_overrides": {
+    "creature": {
+      "bounding_box": "piece",
+      "spawns": [
+        {
+          "type": "minecraft:cat",
+          "maxCount": 1,
+          "minCount": 1,
+          "weight": 1
+        }
+      ]
+    },
+    "monster": {
+      "bounding_box": "piece",
+      "spawns": [
+        {
+          "type": "minecraft:witch",
+          "maxCount": 1,
+          "minCount": 1,
+          "weight": 1
+        }
+      ]
+    }
+  },
   "start_pool": "valhelsia_structures:witch_huts",
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
