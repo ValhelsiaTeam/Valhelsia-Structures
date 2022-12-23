@@ -2,7 +2,6 @@
   "type": "valhelsia_structures:valhelsia_jigsaw_structure",
   "biomes": "#valhelsia_structures:has_structure/spawner_room",
   "max_distance_from_center": 80,
-  "requires_distance_to": [],
   "size": 7,
   "spawn_chance": 0.9,
   "spawn_overrides": {},

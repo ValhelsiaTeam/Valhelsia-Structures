@@ -1,16 +1,12 @@
 package com.stal111.valhelsia_structures.utils;
 
 import com.stal111.valhelsia_structures.core.config.ModConfig;
-import net.minecraft.core.Holder;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.RandomState;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructureSet;
-
-import java.util.List;
 
 /**
  * Structure Utils <br>
@@ -22,31 +18,6 @@ import java.util.List;
  * @version 1.19 - 0.2.0
  */
 public class StructureUtils {
-
-    /**
-     * Checks whether any of the specified structures is near the given position.
-     *
-     * @param generator   the chunk generator
-     * @param randomState the random state
-     * @param seed        the seed to use
-     * @param pos         the position to check around
-     * @param structures  list of structures that should be checked for
-     * @return <code>true</code> if any of the specified structures is near the given position
-     */
-    public static boolean isStructureInDistance(ChunkGenerator generator, RandomState randomState, long seed, ChunkPos pos, List<Holder<StructureSet>> structures) {
-        if (ModConfig.COMMON.minStructureDistance.get() == 0) {
-            return false;
-        }
-
-        for (Holder<StructureSet> structure : structures) {
-            //TODO
-            //if (generator.sta.hasStructureChunkInRange(structure, randomState, seed, pos.x, pos.z, ModConfig.COMMON.minStructureDistance.get())) {
-              //  return true;
-            //}
-        }
-
-        return false;
-    }
 
     /**
      * Checks whether the height difference of the four corners of the structure is smaller than the flatness delta set in the {@link com.stal111.valhelsia_structures.core.config.CommonConfig}.
