@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.core.init;
 
-import com.mojang.datafixers.util.Pair;
 import com.stal111.valhelsia_structures.common.block.*;
 import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
 import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
@@ -23,18 +22,13 @@ import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryHelp
 import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryObject;
 import net.valhelsia.valhelsia_core.core.registry.helper.block.RenderType;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Blocks <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.core.init.ModBlocks
  *
  * @author Valhelsia Team
- * @version 1.19 - 0.2.0
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks implements RegistryClass {
@@ -114,9 +108,15 @@ public class ModBlocks implements RegistryClass {
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final BlockRegistryObject<IronBarsBlock> METAL_FRAMED_GLASS_PANE = HELPER.create("metal_framed_glass_pane", () -> new IronBarsBlock(Block.Properties.copy(Blocks.GLASS_PANE))).withItem();
     @RenderType(ValhelsiaRenderType.TRANSLUCENT)
-    public static final Map<DyeColor, BlockRegistryObject<StainedGlassBlock>> COLORED_METAL_FRAMED_GLASS = registerColoredMetalFramedGlass();
+    public static final Map<DyeColor, BlockRegistryObject<StainedGlassBlock>> COLORED_METAL_FRAMED_GLASS = HELPER.createColorVariants("metal_framed_glass",
+            color -> new StainedGlassBlock(color, Block.Properties.copy(Blocks.RED_STAINED_GLASS)),
+            BlockRegistryObject::withItem
+    );
     @RenderType(ValhelsiaRenderType.TRANSLUCENT)
-    public static final Map<DyeColor, BlockRegistryObject<StainedGlassPaneBlock>> COLORED_METAL_FRAMED_GLASS_PANES = registerColoredMetalFramedGlassPanes();
+    public static final Map<DyeColor, BlockRegistryObject<StainedGlassPaneBlock>> COLORED_METAL_FRAMED_GLASS_PANES = HELPER.createColorVariants("metal_framed_glass_pane",
+            color -> new StainedGlassPaneBlock(color, Block.Properties.copy(Blocks.RED_STAINED_GLASS_PANE)),
+            BlockRegistryObject::withItem
+    );
 
     public static final BlockRegistryObject<IronBarsBlock> PAPER_WALL = HELPER.create("paper_wall", () -> new IronBarsBlock(Block.Properties.of(Material.DECORATION).strength(0.3F).sound(SoundType.WOOL).noOcclusion())).withItem();
     @RenderType(ValhelsiaRenderType.CUTOUT)
@@ -126,7 +126,10 @@ public class ModBlocks implements RegistryClass {
     //public static final RegistryObject<JungleHeadBlock> JUNGLE_HEAD = HELPER.register("jungle_head", new JungleHeadBlock(Block.Properties.from(Blocks.COBBLESTONE).notSolid()), ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryObject<JarBlock> GLAZED_JAR = HELPER.create("glazed_jar", () -> new JarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion())).withItem();
     public static final BlockRegistryObject<JarBlock> CRACKED_GLAZED_JAR = HELPER.create("cracked_glazed_jar", () -> new JarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.0F).noOcclusion())).withItem();
-    public static final List<BlockRegistryObject<JarBlock>> COLORED_GLAZED_JARS = registerColoredGlazedJars();
+    public static final Map<DyeColor, BlockRegistryObject<JarBlock>> COLORED_GLAZED_JARS = HELPER.createColorVariants("glazed_jar",
+            color -> new JarBlock(Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()),
+            BlockRegistryObject::withItem
+    );
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final BlockRegistryObject<BigJarBlock> BIG_GLAZED_JAR = HELPER.create("big_glazed_jar", () -> new BigJarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion())).withItem(registryObject -> new BigJarBlockItem(registryObject.get(), new Item.Properties()));
     public static final BlockRegistryObject<BigJarTopBlock> BIG_GLAZED_JAR_TOP = HELPER.create("big_glazed_jar_top", () -> new BigJarTopBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()));
@@ -136,7 +139,10 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryObject<BigJarTopBlock> CRACKED_BIG_GLAZED_JAR_TOP = HELPER.create("cracked_big_glazed_jar_top", () -> new BigJarTopBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()));
 
     @RenderType(ValhelsiaRenderType.CUTOUT)
-    public static final List<BlockRegistryObject<BigJarBlock>> BIG_COLORED_GLAZED_JARS = registerBigColoredGlazedJars();
+    public static final Map<DyeColor, BlockRegistryObject<BigJarBlock>> BIG_COLORED_GLAZED_JARS = HELPER.createColorVariants(color -> "big_" + color + "_glazed_jar",
+            color -> new BigJarBlock(Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()),
+            blockRegistryObject -> blockRegistryObject.withItem(registryObject -> new BigJarBlockItem(registryObject.get(), new Item.Properties()))
+    );
     public static final BlockRegistryObject<RotatedPillarBlock> LAPIDIFIED_JUNGLE_LOG = HELPER.create("lapidified_jungle_log", () -> new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG)).withItem();
     public static final BlockRegistryObject<RotatedPillarBlock> LAPIDIFIED_JUNGLE_WOOD = HELPER.create("lapidified_jungle_wood", () -> new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG)).withItem();
     public static final BlockRegistryObject<Block> LAPIDIFIED_JUNGLE_PLANKS = HELPER.create("lapidified_jungle_planks", () -> new Block(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
@@ -169,7 +175,10 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryObject<UnlitLanternBlock> UNLIT_SOUL_LANTERN = HELPER.create("unlit_soul_lantern", () -> new UnlitLanternBlock(() -> Blocks.SOUL_LANTERN, Block.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(value -> 0))).withItem();
 
     //Sleeping Bags
-    public static final Map<DyeColor, BlockRegistryObject<SleepingBagBlock>> SLEEPING_BAGS = registerSleepingBags();
+    public static final Map<DyeColor, BlockRegistryObject<SleepingBagBlock>> SLEEPING_BAGS = HELPER.createColorVariants("sleeping_bag",
+            color -> new SleepingBagBlock(Block.Properties.of(Material.WOOL, color).strength(0.2F).noOcclusion().sound(SoundType.WOOL)),
+            blockRegistryObject -> blockRegistryObject.withItem(registryObject -> new BedItem(registryObject.get(), new Item.Properties()))
+    );
 
     // Workarounds for structures:
 
@@ -184,44 +193,4 @@ public class ModBlocks implements RegistryClass {
     // dirt that wont transform into grass blocks
     public static final BlockRegistryObject<Block> DIRT = HELPER.create("dirt", () -> new ValhelsiaStoneBlock(() -> Blocks.DIRT, Block.Properties.copy(Blocks.DIRT).lootFrom(() -> Blocks.DIRT)));
     public static final BlockRegistryObject<Block> COARSE_DIRT = HELPER.create("coarse_dirt", () -> new ValhelsiaStoneBlock(() -> Blocks.COARSE_DIRT, Block.Properties.copy(Blocks.COARSE_DIRT).lootFrom(() -> Blocks.COARSE_DIRT)));
-
-    private static List<BlockRegistryObject<JarBlock>> registerColoredGlazedJars() {
-        List<BlockRegistryObject<JarBlock>> list = new ArrayList<>();
-        for (DyeColor color : DyeColor.values()) {
-            list.add(HELPER.create(color.getName() + "_glazed_jar", () -> new JarBlock(Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.4F).noOcclusion())).withItem());
-        }
-        return list;
-    }
-
-    private static List<BlockRegistryObject<BigJarBlock>> registerBigColoredGlazedJars() {
-        List<BlockRegistryObject<BigJarBlock>> list = new ArrayList<>();
-
-        for (DyeColor color : DyeColor.values()) {
-            list.add(HELPER.create("big_" + color.getName() + "_glazed_jar", () -> new BigJarBlock(Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.4F).noOcclusion())).withItem(registryObject -> new BigJarBlockItem(registryObject.get(), new Item.Properties())));
-            HELPER.create("big_" + color.getName() + "_glazed_jar_top", () -> new BigJarTopBlock(Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()));
-        }
-        return list;
-    }
-
-    private static Map<DyeColor, BlockRegistryObject<SleepingBagBlock>> registerSleepingBags() {
-        return Arrays.stream(DyeColor.values())
-                .map(color -> Pair.of(color, HELPER.create(color.getName() + "_sleeping_bag",
-                        () -> new SleepingBagBlock(Block.Properties.of(Material.WOOL, color).strength(0.2F).noOcclusion().sound(SoundType.WOOL)))
-                        .withItem(registryObject -> new BedItem(registryObject.get(), new Item.Properties()))))
-                .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
-    }
-
-    private static Map<DyeColor, BlockRegistryObject<StainedGlassBlock>> registerColoredMetalFramedGlass() {
-        return Arrays.stream(DyeColor.values())
-                .map(color -> Pair.of(color, HELPER.create(color.getName() + "_metal_framed_glass",
-                        () -> new StainedGlassBlock(color, Block.Properties.copy(Blocks.RED_STAINED_GLASS))).withItem()))
-                .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
-    }
-
-    private static Map<DyeColor, BlockRegistryObject<StainedGlassPaneBlock>> registerColoredMetalFramedGlassPanes() {
-        return Arrays.stream(DyeColor.values())
-                .map(color -> Pair.of(color, HELPER.create(color.getName() + "_metal_framed_glass_pane",
-                        () -> new StainedGlassPaneBlock(color, Block.Properties.copy(Blocks.RED_STAINED_GLASS_PANE))).withItem()))
-                .collect(Collectors.toMap(Pair::getFirst, Pair::getSecond));
-    }
 }

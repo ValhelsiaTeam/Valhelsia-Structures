@@ -58,9 +58,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         }
         this.tag(Tags.Blocks.GLASS_PANES_COLORLESS).add(ModBlocks.METAL_FRAMED_GLASS_PANE.get());
         this.tag(BlockTags.CLIMBABLE).add(ModBlocks.HANGING_VINES_BODY.get(), ModBlocks.HANGING_VINES.get());
-        ModBlocks.COLORED_GLAZED_JARS.forEach(registryObject -> this.tag(ModTags.Blocks.COLORED_JARS).add(registryObject.get()));
+        ModBlocks.COLORED_GLAZED_JARS.values().forEach(registryObject -> this.tag(ModTags.Blocks.COLORED_JARS).add(registryObject.get()));
         this.tag(ModTags.Blocks.JARS).add(ModBlocks.GLAZED_JAR.get(), ModBlocks.CRACKED_GLAZED_JAR.get()).addTag(ModTags.Blocks.COLORED_JARS);
-        ModBlocks.BIG_COLORED_GLAZED_JARS.forEach(registryObject -> this.tag(ModTags.Blocks.BIG_COLORED_JARS).add(registryObject.get()).add(registryObject.get().getTopBlock()));
+        ModBlocks.BIG_COLORED_GLAZED_JARS.values().forEach(registryObject -> this.tag(ModTags.Blocks.BIG_COLORED_JARS).add(registryObject.get()));
         this.tag(ModTags.Blocks.BIG_JARS).add(ModBlocks.BIG_GLAZED_JAR.get(), ModBlocks.BIG_GLAZED_JAR_TOP.get(), ModBlocks.CRACKED_BIG_GLAZED_JAR.get(), ModBlocks.CRACKED_BIG_GLAZED_JAR_TOP.get()).addTag(ModTags.Blocks.BIG_COLORED_JARS);
         this.tag(ModTags.Blocks.LAPIDIFIED_JUNGLE_LOGS).add(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get(), ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get());
         this.tag(BlockTags.LOGS).add(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get(), ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get()).addTag(ModTags.Blocks.LAPIDIFIED_JUNGLE_LOGS);

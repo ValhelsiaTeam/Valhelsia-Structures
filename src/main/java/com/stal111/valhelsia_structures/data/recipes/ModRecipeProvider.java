@@ -78,13 +78,13 @@ public class ModRecipeProvider extends ValhelsiaRecipeProvider {
         this.glazedJar(ModBlocks.GLAZED_JAR.get(), Blocks.TERRACOTTA);
         this.bigGlazedJar(ModBlocks.BIG_GLAZED_JAR.get(), Blocks.TERRACOTTA);
 
-        ModBlocks.COLORED_GLAZED_JARS.forEach(registryObject -> {
+        ModBlocks.COLORED_GLAZED_JARS.values().forEach(registryObject -> {
             String name = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(registryObject.get())).getPath();
             Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name.substring(0, name.length() - 11) + "_terracotta")));
             this.glazedJar(registryObject.get(), block);
         });
 
-        ModBlocks.BIG_COLORED_GLAZED_JARS.forEach(registryObject -> {
+        ModBlocks.BIG_COLORED_GLAZED_JARS.values().forEach(registryObject -> {
             String name = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(registryObject.get())).getPath();
             Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name.substring(4, name.length() - 11) + "_terracotta")));
             this.bigGlazedJar(registryObject.get(), block);

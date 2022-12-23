@@ -1,9 +1,9 @@
-// 1.19.3	2022-12-23T17:33:32.4959193	Tags for minecraft:item mod id valhelsia_structures
+// 1.19.3	2022-12-23T19:41:58.6193621	Tags for minecraft:item mod id valhelsia_structures
 c1b9692433dd32870e79d99f49aec1c73e2e5e96 data/forge/tags/items/fences/wooden.json
 62daf4915ef2309fd7d4cb1768cdbc4f481f16dd data/forge/tags/items/fence_gates/wooden.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/forge/tags/items/glass.json
 abdd65528eb416d6d6ad1f020d97714ff861bf25 data/forge/tags/items/glass/colorless.json
-d1c9a2f9f70deace85a31458e8ccc0dd7db7eabf data/forge/tags/items/glass_panes.json
+b868b381ccc22076b5df27e945925827c7f5eea6 data/forge/tags/items/glass_panes.json
 f0770b509280d280ac69080c30cd3c138c2b18a6 data/forge/tags/items/glass_panes/colorless.json
 217f315b489efedaa2a266116cd7422acacfe8c7 data/minecraft/tags/items/flowers.json
 ec7cc527615bef71f6e499971eaac359586cf984 data/minecraft/tags/items/logs.json
@@ -23,4 +23,4 @@ b41fad179aaae6c898832f4a5a1b0d837bd8546c data/minecraft/tags/items/wooden_slabs.
 52c58f15453c231473cb8d86a678db23d03f996e data/valhelsia_structures/tags/items/lapidified_jungle_logs.json
 0f46cfd4365169d69b7f1c9bc75c8c558cea3191 data/valhelsia_structures/tags/items/non_flammable_posts.json
 7eb5832ba43c8dc9f5bf17e6d7fe9cb67b32c321 data/valhelsia_structures/tags/items/posts.json
-ea77f876610daf875caae64ab1b31dbe06d0d5a5 data/valhelsia_structures/tags/items/sleeping_bags.json
+5d9ddeaa13e76e44565c8ba94abc98a9ecce26e7 data/valhelsia_structures/tags/items/sleeping_bags.json
