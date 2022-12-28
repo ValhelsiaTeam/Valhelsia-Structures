@@ -32,7 +32,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Supplier;
 
 /**
  * Post Block <br>
@@ -46,19 +45,10 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
     public static final BooleanProperty ATTACHED = ModBlockStateProperties.ATTACHED;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    private final Supplier<? extends Block> logBlock;
-
     public static final Map<Direction.Axis, VoxelShape> SHAPES = VoxelShapeHelper.rotateAxis(Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D));
 
-    public PostBlock(Supplier<? extends Block> logBlock) {
-        super(Properties.copy(logBlock.get()).noOcclusion());
-        this.logBlock = logBlock;
-        this.registerDefaultState(this.getStateDefinition().any().setValue(ATTACHED, false).setValue(WATERLOGGED, false));
-    }
-
-    public PostBlock(ResourceLocation logBlock, Properties properties) {
-        super(properties.noOcclusion());
-        this.logBlock = () -> ForgeRegistries.BLOCKS.getValue(logBlock);
+    public PostBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(ATTACHED, false).setValue(WATERLOGGED, false));
     }
 
@@ -67,10 +57,6 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
     public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         VoxelShape shape = SHAPES.get(state.getValue(AXIS));
         return state.getValue(ATTACHED) ? VoxelShapeHelper.add(0, -3, 0, 0, -3, 0, shape) : shape;
-    }
-
-    public Block getLogBlock() {
-        return logBlock.get();
     }
 
     @Override

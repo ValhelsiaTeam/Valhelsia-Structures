@@ -52,7 +52,7 @@ public class WitchHutLegProcessor extends StructureProcessor {
                     BlockState currentState = level.getBlockState(mutable);
 
                     while (mutable.getY() > level.getMinBuildHeight() && mutable.getY() < level.getMaxBuildHeight() && (currentState.isAir() || !currentState.getFluidState().isEmpty())) {
-                        level.getChunk(mutable).setBlockState(mutable, ModBlocks.OAK_POST.get().defaultBlockState()
+                        level.getChunk(mutable).setBlockState(mutable, ModBlocks.WOODEN_POSTS.get(ModBlocks.WoodType.OAK).get().defaultBlockState()
                                         .setValue(BlockStateProperties.WATERLOGGED, currentState.hasProperty(BlockStateProperties.WATERLOGGED) && currentState.getValue(BlockStateProperties.WATERLOGGED))
                                         .setValue(BlockStateProperties.AXIS, Direction.Axis.Y),
                                 false);
@@ -61,7 +61,7 @@ public class WitchHutLegProcessor extends StructureProcessor {
                         currentState = level.getBlockState(mutable);
                     }
 
-                    return new StructureTemplate.StructureBlockInfo(relativeBlockInfo.pos, ModBlocks.OAK_POST.get().defaultBlockState()
+                    return new StructureTemplate.StructureBlockInfo(relativeBlockInfo.pos, ModBlocks.WOODEN_POSTS.get(ModBlocks.WoodType.OAK).get().defaultBlockState()
                             .setValue(BlockStateProperties.WATERLOGGED, level.getBlockState(relativeBlockInfo.pos).hasProperty(BlockStateProperties.WATERLOGGED) && level.getBlockState(relativeBlockInfo.pos).getValue(BlockStateProperties.WATERLOGGED))
                             .setValue(BlockStateProperties.AXIS, Direction.Axis.Y),
                             null);

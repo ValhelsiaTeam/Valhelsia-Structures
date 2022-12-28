@@ -1,4 +1,4 @@
-// 1.19.3	2022-12-23T19:41:58.6193621	Tags for minecraft:item mod id valhelsia_structures
+// 1.19.3	2022-12-28T13:10:56.1839956	Tags for minecraft:item mod id valhelsia_structures
 c1b9692433dd32870e79d99f49aec1c73e2e5e96 data/forge/tags/items/fences/wooden.json
 62daf4915ef2309fd7d4cb1768cdbc4f481f16dd data/forge/tags/items/fence_gates/wooden.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/forge/tags/items/glass.json
@@ -17,10 +17,10 @@ b41fad179aaae6c898832f4a5a1b0d837bd8546c data/minecraft/tags/items/wooden_slabs.
 11d34fed97be08e27701020eff5d758b6bfc4dfe data/valhelsia_structures/tags/items/big_colored_jars.json
 0b2e72e61cb169cc0abf930cbc5c0ee77ae8bd41 data/valhelsia_structures/tags/items/big_jars.json
 4cd0419500b9e52f3fe5dfba62f54502d1bcc8b5 data/valhelsia_structures/tags/items/colored_jars.json
-7a45203e89cd19167e6dbb9134f9b41e06067aa3 data/valhelsia_structures/tags/items/cut_posts.json
+82e43ed19e9ab1a585a5fa05fd4f3ff4f7fd1211 data/valhelsia_structures/tags/items/cut_posts.json
 48b0c34a9d235a9e0fd153c862e9be18901f1ab3 data/valhelsia_structures/tags/items/jars.json
 399f57ad45d097625731d1b5ef8cc15685632ce6 data/valhelsia_structures/tags/items/jar_blacklisted.json
 52c58f15453c231473cb8d86a678db23d03f996e data/valhelsia_structures/tags/items/lapidified_jungle_logs.json
-0f46cfd4365169d69b7f1c9bc75c8c558cea3191 data/valhelsia_structures/tags/items/non_flammable_posts.json
-7eb5832ba43c8dc9f5bf17e6d7fe9cb67b32c321 data/valhelsia_structures/tags/items/posts.json
+54141c0786b98b5ceaa8c30dfe3d93b9ed13f4ae data/valhelsia_structures/tags/items/non_flammable_posts.json
+4dee3368bfe006b88a6cdbb63dc33a01a09602c2 data/valhelsia_structures/tags/items/posts.json
 5d9ddeaa13e76e44565c8ba94abc98a9ecce26e7 data/valhelsia_structures/tags/items/sleeping_bags.json

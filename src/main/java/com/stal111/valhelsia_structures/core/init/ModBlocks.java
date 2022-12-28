@@ -5,8 +5,9 @@ import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
 import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
 import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.BedItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -18,9 +19,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.valhelsia.valhelsia_core.client.util.ValhelsiaRenderType;
 import net.valhelsia.valhelsia_core.common.block.StrippableRotatedPillarBlock;
 import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryHelper;
-import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryObject;
-import net.valhelsia.valhelsia_core.core.registry.helper.block.RenderType;
+import net.valhelsia.valhelsia_core.core.registry.helper.block.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -38,82 +38,50 @@ public class ModBlocks implements RegistryClass {
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final BlockRegistryObject<SpecialSpawnerBlock> SPECIAL_SPAWNER = HELPER.create("special_spawner", () -> new SpecialSpawnerBlock(Block.Properties.copy(Blocks.SPAWNER).strength(-1.0F, 3600000.0F).noLootTable())).withItem();
     @RenderType(ValhelsiaRenderType.CUTOUT)
-    public static final BlockRegistryObject<BrazierBlock> BRAZIER = HELPER.create("brazier", () -> new BrazierBlock(true, 1, Block.Properties.copy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 15 : 0))).withItem();
+    public static final BlockRegistryObject<BrazierBlock> BRAZIER = HELPER.create("brazier", () -> new BrazierBlock(true, 1, Block.Properties.copy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 15 : 0)))
+            .withItem().toolType(ToolType.PICKAXE);
     @RenderType(ValhelsiaRenderType.CUTOUT)
-    public static final BlockRegistryObject<BrazierBlock> SOUL_BRAZIER = HELPER.create("soul_brazier", () -> new BrazierBlock(false, 2, Block.Properties.copy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 11 : 0))).withItem();
+    public static final BlockRegistryObject<BrazierBlock> SOUL_BRAZIER = HELPER.create("soul_brazier", () -> new BrazierBlock(false, 2, Block.Properties.copy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 11 : 0)))
+            .withItem().toolType(ToolType.PICKAXE);
 
-    // Posts
-    public static final BlockRegistryObject<PostBlock> OAK_POST = HELPER.create("oak_post", () -> new PostBlock(() -> Blocks.OAK_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> SPRUCE_POST = HELPER.create("spruce_post", () -> new PostBlock(() -> Blocks.SPRUCE_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> BIRCH_POST = HELPER.create("birch_post", () -> new PostBlock(() -> Blocks.BIRCH_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> JUNGLE_POST = HELPER.create("jungle_post", () -> new PostBlock(() -> Blocks.JUNGLE_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> ACACIA_POST = HELPER.create("acacia_post", () -> new PostBlock(() -> Blocks.ACACIA_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> DARK_OAK_POST = HELPER.create("dark_oak_post", () -> new PostBlock(() -> Blocks.DARK_OAK_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> WARPED_POST = HELPER.create("warped_post", () -> new PostBlock(() -> Blocks.WARPED_STEM)).withItem();
-    public static final BlockRegistryObject<PostBlock> CRIMSON_POST = HELPER.create("crimson_post", () -> new PostBlock(() -> Blocks.CRIMSON_STEM)).withItem();
-    public static final BlockRegistryObject<PostBlock> LAPIDIFIED_JUNGLE_POST = HELPER.create("lapidified_jungle_post", () -> new PostBlock(new ResourceLocation(ValhelsiaStructures.MOD_ID, "lapidified_jungle_log"), BlockProperties.LAPIDIFIED_JUNGLE_LOG)).withItem();
+    public static final BlockSet<WoodType, PostBlock> WOODEN_POSTS = HELPER.createSet(WoodType.class, "post",
+            type -> new PostBlock(type.getDefaultProperties().noOcclusion()),
+            registryObject -> registryObject.withItem().toolType(ToolType.AXE)
+    );
 
-    public static final BlockRegistryObject<PostBlock> STRIPPED_OAK_POST = HELPER.create("stripped_oak_post", () -> new PostBlock(() -> Blocks.STRIPPED_OAK_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> STRIPPED_SPRUCE_POST = HELPER.create("stripped_spruce_post", () -> new PostBlock(() -> Blocks.STRIPPED_SPRUCE_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> STRIPPED_BIRCH_POST = HELPER.create("stripped_birch_post", () -> new PostBlock(() -> Blocks.STRIPPED_BIRCH_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> STRIPPED_JUNGLE_POST = HELPER.create("stripped_jungle_post", () -> new PostBlock(() -> Blocks.STRIPPED_JUNGLE_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> STRIPPED_ACACIA_POST = HELPER.create("stripped_acacia_post", () -> new PostBlock(() -> Blocks.STRIPPED_ACACIA_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> STRIPPED_DARK_OAK_POST = HELPER.create("stripped_dark_oak_post", () -> new PostBlock(() -> Blocks.STRIPPED_DARK_OAK_LOG)).withItem();
-    public static final BlockRegistryObject<PostBlock> STRIPPED_WARPED_POST = HELPER.create("stripped_warped_post", () -> new PostBlock(() -> Blocks.STRIPPED_WARPED_STEM)).withItem();
-    public static final BlockRegistryObject<PostBlock> STRIPPED_CRIMSON_POST = HELPER.create("stripped_crimson_post", () -> new PostBlock(() -> Blocks.STRIPPED_CRIMSON_STEM)).withItem();
-    public static final BlockRegistryObject<PostBlock> STRIPPED_LAPIDIFIED_JUNGLE_POST = HELPER.create("stripped_lapidified_jungle_post", () -> new PostBlock(new ResourceLocation(ValhelsiaStructures.MOD_ID, "lapidified_jungle_log"), BlockProperties.LAPIDIFIED_JUNGLE_LOG)).withItem();
+    public static final BlockSet<WoodType, PostBlock> STRIPPED_WOODEN_POSTS = HELPER.createSet(WoodType.class, s -> "stripped_" + s + "_post",
+            type -> new PostBlock(type.getDefaultProperties().noOcclusion()),
+            registryObject -> registryObject.withItem().toolType(ToolType.AXE)
+    );
 
-    //Cut Posts
-    public static final BlockRegistryObject<CutPostBlock> CUT_OAK_POST = HELPER.create("cut_oak_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.WOOD, MaterialColor.PODZOL))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_SPRUCE_POST = HELPER.create("cut_spruce_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_BIRCH_POST = HELPER.create("cut_birch_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.SAND, MaterialColor.QUARTZ))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_JUNGLE_POST = HELPER.create("cut_jungle_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.DIRT, MaterialColor.PODZOL))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_ACACIA_POST = HELPER.create("cut_acacia_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.COLOR_ORANGE, MaterialColor.STONE))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_DARK_OAK_POST = HELPER.create("cut_dark_oak_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_WARPED_POST = HELPER.create("cut_warped_post", () -> new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.WARPED_STEM))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_CRIMSON_POST = HELPER.create("cut_crimson_post", () -> new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.CRIMSON_STEM))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_LAPIDIFIED_JUNGLE_POST = HELPER.create("cut_lapidified_jungle_post", () -> new CutPostBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG.noOcclusion())).withItem();
+    public static final BlockSet<WoodType, CutPostBlock> CUT_WOODEN_POSTS = HELPER.createSet(WoodType.class, s -> "cut_" + s + "_post",
+            type -> new CutPostBlock(type.getDefaultProperties().color(type.getBarkColor()).noOcclusion()),
+            registryObject -> registryObject.withItem().toolType(ToolType.AXE)
+    );
 
-    public static final BlockRegistryObject<CutPostBlock> CUT_STRIPPED_OAK_POST = HELPER.create("cut_stripped_oak_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.WOOD, MaterialColor.PODZOL))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_STRIPPED_SPRUCE_POST = HELPER.create("cut_stripped_spruce_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.PODZOL, MaterialColor.COLOR_BROWN))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_STRIPPED_BIRCH_POST = HELPER.create("cut_stripped_birch_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.SAND, MaterialColor.QUARTZ))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_STRIPPED_JUNGLE_POST = HELPER.create("cut_stripped_jungle_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.DIRT, MaterialColor.PODZOL))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_STRIPPED_ACACIA_POST = HELPER.create("cut_stripped_acacia_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.COLOR_ORANGE, MaterialColor.STONE))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_STRIPPED_DARK_OAK_POST = HELPER.create("cut_stripped_dark_oak_post", () -> new CutPostBlock(BlockProperties.createCutPostBlock(MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_STRIPPED_WARPED_POST = HELPER.create("cut_stripped_warped_post", () -> new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.WARPED_STEM))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_STRIPPED_CRIMSON_POST = HELPER.create("cut_stripped_crimson_post", () -> new CutPostBlock(BlockProperties.createCutNetherPostBlock(MaterialColor.CRIMSON_STEM))).withItem();
-    public static final BlockRegistryObject<CutPostBlock> CUT_STRIPPED_LAPIDIFIED_JUNGLE_POST = HELPER.create("cut_stripped_lapidified_jungle_post", () -> new CutPostBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG.noOcclusion())).withItem();
+    public static final BlockSet<WoodType, CutPostBlock> CUT_STRIPPED_WOODEN_POSTS = HELPER.createSet(WoodType.class, s -> "cut_stripped_" + s + "_post",
+            type -> new CutPostBlock(type.getDefaultProperties().color(type.getBarkColor()).noOcclusion()),
+            registryObject -> registryObject.withItem().toolType(ToolType.AXE)
+    );
 
-    // Bundled Posts
-    public static final BlockRegistryObject<RotatedPillarBlock> BUNDLED_STRIPPED_OAK_POSTS = HELPER.createStrippedLogBlock("bundled_stripped_oak_posts", MaterialColor.WOOD, MaterialColor.WOOD);
-    public static final BlockRegistryObject<RotatedPillarBlock> BUNDLED_STRIPPED_SPRUCE_POSTS = HELPER.createStrippedLogBlock("bundled_stripped_spruce_posts", MaterialColor.PODZOL, MaterialColor.PODZOL);
-    public static final BlockRegistryObject<RotatedPillarBlock> BUNDLED_STRIPPED_BIRCH_POSTS = HELPER.createStrippedLogBlock("bundled_stripped_birch_posts", MaterialColor.SAND, MaterialColor.SAND);
-    public static final BlockRegistryObject<RotatedPillarBlock> BUNDLED_STRIPPED_JUNGLE_POSTS = HELPER.createStrippedLogBlock("bundled_stripped_jungle_posts", MaterialColor.DIRT, MaterialColor.DIRT);
-    public static final BlockRegistryObject<RotatedPillarBlock> BUNDLED_STRIPPED_ACACIA_POSTS = HELPER.createStrippedLogBlock("bundled_stripped_acacia_posts", MaterialColor.COLOR_ORANGE, MaterialColor.COLOR_ORANGE);
-    public static final BlockRegistryObject<RotatedPillarBlock> BUNDLED_STRIPPED_DARK_OAK_POSTS = HELPER.createStrippedLogBlock("bundled_stripped_dark_oak_posts", MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN);
-    public static final BlockRegistryObject<RotatedPillarBlock> BUNDLED_STRIPPED_CRIMSON_POSTS = HELPER.createStrippedLogBlock("bundled_stripped_crimson_posts", MaterialColor.CRIMSON_STEM, MaterialColor.CRIMSON_STEM);
-    public static final BlockRegistryObject<RotatedPillarBlock> BUNDLED_STRIPPED_WARPED_POSTS = HELPER.createStrippedLogBlock("bundled_stripped_warped_posts", MaterialColor.WARPED_STEM, MaterialColor.WARPED_STEM);
-
-    public static final BlockRegistryObject<StrippableRotatedPillarBlock> BUNDLED_OAK_POSTS = HELPER.createLogBlock("bundled_oak_posts", BUNDLED_STRIPPED_OAK_POSTS, MaterialColor.WOOD, MaterialColor.PODZOL);
-    public static final BlockRegistryObject<StrippableRotatedPillarBlock> BUNDLED_SPRUCE_POSTS = HELPER.createLogBlock("bundled_spruce_posts", BUNDLED_STRIPPED_SPRUCE_POSTS, MaterialColor.PODZOL, MaterialColor.COLOR_BROWN);
-    public static final BlockRegistryObject<StrippableRotatedPillarBlock> BUNDLED_BIRCH_POSTS = HELPER.createLogBlock("bundled_birch_posts", BUNDLED_STRIPPED_BIRCH_POSTS, MaterialColor.SAND, MaterialColor.QUARTZ);
-    public static final BlockRegistryObject<StrippableRotatedPillarBlock> BUNDLED_JUNGLE_POSTS = HELPER.createLogBlock("bundled_jungle_posts", BUNDLED_STRIPPED_JUNGLE_POSTS, MaterialColor.DIRT, MaterialColor.PODZOL);
-    public static final BlockRegistryObject<StrippableRotatedPillarBlock> BUNDLED_ACACIA_POSTS = HELPER.createLogBlock("bundled_acacia_posts", BUNDLED_STRIPPED_ACACIA_POSTS, MaterialColor.COLOR_ORANGE, MaterialColor.STONE);
-    public static final BlockRegistryObject<StrippableRotatedPillarBlock> BUNDLED_DARK_OAK_POSTS = HELPER.createLogBlock("bundled_dark_oak_posts", BUNDLED_STRIPPED_DARK_OAK_POSTS, MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN);
-    public static final BlockRegistryObject<StrippableRotatedPillarBlock> BUNDLED_CRIMSON_POSTS = HELPER.createLogBlock("bundled_crimson_posts", BUNDLED_STRIPPED_CRIMSON_POSTS, MaterialColor.CRIMSON_STEM, MaterialColor.CRIMSON_STEM);
-    public static final BlockRegistryObject<StrippableRotatedPillarBlock> BUNDLED_WARPED_POSTS = HELPER.createLogBlock("bundled_warped_posts", BUNDLED_STRIPPED_WARPED_POSTS, MaterialColor.WARPED_STEM, MaterialColor.WARPED_STEM);
+    public static final BlockSet<WoodType, RotatedPillarBlock> BUNDLED_STRIPPED_POSTS = HELPER.createSet(WoodType.class, s -> "bundled_stripped_" + s + "_posts", woodType -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, state -> {
+        return state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? woodType.getTopColor() : woodType.getBarkColor();
+    })), registryObject -> registryObject.withItem().toolType(ToolType.AXE));
+    public static final BlockSet<WoodType, RotatedPillarBlock> BUNDLED_POSTS = HELPER.createSet(WoodType.class, s -> "bundled_" + s + "_posts", woodType -> new StrippableRotatedPillarBlock(ModBlocks.BUNDLED_STRIPPED_POSTS.get(woodType), BlockBehaviour.Properties.of(Material.WOOD, state -> {
+        return state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? woodType.getTopColor() : woodType.getBarkColor();
+    })), registryObject -> registryObject.withItem().toolType(ToolType.AXE));
 
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final BlockRegistryObject<GlassBlock> METAL_FRAMED_GLASS = HELPER.create("metal_framed_glass", () -> new GlassBlock(Block.Properties.copy(Blocks.GLASS))).withItem();
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final BlockRegistryObject<IronBarsBlock> METAL_FRAMED_GLASS_PANE = HELPER.create("metal_framed_glass_pane", () -> new IronBarsBlock(Block.Properties.copy(Blocks.GLASS_PANE))).withItem();
     @RenderType(ValhelsiaRenderType.TRANSLUCENT)
-    public static final Map<DyeColor, BlockRegistryObject<StainedGlassBlock>> COLORED_METAL_FRAMED_GLASS = HELPER.createColorVariants("metal_framed_glass",
+    public static final BlockSet<DyeColor, StainedGlassBlock> COLORED_METAL_FRAMED_GLASS = HELPER.createColorVariants("metal_framed_glass",
             color -> new StainedGlassBlock(color, Block.Properties.copy(Blocks.RED_STAINED_GLASS)),
             BlockRegistryObject::withItem
     );
     @RenderType(ValhelsiaRenderType.TRANSLUCENT)
-    public static final Map<DyeColor, BlockRegistryObject<StainedGlassPaneBlock>> COLORED_METAL_FRAMED_GLASS_PANES = HELPER.createColorVariants("metal_framed_glass_pane",
+    public static final BlockSet<DyeColor, StainedGlassPaneBlock> COLORED_METAL_FRAMED_GLASS_PANES = HELPER.createColorVariants("metal_framed_glass_pane",
             color -> new StainedGlassPaneBlock(color, Block.Properties.copy(Blocks.RED_STAINED_GLASS_PANE)),
             BlockRegistryObject::withItem
     );
@@ -126,7 +94,7 @@ public class ModBlocks implements RegistryClass {
     //public static final RegistryObject<JungleHeadBlock> JUNGLE_HEAD = HELPER.register("jungle_head", new JungleHeadBlock(Block.Properties.from(Blocks.COBBLESTONE).notSolid()), ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryObject<JarBlock> GLAZED_JAR = HELPER.create("glazed_jar", () -> new JarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion())).withItem();
     public static final BlockRegistryObject<JarBlock> CRACKED_GLAZED_JAR = HELPER.create("cracked_glazed_jar", () -> new JarBlock(Block.Properties.of(Material.STONE, MaterialColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.0F).noOcclusion())).withItem();
-    public static final Map<DyeColor, BlockRegistryObject<JarBlock>> COLORED_GLAZED_JARS = HELPER.createColorVariants("glazed_jar",
+    public static final BlockSet<DyeColor, JarBlock> COLORED_GLAZED_JARS = HELPER.createColorVariants("glazed_jar",
             color -> new JarBlock(Block.Properties.of(Material.STONE, color).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()),
             BlockRegistryObject::withItem
     );
@@ -146,8 +114,8 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryObject<RotatedPillarBlock> LAPIDIFIED_JUNGLE_LOG = HELPER.create("lapidified_jungle_log", () -> new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG)).withItem();
     public static final BlockRegistryObject<RotatedPillarBlock> LAPIDIFIED_JUNGLE_WOOD = HELPER.create("lapidified_jungle_wood", () -> new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG)).withItem();
     public static final BlockRegistryObject<Block> LAPIDIFIED_JUNGLE_PLANKS = HELPER.create("lapidified_jungle_planks", () -> new Block(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
-    public static final BlockRegistryObject<SlabBlock> LAPIDIFIED_JUNGLE_SLAB = HELPER.create("lapidified_jungle_slab", () -> new SlabBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
     public static final BlockRegistryObject<StairBlock> LAPIDIFIED_JUNGLE_STAIRS = HELPER.create("lapidified_jungle_stairs", () -> new StairBlock(() -> ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get().defaultBlockState(), BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
+    public static final BlockRegistryObject<SlabBlock> LAPIDIFIED_JUNGLE_SLAB = HELPER.create("lapidified_jungle_slab", () -> new SlabBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
     public static final BlockRegistryObject<PressurePlateBlock> LAPIDIFIED_JUNGLE_PRESSURE_PLATE = HELPER.create("lapidified_jungle_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F), SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON)).withItem();
     public static final BlockRegistryObject<ButtonBlock> LAPIDIFIED_JUNGLE_BUTTON = HELPER.create("lapidified_jungle_button", () -> new ButtonBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F), 30, true, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON)).withItem();
     public static final BlockRegistryObject<FenceBlock> LAPIDIFIED_JUNGLE_FENCE = HELPER.create("lapidified_jungle_fence", () -> new FenceBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
@@ -175,7 +143,7 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryObject<UnlitLanternBlock> UNLIT_SOUL_LANTERN = HELPER.create("unlit_soul_lantern", () -> new UnlitLanternBlock(() -> Blocks.SOUL_LANTERN, Block.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(value -> 0))).withItem();
 
     //Sleeping Bags
-    public static final Map<DyeColor, BlockRegistryObject<SleepingBagBlock>> SLEEPING_BAGS = HELPER.createColorVariants("sleeping_bag",
+    public static final BlockSet<DyeColor, SleepingBagBlock> SLEEPING_BAGS = HELPER.createColorVariants("sleeping_bag",
             color -> new SleepingBagBlock(Block.Properties.of(Material.WOOL, color).strength(0.2F).noOcclusion().sound(SoundType.WOOL)),
             blockRegistryObject -> blockRegistryObject.withItem(registryObject -> new BedItem(registryObject.get(), new Item.Properties()))
     );
@@ -193,4 +161,52 @@ public class ModBlocks implements RegistryClass {
     // dirt that wont transform into grass blocks
     public static final BlockRegistryObject<Block> DIRT = HELPER.create("dirt", () -> new ValhelsiaStoneBlock(() -> Blocks.DIRT, Block.Properties.copy(Blocks.DIRT).lootFrom(() -> Blocks.DIRT)));
     public static final BlockRegistryObject<Block> COARSE_DIRT = HELPER.create("coarse_dirt", () -> new ValhelsiaStoneBlock(() -> Blocks.COARSE_DIRT, Block.Properties.copy(Blocks.COARSE_DIRT).lootFrom(() -> Blocks.COARSE_DIRT)));
+
+    public enum WoodType implements StringRepresentable {
+        OAK("oak", BlockBehaviour.Properties.copy(Blocks.OAK_LOG), true, MaterialColor.WOOD, MaterialColor.PODZOL),
+        SPRUCE("spruce", BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG), true, MaterialColor.PODZOL, MaterialColor.COLOR_BROWN),
+        BIRCH("birch", BlockBehaviour.Properties.copy(Blocks.BIRCH_LOG), true, MaterialColor.SAND, MaterialColor.QUARTZ),
+        JUNGLE("jungle", BlockBehaviour.Properties.copy(Blocks.JUNGLE_LOG), true, MaterialColor.DIRT, MaterialColor.PODZOL),
+        ACACIA("acacia", BlockBehaviour.Properties.copy(Blocks.ACACIA_LOG), true, MaterialColor.COLOR_ORANGE, MaterialColor.STONE),
+        DARK_OAK("dark_oak", BlockBehaviour.Properties.copy(Blocks.DARK_OAK_LOG), true, MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN),
+        CRIMSON("crimson", BlockBehaviour.Properties.copy(Blocks.CRIMSON_STEM), false, MaterialColor.CRIMSON_STEM, MaterialColor.CRIMSON_STEM),
+        WARPED("warped", BlockBehaviour.Properties.copy(Blocks.WARPED_STEM), false, MaterialColor.WARPED_STEM, MaterialColor.WARPED_STEM),
+        LAPIDIFIED_JUNGLE("lapidified_jungle", BlockProperties.LAPIDIFIED_JUNGLE_LOG, false, MaterialColor.DIRT, MaterialColor.DIRT);
+
+        private final String name;
+        private final BlockBehaviour.Properties defaultProperties;
+        private final boolean flammable;
+        private final MaterialColor topColor;
+        private final MaterialColor barkColor;
+
+        WoodType(String name, BlockBehaviour.Properties defaultProperties, boolean flammable, MaterialColor topColor, MaterialColor barkColor) {
+            this.name = name;
+            this.defaultProperties = defaultProperties;
+            this.flammable = flammable;
+            this.topColor = topColor;
+            this.barkColor = barkColor;
+        }
+
+        @NotNull
+        @Override
+        public String getSerializedName() {
+            return this.name;
+        }
+
+        public BlockBehaviour.Properties getDefaultProperties() {
+            return this.defaultProperties;
+        }
+
+        public boolean isFlammable() {
+            return this.flammable;
+        }
+
+        public MaterialColor getTopColor() {
+            return this.topColor;
+        }
+
+        public MaterialColor getBarkColor() {
+            return this.barkColor;
+        }
+    }
 }

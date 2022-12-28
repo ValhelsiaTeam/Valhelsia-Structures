@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
@@ -34,10 +35,10 @@ public class AxeCraftingRecipeBuilder implements RecipeBuilder {
 
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
 
-    public AxeCraftingRecipeBuilder(RecipeCategory category, Ingredient input, Item result, int count) {
+    public AxeCraftingRecipeBuilder(RecipeCategory category, Ingredient input, ItemLike result, int count) {
         this.category = category;
         this.input = input;
-        this.result = result;
+        this.result = result.asItem();
         this.count = count;
     }
 

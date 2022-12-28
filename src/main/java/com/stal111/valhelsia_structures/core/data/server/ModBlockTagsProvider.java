@@ -2,22 +2,19 @@ package com.stal111.valhelsia_structures.core.data.server;
 
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.StainedGlassBlock;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
+import net.valhelsia.valhelsia_core.core.data.tags.ValhelsiaBlockTagsProvider;
 import net.valhelsia.valhelsia_core.core.init.ValhelsiaTags;
 import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryObject;
 
-import javax.annotation.Nullable;
-import java.util.concurrent.CompletableFuture;
+import javax.annotation.Nonnull;
 
 /**
  * Mod Block Tags Provider <br>
@@ -26,14 +23,16 @@ import java.util.concurrent.CompletableFuture;
  * @author Valhelsia Team
  * @since 2021-01-11
  */
-public class ModBlockTagsProvider extends BlockTagsProvider {
+public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
 
-    public ModBlockTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, ValhelsiaStructures.MOD_ID, existingFileHelper);
+    public ModBlockTagsProvider(DataProviderInfo info) {
+        super(info);
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider provider) {
+    protected void addTags(@Nonnull HolderLookup.Provider provider) {
+        super.addTags(provider);
+
         this.tag(ModTags.Blocks.BRAZIERS).add(ModBlocks.BRAZIER.get(), ModBlocks.SOUL_BRAZIER.get());
         ModBlocks.HELPER.getRegistryObjects().forEach(registryObject -> {
             if (registryObject.get() instanceof PostBlock) {
@@ -42,7 +41,18 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 this.tag(ModTags.Blocks.CUT_POSTS).add(registryObject.get());
             }
         });
-        this.tag(ModTags.Blocks.NON_FLAMMABLE_POSTS).add(ModBlocks.WARPED_POST.get(), ModBlocks.CRIMSON_POST.get(), ModBlocks.LAPIDIFIED_JUNGLE_POST.get());
+
+        ModBlocks.WOODEN_POSTS.forEach((woodType, registryObject) -> {
+            if (!woodType.isFlammable()) {
+                this.tag(ModTags.Blocks.NON_FLAMMABLE_POSTS).add(registryObject.get());
+            }
+        });
+
+        ModBlocks.STRIPPED_WOODEN_POSTS.forEach((woodType, registryObject) -> {
+            if (!woodType.isFlammable()) {
+                this.tag(ModTags.Blocks.NON_FLAMMABLE_POSTS).add(registryObject.get());
+            }
+        });
 
         this.tag(BlockTags.IMPERMEABLE).add(ModBlocks.METAL_FRAMED_GLASS.get());
         for (BlockRegistryObject<StainedGlassBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS.values()) {
@@ -91,10 +101,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         this.tag(ValhelsiaTags.Blocks.OFFSET_RENDERING).add(ModBlocks.BONE_PILE.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
-                .addTag(ModTags.Blocks.POSTS).addTag(ModTags.Blocks.CUT_POSTS)
                 .add(ModBlocks.HANGING_VINES.get(), ModBlocks.HANGING_VINES_BODY.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .addTag(ModTags.Blocks.BRAZIERS).addTag(ModTags.Blocks.JARS).addTag(ModTags.Blocks.BIG_JARS)
+                .addTag(ModTags.Blocks.JARS).addTag(ModTags.Blocks.BIG_JARS)
                 .add(ModBlocks.DUNGEON_DOOR.get(), ModBlocks.DUNGEON_DOOR_LEAF.get(), ModBlocks.BONE_PILE.get(), ModBlocks.BONE_PILE_BLOCK.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.DUNGEON_DOOR.get(), ModBlocks.DUNGEON_DOOR_LEAF.get());
