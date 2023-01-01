@@ -59,8 +59,5 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModRecipeProvider(info));
 
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER.buildRegistrySet(info), Set.of(ValhelsiaStructures.MOD_ID)));
-
-//        generator.addProvider(event.includeServer(), JsonCodecProvider.forDatapackRegistry(
-//                generator, existingFileHelper, ValhelsiaStructures.MOD_ID, ops, ForgeRegistries.Keys.BIOME_MODIFIERS, new ModBiomeModifiers(info, ops).getModifiers()));
     }
 }

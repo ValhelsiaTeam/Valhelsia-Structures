@@ -3,17 +3,15 @@ package com.stal111.valhelsia_structures.common.block;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -77,22 +75,22 @@ public class BigJarBlock extends Block implements SimpleWaterloggedBlock {
         return this.defaultBlockState().setValue(WATERLOGGED, flag).setValue(ROTATION, Mth.floor((double) ((180.0F + context.getRotation()) * 8.0F / 360.0F) + 0.5D) & 7);
     }
 
-    @Nonnull
-    @Override
-    public BlockState updateShape(@Nonnull BlockState state, @Nonnull Direction direction, @Nonnull BlockState neighborState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos neighborPos) {
-        return direction == Direction.UP && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
-    }
+//    @Nonnull
+//    @Override
+//    public BlockState updateShape(@Nonnull BlockState state, @Nonnull Direction direction, @Nonnull BlockState neighborState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos neighborPos) {
+//        return direction == Direction.UP && !state.canSurvive(level, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+//    }
 
-    @Override
-    public boolean canSurvive(@Nonnull BlockState state, @Nonnull LevelReader level, BlockPos pos) {
-        return level.getBlockState(pos.above()).is(this.getTopBlock());
-    }
+//    @Override
+//    public boolean canSurvive(@Nonnull BlockState state, @Nonnull LevelReader level, BlockPos pos) {
+//        return level.getBlockState(pos.above()).is(this.getTopBlock());
+//    }
 
-    @Override
-    public void setPlacedBy(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
-        boolean flag = level.getFluidState(pos.above()).getType() == Fluids.WATER;
-        level.setBlock(pos.above(), this.getTopBlock().defaultBlockState().setValue(ROTATION, state.getValue(ROTATION)).setValue(WATERLOGGED, flag), 3);
-    }
+//    @Override
+//    public void setPlacedBy(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nullable LivingEntity placer, @Nonnull ItemStack stack) {
+//        boolean flag = level.getFluidState(pos.above()).getType() == Fluids.WATER;
+//        level.setBlock(pos.above(), this.getTopBlock().defaultBlockState().setValue(ROTATION, state.getValue(ROTATION)).setValue(WATERLOGGED, flag), 3);
+//    }
 
     public BigJarTopBlock getTopBlock() {
         if (this.topBlock == null) {

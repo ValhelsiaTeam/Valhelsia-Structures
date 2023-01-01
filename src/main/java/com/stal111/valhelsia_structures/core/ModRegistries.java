@@ -8,10 +8,7 @@ import com.stal111.valhelsia_structures.core.init.world.*;
 import com.stal111.valhelsia_structures.data.worldgen.modifier.ModBiomeModifiers;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
-import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.core.registry.RegistryCollector;
 import net.valhelsia.valhelsia_core.core.registry.helper.EntityRegistryHelper;
@@ -38,10 +35,10 @@ public class ModRegistries extends RegistryCollector {
         this.addMappedHelper(Registries.STRUCTURE_POOL_ELEMENT, ModStructurePoolElementTypes::new);
         this.addMappedHelper(Registries.STRUCTURE_PLACEMENT, ModStructurePlacementTypes::new);
 
-        this.addDatapackHelper(Registries.STRUCTURE_SET, (info, context) -> ImmutableList.of(new ModStructureSets(info, (BootstapContext<StructureSet>) context)));
-        this.addDatapackHelper(Registries.STRUCTURE, (info, context) -> ImmutableList.of(new ModStructures(info, (BootstapContext<Structure>) context)));
+        this.addDatapackHelper(Registries.STRUCTURE_SET, ModStructureSets::new);
+        this.addDatapackHelper(Registries.STRUCTURE, ModStructures::new);
         this.addDatapackHelper(Registries.TEMPLATE_POOL, (registryResourceKey, s, classCollector) -> new TemplatePoolRegistryHelper(registryResourceKey, s, classCollector, (resourceLocation, holder, projection, terrainAdjustment) -> projection1 -> new ValhelsiaSinglePoolElement(Either.left(resourceLocation), holder, projection, terrainAdjustment)), (info, context) -> ImmutableList.of(new SpawnerDungeonPools(info, (BootstapContext<StructureTemplatePool>) context), new SimpleStructurePools(info, (BootstapContext<StructureTemplatePool>) context), new BigTreePools(info, (BootstapContext<StructureTemplatePool>) context), new DesertHousePools(info, (BootstapContext<StructureTemplatePool>) context), new MobPools(info, (BootstapContext<StructureTemplatePool>) context), new PlayerHousePools(info, (BootstapContext<StructureTemplatePool>) context)));
-        this.addDatapackHelper(ForgeRegistries.Keys.BIOME_MODIFIERS, (info, context) -> ImmutableList.of(new ModBiomeModifiers(info, (BootstapContext<BiomeModifier>) context)));
+        this.addDatapackHelper(ForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::new);
     }
 
 }
