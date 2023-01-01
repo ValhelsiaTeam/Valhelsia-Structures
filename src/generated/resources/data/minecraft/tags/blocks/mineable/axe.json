@@ -3,6 +3,22 @@
     "#valhelsia_structures:posts",
     "#valhelsia_structures:cut_posts",
     "valhelsia_structures:hanging_vines",
-    "valhelsia_structures:hanging_vines_body"
+    "valhelsia_structures:hanging_vines_body",
+    "valhelsia_structures:bundled_oak_posts",
+    "valhelsia_structures:bundled_stripped_oak_posts",
+    "valhelsia_structures:bundled_birch_posts",
+    "valhelsia_structures:bundled_stripped_birch_posts",
+    "valhelsia_structures:bundled_spruce_posts",
+    "valhelsia_structures:bundled_stripped_spruce_posts",
+    "valhelsia_structures:bundled_jungle_posts",
+    "valhelsia_structures:bundled_stripped_jungle_posts",
+    "valhelsia_structures:bundled_acacia_posts",
+    "valhelsia_structures:bundled_stripped_acacia_posts",
+    "valhelsia_structures:bundled_dark_oak_posts",
+    "valhelsia_structures:bundled_stripped_dark_oak_posts",
+    "valhelsia_structures:bundled_crimson_posts",
+    "valhelsia_structures:bundled_stripped_crimson_posts",
+    "valhelsia_structures:bundled_warped_posts",
+    "valhelsia_structures:bundled_stripped_warped_posts"
   ]
 }

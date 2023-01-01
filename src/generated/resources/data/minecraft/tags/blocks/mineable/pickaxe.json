@@ -6,6 +6,12 @@
     "valhelsia_structures:dungeon_door",
     "valhelsia_structures:dungeon_door_leaf",
     "valhelsia_structures:bone_pile",
-    "valhelsia_structures:bone_pile_block"
+    "valhelsia_structures:bone_pile_block",
+    "valhelsia_structures:unlit_lantern",
+    "valhelsia_structures:unlit_soul_lantern",
+    "valhelsia_structures:stone",
+    "valhelsia_structures:granite",
+    "valhelsia_structures:diorite",
+    "valhelsia_structures:andesite"
   ]
 }

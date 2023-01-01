@@ -90,10 +90,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .addTag(ModTags.Blocks.POSTS).addTag(ModTags.Blocks.CUT_POSTS)
-                .add(ModBlocks.HANGING_VINES.get(), ModBlocks.HANGING_VINES_BODY.get());
+                .add(ModBlocks.HANGING_VINES.get(), ModBlocks.HANGING_VINES_BODY.get(), ModBlocks.BUNDLED_OAK_POSTS.get(), ModBlocks.BUNDLED_STRIPPED_OAK_POSTS.get(), ModBlocks.BUNDLED_BIRCH_POSTS.get(), ModBlocks.BUNDLED_STRIPPED_BIRCH_POSTS.get(), ModBlocks.BUNDLED_SPRUCE_POSTS.get(), ModBlocks.BUNDLED_STRIPPED_SPRUCE_POSTS.get(), ModBlocks.BUNDLED_JUNGLE_POSTS.get(), ModBlocks.BUNDLED_STRIPPED_JUNGLE_POSTS.get(), ModBlocks.BUNDLED_ACACIA_POSTS.get(), ModBlocks.BUNDLED_STRIPPED_ACACIA_POSTS.get(), ModBlocks.BUNDLED_DARK_OAK_POSTS.get(), ModBlocks.BUNDLED_STRIPPED_DARK_OAK_POSTS.get(), ModBlocks.BUNDLED_CRIMSON_POSTS.get(), ModBlocks.BUNDLED_STRIPPED_CRIMSON_POSTS.get(), ModBlocks.BUNDLED_WARPED_POSTS.get(), ModBlocks.BUNDLED_STRIPPED_WARPED_POSTS.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .addTag(ModTags.Blocks.BRAZIERS).addTag(ModTags.Blocks.JARS).addTag(ModTags.Blocks.BIG_JARS)
-                .add(ModBlocks.DUNGEON_DOOR.get(), ModBlocks.DUNGEON_DOOR_LEAF.get(), ModBlocks.BONE_PILE.get(), ModBlocks.BONE_PILE_BLOCK.get());
+                .add(ModBlocks.DUNGEON_DOOR.get(), ModBlocks.DUNGEON_DOOR_LEAF.get(), ModBlocks.BONE_PILE.get(), ModBlocks.BONE_PILE_BLOCK.get(), ModBlocks.UNLIT_LANTERN.get(), ModBlocks.UNLIT_SOUL_LANTERN.get(), ModBlocks.STONE.get(), ModBlocks.GRANITE.get(), ModBlocks.DIORITE.get(), ModBlocks.ANDESITE.get());
+        this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get(), ModBlocks.COARSE_DIRT.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.DUNGEON_DOOR.get(), ModBlocks.DUNGEON_DOOR_LEAF.get());
     }
