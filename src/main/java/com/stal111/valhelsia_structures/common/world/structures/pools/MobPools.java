@@ -12,7 +12,8 @@ import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 public class MobPools {
 
     public static void load() {
-        JigsawHelper.register("mobs/bee", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/bee", 1)));
+        JigsawHelper.register("mobs/bee", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/bees/bee_1", 1)));
+        JigsawHelper.register("mobs/bees", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/bees/bee_1", 1), Pair.of("mobs/bees/bee_2", 1)));
         JigsawHelper.register("mobs/skeleton", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/skeleton", 1)));
         JigsawHelper.register("mobs/pillager_with_axe_1", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/pillager_with_axe_1", 1)));
         JigsawHelper.register("mobs/pillager_with_crossbow_1", StructureTemplatePool.Projection.RIGID, ImmutableList.of(Pair.of("mobs/pillager_with_crossbow_1", 1)));
