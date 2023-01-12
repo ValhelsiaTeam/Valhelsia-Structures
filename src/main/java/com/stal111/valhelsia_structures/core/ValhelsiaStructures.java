@@ -58,4 +58,9 @@ public class ValhelsiaStructures extends ValhelsiaMod {
         // Config
         this.registerCommonConfig(ModConfig.COMMON_SPEC);
     }
+
+    @Override
+    public EventHandler buildEventHandler() {
+        return new ModEventHandler();
+    }
 }
