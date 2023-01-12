@@ -88,7 +88,7 @@ public class ModBlocks implements RegistryClass {
 
     public static final BlockRegistryObject<IronBarsBlock> PAPER_WALL = HELPER.create("paper_wall", () -> new IronBarsBlock(Block.Properties.of(Material.DECORATION).strength(0.3F).sound(SoundType.WOOL).noOcclusion())).withItem();
     @RenderType(ValhelsiaRenderType.CUTOUT)
-    public static final BlockRegistryObject<HangingVinesBodyBlock> HANGING_VINES_BODY = HELPER.create("hanging_vines_body", () -> new HangingVinesBodyBlock(Block.Properties.of(Material.REPLACEABLE_PLANT).noCollission().strength(0.2F).sound(SoundType.VINE))).withItem();
+    public static final BlockRegistryObject<HangingVinesBodyBlock> HANGING_VINES_BODY = HELPER.create("hanging_vines_body", () -> new HangingVinesBodyBlock(Block.Properties.of(Material.REPLACEABLE_PLANT).noCollission().strength(0.2F).sound(SoundType.VINE)));
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final BlockRegistryObject<HangingVinesBlock> HANGING_VINES = HELPER.create("hanging_vines", () -> new HangingVinesBlock(Block.Properties.of(Material.REPLACEABLE_PLANT).randomTicks().noCollission().strength(0.2F).sound(SoundType.VINE))).withItem();
     //public static final RegistryObject<JungleHeadBlock> JUNGLE_HEAD = HELPER.register("jungle_head", new JungleHeadBlock(Block.Properties.from(Blocks.COBBLESTONE).notSolid()), ValhelsiaRenderType.CUTOUT);

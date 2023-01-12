@@ -1,4 +1,4 @@
-// 1.19.3	2022-12-21T19:24:58.0387606	Item Models: valhelsia_structures
+// 1.19.3	2023-01-12T20:12:35.0279083	Item Models: valhelsia_structures
 32e8ec8070b43b34379155db78179e0416d04c18 assets/valhelsia_structures/models/item/acacia_post.json
 8a064420a192a5fb25223218e77e741a12b2aa04 assets/valhelsia_structures/models/item/big_black_glazed_jar.json
 b57eea540aca7a6e6e7d8bb4ef4ae6d492dbeea4 assets/valhelsia_structures/models/item/big_blue_glazed_jar.json
@@ -89,7 +89,6 @@ fabb6fae5ba8006b611112d79dcfb7cc7e949cd4 assets/valhelsia_structures/models/item
 eea8c5d9019f1da96b8476d3867646459c852c69 assets/valhelsia_structures/models/item/green_metal_framed_glass_pane.json
 774cb93a37d690fca8a5d4e0e088c8cdf2bb8c58 assets/valhelsia_structures/models/item/green_sleeping_bag.json
 8139605d50361d37b2e8959eda71e1864419aeda assets/valhelsia_structures/models/item/hanging_vines.json
-6db2b05bc5211b283abbfe9c96605b2b2b6906ae assets/valhelsia_structures/models/item/hanging_vines_body.json
 a09d15880ab0cfa249b869508020a63f5466501f assets/valhelsia_structures/models/item/hibiscus.json
 0fe769bbef98b4640befcb260e963310e99bb361 assets/valhelsia_structures/models/item/jungle_post.json
 e6eee81f6014789294d74644e617254b5cba468c assets/valhelsia_structures/models/item/lapidified_jungle_button.json
