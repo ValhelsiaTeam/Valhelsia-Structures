@@ -29,6 +29,6 @@ public class BigTreePools extends DatapackRegistryClass<StructureTemplatePool> {
     @Override
     public void bootstrap(BootstapContext<StructureTemplatePool> context) {
         HELPER.create(START, context, "vegetations", builder -> builder.element("big_tree"));
-        HELPER.create("vegetations/big_tree_underside", context, "vegetations", builder -> builder.element("big_tree_underside"));
+        HELPER.create("vegetations/big_tree/underside", context, "vegetations", builder -> builder.element("big_tree_underside"));
     }
 }

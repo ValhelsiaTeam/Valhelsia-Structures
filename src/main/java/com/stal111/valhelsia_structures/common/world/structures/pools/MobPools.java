@@ -23,7 +23,8 @@ public class MobPools extends DatapackRegistryClass<StructureTemplatePool> {
     @Override
     public void bootstrap(BootstapContext<StructureTemplatePool> context) {
         // Entities
-        HELPER.create("mobs/bee", context, "mobs", builder -> builder.element("bee"));
+        HELPER.create("mobs/bee", context, "mobs/bee", builder -> builder.element("bee_1"));
+        HELPER.create("mobs/bees", context, "mobs/bee", builder -> builder.element("bee_1").element("bee_2"));
         HELPER.create("mobs/skeleton", context, "mobs", builder -> builder.element("skeleton"));
         HELPER.create("mobs/pillager_with_axe_1", context, "mobs", builder -> builder.element("pillager_with_axe_1"));
         HELPER.create("mobs/pillager_with_crossbow_1", context, "mobs", builder -> builder.element("pillager_with_crossbow_1"));
