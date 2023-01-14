@@ -1,0 +1,20 @@
+{
+  "processors": [
+    {
+      "block": {
+        "Name": "minecraft:cobbled_deepslate"
+      },
+      "processor_type": "valhelsia_structures:spawner_room_leg",
+      "slab_block": {
+        "Name": "minecraft:cobbled_deepslate_slab",
+        "Properties": {
+          "type": "top",
+          "waterlogged": "false"
+        }
+      }
+    },
+    {
+      "processor_type": "valhelsia_core:remove_water"
+    }
+  ]
+}

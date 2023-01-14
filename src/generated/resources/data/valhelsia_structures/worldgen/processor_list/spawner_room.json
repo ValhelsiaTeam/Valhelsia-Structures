@@ -1,0 +1,20 @@
+{
+  "processors": [
+    {
+      "block": {
+        "Name": "minecraft:cobblestone"
+      },
+      "processor_type": "valhelsia_structures:spawner_room_leg",
+      "slab_block": {
+        "Name": "minecraft:cobblestone_slab",
+        "Properties": {
+          "type": "top",
+          "waterlogged": "false"
+        }
+      }
+    },
+    {
+      "processor_type": "valhelsia_core:remove_water"
+    }
+  ]
+}

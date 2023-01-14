@@ -19,8 +19,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
 import net.valhelsia.valhelsia_core.data.recipes.RecipePart;
+import net.valhelsia.valhelsia_core.data.recipes.RecipeSubProvider;
 import net.valhelsia.valhelsia_core.data.recipes.ValhelsiaRecipeProvider;
 
 import java.util.EnumMap;
@@ -30,7 +30,7 @@ import java.util.Objects;
  * @author Valhelsia Team
  * @since 2022-10-24
  */
-public class ModRecipeProvider extends ValhelsiaRecipeProvider {
+public class ModRecipeProvider extends RecipeSubProvider {
 
     public static final EnumMap<ModBlocks.WoodType, Block> WOOD_TYPE_TO_LOG = Util.make(new EnumMap<>(ModBlocks.WoodType.class), map -> {
         map.put(ModBlocks.WoodType.OAK, Blocks.OAK_LOG);
@@ -56,8 +56,8 @@ public class ModRecipeProvider extends ValhelsiaRecipeProvider {
         map.put(ModBlocks.WoodType.LAPIDIFIED_JUNGLE, ModBlocks.LAPIDIFIED_JUNGLE_LOG.get());
     });
 
-    public ModRecipeProvider(DataProviderInfo info) {
-        super(info);
+    public ModRecipeProvider(ValhelsiaRecipeProvider provider) {
+        super(provider);
     }
 
     @Override

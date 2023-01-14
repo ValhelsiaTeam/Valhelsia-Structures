@@ -20,6 +20,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
+import net.valhelsia.valhelsia_core.data.recipes.ValhelsiaRecipeProvider;
 
 import java.util.List;
 import java.util.Set;
@@ -56,7 +57,7 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTables::new, LootContextParamSets.BLOCK))));
         generator.addProvider(event.includeServer(), new ModLootModifierProvider(output));
 
-        generator.addProvider(event.includeServer(), new ModRecipeProvider(info));
+        generator.addProvider(event.includeServer(), new ValhelsiaRecipeProvider(info, ModRecipeProvider::new));
 
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER.buildRegistrySet(info), Set.of(ValhelsiaStructures.MOD_ID)));
     }

@@ -4,7 +4,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/passage/passage_1",
-        "processors": "minecraft:empty",
+        "processors": "valhelsia_structures:remove_water",
         "projection": "rigid"
       },
       "weight": 1
@@ -13,7 +13,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/passage/passage_2",
-        "processors": "minecraft:empty",
+        "processors": "valhelsia_structures:remove_water",
         "projection": "rigid"
       },
       "weight": 1
@@ -22,7 +22,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/passage/passage_3",
-        "processors": "minecraft:empty",
+        "processors": "valhelsia_structures:remove_water",
         "projection": "rigid"
       },
       "weight": 1
@@ -31,7 +31,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/passage/passage_4",
-        "processors": "minecraft:empty",
+        "processors": "valhelsia_structures:remove_water",
         "projection": "rigid"
       },
       "weight": 1
@@ -40,7 +40,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/passage/passage_5",
-        "processors": "minecraft:empty",
+        "processors": "valhelsia_structures:remove_water",
         "projection": "rigid"
       },
       "weight": 1
@@ -49,7 +49,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/passage/passage_6",
-        "processors": "minecraft:empty",
+        "processors": "valhelsia_structures:remove_water",
         "projection": "rigid"
       },
       "weight": 1
