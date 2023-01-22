@@ -1,4 +1,4 @@
-// 1.19.3	2022-12-28T13:40:10.6960556	Tags for minecraft:block mod id valhelsia_structures
+// 1.19.3	2023-01-22T15:14:51.5579338	Tags for minecraft:block mod id valhelsia_structures
 be4770091b89d612dfac964ba86728eb69bad56e data/forge/tags/blocks/braziers.json
 c1b9692433dd32870e79d99f49aec1c73e2e5e96 data/forge/tags/blocks/fences/wooden.json
 62daf4915ef2309fd7d4cb1768cdbc4f481f16dd data/forge/tags/blocks/fence_gates/wooden.json
@@ -16,7 +16,7 @@ f0770b509280d280ac69080c30cd3c138c2b18a6 data/forge/tags/blocks/glass_panes/colo
 53e923437441d7ce055b2aa5bc9d0db9e36789c9 data/minecraft/tags/blocks/impermeable.json
 ec7cc527615bef71f6e499971eaac359586cf984 data/minecraft/tags/blocks/logs.json
 03e87a315668e20233b9c64eedd8c76e32d90187 data/minecraft/tags/blocks/mineable/axe.json
-03c07fb30bdafc9a98ab81852fe2472caf200889 data/minecraft/tags/blocks/mineable/pickaxe.json
+b941e8d877686273816d4fdf5a2189cd7b0ff62b data/minecraft/tags/blocks/mineable/pickaxe.json
 0abe479b4726a47b22a4ca2ea68f062d2e9a99f8 data/minecraft/tags/blocks/needs_diamond_tool.json
 e0c33a67d277ec15494b7d13c29447cfd21a6cc7 data/minecraft/tags/blocks/piglin_repellents.json
 5e680038e111e37e403afe5bbd48da07d088ad83 data/minecraft/tags/blocks/planks.json

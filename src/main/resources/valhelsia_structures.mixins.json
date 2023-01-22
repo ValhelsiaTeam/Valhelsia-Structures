@@ -6,7 +6,6 @@
   "refmap": "valhelsia_structures.refmap.json",
   "mixins": [
     "BeardifierMixin",
-    "BlockBehaviourMixin",
     "BucketItemMixin",
     "CatEntityMixin",
     "FlowingFluidMixin",

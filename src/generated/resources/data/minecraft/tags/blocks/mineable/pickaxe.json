@@ -2,6 +2,8 @@
   "values": [
     "valhelsia_structures:brazier",
     "valhelsia_structures:soul_brazier",
+    "valhelsia_structures:unlit_lantern",
+    "valhelsia_structures:unlit_soul_lantern",
     "#valhelsia_structures:jars",
     "#valhelsia_structures:big_jars",
     "valhelsia_structures:dungeon_door",

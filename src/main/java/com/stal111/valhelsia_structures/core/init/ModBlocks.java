@@ -5,7 +5,6 @@ import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
 import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
 import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.utils.ValhelsiaBlockProperties;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringRepresentable;
@@ -19,6 +18,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.fml.common.Mod;
 import net.valhelsia.valhelsia_core.client.util.ValhelsiaRenderType;
 import net.valhelsia.valhelsia_core.common.block.StrippableRotatedPillarBlock;
+import net.valhelsia.valhelsia_core.common.util.ValhelsiaBlockProperties;
 import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
 import net.valhelsia.valhelsia_core.core.registry.helper.block.*;
 import org.jetbrains.annotations.NotNull;
@@ -139,9 +139,9 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryObject<BonePileBlock> BONE_PILE = HELPER.create("bone_pile", () -> new BonePileBlock(Block.Properties.copy(Blocks.BONE_BLOCK).noOcclusion())).withItem();
     public static final BlockRegistryObject<Block> BONE_PILE_BLOCK = HELPER.create("bone_pile_block", () -> new Block(Block.Properties.copy(Blocks.BONE_BLOCK))).withItem();
     @RenderType(ValhelsiaRenderType.CUTOUT)
-    public static final BlockRegistryObject<UnlitLanternBlock> UNLIT_LANTERN = HELPER.create("unlit_lantern", () -> new UnlitLanternBlock(() -> Blocks.LANTERN, Block.Properties.copy(Blocks.LANTERN).lightLevel(value -> 0))).withItem();
+    public static final BlockRegistryObject<UnlitLanternBlock> UNLIT_LANTERN = HELPER.create("unlit_lantern", () -> new UnlitLanternBlock(() -> Blocks.LANTERN, Block.Properties.copy(Blocks.LANTERN).lightLevel(value -> 0))).withItem().toolType(ToolType.PICKAXE);
     @RenderType(ValhelsiaRenderType.CUTOUT)
-    public static final BlockRegistryObject<UnlitLanternBlock> UNLIT_SOUL_LANTERN = HELPER.create("unlit_soul_lantern", () -> new UnlitLanternBlock(() -> Blocks.SOUL_LANTERN, Block.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(value -> 0))).withItem();
+    public static final BlockRegistryObject<UnlitLanternBlock> UNLIT_SOUL_LANTERN = HELPER.create("unlit_soul_lantern", () -> new UnlitLanternBlock(() -> Blocks.SOUL_LANTERN, Block.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(value -> 0))).withItem().toolType(ToolType.PICKAXE);
 
     //Sleeping Bags
     public static final BlockSet<DyeColor, SleepingBagBlock> SLEEPING_BAGS = HELPER.createColorVariants("sleeping_bag",
