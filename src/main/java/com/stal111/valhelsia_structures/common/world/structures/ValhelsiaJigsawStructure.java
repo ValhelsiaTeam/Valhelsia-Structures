@@ -5,6 +5,7 @@ import com.mojang.serialization.DataResult;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProvider;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureTypes;
+import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -94,9 +95,9 @@ public class ValhelsiaJigsawStructure extends Structure {
         WorldgenRandom random = new WorldgenRandom(new LegacyRandomSource(0L));
 
         // Check if the surface is flat
-//        if (this.step() == GenerationStep.Decoration.SURFACE_STRUCTURES && !StructureUtils.isSurfaceFlat(context, this.adjustBoundingBox())) {
-//            return false;
-//        }
+        if (this.step() == GenerationStep.Decoration.SURFACE_STRUCTURES && !StructureUtils.isSurfaceFlat(context, 15)) {
+            return false;
+        }
 
         // Check for water
         if (!this.canGenerateOnWater()) {
