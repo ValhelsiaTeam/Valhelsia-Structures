@@ -16,7 +16,8 @@
     "WallTorchBlockMixin"
   ],
   "client": [
-    "BlockModelRendererMixin"
+    "BlockModelRendererMixin",
+    "ModelBakerImplAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

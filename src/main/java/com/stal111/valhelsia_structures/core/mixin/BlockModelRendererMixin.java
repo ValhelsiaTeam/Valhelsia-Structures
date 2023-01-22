@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.core.mixin;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.BrightnessCombinerUtils;
 import com.stal111.valhelsia_structures.utils.ModTags;
@@ -14,7 +15,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.BedBlock;
@@ -43,12 +46,13 @@ public abstract class BlockModelRendererMixin {
 
     @Shadow public abstract void tesselateWithoutAO(BlockAndTintGetter p_111091_, BakedModel p_111092_, BlockState p_111093_, BlockPos p_111094_, PoseStack p_111095_, VertexConsumer p_111096_, boolean p_111097_, RandomSource p_111098_, long p_111099_, int p_111100_);
 
-    @Inject(at = @At(value = "RETURN"), method = "tesselateBlock(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZLnet/minecraft/util/RandomSource;JILnet/minecraftforge/client/model/data/ModelData;Lnet/minecraft/client/renderer/RenderType;)V", remap = false, cancellable = true)
-    private void valhelsia_tesselateBlock(BlockAndTintGetter level, BakedModel model, BlockState state, BlockPos pos, PoseStack poseStack, VertexConsumer consumer, boolean checkSides, RandomSource random, long seed, int packedOverlay, ModelData modelData, RenderType renderType, CallbackInfo ci) {
+    @Inject(at = @At(value = "RETURN"), method = "tesselateBlock(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZLnet/minecraft/util/RandomSource;JILnet/minecraftforge/client/model/data/ModelData;Lnet/minecraft/client/renderer/RenderType;Z)V", remap = false, cancellable = true)
+    private void valhelsia_tesselateBlock(BlockAndTintGetter level, BakedModel model, BlockState state, BlockPos pos, PoseStack poseStack, VertexConsumer consumer, boolean checkSides, RandomSource random, long seed, int packedOverlay, ModelData modelData, RenderType renderType, boolean queryModelSpecificData, CallbackInfo ci) {
         if (state.is(ModBlocks.BONE_PILE.get())) {
             for (int i = 1; i < state.getValue(ModBlockStateProperties.LAYERS_1_5); i++) {
-                //TODO
-               // model = Minecraft.getInstance().getModelManager().getModelBakery().bake(new ResourceLocation(ValhelsiaStructures.MOD_ID, "block/bone_pile"), BlockModelRotation.by(90, 90 * i));
+                model = ModelBakerImplAccessor.createModelBakerImpl(Minecraft.getInstance().getModelManager().getModelBakery(), (resourceLocation, material) -> {
+                    return Minecraft.getInstance().getTextureAtlas(material.atlasLocation()).apply(resourceLocation);
+                }, new ResourceLocation(ValhelsiaStructures.MOD_ID, "block/bone_pile")).bake(new ResourceLocation(ValhelsiaStructures.MOD_ID, "block/bone_pile"), BlockModelRotation.by(90, 90 * i));
 
                 if (model == null) {
                     return;
