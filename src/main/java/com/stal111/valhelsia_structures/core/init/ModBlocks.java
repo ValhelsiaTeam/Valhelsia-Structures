@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
 import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
 import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.utils.ValhelsiaBlockProperties;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringRepresentable;
@@ -64,10 +65,10 @@ public class ModBlocks implements RegistryClass {
             registryObject -> registryObject.withItem().toolType(ToolType.AXE)
     );
 
-    public static final BlockSet<WoodType, RotatedPillarBlock> BUNDLED_STRIPPED_POSTS = HELPER.createSet(WoodType.class, s -> "bundled_stripped_" + s + "_posts", woodType -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.WOOD, state -> {
+    public static final BlockSet<WoodType, RotatedPillarBlock> BUNDLED_STRIPPED_POSTS = HELPER.createSet(WoodType.class, s -> "bundled_stripped_" + s + "_posts", woodType -> new RotatedPillarBlock(((ValhelsiaBlockProperties) woodType.getDefaultProperties()).color(state -> {
         return state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? woodType.getTopColor() : woodType.getBarkColor();
     })), registryObject -> registryObject.withItem().toolType(ToolType.AXE));
-    public static final BlockSet<WoodType, RotatedPillarBlock> BUNDLED_POSTS = HELPER.createSet(WoodType.class, s -> "bundled_" + s + "_posts", woodType -> new StrippableRotatedPillarBlock(ModBlocks.BUNDLED_STRIPPED_POSTS.get(woodType), BlockBehaviour.Properties.of(Material.WOOD, state -> {
+    public static final BlockSet<WoodType, RotatedPillarBlock> BUNDLED_POSTS = HELPER.createSet(WoodType.class, s -> "bundled_" + s + "_posts", woodType -> new StrippableRotatedPillarBlock(ModBlocks.BUNDLED_STRIPPED_POSTS.get(woodType), ((ValhelsiaBlockProperties) woodType.getDefaultProperties()).color(state -> {
         return state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? woodType.getTopColor() : woodType.getBarkColor();
     })), registryObject -> registryObject.withItem().toolType(ToolType.AXE));
 
