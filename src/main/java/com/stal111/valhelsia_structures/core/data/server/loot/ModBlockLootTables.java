@@ -43,6 +43,9 @@ public class ModBlockLootTables extends ValhelsiaBlockLootTables {
         );
 
         forEach(block -> block instanceof SlabBlock, block -> add(block, ValhelsiaBlockLootTables::droppingSlab));
+
+        take(this::registerDropSelfLootTable, ModBlocks.PAPER_WALL);
+
         forEach(block -> block instanceof GlassBlock || block instanceof IronBarsBlock, this::dropWhenSilkTouch);
         forEach(block -> block instanceof JarBlock || block instanceof BigJarBlock, this::dropWhenSilkTouch);
         take(block -> add(block, createShearsOnlyDrop(ModBlocks.HANGING_VINES.get())), ModBlocks.HANGING_VINES, ModBlocks.HANGING_VINES_BODY);

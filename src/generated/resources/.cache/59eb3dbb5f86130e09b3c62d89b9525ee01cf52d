@@ -1,4 +1,4 @@
-// 1.19.3	2022-12-28T13:10:56.1919754	Loot Tables
+// 1.19.3	2023-01-22T15:27:16.0320915	Loot Tables
 62a390a728914e38769d9458602b66eb790aeac9 data/valhelsia_structures/loot_tables/blocks/acacia_post.json
 fe9e1b4ef668860527cfc13faae1fc79c679b4be data/valhelsia_structures/loot_tables/blocks/big_black_glazed_jar.json
 c4e9af562e096c76543c3aa53db1634c23fd5e0c data/valhelsia_structures/loot_tables/blocks/big_blue_glazed_jar.json
@@ -132,7 +132,7 @@ dd7d28798fc20dfee3dc66f68cc52eabd0aa4885 data/valhelsia_structures/loot_tables/b
 31e164ce5f38fcacab7170b92532453bbe258ab2 data/valhelsia_structures/loot_tables/blocks/orange_metal_framed_glass.json
 1cd5097f97d989c4191523d17069616fab3b168c data/valhelsia_structures/loot_tables/blocks/orange_metal_framed_glass_pane.json
 e88be23a5f4e999d6c085c1ddddf1a9aba47d903 data/valhelsia_structures/loot_tables/blocks/orange_sleeping_bag.json
-7b57df80ef69cc92c19d5488ad38ac8c806c9427 data/valhelsia_structures/loot_tables/blocks/paper_wall.json
+445886ac6aa0b5e3dc05ef35166b4fd5949e5118 data/valhelsia_structures/loot_tables/blocks/paper_wall.json
 ec5c772e8e27e912a84c13fbfbcf74ef8c04186f data/valhelsia_structures/loot_tables/blocks/pink_glazed_jar.json
 88c6f3eee9248445bf61332e68dbaba322331cad data/valhelsia_structures/loot_tables/blocks/pink_metal_framed_glass.json
 508bc762e12ca03cc7a5d1fe56e20fc354770055 data/valhelsia_structures/loot_tables/blocks/pink_metal_framed_glass_pane.json
