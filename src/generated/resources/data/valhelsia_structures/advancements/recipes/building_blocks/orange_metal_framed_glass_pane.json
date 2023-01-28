@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_metal_framed_glass": {
+    "has_orange_metal_framed_glass": {
       "conditions": {
         "items": [
           {
             "items": [
-              "valhelsia_structures:metal_framed_glass"
+              "valhelsia_structures:orange_metal_framed_glass"
             ]
           }
         ]
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_metal_framed_glass",
+      "has_orange_metal_framed_glass",
       "has_the_recipe"
     ]
   ],

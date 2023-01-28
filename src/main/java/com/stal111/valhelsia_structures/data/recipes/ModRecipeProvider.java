@@ -91,7 +91,7 @@ public class ModRecipeProvider extends RecipeSubProvider {
 
         ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.forEach((color, registryObject) -> {
             Block block = ModBlocks.COLORED_METAL_FRAMED_GLASS.get(color).get();
-            this.glassPane(registryObject.get(), RecipePart.of(ModBlocks.METAL_FRAMED_GLASS.get()));
+            this.glassPane(registryObject.get(), RecipePart.of(block));
         });
 
         this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PAPER_WALL.get(), 2, builder -> builder.pattern("#X#").pattern("#X#").pattern("#X#").define('#', Items.BAMBOO).define('X', Items.PAPER).unlockedBy(this, Items.BAMBOO));
