@@ -126,13 +126,13 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryObject<BushBlock> HIBISCUS = HELPER.create("hibiscus", () -> new BushBlock(Block.Properties.copy(Blocks.POPPY))).withItem();
     public static final BlockRegistryObject<GiantFernBlock> GIANT_FERN = HELPER.create("giant_fern", () -> new GiantFernBlock(Block.Properties.copy(Blocks.POPPY))).withItem();
     @RenderType(ValhelsiaRenderType.CUTOUT)
-    public static final BlockRegistryObject<DousedTorchBlock> DOUSED_TORCH = HELPER.create("doused_torch", () -> new DousedTorchBlock((TorchBlock) Blocks.TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak()));
+    public static final BlockRegistryObject<DousedTorchBlock> DOUSED_TORCH = HELPER.create("doused_torch", () -> new DousedTorchBlock((TorchBlock) Blocks.TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak().sound(SoundType.WOOD)));
     @RenderType(ValhelsiaRenderType.CUTOUT)
-    public static final BlockRegistryObject<DousedWallTorchBlock> DOUSED_WALL_TORCH = HELPER.create("doused_wall_torch", () -> new DousedWallTorchBlock((TorchBlock) Blocks.WALL_TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak()));
+    public static final BlockRegistryObject<DousedWallTorchBlock> DOUSED_WALL_TORCH = HELPER.create("doused_wall_torch", () -> new DousedWallTorchBlock((TorchBlock) Blocks.WALL_TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak().sound(SoundType.WOOD)));
     @RenderType(ValhelsiaRenderType.CUTOUT)
-    public static final BlockRegistryObject<DousedTorchBlock> DOUSED_SOUL_TORCH = HELPER.create("doused_soul_torch", () -> new DousedTorchBlock((TorchBlock) Blocks.SOUL_TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak()));
+    public static final BlockRegistryObject<DousedTorchBlock> DOUSED_SOUL_TORCH = HELPER.create("doused_soul_torch", () -> new DousedTorchBlock((TorchBlock) Blocks.SOUL_TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak().sound(SoundType.WOOD)));
     @RenderType(ValhelsiaRenderType.CUTOUT)
-    public static final BlockRegistryObject<DousedWallTorchBlock> DOUSED_SOUL_WALL_TORCH = HELPER.create("doused_soul_wall_torch", () -> new DousedWallTorchBlock((TorchBlock) Blocks.SOUL_WALL_TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak()));
+    public static final BlockRegistryObject<DousedWallTorchBlock> DOUSED_SOUL_WALL_TORCH = HELPER.create("doused_soul_wall_torch", () -> new DousedWallTorchBlock((TorchBlock) Blocks.SOUL_WALL_TORCH, Block.Properties.of(Material.DECORATION).noCollission().instabreak().sound(SoundType.WOOD)));
     public static final BlockRegistryObject<DungeonDoorBlock> DUNGEON_DOOR = HELPER.create("dungeon_door", () -> new DungeonDoorBlock(Block.Properties.of(Material.METAL).strength(50.0F, 100.0F).requiresCorrectToolForDrops().noOcclusion())).withItem();
     public static final BlockRegistryObject<DungeonDoorLeafBlock> DUNGEON_DOOR_LEAF = HELPER.create("dungeon_door_leaf", () -> new DungeonDoorLeafBlock(Block.Properties.of(Material.METAL).strength(50.0F, 100.0F).requiresCorrectToolForDrops().noOcclusion().lootFrom(ModBlocks.DUNGEON_DOOR)));
     @RenderType(ValhelsiaRenderType.CUTOUT)
