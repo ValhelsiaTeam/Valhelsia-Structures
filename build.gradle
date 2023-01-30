@@ -126,7 +126,7 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.19.3-44.0.37'
+    minecraft 'net.minecraftforge:forge:1.19.3-44.1.8'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 
@@ -134,11 +134,11 @@ dependencies {
     implementation fg.deobf(files("libs/valhelsia_furniture-forge-${valhelsia_furniture_version}-dev.jar"))
 
     // compile against the JEI API but do not include it at runtime
-    //compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    //compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar
-    //runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
-    //runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
