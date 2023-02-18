@@ -40,7 +40,7 @@ side="BOTH"
 
 [[dependencies.valhelsia_structures]]
 modId="valhelsia_furniture"
-mandatory=true
+mandatory=false
 versionRange="[1.19.2-1.0.0,)"
 ordering="AFTER"
 side="BOTH"
