@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.core;
 
+import com.stal111.valhelsia_structures.client.event.ScreenEvents;
 import com.stal111.valhelsia_structures.common.event.CreativeModeTabEvents;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.valhelsia.valhelsia_core.core.ValhelsiaMod;
@@ -17,6 +18,6 @@ public class ModEventHandler extends ValhelsiaMod.EventHandler {
 
     @Override
     public void registerForgeEvents(IEventBus eventBus) {
-
+        eventBus.register(new ScreenEvents());
     }
 }

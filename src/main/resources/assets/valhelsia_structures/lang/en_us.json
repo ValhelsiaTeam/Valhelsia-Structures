@@ -187,6 +187,10 @@
     "gui.valhelsia_structures.config.invalid_biome_category": "List contains invalid Biome Category:",
     "gui.valhelsia_structures.config.invalid_blacklisted_biome": "List contains invalid Biome:",
 
+    "gui.valhelsia_structures.furniture_warning_1": "Valhelsia Structures detected that Valhelsia Furniture is not installed.",
+    "gui.valhelsia_structures.furniture_warning_2": "While it is not required, it greatly enhances the structures.",
+
+
     "filled_map.valhelsia_structures.spawner_dungeon": "Spawner Dungeon Explorer Map",
     "filled_map.valhelsia_structures.castle": "Castle Explorer Map"
 }

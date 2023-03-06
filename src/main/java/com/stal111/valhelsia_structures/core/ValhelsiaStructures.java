@@ -57,6 +57,7 @@ public class ValhelsiaStructures extends ValhelsiaMod {
 
         // Config
         this.registerCommonConfig(ModConfig.COMMON_SPEC);
+        this.registerClientConfig(ModConfig.CLIENT_SPEC);
     }
 
     @Override
