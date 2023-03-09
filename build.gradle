@@ -22,7 +22,7 @@ mixin {
     add sourceSets.main, "valhelsia_structures.refmap.json"
 }
 
-version = '1.19.2-1.0.1'
+version = '1.19.2-1.0.2'
 group = 'com.stal111.valhelsia_structures' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'valhelsia_structures-forge'
 
@@ -126,7 +126,7 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.19.2-43.1.58'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.2.6'
 
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 
