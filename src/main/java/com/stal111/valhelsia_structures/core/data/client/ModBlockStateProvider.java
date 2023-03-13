@@ -37,7 +37,8 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         getRemainingBlocks().remove(ModBlocks.BUNDLED_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE));
         getRemainingBlocks().remove(ModBlocks.BUNDLED_STRIPPED_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE));
 
-        forEach(block -> block instanceof BrazierBlock, this::brazierBlock);
+        take(block -> this.brazierBlock(block, modLoc("block/brazier_fire"), modLoc("block/brazier_top")), ModBlocks.BRAZIER);
+        take(block -> this.brazierBlock(block, modLoc("block/soul_brazier_fire"), modLoc("block/soul_brazier_top")), ModBlocks.SOUL_BRAZIER);
         forEach(block -> getName(block).contains("bundled"), block -> axisBlock((RotatedPillarBlock) block, modLoc("block/bundled_posts/" + getName(block)), modLoc("block/bundled_posts/" + getName(block) + "_top")));
         forEach(block -> block instanceof PostBlock, this::postBlock);
         forEach(block -> block instanceof CutPostBlock, this::cutPostBlock);
@@ -77,14 +78,13 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
         forEach(this::simpleBlock);
     }
 
-    private void brazierBlock(Block block) {
-        String name = this.getName(block);
-        ModelFile model = getExistingModel(modLoc("block/" + name));
-        ModelFile offModel = getExistingModel(modLoc("block/" + name + "_off"));
+    private void brazierBlock(Block block, ResourceLocation fireTexture, ResourceLocation brazierTop) {
+        ModelFile model = models().withExistingParent(getName(block), modLoc("template_brazier")).texture("fire", fireTexture).texture("brazier_top", brazierTop);
+        ModelFile offModel = models().withExistingParent(getName(block) + "_off", modLoc("template_brazier_off")).texture("brazier_top", brazierTop);
 
         getVariantBuilder(block)
-                .partialState().with(BlockStateProperties.LIT, true).modelForState().modelFile(model).addModel()
-                .partialState().with(BlockStateProperties.LIT, false).modelForState().modelFile(offModel).addModel();
+                .partialState().with(BlockStateProperties.LIT, false).modelForState().modelFile(offModel).addModel()
+                .partialState().with(BlockStateProperties.LIT, true).modelForState().modelFile(model).addModel();
     }
 
     private void postBlock(Block block) {
