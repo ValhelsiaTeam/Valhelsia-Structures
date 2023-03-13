@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.client.event;
 
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.ConfigurableValue;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiComponent;
@@ -21,7 +22,7 @@ public class ScreenEvents {
 
     @SubscribeEvent
     public void onScreenRender(ScreenEvent.Render event) {
-        if (event.getScreen() instanceof CreateWorldScreen screen && screen.height >= 260 && FURNITURE_WARNING_ENABLED.get()) {
+        if (event.getScreen() instanceof CreateWorldScreen screen && screen.height >= 260 && !ValhelsiaStructures.isFurnitureInstalled() && FURNITURE_WARNING_ENABLED.get()) {
             GuiComponent.drawCenteredString(event.getPoseStack(), screen.getMinecraft().font, FURNITURE_WARNING_1, screen.width / 2, 230, 16777215);
             GuiComponent.drawCenteredString(event.getPoseStack(), screen.getMinecraft().font, FURNITURE_WARNING_2, screen.width / 2, 242, 16777215);
         }

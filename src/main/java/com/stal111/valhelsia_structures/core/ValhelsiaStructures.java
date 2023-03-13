@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -63,5 +64,9 @@ public class ValhelsiaStructures extends ValhelsiaMod {
     @Override
     public EventHandler buildEventHandler() {
         return new ModEventHandler();
+    }
+
+    public static boolean isFurnitureInstalled() {
+        return ModList.get().isLoaded("valhelsia_furniture");
     }
 }

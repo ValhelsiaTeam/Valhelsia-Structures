@@ -2,11 +2,11 @@ package com.stal111.valhelsia_structures.common.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
-import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
@@ -16,8 +16,6 @@ import java.util.Optional;
  * @since 2023-03-12
  */
 public record StartPoolDecider(Holder<StructureTemplatePool> defaultStartPool, @Nullable Holder<StructureTemplatePool> furnishedStartPool) {
-
-    private static final boolean IS_FURNITURE_LOADED = ModList.get().isLoaded("valhelsia_furniture");
 
     public static final Codec<StartPoolDecider> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             StructureTemplatePool.CODEC.fieldOf("default").forGetter(decider -> {
@@ -43,7 +41,7 @@ public record StartPoolDecider(Holder<StructureTemplatePool> defaultStartPool, @
     }
 
     public Holder<StructureTemplatePool> decide() {
-        if (this.furnishedStartPool == null || !IS_FURNITURE_LOADED) {
+        if (this.furnishedStartPool == null || !ValhelsiaStructures.isFurnitureInstalled()) {
             return this.defaultStartPool;
         }
 
