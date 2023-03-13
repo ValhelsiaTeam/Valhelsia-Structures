@@ -1,9 +1,9 @@
 package com.stal111.valhelsia_structures.common.world.structures.pools;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
 import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
@@ -20,7 +20,7 @@ public class DesertHousePools extends DatapackRegistryClass<StructureTemplatePoo
 
     public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.TEMPLATE_POOL);
 
-    public static final ResourceKey<StructureTemplatePool> START = HELPER.createKey("desert_house/houses");
+    public static final StartPoolKeySet START = StartPoolKeySet.withFurnishedVariant(HELPER, "desert_house/houses");
 
     public DesertHousePools(DataProviderInfo info, BootstapContext<StructureTemplatePool> context) {
         super(info, context);
@@ -28,7 +28,7 @@ public class DesertHousePools extends DatapackRegistryClass<StructureTemplatePoo
 
     @Override
     public void bootstrap(BootstapContext<StructureTemplatePool> context) {
-        HELPER.create(START, context, "desert_house", builder -> builder.element("desert_house"));
+        START.create(HELPER, context, "desert_house", builder -> builder.element("desert_house"));
         HELPER.create("desert_house/oasis_plate", context, "desert_house", builder -> builder.element("oasis_plate"));
         HELPER.create("desert_house/well_or_oasis_plate", context, "desert_house", builder -> builder.element("well_or_oasis_plate"));
         HELPER.create("desert_house/oasis", context, "desert_house", builder -> builder.element("feature_oasis_1").element("feature_oasis_2"));

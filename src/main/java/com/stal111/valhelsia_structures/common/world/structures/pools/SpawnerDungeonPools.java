@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.common.world.structures.pools;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.data.worldgen.processors.ModProcessorLists;
+import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
@@ -20,7 +21,7 @@ public class SpawnerDungeonPools extends DatapackRegistryClass<StructureTemplate
 
     public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.TEMPLATE_POOL);
 
-    public static final ResourceKey<StructureTemplatePool> START = HELPER.createKey("spawner_dungeon/cave_entrances");
+    public static final StartPoolKeySet START = StartPoolKeySet.simple(HELPER, "spawner_dungeon/cave_entrances");
 
     public SpawnerDungeonPools(DataProviderInfo info, BootstapContext<StructureTemplatePool> context) {
         super(info, context);
@@ -30,7 +31,7 @@ public class SpawnerDungeonPools extends DatapackRegistryClass<StructureTemplate
     public void bootstrap(BootstapContext<StructureTemplatePool> context) {
         ResourceKey<StructureProcessorList> removeWater = ModProcessorLists.REMOVE_WATER;
 
-        HELPER.create(START, context, "spawner_dungeon/cave_entrance", builder -> builder.element("large").element("small_1").element("small_2").element("small_3").processors(removeWater), TerrainAdjustment.BEARD_THIN);
+        START.create(HELPER, context, "spawner_dungeon/cave_entrance", builder -> builder.element("large").element("small_1").element("small_2").element("small_3").processors(removeWater), TerrainAdjustment.BEARD_THIN);
         HELPER.create("spawner_dungeon/cave_entrance/large_bottom", context, "spawner_dungeon/cave_entrance", builder -> builder.element("large_bottom").processors(removeWater));
         HELPER.create("spawner_dungeon/cave_entrance/small_1_bottom", context, "spawner_dungeon/cave_entrance", builder -> builder.element("small_1_bottom").processors(removeWater));
         HELPER.create("spawner_dungeon/cave_entrance/small_2_bottom", context, "spawner_dungeon/cave_entrance", builder -> builder.element("small_2_bottom").processors(removeWater));

@@ -13,6 +13,8 @@
       }
     }
   },
-  "start_pool": "valhelsia_structures:spawner_rooms",
+  "start_pool": {
+    "default": "valhelsia_structures:spawner_rooms"
+  },
   "step": "underground_structures"
 }

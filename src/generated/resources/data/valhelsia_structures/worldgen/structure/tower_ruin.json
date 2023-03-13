@@ -6,7 +6,9 @@
   "size": 7,
   "spawn_chance": 0.8,
   "spawn_overrides": {},
-  "start_pool": "valhelsia_structures:tower_ruins",
+  "start_pool": {
+    "default": "valhelsia_structures:tower_ruins"
+  },
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }

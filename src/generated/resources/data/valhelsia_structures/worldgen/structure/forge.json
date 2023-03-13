@@ -6,7 +6,10 @@
   "size": 7,
   "spawn_chance": 0.75,
   "spawn_overrides": {},
-  "start_pool": "valhelsia_structures:forges",
+  "start_pool": {
+    "default": "valhelsia_structures:forges",
+    "furnished": "valhelsia_structures:furnished/forges"
+  },
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }

@@ -30,7 +30,10 @@
       ]
     }
   },
-  "start_pool": "valhelsia_structures:witch_huts",
+  "start_pool": {
+    "default": "valhelsia_structures:witch_huts",
+    "furnished": "valhelsia_structures:furnished/witch_huts"
+  },
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }

@@ -6,7 +6,9 @@
   "size": 7,
   "spawn_chance": 0.7,
   "spawn_overrides": {},
-  "start_pool": "valhelsia_structures:vegetations/big_trees",
+  "start_pool": {
+    "default": "valhelsia_structures:vegetations/big_trees"
+  },
   "step": "surface_structures",
   "terrain_adaptation": "beard_thin"
 }
