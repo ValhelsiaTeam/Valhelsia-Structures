@@ -13,5 +13,6 @@
   "result": {
     "count": 16,
     "item": "valhelsia_structures:light_blue_metal_framed_glass_pane"
-  }
+  },
+  "show_notification": true
 }

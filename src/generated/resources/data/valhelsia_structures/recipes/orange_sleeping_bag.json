@@ -11,5 +11,6 @@
   ],
   "result": {
     "item": "valhelsia_structures:orange_sleeping_bag"
-  }
+  },
+  "show_notification": true
 }

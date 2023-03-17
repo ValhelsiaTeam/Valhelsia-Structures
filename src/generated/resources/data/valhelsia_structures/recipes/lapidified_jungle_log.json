@@ -22,5 +22,6 @@
   "result": {
     "count": 8,
     "item": "valhelsia_structures:lapidified_jungle_log"
-  }
+  },
+  "show_notification": true
 }

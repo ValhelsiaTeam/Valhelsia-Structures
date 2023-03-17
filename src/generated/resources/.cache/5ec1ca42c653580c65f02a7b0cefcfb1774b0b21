@@ -1,7 +1,6 @@
-// 1.19.3	2022-12-28T13:10:56.1839956	Tags for minecraft:item mod id valhelsia_structures
+// 1.19.4	2023-03-17T21:52:01.0425933	Tags for minecraft:item mod id valhelsia_structures
 c1b9692433dd32870e79d99f49aec1c73e2e5e96 data/forge/tags/items/fences/wooden.json
 62daf4915ef2309fd7d4cb1768cdbc4f481f16dd data/forge/tags/items/fence_gates/wooden.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/forge/tags/items/glass.json
 abdd65528eb416d6d6ad1f020d97714ff861bf25 data/forge/tags/items/glass/colorless.json
 b868b381ccc22076b5df27e945925827c7f5eea6 data/forge/tags/items/glass_panes.json
 f0770b509280d280ac69080c30cd3c138c2b18a6 data/forge/tags/items/glass_panes/colorless.json

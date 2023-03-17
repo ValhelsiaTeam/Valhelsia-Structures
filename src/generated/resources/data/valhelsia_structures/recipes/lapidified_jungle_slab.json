@@ -12,5 +12,6 @@
   "result": {
     "count": 6,
     "item": "valhelsia_structures:lapidified_jungle_slab"
-  }
+  },
+  "show_notification": true
 }

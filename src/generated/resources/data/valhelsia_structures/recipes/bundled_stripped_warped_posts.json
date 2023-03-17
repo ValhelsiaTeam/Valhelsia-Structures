@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "valhelsia_structures:bundled_stripped_warped_posts"
-  }
+  },
+  "show_notification": true
 }

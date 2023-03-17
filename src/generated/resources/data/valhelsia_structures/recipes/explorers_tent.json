@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "valhelsia_structures:explorers_tent"
-  }
+  },
+  "show_notification": true
 }

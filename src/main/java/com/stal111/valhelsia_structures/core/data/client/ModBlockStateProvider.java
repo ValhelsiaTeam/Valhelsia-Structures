@@ -34,7 +34,6 @@ public class ModBlockStateProvider extends ValhelsiaBlockStateProvider {
 
         getRemainingBlocks().remove(ModBlocks.STRIPPED_WOODEN_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE));
         getRemainingBlocks().remove(ModBlocks.CUT_STRIPPED_WOODEN_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE));
-        getRemainingBlocks().remove(ModBlocks.BUNDLED_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE));
         getRemainingBlocks().remove(ModBlocks.BUNDLED_STRIPPED_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE));
 
         take(block -> this.brazierBlock(block, modLoc("block/brazier_fire"), modLoc("block/brazier_top")), ModBlocks.BRAZIER);

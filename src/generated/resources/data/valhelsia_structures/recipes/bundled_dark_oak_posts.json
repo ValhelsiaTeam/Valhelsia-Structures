@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "valhelsia_structures:bundled_dark_oak_posts"
-  }
+  },
+  "show_notification": true
 }

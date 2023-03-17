@@ -13,5 +13,6 @@
   ],
   "result": {
     "item": "valhelsia_structures:glazed_jar"
-  }
+  },
+  "show_notification": true
 }

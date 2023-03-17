@@ -11,5 +11,6 @@
   ],
   "result": {
     "item": "valhelsia_structures:pink_sleeping_bag"
-  }
+  },
+  "show_notification": true
 }
