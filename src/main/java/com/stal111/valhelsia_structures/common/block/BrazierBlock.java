@@ -6,7 +6,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -75,7 +74,7 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
 
             if (entity.getX() >= pos.getX() + 0.1D && entity.getZ() >= pos.getZ() + 0.1D && entity.getX() <= pos.getX() + 0.9D && entity.getZ() <= pos.getZ() + 0.9D) {
                 if (entity.getY() >= pos.getY() + 0.5D) {
-                    entity.hurt(DamageSource.IN_FIRE, this.fireDamage);
+                    entity.hurt(level.damageSources().inFire(), this.fireDamage);
                 }
             }
         }

@@ -1,9 +1,6 @@
 package com.stal111.valhelsia_structures.common;
 
-import com.stal111.valhelsia_structures.core.init.other.CompostableRegistry;
-import com.stal111.valhelsia_structures.core.init.other.FireExtinguishRegistry;
-import com.stal111.valhelsia_structures.core.init.other.FlammableRegistry;
-import com.stal111.valhelsia_structures.core.init.other.FlintAndSteelRegistry;
+import com.stal111.valhelsia_structures.core.init.other.*;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
 /**
@@ -19,6 +16,8 @@ public class CommonSetup {
         event.enqueueWork(() -> {
             FlammableRegistry.register();
             CompostableRegistry.register();
+
+            ModWoodTypes.registerWoodTypes();
         });
 
         FlintAndSteelRegistry.register();

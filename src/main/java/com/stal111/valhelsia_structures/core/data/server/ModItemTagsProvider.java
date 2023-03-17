@@ -9,8 +9,8 @@ import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 import javax.annotation.Nullable;
@@ -25,7 +25,7 @@ import java.util.concurrent.CompletableFuture;
  */
 public class ModItemTagsProvider extends ItemTagsProvider {
 
-    public ModItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, BlockTagsProvider blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
+    public ModItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(output, lookupProvider, blockTagProvider, ValhelsiaStructures.MOD_ID, existingFileHelper);
     }
 

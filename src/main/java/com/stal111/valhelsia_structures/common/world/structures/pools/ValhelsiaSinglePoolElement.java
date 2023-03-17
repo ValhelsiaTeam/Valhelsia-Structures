@@ -64,7 +64,7 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
 
     private static <T> DataResult<T> encodeTemplate(Either<ResourceLocation, StructureTemplate> either, DynamicOps<T> dynamicOps, T t) {
         Optional<ResourceLocation> optional = either.left();
-        return optional.isEmpty() ? DataResult.error("Can not serialize a runtime pool element") : ResourceLocation.CODEC.encode(optional.get(), dynamicOps, t);
+        return optional.isEmpty() ? DataResult.error(() -> "Can not serialize a runtime pool element") : ResourceLocation.CODEC.encode(optional.get(), dynamicOps, t);
     }
 
     protected static <E extends ValhelsiaSinglePoolElement> RecordCodecBuilder<E, Either<ResourceLocation, StructureTemplate>> valhelsiaTemplateCodec() {

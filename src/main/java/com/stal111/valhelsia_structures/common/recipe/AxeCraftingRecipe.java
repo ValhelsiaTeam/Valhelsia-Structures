@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -73,7 +75,7 @@ public class AxeCraftingRecipe extends CustomRecipe {
 
     @Nonnull
     @Override
-    public ItemStack assemble(CraftingContainer inv) {
+    public ItemStack assemble(CraftingContainer inv, @NotNull RegistryAccess registryAccess) {
         int logCount = 0;
 
         for(int i = 0; i < inv.getContainerSize(); i++) {

@@ -5,14 +5,15 @@ import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
 import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
 import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.init.other.ModWoodTypes;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.BedItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.fml.common.Mod;
@@ -35,6 +36,8 @@ import java.util.Map;
 public class ModBlocks implements RegistryClass {
 
     public static final BlockRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getBlockHelper();
+
+    public static final BlockSetType LAPIDIFIED_JUNGLE = new BlockSetType("lapidified_jungle");
 
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final BlockRegistryObject<SpecialSpawnerBlock> SPECIAL_SPAWNER = HELPER.create("special_spawner", () -> new SpecialSpawnerBlock(Block.Properties.copy(Blocks.SPAWNER).strength(-1.0F, 3600000.0F).noLootTable())).withItem();
@@ -117,10 +120,10 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryObject<Block> LAPIDIFIED_JUNGLE_PLANKS = HELPER.create("lapidified_jungle_planks", () -> new Block(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
     public static final BlockRegistryObject<StairBlock> LAPIDIFIED_JUNGLE_STAIRS = HELPER.create("lapidified_jungle_stairs", () -> new StairBlock(() -> ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get().defaultBlockState(), BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
     public static final BlockRegistryObject<SlabBlock> LAPIDIFIED_JUNGLE_SLAB = HELPER.create("lapidified_jungle_slab", () -> new SlabBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
-    public static final BlockRegistryObject<PressurePlateBlock> LAPIDIFIED_JUNGLE_PRESSURE_PLATE = HELPER.create("lapidified_jungle_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F), SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_OFF, SoundEvents.WOODEN_PRESSURE_PLATE_CLICK_ON)).withItem();
-    public static final BlockRegistryObject<ButtonBlock> LAPIDIFIED_JUNGLE_BUTTON = HELPER.create("lapidified_jungle_button", () -> new ButtonBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F), 30, true, SoundEvents.WOODEN_BUTTON_CLICK_OFF, SoundEvents.WOODEN_BUTTON_CLICK_ON)).withItem();
+    public static final BlockRegistryObject<PressurePlateBlock> LAPIDIFIED_JUNGLE_PRESSURE_PLATE = HELPER.create("lapidified_jungle_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F), LAPIDIFIED_JUNGLE)).withItem();
+    public static final BlockRegistryObject<ButtonBlock> LAPIDIFIED_JUNGLE_BUTTON = HELPER.create("lapidified_jungle_button", () -> new ButtonBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F), LAPIDIFIED_JUNGLE, 30, true)).withItem();
     public static final BlockRegistryObject<FenceBlock> LAPIDIFIED_JUNGLE_FENCE = HELPER.create("lapidified_jungle_fence", () -> new FenceBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
-    public static final BlockRegistryObject<FenceGateBlock> LAPIDIFIED_JUNGLE_FENCE_GATE = HELPER.create("lapidified_jungle_fence_gate", () -> new FenceGateBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS, SoundEvents.FENCE_GATE_CLOSE, SoundEvents.FENCE_GATE_OPEN)).withItem();
+    public static final BlockRegistryObject<FenceGateBlock> LAPIDIFIED_JUNGLE_FENCE_GATE = HELPER.create("lapidified_jungle_fence_gate", () -> new FenceGateBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS, ModWoodTypes.LAPIDIFIED_JUNGLE)).withItem();
     public static final BlockRegistryObject<ExplorersTentBlock> EXPLORERS_TENT = HELPER.create("explorers_tent", () -> new ExplorersTentBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_WOOL).noOcclusion())).withItem(registryObject -> new DyeableBlockItem(registryObject.get(), new Item.Properties()));
     @RenderType(ValhelsiaRenderType.CUTOUT)
     public static final BlockRegistryObject<BushBlock> HIBISCUS = HELPER.create("hibiscus", () -> new BushBlock(Block.Properties.copy(Blocks.POPPY))).withItem();

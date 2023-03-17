@@ -36,7 +36,7 @@ public class CreativeModeTabEvents {
         event.registerCreativeModeTab(new ResourceLocation(ValhelsiaStructures.MOD_ID, "main"), builder -> builder
                 .icon(() -> new ItemStack(ModBlocks.BRAZIER.get()))
                 .title(Component.translatable("itemGroup.valhelsia_structures"))
-                .displayItems((featureFlags, output, hasOp) -> {
+                .displayItems((parameters, output) -> {
                     List<Item> hiddenItems = HIDDEN_ITEMS.stream().map(supplier -> supplier.get().asItem()).toList();
 
                     ValhelsiaStructures.REGISTRY_MANAGER.getItemHelper().getRegistryObjects().forEach(registryObject -> {

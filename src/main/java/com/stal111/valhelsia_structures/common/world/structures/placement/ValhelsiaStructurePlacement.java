@@ -36,7 +36,7 @@ public class ValhelsiaStructurePlacement extends RandomSpreadStructurePlacement 
                 Codec.list(ExclusionZone.CODEC).fieldOf("exclusion_zones").forGetter(ValhelsiaStructurePlacement::getExclusionZones)
         ).apply(instance, ValhelsiaStructurePlacement::new);
     }).flatXmap(placement -> {
-        return placement.spacing() <= placement.separation() ? DataResult.error("Spacing has to be larger than separation") : DataResult.success(placement);
+        return placement.spacing() <= placement.separation() ? DataResult.error(() -> "Spacing has to be larger than separation") : DataResult.success(placement);
     }, DataResult::success).codec();
 
     private final List<ExclusionZone> exclusionZones;

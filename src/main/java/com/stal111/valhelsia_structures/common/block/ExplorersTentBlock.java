@@ -10,7 +10,6 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -133,7 +132,7 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
                     level.removeBlock(pos, false);
                 }
 
-                level.explode(null, DamageSource.badRespawnPointExplosion(pos.getCenter()), null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 5.0F, true, Level.ExplosionInteraction.BLOCK);
+                level.explode(null, level.damageSources().badRespawnPointExplosion(pos.getCenter()), null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 5.0F, true, Level.ExplosionInteraction.BLOCK);
 
                 return InteractionResult.SUCCESS;
             }

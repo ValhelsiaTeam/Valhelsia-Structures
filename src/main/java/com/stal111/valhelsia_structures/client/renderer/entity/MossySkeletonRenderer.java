@@ -17,7 +17,6 @@ import javax.annotation.Nonnull;
  * Valhelsia Structures - com.stal111.valhelsia_structures.client.renderer.entity.MossySkeletonRenderer
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2021-02-20
  */
 public class MossySkeletonRenderer extends HumanoidMobRenderer<MossySkeletonEntity, MossySkeletonModel<MossySkeletonEntity>> {
@@ -31,7 +30,7 @@ public class MossySkeletonRenderer extends HumanoidMobRenderer<MossySkeletonEnti
 
     public MossySkeletonRenderer(EntityRendererProvider.Context context, ModelLayerLocation layer, ModelLayerLocation innerArmorLayer, ModelLayerLocation outerArmorLayer) {
         super(context, new MossySkeletonModel<>(context.bakeLayer(layer)), 0.5F);
-        this.addLayer(new HumanoidArmorLayer<>(this, new MossySkeletonModel<>(context.bakeLayer(innerArmorLayer)), new MossySkeletonModel<>(context.bakeLayer(outerArmorLayer))));
+        this.addLayer(new HumanoidArmorLayer<>(this, new MossySkeletonModel<>(context.bakeLayer(innerArmorLayer)), new MossySkeletonModel<>(context.bakeLayer(outerArmorLayer)), context.getModelManager()));
 
 //        this.addLayer(new MossySkeletonVinesLayer<>(this));
 //        this.addLayer(new MossySkeletonArrowLayer<>(this));
