@@ -1,4 +1,4 @@
-// 1.19.3	2023-01-12T20:12:35.0279083	Item Models: valhelsia_structures
+// 1.19.4	2023-03-17T22:17:47.3745379	Item Models: valhelsia_structures
 32e8ec8070b43b34379155db78179e0416d04c18 assets/valhelsia_structures/models/item/acacia_post.json
 8a064420a192a5fb25223218e77e741a12b2aa04 assets/valhelsia_structures/models/item/big_black_glazed_jar.json
 b57eea540aca7a6e6e7d8bb4ef4ae6d492dbeea4 assets/valhelsia_structures/models/item/big_blue_glazed_jar.json
@@ -38,6 +38,7 @@ e4c18524271e1bcf469ca86c51209e5ceca80c2e assets/valhelsia_structures/models/item
 175521bbfe077459210c15016a4af17eef1cfa1e assets/valhelsia_structures/models/item/bundled_crimson_posts.json
 4a9a95d5b57598ca0d94256adc951838997a4d89 assets/valhelsia_structures/models/item/bundled_dark_oak_posts.json
 6dad2627f3c28d733ce5ad579d8ef4e307cc96bd assets/valhelsia_structures/models/item/bundled_jungle_posts.json
+b1353d77987deba175b369d99af7a9ea55f8582e assets/valhelsia_structures/models/item/bundled_lapidified_jungle_posts.json
 51e6fb572e84ded7d6d3cc2f4659243c318c0f24 assets/valhelsia_structures/models/item/bundled_oak_posts.json
 7ceca92cafe55f20ee76925fb224cef9ad8ff279 assets/valhelsia_structures/models/item/bundled_spruce_posts.json
 d135c57ef815d275a11528dc6e2538b4e1e81d08 assets/valhelsia_structures/models/item/bundled_stripped_acacia_posts.json

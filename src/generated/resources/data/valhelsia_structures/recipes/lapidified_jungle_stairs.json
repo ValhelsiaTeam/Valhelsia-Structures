@@ -14,5 +14,6 @@
   "result": {
     "count": 4,
     "item": "valhelsia_structures:lapidified_jungle_stairs"
-  }
+  },
+  "show_notification": true
 }

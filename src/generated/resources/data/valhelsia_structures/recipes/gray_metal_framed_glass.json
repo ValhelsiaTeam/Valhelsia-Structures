@@ -17,5 +17,6 @@
   "result": {
     "count": 8,
     "item": "valhelsia_structures:gray_metal_framed_glass"
-  }
+  },
+  "show_notification": true
 }

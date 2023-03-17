@@ -14,5 +14,6 @@
   ],
   "result": {
     "item": "valhelsia_structures:big_green_glazed_jar"
-  }
+  },
+  "show_notification": true
 }
