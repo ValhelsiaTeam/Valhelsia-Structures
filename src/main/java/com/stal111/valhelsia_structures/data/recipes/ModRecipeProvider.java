@@ -39,6 +39,7 @@ public class ModRecipeProvider extends RecipeSubProvider {
         map.put(ModBlocks.WoodType.JUNGLE, Blocks.JUNGLE_LOG);
         map.put(ModBlocks.WoodType.ACACIA, Blocks.ACACIA_LOG);
         map.put(ModBlocks.WoodType.DARK_OAK, Blocks.DARK_OAK_LOG);
+        map.put(ModBlocks.WoodType.MANGROVE, Blocks.MANGROVE_LOG);
         map.put(ModBlocks.WoodType.CRIMSON, Blocks.CRIMSON_STEM);
         map.put(ModBlocks.WoodType.WARPED, Blocks.WARPED_STEM);
         map.put(ModBlocks.WoodType.LAPIDIFIED_JUNGLE, ModBlocks.LAPIDIFIED_JUNGLE_LOG.get());
@@ -51,6 +52,7 @@ public class ModRecipeProvider extends RecipeSubProvider {
         map.put(ModBlocks.WoodType.JUNGLE, Blocks.STRIPPED_JUNGLE_LOG);
         map.put(ModBlocks.WoodType.ACACIA, Blocks.STRIPPED_ACACIA_LOG);
         map.put(ModBlocks.WoodType.DARK_OAK, Blocks.STRIPPED_DARK_OAK_LOG);
+        map.put(ModBlocks.WoodType.MANGROVE, Blocks.MANGROVE_LOG);
         map.put(ModBlocks.WoodType.CRIMSON, Blocks.STRIPPED_CRIMSON_STEM);
         map.put(ModBlocks.WoodType.WARPED, Blocks.STRIPPED_WARPED_STEM);
         map.put(ModBlocks.WoodType.LAPIDIFIED_JUNGLE, ModBlocks.LAPIDIFIED_JUNGLE_LOG.get());

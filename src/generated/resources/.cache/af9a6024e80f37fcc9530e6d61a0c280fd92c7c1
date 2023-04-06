@@ -1,4 +1,4 @@
-// 1.19.4	2023-03-17T21:52:01.0794938	Tags for minecraft:block mod id valhelsia_structures
+// 1.19.4	2023-04-06T17:16:37.4993415	Tags for minecraft:block mod id valhelsia_structures
 be4770091b89d612dfac964ba86728eb69bad56e data/forge/tags/blocks/braziers.json
 c1b9692433dd32870e79d99f49aec1c73e2e5e96 data/forge/tags/blocks/fences/wooden.json
 62daf4915ef2309fd7d4cb1768cdbc4f481f16dd data/forge/tags/blocks/fence_gates/wooden.json
@@ -15,7 +15,7 @@ f0770b509280d280ac69080c30cd3c138c2b18a6 data/forge/tags/blocks/glass_panes/colo
 217f315b489efedaa2a266116cd7422acacfe8c7 data/minecraft/tags/blocks/flowers.json
 53e923437441d7ce055b2aa5bc9d0db9e36789c9 data/minecraft/tags/blocks/impermeable.json
 ec7cc527615bef71f6e499971eaac359586cf984 data/minecraft/tags/blocks/logs.json
-03e87a315668e20233b9c64eedd8c76e32d90187 data/minecraft/tags/blocks/mineable/axe.json
+43373de91b79b7730662b3decb4b006c8cbb5cbd data/minecraft/tags/blocks/mineable/axe.json
 b941e8d877686273816d4fdf5a2189cd7b0ff62b data/minecraft/tags/blocks/mineable/pickaxe.json
 0abe479b4726a47b22a4ca2ea68f062d2e9a99f8 data/minecraft/tags/blocks/needs_diamond_tool.json
 e0c33a67d277ec15494b7d13c29447cfd21a6cc7 data/minecraft/tags/blocks/piglin_repellents.json
@@ -31,9 +31,9 @@ c2d09418105ee61c6f3bf6822cc6ccdd29284322 data/valhelsia_core/tags/blocks/offset_
 11d34fed97be08e27701020eff5d758b6bfc4dfe data/valhelsia_structures/tags/blocks/big_colored_jars.json
 67bd91e39f24ad989fcd8e22effdc4ceb3d63ff8 data/valhelsia_structures/tags/blocks/big_jars.json
 4cd0419500b9e52f3fe5dfba62f54502d1bcc8b5 data/valhelsia_structures/tags/blocks/colored_jars.json
-82e43ed19e9ab1a585a5fa05fd4f3ff4f7fd1211 data/valhelsia_structures/tags/blocks/cut_posts.json
+5b0b44025e89a2f97d8983f853382a5d48c49931 data/valhelsia_structures/tags/blocks/cut_posts.json
 48b0c34a9d235a9e0fd153c862e9be18901f1ab3 data/valhelsia_structures/tags/blocks/jars.json
 52c58f15453c231473cb8d86a678db23d03f996e data/valhelsia_structures/tags/blocks/lapidified_jungle_logs.json
 54141c0786b98b5ceaa8c30dfe3d93b9ed13f4ae data/valhelsia_structures/tags/blocks/non_flammable_posts.json
-4dee3368bfe006b88a6cdbb63dc33a01a09602c2 data/valhelsia_structures/tags/blocks/posts.json
+61ada48369a2c93392e385c38bf83f25dc50502a data/valhelsia_structures/tags/blocks/posts.json
 5d9ddeaa13e76e44565c8ba94abc98a9ecce26e7 data/valhelsia_structures/tags/blocks/sleeping_bags.json

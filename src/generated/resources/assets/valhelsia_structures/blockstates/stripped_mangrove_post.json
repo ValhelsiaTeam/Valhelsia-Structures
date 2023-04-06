@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "attached=false,axis=x": {
+      "model": "valhelsia_structures:block/stripped_mangrove_post",
+      "x": 90,
+      "y": 90
+    },
+    "attached=false,axis=y": {
+      "model": "valhelsia_structures:block/stripped_mangrove_post"
+    },
+    "attached=false,axis=z": {
+      "model": "valhelsia_structures:block/stripped_mangrove_post",
+      "x": 90
+    },
+    "attached=true,axis=x": {
+      "model": "valhelsia_structures:block/attached_stripped_mangrove_post",
+      "x": 90,
+      "y": 90
+    },
+    "attached=true,axis=y": {
+      "model": "valhelsia_structures:block/attached_stripped_mangrove_post"
+    },
+    "attached=true,axis=z": {
+      "model": "valhelsia_structures:block/attached_stripped_mangrove_post",
+      "x": 90
+    }
+  }
+}

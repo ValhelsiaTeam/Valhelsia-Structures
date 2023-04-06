@@ -1,0 +1,73 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "valhelsia_structures:cut_mangrove_post",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "parts": "1"
+                  }
+                }
+              ],
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "valhelsia_structures:cut_mangrove_post",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "parts": "2"
+                  }
+                }
+              ],
+              "count": 2.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "valhelsia_structures:cut_mangrove_post",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "parts": "3"
+                  }
+                }
+              ],
+              "count": 3.0,
+              "function": "minecraft:set_count"
+            },
+            {
+              "add": false,
+              "conditions": [
+                {
+                  "block": "valhelsia_structures:cut_mangrove_post",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "parts": "4"
+                  }
+                }
+              ],
+              "count": 4.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "valhelsia_structures:cut_mangrove_post"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}

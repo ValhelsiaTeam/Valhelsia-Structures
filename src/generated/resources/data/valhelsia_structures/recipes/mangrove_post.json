@@ -1,0 +1,10 @@
+{
+  "type": "valhelsia_structures:axe_crafting",
+  "input": {
+    "item": "minecraft:mangrove_log"
+  },
+  "output": {
+    "count": 2,
+    "item": "valhelsia_structures:mangrove_post"
+  }
+}

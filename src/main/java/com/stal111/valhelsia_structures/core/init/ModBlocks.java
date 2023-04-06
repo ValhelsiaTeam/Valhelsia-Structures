@@ -170,6 +170,7 @@ public class ModBlocks implements RegistryClass {
         JUNGLE("jungle", BlockBehaviour.Properties.copy(Blocks.JUNGLE_LOG), true, MaterialColor.DIRT, MaterialColor.PODZOL),
         ACACIA("acacia", BlockBehaviour.Properties.copy(Blocks.ACACIA_LOG), true, MaterialColor.COLOR_ORANGE, MaterialColor.STONE),
         DARK_OAK("dark_oak", BlockBehaviour.Properties.copy(Blocks.DARK_OAK_LOG), true, MaterialColor.COLOR_BROWN, MaterialColor.COLOR_BROWN),
+        MANGROVE("mangrove", BlockBehaviour.Properties.copy(Blocks.MANGROVE_LOG), true, MaterialColor.COLOR_RED, MaterialColor.PODZOL),
         CRIMSON("crimson", BlockBehaviour.Properties.copy(Blocks.CRIMSON_STEM), false, MaterialColor.CRIMSON_STEM, MaterialColor.CRIMSON_STEM),
         WARPED("warped", BlockBehaviour.Properties.copy(Blocks.WARPED_STEM), false, MaterialColor.WARPED_STEM, MaterialColor.WARPED_STEM),
         LAPIDIFIED_JUNGLE("lapidified_jungle", BlockProperties.LAPIDIFIED_JUNGLE_LOG, false, MaterialColor.DIRT, MaterialColor.DIRT);
