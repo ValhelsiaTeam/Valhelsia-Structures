@@ -101,28 +101,4 @@ public class ModStructures extends DatapackRegistryClass<Structure> {
     private AndHolderSet<Biome> withConditionTag(HolderGetter<Biome> biomeHolderGetter, TagKey<Biome> tagKey, TagKey<Biome> conditionTagKey) {
         return new AndHolderSet<>(List.of(biomeHolderGetter.getOrThrow(tagKey), biomeHolderGetter.getOrThrow(conditionTagKey)));
     }
-
-//    public static final Holder<? extends Structure> CASTLE = register("castle",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.5D), ConfigurableValue.of(32)));
-//    public static final Holder<? extends Structure> CASTLE_RUIN = register("castle_ruin",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.6D), ConfigurableValue.of(32)));
-//    public static final Holder<? extends Structure> DESERT_HOUSE = register("desert_house",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.7D), ConfigurableValue.of(20)));
-//    public static final Holder<? extends Structure> FORGE = register("forge",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.7D), ConfigurableValue.of(20)));
-//    public static final Holder<? extends Structure> PLAYER_HOUSE = register("player_house",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.7D), ConfigurableValue.of(18)));
-//    public static final Holder<? extends Structure> SPAWNER_DUNGEON = register("spawner_dungeon",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.8D), ConfigurableValue.of(18), ConfigurableValue.of(0)));
-//    public static final Holder<? extends Structure> TOWER_RUIN = register("tower_ruin",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.8D), ConfigurableValue.of(22)));
-//    public static final Holder<? extends Structure> WITCH_HUT = register("witch_hut",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.85D), ConfigurableValue.of(13), ConfigurableValue.of(3)));
-//    public static final Holder<? extends Structure> BIG_TREE = register("big_tree",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.7D), ConfigurableValue.of(25)));
-//    public static final Holder<? extends Structure> SPAWNER_ROOM = register("spawner_room",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(0.9D), null, ConfigurableValue.of(0)));
-//    public static final Holder<? extends Structure> DEEP_SPAWNER_ROOM = register("deep_spawner_room",
-//            ValhelsiaStructureSettings.of(ConfigurableValue.of(1.0D), null, ConfigurableValue.of(0)));
-
 }
