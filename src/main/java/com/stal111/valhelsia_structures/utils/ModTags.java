@@ -75,6 +75,7 @@ public class ModTags {
         public static final TagKey<Biome> HAS_CASTLE = modTag("has_structure/castle");
         public static final TagKey<Biome> HAS_CASTLE_RUIN = modTag("has_structure/castle_ruin");
         public static final TagKey<Biome> HAS_DESERT_HOUSE = modTag("has_structure/has_desert_house");
+        public static final TagKey<Biome> DESERT_HOUSE_CONDITION = modTag("has_structure/desert_house_condition");
         public static final TagKey<Biome> HAS_FORGE = modTag("has_structure/has_forge");
         public static final TagKey<Biome> HAS_PLAYER_HOUSE = modTag("has_structure/player_house");
         public static final TagKey<Biome> HAS_SPAWNER_DUNGEON = modTag("has_structure/spawner_dungeon");

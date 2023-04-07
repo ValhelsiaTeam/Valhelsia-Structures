@@ -8,9 +8,9 @@ import com.stal111.valhelsia_structures.core.init.world.ModStructureTypes;
 import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.NoiseColumn;
@@ -74,7 +74,7 @@ public class ValhelsiaJigsawStructure extends Structure {
         this.maxDistanceFromCenter = maxDistanceFromCenter;
     }
 
-    public static ValhelsiaJigsawStructure.Builder builder(BootstapContext<Structure> context, TagKey<Biome> biomeTagKey, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
+    public static ValhelsiaJigsawStructure.Builder builder(BootstapContext<Structure> context, HolderSet<Biome> biomeTagKey, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
         return new Builder(context, biomeTagKey, step, terrainAdjustment, startPool);
     }
 
@@ -178,7 +178,8 @@ public class ValhelsiaJigsawStructure extends Structure {
     public static class Builder {
 
         private final BootstapContext<Structure> context;
-        private final TagKey<Biome> biomeTagKey;
+        private final HolderSet<Biome> biomeHolderSet;
+
         private final GenerationStep.Decoration step;
         private final TerrainAdjustment terrainAdjustment;
         private final StartPoolKeySet startPool;
@@ -198,9 +199,9 @@ public class ValhelsiaJigsawStructure extends Structure {
         @Nullable
         private Boolean individualTerrainAdjustment = null;
 
-        private Builder(BootstapContext<Structure> context, TagKey<Biome> biomeTagKey, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
+        private Builder(BootstapContext<Structure> context, HolderSet<Biome> biomeHolderSet, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
             this.context = context;
-            this.biomeTagKey = biomeTagKey;
+            this.biomeHolderSet = biomeHolderSet;
             this.step = step;
             this.terrainAdjustment = terrainAdjustment;
             this.startPool = startPool;
@@ -251,7 +252,7 @@ public class ValhelsiaJigsawStructure extends Structure {
         }
 
         public ValhelsiaJigsawStructure build() {
-            StructureSettings settings = new StructureSettings(this.context.lookup(Registries.BIOME).getOrThrow(this.biomeTagKey), this.spawnOverrides, this.step, this.terrainAdjustment);
+            StructureSettings settings = new StructureSettings(biomeHolderSet, this.spawnOverrides, this.step, this.terrainAdjustment);
             ValhelsiaStructureSettings valhelsiaStructureSettings = new ValhelsiaStructureSettings(this.spawnChance, this.customMargin, this.individualTerrainAdjustment);
 
             return new ValhelsiaJigsawStructure(settings, valhelsiaStructureSettings, StartPoolDecider.of(this.context.lookup(Registries.TEMPLATE_POOL), this.startPool), this.maxDepth, this.heightProvider, this.projectStartToHeightmap, this.maxDistanceFromCenter);

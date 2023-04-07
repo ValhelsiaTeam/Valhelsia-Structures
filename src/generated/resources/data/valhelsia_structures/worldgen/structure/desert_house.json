@@ -1,6 +1,12 @@
 {
   "type": "valhelsia_structures:valhelsia_jigsaw_structure",
-  "biomes": "#valhelsia_structures:has_structure/has_desert_house",
+  "biomes": {
+    "type": "forge:and",
+    "values": [
+      "#valhelsia_structures:has_structure/has_desert_house",
+      "#valhelsia_structures:has_structure/desert_house_condition"
+    ]
+  },
   "max_distance_from_center": 80,
   "project_start_to_heightmap": "WORLD_SURFACE_WG",
   "size": 7,
