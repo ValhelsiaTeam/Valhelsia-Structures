@@ -87,7 +87,7 @@ public class ModStructures extends DatapackRegistryClass<Structure> {
     }
 
     protected void surfaceStructure(BootstapContext<Structure> context, ResourceKey<Structure> key, HolderSet<Biome> biomeHolderSet, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool, UnaryOperator<ValhelsiaJigsawStructure.Builder> builderUnaryOperator) {
-        context.register(key, builderUnaryOperator.apply(ValhelsiaJigsawStructure.builder(context, biomeHolderSet, GenerationStep.Decoration.SURFACE_STRUCTURES, terrainAdjustment, startPool)).build());
+        context.register(key, builderUnaryOperator.apply(ValhelsiaJigsawStructure.builder(context, biomeHolderSet, GenerationStep.Decoration.TOP_LAYER_MODIFICATION, terrainAdjustment, startPool)).build());
     }
 
     protected void undergroundStructure(BootstapContext<Structure> context, ResourceKey<Structure> key, HolderSet<Biome> biomeHolderSet, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool, UnaryOperator<ValhelsiaJigsawStructure.Builder> builderUnaryOperator) {
