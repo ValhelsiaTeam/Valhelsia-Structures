@@ -21,11 +21,8 @@ import java.util.function.Supplier;
 public class CreativeModeTabEvents {
 
     public static final ImmutableList<Supplier<? extends ItemLike>> HIDDEN_ITEMS = ImmutableList.<Supplier<? extends ItemLike>>builder()
-            .add(ModBlocks.WOODEN_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
             .add(ModBlocks.STRIPPED_WOODEN_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
-            .add(ModBlocks.CUT_WOODEN_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
             .add(ModBlocks.CUT_STRIPPED_WOODEN_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
-            .add(ModBlocks.BUNDLED_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
             .add(ModBlocks.BUNDLED_STRIPPED_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
             .add(ModBlocks.HIBISCUS)
             .add(ModBlocks.GIANT_FERN)
