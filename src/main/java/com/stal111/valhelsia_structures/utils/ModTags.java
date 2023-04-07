@@ -72,9 +72,6 @@ public class ModTags {
     }
 
     public static class Biomes {
-        public static final TagKey<Biome> IS_PLAINS = forgeTag("is_plains");
-        public static final TagKey<Biome> IS_DESERT = forgeTag("is_desert");
-
         public static final TagKey<Biome> HAS_CASTLE = modTag("has_structure/castle");
         public static final TagKey<Biome> HAS_CASTLE_RUIN = modTag("has_structure/castle_ruin");
         public static final TagKey<Biome> HAS_DESERT_HOUSE = modTag("has_structure/has_desert_house");
