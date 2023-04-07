@@ -134,11 +134,11 @@ dependencies {
     implementation fg.deobf(files("libs/valhelsia_furniture-forge-${valhelsia_furniture_version}-dev.jar"))
 
     // compile against the JEI API but do not include it at runtime
-  //  compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-  //  compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar
-  //  runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
-  //  runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
