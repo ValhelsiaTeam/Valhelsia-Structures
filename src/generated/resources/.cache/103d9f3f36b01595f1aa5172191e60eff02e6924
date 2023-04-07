@@ -1,4 +1,4 @@
-// 1.19.3	2023-04-06T17:47:47.1244566	Registries
+// 1.19.3	2023-04-07T12:32:57.7005691	Registries
 8a66e5489de0592bc85d7c2397db71e903c453a5 data/valhelsia_structures/forge/biome_modifier/remove_monster_room.json
 83e1052a196bd4c424b737c7a8c34b68a0ed7998 data/valhelsia_structures/worldgen/processor_list/deep_spawner_room.json
 485baf83408ac726ec190aaef8bf5f6a5b6cc822 data/valhelsia_structures/worldgen/processor_list/remove_water.json
@@ -8,7 +8,7 @@ feb997be3ddca0fc4bbd49c22166359182a2c3e6 data/valhelsia_structures/worldgen/proc
 54c240bf6ca4512b3b75a4de169d59ac04278e28 data/valhelsia_structures/worldgen/structure/castle.json
 67c222a0a3eef5df1ef8e572db40a19f5f0ce51b data/valhelsia_structures/worldgen/structure/castle_ruin.json
 b1fcf5e2323dabf1ecc4b4b0630af69c93a618f5 data/valhelsia_structures/worldgen/structure/deep_spawner_room.json
-1073ae554129bb7229bb7bc45ad7a2d64733e26e data/valhelsia_structures/worldgen/structure/desert_house.json
+092563b973c2a2f82139ac13a532733849125f3f data/valhelsia_structures/worldgen/structure/desert_house.json
 dee7586f462ce507e8e2d98b871f4e7c8c4a1c88 data/valhelsia_structures/worldgen/structure/forge.json
 2a744f453f42b1009696c9ae974e0df53e29b803 data/valhelsia_structures/worldgen/structure/player_house.json
 825f6dce9dc4671682d55ac7098ee24661472448 data/valhelsia_structures/worldgen/structure/spawner_dungeon.json

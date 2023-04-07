@@ -1,11 +1,10 @@
-// 1.19.3	2023-04-06T17:47:47.0995227	Tags for minecraft:worldgen/biome mod id valhelsia_structures
-f3ef2895c49e29111297e950661e5bc71a79989e data/forge/tags/worldgen/biome/is_desert.json
-50625c35926cbad9442439f8a7d1745418e77a3d data/forge/tags/worldgen/biome/is_plains.json
+// 1.19.3	2023-04-07T12:32:57.6840585	Tags for minecraft:worldgen/biome mod id valhelsia_structures
 b221ec153f29e62c2cbf6a8c454ed35e266b870a data/minecraft/tags/worldgen/biome/has_structure/swamp_hut.json
 5c0d6417dc8d9501750754f0547746a8f45239a0 data/valhelsia_structures/tags/worldgen/biome/has_structure/big_tree.json
 488ca197e91dc180f4a4d81232ae9fda2d083c49 data/valhelsia_structures/tags/worldgen/biome/has_structure/castle.json
 488ca197e91dc180f4a4d81232ae9fda2d083c49 data/valhelsia_structures/tags/worldgen/biome/has_structure/castle_ruin.json
 b020f6cdcd2d955793278b2f89a178a1d31e599a data/valhelsia_structures/tags/worldgen/biome/has_structure/deep_spawner_room.json
+3c1d7207a8494b533c19fe4a7379b32833895c17 data/valhelsia_structures/tags/worldgen/biome/has_structure/desert_house_condition.json
 66231d74902a9f3a4339266335581c57c91784dd data/valhelsia_structures/tags/worldgen/biome/has_structure/has_desert_house.json
 a9004cb282a10f87578085c70f320238a442bcd1 data/valhelsia_structures/tags/worldgen/biome/has_structure/has_forge.json
 a9004cb282a10f87578085c70f320238a442bcd1 data/valhelsia_structures/tags/worldgen/biome/has_structure/player_house.json
