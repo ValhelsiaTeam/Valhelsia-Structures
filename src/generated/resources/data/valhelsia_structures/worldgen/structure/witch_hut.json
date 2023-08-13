@@ -34,6 +34,6 @@
     "default": "valhelsia_structures:witch_huts",
     "furnished": "valhelsia_structures:furnished/witch_huts"
   },
-  "step": "surface_structures",
+  "step": "top_layer_modification",
   "terrain_adaptation": "beard_thin"
 }

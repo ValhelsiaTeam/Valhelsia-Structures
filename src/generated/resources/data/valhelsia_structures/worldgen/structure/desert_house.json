@@ -16,6 +16,6 @@
     "default": "valhelsia_structures:desert_house/houses",
     "furnished": "valhelsia_structures:furnished/desert_house/houses"
   },
-  "step": "surface_structures",
+  "step": "top_layer_modification",
   "terrain_adaptation": "beard_thin"
 }

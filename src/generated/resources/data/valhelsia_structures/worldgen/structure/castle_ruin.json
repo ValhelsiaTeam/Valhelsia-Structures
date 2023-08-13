@@ -9,6 +9,6 @@
   "start_pool": {
     "default": "valhelsia_structures:castle_ruins"
   },
-  "step": "surface_structures",
+  "step": "top_layer_modification",
   "terrain_adaptation": "beard_thin"
 }

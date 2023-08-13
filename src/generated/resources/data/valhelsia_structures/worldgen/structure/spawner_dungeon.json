@@ -18,5 +18,5 @@
   "start_pool": {
     "default": "valhelsia_structures:spawner_dungeon/cave_entrances"
   },
-  "step": "surface_structures"
+  "step": "top_layer_modification"
 }
