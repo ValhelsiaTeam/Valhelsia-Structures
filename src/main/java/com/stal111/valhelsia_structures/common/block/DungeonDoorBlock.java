@@ -6,9 +6,11 @@ import com.stal111.valhelsia_structures.common.block.properties.DungeonDoorPart;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
+import com.stal111.valhelsia_structures.core.init.ModSoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -210,6 +212,8 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
         }
         if (canOpen) {
             map.forEach((blockPos, blockState) -> level.setBlock(blockPos, blockState, blockState == Blocks.AIR.defaultBlockState() ? 35 : 10));
+
+            level.playSound(player, pos, open ? ModSoundEvents.DUNGEON_DOOR_OPEN.get() : ModSoundEvents.DUNGEON_DOOR_CLOSE.get(), SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide());

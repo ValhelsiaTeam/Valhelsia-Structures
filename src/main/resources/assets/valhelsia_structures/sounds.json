@@ -1,8 +1,0 @@
-{
-  "dungeon_door_open": {
-    "category": "block",
-    "sounds": [
-      "valhelsia_structures:dungeon_door_open"
-    ]
-  }
-}
