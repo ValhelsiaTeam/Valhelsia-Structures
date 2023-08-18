@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
@@ -212,6 +213,8 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
         }
         if (canOpen) {
             map.forEach((blockPos, blockState) -> level.setBlock(blockPos, blockState, blockState == Blocks.AIR.defaultBlockState() ? 35 : 10));
+
+            level.gameEvent(player, open ? GameEvent.BLOCK_OPEN : GameEvent.BLOCK_CLOSE, pos);
 
             level.playSound(player, pos, open ? ModSoundEvents.DUNGEON_DOOR_OPEN.get() : ModSoundEvents.DUNGEON_DOOR_CLOSE.get(), SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
         }
