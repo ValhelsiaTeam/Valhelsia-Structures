@@ -36,6 +36,7 @@ public class ModRegistries extends RegistryCollector {
         this.addMappedHelper(Registries.STRUCTURE_POOL_ELEMENT, ModStructurePoolElementTypes::new);
         this.addMappedHelper(Registries.STRUCTURE_PLACEMENT, ModStructurePlacementTypes::new);
         this.addMappedHelper(Registries.STRUCTURE_PROCESSOR, ModStructureProcessors::new);
+        this.addMappedHelper(Registries.SOUND_EVENT, ModSoundEvents::new);
 
         this.addDatapackHelper(Registries.STRUCTURE_SET, ModStructureSets::new);
         this.addDatapackHelper(Registries.STRUCTURE, ModStructures::new);

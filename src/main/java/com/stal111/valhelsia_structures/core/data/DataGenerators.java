@@ -8,7 +8,6 @@ import com.stal111.valhelsia_structures.core.data.server.ModBlockTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.ModItemTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModBlockLootTables;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModLootModifierProvider;
-import com.stal111.valhelsia_structures.core.data.server.loot.ModLootTableProvider;
 import com.stal111.valhelsia_structures.data.ModSoundsProvider;
 import com.stal111.valhelsia_structures.data.recipes.ModRecipeProvider;
 import net.minecraft.core.HolderLookup;
@@ -47,9 +46,9 @@ public class DataGenerators {
 
         DataProviderInfo info = DataProviderInfo.of(event, ValhelsiaStructures.REGISTRY_MANAGER);
 
-        generator.addProvider(event.includeClient(), new ModBlockStateProvider(generator, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ModItemModelProvider(generator, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ModSoundsProvider(generator, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ModItemModelProvider(output, existingFileHelper));
+        generator.addProvider(event.includeClient(), new ModSoundsProvider(output, existingFileHelper));
 
         ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(info);
         generator.addProvider(event.includeServer(), blockTagsProvider);

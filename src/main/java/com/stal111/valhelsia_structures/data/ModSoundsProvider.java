@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.data;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModSoundEvents;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.SoundDefinition;
@@ -17,11 +17,11 @@ public class ModSoundsProvider extends SoundDefinitionsProvider {
     /**
      * Creates a new instance of this data provider.
      *
-     * @param generator The data generator instance provided by the event you are initializing this provider in.
-     * @param helper    The existing file helper provided by the event you are initializing this provider in.
+     * @param output The {@linkplain PackOutput} instance provided by the data generator.
+     * @param helper The existing file helper provided by the event you are initializing this provider in.
      */
-    public ModSoundsProvider(DataGenerator generator, ExistingFileHelper helper) {
-        super(generator, ValhelsiaStructures.MOD_ID, helper);
+    public ModSoundsProvider(PackOutput output, ExistingFileHelper helper) {
+        super(output, ValhelsiaStructures.MOD_ID, helper);
     }
 
     @Override
