@@ -4,8 +4,8 @@ import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
-import net.valhelsia.valhelsia_core.common.world.structure.jigsaw.JigsawBuilder;
-import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.TemplatePoolRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.world.structure.jigsaw.JigsawBuilder;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;

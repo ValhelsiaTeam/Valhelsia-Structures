@@ -1,13 +1,16 @@
 package com.stal111.valhelsia_structures.data.worldgen.modifier;
 
+import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.HolderSet;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.data.worldgen.placement.CavePlacements;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.common.world.ForgeBiomeModifiers;
-import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
-import net.valhelsia.valhelsia_core.data.worldgen.ValhelsiaBiomeModifierProvider;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryHelper;
+import net.valhelsia.valhelsia_core.api.datagen.worldgen.ValhelsiaBiomeModifierProvider;
 
 import java.util.Collections;
 
@@ -17,18 +20,16 @@ import java.util.Collections;
  */
 public class ModBiomeModifiers extends ValhelsiaBiomeModifierProvider {
 
-    public ModBiomeModifiers(DataProviderInfo info, BootstapContext<BiomeModifier> context) {
-        super(info, context);
-        System.out.println(context);
+    public static final DatapackRegistryHelper<BiomeModifier> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(ForgeRegistries.Keys.BIOME_MODIFIERS);
 
+    public static final ResourceKey<BiomeModifier> REMOVE_MONSTER_ROOM = HELPER.createKey("remove_monster_room");
+
+    public ModBiomeModifiers(BootstapContext<BiomeModifier> context) {
+        super(context);
     }
 
     @Override
     public void bootstrap(BootstapContext<BiomeModifier> context) {
-        System.out.println(context);
-        System.out.println(this.biomeRegistry);
-        System.out.println(this.featureRegistry);
-
-        this.add("remove_monster_room", new ForgeBiomeModifiers.RemoveFeaturesBiomeModifier(this.isOverworld, HolderSet.direct(this.featureRegistry.getOrThrow(CavePlacements.MONSTER_ROOM), this.featureRegistry.getOrThrow(CavePlacements.MONSTER_ROOM_DEEP)), Collections.singleton(GenerationStep.Decoration.UNDERGROUND_STRUCTURES)));
+        this.add(REMOVE_MONSTER_ROOM, new ForgeBiomeModifiers.RemoveFeaturesBiomeModifier(this.isOverworld, HolderSet.direct(this.featureRegistry.getOrThrow(CavePlacements.MONSTER_ROOM), this.featureRegistry.getOrThrow(CavePlacements.MONSTER_ROOM_DEEP)), Collections.singleton(GenerationStep.Decoration.UNDERGROUND_STRUCTURES)));
     }
 }

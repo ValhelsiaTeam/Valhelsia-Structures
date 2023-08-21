@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.TorchBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.valhelsia.valhelsia_core.common.helper.FireExtinguishHelper;
+import net.valhelsia.valhelsia_core.api.common.helper.FireExtinguishHelper;
 
 /**
  * Fire Extinguish Registry <br>

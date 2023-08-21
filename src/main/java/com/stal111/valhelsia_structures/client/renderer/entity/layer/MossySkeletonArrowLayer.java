@@ -40,7 +40,7 @@ public class MossySkeletonArrowLayer<T extends MossySkeletonEntity> extends Rend
         ModelPart modelRenderer = this.getParentModel().getHead();
         modelRenderer.translateAndRotate(poseStack);
 
-        Arrow arrowEntity = new Arrow(entity.level, entity.getX(), entity.getY(), entity.getZ());
+        Arrow arrowEntity = new Arrow(entity.level(), entity.getX(), entity.getY(), entity.getZ());
         arrowEntity.setYRot(-120.0F);
         arrowEntity.setXRot(30.0F);
         poseStack.translate(0.0, -0.25, 0.0);

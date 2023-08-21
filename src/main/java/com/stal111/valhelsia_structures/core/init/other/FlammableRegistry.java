@@ -1,8 +1,7 @@
 package com.stal111.valhelsia_structures.core.init.other;
 
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
-import net.valhelsia.valhelsia_core.core.registry.helper.block.FlammableHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.block.FlammableHelper;
 
 /**
  * Flammable Registry <br>
@@ -13,7 +12,7 @@ import net.valhelsia.valhelsia_core.core.registry.helper.block.FlammableHelper;
  */
 public class FlammableRegistry {
 
-    private static final FlammableHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getBlockHelper().getFlammableHelper();
+    private static final FlammableHelper HELPER = FlammableHelper.get();
 
     public static void register() {
         ModBlocks.WOODEN_POSTS.forEach((woodType, registryObject) -> {
@@ -43,7 +42,7 @@ public class FlammableRegistry {
         HELPER.register(ModBlocks.PAPER_WALL.get(), 60, 60);
         HELPER.register(ModBlocks.HANGING_VINES_BODY.get(), 15, 100);
         HELPER.register(ModBlocks.HANGING_VINES.get(), 15, 100);
-       // HELPER.registerPlant(ModBlocks.HIBISCUS.get());
-       // HELPER.registerPlant(ModBlocks.GIANT_FERN.get());
+        HELPER.registerPlant(ModBlocks.HIBISCUS.get());
+        HELPER.registerPlant(ModBlocks.GIANT_FERN.get());
     }
 }

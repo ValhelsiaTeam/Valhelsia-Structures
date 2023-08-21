@@ -8,9 +8,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
-import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
-import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.TemplatePoolRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryClass;
 
 /**
  * @author Valhelsia Team
@@ -18,7 +17,7 @@ import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHel
  */
 public class SimpleStructurePools extends DatapackRegistryClass<StructureTemplatePool> {
 
-    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.TEMPLATE_POOL);
+    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.TEMPLATE_POOL);
 
     public static final StartPoolKeySet CASTLES = StartPoolKeySet.withFurnishedVariant(HELPER, "castles");
     public static final StartPoolKeySet CASTLE_RUINS = StartPoolKeySet.simple(HELPER, "castle_ruins");
@@ -28,8 +27,8 @@ public class SimpleStructurePools extends DatapackRegistryClass<StructureTemplat
     public static final StartPoolKeySet DEEP_SPAWNER_ROOMS = StartPoolKeySet.simple(HELPER, "deep_spawner_rooms");
     public static final StartPoolKeySet WITCH_HUTS = StartPoolKeySet.withFurnishedVariant(HELPER, "witch_huts");
 
-    public SimpleStructurePools(DataProviderInfo info, BootstapContext<StructureTemplatePool> context) {
-        super(info, context);
+    public SimpleStructurePools(BootstapContext<StructureTemplatePool> context) {
+        super(context);
     }
 
     @Override

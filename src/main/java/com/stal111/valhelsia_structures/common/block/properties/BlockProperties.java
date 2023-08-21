@@ -2,8 +2,7 @@ package com.stal111.valhelsia_structures.common.block.properties;
 
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 /**
  * Block Properties <br>
@@ -15,6 +14,6 @@ import net.minecraft.world.level.material.MaterialColor;
  */
 public class BlockProperties {
 
-    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_LOG = BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.DIRT).requiresCorrectToolForDrops().strength(3.0F).sound(SoundType.WOOD);
-    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_PLANKS = BlockBehaviour.Properties.of(Material.WOOD, MaterialColor.DIRT).requiresCorrectToolForDrops().strength(3.0F, 4.0F).sound(SoundType.WOOD);
+    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_LOG = BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).requiresCorrectToolForDrops().strength(3.0F).sound(SoundType.WOOD);
+    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_PLANKS = BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).requiresCorrectToolForDrops().strength(3.0F, 4.0F).sound(SoundType.WOOD);
 }

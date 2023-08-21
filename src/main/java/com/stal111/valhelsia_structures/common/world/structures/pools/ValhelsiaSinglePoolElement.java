@@ -83,10 +83,10 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
         }
 
         for (StructureTemplate.StructureBlockInfo info : structuretemplate.filterBlocks(offset, this.getSettings(rotation, box, keepJigsaws), Blocks.STRUCTURE_BLOCK)) {
-            StructureMode mode = StructureMode.valueOf(info.nbt.getString("mode"));
+            StructureMode mode = StructureMode.valueOf(info.nbt().getString("mode"));
 
             if (mode == StructureMode.DATA) {
-                this.handleDataMarker(level, info, info.pos, rotation, random, box);
+                this.handleDataMarker(level, info, info.pos(), rotation, random, box);
             }
         }
 
@@ -95,7 +95,7 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
 
     @Override
     public void handleDataMarker(@NotNull LevelAccessor level, @NotNull StructureTemplate.StructureBlockInfo blockInfo, @NotNull BlockPos pos, @NotNull Rotation rotation, @NotNull RandomSource random, @NotNull BoundingBox box) {
-        String data = blockInfo.nbt.getString("metadata");
+        String data = blockInfo.nbt().getString("metadata");
 
         if (data.startsWith("spawner:")) {
             level.removeBlock(pos, false);
@@ -149,7 +149,7 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
         List<StructureTemplate.StructureBlockInfo> markers = new ArrayList<>();
 
         for (StructureTemplate.StructureBlockInfo info : structureBlockInfos) {
-            StructureMode mode = StructureMode.valueOf(info.nbt.getString("mode"));
+            StructureMode mode = StructureMode.valueOf(info.nbt().getString("mode"));
 
             if (mode == StructureMode.DATA) {
                 markers.add(info);

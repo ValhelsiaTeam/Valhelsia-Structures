@@ -5,9 +5,8 @@ import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
-import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
-import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.TemplatePoolRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryClass;
 
 /**
  * Player House Pools <br>
@@ -19,11 +18,11 @@ import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHel
  */
 public class PlayerHousePools extends DatapackRegistryClass<StructureTemplatePool> {
 
-    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.TEMPLATE_POOL);
+    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.TEMPLATE_POOL);
     public static final StartPoolKeySet START = StartPoolKeySet.withFurnishedVariant(HELPER, "player_house/houses");
 
-    public PlayerHousePools(DataProviderInfo info, BootstapContext<StructureTemplatePool> context) {
-        super(info, context);
+    public PlayerHousePools(BootstapContext<StructureTemplatePool> context) {
+        super(context);
     }
 
     @Override

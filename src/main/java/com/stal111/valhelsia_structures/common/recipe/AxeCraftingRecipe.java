@@ -62,7 +62,7 @@ public class AxeCraftingRecipe extends CustomRecipe {
         for (int i = 0; i < inv.getContainerSize(); i++) {
             ItemStack stack1 = inv.getItem(i);
             if (i != axeSlot && !stack1.isEmpty()) {
-                if (input.test(stack1) && (stack == null || stack.sameItem(stack1))) {
+                if (input.test(stack1) && (stack == null || ItemStack.isSameItem(stack, stack1))) {
                     stack = stack1;
                 } else {
                     return false;

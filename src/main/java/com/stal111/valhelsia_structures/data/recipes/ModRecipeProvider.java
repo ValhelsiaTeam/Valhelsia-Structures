@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipeBuilder;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.Util;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -19,9 +20,9 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.valhelsia.valhelsia_core.data.recipes.RecipePart;
-import net.valhelsia.valhelsia_core.data.recipes.RecipeSubProvider;
-import net.valhelsia.valhelsia_core.data.recipes.ValhelsiaRecipeProvider;
+import net.valhelsia.valhelsia_core.api.datagen.recipes.RecipePart;
+import net.valhelsia.valhelsia_core.api.datagen.recipes.RecipeSubProvider;
+import net.valhelsia.valhelsia_core.api.datagen.recipes.ValhelsiaRecipeProvider;
 
 import java.util.EnumMap;
 import java.util.Objects;
@@ -139,15 +140,15 @@ public class ModRecipeProvider extends RecipeSubProvider {
 
         Block whiteSleepingBag = ModBlocks.SLEEPING_BAGS.get(DyeColor.WHITE).get();
 
-        ModBlocks.SLEEPING_BAGS.forEach((color, registryObject) -> {
+        ModBlocks.SLEEPING_BAGS.forEach((color, entry) -> {
             Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getName() + "_wool"));
 
             if (block != null) {
-                this.singleRow(RecipeCategory.DECORATIONS, registryObject.get(), RecipePart.of(block));
+                this.singleRow(RecipeCategory.DECORATIONS, entry.get(), RecipePart.of(block));
             }
 
             if (color != DyeColor.WHITE) {
-                this.shapeless(RecipeCategory.DECORATIONS, registryObject.get(), builder -> builder.requires(whiteSleepingBag).requires(color.getTag()).unlockedBy("has_item", has(whiteSleepingBag)).unlockedBy("has_color", has(color.getTag())), registryObject.getRegistryObject().getId().getPath() + "_from_white_sleeping_bag");
+                this.shapeless(RecipeCategory.DECORATIONS, entry.get(), builder -> builder.requires(whiteSleepingBag).requires(color.getTag()).unlockedBy("has_item", has(whiteSleepingBag)).unlockedBy("has_color", has(color.getTag())), BuiltInRegistries.BLOCK.getKey(entry.get()).getPath() + "_from_white_sleeping_bag");
             }
         });
 

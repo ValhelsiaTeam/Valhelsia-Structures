@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.common.integration;
 
-import com.stal111.valhelsia_structures.common.event.CreativeModeTabEvents;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import com.stal111.valhelsia_structures.core.init.ModCreativeModeTabs;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -32,7 +32,7 @@ public class ValhelsiaStructuresJEIPlugin implements IModPlugin {
 
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
-        jeiRuntime.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, CreativeModeTabEvents.HIDDEN_ITEMS.stream().map(supplier -> new ItemStack(supplier.get())).toList());
+        jeiRuntime.getIngredientManager().removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, ModCreativeModeTabs.HIDDEN_ITEMS.stream().map(supplier -> new ItemStack(supplier.get())).toList());
     }
 
     @Override

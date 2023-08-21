@@ -6,7 +6,7 @@ import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
-import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
+import net.valhelsia.valhelsia_core.api.common.registry.RegistryClass;
 
 /**
  * @author Valhelsia Team

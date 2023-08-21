@@ -5,10 +5,10 @@ import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.MappedRegistryHelper;
-import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryObject;
+import net.valhelsia.valhelsia_core.api.common.registry.RegistryClass;
+import net.valhelsia.valhelsia_core.api.common.registry.RegistryEntry;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.MappedRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.block.BlockRegistryEntry;
 
 import java.util.stream.Stream;
 
@@ -20,13 +20,13 @@ import java.util.stream.Stream;
  */
 public class ModBlockEntities implements RegistryClass {
 
-    public static final MappedRegistryHelper<BlockEntityType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getMappedHelper(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES);
+    public static final MappedRegistryHelper<BlockEntityType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES);
 
 
-    public static final RegistryObject<BlockEntityType<SpecialSpawnerBlockEntity>> SPECIAL_SPAWNER = HELPER.register("special_spawner", () -> BlockEntityType.Builder.of(SpecialSpawnerBlockEntity::new, ModBlocks.SPECIAL_SPAWNER.get()).build(null));
-    public static final RegistryObject<BlockEntityType<JarBlockEntity>> JAR = HELPER.register("jar", () -> BlockEntityType.Builder.of(JarBlockEntity::new, Stream.concat(Stream.of(ModBlocks.GLAZED_JAR.get(), ModBlocks.CRACKED_GLAZED_JAR.get()), ModBlocks.COLORED_GLAZED_JARS.values().stream().map(BlockRegistryObject::get)).toArray(Block[]::new)).build(null));
-    public static final RegistryObject<BlockEntityType<ExplorersTentBlockEntity>> TENT = HELPER.register("explorers_tent", () -> BlockEntityType.Builder.of(ExplorersTentBlockEntity::new, ModBlocks.EXPLORERS_TENT.get()).build(null));
-    public static final RegistryObject<BlockEntityType<GiantFernBlockEntity>> GIANT_FERN = HELPER.register("giant_fern", () -> BlockEntityType.Builder.of(GiantFernBlockEntity::new, ModBlocks.GIANT_FERN.get()).build(null));
-    public static final RegistryObject<BlockEntityType<DungeonDoorBlockEntity>> DUNGEON_DOOR = HELPER.register("dungeon_door", () -> BlockEntityType.Builder.of(DungeonDoorBlockEntity::new, ModBlocks.DUNGEON_DOOR.get()).build(null));
+    public static final RegistryEntry<BlockEntityType<SpecialSpawnerBlockEntity>> SPECIAL_SPAWNER = HELPER.register("special_spawner", () -> BlockEntityType.Builder.of(SpecialSpawnerBlockEntity::new, ModBlocks.SPECIAL_SPAWNER.get()).build(null));
+    public static final RegistryEntry<BlockEntityType<JarBlockEntity>> JAR = HELPER.register("jar", () -> BlockEntityType.Builder.of(JarBlockEntity::new, Stream.concat(Stream.of(ModBlocks.GLAZED_JAR.get(), ModBlocks.CRACKED_GLAZED_JAR.get()), ModBlocks.COLORED_GLAZED_JARS.values().stream().map(BlockRegistryEntry::get)).toArray(Block[]::new)).build(null));
+    public static final RegistryEntry<BlockEntityType<ExplorersTentBlockEntity>> TENT = HELPER.register("explorers_tent", () -> BlockEntityType.Builder.of(ExplorersTentBlockEntity::new, ModBlocks.EXPLORERS_TENT.get()).build(null));
+    public static final RegistryEntry<BlockEntityType<GiantFernBlockEntity>> GIANT_FERN = HELPER.register("giant_fern", () -> BlockEntityType.Builder.of(GiantFernBlockEntity::new, ModBlocks.GIANT_FERN.get()).build(null));
+    public static final RegistryEntry<BlockEntityType<DungeonDoorBlockEntity>> DUNGEON_DOOR = HELPER.register("dungeon_door", () -> BlockEntityType.Builder.of(DungeonDoorBlockEntity::new, ModBlocks.DUNGEON_DOOR.get()).build(null));
 
 }

@@ -8,8 +8,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
-import net.valhelsia.valhelsia_core.common.loot.conditions.MatchBlockCondition;
-import net.valhelsia.valhelsia_core.common.loot.modifiers.AppendLootTableModifier;
+import net.valhelsia.valhelsia_core.api.common.loot.condition.MatchBlockCondition;
+import net.valhelsia.valhelsia_core.api.common.loot.modifier.AppendLootTableModifier;
 
 /**
  * Mod Loot Modifiers <br>

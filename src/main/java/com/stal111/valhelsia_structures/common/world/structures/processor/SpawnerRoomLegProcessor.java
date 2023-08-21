@@ -42,14 +42,14 @@ public class SpawnerRoomLegProcessor extends StructureProcessor {
     @Nullable
     @Override
     public StructureTemplate.StructureBlockInfo process(@NotNull LevelReader level, @NotNull BlockPos piecePos, @NotNull BlockPos pieceBottomCenterPos, @NotNull StructureTemplate.StructureBlockInfo blockInfo, @NotNull StructureTemplate.StructureBlockInfo relativeBlockInfo, @NotNull StructurePlaceSettings placeSettings, @Nullable StructureTemplate template) {
-        if (relativeBlockInfo.state.is(Blocks.STRUCTURE_BLOCK)) {
-            StructureMode mode = StructureMode.valueOf(relativeBlockInfo.nbt.getString("mode"));
+        if (relativeBlockInfo.state().is(Blocks.STRUCTURE_BLOCK)) {
+            StructureMode mode = StructureMode.valueOf(relativeBlockInfo.nbt().getString("mode"));
 
             if (mode == StructureMode.DATA) {
-                String data = relativeBlockInfo.nbt.getString("metadata");
+                String data = relativeBlockInfo.nbt().getString("metadata");
 
                 if (data.startsWith("support_leg")) {
-                    BlockPos.MutableBlockPos mutable = relativeBlockInfo.pos.below().mutable();
+                    BlockPos.MutableBlockPos mutable = relativeBlockInfo.pos().below().mutable();
 
                     while (mutable.getY() > level.getMinBuildHeight() && mutable.getY() < level.getMaxBuildHeight()) {
                         if (!this.placeBlock(level, mutable, this.block)) {
@@ -65,7 +65,7 @@ public class SpawnerRoomLegProcessor extends StructureProcessor {
                     if (direction != null) {
                         direction = placeSettings.getRotation().rotate(direction);
 
-                        mutable = relativeBlockInfo.pos.below().mutable().move(direction);
+                        mutable = relativeBlockInfo.pos().below().mutable().move(direction);
                         this.placeBlock(level, mutable, this.slabBlock);
 
                         mutable.move(direction.getClockWise());
@@ -75,7 +75,7 @@ public class SpawnerRoomLegProcessor extends StructureProcessor {
                         this.placeBlock(level, mutable, this.slabBlock);
                     }
 
-                    return new StructureTemplate.StructureBlockInfo(relativeBlockInfo.pos, Blocks.COBBLESTONE.defaultBlockState(), null);
+                    return new StructureTemplate.StructureBlockInfo(relativeBlockInfo.pos(), Blocks.COBBLESTONE.defaultBlockState(), null);
                 }
             }
         }

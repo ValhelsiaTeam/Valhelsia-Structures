@@ -9,9 +9,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
 import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement;
-import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
-import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryClass;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryHelper;
 
 import java.util.stream.Stream;
 
@@ -21,7 +20,7 @@ import java.util.stream.Stream;
  */
 public class ModStructureSets extends DatapackRegistryClass<StructureSet> {
 
-    public static final DatapackRegistryHelper<StructureSet> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.STRUCTURE_SET);
+    public static final DatapackRegistryHelper<StructureSet> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.STRUCTURE_SET);
 
     public static final ResourceKey<StructureSet> CASTLES = HELPER.createKey("castles");
     public static final ResourceKey<StructureSet> CASTLE_RUINS = HELPER.createKey("castle_ruins");
@@ -35,8 +34,8 @@ public class ModStructureSets extends DatapackRegistryClass<StructureSet> {
     public static final ResourceKey<StructureSet> SPAWNER_ROOMS = HELPER.createKey("spawner_rooms");
     public static final ResourceKey<StructureSet> DEEP_SPAWNER_ROOMS = HELPER.createKey("deep_spawner_rooms");
 
-    public ModStructureSets(DataProviderInfo info, BootstapContext<StructureSet> context) {
-        super(info, context);
+    public ModStructureSets(BootstapContext<StructureSet> context) {
+        super(context);
     }
 
     @Override

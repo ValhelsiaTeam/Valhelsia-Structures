@@ -11,7 +11,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.valhelsia.valhelsia_core.common.helper.FlintAndSteelHelper;
+import net.valhelsia.valhelsia_core.api.common.helper.FlintAndSteelHelper;
 
 import java.util.Objects;
 

@@ -1,10 +1,8 @@
 package com.stal111.valhelsia_structures.common.event;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.core.init.ModEntities;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
@@ -16,8 +14,8 @@ import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.valhelsia.valhelsia_core.common.helper.TradeHelper;
-import net.valhelsia.valhelsia_core.common.util.ItemStackUtils;
+import net.valhelsia.valhelsia_core.api.common.helper.forge.TradeHelper;
+import net.valhelsia.valhelsia_core.api.common.util.ItemStackUtils;
 
 /**
  * Entity Event Listener <br>
@@ -44,7 +42,7 @@ public class EntityEventListener {
                 VillagerProfession.CARTOGRAPHER,
                 1,
                 (trader, rand) -> {
-                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModTags.Structures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.spawner_dungeon");
+                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level(), trader.blockPosition(), ModTags.Structures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.spawner_dungeon");
                     if (stack == null) {
                         return null;
                     }
@@ -55,7 +53,7 @@ public class EntityEventListener {
                 VillagerProfession.CARTOGRAPHER,
                 2,
                 (trader, rand) -> {
-                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level, trader.blockPosition(), ModTags.Structures.ON_CASTLE_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.castle");
+                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level(), trader.blockPosition(), ModTags.Structures.ON_CASTLE_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.castle");
                     if (stack == null) {
                         return null;
                     }
@@ -69,7 +67,7 @@ public class EntityEventListener {
 
         @SubscribeEvent
         public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
-            event.put(ModEntities.MOSSY_SKELETON.get(), AbstractSkeleton.createAttributes().build());
+           // event.put(ModEntities.MOSSY_SKELETON.get(), AbstractSkeleton.createAttributes().build());
         }
     }
 }

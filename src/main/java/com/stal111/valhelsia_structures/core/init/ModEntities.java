@@ -4,11 +4,10 @@ import com.stal111.valhelsia_structures.common.entity.MossySkeletonEntity;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import net.valhelsia.valhelsia_core.core.registry.RegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.EntityRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.RegistryClass;
+import net.valhelsia.valhelsia_core.api.common.registry.RegistryEntry;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.EntityRegistryHelper;
 
 /**
  * Mod Entities <br>
@@ -18,11 +17,10 @@ import net.valhelsia.valhelsia_core.core.registry.helper.EntityRegistryHelper;
  * @version 1.19 - 0.2.0
  * @since 2021-02-20
  */
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEntities implements RegistryClass {
 
-    public static final EntityRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getMappedHelper(ForgeRegistries.Keys.ENTITY_TYPES);
+    public static final EntityRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(ForgeRegistries.Keys.ENTITY_TYPES);
 
-    public static final RegistryObject<EntityType<MossySkeletonEntity>> MOSSY_SKELETON = HELPER.register("mossy_skeleton", EntityType.Builder.of(MossySkeletonEntity::new, MobCategory.MONSTER).sized(0.6F, 1.99F).clientTrackingRange(8));
+    public static final RegistryEntry<EntityType<MossySkeletonEntity>> MOSSY_SKELETON = HELPER.register("mossy_skeleton", EntityType.Builder.of(MossySkeletonEntity::new, MobCategory.MONSTER).sized(0.6F, 1.99F).clientTrackingRange(8));
 
 }

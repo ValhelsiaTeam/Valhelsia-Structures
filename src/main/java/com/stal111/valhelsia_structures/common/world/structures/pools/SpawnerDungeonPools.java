@@ -9,9 +9,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
-import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
-import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.TemplatePoolRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryClass;
 
 
 /**
@@ -19,12 +18,12 @@ import net.valhelsia.valhelsia_core.core.registry.helper.TemplatePoolRegistryHel
  */
 public class SpawnerDungeonPools extends DatapackRegistryClass<StructureTemplatePool> {
 
-    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.TEMPLATE_POOL);
+    public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.TEMPLATE_POOL);
 
     public static final StartPoolKeySet START = StartPoolKeySet.simple(HELPER, "spawner_dungeon/cave_entrances");
 
-    public SpawnerDungeonPools(DataProviderInfo info, BootstapContext<StructureTemplatePool> context) {
-        super(info, context);
+    public SpawnerDungeonPools(BootstapContext<StructureTemplatePool> context) {
+        super(context);
     }
 
     @Override

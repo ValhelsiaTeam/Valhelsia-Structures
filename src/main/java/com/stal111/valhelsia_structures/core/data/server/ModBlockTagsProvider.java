@@ -9,10 +9,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.StainedGlassBlock;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraftforge.common.Tags;
-import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
-import net.valhelsia.valhelsia_core.core.data.tags.ValhelsiaBlockTagsProvider;
-import net.valhelsia.valhelsia_core.core.init.ValhelsiaTags;
-import net.valhelsia.valhelsia_core.core.registry.helper.block.BlockRegistryObject;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.block.BlockRegistryEntry;
+import net.valhelsia.valhelsia_core.api.datagen.DataProviderContext;
+import net.valhelsia.valhelsia_core.api.datagen.tags.ValhelsiaBlockTagsProvider;
 
 import javax.annotation.Nonnull;
 
@@ -25,20 +24,18 @@ import javax.annotation.Nonnull;
  */
 public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
 
-    public ModBlockTagsProvider(DataProviderInfo info) {
-        super(info);
+    public ModBlockTagsProvider(DataProviderContext context) {
+        super(context.output(), context.lookupProvider());
     }
 
     @Override
     protected void addTags(@Nonnull HolderLookup.Provider provider) {
-        super.addTags(provider);
-
         this.tag(ModTags.Blocks.BRAZIERS).add(ModBlocks.BRAZIER.get(), ModBlocks.SOUL_BRAZIER.get());
-        ModBlocks.HELPER.getRegistryObjects().forEach(registryObject -> {
-            if (registryObject.get() instanceof PostBlock) {
-                this.tag(ModTags.Blocks.POSTS).add(registryObject.get());
-            } else if (registryObject.get() instanceof CutPostBlock) {
-                this.tag(ModTags.Blocks.CUT_POSTS).add(registryObject.get());
+        ModBlocks.HELPER.getRegistryEntries().forEach(entry -> {
+            if (entry.get() instanceof PostBlock) {
+                this.tag(ModTags.Blocks.POSTS).add(entry.get());
+            } else if (entry.get() instanceof CutPostBlock) {
+                this.tag(ModTags.Blocks.CUT_POSTS).add(entry.get());
             }
         });
 
@@ -55,14 +52,14 @@ public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
         });
 
         this.tag(BlockTags.IMPERMEABLE).add(ModBlocks.METAL_FRAMED_GLASS.get());
-        for (BlockRegistryObject<StainedGlassBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS.values()) {
+        for (BlockRegistryEntry<StainedGlassBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS.values()) {
             this.tag(BlockTags.IMPERMEABLE).add(registryObject.get());
             this.tag(Tags.Blocks.STAINED_GLASS).add(registryObject.get());
         }
 
         this.tag(Tags.Blocks.GLASS_COLORLESS).add(ModBlocks.METAL_FRAMED_GLASS.get());
         this.tag(Tags.Blocks.GLASS_PANES).add(ModBlocks.METAL_FRAMED_GLASS_PANE.get());
-        for (BlockRegistryObject<StainedGlassPaneBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.values()) {
+        for (BlockRegistryEntry<StainedGlassPaneBlock> registryObject : ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.values()) {
             this.tag(Tags.Blocks.GLASS_PANES).add(registryObject.get());
             this.tag(Tags.Blocks.STAINED_GLASS_PANES).add(registryObject.get());
         }
@@ -98,7 +95,8 @@ public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
 
         ModBlocks.SLEEPING_BAGS.values().forEach(block -> this.tag(ModTags.Blocks.SLEEPING_BAGS).add(block.get()));
 
-        this.tag(ValhelsiaTags.Blocks.OFFSET_RENDERING).add(ModBlocks.BONE_PILE.get());
+        //TODO
+        //this.tag(ValhelsiaTags.Blocks.OFFSET_RENDERING).add(ModBlocks.BONE_PILE.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(ModBlocks.HANGING_VINES.get(), ModBlocks.HANGING_VINES_BODY.get());

@@ -43,7 +43,7 @@ public abstract class BucketItemMixin {
     @Inject(
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/world/level/material/Material;isLiquid()Z",
+                    target = "Lnet/minecraft/world/level/block/state/BlockState;liquid()Z",
                     shift = At.Shift.BEFORE), method = "emptyContents(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/phys/BlockHitResult;Lnet/minecraft/world/item/ItemStack;)Z",
             cancellable = true
     )

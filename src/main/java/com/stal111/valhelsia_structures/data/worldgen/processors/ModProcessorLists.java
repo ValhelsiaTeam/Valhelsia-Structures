@@ -10,10 +10,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.state.properties.SlabType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
-import net.valhelsia.valhelsia_core.common.world.structure.processor.RemoveWaterProcessor;
-import net.valhelsia.valhelsia_core.core.data.DataProviderInfo;
-import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryClass;
-import net.valhelsia.valhelsia_core.core.registry.helper.DatapackRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryClass;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.world.structure.processor.RemoveWaterProcessor;
 
 import java.util.List;
 
@@ -23,15 +22,15 @@ import java.util.List;
  */
 public class ModProcessorLists extends DatapackRegistryClass<StructureProcessorList> {
 
-    public static final DatapackRegistryHelper<StructureProcessorList> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getDatapackHelper(Registries.PROCESSOR_LIST);
+    public static final DatapackRegistryHelper<StructureProcessorList> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.PROCESSOR_LIST);
 
     public static final ResourceKey<StructureProcessorList> REMOVE_WATER = HELPER.createKey("remove_water");
     public static final ResourceKey<StructureProcessorList> WITCH_HUT = HELPER.createKey("witch_hut");
     public static final ResourceKey<StructureProcessorList> SPAWNER_ROOM = HELPER.createKey("spawner_room");
     public static final ResourceKey<StructureProcessorList> DEEP_SPAWNER_ROOM = HELPER.createKey("deep_spawner_room");
 
-    public ModProcessorLists(DataProviderInfo info, BootstapContext<StructureProcessorList> context) {
-        super(info, context);
+    public ModProcessorLists(BootstapContext<StructureProcessorList> context) {
+        super(context);
     }
 
     @Override
