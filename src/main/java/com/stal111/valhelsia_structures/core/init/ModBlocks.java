@@ -15,9 +15,11 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.common.Mod;
 import net.valhelsia.valhelsia_core.api.client.ValhelsiaRenderType;
 import net.valhelsia.valhelsia_core.api.common.block.StrippableRotatedPillarBlock;
+import net.valhelsia.valhelsia_core.api.common.block.entity.ValhelsiaBlockProperties;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryClass;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.block.BlockEntrySet;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.block.BlockRegistryEntry;
@@ -35,6 +37,10 @@ import org.jetbrains.annotations.NotNull;
 public class ModBlocks implements RegistryClass {
 
     public static final BlockRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getBlockHelper();
+
+    private static final BlockBehaviour.OffsetFunction BONE_PILE_OFFSET = (state, level, pos) -> {
+        return new Vec3(0.0D, -0.46875D, 0.0D);
+    };
 
     public static final BlockSetType LAPIDIFIED_JUNGLE = new BlockSetType("lapidified_jungle");
 
@@ -120,7 +126,7 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryEntry<DousedWallTorchBlock> DOUSED_SOUL_WALL_TORCH = HELPER.register("doused_soul_wall_torch", () -> new DousedWallTorchBlock((TorchBlock) Blocks.SOUL_WALL_TORCH, Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<DungeonDoorBlock> DUNGEON_DOOR = HELPER.register("dungeon_door", () -> new DungeonDoorBlock(Block.Properties.of().strength(50.0F, 100.0F).requiresCorrectToolForDrops().noOcclusion())).withItem();
     public static final BlockRegistryEntry<DungeonDoorLeafBlock> DUNGEON_DOOR_LEAF = HELPER.register("dungeon_door_leaf", () -> new DungeonDoorLeafBlock(Block.Properties.of().strength(50.0F, 100.0F).requiresCorrectToolForDrops().noOcclusion().lootFrom(ModBlocks.DUNGEON_DOOR)));
-    public static final BlockRegistryEntry<BonePileBlock> BONE_PILE = HELPER.register("bone_pile", () -> new BonePileBlock(Block.Properties.copy(Blocks.BONE_BLOCK).noOcclusion())).withItem().renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<BonePileBlock> BONE_PILE = HELPER.register("bone_pile", () -> new BonePileBlock(ValhelsiaBlockProperties.of().offsetType(BONE_PILE_OFFSET).mapColor(MapColor.SAND).requiresCorrectToolForDrops().strength(2.0F).sound(SoundType.BONE_BLOCK).noOcclusion().dynamicShape())).withItem().renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<Block> BONE_PILE_BLOCK = HELPER.register("bone_pile_block", () -> new Block(Block.Properties.copy(Blocks.BONE_BLOCK))).withItem();
     public static final BlockRegistryEntry<UnlitLanternBlock> UNLIT_LANTERN = HELPER.register("unlit_lantern", () -> new UnlitLanternBlock(() -> Blocks.LANTERN, Block.Properties.copy(Blocks.LANTERN).lightLevel(value -> 0))).withItem().toolType(ToolType.PICKAXE).renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<UnlitLanternBlock> UNLIT_SOUL_LANTERN = HELPER.register("unlit_soul_lantern", () -> new UnlitLanternBlock(() -> Blocks.SOUL_LANTERN, Block.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(value -> 0))).withItem().toolType(ToolType.PICKAXE).renderType(ValhelsiaRenderType.CUTOUT);
