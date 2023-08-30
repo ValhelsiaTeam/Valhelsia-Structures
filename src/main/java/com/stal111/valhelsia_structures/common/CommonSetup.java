@@ -14,7 +14,7 @@ public class CommonSetup {
 
     public static void setup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            //FlammableRegistry.register();
+            FlammableRegistry.register();
             CompostableRegistry.register();
 
             ModWoodTypes.registerWoodTypes();
