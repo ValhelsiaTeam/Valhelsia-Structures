@@ -120,6 +120,9 @@ repositories {
     maven {
         url = "https://www.cursemaven.com"
     }
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -130,7 +133,7 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
 
-    implementation fg.deobf(files("libs/valhelsia_core-forge-${valhelsia_core_version}-dev.jar"))
+    implementation fg.deobf("net.valhelsia:valhelsia_core-forge-${mc_version}:${valhelsia_core_version}")
     //implementation fg.deobf(files("libs/valhelsia_furniture-forge-${valhelsia_furniture_version}-dev.jar"))
 
     // compile against the JEI API but do not include it at runtime
