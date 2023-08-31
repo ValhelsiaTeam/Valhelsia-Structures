@@ -19,7 +19,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
@@ -92,7 +91,7 @@ public class ValhelsiaJigsawStructure extends Structure {
         ChunkPos chunkPos = context.chunkPos();
         BlockPos pos = chunkPos.getWorldPosition();
         ChunkGenerator generator = context.chunkGenerator();
-        WorldgenRandom random = new WorldgenRandom(new LegacyRandomSource(0L));
+        WorldgenRandom random = context.random();
 
         // Check if the surface is flat
         if (this.step() == GenerationStep.Decoration.SURFACE_STRUCTURES && !StructureUtils.isSurfaceFlat(context, 15)) {
@@ -112,8 +111,6 @@ public class ValhelsiaJigsawStructure extends Structure {
         }
 
         // Check the spawn chance
-        random.setSeed((long) (chunkPos.x >> 4 ^ chunkPos.z >> 4 << 4) ^ context.seed());
-
         return random.nextDouble() < this.getStructureSettings().spawnChance();
     }
 
