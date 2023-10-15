@@ -53,7 +53,6 @@ public class ValhelsiaStructures extends ValhelsiaMod {
     public static final RegistryManager REGISTRY_MANAGER = RegistryManager.builder(MOD_ID)
             .addBlockHelper(ForgeRegistries.Keys.BLOCKS, ModCreativeModeTabs.MAIN, ModBlocks::new)
             .addHelper(ForgeRegistries.Keys.ITEMS, ModItems::new)
-            .addHelper(ForgeRegistries.Keys.ENTITY_TYPES, ModEntities::new)
             .addHelper(Registry.STRUCTURE_TYPE_REGISTRY, ModStructureTypes::new)
             .addHelper(Registry.STRUCTURE_REGISTRY, ModStructures::new)
             .addHelper(Registry.STRUCTURE_SET_REGISTRY, ModStructureSets::new)

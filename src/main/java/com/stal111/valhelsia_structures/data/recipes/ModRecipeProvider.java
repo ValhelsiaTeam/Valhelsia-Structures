@@ -68,7 +68,6 @@ public class ModRecipeProvider extends ValhelsiaRecipeProvider {
 
         this.shaped(ModBlocks.PAPER_WALL.get(), 2, builder -> builder.pattern("#X#").pattern("#X#").pattern("#X#").define('#', Items.BAMBOO).define('X', Items.PAPER).unlockedBy(this, Items.BAMBOO));
         this.shaped(ModBlocks.BONE_PILE.get(), 3, builder -> builder.pattern("###").define('#', Items.BONE).group("bone_pile").unlockedBy(this, Items.BONE));
-        this.shapeless(ModBlocks.BONE_PILE.get(), 9, builder -> builder.requires(ModBlocks.BONE_PILE_BLOCK.get()).group("bone_pile").unlockedBy(getHasName(ModBlocks.BONE_PILE_BLOCK.get()), has(ModBlocks.BONE_PILE_BLOCK.get())), "bone_pile_from_bone_pile_block");
         this.storageRecipe(Items.BONE, ModBlocks.BONE_PILE_BLOCK.get());
         this.shaped(ModBlocks.BONE_PILE_BLOCK.get(), builder -> builder.pattern("###").pattern("###").pattern("###").define('#', ModBlocks.BONE_PILE.get()).group("bone_pile_block").unlockedBy(this, ModBlocks.BONE_PILE.get()), "bone_pile_block_from_bone_piles");
 
