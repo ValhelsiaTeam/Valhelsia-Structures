@@ -1,17 +1,14 @@
 package com.stal111.valhelsia_structures.common.event;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.core.init.ModEntities;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.saveddata.maps.MapDecoration;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.village.VillagerTradesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -62,14 +59,5 @@ public class EntityEventListener {
                     return new MerchantOffer(new ItemStack(Items.EMERALD, 12), new ItemStack(Items.COMPASS), stack, 12, 10, 1);
                 }
         );
-    }
-
-    @Mod.EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class ModEvents {
-
-        @SubscribeEvent
-        public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
-            event.put(ModEntities.MOSSY_SKELETON.get(), AbstractSkeleton.createAttributes().build());
-        }
     }
 }
