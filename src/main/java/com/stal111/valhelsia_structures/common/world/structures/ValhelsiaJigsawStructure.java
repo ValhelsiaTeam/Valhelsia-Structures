@@ -94,7 +94,7 @@ public class ValhelsiaJigsawStructure extends Structure {
         WorldgenRandom random = context.random();
 
         // Check if the surface is flat
-        if (this.step() == GenerationStep.Decoration.SURFACE_STRUCTURES && !StructureUtils.isSurfaceFlat(context, 15)) {
+        if (this.step() == GenerationStep.Decoration.FLUID_SPRINGS && !StructureUtils.isSurfaceFlat(context, 15)) {
             return false;
         }
 

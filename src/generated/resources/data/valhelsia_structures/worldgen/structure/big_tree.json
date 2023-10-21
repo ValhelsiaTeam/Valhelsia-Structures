@@ -9,6 +9,6 @@
   "start_pool": {
     "default": "valhelsia_structures:vegetations/big_trees"
   },
-  "step": "top_layer_modification",
+  "step": "fluid_springs",
   "terrain_adaptation": "beard_thin"
 }
