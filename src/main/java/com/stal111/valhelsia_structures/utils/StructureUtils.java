@@ -28,7 +28,7 @@ public class StructureUtils {
      */
     public static boolean isSurfaceFlat(Structure.GenerationContext context, int size) {
         ChunkPos pos = context.chunkPos();
-        int[] cornerHeights = getCornerHeights(context, pos.getMinBlockX(), size, pos.getMinBlockZ(), size);
+        int[] cornerHeights = getCornerHeights(context, pos.getMiddleBlockX(), size, pos.getMiddleBlockZ(), size);
 
         int minHeight = Math.min(Math.min(cornerHeights[0], cornerHeights[1]), Math.min(cornerHeights[2], cornerHeights[3]));
         int maxHeight = Math.max(Math.max(cornerHeights[0], cornerHeights[1]), Math.max(cornerHeights[2], cornerHeights[3]));
