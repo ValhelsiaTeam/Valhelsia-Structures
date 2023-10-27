@@ -14,6 +14,6 @@ import net.minecraft.world.level.material.MapColor;
  */
 public class BlockProperties {
 
-    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_LOG = BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).requiresCorrectToolForDrops().strength(3.0F).sound(SoundType.WOOD);
-    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_PLANKS = BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).requiresCorrectToolForDrops().strength(3.0F, 4.0F).sound(SoundType.WOOD);
+    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_LOG = BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).strength(3.0F).sound(SoundType.WOOD);
+    public static final BlockBehaviour.Properties LAPIDIFIED_JUNGLE_PLANKS = BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).strength(3.0F, 4.0F).sound(SoundType.WOOD);
 }
