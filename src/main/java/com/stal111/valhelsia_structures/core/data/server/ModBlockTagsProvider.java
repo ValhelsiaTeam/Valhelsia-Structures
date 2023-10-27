@@ -99,7 +99,7 @@ public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
         //this.tag(ValhelsiaTags.Blocks.OFFSET_RENDERING).add(ModBlocks.BONE_PILE.get());
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
-                .add(ModBlocks.HANGING_VINES.get(), ModBlocks.HANGING_VINES_BODY.get());
+                .add(ModBlocks.HANGING_VINES.get(), ModBlocks.HANGING_VINES_BODY.get(), ModBlocks.PAPER_WALL.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .addTag(ModTags.Blocks.JARS).addTag(ModTags.Blocks.BIG_JARS)
                 .add(ModBlocks.DUNGEON_DOOR.get(), ModBlocks.DUNGEON_DOOR_LEAF.get(), ModBlocks.BONE_PILE.get(), ModBlocks.BONE_PILE_BLOCK.get());
