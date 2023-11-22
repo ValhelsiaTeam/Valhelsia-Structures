@@ -6,7 +6,6 @@ import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
-import net.minecraft.world.level.GrassColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -40,7 +39,7 @@ public class ColorEvents {
             }
 
             return -1;
-        }, ModBlocks.HANGING_VINES.get(), ModBlocks.GRASS_BLOCK.get());
+        }, ModBlocks.HANGING_VINES.get());
     }
 
     @SubscribeEvent
@@ -51,12 +50,5 @@ public class ColorEvents {
             }
             return FoliageColor.getDefaultColor();
         }, ModBlocks.HANGING_VINES.get(), ModBlocks.HANGING_VINES_BODY.get());
-
-        event.register((state, level, pos, tintIndex) -> {
-            if (level != null && pos != null) {
-                return BiomeColors.getAverageGrassColor(level, pos);
-            }
-            return GrassColor.get(0.5D, 1.0D);
-        }, ModBlocks.GRASS_BLOCK.get());
     }
 }

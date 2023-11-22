@@ -1,4 +1,4 @@
-// 1.20.2	2023-11-22T19:48:02.9122846	Tags for minecraft:block mod id vanilla
+// 1.20.2	2023-11-22T20:25:08.9555431	Tags for minecraft:block mod id vanilla
 be4770091b89d612dfac964ba86728eb69bad56e data/forge/tags/blocks/braziers.json
 c1b9692433dd32870e79d99f49aec1c73e2e5e96 data/forge/tags/blocks/fences/wooden.json
 62daf4915ef2309fd7d4cb1768cdbc4f481f16dd data/forge/tags/blocks/fence_gates/wooden.json
@@ -7,10 +7,7 @@ b868b381ccc22076b5df27e945925827c7f5eea6 data/forge/tags/blocks/glass_panes.json
 f0770b509280d280ac69080c30cd3c138c2b18a6 data/forge/tags/blocks/glass_panes/colorless.json
 4fe4b0dd55ae8ef6d7048282aa590c6cd9408bfd data/forge/tags/blocks/stained_glass.json
 7e35229e6667b990dceb0418dfa87ad6603daf18 data/forge/tags/blocks/stained_glass_panes.json
-718d29e1a851b39737ad188f0b94b904bb17f3bd data/minecraft/tags/blocks/bamboo_plantable_on.json
 8782980469a6a7109cdc309bcf141aff18c32ce9 data/minecraft/tags/blocks/climbable.json
-38a8dc4c99fdc39cb4140a653d17df03766f9044 data/minecraft/tags/blocks/dirt.json
-38a8dc4c99fdc39cb4140a653d17df03766f9044 data/minecraft/tags/blocks/enderman_holdable.json
 62daf4915ef2309fd7d4cb1768cdbc4f481f16dd data/minecraft/tags/blocks/fence_gates.json
 217f315b489efedaa2a266116cd7422acacfe8c7 data/minecraft/tags/blocks/flowers.json
 53e923437441d7ce055b2aa5bc9d0db9e36789c9 data/minecraft/tags/blocks/impermeable.json
@@ -20,7 +17,6 @@ c0f5a71884e5879906f8fa701b70f7b597a677ca data/minecraft/tags/blocks/mineable/pic
 0abe479b4726a47b22a4ca2ea68f062d2e9a99f8 data/minecraft/tags/blocks/needs_diamond_tool.json
 e0c33a67d277ec15494b7d13c29447cfd21a6cc7 data/minecraft/tags/blocks/piglin_repellents.json
 5e680038e111e37e403afe5bbd48da07d088ad83 data/minecraft/tags/blocks/planks.json
-807481b286d56eaf4e17e0547f8538690cc6d36b data/minecraft/tags/blocks/valid_spawn.json
 adddeeea7707034737495c1ff52c71202533090d data/minecraft/tags/blocks/wall_post_override.json
 5ec5f5ebacf404a47008e3fdf22826ddca3ebfd1 data/minecraft/tags/blocks/wooden_buttons.json
 c1b9692433dd32870e79d99f49aec1c73e2e5e96 data/minecraft/tags/blocks/wooden_fences.json

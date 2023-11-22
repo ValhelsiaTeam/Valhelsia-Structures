@@ -81,7 +81,6 @@ public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
         this.tag(BlockTags.FENCE_GATES).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get());
         this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get());
         this.tag(BlockTags.FLOWERS).add(ModBlocks.HIBISCUS.get());
-        this.tag(BlockTags.DIRT).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get(), ModBlocks.COARSE_DIRT.get());
 
         this.tag(BlockTags.PIGLIN_REPELLENTS).add(ModBlocks.SOUL_BRAZIER.get());
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(
@@ -89,9 +88,6 @@ public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
                 ModBlocks.DOUSED_TORCH.get(),
                 ModBlocks.DOUSED_SOUL_TORCH.get()
         );
-        this.tag(BlockTags.VALID_SPAWN).add(ModBlocks.GRASS_BLOCK.get());
-        this.tag(BlockTags.BAMBOO_PLANTABLE_ON).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get());
-        this.tag(BlockTags.ENDERMAN_HOLDABLE).add(ModBlocks.GRASS_BLOCK.get(), ModBlocks.DIRT.get(), ModBlocks.COARSE_DIRT.get());
 
         ModBlocks.SLEEPING_BAGS.values().forEach(block -> this.tag(ModTags.Blocks.SLEEPING_BAGS).add(block.get()));
 

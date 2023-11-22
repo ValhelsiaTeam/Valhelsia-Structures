@@ -135,19 +135,6 @@ public class ModBlocks implements RegistryClass {
             blockRegistryObject -> blockRegistryObject.withItem(registryObject -> new BedItem(registryObject.get(), new Item.Properties()))
     );
 
-    // Workarounds for structures:
-
-    // stone that can't be replaced during later generation steps
-    public static final BlockRegistryEntry<Block> STONE = HELPER.register("stone", () -> new ValhelsiaStoneBlock(() -> Blocks.STONE, Block.Properties.copy(Blocks.STONE).lootFrom(() -> Blocks.STONE)));
-    public static final BlockRegistryEntry<Block> GRANITE = HELPER.register("granite", () -> new ValhelsiaStoneBlock(() -> Blocks.GRANITE, Block.Properties.copy(Blocks.GRANITE).lootFrom(() -> Blocks.GRANITE)));
-    public static final BlockRegistryEntry<Block> DIORITE = HELPER.register("diorite", () -> new ValhelsiaStoneBlock(() -> Blocks.DIORITE, Block.Properties.copy(Blocks.DIORITE).lootFrom(() -> Blocks.DIORITE)));
-    public static final BlockRegistryEntry<Block> ANDESITE = HELPER.register("andesite", () -> new ValhelsiaStoneBlock(() -> Blocks.ANDESITE, Block.Properties.copy(Blocks.ANDESITE).lootFrom(() -> Blocks.ANDESITE)));
-    // grass block on which features cannot generate
-    public static final BlockRegistryEntry<ValhelsiaGrassBlock> GRASS_BLOCK = HELPER.register("grass_block", () -> new ValhelsiaGrassBlock(Block.Properties.copy(Blocks.GRASS_BLOCK).lootFrom(() -> Blocks.GRASS_BLOCK))).renderType(ValhelsiaRenderType.CUTOUT);
-    // dirt that wont transform into grass blocks
-    public static final BlockRegistryEntry<Block> DIRT = HELPER.register("dirt", () -> new ValhelsiaStoneBlock(() -> Blocks.DIRT, Block.Properties.copy(Blocks.DIRT).lootFrom(() -> Blocks.DIRT)));
-    public static final BlockRegistryEntry<Block> COARSE_DIRT = HELPER.register("coarse_dirt", () -> new ValhelsiaStoneBlock(() -> Blocks.COARSE_DIRT, Block.Properties.copy(Blocks.COARSE_DIRT).lootFrom(() -> Blocks.COARSE_DIRT)));
-
     public enum WoodType implements StringRepresentable {
         OAK("oak", BlockBehaviour.Properties.copy(Blocks.OAK_LOG), true, MapColor.WOOD, MapColor.PODZOL),
         SPRUCE("spruce", BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG), true, MapColor.PODZOL, MapColor.COLOR_BROWN),
