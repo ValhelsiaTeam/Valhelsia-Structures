@@ -5,10 +5,10 @@ import com.stal111.valhelsia_structures.client.model.block.ExplorersTentModel;
 import com.stal111.valhelsia_structures.client.model.block.GiantFernModel;
 import com.stal111.valhelsia_structures.client.renderer.entity.block.*;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 /**
  * Entity Renderer Events <br>

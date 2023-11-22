@@ -69,7 +69,7 @@ public abstract class BucketItemMixin {
     }
 
     @Inject(at = @At(value = "HEAD"), method = "canBlockContainFluid", cancellable = true, remap = false)
-    private void valhelsia_canBlockContainFluid(Level level, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
+    private void valhelsia_canBlockContainFluid(Player player, Level level, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {
         if (state.getBlock() instanceof TorchBlock && this.content == Fluids.WATER && !ModConfig.COMMON.disableDousedTorch.get()) {
             cir.setReturnValue(true);
         }

@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_magenta_wool",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_magenta_wool"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:magenta_sleeping_bag"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

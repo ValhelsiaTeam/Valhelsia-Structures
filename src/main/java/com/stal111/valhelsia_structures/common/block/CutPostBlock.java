@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -24,9 +25,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ToolAction;
-import net.minecraftforge.common.ToolActions;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.ToolAction;
+import net.neoforged.neoforge.common.ToolActions;
 import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
 
 import javax.annotation.Nonnull;
@@ -118,14 +118,14 @@ public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-        ResourceLocation location = ForgeRegistries.BLOCKS.getKey(this);
+        ResourceLocation location = BuiltInRegistries.BLOCK.getKey(this);
 
         if (!context.getItemInHand().canPerformAction(toolAction) || Objects.requireNonNull(location).getPath().contains("stripped")) {
             return null;
         }
 
         if (toolAction == ToolActions.AXE_STRIP) {
-            return Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(location.getNamespace(), "cut_stripped_" + location.getPath().substring(4)))).defaultBlockState()
+            return Objects.requireNonNull(BuiltInRegistries.BLOCK.get(new ResourceLocation(location.getNamespace(), "cut_stripped_" + location.getPath().substring(4)))).defaultBlockState()
                     .setValue(FACING, state.getValue(FACING))
                     .setValue(ATTACHED, state.getValue(ATTACHED))
                     .setValue(PARTS, state.getValue(PARTS))

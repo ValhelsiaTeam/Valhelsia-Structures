@@ -30,14 +30,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_ingots/iron",
-      "has_glass/colorless",
-      "has_the_recipe"
+      "has_glass/colorless"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:metal_framed_glass"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

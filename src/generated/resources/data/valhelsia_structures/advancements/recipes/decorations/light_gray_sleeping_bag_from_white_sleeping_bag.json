@@ -32,14 +32,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_item",
-      "has_color",
-      "has_the_recipe"
+      "has_color"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:light_gray_sleeping_bag_from_white_sleeping_bag"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

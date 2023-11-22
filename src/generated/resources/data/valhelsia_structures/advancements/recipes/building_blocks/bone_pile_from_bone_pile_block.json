@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_bone_pile_block",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_bone_pile_block"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:bone_pile_from_bone_pile_block"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

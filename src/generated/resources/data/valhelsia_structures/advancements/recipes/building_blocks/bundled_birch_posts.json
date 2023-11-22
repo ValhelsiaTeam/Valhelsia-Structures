@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_birch_post",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_birch_post"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:bundled_birch_posts"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

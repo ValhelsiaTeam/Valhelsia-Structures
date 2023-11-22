@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_item",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_item"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:smelting/cracked_glazed_jar"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

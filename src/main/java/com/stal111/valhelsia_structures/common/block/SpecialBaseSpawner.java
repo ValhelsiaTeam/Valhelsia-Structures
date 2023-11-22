@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.common.block;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtOps;
@@ -15,7 +16,6 @@ import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SpawnData;
 import net.minecraft.world.phys.AABB;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
@@ -52,7 +52,7 @@ public abstract class SpecialBaseSpawner {
     private short waveCount = 0;
 
     public void setEntityId(EntityType<?> type) {
-        this.nextSpawnData.getEntityToSpawn().putString("id", Objects.requireNonNull(ForgeRegistries.ENTITY_TYPES.getKey(type)).toString());
+        this.nextSpawnData.getEntityToSpawn().putString("id", BuiltInRegistries.ENTITY_TYPE.getKey(type).toString());
     }
 
     private boolean isNearPlayer(Level pLevel, BlockPos pPos) {

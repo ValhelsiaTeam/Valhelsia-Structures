@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_lapidified_jungle_post",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_lapidified_jungle_post"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:bundled_lapidified_jungle_posts"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

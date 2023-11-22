@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.core.config;
 
 import com.stal111.valhelsia_structures.common.world.structures.ValhelsiaStructureSettings;
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
  * Common Config <br>
@@ -13,12 +13,12 @@ import net.minecraftforge.common.ForgeConfigSpec;
  */
 public class CommonConfig {
 
-    public final ForgeConfigSpec.IntValue flatnessDelta;
-    public final ForgeConfigSpec.IntValue minStructureDistance;
+    public final ModConfigSpec.IntValue flatnessDelta;
+    public final ModConfigSpec.IntValue minStructureDistance;
 
-    public final ForgeConfigSpec.BooleanValue disableDousedTorch;
+    public final ModConfigSpec.BooleanValue disableDousedTorch;
 
-    public CommonConfig(ForgeConfigSpec.Builder builder) {
+    public CommonConfig(ModConfigSpec.Builder builder) {
         builder.push("structures");
         this.flatnessDelta = builder.comment("How flat does terrain need to be for surface structures to spawn? (in blocks) [default: 4]").defineInRange("global.flatness_delta", 4, 0, 64);
         this.minStructureDistance = builder.comment("How many chunks need to be at least between two structures? (in chunks) [default: 5]").defineInRange("global.min_structure_distance", 5, 0, 64);

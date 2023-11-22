@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_pink_wool",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_pink_wool"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:pink_sleeping_bag"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

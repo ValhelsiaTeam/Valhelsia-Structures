@@ -1,6 +1,0 @@
-{
-  "parent": "valhelsia_structures:block/big_jar",
-  "textures": {
-    "jar": "valhelsia_structures:block/jar/big/big_green_glazed_jar"
-  }
-}

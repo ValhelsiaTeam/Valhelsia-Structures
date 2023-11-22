@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_glass_pane_side",
-  "textures": {
-    "edge": "valhelsia_structures:block/metal_framed_glass_pane_top",
-    "pane": "valhelsia_structures:block/yellow_metal_framed_glass"
-  }
-}

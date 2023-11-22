@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_magenta_metal_framed_glass",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_magenta_metal_framed_glass"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:magenta_metal_framed_glass_pane"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

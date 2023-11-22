@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.core.config;
 
 import com.stal111.valhelsia_structures.client.event.ScreenEvents;
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
  * @author Valhelsia Team
@@ -9,7 +9,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
  */
 public class ClientConfig {
 
-    public ClientConfig(ForgeConfigSpec.Builder builder) {
+    public ClientConfig(ModConfigSpec.Builder builder) {
         ScreenEvents.FURNITURE_WARNING_ENABLED.setConfiguredValue(value -> builder.comment("Show a warning if Valhelsia Furniture is not installed before world creation.").define("furniture_warning", value));
     }
 }

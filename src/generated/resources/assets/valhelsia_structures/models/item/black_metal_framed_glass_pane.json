@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "valhelsia_structures:block/black_metal_framed_glass"
-  }
-}

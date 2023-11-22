@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_stripped_oak_post",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_stripped_oak_post"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:bundled_stripped_oak_posts"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

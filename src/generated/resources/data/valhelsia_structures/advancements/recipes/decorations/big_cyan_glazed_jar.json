@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_cyan_terracotta",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cyan_terracotta"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:big_cyan_glazed_jar"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

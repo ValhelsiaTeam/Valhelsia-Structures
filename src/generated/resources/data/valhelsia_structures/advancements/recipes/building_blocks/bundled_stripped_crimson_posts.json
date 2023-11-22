@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_stripped_crimson_post",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_stripped_crimson_post"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:bundled_stripped_crimson_posts"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

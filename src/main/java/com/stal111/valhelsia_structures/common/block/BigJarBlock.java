@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.common.block;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -21,7 +22,6 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
 
 import javax.annotation.Nonnull;
@@ -94,7 +94,7 @@ public class BigJarBlock extends Block implements SimpleWaterloggedBlock {
 
     public BigJarTopBlock getTopBlock() {
         if (this.topBlock == null) {
-            this.topBlock = (BigJarTopBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(this)).getPath() + "_top"));
+            this.topBlock = (BigJarTopBlock) BuiltInRegistries.BLOCK.get(new ResourceLocation(ValhelsiaStructures.MOD_ID, Objects.requireNonNull(BuiltInRegistries.BLOCK.getKey(this)).getPath() + "_top"));
         }
         return this.topBlock;
     }

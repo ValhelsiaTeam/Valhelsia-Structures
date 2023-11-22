@@ -17,7 +17,8 @@ import java.util.OptionalInt;
  */
 public abstract class StructureHeightProvider {
 
-    public static final DeferredCodec<StructureHeightProvider> CODEC = new DeferredCodec<>(() -> ValhelsiaStructures.STRUCTURE_HEIGHT_PROVIDER_TYPES.get().getCodec().dispatch(StructureHeightProvider::getType, StructureHeightProviderType::codec));
+    public static final DeferredCodec<StructureHeightProvider> CODEC = new DeferredCodec<>(() -> ValhelsiaStructures.STRUCTURE_HEIGHT_PROVIDER_TYPES_REGISTRY.byNameCodec().dispatch(StructureHeightProvider::getType, StructureHeightProviderType::codec));
+
     public abstract OptionalInt sample(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType);
     public abstract int minY(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType);
     public abstract int maxY(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType);

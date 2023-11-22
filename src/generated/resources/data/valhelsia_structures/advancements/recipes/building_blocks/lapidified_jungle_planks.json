@@ -20,13 +20,14 @@
   },
   "requirements": [
     [
-      "has_log",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:lapidified_jungle_planks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

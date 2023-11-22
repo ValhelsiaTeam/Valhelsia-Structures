@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_terracotta",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_terracotta"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:glazed_jar"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

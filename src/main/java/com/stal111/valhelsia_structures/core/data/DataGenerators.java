@@ -4,24 +4,20 @@ import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.data.server.ModBiomeTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.ModBlockTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.ModItemTagsProvider;
-import com.stal111.valhelsia_structures.core.data.server.loot.ModBlockLootTables;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModLootModifierProvider;
 import com.stal111.valhelsia_structures.data.ModSoundsProvider;
 import com.stal111.valhelsia_structures.data.recipes.ModRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.valhelsia.valhelsia_core.api.datagen.DataProviderContext;
-import net.valhelsia.valhelsia_core.api.datagen.recipes.ValhelsiaRecipeProvider;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.valhelsia.valhelsia_core.datagen.DataProviderContext;
+import net.valhelsia.valhelsia_core.datagen.recipes.ValhelsiaRecipeProvider;
 
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
@@ -54,10 +50,10 @@ public class DataGenerators {
        // generator.addProvider(event.includeServer(), new ModStructureTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModBiomeTagsProvider(output, lookupProvider, existingFileHelper));
 
-        generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTables::new, LootContextParamSets.BLOCK))));
+        //generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTables::new, LootContextParamSets.BLOCK))));
         generator.addProvider(event.includeServer(), new ModLootModifierProvider(output));
 
-        generator.addProvider(event.includeServer(), new ValhelsiaRecipeProvider(context, ModRecipeProvider::new));
+        generator.addProvider(event.includeServer(), new ValhelsiaRecipeProvider(context, lookupProvider, ModRecipeProvider::new));
 
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER.buildRegistrySet(), Set.of(ValhelsiaStructures.MOD_ID)));
     }

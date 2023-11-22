@@ -18,14 +18,12 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.valhelsia.valhelsia_core.api.datagen.recipes.RecipePart;
-import net.valhelsia.valhelsia_core.api.datagen.recipes.RecipeSubProvider;
-import net.valhelsia.valhelsia_core.api.datagen.recipes.ValhelsiaRecipeProvider;
+import net.neoforged.neoforge.common.Tags;
+import net.valhelsia.valhelsia_core.datagen.recipes.RecipePart;
+import net.valhelsia.valhelsia_core.datagen.recipes.RecipeSubProvider;
+import net.valhelsia.valhelsia_core.datagen.recipes.ValhelsiaRecipeProvider;
 
 import java.util.EnumMap;
-import java.util.Objects;
 
 /**
  * @author Valhelsia Team
@@ -88,7 +86,7 @@ public class ModRecipeProvider extends RecipeSubProvider {
         this.glassPane(ModBlocks.METAL_FRAMED_GLASS_PANE.get(), RecipePart.of(ModBlocks.METAL_FRAMED_GLASS.get()));
 
         ModBlocks.COLORED_METAL_FRAMED_GLASS.forEach((color, registryObject) -> {
-            Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getName() + "_stained_glass")));
+            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(color.getName() + "_stained_glass"));
             this.metalFramedGlass(registryObject.get(), RecipePart.of(block));
         });
 
@@ -109,14 +107,14 @@ public class ModRecipeProvider extends RecipeSubProvider {
         this.bigGlazedJar(ModBlocks.BIG_GLAZED_JAR.get(), Blocks.TERRACOTTA);
 
         ModBlocks.COLORED_GLAZED_JARS.values().forEach(registryObject -> {
-            String name = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(registryObject.get())).getPath();
-            Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name.substring(0, name.length() - 11) + "_terracotta")));
+            String name = BuiltInRegistries.BLOCK.getKey(registryObject.get()).getPath();
+            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(name.substring(0, name.length() - 11) + "_terracotta"));
             this.glazedJar(registryObject.get(), block);
         });
 
         ModBlocks.BIG_COLORED_GLAZED_JARS.values().forEach(registryObject -> {
-            String name = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(registryObject.get())).getPath();
-            Block block = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(new ResourceLocation(name.substring(4, name.length() - 11) + "_terracotta")));
+            String name = BuiltInRegistries.BLOCK.getKey(registryObject.get()).getPath();
+            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(name.substring(4, name.length() - 11) + "_terracotta"));
             this.bigGlazedJar(registryObject.get(), block);
         });
 
@@ -141,11 +139,9 @@ public class ModRecipeProvider extends RecipeSubProvider {
         Block whiteSleepingBag = ModBlocks.SLEEPING_BAGS.get(DyeColor.WHITE).get();
 
         ModBlocks.SLEEPING_BAGS.forEach((color, entry) -> {
-            Block block = ForgeRegistries.BLOCKS.getValue(new ResourceLocation(color.getName() + "_wool"));
+            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(color.getName() + "_wool"));
 
-            if (block != null) {
-                this.singleRow(RecipeCategory.DECORATIONS, entry.get(), RecipePart.of(block));
-            }
+            this.singleRow(RecipeCategory.DECORATIONS, entry.get(), RecipePart.of(block));
 
             if (color != DyeColor.WHITE) {
                 this.shapeless(RecipeCategory.DECORATIONS, entry.get(), builder -> builder.requires(whiteSleepingBag).requires(color.getTag()).unlockedBy("has_item", has(whiteSleepingBag)).unlockedBy("has_color", has(color.getTag())), BuiltInRegistries.BLOCK.getKey(entry.get()).getPath() + "_from_white_sleeping_bag");

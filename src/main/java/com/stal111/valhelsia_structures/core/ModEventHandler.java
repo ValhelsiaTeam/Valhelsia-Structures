@@ -1,10 +1,10 @@
 package com.stal111.valhelsia_structures.core;
 
 import com.stal111.valhelsia_structures.client.event.ScreenEvents;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.loading.FMLEnvironment;
-import net.valhelsia.valhelsia_core.core.ValhelsiaForgeEventHandler;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.valhelsia.valhelsia_core.core.neoforge.ValhelsiaForgeEventHandler;
 
 /**
  * @author Valhelsia Team

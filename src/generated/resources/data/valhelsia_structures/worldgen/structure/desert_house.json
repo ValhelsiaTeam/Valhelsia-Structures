@@ -1,7 +1,7 @@
 {
   "type": "valhelsia_structures:valhelsia_jigsaw_structure",
   "biomes": {
-    "type": "forge:and",
+    "type": "neoforge:and",
     "values": [
       "#valhelsia_structures:has_structure/has_desert_house",
       "#valhelsia_structures:has_structure/desert_house_condition"
@@ -16,6 +16,6 @@
     "default": "valhelsia_structures:desert_house/houses",
     "furnished": "valhelsia_structures:furnished/desert_house/houses"
   },
-  "step": "fluid_springs",
+  "step": "top_layer_modification",
   "terrain_adaptation": "beard_thin"
 }

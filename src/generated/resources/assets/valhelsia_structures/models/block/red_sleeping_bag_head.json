@@ -1,6 +1,0 @@
-{
-  "parent": "valhelsia_structures:block/sleeping_bag_head",
-  "textures": {
-    "0": "valhelsia_structures:block/sleeping_bag/red_sleeping_bag"
-  }
-}

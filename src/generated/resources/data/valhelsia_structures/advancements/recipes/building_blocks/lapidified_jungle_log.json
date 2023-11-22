@@ -35,14 +35,15 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_item",
-      "has_jungle_log",
-      "has_the_recipe"
+      "has_jungle_log"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:lapidified_jungle_log"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

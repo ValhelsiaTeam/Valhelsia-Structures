@@ -2,9 +2,9 @@ package com.stal111.valhelsia_structures.core.init;
 
 import com.stal111.valhelsia_structures.common.block.entity.*;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryClass;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryEntry;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.MappedRegistryHelper;
@@ -20,7 +20,7 @@ import java.util.stream.Stream;
  */
 public class ModBlockEntities implements RegistryClass {
 
-    public static final MappedRegistryHelper<BlockEntityType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(ForgeRegistries.Keys.BLOCK_ENTITY_TYPES);
+    public static final MappedRegistryHelper<BlockEntityType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.BLOCK_ENTITY_TYPE);
 
 
     public static final RegistryEntry<BlockEntityType<SpecialSpawnerBlockEntity>> SPECIAL_SPAWNER = HELPER.register("special_spawner", () -> BlockEntityType.Builder.of(SpecialSpawnerBlockEntity::new, ModBlocks.SPECIAL_SPAWNER.get()).build(null));

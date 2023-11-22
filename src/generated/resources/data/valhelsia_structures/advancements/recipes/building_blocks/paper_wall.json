@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_bamboo",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_bamboo"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:paper_wall"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.utils;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -17,13 +17,13 @@ import java.util.function.Function;
 public class ConfigurableValue<D> {
 
     private final D defaultValue;
-    @Nullable private ForgeConfigSpec.ConfigValue<D> configuredValue;
+    @Nullable private ModConfigSpec.ConfigValue<D> configuredValue;
 
     public ConfigurableValue(@Nonnull D defaultValue) {
         this(defaultValue, null);
     }
 
-    public ConfigurableValue(@Nonnull D defaultValue, @Nullable ForgeConfigSpec.ConfigValue<D> configuredValue) {
+    public ConfigurableValue(@Nonnull D defaultValue, @Nullable ModConfigSpec.ConfigValue<D> configuredValue) {
         this.defaultValue = defaultValue;
         this.configuredValue = configuredValue;
     }
@@ -37,15 +37,15 @@ public class ConfigurableValue<D> {
     }
 
     @Nullable
-    public ForgeConfigSpec.ConfigValue<D> getConfiguredValue() {
+    public ModConfigSpec.ConfigValue<D> getConfiguredValue() {
         return this.configuredValue;
     }
 
-    public void setConfiguredValue(ForgeConfigSpec.ConfigValue<D> configuredValue) {
+    public void setConfiguredValue(ModConfigSpec.ConfigValue<D> configuredValue) {
         this.setConfiguredValue(d -> configuredValue);
     }
 
-    public void setConfiguredValue(Function<D, ForgeConfigSpec.ConfigValue<D>> configValueFunction) {
+    public void setConfiguredValue(Function<D, ModConfigSpec.ConfigValue<D>> configValueFunction) {
         this.configuredValue = configValueFunction.apply(this.getDefaultValue());
     }
 

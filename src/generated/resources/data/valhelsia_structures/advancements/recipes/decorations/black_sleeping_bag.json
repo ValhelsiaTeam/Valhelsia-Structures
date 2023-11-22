@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_black_wool",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_black_wool"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:black_sleeping_bag"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

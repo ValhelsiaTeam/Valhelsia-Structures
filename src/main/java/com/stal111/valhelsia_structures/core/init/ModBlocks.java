@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fml.common.Mod;
 import net.valhelsia.valhelsia_core.api.client.ValhelsiaRenderType;
 import net.valhelsia.valhelsia_core.api.common.block.StrippableRotatedPillarBlock;
 import net.valhelsia.valhelsia_core.api.common.block.entity.ValhelsiaBlockProperties;
@@ -33,7 +32,6 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Valhelsia Team
  */
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModBlocks implements RegistryClass {
 
     public static final BlockRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getBlockHelper();

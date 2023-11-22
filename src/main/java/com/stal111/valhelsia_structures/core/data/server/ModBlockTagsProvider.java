@@ -8,10 +8,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.StainedGlassBlock;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
-import net.minecraftforge.common.Tags;
+import net.neoforged.neoforge.common.Tags;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.block.BlockRegistryEntry;
-import net.valhelsia.valhelsia_core.api.datagen.DataProviderContext;
-import net.valhelsia.valhelsia_core.api.datagen.tags.ValhelsiaBlockTagsProvider;
+import net.valhelsia.valhelsia_core.datagen.DataProviderContext;
+import net.valhelsia.valhelsia_core.datagen.tags.ValhelsiaBlockTagsProvider;
 
 import javax.annotation.Nonnull;
 

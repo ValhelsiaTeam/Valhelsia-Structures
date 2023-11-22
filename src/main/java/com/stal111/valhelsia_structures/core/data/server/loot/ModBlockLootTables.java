@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.core.data.server.loot;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.world.flag.FeatureFlags;
-import net.valhelsia.valhelsia_core.api.datagen.ValhelsiaBlockLootTables;
+import net.valhelsia.valhelsia_core.datagen.ValhelsiaBlockLootTables;
 
 import java.util.Set;
 

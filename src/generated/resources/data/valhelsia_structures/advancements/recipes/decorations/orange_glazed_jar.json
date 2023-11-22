@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_orange_terracotta",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_orange_terracotta"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:orange_glazed_jar"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

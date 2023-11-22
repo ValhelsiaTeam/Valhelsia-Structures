@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_magenta_terracotta",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_magenta_terracotta"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:magenta_glazed_jar"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

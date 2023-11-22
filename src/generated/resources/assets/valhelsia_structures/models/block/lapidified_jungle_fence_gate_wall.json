@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/template_fence_gate_wall",
-  "textures": {
-    "texture": "valhelsia_structures:block/lapidified_jungle_planks"
-  }
-}

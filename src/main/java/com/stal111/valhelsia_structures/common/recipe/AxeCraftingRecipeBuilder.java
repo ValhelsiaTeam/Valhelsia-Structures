@@ -2,25 +2,25 @@ package com.stal111.valhelsia_structures.common.recipe;
 
 import com.google.gson.JsonObject;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.*;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.function.Consumer;
 
 /**
  * @author Valhelsia Team
@@ -34,6 +34,7 @@ public class AxeCraftingRecipeBuilder implements RecipeBuilder {
     private final int count;
 
     private final Advancement.Builder advancement = Advancement.Builder.advancement();
+    private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
     public AxeCraftingRecipeBuilder(RecipeCategory category, Ingredient input, ItemLike result, int count) {
         this.category = category;
@@ -43,24 +44,24 @@ public class AxeCraftingRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public void save(@Nonnull Consumer<FinishedRecipe> consumer) {
-        this.save(consumer, ForgeRegistries.ITEMS.getKey(this.result));
+    public void save(@NotNull RecipeOutput output) {
+        this.save(output, BuiltInRegistries.ITEM.getKey(this.result));
     }
 
     @Override
-    public void save(@Nonnull Consumer<FinishedRecipe> consumer, @Nonnull String save) {
-        ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(this.result);
-        if (new ResourceLocation(save).equals(resourcelocation)) {
-            throw new IllegalStateException("Axe Crafting Recipe " + save + " should remove its 'save' argument");
+    public void save(@NotNull RecipeOutput output, @NotNull String location) {
+        ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(this.result);
+        if (new ResourceLocation(location).equals(resourcelocation)) {
+            throw new IllegalStateException("Axe Crafting Recipe " + location + " should remove its 'save' argument");
         } else {
-            this.save(consumer, new ResourceLocation(save));
+            this.save(output, new ResourceLocation(location));
         }
     }
 
-    @Nonnull
     @Override
-    public RecipeBuilder unlockedBy(@Nonnull String criterionName, @Nonnull CriterionTriggerInstance criterionTrigger) {
-        this.advancement.addCriterion(criterionName, criterionTrigger);
+    public @NotNull RecipeBuilder unlockedBy(@NotNull String criterionName, @NotNull Criterion<?> criterion) {
+        this.criteria.put(criterionName, criterion);
+
         return this;
     }
 
@@ -76,15 +77,22 @@ public class AxeCraftingRecipeBuilder implements RecipeBuilder {
         return this.result;
     }
 
-    public void save(Consumer<FinishedRecipe> consumer, ResourceLocation id) {
+    public void save(RecipeOutput output, @NotNull ResourceLocation id) {
         this.ensureValid(id);
-        this.advancement.parent(new ResourceLocation("recipes/root")).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(RequirementsStrategy.OR);
-        consumer.accept(new AxeCraftingRecipeBuilder.Result(id, this.result, this.count, this.input, this.advancement, new ResourceLocation(id.getNamespace(), "recipes/" + this.category.getFolderName() + "/" + id.getPath())));
+
+        Advancement.Builder builder = output.advancement()
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
+                .rewards(AdvancementRewards.Builder.recipe(id))
+                .requirements(AdvancementRequirements.Strategy.OR);
+
+        this.criteria.forEach(builder::addCriterion);
+
+        output.accept(new AxeCraftingRecipeBuilder.Result(id, this.result, this.count, this.input, builder.build(id.withPrefix("recipes/" + this.category.getFolderName() + "/"))));
     }
 
-    private void ensureValid(ResourceLocation pId) {
-        if (this.advancement.getCriteria().isEmpty()) {
-            throw new IllegalStateException("No way of obtaining recipe " + pId);
+    private void ensureValid(ResourceLocation id) {
+        if (this.criteria.isEmpty()) {
+            throw new IllegalStateException("No way of obtaining recipe " + id);
         }
     }
 
@@ -93,23 +101,22 @@ public class AxeCraftingRecipeBuilder implements RecipeBuilder {
         private final Item output;
         private final int count;
         private final Ingredient input;
-        private final Advancement.Builder advancementBuilder;
-        private final ResourceLocation advancementId;
+        private final AdvancementHolder advancement;
 
-        public Result(ResourceLocation id, Item output, int count, Ingredient input, Advancement.Builder advancementBuilder, ResourceLocation advancementId) {
+
+        public Result(ResourceLocation id, Item output, int count, Ingredient input, AdvancementHolder advancement) {
             this.id = id;
             this.output = output;
             this.count = count;
             this.input = input;
-            this.advancementBuilder = advancementBuilder;
-            this.advancementId = advancementId;
+            this.advancement = advancement;
         }
 
         @Override
         public void serializeRecipeData(@Nonnull JsonObject json) {
-            json.add("input", this.input.toJson());
+            json.add("input", this.input.toJson(false));
             JsonObject output = new JsonObject();
-            output.addProperty("item", Objects.requireNonNull(ForgeRegistries.ITEMS.getKey(this.output)).toString());
+            output.addProperty("item", Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(this.output)).toString());
             if (this.count > 1) {
                 output.addProperty("count", this.count);
             }
@@ -119,26 +126,20 @@ public class AxeCraftingRecipeBuilder implements RecipeBuilder {
 
         @Nonnull
         @Override
-        public RecipeSerializer<?> getType() {
+        public RecipeSerializer<?> type() {
             return ModRecipes.AXE_CRAFTING_SERIALIZER.get();
         }
 
         @Nonnull
         @Override
-        public ResourceLocation getId() {
+        public ResourceLocation id() {
             return this.id;
         }
 
-        @Nullable
+        @org.jetbrains.annotations.Nullable
         @Override
-        public JsonObject serializeAdvancement() {
-            return this.advancementBuilder.serializeToJson();
-        }
-
-        @Nullable
-        @Override
-        public ResourceLocation getAdvancementId() {
-            return this.advancementId;
+        public AdvancementHolder advancement() {
+            return this.advancement;
         }
     }
 }

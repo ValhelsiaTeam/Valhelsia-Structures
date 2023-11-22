@@ -1,6 +1,8 @@
 {
     "pack": {
-        "description": "Valhelsia Structures Resources",
-        "pack_format": 8
+        "description": {
+            "text": "${mod_id} resources"
+        },
+        "pack_format": ${pack_format_number}
     }
 }

@@ -5,8 +5,8 @@ import com.stal111.valhelsia_structures.utils.ConfigurableValue;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.worldselection.CreateWorldScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.client.event.ScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.client.event.ScreenEvent;
 
 /**
  * @author Valhelsia Team
@@ -20,7 +20,7 @@ public class ScreenEvents {
     private static final Component FURNITURE_WARNING_2 = Component.translatable("gui.valhelsia_structures.furniture_warning_2").withStyle(ChatFormatting.RED);
 
     @SubscribeEvent
-    public void onScreenRender(ScreenEvent.Render event) {
+    public void onScreenRender(ScreenEvent.BackgroundRendered event) {
         if (event.getScreen() instanceof CreateWorldScreen screen && screen.height >= 260 && !ValhelsiaStructures.isFurnitureInstalled() && FURNITURE_WARNING_ENABLED.get()) {
             event.getGuiGraphics().drawCenteredString(screen.getMinecraft().font, FURNITURE_WARNING_1, screen.width / 2, 230, 16777215);
             event.getGuiGraphics().drawCenteredString(screen.getMinecraft().font, FURNITURE_WARNING_2, screen.width / 2, 242, 16777215);

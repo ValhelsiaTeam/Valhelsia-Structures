@@ -1,22 +1,23 @@
 package com.stal111.valhelsia_structures.common.recipe;
 
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
+import net.minecraft.world.item.crafting.CustomRecipe;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Axe Crafting Recipe <br>
@@ -34,8 +35,8 @@ public class AxeCraftingRecipe extends CustomRecipe {
     private final ItemStack output;
     private final int count;
 
-    public AxeCraftingRecipe(ResourceLocation recipeId, Ingredient input, ItemStack output, CraftingBookCategory category) {
-        super(recipeId, category);
+    public AxeCraftingRecipe(Ingredient input, ItemStack output, CraftingBookCategory category) {
+        super(category);
         this.input = input;
         this.output = output;
         this.count = output.getCount();
@@ -138,24 +139,28 @@ public class AxeCraftingRecipe extends CustomRecipe {
 
     public static class Serializer implements RecipeSerializer<AxeCraftingRecipe> {
 
-        @Nonnull
-        @Override
-        public AxeCraftingRecipe fromJson(@Nonnull ResourceLocation recipeId, @Nonnull JsonObject serializedRecipe) {
-            CraftingBookCategory category = CraftingBookCategory.CODEC.byName(GsonHelper.getAsString(serializedRecipe, "category", null), CraftingBookCategory.MISC);
+        private static final Codec<AxeCraftingRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(recipe -> {
+                    return recipe.input;
+                }),
+                ItemStack.CODEC.fieldOf("output").forGetter(recipe -> {
+                    return recipe.output;
+                }),
+                CraftingBookCategory.CODEC.fieldOf("category").forGetter(CustomRecipe::category)
+        ).apply(instance, AxeCraftingRecipe::new));
 
-            Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(serializedRecipe, "input"));
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(serializedRecipe, "output"));
-            return new AxeCraftingRecipe(recipeId, input, output, category);
+        @Override
+        public @NotNull Codec<AxeCraftingRecipe> codec() {
+            return CODEC;
         }
 
-        @Nullable
         @Override
-        public AxeCraftingRecipe fromNetwork(@Nonnull ResourceLocation recipeId, @Nonnull FriendlyByteBuf buffer) {
+        public @org.jetbrains.annotations.Nullable AxeCraftingRecipe fromNetwork(@NotNull FriendlyByteBuf buffer) {
             CraftingBookCategory category = buffer.readEnum(CraftingBookCategory.class);
 
             Ingredient input = Ingredient.fromNetwork(buffer);
             ItemStack output = buffer.readItem();
-            return new AxeCraftingRecipe(recipeId, input, output, category);
+            return new AxeCraftingRecipe(input, output, category);
         }
 
         @Override

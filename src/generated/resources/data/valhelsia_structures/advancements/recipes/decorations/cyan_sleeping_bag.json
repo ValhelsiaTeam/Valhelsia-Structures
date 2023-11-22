@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_cyan_wool",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cyan_wool"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:cyan_sleeping_bag"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

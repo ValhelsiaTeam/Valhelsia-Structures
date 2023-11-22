@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.common;
 
 import com.stal111.valhelsia_structures.core.init.other.*;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 /**
  * Common Setup <br>

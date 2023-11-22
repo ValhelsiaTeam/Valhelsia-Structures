@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.common.block.properties.ModBlockStatePro
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
@@ -31,12 +32,10 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.registries.ForgeRegistries;
 import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 /**
  * Jar Block <br>
@@ -112,14 +111,14 @@ public class JarBlock extends Block implements SimpleWaterloggedBlock, EntityBlo
     }
 
     private boolean canBePotted(Block block) {
-        ResourceLocation registryName = Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(block));
+        ResourceLocation registryName = BuiltInRegistries.BLOCK.getKey(block);
         ResourceLocation pottedName = new ResourceLocation(registryName.getNamespace(), "potted_" + registryName.getPath());
 
-        if (!ForgeRegistries.BLOCKS.containsKey(pottedName)) {
+        if (!BuiltInRegistries.BLOCK.containsKey(pottedName)) {
             return false;
         }
 
-        boolean flag = Objects.requireNonNull(ForgeRegistries.BLOCKS.getValue(pottedName)).builtInRegistryHolder().is(BlockTags.FLOWER_POTS);
+        boolean flag = BuiltInRegistries.BLOCK.get(pottedName).builtInRegistryHolder().is(BlockTags.FLOWER_POTS);
 
         return flag && !block.asItem().builtInRegistryHolder().is(ModTags.Items.JAR_BLACKLISTED);
     }

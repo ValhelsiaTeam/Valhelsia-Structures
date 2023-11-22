@@ -10,6 +10,6 @@
     "default": "valhelsia_structures:castles",
     "furnished": "valhelsia_structures:furnished/castles"
   },
-  "step": "fluid_springs",
+  "step": "top_layer_modification",
   "terrain_adaptation": "beard_thin"
 }

@@ -22,13 +22,14 @@
   },
   "requirements": [
     [
-      "has_orange_wool",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_orange_wool"
     ]
   ],
   "rewards": {
     "recipes": [
       "valhelsia_structures:orange_sleeping_bag"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
