@@ -5,7 +5,6 @@ import com.stal111.valhelsia_structures.core.init.world.*;
 import com.stal111.valhelsia_structures.data.worldgen.processors.ModProcessorLists;
 import net.minecraft.core.registries.Registries;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryCollector;
-import net.valhelsia.valhelsia_core.api.common.registry.helper.EntityRegistryHelper;
 
 /**
  * @author Valhelsia Team
@@ -22,7 +21,6 @@ public class ModRegistries extends RegistryCollector {
         this.addItemHelper(ModItems.class);
         this.addBlockHelper(ModBlocks.class);
         this.addMappedHelper(Registries.BLOCK_ENTITY_TYPE, ModBlockEntities.class);
-        this.addMappedHelper(Registries.ENTITY_TYPE, EntityRegistryHelper::new, ModEntities.class);
         this.addMappedHelper(Registries.RECIPE_SERIALIZER, ModRecipes.class);
         this.addMappedHelper(Registries.STRUCTURE_TYPE, ModStructureTypes.class);
         this.addMappedHelper(Registries.STRUCTURE_POOL_ELEMENT, ModStructurePoolElementTypes.class);
