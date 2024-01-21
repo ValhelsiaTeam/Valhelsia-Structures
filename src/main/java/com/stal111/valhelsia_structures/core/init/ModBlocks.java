@@ -13,7 +13,9 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
 import net.valhelsia.valhelsia_core.api.client.ValhelsiaRenderType;
@@ -40,6 +42,14 @@ public class ModBlocks implements RegistryClass {
         return new Vec3(0.0D, -0.46875D, 0.0D);
     };
 
+    private static final MapColorProvider AXIS_COLOR_PROVIDER = (state, topColor, barkColor) -> {
+        return state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? topColor : barkColor;
+    };
+
+    private static final MapColorProvider FACING_COLOR_PROVIDER = (state, topColor, barkColor) -> {
+        return state.getValue(HorizontalDirectionalBlock.FACING).getAxis() == Direction.Axis.Y ? topColor : barkColor;
+    };
+
     public static final BlockSetType LAPIDIFIED_JUNGLE = new BlockSetType("lapidified_jungle");
 
     public static final BlockRegistryEntry<SpecialSpawnerBlock> SPECIAL_SPAWNER = HELPER.register("special_spawner", () -> new SpecialSpawnerBlock(Block.Properties.copy(Blocks.SPAWNER).strength(-1.0F, 3600000.0F).noLootTable())).withItem().renderType(ValhelsiaRenderType.CUTOUT);
@@ -49,31 +59,33 @@ public class ModBlocks implements RegistryClass {
             .withItem().toolType(ToolType.PICKAXE).renderType(ValhelsiaRenderType.CUTOUT);
 
     public static final BlockEntrySet<PostBlock, WoodType> WOODEN_POSTS = HELPER.registerEntrySet(WoodType.class, "post",
-            type -> new PostBlock(type.getDefaultProperties().noOcclusion()),
+            type -> new PostBlock(type.buildProperties(false, AXIS_COLOR_PROVIDER).noOcclusion()),
             registryObject -> registryObject.withItem().toolType(ToolType.AXE)
     );
 
     public static final BlockEntrySet<PostBlock, WoodType> STRIPPED_WOODEN_POSTS = HELPER.registerEntrySet(WoodType.class, s -> "stripped_" + s + "_post",
-            type -> new PostBlock(type.getDefaultProperties().noOcclusion()),
+            type -> new PostBlock(type.buildProperties(true, AXIS_COLOR_PROVIDER).noOcclusion()),
             registryObject -> registryObject.withItem().toolType(ToolType.AXE)
     );
 
     public static final BlockEntrySet<CutPostBlock, WoodType> CUT_WOODEN_POSTS = HELPER.registerEntrySet(WoodType.class, s -> "cut_" + s + "_post",
-            type -> new CutPostBlock(type.getDefaultProperties().mapColor(type.getBarkColor()).noOcclusion()),
+            type -> new CutPostBlock(type.buildProperties(false, FACING_COLOR_PROVIDER).mapColor(type.getBarkColor()).noOcclusion()),
             registryObject -> registryObject.withItem().toolType(ToolType.AXE)
     );
 
     public static final BlockEntrySet<CutPostBlock, WoodType> CUT_STRIPPED_WOODEN_POSTS = HELPER.registerEntrySet(WoodType.class, s -> "cut_stripped_" + s + "_post",
-            type -> new CutPostBlock(type.getDefaultProperties().mapColor(type.getBarkColor()).noOcclusion()),
+            type -> new CutPostBlock(type.buildProperties(true, FACING_COLOR_PROVIDER).mapColor(type.getBarkColor()).noOcclusion()),
             registryObject -> registryObject.withItem().toolType(ToolType.AXE)
     );
 
-    public static final BlockEntrySet<RotatedPillarBlock, WoodType> BUNDLED_STRIPPED_POSTS = HELPER.registerEntrySet(WoodType.class, s -> "bundled_stripped_" + s + "_posts", woodType -> new RotatedPillarBlock(woodType.getDefaultProperties().mapColor(state -> {
-        return state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? woodType.getTopColor() : woodType.getBarkColor();
-    })), registryObject -> registryObject.withItem().toolType(ToolType.AXE));
-    public static final BlockEntrySet<RotatedPillarBlock, WoodType> BUNDLED_POSTS = HELPER.registerEntrySet(WoodType.class, s -> "bundled_" + s + "_posts", woodType -> new StrippableRotatedPillarBlock(ModBlocks.BUNDLED_STRIPPED_POSTS.get(woodType), woodType.getDefaultProperties().mapColor(state -> {
-        return state.getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y ? woodType.getTopColor() : woodType.getBarkColor();
-    })), registryObject -> registryObject.withItem().toolType(ToolType.AXE));
+    public static final BlockEntrySet<RotatedPillarBlock, WoodType> BUNDLED_STRIPPED_POSTS = HELPER.registerEntrySet(WoodType.class, s -> "bundled_stripped_" + s + "_posts",
+            type -> new RotatedPillarBlock(type.buildProperties(true, AXIS_COLOR_PROVIDER)),
+            registryObject -> registryObject.withItem().toolType(ToolType.AXE)
+    );
+    public static final BlockEntrySet<RotatedPillarBlock, WoodType> BUNDLED_POSTS = HELPER.registerEntrySet(WoodType.class, s -> "bundled_" + s + "_posts",
+            type -> new StrippableRotatedPillarBlock(ModBlocks.BUNDLED_STRIPPED_POSTS.get(type), type.buildProperties(false, AXIS_COLOR_PROVIDER)),
+            registryObject -> registryObject.withItem().toolType(ToolType.AXE)
+    );
 
     public static final BlockRegistryEntry<GlassBlock> METAL_FRAMED_GLASS = HELPER.register("metal_framed_glass", () -> new GlassBlock(Block.Properties.copy(Blocks.GLASS))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<IronBarsBlock> METAL_FRAMED_GLASS_PANE = HELPER.register("metal_framed_glass_pane", () -> new IronBarsBlock(Block.Properties.copy(Blocks.GLASS_PANE))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
@@ -136,26 +148,24 @@ public class ModBlocks implements RegistryClass {
     );
 
     public enum WoodType implements StringRepresentable {
-        OAK("oak", BlockBehaviour.Properties.copy(Blocks.OAK_LOG), true, MapColor.WOOD, MapColor.PODZOL),
-        SPRUCE("spruce", BlockBehaviour.Properties.copy(Blocks.SPRUCE_LOG), true, MapColor.PODZOL, MapColor.COLOR_BROWN),
-        BIRCH("birch", BlockBehaviour.Properties.copy(Blocks.BIRCH_LOG), true, MapColor.SAND, MapColor.QUARTZ),
-        JUNGLE("jungle", BlockBehaviour.Properties.copy(Blocks.JUNGLE_LOG), true, MapColor.DIRT, MapColor.PODZOL),
-        ACACIA("acacia", BlockBehaviour.Properties.copy(Blocks.ACACIA_LOG), true, MapColor.COLOR_ORANGE, MapColor.STONE),
-        DARK_OAK("dark_oak", BlockBehaviour.Properties.copy(Blocks.DARK_OAK_LOG), true, MapColor.COLOR_BROWN, MapColor.COLOR_BROWN),
-        MANGROVE("mangrove", BlockBehaviour.Properties.copy(Blocks.MANGROVE_LOG), true, MapColor.COLOR_RED, MapColor.PODZOL),
-        CRIMSON("crimson", BlockBehaviour.Properties.copy(Blocks.CRIMSON_STEM), false, MapColor.CRIMSON_STEM, MapColor.CRIMSON_STEM),
-        WARPED("warped", BlockBehaviour.Properties.copy(Blocks.WARPED_STEM), false, MapColor.WARPED_STEM, MapColor.WARPED_STEM),
-        LAPIDIFIED_JUNGLE("lapidified_jungle", BlockProperties.LAPIDIFIED_JUNGLE_LOG, false, MapColor.DIRT, MapColor.DIRT);
+        OAK("oak", true, MapColor.WOOD, MapColor.PODZOL),
+        SPRUCE("spruce", true, MapColor.PODZOL, MapColor.COLOR_BROWN),
+        BIRCH("birch", true, MapColor.SAND, MapColor.QUARTZ),
+        JUNGLE("jungle", true, MapColor.DIRT, MapColor.PODZOL),
+        ACACIA("acacia", true, MapColor.COLOR_ORANGE, MapColor.STONE),
+        DARK_OAK("dark_oak", true, MapColor.COLOR_BROWN, MapColor.COLOR_BROWN),
+        MANGROVE("mangrove", true, MapColor.COLOR_RED, MapColor.PODZOL),
+        CRIMSON("crimson", false, MapColor.CRIMSON_STEM, MapColor.CRIMSON_STEM),
+        WARPED("warped", false, MapColor.WARPED_STEM, MapColor.WARPED_STEM),
+        LAPIDIFIED_JUNGLE("lapidified_jungle", false, MapColor.DIRT, MapColor.DIRT);
 
         private final String name;
-        private final BlockBehaviour.Properties defaultProperties;
         private final boolean flammable;
         private final MapColor topColor;
         private final MapColor barkColor;
 
-        WoodType(String name, BlockBehaviour.Properties defaultProperties, boolean flammable, MapColor topColor, MapColor barkColor) {
+        WoodType(String name, boolean flammable, MapColor topColor, MapColor barkColor) {
             this.name = name;
-            this.defaultProperties = defaultProperties;
             this.flammable = flammable;
             this.topColor = topColor;
             this.barkColor = barkColor;
@@ -167,8 +177,18 @@ public class ModBlocks implements RegistryClass {
             return this.name;
         }
 
-        public BlockBehaviour.Properties getDefaultProperties() {
-            return this.defaultProperties;
+        public BlockBehaviour.Properties buildProperties(boolean stripped, MapColorProvider colorProvider) {
+            var properties = BlockBehaviour.Properties.of()
+                    .instrument(NoteBlockInstrument.BASS)
+                    .strength(2.0F)
+                    .sound(SoundType.WOOD)
+                    .mapColor(state -> colorProvider.getMapColor(state, this.topColor, stripped ? this.topColor : this.barkColor));
+
+            if (this.isFlammable()) {
+                properties = properties.ignitedByLava();
+            }
+
+            return properties;
         }
 
         public boolean isFlammable() {
@@ -182,5 +202,9 @@ public class ModBlocks implements RegistryClass {
         public MapColor getBarkColor() {
             return this.barkColor;
         }
+    }
+
+    public interface MapColorProvider {
+        MapColor getMapColor(BlockState state, MapColor topColor, MapColor barkColor);
     }
 }
