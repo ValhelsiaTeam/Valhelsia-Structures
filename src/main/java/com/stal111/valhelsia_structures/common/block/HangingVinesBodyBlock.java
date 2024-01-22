@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.Objects;
@@ -28,6 +30,8 @@ import java.util.Objects;
  * @since 2020-10-16
  */
 public class HangingVinesBodyBlock extends GrowingPlantBodyBlock {
+
+    public static final MapCodec<HangingVinesBodyBlock> CODEC = simpleCodec(HangingVinesBodyBlock::new);
 
     public static final BooleanProperty ATTACHED = ModBlockStateProperties.ATTACHED;
 
@@ -53,6 +57,11 @@ public class HangingVinesBodyBlock extends GrowingPlantBodyBlock {
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         boolean flag = context.getLevel().getBlockState(context.getClickedPos().above()).getBlock() != this.getBodyBlock();
         return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(ATTACHED, flag);
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends GrowingPlantBodyBlock> codec() {
+        return CODEC;
     }
 
     @Nonnull

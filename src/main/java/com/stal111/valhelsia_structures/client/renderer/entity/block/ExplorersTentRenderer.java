@@ -17,6 +17,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -94,5 +96,10 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
     @Override
     public boolean shouldRenderOffScreen(@Nonnull ExplorersTentBlockEntity blockEntity) {
         return true;
+    }
+
+    @Override
+    public @NotNull AABB getRenderBoundingBox(ExplorersTentBlockEntity blockEntity) {
+        return new AABB(blockEntity.getBlockPos()).inflate(1.0D);
     }
 }

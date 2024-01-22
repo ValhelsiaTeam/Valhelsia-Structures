@@ -8,7 +8,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.LidBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.phys.AABB;
 
 /**
  * Dungeon Door Block Entity <br>
@@ -41,10 +40,5 @@ public class DungeonDoorBlockEntity extends BlockEntity implements LidBlockEntit
     @Override
     public float getOpenNess(float partialTicks) {
         return Mth.lerp(partialTicks, this.oLeafAngle, this.leafAngle);
-    }
-
-    @Override
-    public AABB getRenderBoundingBox() {
-        return new AABB(this.worldPosition.offset(-5, -5, -5), this.worldPosition.offset(5, 5, 5));
     }
 }

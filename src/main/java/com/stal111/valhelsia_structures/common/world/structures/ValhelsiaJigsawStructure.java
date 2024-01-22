@@ -22,13 +22,11 @@ import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.*;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
+import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -144,7 +142,8 @@ public class ValhelsiaJigsawStructure extends Structure {
                 pos.atY(y.getAsInt()),
                 true,
                 Optional.ofNullable(this.projectStartToHeightmap),
-                this.maxDistanceFromCenter
+                this.maxDistanceFromCenter,
+                PoolAliasLookup.create(List.of(), pos, context.seed())
         );
     }
 

@@ -42,7 +42,7 @@ public class FlammableRegistry {
         HELPER.register(ModBlocks.PAPER_WALL.get(), 60, 60);
         HELPER.register(ModBlocks.HANGING_VINES_BODY.get(), 15, 100);
         HELPER.register(ModBlocks.HANGING_VINES.get(), 15, 100);
-        HELPER.registerPlant(ModBlocks.HIBISCUS.get());
+        //HELPER.registerPlant(ModBlocks.HIBISCUS.get());
         HELPER.registerPlant(ModBlocks.GIANT_FERN.get());
     }
 }

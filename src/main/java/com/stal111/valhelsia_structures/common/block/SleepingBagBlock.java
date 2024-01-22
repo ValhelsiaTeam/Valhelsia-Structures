@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.common.block;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -30,6 +31,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -45,6 +47,8 @@ import java.util.Map;
  */
 public class SleepingBagBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
 
+    public static final MapCodec<SleepingBagBlock> CODEC = simpleCodec(SleepingBagBlock::new);
+
     public static final EnumProperty<BedPart> PART = BlockStateProperties.BED_PART;
     public static final BooleanProperty OCCUPIED = BlockStateProperties.OCCUPIED;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -55,6 +59,11 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
     public SleepingBagBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(PART, BedPart.FOOT).setValue(OCCUPIED, false).setValue(WATERLOGGED, false));
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends HorizontalDirectionalBlock> codec() {
+        return CODEC;
     }
 
     @Nonnull
@@ -165,17 +174,11 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
     }
 
     @Override
-    public void playerWillDestroy(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
-        super.playerWillDestroy(level, pos, state, player);
-
-        if (level.isClientSide() || !player.isCreative()) {
-            return;
-        }
-
+    public @NotNull BlockState playerWillDestroy(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
         BedPart part = state.getValue(PART);
 
-        if (part == BedPart.HEAD) {
-            return;
+        if (level.isClientSide() || !player.isCreative() || part == BedPart.HEAD) {
+            return super.playerWillDestroy(level, pos, state, player);
         }
 
         BlockPos headPos = pos.relative(this.getNeighbourDirection(part, state.getValue(FACING)));
@@ -185,6 +188,8 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
             level.setBlock(headPos, headState.getValue(WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState(), 35);
             level.levelEvent(player, 2001, headPos, Block.getId(headState));
         }
+
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Nullable

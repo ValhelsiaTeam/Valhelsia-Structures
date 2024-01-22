@@ -1,18 +1,17 @@
 package com.stal111.valhelsia_structures.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.common.block.entity.GiantFernBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BushBlock;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -27,11 +26,18 @@ import javax.annotation.Nullable;
  */
 public class GiantFernBlock extends BushBlock implements EntityBlock {
 
+    public static final MapCodec<GiantFernBlock> CODEC = simpleCodec(GiantFernBlock::new);
+
     public static final BooleanProperty ROTATED = ModBlockStateProperties.ROTATED;
 
     public GiantFernBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(ROTATED, false));
+    }
+
+    @Override
+    protected @NotNull MapCodec<? extends BushBlock> codec() {
+        return CODEC;
     }
 
     @Nullable

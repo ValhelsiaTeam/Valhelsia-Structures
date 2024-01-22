@@ -11,6 +11,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -49,5 +51,10 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
     @Override
     public boolean shouldRenderOffScreen(@Nonnull DungeonDoorBlockEntity blockEntity) {
         return true;
+    }
+
+    @Override
+    public @NotNull AABB getRenderBoundingBox(DungeonDoorBlockEntity blockEntity) {
+        return new AABB(blockEntity.getBlockPos().offset(-5, -5, -5).getCenter(), blockEntity.getBlockPos().offset(5, 5, 5).getCenter());
     }
 }

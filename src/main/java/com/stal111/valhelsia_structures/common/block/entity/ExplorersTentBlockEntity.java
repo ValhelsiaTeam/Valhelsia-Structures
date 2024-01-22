@@ -8,7 +8,6 @@ import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -86,10 +85,5 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
     @Override
     public void clearContent() {
         this.setSleepingBag(ItemStack.EMPTY);
-    }
-
-    @Override
-    public AABB getRenderBoundingBox() {
-        return new AABB(this.getBlockPos()).inflate(1.0D);
     }
 }

@@ -52,10 +52,10 @@ public class ModBlocks implements RegistryClass {
 
     public static final BlockSetType LAPIDIFIED_JUNGLE = new BlockSetType("lapidified_jungle");
 
-    public static final BlockRegistryEntry<SpecialSpawnerBlock> SPECIAL_SPAWNER = HELPER.register("special_spawner", () -> new SpecialSpawnerBlock(Block.Properties.copy(Blocks.SPAWNER).strength(-1.0F, 3600000.0F).noLootTable())).withItem().renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<BrazierBlock> BRAZIER = HELPER.register("brazier", () -> new BrazierBlock(true, 1, Block.Properties.copy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 15 : 0)))
+    public static final BlockRegistryEntry<SpecialSpawnerBlock> SPECIAL_SPAWNER = HELPER.register("special_spawner", () -> new SpecialSpawnerBlock(Block.Properties.ofLegacyCopy(Blocks.SPAWNER).strength(-1.0F, 3600000.0F).noLootTable())).withItem().renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<BrazierBlock> BRAZIER = HELPER.register("brazier", () -> new BrazierBlock(true, 1, Block.Properties.ofLegacyCopy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 15 : 0)))
             .withItem().toolType(ToolType.PICKAXE).renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<BrazierBlock> SOUL_BRAZIER = HELPER.register("soul_brazier", () -> new BrazierBlock(false, 2, Block.Properties.copy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 11 : 0)))
+    public static final BlockRegistryEntry<BrazierBlock> SOUL_BRAZIER = HELPER.register("soul_brazier", () -> new BrazierBlock(false, 2, Block.Properties.ofLegacyCopy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 11 : 0)))
             .withItem().toolType(ToolType.PICKAXE).renderType(ValhelsiaRenderType.CUTOUT);
 
     public static final BlockEntrySet<PostBlock, WoodType> WOODEN_POSTS = HELPER.registerEntrySet(WoodType.class, "post",
@@ -87,14 +87,14 @@ public class ModBlocks implements RegistryClass {
             registryObject -> registryObject.withItem().toolType(ToolType.AXE)
     );
 
-    public static final BlockRegistryEntry<GlassBlock> METAL_FRAMED_GLASS = HELPER.register("metal_framed_glass", () -> new GlassBlock(Block.Properties.copy(Blocks.GLASS))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<IronBarsBlock> METAL_FRAMED_GLASS_PANE = HELPER.register("metal_framed_glass_pane", () -> new IronBarsBlock(Block.Properties.copy(Blocks.GLASS_PANE))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<TransparentBlock> METAL_FRAMED_GLASS = HELPER.register("metal_framed_glass", () -> new TransparentBlock(Block.Properties.ofLegacyCopy(Blocks.GLASS))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<IronBarsBlock> METAL_FRAMED_GLASS_PANE = HELPER.register("metal_framed_glass_pane", () -> new IronBarsBlock(Block.Properties.ofLegacyCopy(Blocks.GLASS_PANE))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockEntrySet<StainedGlassBlock, DyeColor> COLORED_METAL_FRAMED_GLASS = HELPER.registerColorEntrySet("metal_framed_glass",
-            color -> new StainedGlassBlock(color, Block.Properties.copy(Blocks.RED_STAINED_GLASS)),
+            color -> new StainedGlassBlock(color, Block.Properties.ofLegacyCopy(Blocks.RED_STAINED_GLASS)),
             entry -> entry.withItem().renderType(ValhelsiaRenderType.TRANSLUCENT)
     );
     public static final BlockEntrySet<StainedGlassPaneBlock, DyeColor> COLORED_METAL_FRAMED_GLASS_PANES = HELPER.registerColorEntrySet("metal_framed_glass_pane",
-            color -> new StainedGlassPaneBlock(color, Block.Properties.copy(Blocks.RED_STAINED_GLASS_PANE)),
+            color -> new StainedGlassPaneBlock(color, Block.Properties.ofLegacyCopy(Blocks.RED_STAINED_GLASS_PANE)),
             entry -> entry.withItem().renderType(ValhelsiaRenderType.TRANSLUCENT)
     );
 
@@ -123,13 +123,13 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryEntry<Block> LAPIDIFIED_JUNGLE_PLANKS = HELPER.register("lapidified_jungle_planks", () -> new Block(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
     public static final BlockRegistryEntry<StairBlock> LAPIDIFIED_JUNGLE_STAIRS = HELPER.register("lapidified_jungle_stairs", () -> new StairBlock(() -> ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get().defaultBlockState(), BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
     public static final BlockRegistryEntry<SlabBlock> LAPIDIFIED_JUNGLE_SLAB = HELPER.register("lapidified_jungle_slab", () -> new SlabBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
-    public static final BlockRegistryEntry<PressurePlateBlock> LAPIDIFIED_JUNGLE_PRESSURE_PLATE = HELPER.register("lapidified_jungle_pressure_plate", () -> new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F), LAPIDIFIED_JUNGLE)).withItem();
-    public static final BlockRegistryEntry<ButtonBlock> LAPIDIFIED_JUNGLE_BUTTON = HELPER.register("lapidified_jungle_button", () -> new ButtonBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F), LAPIDIFIED_JUNGLE, 30, true)).withItem();
+    public static final BlockRegistryEntry<PressurePlateBlock> LAPIDIFIED_JUNGLE_PRESSURE_PLATE = HELPER.register("lapidified_jungle_pressure_plate", () -> new PressurePlateBlock(LAPIDIFIED_JUNGLE, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F))).withItem();
+    public static final BlockRegistryEntry<ButtonBlock> LAPIDIFIED_JUNGLE_BUTTON = HELPER.register("lapidified_jungle_button", () -> new ButtonBlock(LAPIDIFIED_JUNGLE, 30, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F))).withItem();
     public static final BlockRegistryEntry<FenceBlock> LAPIDIFIED_JUNGLE_FENCE = HELPER.register("lapidified_jungle_fence", () -> new FenceBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
-    public static final BlockRegistryEntry<FenceGateBlock> LAPIDIFIED_JUNGLE_FENCE_GATE = HELPER.register("lapidified_jungle_fence_gate", () -> new FenceGateBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.forceSolidOn(), ModWoodTypes.LAPIDIFIED_JUNGLE)).withItem();
-    public static final BlockRegistryEntry<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", () -> new ExplorersTentBlock(BlockBehaviour.Properties.copy(Blocks.BROWN_WOOL).noOcclusion())).withItem(registryObject -> new DyeableBlockItem(registryObject.get(), new Item.Properties()));
-    public static final BlockRegistryEntry<BushBlock> HIBISCUS = HELPER.register("hibiscus", () -> new BushBlock(Block.Properties.copy(Blocks.POPPY))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", () -> new GiantFernBlock(Block.Properties.copy(Blocks.POPPY))).withItem();
+    public static final BlockRegistryEntry<FenceGateBlock> LAPIDIFIED_JUNGLE_FENCE_GATE = HELPER.register("lapidified_jungle_fence_gate", () -> new FenceGateBlock(ModWoodTypes.LAPIDIFIED_JUNGLE, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.forceSolidOn())).withItem();
+    public static final BlockRegistryEntry<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", () -> new ExplorersTentBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.BROWN_WOOL).noOcclusion())).withItem(registryObject -> new DyeableBlockItem(registryObject.get(), new Item.Properties()));
+    //public static final BlockRegistryEntry<BushBlock> HIBISCUS = HELPER.register("hibiscus", () -> new BushBlock(Block.Properties.ofLegacyCopy(Blocks.POPPY))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", () -> new GiantFernBlock(Block.Properties.ofLegacyCopy(Blocks.POPPY))).withItem();
     public static final BlockRegistryEntry<DousedTorchBlock> DOUSED_TORCH = HELPER.register("doused_torch", () -> new DousedTorchBlock((TorchBlock) Blocks.TORCH, Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<DousedWallTorchBlock> DOUSED_WALL_TORCH = HELPER.register("doused_wall_torch", () -> new DousedWallTorchBlock((TorchBlock) Blocks.WALL_TORCH, Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<DousedTorchBlock> DOUSED_SOUL_TORCH = HELPER.register("doused_soul_torch", () -> new DousedTorchBlock((TorchBlock) Blocks.SOUL_TORCH, Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
@@ -137,9 +137,9 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryEntry<DungeonDoorBlock> DUNGEON_DOOR = HELPER.register("dungeon_door", () -> new DungeonDoorBlock(Block.Properties.of().strength(50.0F, 100.0F).requiresCorrectToolForDrops().noOcclusion())).withItem();
     public static final BlockRegistryEntry<DungeonDoorLeafBlock> DUNGEON_DOOR_LEAF = HELPER.register("dungeon_door_leaf", () -> new DungeonDoorLeafBlock(Block.Properties.of().strength(50.0F, 100.0F).requiresCorrectToolForDrops().noOcclusion().lootFrom(ModBlocks.DUNGEON_DOOR)));
     public static final BlockRegistryEntry<BonePileBlock> BONE_PILE = HELPER.register("bone_pile", () -> new BonePileBlock(ValhelsiaBlockProperties.of().offsetType(BONE_PILE_OFFSET).mapColor(MapColor.SAND).requiresCorrectToolForDrops().strength(2.0F).sound(SoundType.BONE_BLOCK).noOcclusion().dynamicShape())).withItem().renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<Block> BONE_PILE_BLOCK = HELPER.register("bone_pile_block", () -> new Block(Block.Properties.copy(Blocks.BONE_BLOCK))).withItem();
-    public static final BlockRegistryEntry<UnlitLanternBlock> UNLIT_LANTERN = HELPER.register("unlit_lantern", () -> new UnlitLanternBlock(() -> Blocks.LANTERN, Block.Properties.copy(Blocks.LANTERN).lightLevel(value -> 0))).withItem().toolType(ToolType.PICKAXE).renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<UnlitLanternBlock> UNLIT_SOUL_LANTERN = HELPER.register("unlit_soul_lantern", () -> new UnlitLanternBlock(() -> Blocks.SOUL_LANTERN, Block.Properties.copy(Blocks.SOUL_LANTERN).lightLevel(value -> 0))).withItem().toolType(ToolType.PICKAXE).renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<Block> BONE_PILE_BLOCK = HELPER.register("bone_pile_block", () -> new Block(Block.Properties.ofLegacyCopy(Blocks.BONE_BLOCK))).withItem();
+    public static final BlockRegistryEntry<UnlitLanternBlock> UNLIT_LANTERN = HELPER.register("unlit_lantern", () -> new UnlitLanternBlock(() -> Blocks.LANTERN, Block.Properties.ofLegacyCopy(Blocks.LANTERN).lightLevel(value -> 0))).withItem().toolType(ToolType.PICKAXE).renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<UnlitLanternBlock> UNLIT_SOUL_LANTERN = HELPER.register("unlit_soul_lantern", () -> new UnlitLanternBlock(() -> Blocks.SOUL_LANTERN, Block.Properties.ofLegacyCopy(Blocks.SOUL_LANTERN).lightLevel(value -> 0))).withItem().toolType(ToolType.PICKAXE).renderType(ValhelsiaRenderType.CUTOUT);
 
     //Sleeping Bags
     public static final BlockEntrySet<SleepingBagBlock, DyeColor> SLEEPING_BAGS = HELPER.registerColorEntrySet("sleeping_bag",

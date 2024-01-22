@@ -80,7 +80,7 @@ public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
         this.tag(Tags.Blocks.FENCES_WOODEN).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE.get());
         this.tag(BlockTags.FENCE_GATES).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get());
         this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get());
-        this.tag(BlockTags.FLOWERS).add(ModBlocks.HIBISCUS.get());
+        //this.tag(BlockTags.FLOWERS).add(ModBlocks.HIBISCUS.get());
 
         this.tag(BlockTags.PIGLIN_REPELLENTS).add(ModBlocks.SOUL_BRAZIER.get());
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(

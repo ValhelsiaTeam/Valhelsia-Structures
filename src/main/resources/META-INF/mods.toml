@@ -31,7 +31,7 @@ description='''${mod_description}'''
 
 [[dependencies.${mod_id}]]
 modId="neoforge"
-mandatory=true
+type="required"
 versionRange="${neo_version_range}" #mandatory
 ordering="NONE"
 side="BOTH"
@@ -39,14 +39,14 @@ side="BOTH"
 
 [[dependencies.${mod_id}]]
 modId="valhelsia_core"
-mandatory=true
+type="required"
 versionRange="[1.1.2,)"
 ordering="BEFORE"
 side="BOTH"
 
 [[dependencies.${mod_id}]]
 modId="valhelsia_furniture"
-mandatory=false
+type="optional"
 versionRange="[1.1.2,)"
 ordering="NONE"
 side="BOTH"

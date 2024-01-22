@@ -28,7 +28,7 @@ public class ModCreativeModeTabs implements RegistryClass {
             .add(ModBlocks.STRIPPED_WOODEN_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
             .add(ModBlocks.CUT_STRIPPED_WOODEN_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
             .add(ModBlocks.BUNDLED_STRIPPED_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
-            .add(ModBlocks.HIBISCUS)
+            //.add(ModBlocks.HIBISCUS)
             .add(ModBlocks.GIANT_FERN)
             .build();
 

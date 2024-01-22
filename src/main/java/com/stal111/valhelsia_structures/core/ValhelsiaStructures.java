@@ -14,7 +14,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
@@ -46,9 +45,7 @@ public class ValhelsiaStructures {
 
     public static final RegistryManager REGISTRY_MANAGER = new RegistryManager(new ModRegistries(ValhelsiaStructures.MOD_ID));
 
-    public ValhelsiaStructures() {
-        IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+    public ValhelsiaStructures(IEventBus eventBus) {
         ModDefinition.of(ValhelsiaStructures.MOD_ID)
                 .withRegistryManager(ValhelsiaStructures.REGISTRY_MANAGER)
                 .withEventHandler(new ModEventHandler(eventBus))
@@ -56,8 +53,8 @@ public class ValhelsiaStructures {
                 .create();
 
         // Event Listeners
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(CommonSetup::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(NewRegistryEvent.class, event -> event.register(STRUCTURE_HEIGHT_PROVIDER_TYPES_REGISTRY));
+        eventBus.addListener(CommonSetup::setup);
+        eventBus.addListener(NewRegistryEvent.class, event -> event.register(STRUCTURE_HEIGHT_PROVIDER_TYPES_REGISTRY));
 
         // Config
         this.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON, ModConfig.COMMON_SPEC);
