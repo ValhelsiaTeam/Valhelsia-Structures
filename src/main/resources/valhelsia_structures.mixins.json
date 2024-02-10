@@ -8,12 +8,9 @@
     "BeardifierMixin",
     "BucketItemMixin",
     "CatEntityMixin",
-    "FlowingFluidMixin",
     "LakesFeatureMixin",
     "PillagerEntityMixin",
-    "SpreadingSnowyDirtBlockMixin",
-    "TorchBlockMixin",
-    "WallTorchBlockMixin"
+    "SpreadingSnowyDirtBlockMixin"
   ],
   "client": [
     "BlockModelRendererMixin",
