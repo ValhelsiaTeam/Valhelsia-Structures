@@ -3,26 +3,23 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.80'
-    id 'net.neoforged.gradle.mixin' version '7.0.80'
+    id 'net.neoforged.gradle.userdev' version '7.0.155'
+    id 'net.neoforged.gradle.mixin' version '7.0.155'
 }
 
-version = '1.20.2-1.1.0'
+version = '1.21-1.1.0'
 group = 'com.stal111.valhelsia_structures'
 
 base {
-    archivesName = project.mod_id + '-forge'
+    archivesName = project.mod_id + '-neoforge'
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 
 runs {
     configureEach {
-        // "SCAN": For mods scan.
-        // "REGISTRIES": For firing of registry events.
-        // "REGISTRYDUMP": For getting the contents of all registries.
         systemProperty 'forge.logging.markers', 'REGISTRIES'
 
         systemProperty 'forge.logging.console.level', 'debug'
@@ -73,7 +70,7 @@ repositories {
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
-    implementation "net.valhelsia:valhelsia_core-forge-${mc_version}:${valhelsia_core_version}"
+    implementation "net.valhelsia:valhelsia_core-neoforge-${mc_version}:${valhelsia_core_version}"
     //implementation fg.deobf(files("libs/valhelsia_furniture-forge-${valhelsia_furniture_version}-dev.jar"))
 
     // compile against the JEI API but do not include it at runtime
