@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.common.world.structures.height;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureHeightProviderTypes;
@@ -21,7 +21,7 @@ import java.util.OptionalInt;
  */
 public class UniformHeightProvider extends StructureHeightProvider {
 
-    public static final Codec<UniformHeightProvider> CODEC = RecordCodecBuilder.create((instance) -> {
+    public static final MapCodec<UniformHeightProvider> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(VerticalAnchor.CODEC.fieldOf("min_inclusive").forGetter((provider) -> {
             return provider.minInclusive;
         }), VerticalAnchor.CODEC.fieldOf("max_inclusive").forGetter((provider) -> {

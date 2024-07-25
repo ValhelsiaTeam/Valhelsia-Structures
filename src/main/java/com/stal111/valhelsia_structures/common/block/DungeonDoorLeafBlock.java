@@ -5,7 +5,6 @@ import com.stal111.valhelsia_structures.common.block.properties.ModBlockStatePro
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -107,13 +106,13 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
 
     @Nonnull
     @Override
-    public InteractionResult use(BlockState state, Level world, BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, @Nonnull Player player, @Nonnull BlockHitResult hit) {
         BlockPos offsetPos = pos.relative(Direction.fromYRot(state.getValue(FACING).toYRot()).getOpposite());
-        BlockState offsetState = world.getBlockState(offsetPos);
+        BlockState offsetState = level.getBlockState(offsetPos);
 
-        offsetState.getBlock().use(offsetState, world, offsetPos, player, hand, hit);
+        offsetState.useWithoutItem(level, player, hit);
 
-        return InteractionResult.sidedSuccess(world.isClientSide());
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 
     @Override

@@ -103,7 +103,7 @@ public abstract class SpecialBaseSpawner {
                     double d1 = j >= 2 ? listTag.getDouble(1) : (double)(pos.getY() + serverLevel.random.nextInt(3) - 1);
                     double d2 = j >= 3 ? listTag.getDouble(2) : (double)pos.getZ() + (serverLevel.random.nextDouble() - serverLevel.random.nextDouble()) * (double)this.spawnRange + 0.5D;
 
-                    if (serverLevel.noCollision(optional.get().getAABB(d0, d1, d2))) {
+                    if (serverLevel.noCollision(optional.get().getSpawnAABB(d0, d1, d2))) {
                         Entity entity = EntityType.loadEntityRecursive(compoundtag, serverLevel, (e) -> {
                             e.moveTo(d0, d1, d2, e.getYRot(), e.getXRot());
                             return e;
@@ -123,7 +123,7 @@ public abstract class SpecialBaseSpawner {
 
                         if (entity instanceof Mob mob) {
                             if (this.nextSpawnData.getEntityToSpawn().size() == 1 && this.nextSpawnData.getEntityToSpawn().contains("id", 8)) {
-                                mob.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.SPAWNER, null, null);
+                                mob.finalizeSpawn(serverLevel, serverLevel.getCurrentDifficultyAt(entity.blockPosition()), MobSpawnType.SPAWNER, null);
                             }
                         }
 
@@ -160,8 +160,8 @@ public abstract class SpecialBaseSpawner {
             this.spawnDelay = this.minSpawnDelay + level.getRandom().nextInt(this.maxSpawnDelay - this.minSpawnDelay);
         }
 
-        this.spawnPotentials.getRandom(level.getRandom()).ifPresent((spawnData) -> {
-            this.setNextSpawnData(level, pos, spawnData.getData());
+        this.spawnPotentials.getRandom(level.getRandom()).ifPresent(spawnData -> {
+            this.setNextSpawnData(level, pos, spawnData.data());
         });
         this.broadcastEvent(level, pos, 1);
     }
@@ -176,7 +176,7 @@ public abstract class SpecialBaseSpawner {
             SpawnData spawndata;
             if (flag1) {
                 spawndata = SpawnData.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("SpawnData")).resultOrPartial((p_186391_) -> {
-                    LOGGER.warn("Invalid SpawnData: {}", (Object)p_186391_);
+                    LOGGER.warn("Invalid SpawnData: {}", p_186391_);
                 }).orElseGet(SpawnData::new);
             } else {
                 spawndata = new SpawnData();
@@ -195,8 +195,8 @@ public abstract class SpecialBaseSpawner {
                 }).orElseGet(SpawnData::new);
                 this.setNextSpawnData(level, pos, spawnData);
             } else {
-                this.spawnPotentials.getRandom(Objects.requireNonNull(level).getRandom()).ifPresent((p_186378_) -> {
-                    this.setNextSpawnData(level, pos, p_186378_.getData());
+                this.spawnPotentials.getRandom(Objects.requireNonNull(level).getRandom()).ifPresent(dataWrapper -> {
+                    this.setNextSpawnData(level, pos, dataWrapper.data());
                 });
             }
         }

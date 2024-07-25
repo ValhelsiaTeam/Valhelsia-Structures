@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.common.world.structures;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProvider;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureTypes;
@@ -10,7 +11,7 @@ import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.NoiseColumn;
@@ -21,8 +22,10 @@ import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraft.world.level.levelgen.structure.*;
+import net.minecraft.world.level.levelgen.structure.pools.DimensionPadding;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
 import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup;
+import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -37,7 +40,7 @@ import java.util.function.Function;
  */
 public class ValhelsiaJigsawStructure extends Structure {
 
-    public static final Codec<ValhelsiaJigsawStructure> CODEC = RecordCodecBuilder.<ValhelsiaJigsawStructure>mapCodec((instance) -> instance.group(
+    public static final MapCodec<ValhelsiaJigsawStructure> CODEC = RecordCodecBuilder.<ValhelsiaJigsawStructure>mapCodec(instance -> instance.group(
             settingsCodec(instance),
             ValhelsiaStructureSettings.CODEC.forGetter(structure -> structure.settings),
             StartPoolDecider.CODEC.fieldOf("start_pool").forGetter(structure -> {
@@ -49,7 +52,7 @@ public class ValhelsiaJigsawStructure extends Structure {
             Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter)
     ).apply(instance, (structureSettings, valhelsiaStructureSettings, startPoolDecider, integer, structureHeightProvider, types, integer2) -> {
         return new ValhelsiaJigsawStructure(structureSettings, valhelsiaStructureSettings, startPoolDecider, integer, structureHeightProvider.orElse(null), types.orElse(null), integer2);
-    })).flatXmap(verifyRange(), verifyRange()).codec();
+    })).flatXmap(verifyRange(), verifyRange());
 
     private final ValhelsiaStructureSettings settings;
     private final StartPoolDecider startPoolDecider;
@@ -71,7 +74,7 @@ public class ValhelsiaJigsawStructure extends Structure {
         this.maxDistanceFromCenter = maxDistanceFromCenter;
     }
 
-    public static ValhelsiaJigsawStructure.Builder builder(BootstapContext<Structure> context, HolderSet<Biome> biomeTagKey, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
+    public static ValhelsiaJigsawStructure.Builder builder(BootstrapContext<Structure> context, HolderSet<Biome> biomeTagKey, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
         return new Builder(context, biomeTagKey, step, terrainAdjustment, startPool);
     }
 
@@ -79,7 +82,7 @@ public class ValhelsiaJigsawStructure extends Structure {
         return (structure) -> {
             int i = switch (structure.terrainAdaptation()) {
                 case NONE -> 0;
-                case BURY, BEARD_THIN, BEARD_BOX -> 12;
+                case BURY, BEARD_THIN, BEARD_BOX, ENCAPSULATE -> 12;
             };
             return structure.maxDistanceFromCenter + i > 128 ? DataResult.error(() -> "Structure size including terrain adaptation must not exceed 128") : DataResult.success(structure);
         };
@@ -143,7 +146,9 @@ public class ValhelsiaJigsawStructure extends Structure {
                 true,
                 Optional.ofNullable(this.projectStartToHeightmap),
                 this.maxDistanceFromCenter,
-                PoolAliasLookup.create(List.of(), pos, context.seed())
+                PoolAliasLookup.create(List.of(), pos, context.seed()),
+                DimensionPadding.ZERO,
+                LiquidSettings.APPLY_WATERLOGGING
         );
     }
 
@@ -173,7 +178,7 @@ public class ValhelsiaJigsawStructure extends Structure {
 
     public static class Builder {
 
-        private final BootstapContext<Structure> context;
+        private final BootstrapContext<Structure> context;
         private final HolderSet<Biome> biomeHolderSet;
 
         private final GenerationStep.Decoration step;
@@ -195,7 +200,7 @@ public class ValhelsiaJigsawStructure extends Structure {
         @Nullable
         private Boolean individualTerrainAdjustment = null;
 
-        private Builder(BootstapContext<Structure> context, HolderSet<Biome> biomeHolderSet, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
+        private Builder(BootstrapContext<Structure> context, HolderSet<Biome> biomeHolderSet, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
             this.context = context;
             this.biomeHolderSet = biomeHolderSet;
             this.step = step;

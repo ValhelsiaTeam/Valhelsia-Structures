@@ -4,7 +4,7 @@ import com.stal111.valhelsia_structures.common.world.structures.processor.Spawne
 import com.stal111.valhelsia_structures.common.world.structures.processor.WitchHutLegProcessor;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SlabBlock;
@@ -29,12 +29,12 @@ public class ModProcessorLists extends DatapackRegistryClass<StructureProcessorL
     public static final ResourceKey<StructureProcessorList> SPAWNER_ROOM = HELPER.createKey("spawner_room");
     public static final ResourceKey<StructureProcessorList> DEEP_SPAWNER_ROOM = HELPER.createKey("deep_spawner_room");
 
-    public ModProcessorLists(BootstapContext<StructureProcessorList> context) {
+    public ModProcessorLists(BootstrapContext<StructureProcessorList> context) {
         super(context);
     }
 
     @Override
-    public void bootstrap(BootstapContext<StructureProcessorList> context) {
+    public void bootstrap(BootstrapContext<StructureProcessorList> context) {
         context.register(REMOVE_WATER, new StructureProcessorList(List.of(RemoveWaterProcessor.INSTANCE)));
         context.register(WITCH_HUT, new StructureProcessorList(List.of(WitchHutLegProcessor.INSTANCE)));
         context.register(SPAWNER_ROOM, new StructureProcessorList(List.of(new SpawnerRoomLegProcessor(Blocks.COBBLESTONE.defaultBlockState(), Blocks.COBBLESTONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP)), RemoveWaterProcessor.INSTANCE)));

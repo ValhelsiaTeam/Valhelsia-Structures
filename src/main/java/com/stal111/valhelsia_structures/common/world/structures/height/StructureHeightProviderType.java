@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.common.world.structures.height;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 
 /**
  * @author Valhelsia Team
@@ -8,5 +8,5 @@ import com.mojang.serialization.Codec;
  */
 public interface StructureHeightProviderType<P extends StructureHeightProvider> {
 
-    Codec<P> codec();
+    MapCodec<P> codec();
 }

@@ -109,10 +109,8 @@ public class ModBlocks implements RegistryClass {
             BlockRegistryEntry::withItem
     );
     public static final BlockRegistryEntry<BigJarBlock> BIG_GLAZED_JAR = HELPER.register("big_glazed_jar", () -> new BigJarBlock(Block.Properties.of().mapColor(MapColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion())).withItem(registryObject -> new BigJarBlockItem(registryObject.get(), new Item.Properties())).renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<BigJarTopBlock> BIG_GLAZED_JAR_TOP = HELPER.register("big_glazed_jar_top", () -> new BigJarTopBlock(Block.Properties.of().mapColor(MapColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()));
 
     public static final BlockRegistryEntry<BigJarBlock> CRACKED_BIG_GLAZED_JAR = HELPER.register("cracked_big_glazed_jar", () -> new BigJarBlock(Block.Properties.of().mapColor(MapColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion())).withItem(registryObject -> new BigJarBlockItem(registryObject.get(), new Item.Properties())).renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<BigJarTopBlock> CRACKED_BIG_GLAZED_JAR_TOP = HELPER.register("cracked_big_glazed_jar_top", () -> new BigJarTopBlock(Block.Properties.of().mapColor(MapColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()));
 
     public static final BlockEntrySet<BigJarBlock, DyeColor> BIG_COLORED_GLAZED_JARS = HELPER.registerColorEntrySet(color -> "big_" + color + "_glazed_jar",
             color -> new BigJarBlock(Block.Properties.of().mapColor(color.getMapColor()).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()),
@@ -121,7 +119,7 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryEntry<RotatedPillarBlock> LAPIDIFIED_JUNGLE_LOG = HELPER.register("lapidified_jungle_log", () -> new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG)).withItem();
     public static final BlockRegistryEntry<RotatedPillarBlock> LAPIDIFIED_JUNGLE_WOOD = HELPER.register("lapidified_jungle_wood", () -> new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG)).withItem();
     public static final BlockRegistryEntry<Block> LAPIDIFIED_JUNGLE_PLANKS = HELPER.register("lapidified_jungle_planks", () -> new Block(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
-    public static final BlockRegistryEntry<StairBlock> LAPIDIFIED_JUNGLE_STAIRS = HELPER.register("lapidified_jungle_stairs", () -> new StairBlock(() -> ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get().defaultBlockState(), BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
+    public static final BlockRegistryEntry<StairBlock> LAPIDIFIED_JUNGLE_STAIRS = HELPER.register("lapidified_jungle_stairs", () -> new StairBlock(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get().defaultBlockState(), BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
     public static final BlockRegistryEntry<SlabBlock> LAPIDIFIED_JUNGLE_SLAB = HELPER.register("lapidified_jungle_slab", () -> new SlabBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
     public static final BlockRegistryEntry<PressurePlateBlock> LAPIDIFIED_JUNGLE_PRESSURE_PLATE = HELPER.register("lapidified_jungle_pressure_plate", () -> new PressurePlateBlock(LAPIDIFIED_JUNGLE, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F))).withItem();
     public static final BlockRegistryEntry<ButtonBlock> LAPIDIFIED_JUNGLE_BUTTON = HELPER.register("lapidified_jungle_button", () -> new ButtonBlock(LAPIDIFIED_JUNGLE, 30, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F))).withItem();

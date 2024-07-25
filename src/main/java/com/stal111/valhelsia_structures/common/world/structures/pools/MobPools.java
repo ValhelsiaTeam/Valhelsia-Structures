@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.common.world.structures.pools;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.TemplatePoolRegistryHelper;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryClass;
@@ -15,12 +15,12 @@ public class MobPools extends DatapackRegistryClass<StructureTemplatePool> {
 
     public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.TEMPLATE_POOL);
 
-    public MobPools(BootstapContext<StructureTemplatePool> context) {
+    public MobPools(BootstrapContext<StructureTemplatePool> context) {
         super(context);
     }
 
     @Override
-    public void bootstrap(BootstapContext<StructureTemplatePool> context) {
+    public void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         // Entities
         HELPER.create("mobs/bee", context, "mobs/bee", builder -> builder.element("bee_1"));
         HELPER.create("mobs/bees", context, "mobs/bee", builder -> builder.element("bee_1").element("bee_2"));

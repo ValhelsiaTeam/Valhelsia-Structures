@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.common.world.structures.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureProcessors;
 import net.minecraft.core.BlockPos;
@@ -27,7 +27,7 @@ public class WitchHutLegProcessor extends StructureProcessor {
 
     public static final WitchHutLegProcessor INSTANCE = new WitchHutLegProcessor();
 
-    public static final Codec<WitchHutLegProcessor> CODEC = Codec.unit(() -> {
+    public static final MapCodec<WitchHutLegProcessor> CODEC = MapCodec.unit(() -> {
         return WitchHutLegProcessor.INSTANCE;
     });
 

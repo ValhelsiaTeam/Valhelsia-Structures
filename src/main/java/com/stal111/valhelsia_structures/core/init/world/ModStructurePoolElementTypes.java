@@ -16,5 +16,5 @@ public class ModStructurePoolElementTypes implements RegistryClass {
 
     public static final MappedRegistryHelper<StructurePoolElementType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.STRUCTURE_POOL_ELEMENT);
 
-    public static final RegistryEntry<StructurePoolElementType<ValhelsiaSinglePoolElement>> VALHELSIA_SINGLE = HELPER.register("valhelsia_single", () -> () -> ValhelsiaSinglePoolElement.CODEC);
+    public static final RegistryEntry<StructurePoolElementType<?>, StructurePoolElementType<ValhelsiaSinglePoolElement>> VALHELSIA_SINGLE = HELPER.register("valhelsia_single", () -> () -> ValhelsiaSinglePoolElement.CODEC);
 }

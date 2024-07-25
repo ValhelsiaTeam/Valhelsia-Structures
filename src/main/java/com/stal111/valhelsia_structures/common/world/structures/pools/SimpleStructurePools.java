@@ -5,7 +5,7 @@ import com.stal111.valhelsia_structures.data.worldgen.processors.ModProcessorLis
 import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.TemplatePoolRegistryHelper;
@@ -27,12 +27,12 @@ public class SimpleStructurePools extends DatapackRegistryClass<StructureTemplat
     public static final StartPoolKeySet DEEP_SPAWNER_ROOMS = StartPoolKeySet.simple(HELPER, "deep_spawner_rooms");
     public static final StartPoolKeySet WITCH_HUTS = StartPoolKeySet.withFurnishedVariant(HELPER, "witch_huts");
 
-    public SimpleStructurePools(BootstapContext<StructureTemplatePool> context) {
+    public SimpleStructurePools(BootstrapContext<StructureTemplatePool> context) {
         super(context);
     }
 
     @Override
-    public void bootstrap(BootstapContext<StructureTemplatePool> context) {
+    public void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         HolderGetter<StructureProcessorList> processorListRegistry = context.lookup(Registries.PROCESSOR_LIST);
 
         CASTLES.create(HELPER, context, builder -> builder.element("castle"));

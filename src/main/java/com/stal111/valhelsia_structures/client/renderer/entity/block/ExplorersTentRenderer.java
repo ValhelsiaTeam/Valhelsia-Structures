@@ -32,8 +32,8 @@ import javax.annotation.Nonnull;
  */
 public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentBlockEntity> {
 
-    private static final ResourceLocation TENT_TEXTURE = new ResourceLocation(ValhelsiaStructures.MOD_ID, "textures/block/explorers_tent.png");
-    private static final ResourceLocation TENT_STICKS_TEXTURE = new ResourceLocation(ValhelsiaStructures.MOD_ID, "textures/block/explorers_tent_sticks.png");
+    private static final ResourceLocation TENT_TEXTURE = ValhelsiaStructures.location("textures/block/explorers_tent.png");
+    private static final ResourceLocation TENT_STICKS_TEXTURE = ValhelsiaStructures.location("textures/block/explorers_tent_sticks.png");
 
     private final ExplorersTentModel model;
 
@@ -52,12 +52,7 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
         poseStack.mulPose(Axis.YP.rotationDegrees(rotation));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
-        int i = blockEntity.getColor();
-        float red = (float) (i >> 16 & 255) / 255.0F;
-        float green = (float) (i >> 8 & 255) / 255.0F;
-        float blue = (float) (i & 255) / 255.0F;
-
-        this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TENT_TEXTURE)), combinedLight, combinedOverlay, red, green, blue, 1.0F);
+        this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TENT_TEXTURE)), combinedLight, combinedOverlay, blockEntity.getColor());
 
         poseStack.translate(0.0D, 0.3D, 0.0D);
         poseStack.mulPose(Axis.YP.rotationDegrees(90));

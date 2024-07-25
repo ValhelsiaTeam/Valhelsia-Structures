@@ -17,7 +17,7 @@ public class ModStructureProcessors implements RegistryClass {
 
     public static final MappedRegistryHelper<StructureProcessorType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.STRUCTURE_PROCESSOR);
 
-    public static final RegistryEntry<StructureProcessorType<SpawnerRoomLegProcessor>> SPAWNER_ROOM_LEG = HELPER.register("spawner_room_leg", () -> () -> SpawnerRoomLegProcessor.CODEC);
-    public static final RegistryEntry<StructureProcessorType<WitchHutLegProcessor>> WITCH_HUT_LEG = HELPER.register("witch_hut_leg", () -> () -> WitchHutLegProcessor.CODEC);
+    public static final RegistryEntry<StructureProcessorType<?>, StructureProcessorType<SpawnerRoomLegProcessor>> SPAWNER_ROOM_LEG = HELPER.register("spawner_room_leg", () -> () -> SpawnerRoomLegProcessor.CODEC);
+    public static final RegistryEntry<StructureProcessorType<?>, StructureProcessorType<WitchHutLegProcessor>> WITCH_HUT_LEG = HELPER.register("witch_hut_leg", () -> () -> WitchHutLegProcessor.CODEC);
 
 }

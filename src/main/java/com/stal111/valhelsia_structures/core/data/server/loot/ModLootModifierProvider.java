@@ -1,8 +1,8 @@
 package com.stal111.valhelsia_structures.core.data.server.loot;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
+import net.valhelsia.valhelsia_core.datagen.DataProviderContext;
 
 /**
  * Mod Loot Modifiers <br>
@@ -13,8 +13,8 @@ import net.neoforged.neoforge.common.data.GlobalLootModifierProvider;
  */
 public class ModLootModifierProvider extends GlobalLootModifierProvider {
 
-    public ModLootModifierProvider(PackOutput output) {
-        super(output, ValhelsiaStructures.MOD_ID);
+    public ModLootModifierProvider(DataProviderContext context) {
+        super(context.output(), context.lookupProvider(), ValhelsiaStructures.MOD_ID);
     }
 
     @Override

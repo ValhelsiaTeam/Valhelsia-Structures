@@ -17,7 +17,6 @@ import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.BedBlock;
@@ -52,7 +51,7 @@ public abstract class BlockModelRendererMixin {
             for (int i = 1; i < state.getValue(ModBlockStateProperties.LAYERS_1_5); i++) {
                 model = ModelBakerImplAccessor.createModelBakerImpl(Minecraft.getInstance().getModelManager().getModelBakery(), (resourceLocation, material) -> {
                     return Minecraft.getInstance().getTextureAtlas(material.atlasLocation()).apply(resourceLocation);
-                }, new ResourceLocation(ValhelsiaStructures.MOD_ID, "block/bone_pile")).bake(new ResourceLocation(ValhelsiaStructures.MOD_ID, "block/bone_pile"), BlockModelRotation.by(90, 90 * i));
+                }, ValhelsiaStructures.location("block/bone_pile")).bake(ValhelsiaStructures.location("block/bone_pile"), BlockModelRotation.by(90, 90 * i));
 
                 if (model == null) {
                     return;

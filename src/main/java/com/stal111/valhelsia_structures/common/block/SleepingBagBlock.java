@@ -5,7 +5,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -74,7 +73,7 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
 
     @Nonnull
     @Override
-    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+    public InteractionResult useWithoutItem(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull BlockHitResult hit) {
         if (level.isClientSide()) {
             return InteractionResult.CONSUME;
         }
@@ -226,7 +225,7 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
     }
 
     @Override
-    public boolean isBed(BlockState state, BlockGetter level, BlockPos pos, @Nullable Entity player) {
+    public boolean isBed(BlockState state, BlockGetter level, BlockPos pos, LivingEntity sleeper) {
         return true;
     }
 

@@ -49,10 +49,10 @@ public class AxeCraftingRecipeBuilder implements RecipeBuilder {
     @Override
     public void save(@NotNull RecipeOutput output, @NotNull String location) {
         ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(this.result);
-        if (new ResourceLocation(location).equals(resourcelocation)) {
+        if (ResourceLocation.parse(location).equals(resourcelocation)) {
             throw new IllegalStateException("Axe Crafting Recipe " + location + " should remove its 'save' argument");
         } else {
-            this.save(output, new ResourceLocation(location));
+            this.save(output, ResourceLocation.parse(location));
         }
     }
 

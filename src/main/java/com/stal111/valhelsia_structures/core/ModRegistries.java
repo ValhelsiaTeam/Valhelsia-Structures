@@ -8,7 +8,7 @@ import com.stal111.valhelsia_structures.core.init.world.*;
 import com.stal111.valhelsia_structures.data.worldgen.modifier.ModBiomeModifiers;
 import com.stal111.valhelsia_structures.data.worldgen.processors.ModProcessorLists;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryCollector;
@@ -49,7 +49,7 @@ public class ModRegistries extends RegistryCollector {
                     return new ValhelsiaSinglePoolElement(Either.left(resourceLocation), holder, projection, terrainAdjustment);
                 };
             });
-        }, context -> ImmutableList.of(new SpawnerDungeonPools((BootstapContext<StructureTemplatePool>) context), new SimpleStructurePools((BootstapContext<StructureTemplatePool>) context), new BigTreePools((BootstapContext<StructureTemplatePool>) context), new DesertHousePools((BootstapContext<StructureTemplatePool>) context), new MobPools((BootstapContext<StructureTemplatePool>) context), new PlayerHousePools((BootstapContext<StructureTemplatePool>) context)));
+        }, context -> ImmutableList.of(new SpawnerDungeonPools((BootstrapContext<StructureTemplatePool>) context), new SimpleStructurePools((BootstrapContext<StructureTemplatePool>) context), new BigTreePools((BootstrapContext<StructureTemplatePool>) context), new DesertHousePools((BootstrapContext<StructureTemplatePool>) context), new MobPools((BootstrapContext<StructureTemplatePool>) context), new PlayerHousePools((BootstrapContext<StructureTemplatePool>) context)));
         this.addDatapackHelper(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::new);
         this.addDatapackHelper(Registries.PROCESSOR_LIST, ModProcessorLists::new);
     }

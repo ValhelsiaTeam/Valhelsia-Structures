@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.common.world.structures.placement;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.core.init.world.ModStructurePlacementTypes;
 import net.minecraft.core.Vec3i;
@@ -21,7 +22,7 @@ import java.util.Optional;
  */
 public class ValhelsiaStructurePlacement extends RandomSpreadStructurePlacement {
 
-    public static final Codec<ValhelsiaStructurePlacement> CODEC = RecordCodecBuilder.<ValhelsiaStructurePlacement>mapCodec(instance -> {
+    public static final MapCodec<ValhelsiaStructurePlacement> CODEC = RecordCodecBuilder.<ValhelsiaStructurePlacement>mapCodec(instance -> {
         var placementCodec = placementCodec(instance);
 
         return instance.group(
@@ -37,7 +38,7 @@ public class ValhelsiaStructurePlacement extends RandomSpreadStructurePlacement 
         ).apply(instance, ValhelsiaStructurePlacement::new);
     }).flatXmap(placement -> {
         return placement.spacing() <= placement.separation() ? DataResult.error(() -> "Spacing has to be larger than separation") : DataResult.success(placement);
-    }, DataResult::success).codec();
+    }, DataResult::success);
 
     private final List<ExclusionZone> exclusionZones;
 

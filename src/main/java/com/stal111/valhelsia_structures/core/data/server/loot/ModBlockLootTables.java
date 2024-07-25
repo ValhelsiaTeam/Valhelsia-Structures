@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.core.data.server.loot;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.world.flag.FeatureFlags;
 import net.valhelsia.valhelsia_core.datagen.ValhelsiaBlockLootTables;
 
@@ -15,8 +16,8 @@ import java.util.Set;
  */
 public class ModBlockLootTables extends ValhelsiaBlockLootTables {
 
-    public ModBlockLootTables() {
-        super(Set.of(), FeatureFlags.DEFAULT_FLAGS, ValhelsiaStructures.REGISTRY_MANAGER);
+    public ModBlockLootTables(HolderLookup.Provider lookupProvider) {
+        super(Set.of(), FeatureFlags.DEFAULT_FLAGS, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER);
     }
 
     @Override

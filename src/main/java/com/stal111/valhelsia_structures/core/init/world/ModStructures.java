@@ -9,7 +9,7 @@ import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.random.WeightedRandomList;
@@ -49,11 +49,11 @@ public class ModStructures extends DatapackRegistryClass<Structure> {
     public static final ResourceKey<Structure> SPAWNER_ROOM = HELPER.createKey("spawner_room");
     public static final ResourceKey<Structure> DEEP_SPAWNER_ROOM = HELPER.createKey("deep_spawner_room");
 
-    public ModStructures(BootstapContext<Structure> context) {
+    public ModStructures(BootstrapContext<Structure> context) {
         super(context);
     }
 
-    public void bootstrap(BootstapContext<Structure> context) {
+    public void bootstrap(BootstrapContext<Structure> context) {
         HolderGetter<Biome> biomeHolderGetter = context.lookup(Registries.BIOME);
 
         HolderSet<Biome> castleBiomes = this.singleTag(biomeHolderGetter, ModTags.Biomes.HAS_CASTLE);
@@ -85,11 +85,11 @@ public class ModStructures extends DatapackRegistryClass<Structure> {
         this.undergroundStructure(context, DEEP_SPAWNER_ROOM, deepSpawnerRoomBiomes, TerrainAdjustment.NONE, SimpleStructurePools.DEEP_SPAWNER_ROOMS, builder -> builder.startHeight(StructureHeightProvider.deepSpawnerRoom(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(-1))));
     }
 
-    protected void surfaceStructure(BootstapContext<Structure> context, ResourceKey<Structure> key, HolderSet<Biome> biomeHolderSet, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool, UnaryOperator<ValhelsiaJigsawStructure.Builder> builderUnaryOperator) {
+    protected void surfaceStructure(BootstrapContext<Structure> context, ResourceKey<Structure> key, HolderSet<Biome> biomeHolderSet, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool, UnaryOperator<ValhelsiaJigsawStructure.Builder> builderUnaryOperator) {
         context.register(key, builderUnaryOperator.apply(ValhelsiaJigsawStructure.builder(context, biomeHolderSet, GenerationStep.Decoration.TOP_LAYER_MODIFICATION, terrainAdjustment, startPool)).build());
     }
 
-    protected void undergroundStructure(BootstapContext<Structure> context, ResourceKey<Structure> key, HolderSet<Biome> biomeHolderSet, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool, UnaryOperator<ValhelsiaJigsawStructure.Builder> builderUnaryOperator) {
+    protected void undergroundStructure(BootstrapContext<Structure> context, ResourceKey<Structure> key, HolderSet<Biome> biomeHolderSet, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool, UnaryOperator<ValhelsiaJigsawStructure.Builder> builderUnaryOperator) {
         context.register(key, builderUnaryOperator.apply(ValhelsiaJigsawStructure.builder(context, biomeHolderSet, GenerationStep.Decoration.UNDERGROUND_STRUCTURES, terrainAdjustment, startPool)).build());
     }
 

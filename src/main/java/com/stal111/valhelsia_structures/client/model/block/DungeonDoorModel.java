@@ -13,7 +13,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
@@ -27,7 +26,7 @@ import javax.annotation.Nonnull;
  */
 public class DungeonDoorModel extends Model {
 
-	public static final ModelLayerLocation DUNGEON_DOOR = new ModelLayerLocation(new ResourceLocation(ValhelsiaStructures.MOD_ID, "dungeon_door"), "main");
+	public static final ModelLayerLocation DUNGEON_DOOR = new ModelLayerLocation(ValhelsiaStructures.location("dungeon_door"), "main");
 
 	private final ModelPart rightDoor;
 	private final ModelPart leftDoor;
@@ -61,7 +60,7 @@ public class DungeonDoorModel extends Model {
 	}
 
 	@Override
-	public void renderToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+	public void renderToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
 		rightDoor.render(poseStack, buffer, packedLight, packedOverlay);
 		leftDoor.render(poseStack, buffer, packedLight, packedOverlay);
 	}

@@ -16,5 +16,5 @@ public class ModStructurePlacementTypes implements RegistryClass {
 
     public static final MappedRegistryHelper<StructurePlacementType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.STRUCTURE_PLACEMENT);
 
-    public static final RegistryEntry<StructurePlacementType<ValhelsiaStructurePlacement>> VALHELSIA_RANDOM_SPREAD = HELPER.register("valhelsia_random_spread", () -> () -> ValhelsiaStructurePlacement.CODEC);
+    public static final RegistryEntry<StructurePlacementType<?>, StructurePlacementType<ValhelsiaStructurePlacement>> VALHELSIA_RANDOM_SPREAD = HELPER.register("valhelsia_random_spread", () -> () -> ValhelsiaStructurePlacement.CODEC);
 }

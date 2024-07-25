@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.common.block;
 
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -17,6 +18,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * Doused Wall Torch Block <br>
@@ -29,6 +32,13 @@ import javax.annotation.Nullable;
 public class DousedWallTorchBlock extends DousedTorchBlock {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+
+    private static final Map<Direction, VoxelShape> AABBS = Util.make(new EnumMap<>(Direction.class), map -> {
+        map.put(Direction.NORTH, Block.box(5.5, 3.0, 11.0, 10.5, 13.0, 16.0));
+        map.put(Direction.SOUTH, Block.box(5.5, 3.0, 0.0, 10.5, 13.0, 5.0));
+        map.put(Direction.WEST, Block.box(11.0, 3.0, 5.5, 16.0, 13.0, 10.5));
+        map.put(Direction.EAST, Block.box(0.0, 3.0, 5.5, 5.0, 13.0, 10.5));
+    });
 
     public DousedWallTorchBlock(TorchBlock torchBlock, Properties properties) {
         super(torchBlock, properties);
@@ -43,8 +53,8 @@ public class DousedWallTorchBlock extends DousedTorchBlock {
 
     @Nonnull
     @Override
-    public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
-        return Blocks.WALL_TORCH.getShape(state, level, pos, context);
+    protected VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
+        return AABBS.get(state.getValue(FACING));
     }
 
     @Override

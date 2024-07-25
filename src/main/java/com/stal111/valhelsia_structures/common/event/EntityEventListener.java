@@ -7,10 +7,10 @@ import net.minecraft.world.entity.monster.Pillager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.trading.MerchantOffer;
-import net.minecraft.world.level.saveddata.maps.MapDecoration;
+import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.BasicItemListing;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
@@ -26,7 +26,7 @@ import net.valhelsia.valhelsia_core.api.common.util.ItemStackUtils;
  * @author Valhelsia Team
  * @since 2021-05-11
  */
-@Mod.EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID)
+@EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID)
 public class EntityEventListener {
 
     @SubscribeEvent
@@ -42,27 +42,27 @@ public class EntityEventListener {
                 VillagerProfession.CARTOGRAPHER,
                 1,
                 (trader, rand) -> {
-                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level(), trader.blockPosition(), ModTags.Structures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.spawner_dungeon");
+                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level(), trader.blockPosition(), ModTags.Structures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS, MapDecorationTypes.RED_X, "filled_map.valhelsia_structures.spawner_dungeon");
                     if (stack == null) {
                         return null;
                     }
-                    return new MerchantOffer(new ItemStack(Items.EMERALD, 10), new ItemStack(Items.COMPASS), stack, 12, 5, 1);
+                    return new BasicItemListing(new ItemStack(Items.EMERALD, 10), new ItemStack(Items.COMPASS), stack, 12, 5, 1).getOffer(trader, rand);
                 }
         );
         TradeHelper.addVillagerTrade(event,
                 VillagerProfession.CARTOGRAPHER,
                 2,
                 (trader, rand) -> {
-                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level(), trader.blockPosition(), ModTags.Structures.ON_CASTLE_EXPLORER_MAPS, MapDecoration.Type.RED_X, "filled_map.valhelsia_structures.castle");
+                    ItemStack stack = ItemStackUtils.getFilledMap(trader.level(), trader.blockPosition(), ModTags.Structures.ON_CASTLE_EXPLORER_MAPS, MapDecorationTypes.RED_X, "filled_map.valhelsia_structures.castle");
                     if (stack == null) {
                         return null;
                     }
-                    return new MerchantOffer(new ItemStack(Items.EMERALD, 12), new ItemStack(Items.COMPASS), stack, 12, 10, 1);
+                    return new BasicItemListing(new ItemStack(Items.EMERALD, 12), new ItemStack(Items.COMPASS), stack, 12, 10, 1).getOffer(trader, rand);
                 }
         );
     }
 
-    @Mod.EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
     public static class ModEvents {
 
         @SubscribeEvent

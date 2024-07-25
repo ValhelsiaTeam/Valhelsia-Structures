@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.common.world.structures.height;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureHeightProviderTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.NoiseColumn;
@@ -9,6 +9,7 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.structure.Structure;
 
 import java.util.OptionalInt;
+import java.util.function.Function;
 
 /**
  * @author Valhelsia Team
@@ -16,7 +17,7 @@ import java.util.OptionalInt;
  */
 public class SpawnerRoomHeightProvider extends BelowSurfaceHeightProvider {
 
-    public static final Codec<SpawnerRoomHeightProvider> CODEC = BelowSurfaceHeightProvider.CODEC.xmap(provider -> new SpawnerRoomHeightProvider(provider.getMinInclusive()), provider -> provider);
+    public static final MapCodec<SpawnerRoomHeightProvider> CODEC = BelowSurfaceHeightProvider.CODEC.fieldOf("height").xmap(provider -> new SpawnerRoomHeightProvider(provider.getMinInclusive()), Function.identity());
 
     public SpawnerRoomHeightProvider(VerticalAnchor minInclusive) {
         super(minInclusive);

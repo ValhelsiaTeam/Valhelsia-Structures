@@ -7,7 +7,7 @@ import com.stal111.valhelsia_structures.client.renderer.entity.block.*;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 /**
@@ -18,7 +18,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
  * @version 1.17.1-0.1.0
  * @since 2021-10-03
  */
-@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class EntityRendererEvents {
 
     @SubscribeEvent

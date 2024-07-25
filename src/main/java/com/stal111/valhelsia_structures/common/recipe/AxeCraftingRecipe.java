@@ -1,19 +1,16 @@
 package com.stal111.valhelsia_structures.common.recipe;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
 import com.stal111.valhelsia_structures.utils.ModTags;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,12 +40,12 @@ public class AxeCraftingRecipe extends CustomRecipe {
     }
 
     @Override
-    public boolean matches(CraftingContainer inv, @Nonnull Level level) {
+    public boolean matches(CraftingInput input, @Nonnull Level level) {
         int axeSlot = -1;
         ItemStack stack = null;
 
-        for (int slot = 0; slot < inv.getContainerSize(); slot++) {
-            ItemStack item = inv.getItem(slot);
+        for (int slot = 0; slot < input.size(); slot++) {
+            ItemStack item = input.getItem(slot);
 
             if (item.getItem() instanceof AxeItem && !item.is(ModTags.Items.AXE_CRAFTING_BLACKLISTED)) {
                 axeSlot = slot;
@@ -60,10 +57,10 @@ public class AxeCraftingRecipe extends CustomRecipe {
             return false;
         }
 
-        for (int i = 0; i < inv.getContainerSize(); i++) {
-            ItemStack stack1 = inv.getItem(i);
+        for (int i = 0; i < input.size(); i++) {
+            ItemStack stack1 = input.getItem(i);
             if (i != axeSlot && !stack1.isEmpty()) {
-                if (input.test(stack1) && (stack == null || ItemStack.isSameItem(stack, stack1))) {
+                if (this.input.test(stack1) && (stack == null || ItemStack.isSameItem(stack, stack1))) {
                     stack = stack1;
                 } else {
                     return false;
@@ -76,12 +73,12 @@ public class AxeCraftingRecipe extends CustomRecipe {
 
     @Nonnull
     @Override
-    public ItemStack assemble(CraftingContainer inv, @NotNull RegistryAccess registryAccess) {
+    public ItemStack assemble(CraftingInput input, @NotNull HolderLookup.Provider lookupProvider) {
         int logCount = 0;
 
-        for(int i = 0; i < inv.getContainerSize(); i++) {
-            ItemStack stack = inv.getItem(i);
-            if (input.test(stack)) {
+        for(int i = 0; i < input.size(); i++) {
+            ItemStack stack = input.getItem(i);
+            if (this.input.test(stack)) {
                 logCount++;
             }
         }
@@ -91,20 +88,20 @@ public class AxeCraftingRecipe extends CustomRecipe {
 
     @Nonnull
     @Override
-    public NonNullList<ItemStack> getRemainingItems(CraftingContainer inv) {
-        NonNullList<ItemStack> itemStacks = NonNullList.withSize(inv.getContainerSize(), ItemStack.EMPTY);
+    public NonNullList<ItemStack> getRemainingItems(CraftingInput input) {
+        NonNullList<ItemStack> itemStacks = NonNullList.withSize(input.size(), ItemStack.EMPTY);
 
         int logCount = 0;
 
         for(int i = 0; i < itemStacks.size(); i++) {
-            if (input.test(inv.getItem(i))) {
+            if (this.input.test(input.getItem(i))) {
                 logCount++;
             }
         }
 
 
         for(int i = 0; i < itemStacks.size(); i++) {
-            ItemStack stack = inv.getItem(i);
+            ItemStack stack = input.getItem(i);
             if (stack.getItem() instanceof AxeItem) {
                 ItemStack stack1 = stack.copy();
                 stack1.setDamageValue(stack1.getDamageValue() + logCount);
@@ -139,35 +136,30 @@ public class AxeCraftingRecipe extends CustomRecipe {
 
     public static class Serializer implements RecipeSerializer<AxeCraftingRecipe> {
 
-        private static final Codec<AxeCraftingRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(recipe -> {
-                    return recipe.input;
-                }),
-                ItemStack.CODEC.fieldOf("output").forGetter(recipe -> {
-                    return recipe.output;
-                }),
+        private static final MapCodec<AxeCraftingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(recipe -> recipe.input),
+                ItemStack.CODEC.fieldOf("output").forGetter(recipe -> recipe.output),
                 CraftingBookCategory.CODEC.fieldOf("category").forGetter(CustomRecipe::category)
         ).apply(instance, AxeCraftingRecipe::new));
 
+        private static final StreamCodec<RegistryFriendlyByteBuf, AxeCraftingRecipe> STREAM_CODEC = StreamCodec.composite(
+                Ingredient.CONTENTS_STREAM_CODEC,
+                AxeCraftingRecipe::getInput,
+                ItemStack.STREAM_CODEC,
+                AxeCraftingRecipe::getOutput,
+                CraftingBookCategory.STREAM_CODEC,
+                CustomRecipe::category,
+                AxeCraftingRecipe::new
+        );
+
         @Override
-        public @NotNull Codec<AxeCraftingRecipe> codec() {
+        public @NotNull MapCodec<AxeCraftingRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public @org.jetbrains.annotations.Nullable AxeCraftingRecipe fromNetwork(@NotNull FriendlyByteBuf buffer) {
-            CraftingBookCategory category = buffer.readEnum(CraftingBookCategory.class);
-
-            Ingredient input = Ingredient.fromNetwork(buffer);
-            ItemStack output = buffer.readItem();
-            return new AxeCraftingRecipe(input, output, category);
-        }
-
-        @Override
-        public void toNetwork(@Nonnull FriendlyByteBuf buffer, @Nonnull AxeCraftingRecipe recipe) {
-            buffer.writeEnum(recipe.category());
-            recipe.input.toNetwork(buffer);
-            buffer.writeItem(recipe.output);
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, AxeCraftingRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

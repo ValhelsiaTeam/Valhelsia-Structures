@@ -2,7 +2,7 @@ package com.stal111.valhelsia_structures.data.worldgen.modifier;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.HolderSet;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.CavePlacements;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.GenerationStep;
@@ -24,12 +24,12 @@ public class ModBiomeModifiers extends ValhelsiaBiomeModifierProvider {
 
     public static final ResourceKey<BiomeModifier> REMOVE_MONSTER_ROOM = HELPER.createKey("remove_monster_room");
 
-    public ModBiomeModifiers(BootstapContext<BiomeModifier> context) {
+    public ModBiomeModifiers(BootstrapContext<BiomeModifier> context) {
         super(context);
     }
 
     @Override
-    public void bootstrap(BootstapContext<BiomeModifier> context) {
+    public void bootstrap(BootstrapContext<BiomeModifier> context) {
         this.add(REMOVE_MONSTER_ROOM, new BiomeModifiers.RemoveFeaturesBiomeModifier(this.isOverworld, HolderSet.direct(this.featureRegistry.getOrThrow(CavePlacements.MONSTER_ROOM), this.featureRegistry.getOrThrow(CavePlacements.MONSTER_ROOM_DEEP)), Collections.singleton(GenerationStep.Decoration.UNDERGROUND_STRUCTURES)));
     }
 }

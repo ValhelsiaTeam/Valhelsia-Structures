@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.common.block.entity;
 import com.stal111.valhelsia_structures.common.block.SpecialBaseSpawner;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.SpawnData;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -60,13 +62,13 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void load(@Nonnull CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
+        super.loadAdditional(tag, lookupProvider);
         this.spawner.load(this.level, this.worldPosition, tag);
     }
 
     @Override
-    public void saveAdditional(@Nonnull CompoundTag tag) {
+    public void saveAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
         this.spawner.save(this.level, this.worldPosition, tag);
     }
 
@@ -78,8 +80,8 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
 
     @Nonnull
     @Override
-    public CompoundTag getUpdateTag() {
-        CompoundTag tag = this.saveWithoutMetadata();
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider lookupProvider) {
+        CompoundTag tag = this.saveWithoutMetadata(lookupProvider);
         tag.remove("SpawnPotentials");
         return tag;
     }

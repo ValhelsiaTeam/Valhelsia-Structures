@@ -6,7 +6,7 @@ import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
 
 /**
@@ -17,7 +17,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
  * @version 1.18.2 - 0.2.0
  * @since 2022-04-03
  */
-@Mod.EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID)
+@EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID)
 public class PlayerEvents {
 
     @SubscribeEvent

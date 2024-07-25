@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.utils;
 
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
@@ -29,25 +29,25 @@ public interface StartPoolKeySet {
 
     void forEachKey(BiConsumer<ResourceKey<StructureTemplatePool>, Boolean> consumer);
 
-    default void create(TemplatePoolRegistryHelper helper, BootstapContext<StructureTemplatePool> context, String folder, UnaryOperator<JigsawBuilder> builder) {
+    default void create(TemplatePoolRegistryHelper helper, BootstrapContext<StructureTemplatePool> context, String folder, UnaryOperator<JigsawBuilder> builder) {
         this.forEachKey((key, furnished) -> {
             helper.create(key, context, furnished ? FURNISHED_PREFIX + "/" + folder : folder, builder);
         });
     }
 
-    default void create(TemplatePoolRegistryHelper helper, BootstapContext<StructureTemplatePool> context, UnaryOperator<JigsawBuilder> builder) {
+    default void create(TemplatePoolRegistryHelper helper, BootstrapContext<StructureTemplatePool> context, UnaryOperator<JigsawBuilder> builder) {
         this.forEachKey((key, furnished) -> {
             helper.create(key, context, furnished ? FURNISHED_PREFIX : null, builder);
         });
     }
 
-    default void create(TemplatePoolRegistryHelper helper, BootstapContext<StructureTemplatePool> context, String folder, UnaryOperator<JigsawBuilder> builder, @Nullable TerrainAdjustment terrainAdjustment) {
+    default void create(TemplatePoolRegistryHelper helper, BootstrapContext<StructureTemplatePool> context, String folder, UnaryOperator<JigsawBuilder> builder, @Nullable TerrainAdjustment terrainAdjustment) {
         this.forEachKey((key, furnished) -> {
             helper.create(key, context, furnished ? FURNISHED_PREFIX + "/" + folder : folder, builder, terrainAdjustment);
         });
     }
 
-    default void create(TemplatePoolRegistryHelper helper, BootstapContext<StructureTemplatePool> context, UnaryOperator<JigsawBuilder> builder, @Nullable TerrainAdjustment terrainAdjustment) {
+    default void create(TemplatePoolRegistryHelper helper, BootstrapContext<StructureTemplatePool> context, UnaryOperator<JigsawBuilder> builder, @Nullable TerrainAdjustment terrainAdjustment) {
         this.forEachKey((key, furnished) -> {
             helper.create(key, context, furnished ? FURNISHED_PREFIX : null, builder, terrainAdjustment);
         });

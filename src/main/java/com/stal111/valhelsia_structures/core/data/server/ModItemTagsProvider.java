@@ -34,7 +34,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.copy(ModTags.Blocks.POSTS, ModTags.Items.POSTS);
         this.copy(ModTags.Blocks.CUT_POSTS, ModTags.Items.CUT_POSTS);
         this.copy(ModTags.Blocks.NON_FLAMMABLE_POSTS, ModTags.Items.NON_FLAMMABLE_POSTS);
-        this.copy(Tags.Blocks.GLASS_COLORLESS, Tags.Items.GLASS_COLORLESS);
+        this.copy(Tags.Blocks.GLASS_BLOCKS_COLORLESS, Tags.Items.GLASS_BLOCKS_COLORLESS);
         this.copy(Tags.Blocks.GLASS_PANES, Tags.Items.GLASS_PANES);
         this.copy(Tags.Blocks.GLASS_PANES_COLORLESS, Tags.Items.GLASS_PANES_COLORLESS);
         this.copy(ModTags.Blocks.COLORED_JARS, ModTags.Items.COLORED_JARS);

@@ -10,7 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbilities;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,14 +32,14 @@ public class AxeCraftingRecipeMaker {
             return List.of();
         }
 
-        Ingredient axeIngredient = Ingredient.of(BuiltInRegistries.ITEM.stream().map(ItemStack::new).filter(stack -> stack.canPerformAction(ToolActions.AXE_DIG) && !stack.is(ModTags.Items.AXE_CRAFTING_BLACKLISTED)));
+        Ingredient axeIngredient = Ingredient.of(BuiltInRegistries.ITEM.stream().map(ItemStack::new).filter(stack -> stack.canPerformAction(ItemAbilities.AXE_DIG) && !stack.is(ModTags.Items.AXE_CRAFTING_BLACKLISTED)));
 
         return level.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING).stream()
                 .filter(recipe -> recipe.value() instanceof AxeCraftingRecipe)
                 .map(recipe -> (AxeCraftingRecipe) recipe.value())
                 .map(recipe -> {
                     ItemStack output = recipe.getOutput();
-                    ResourceLocation id = new ResourceLocation(ValhelsiaStructures.MOD_ID, "jei.axe_crafting." + output.getDescriptionId());
+                    ResourceLocation id = ValhelsiaStructures.location("jei.axe_crafting." + output.getDescriptionId());
 
                     return new ShapelessRecipe(group, CraftingBookCategory.BUILDING, output, NonNullList.of(Ingredient.EMPTY, axeIngredient, recipe.getInput()));
                 })

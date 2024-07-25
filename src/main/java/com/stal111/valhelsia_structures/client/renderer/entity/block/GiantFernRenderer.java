@@ -22,7 +22,7 @@ import javax.annotation.Nonnull;
  */
 public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEntity> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(ValhelsiaStructures.MOD_ID, "textures/block/giant_fern.png");
+    private static final ResourceLocation TEXTURE = ValhelsiaStructures.location("textures/block/giant_fern.png");
 
     private final GiantFernModel model;
 
@@ -41,7 +41,7 @@ public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEnti
             poseStack.mulPose(Axis.YP.rotationDegrees(45));
         }
 
-        this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TEXTURE)), combinedLight, combinedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TEXTURE)), combinedLight, combinedOverlay);
 
         poseStack.popPose();
     }

@@ -23,10 +23,10 @@ public class ModBlockEntities implements RegistryClass {
     public static final MappedRegistryHelper<BlockEntityType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.BLOCK_ENTITY_TYPE);
 
 
-    public static final RegistryEntry<BlockEntityType<SpecialSpawnerBlockEntity>> SPECIAL_SPAWNER = HELPER.register("special_spawner", () -> BlockEntityType.Builder.of(SpecialSpawnerBlockEntity::new, ModBlocks.SPECIAL_SPAWNER.get()).build(null));
-    public static final RegistryEntry<BlockEntityType<JarBlockEntity>> JAR = HELPER.register("jar", () -> BlockEntityType.Builder.of(JarBlockEntity::new, Stream.concat(Stream.of(ModBlocks.GLAZED_JAR.get(), ModBlocks.CRACKED_GLAZED_JAR.get()), ModBlocks.COLORED_GLAZED_JARS.values().stream().map(BlockRegistryEntry::get)).toArray(Block[]::new)).build(null));
-    public static final RegistryEntry<BlockEntityType<ExplorersTentBlockEntity>> TENT = HELPER.register("explorers_tent", () -> BlockEntityType.Builder.of(ExplorersTentBlockEntity::new, ModBlocks.EXPLORERS_TENT.get()).build(null));
-    public static final RegistryEntry<BlockEntityType<GiantFernBlockEntity>> GIANT_FERN = HELPER.register("giant_fern", () -> BlockEntityType.Builder.of(GiantFernBlockEntity::new, ModBlocks.GIANT_FERN.get()).build(null));
-    public static final RegistryEntry<BlockEntityType<DungeonDoorBlockEntity>> DUNGEON_DOOR = HELPER.register("dungeon_door", () -> BlockEntityType.Builder.of(DungeonDoorBlockEntity::new, ModBlocks.DUNGEON_DOOR.get()).build(null));
+    public static final RegistryEntry<BlockEntityType<?>, BlockEntityType<SpecialSpawnerBlockEntity>> SPECIAL_SPAWNER = HELPER.register("special_spawner", () -> BlockEntityType.Builder.of(SpecialSpawnerBlockEntity::new, ModBlocks.SPECIAL_SPAWNER.get()).build(null));
+    public static final RegistryEntry<BlockEntityType<?>, BlockEntityType<JarBlockEntity>> JAR = HELPER.register("jar", () -> BlockEntityType.Builder.of(JarBlockEntity::new, Stream.concat(Stream.of(ModBlocks.GLAZED_JAR.get(), ModBlocks.CRACKED_GLAZED_JAR.get()), ModBlocks.COLORED_GLAZED_JARS.values().stream().map(BlockRegistryEntry::get)).toArray(Block[]::new)).build(null));
+    public static final RegistryEntry<BlockEntityType<?>, BlockEntityType<ExplorersTentBlockEntity>> TENT = HELPER.register("explorers_tent", () -> BlockEntityType.Builder.of(ExplorersTentBlockEntity::new, ModBlocks.EXPLORERS_TENT.get()).build(null));
+    public static final RegistryEntry<BlockEntityType<?>, BlockEntityType<GiantFernBlockEntity>> GIANT_FERN = HELPER.register("giant_fern", () -> BlockEntityType.Builder.of(GiantFernBlockEntity::new, ModBlocks.GIANT_FERN.get()).build(null));
+    public static final RegistryEntry<BlockEntityType<?>, BlockEntityType<DungeonDoorBlockEntity>> DUNGEON_DOOR = HELPER.register("dungeon_door", () -> BlockEntityType.Builder.of(DungeonDoorBlockEntity::new, ModBlocks.DUNGEON_DOOR.get()).build(null));
 
 }

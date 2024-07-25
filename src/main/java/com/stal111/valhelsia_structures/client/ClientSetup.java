@@ -3,7 +3,6 @@ package com.stal111.valhelsia_structures.client;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.valhelsia.valhelsia_core.api.client.ClientSetupHelper;
 
 /**
@@ -16,9 +15,7 @@ import net.valhelsia.valhelsia_core.api.client.ClientSetupHelper;
  */
 public class ClientSetup {
 
-    public ClientSetup(ClientSetupHelper helper) {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+    public ClientSetup(ClientSetupHelper helper, IEventBus modEventBus) {
         modEventBus.addListener(this::onClientSetup);
     }
 

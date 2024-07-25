@@ -32,7 +32,7 @@ public class ModCreativeModeTabs implements RegistryClass {
             .add(ModBlocks.GIANT_FERN)
             .build();
 
-    public static final RegistryEntry<CreativeModeTab> MAIN = HELPER.register("main", CreativeTabFactory.create(builder -> builder
+    public static final RegistryEntry<CreativeModeTab, CreativeModeTab> MAIN = HELPER.register("main", CreativeTabFactory.create(builder -> builder
             .icon(() -> new ItemStack(ModBlocks.BRAZIER.get()))
             .title(Component.translatable("itemGroup.valhelsia_structures"))
             .displayItems((parameters, output) -> {

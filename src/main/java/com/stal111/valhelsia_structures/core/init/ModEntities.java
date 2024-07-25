@@ -21,6 +21,6 @@ public class ModEntities implements RegistryClass {
 
     public static final EntityRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.ENTITY_TYPE);
 
-    public static final RegistryEntry<EntityType<MossySkeletonEntity>> MOSSY_SKELETON = HELPER.register("mossy_skeleton", EntityType.Builder.of(MossySkeletonEntity::new, MobCategory.MONSTER).sized(0.6F, 1.99F).clientTrackingRange(8));
+    public static final RegistryEntry<EntityType<?>, EntityType<MossySkeletonEntity>> MOSSY_SKELETON = HELPER.register("mossy_skeleton", EntityType.Builder.of(MossySkeletonEntity::new, MobCategory.MONSTER).sized(0.6F, 1.99F).clientTrackingRange(8));
 
 }

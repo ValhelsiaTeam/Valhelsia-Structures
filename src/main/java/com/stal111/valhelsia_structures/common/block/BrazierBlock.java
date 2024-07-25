@@ -10,7 +10,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -28,6 +27,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -67,15 +67,13 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
     public void entityInside(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Entity entity) {
         super.entityInside(state, level, pos, entity);
 
-        if (state.getValue(LIT)) {
-            if (entity.fireImmune() || !(entity instanceof LivingEntity) || EnchantmentHelper.hasFrostWalker((LivingEntity) entity)) {
-                return;
-            }
+        if (!state.getValue(LIT) || !(entity instanceof LivingEntity)) {
+            return;
+        }
 
-            if (entity.getX() >= pos.getX() + 0.1D && entity.getZ() >= pos.getZ() + 0.1D && entity.getX() <= pos.getX() + 0.9D && entity.getZ() <= pos.getZ() + 0.9D) {
-                if (entity.getY() >= pos.getY() + 0.5D) {
-                    entity.hurt(level.damageSources().inFire(), this.fireDamage);
-                }
+        if (entity.getX() >= pos.getX() + 0.1D && entity.getZ() >= pos.getZ() + 0.1D && entity.getX() <= pos.getX() + 0.9D && entity.getZ() <= pos.getZ() + 0.9D) {
+            if (entity.getY() >= pos.getY() + 0.5D) {
+                entity.hurt(level.damageSources().inFire(), this.fireDamage);
             }
         }
     }
@@ -144,7 +142,7 @@ public class BrazierBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public boolean isPathfindable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull PathComputationType type) {
+    protected boolean isPathfindable(@NotNull BlockState state, @NotNull PathComputationType pathComputationType) {
         return false;
     }
 

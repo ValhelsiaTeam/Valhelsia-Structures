@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.common.world.structures.processor;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureProcessors;
 import net.minecraft.core.BlockPos;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class SpawnerRoomLegProcessor extends StructureProcessor {
 
-    public static final Codec<SpawnerRoomLegProcessor> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final MapCodec<SpawnerRoomLegProcessor> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BlockState.CODEC.fieldOf("block").forGetter(processor -> {
                 return processor.block;
             }),

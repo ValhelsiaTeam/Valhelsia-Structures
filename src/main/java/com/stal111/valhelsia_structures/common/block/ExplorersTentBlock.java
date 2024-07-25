@@ -10,7 +10,8 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -100,13 +101,10 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
         return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
-    @Nonnull
     @Override
-    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hitResult) {
-        ItemStack stack = player.getItemInHand(hand);
-
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!(level.getBlockEntity(pos) instanceof ExplorersTentBlockEntity blockEntity)) {
-            return InteractionResult.PASS;
+            return ItemInteractionResult.FAIL;
         }
 
         if (stack.is(ModTags.Items.SLEEPING_BAGS) && blockEntity.getSleepingBag().isEmpty()) {
@@ -117,8 +115,20 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
             if (!player.getAbilities().instabuild) {
                 stack.shrink(1);
             }
-            return InteractionResult.sidedSuccess(level.isClientSide());
-        } else if (!blockEntity.getSleepingBag().isEmpty()) {
+            return ItemInteractionResult.sidedSuccess(level.isClientSide());
+        }
+
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+    }
+
+    @Nonnull
+    @Override
+    public InteractionResult useWithoutItem(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull BlockHitResult hitResult) {
+        if (!(level.getBlockEntity(pos) instanceof ExplorersTentBlockEntity blockEntity)) {
+            return InteractionResult.PASS;
+        }
+
+        if (!blockEntity.getSleepingBag().isEmpty()) {
             if (level.isClientSide()) {
                 return InteractionResult.CONSUME;
             }
@@ -154,7 +164,7 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
             return InteractionResult.SUCCESS;
         }
 
-        return super.use(state, level, pos, player, hand, hitResult);
+        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
     @Nonnull
@@ -192,7 +202,7 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
     }
 
     @Override
-    public boolean isBed(BlockState state, BlockGetter level, BlockPos pos, @Nullable Entity player) {
+    public boolean isBed(BlockState state, BlockGetter level, BlockPos pos, LivingEntity sleeper) {
         return state.getValue(SLEEPING_BAG);
     }
 }

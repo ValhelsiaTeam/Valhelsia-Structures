@@ -6,7 +6,7 @@ import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
 
 /**
@@ -17,7 +17,7 @@ import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
  * @version 1.17.1-0.1.0
  * @since 2021-07-12
  */
-@Mod.EventBusSubscriber
+@EventBusSubscriber
 public class FurnaceFuelListener {
 
     @SubscribeEvent

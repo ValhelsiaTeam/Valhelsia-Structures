@@ -2,12 +2,14 @@ package com.stal111.valhelsia_structures.common.block.entity;
 
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -48,25 +50,25 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
     }
 
     @Override
-    public void load(@Nonnull CompoundTag tag) {
-        super.load(tag);
+    public void loadAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
+        super.loadAdditional(tag, lookupProvider);
         if (tag.contains("Color")) {
             this.setColor(tag.getInt("Color"));
         }
 
         if (tag.contains("SleepingBag", 10)) {
-            this.setSleepingBag(ItemStack.of(tag.getCompound("SleepingBag")));
+            this.setSleepingBag(ItemStack.parseOptional(lookupProvider, tag.getCompound("SleepingBag")));
         }
     }
 
     @Override
-    public void saveAdditional(@Nonnull CompoundTag tag) {
+    public void saveAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
         if (this.color != DEFAULT_COLOR) {
             tag.putInt("Color", this.getColor());
         }
 
         if (!this.sleepingBag.isEmpty()) {
-            tag.put("SleepingBag", this.sleepingBag.save(new CompoundTag()));
+            tag.put("SleepingBag", this.sleepingBag.save(lookupProvider));
         }
     }
 
@@ -76,10 +78,9 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    @Nonnull
     @Override
-    public CompoundTag getUpdateTag() {
-        return this.saveWithoutMetadata();
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.@NotNull Provider lookupProvider) {
+        return super.getUpdateTag(lookupProvider);
     }
 
     @Override

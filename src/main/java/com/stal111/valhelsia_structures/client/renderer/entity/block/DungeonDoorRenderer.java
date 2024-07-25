@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
  */
 public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlockEntity> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(ValhelsiaStructures.MOD_ID, "textures/block/dungeon_door.png");
+    private static final ResourceLocation TEXTURE = ValhelsiaStructures.location("textures/block/dungeon_door.png");
 
     private final DungeonDoorModel model;
 
@@ -43,7 +43,7 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
         this.model.setupAnim(blockEntity, partialTicks);
-        this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TEXTURE)), combinedLight, combinedOverlay, 1.0F, 1.0F, 1.0F, 1.0F);
+        this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TEXTURE)), combinedLight, combinedOverlay);
 
         poseStack.popPose();
     }

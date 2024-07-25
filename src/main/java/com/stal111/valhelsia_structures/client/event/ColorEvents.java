@@ -4,19 +4,20 @@ import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 
 /**
  * @author Valhelsia Team
  * @since 2022-10-24
  */
-@Mod.EventBusSubscriber(value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class ColorEvents {
 
     @SubscribeEvent
@@ -25,7 +26,7 @@ public class ColorEvents {
 
         event.register((stack, tintIndex) -> {
             if (tintIndex == 0 && stack.getItem() instanceof DyeableBlockItem item) {
-                return item.getColor(stack);
+                return stack.get(DataComponents.DYED_COLOR).rgb();
             }
 
             return -1;

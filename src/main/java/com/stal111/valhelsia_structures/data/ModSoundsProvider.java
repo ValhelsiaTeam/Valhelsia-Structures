@@ -3,7 +3,6 @@ package com.stal111.valhelsia_structures.data;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModSoundEvents;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SoundDefinition;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
@@ -31,6 +30,6 @@ public class ModSoundsProvider extends SoundDefinitionsProvider {
     }
 
     private SoundDefinition.Sound simpleSound(String name) {
-        return SoundDefinition.Sound.sound(new ResourceLocation(ValhelsiaStructures.MOD_ID, name), SoundDefinition.SoundType.SOUND);
+        return SoundDefinition.Sound.sound(ValhelsiaStructures.location("name"), SoundDefinition.SoundType.SOUND);
     }
 }

@@ -4,7 +4,7 @@ import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.data.worldgen.processors.ModProcessorLists;
 import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
@@ -22,12 +22,12 @@ public class SpawnerDungeonPools extends DatapackRegistryClass<StructureTemplate
 
     public static final StartPoolKeySet START = StartPoolKeySet.simple(HELPER, "spawner_dungeon/cave_entrances");
 
-    public SpawnerDungeonPools(BootstapContext<StructureTemplatePool> context) {
+    public SpawnerDungeonPools(BootstrapContext<StructureTemplatePool> context) {
         super(context);
     }
 
     @Override
-    public void bootstrap(BootstapContext<StructureTemplatePool> context) {
+    public void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         ResourceKey<StructureProcessorList> removeWater = ModProcessorLists.REMOVE_WATER;
 
         START.create(HELPER, context, "spawner_dungeon/cave_entrance", builder -> builder.element("large").element("small_1").element("small_2").element("small_3").processors(removeWater), TerrainAdjustment.BEARD_THIN);

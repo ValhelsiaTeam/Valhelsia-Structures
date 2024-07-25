@@ -3,7 +3,7 @@ package com.stal111.valhelsia_structures.common.world.structures.pools;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.TemplatePoolRegistryHelper;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryClass;
@@ -21,12 +21,12 @@ public class DesertHousePools extends DatapackRegistryClass<StructureTemplatePoo
 
     public static final StartPoolKeySet START = StartPoolKeySet.withFurnishedVariant(HELPER, "desert_house/houses");
 
-    public DesertHousePools(BootstapContext<StructureTemplatePool> context) {
+    public DesertHousePools(BootstrapContext<StructureTemplatePool> context) {
         super(context);
     }
 
     @Override
-    public void bootstrap(BootstapContext<StructureTemplatePool> context) {
+    public void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         START.create(HELPER, context, "desert_house", builder -> builder.element("desert_house"));
         HELPER.create("desert_house/oasis_plate", context, "desert_house", builder -> builder.element("oasis_plate"));
         HELPER.create("desert_house/well_or_oasis_plate", context, "desert_house", builder -> builder.element("well_or_oasis_plate"));

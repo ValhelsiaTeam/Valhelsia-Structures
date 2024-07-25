@@ -12,7 +12,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
@@ -26,7 +25,7 @@ import javax.annotation.Nonnull;
  */
 public class GiantFernModel extends Model {
 
-    public static final ModelLayerLocation GIANT_FERN = new ModelLayerLocation(new ResourceLocation(ValhelsiaStructures.MOD_ID, "giant_fern"), "main");
+    public static final ModelLayerLocation GIANT_FERN = new ModelLayerLocation(ValhelsiaStructures.location("giant_fern"), "main");
 
     private final ModelPart fernBottom1;
     private final ModelPart fernBottom2;
@@ -83,7 +82,7 @@ public class GiantFernModel extends Model {
     }
 
     @Override
-    public void renderToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
         fernBottom1.render(poseStack, buffer, packedLight, packedOverlay);
         fernBottom2.render(poseStack, buffer, packedLight, packedOverlay);
         fernBottom3.render(poseStack, buffer, packedLight, packedOverlay);

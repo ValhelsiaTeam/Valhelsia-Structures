@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.common.world.structures.height;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureHeightProviderTypes;
 import net.minecraft.core.BlockPos;
@@ -17,7 +17,7 @@ import java.util.OptionalInt;
  */
 public class BelowSurfaceHeightProvider extends StructureHeightProvider {
 
-    public static final Codec<BelowSurfaceHeightProvider> CODEC = RecordCodecBuilder.create((instance) -> {
+    public static final MapCodec<BelowSurfaceHeightProvider> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(VerticalAnchor.CODEC.fieldOf("min_inclusive").forGetter(provider -> {
             return provider.minInclusive;
         })).apply(instance, BelowSurfaceHeightProvider::new);

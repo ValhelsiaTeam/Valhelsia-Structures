@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.DynamicOps;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.common.block.entity.SpecialSpawnerBlockEntity;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
@@ -45,7 +46,7 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
 
     private static final Codec<Either<ResourceLocation, StructureTemplate>> TEMPLATE_CODEC = Codec.of(ValhelsiaSinglePoolElement::encodeTemplate, ResourceLocation.CODEC.map(Either::left));
 
-    public static final Codec<ValhelsiaSinglePoolElement> CODEC = RecordCodecBuilder.create((instance) -> {
+    public static final MapCodec<ValhelsiaSinglePoolElement> CODEC = RecordCodecBuilder.mapCodec(instance -> {
         return instance.group(valhelsiaTemplateCodec(), processorsCodec(), projectionCodec(), TerrainAdjustment.CODEC.optionalFieldOf("terrain_adjustment").forGetter(element -> {
             return Optional.ofNullable(element.terrainAdjustment);
         })).apply(instance, (either, processorListHolder, projection, terrainAdjustment) -> {
@@ -58,7 +59,7 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
     private final TerrainAdjustment terrainAdjustment;
 
     public ValhelsiaSinglePoolElement(Either<ResourceLocation, StructureTemplate> resourceLocation, Holder<StructureProcessorList> processors, StructureTemplatePool.Projection projection, @Nullable TerrainAdjustment terrainAdjustment) {
-        super(resourceLocation, processors, projection);
+        super(resourceLocation, processors, projection, Optional.empty());
         this.terrainAdjustment = terrainAdjustment;
     }
 
@@ -74,15 +75,15 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
     }
 
     @Override
-    public boolean place(StructureTemplateManager templateManager, @NotNull WorldGenLevel level, @NotNull StructureManager structureManager, @NotNull ChunkGenerator generator, @NotNull BlockPos offset, @NotNull BlockPos pos, @NotNull Rotation rotation, @NotNull BoundingBox box, @NotNull RandomSource random, boolean keepJigsaws) {
+    public boolean place(StructureTemplateManager templateManager, @NotNull WorldGenLevel level, @NotNull StructureManager structureManager, @NotNull ChunkGenerator generator, @NotNull BlockPos offset, @NotNull BlockPos pos, @NotNull Rotation rotation, @NotNull BoundingBox box, @NotNull RandomSource random, LiquidSettings liquidSettings, boolean keepJigsaws) {
         StructureTemplate structuretemplate = this.template.map(templateManager::getOrCreate, Function.identity());
-        StructurePlaceSettings structureplacesettings = this.getSettings(rotation, box, keepJigsaws);
+        StructurePlaceSettings structureplacesettings = this.getSettings(rotation, box, liquidSettings, keepJigsaws);
 
         if (!structuretemplate.placeInWorld(level, offset, pos, structureplacesettings, random, 18)) {
             return false;
         }
 
-        for (StructureTemplate.StructureBlockInfo info : structuretemplate.filterBlocks(offset, this.getSettings(rotation, box, keepJigsaws), Blocks.STRUCTURE_BLOCK)) {
+        for (StructureTemplate.StructureBlockInfo info : structuretemplate.filterBlocks(offset, this.getSettings(rotation, box, liquidSettings, keepJigsaws), Blocks.STRUCTURE_BLOCK)) {
             StructureMode mode = StructureMode.valueOf(info.nbt().getString("mode"));
 
             if (mode == StructureMode.DATA) {
@@ -158,11 +159,10 @@ public class ValhelsiaSinglePoolElement extends SinglePoolElement {
 
         return markers;
     }
-
     @Nonnull
     @Override
-    protected StructurePlaceSettings getSettings(@Nonnull Rotation rotation, @Nonnull BoundingBox box, boolean keepJigsawBlocks) {
-        return super.getSettings(rotation, box, keepJigsawBlocks).popProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
+    protected StructurePlaceSettings getSettings(@Nonnull Rotation rotation, @Nonnull BoundingBox box, LiquidSettings liquidSettings, boolean keepJigsawBlocks) {
+        return super.getSettings(rotation, box, liquidSettings, keepJigsawBlocks).popProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
     }
 
     public TerrainAdjustment getTerrainAdjustment() {

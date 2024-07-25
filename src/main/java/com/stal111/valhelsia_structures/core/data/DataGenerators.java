@@ -11,7 +11,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -28,7 +28,7 @@ import java.util.concurrent.CompletableFuture;
  * @author Valhelsia Team
  * @since 2020-11-13
  */
-@Mod.EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
 
     @SubscribeEvent
@@ -51,9 +51,9 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(), new ModBiomeTagsProvider(output, lookupProvider, existingFileHelper));
 
         //generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTables::new, LootContextParamSets.BLOCK))));
-        generator.addProvider(event.includeServer(), new ModLootModifierProvider(output));
+        generator.addProvider(event.includeServer(), new ModLootModifierProvider(context));
 
-        generator.addProvider(event.includeServer(), new ValhelsiaRecipeProvider(context, lookupProvider, ModRecipeProvider::new));
+        generator.addProvider(event.includeServer(), new ValhelsiaRecipeProvider(context, ModRecipeProvider::new));
 
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER.buildRegistrySet(), Set.of(ValhelsiaStructures.MOD_ID)));
     }

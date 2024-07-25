@@ -4,7 +4,7 @@ import com.stal111.valhelsia_structures.common.world.structures.placement.Valhel
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.level.levelgen.structure.StructureSet;
@@ -34,12 +34,12 @@ public class ModStructureSets extends DatapackRegistryClass<StructureSet> {
     public static final ResourceKey<StructureSet> SPAWNER_ROOMS = HELPER.createKey("spawner_rooms");
     public static final ResourceKey<StructureSet> DEEP_SPAWNER_ROOMS = HELPER.createKey("deep_spawner_rooms");
 
-    public ModStructureSets(BootstapContext<StructureSet> context) {
+    public ModStructureSets(BootstrapContext<StructureSet> context) {
         super(context);
     }
 
     @Override
-    public void bootstrap(BootstapContext<StructureSet> context) {
+    public void bootstrap(BootstrapContext<StructureSet> context) {
         HolderGetter<Structure> structureRegistry = context.lookup(Registries.STRUCTURE);
 
         context.register(CASTLES, new StructureSet(structureRegistry.getOrThrow(ModStructures.CASTLE), this.placement(context, 37, 7, 16987356, CASTLE_RUINS, FORGES, PLAYER_HOUSES, TOWER_RUINS, BIG_TREES)));
@@ -56,7 +56,7 @@ public class ModStructureSets extends DatapackRegistryClass<StructureSet> {
     }
 
     @SafeVarargs
-    public final ValhelsiaStructurePlacement placement(BootstapContext<StructureSet> context, int spacing, int separation, int seed, ResourceKey<StructureSet>... exclusionZones) {
+    public final ValhelsiaStructurePlacement placement(BootstrapContext<StructureSet> context, int spacing, int separation, int seed, ResourceKey<StructureSet>... exclusionZones) {
         return new ValhelsiaStructurePlacement(seed, spacing, separation, Stream.of(exclusionZones).map(structureSetResourceKey -> new StructurePlacement.ExclusionZone(context.lookup(Registries.STRUCTURE_SET).getOrThrow(structureSetResourceKey), 10)).toList());
     }
 }

@@ -25,9 +25,10 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.common.ToolAction;
-import net.neoforged.neoforge.common.ToolActions;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
 import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -117,15 +118,15 @@ public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
         ResourceLocation location = BuiltInRegistries.BLOCK.getKey(this);
 
-        if (!context.getItemInHand().canPerformAction(toolAction) || Objects.requireNonNull(location).getPath().contains("stripped")) {
+        if (!context.getItemInHand().canPerformAction(itemAbility) || Objects.requireNonNull(location).getPath().contains("stripped")) {
             return null;
         }
 
-        if (toolAction == ToolActions.AXE_STRIP) {
-            return Objects.requireNonNull(BuiltInRegistries.BLOCK.get(new ResourceLocation(location.getNamespace(), "cut_stripped_" + location.getPath().substring(4)))).defaultBlockState()
+        if (itemAbility == ItemAbilities.AXE_STRIP) {
+            return Objects.requireNonNull(BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "cut_stripped_" + location.getPath().substring(4)))).defaultBlockState()
                     .setValue(FACING, state.getValue(FACING))
                     .setValue(ATTACHED, state.getValue(ATTACHED))
                     .setValue(PARTS, state.getValue(PARTS))
@@ -153,7 +154,7 @@ public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public boolean isPathfindable(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull PathComputationType type) {
+    protected boolean isPathfindable(@NotNull BlockState state, @NotNull PathComputationType pathComputationType) {
         return false;
     }
 

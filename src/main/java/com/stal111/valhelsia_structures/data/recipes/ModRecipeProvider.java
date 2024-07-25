@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipeBuilder;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.Util;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
@@ -62,7 +63,7 @@ public class ModRecipeProvider extends RecipeSubProvider {
     }
 
     @Override
-    protected void registerRecipes() {
+    protected void registerRecipes(HolderLookup.Provider lookupProvider) {
         // Crafting Recipes
         this.brazier(ModBlocks.BRAZIER.get(), ItemTags.COALS);
         this.brazier(ModBlocks.SOUL_BRAZIER.get(), ItemTags.SOUL_FIRE_BASE_BLOCKS);
@@ -82,11 +83,11 @@ public class ModRecipeProvider extends RecipeSubProvider {
 
         }
 
-        this.metalFramedGlass(ModBlocks.METAL_FRAMED_GLASS.get(), RecipePart.of(Tags.Items.GLASS_COLORLESS));
+        this.metalFramedGlass(ModBlocks.METAL_FRAMED_GLASS.get(), RecipePart.of(Tags.Items.GLASS_BLOCKS_COLORLESS));
         this.glassPane(ModBlocks.METAL_FRAMED_GLASS_PANE.get(), RecipePart.of(ModBlocks.METAL_FRAMED_GLASS.get()));
 
         ModBlocks.COLORED_METAL_FRAMED_GLASS.forEach((color, registryObject) -> {
-            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(color.getName() + "_stained_glass"));
+            Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.withDefaultNamespace(color.getName() + "_stained_glass"));
             this.metalFramedGlass(registryObject.get(), RecipePart.of(block));
         });
 
@@ -101,20 +102,20 @@ public class ModRecipeProvider extends RecipeSubProvider {
         this.storageRecipe(Items.BONE, ModBlocks.BONE_PILE_BLOCK.get());
         this.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BONE_PILE_BLOCK.get(), builder -> builder.pattern("###").pattern("###").pattern("###").define('#', ModBlocks.BONE_PILE.get()).group("bone_pile_block").unlockedBy(this, ModBlocks.BONE_PILE.get()), "bone_pile_block_from_bone_piles");
 
-        this.shaped(RecipeCategory.DECORATIONS, ModBlocks.EXPLORERS_TENT.get(), builder -> builder.pattern(" # ").pattern("#X#").pattern("#X#").define('#', Tags.Items.LEATHER).define('X', Tags.Items.RODS_WOODEN).unlockedBy(this, RecipePart.of(Tags.Items.LEATHER)));
+        this.shaped(RecipeCategory.DECORATIONS, ModBlocks.EXPLORERS_TENT.get(), builder -> builder.pattern(" # ").pattern("#X#").pattern("#X#").define('#', Items.LEATHER).define('X', Tags.Items.RODS_WOODEN).unlockedBy(this, Items.LEATHER));
 
         this.glazedJar(ModBlocks.GLAZED_JAR.get(), Blocks.TERRACOTTA);
         this.bigGlazedJar(ModBlocks.BIG_GLAZED_JAR.get(), Blocks.TERRACOTTA);
 
         ModBlocks.COLORED_GLAZED_JARS.values().forEach(registryObject -> {
             String name = BuiltInRegistries.BLOCK.getKey(registryObject.get()).getPath();
-            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(name.substring(0, name.length() - 11) + "_terracotta"));
+            Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.withDefaultNamespace(name.substring(0, name.length() - 11) + "_terracotta"));
             this.glazedJar(registryObject.get(), block);
         });
 
         ModBlocks.BIG_COLORED_GLAZED_JARS.values().forEach(registryObject -> {
             String name = BuiltInRegistries.BLOCK.getKey(registryObject.get()).getPath();
-            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(name.substring(4, name.length() - 11) + "_terracotta"));
+            Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.withDefaultNamespace(name.substring(4, name.length() - 11) + "_terracotta"));
             this.bigGlazedJar(registryObject.get(), block);
         });
 
@@ -139,7 +140,7 @@ public class ModRecipeProvider extends RecipeSubProvider {
         Block whiteSleepingBag = ModBlocks.SLEEPING_BAGS.get(DyeColor.WHITE).get();
 
         ModBlocks.SLEEPING_BAGS.forEach((color, entry) -> {
-            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(color.getName() + "_wool"));
+            Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.withDefaultNamespace(color.getName() + "_wool"));
 
             this.singleRow(RecipeCategory.DECORATIONS, entry.get(), RecipePart.of(block));
 

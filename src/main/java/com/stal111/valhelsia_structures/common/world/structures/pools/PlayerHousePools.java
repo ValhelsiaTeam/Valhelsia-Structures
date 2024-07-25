@@ -3,7 +3,7 @@ package com.stal111.valhelsia_structures.common.world.structures.pools;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.TemplatePoolRegistryHelper;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryClass;
@@ -21,12 +21,12 @@ public class PlayerHousePools extends DatapackRegistryClass<StructureTemplatePoo
     public static final TemplatePoolRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.TEMPLATE_POOL);
     public static final StartPoolKeySet START = StartPoolKeySet.withFurnishedVariant(HELPER, "player_house/houses");
 
-    public PlayerHousePools(BootstapContext<StructureTemplatePool> context) {
+    public PlayerHousePools(BootstrapContext<StructureTemplatePool> context) {
         super(context);
     }
 
     @Override
-    public void bootstrap(BootstapContext<StructureTemplatePool> context) {
+    public void bootstrap(BootstrapContext<StructureTemplatePool> context) {
         START.create(HELPER, context, "player_house", builder -> builder.element("house_1").element("house_2"));
         HELPER.create("player_house/feature_plate", context, "player_house", builder -> builder.element("feature_plate_1").element("feature_plate_2"));
         HELPER.create("player_house/farms", context, "player_house", builder -> builder.element("feature_farm_1").element("feature_farm_2").element("feature_farm_3").element("feature_bee").element("feature_chicken"));

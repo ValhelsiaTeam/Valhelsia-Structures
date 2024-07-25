@@ -12,7 +12,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -74,13 +74,10 @@ public class JarBlock extends Block implements SimpleWaterloggedBlock, EntityBlo
         return SHAPE;
     }
 
-    @Nonnull
     @Override
-    public InteractionResult use(@Nonnull BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
-        ItemStack stack = player.getItemInHand(hand);
-
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!(level.getBlockEntity(pos) instanceof JarBlockEntity jarBlockEntity)) {
-            return InteractionResult.PASS;
+            return ItemInteractionResult.FAIL;
         }
 
         boolean canBePotted = this.canBePotted(Block.byItem(stack.getItem()));
@@ -104,15 +101,15 @@ public class JarBlock extends Block implements SimpleWaterloggedBlock, EntityBlo
                 stack.shrink(1);
             }
         } else {
-            return InteractionResult.PASS;
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return ItemInteractionResult.sidedSuccess(level.isClientSide());
     }
 
     private boolean canBePotted(Block block) {
         ResourceLocation registryName = BuiltInRegistries.BLOCK.getKey(block);
-        ResourceLocation pottedName = new ResourceLocation(registryName.getNamespace(), "potted_" + registryName.getPath());
+        ResourceLocation pottedName = ResourceLocation.fromNamespaceAndPath(registryName.getNamespace(), "potted_" + registryName.getPath());
 
         if (!BuiltInRegistries.BLOCK.containsKey(pottedName)) {
             return false;

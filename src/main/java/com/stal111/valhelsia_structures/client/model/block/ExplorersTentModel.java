@@ -12,7 +12,6 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
 
 import javax.annotation.Nonnull;
 
@@ -26,7 +25,7 @@ import javax.annotation.Nonnull;
  */
 public class ExplorersTentModel extends Model {
 
-	public static final ModelLayerLocation EXPLORERS_TENT = new ModelLayerLocation(new ResourceLocation(ValhelsiaStructures.MOD_ID, "explorers_tent"), "main");
+	public static final ModelLayerLocation EXPLORERS_TENT = new ModelLayerLocation(ValhelsiaStructures.location("explorers_tent"), "main");
 
 	private final ModelPart stick;
 	private final ModelPart frontStick;
@@ -70,9 +69,9 @@ public class ExplorersTentModel extends Model {
 	}
 
 	@Override
-	public void renderToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		stick.getChild("leftSlope").render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
-		stick.getChild("rightSlope").render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+	public void renderToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+		stick.getChild("leftSlope").render(poseStack, buffer, packedLight, packedOverlay, color);
+		stick.getChild("rightSlope").render(poseStack, buffer, packedLight, packedOverlay, color);
 	}
 
 	public void renderSticksToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay) {

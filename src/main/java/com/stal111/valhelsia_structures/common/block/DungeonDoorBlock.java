@@ -179,9 +179,8 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
         this.breakDoor(level, pos, state, null, true);
     }
 
-    @Nonnull
     @Override
-    public InteractionResult use(BlockState state, Level level, @Nonnull BlockPos pos, @Nonnull Player player, @Nonnull InteractionHand hand, @Nonnull BlockHitResult hit) {
+    protected @NotNull InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         boolean open = !state.getValue(OPEN);
 
         Map<BlockPos, BlockState> map = new HashMap<>();
@@ -197,7 +196,7 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
                         BlockPos leafPos = offsetPos.relative(state.getValue(FACING));
 
                         if (open) {
-                            if (!level.getBlockState(leafPos).canBeReplaced(new BlockPlaceContext(player, hand, new ItemStack(ModBlocks.DUNGEON_DOOR.get()), hit))) {
+                            if (!level.getBlockState(leafPos).canBeReplaced(new BlockPlaceContext(player, InteractionHand.MAIN_HAND, new ItemStack(ModBlocks.DUNGEON_DOOR.get()), hitResult))) {
                                 canOpen = false;
                             }
                             map.put(leafPos, ModBlocks.DUNGEON_DOOR_LEAF.get().defaultBlockState()
@@ -220,8 +219,7 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
             level.playSound(player, pos, open ? ModSoundEvents.DUNGEON_DOOR_OPEN.get() : ModSoundEvents.DUNGEON_DOOR_CLOSE.get(), SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.1F + 0.9F);
         }
 
-        return InteractionResult.sidedSuccess(level.isClientSide());
-    }
+        return InteractionResult.sidedSuccess(level.isClientSide());    }
 
     @Override
     public @NotNull BlockState playerWillDestroy(@Nonnull Level level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Player player) {
