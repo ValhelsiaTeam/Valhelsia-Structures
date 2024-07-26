@@ -3,7 +3,6 @@ package com.stal111.valhelsia_structures.core.mixin;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.BrightnessCombinerUtils;
 import com.stal111.valhelsia_structures.utils.ModTags;
@@ -15,7 +14,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.client.resources.model.BlockModelRotation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -49,9 +47,9 @@ public abstract class BlockModelRendererMixin {
     private void valhelsia_tesselateBlock(BlockAndTintGetter level, BakedModel model, BlockState state, BlockPos pos, PoseStack poseStack, VertexConsumer vertexConsumer, boolean checkSides, RandomSource random, long seed, int packedOverlay, ModelData modelData, RenderType renderType, CallbackInfo ci) {
         if (state.is(ModBlocks.BONE_PILE.get())) {
             for (int i = 1; i < state.getValue(ModBlockStateProperties.LAYERS_1_5); i++) {
-                model = ModelBakerImplAccessor.createModelBakerImpl(Minecraft.getInstance().getModelManager().getModelBakery(), (resourceLocation, material) -> {
-                    return Minecraft.getInstance().getTextureAtlas(material.atlasLocation()).apply(resourceLocation);
-                }, ValhelsiaStructures.location("block/bone_pile")).bake(ValhelsiaStructures.location("block/bone_pile"), BlockModelRotation.by(90, 90 * i));
+//                model = ModelBakerImplAccessor.createModelBakerImpl((resourceLocation, material) -> {
+//                    return Minecraft.getInstance().getTextureAtlas(material.atlasLocation()).apply(resourceLocation.id());
+//                }, ModelResourceLocation.inventory(ValhelsiaStructures.location("block/bone_pile"))).bake(ValhelsiaStructures.location("block/bone_pile"), BlockModelRotation.by(90, 90 * i));
 
                 if (model == null) {
                     return;
