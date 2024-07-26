@@ -1,0 +1,11 @@
+{
+  "type": "valhelsia_structures:axe_crafting",
+  "category": "building",
+  "input": {
+    "item": "valhelsia_structures:stripped_dark_oak_post"
+  },
+  "output": {
+    "count": 4,
+    "id": "valhelsia_structures:cut_stripped_dark_oak_post"
+  }
+}

@@ -30,6 +30,6 @@ public class ModSoundsProvider extends SoundDefinitionsProvider {
     }
 
     private SoundDefinition.Sound simpleSound(String name) {
-        return SoundDefinition.Sound.sound(ValhelsiaStructures.location("name"), SoundDefinition.SoundType.SOUND);
+        return SoundDefinition.Sound.sound(ValhelsiaStructures.location(name), SoundDefinition.SoundType.SOUND);
     }
 }

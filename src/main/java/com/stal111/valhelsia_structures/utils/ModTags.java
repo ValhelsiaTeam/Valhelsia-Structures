@@ -30,7 +30,7 @@ public class ModTags {
         public static final TagKey<Block> SLEEPING_BAGS = modTag("sleeping_bags");
 
         private static TagKey<Block> modTag(String name) {
-            return TagKey.create(Registries.BLOCK, ValhelsiaStructures.location("name"));
+            return TagKey.create(Registries.BLOCK, ValhelsiaStructures.location(name));
         }
     }
 

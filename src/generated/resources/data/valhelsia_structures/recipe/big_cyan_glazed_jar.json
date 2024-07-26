@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "biGlazedJar",
+  "key": {
+    "#": {
+      "item": "minecraft:cyan_terracotta"
+    }
+  },
+  "pattern": [
+    "# #",
+    "# #",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "valhelsia_structures:big_cyan_glazed_jar"
+  }
+}

@@ -1,19 +1,17 @@
 package com.stal111.valhelsia_structures.core.data.server;
 
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.valhelsia.valhelsia_core.datagen.DataProviderContext;
+import net.valhelsia.valhelsia_core.datagen.tags.ValhelsiaItemTagsProvider;
 
-import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -23,10 +21,10 @@ import java.util.concurrent.CompletableFuture;
  * @author Valhelsia Team
  * @since 2021-01-12
  */
-public class ModItemTagsProvider extends ItemTagsProvider {
+public class ModItemTagsProvider extends ValhelsiaItemTagsProvider {
 
-    public ModItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> blockTagProvider, @Nullable ExistingFileHelper existingFileHelper) {
-        super(output, lookupProvider, blockTagProvider, ValhelsiaStructures.MOD_ID, existingFileHelper);
+    public ModItemTagsProvider(DataProviderContext context, CompletableFuture<TagsProvider.TagLookup<Block>> blockTagLookup) {
+        super(context, blockTagLookup);
     }
 
     @Override
@@ -51,7 +49,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         this.copy(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
         this.copy(Tags.Blocks.FENCES_WOODEN, Tags.Items.FENCES_WOODEN);
         this.copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
-        this.copy(BlockTags.FLOWERS, ItemTags.FLOWERS);
         this.copy(ModTags.Blocks.SLEEPING_BAGS, ModTags.Items.SLEEPING_BAGS);
 
         this.copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS);

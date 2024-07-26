@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    {
+      "tag": "valhelsia_structures:lapidified_jungle_logs"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "id": "valhelsia_structures:lapidified_jungle_planks"
+  }
+}

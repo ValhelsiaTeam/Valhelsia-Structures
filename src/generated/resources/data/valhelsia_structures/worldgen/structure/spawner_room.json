@@ -7,7 +7,7 @@
   "spawn_overrides": {},
   "start_height": {
     "type": "valhelsia_structures:spawner_room_height",
-    "value": {
+    "height": {
       "min_inclusive": {
         "absolute": 0
       }

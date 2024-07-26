@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blue_stained_glass": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:blue_stained_glass"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_ingots/iron": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "valhelsia_structures:blue_metal_framed_glass"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ingots/iron",
+      "has_blue_stained_glass"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "valhelsia_structures:blue_metal_framed_glass"
+    ]
+  }
+}

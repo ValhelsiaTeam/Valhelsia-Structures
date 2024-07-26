@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "c:ingots/iron"
+    },
+    "*": {
+      "item": "minecraft:iron_bars"
+    },
+    "X": {
+      "tag": "minecraft:coals"
+    }
+  },
+  "pattern": [
+    "*X*",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "valhelsia_structures:brazier"
+  }
+}

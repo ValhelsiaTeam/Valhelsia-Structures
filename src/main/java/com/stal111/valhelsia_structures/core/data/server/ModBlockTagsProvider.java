@@ -25,7 +25,7 @@ import javax.annotation.Nonnull;
 public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
 
     public ModBlockTagsProvider(DataProviderContext context) {
-        super(context.output(), context.lookupProvider());
+        super(context);
     }
 
     @Override

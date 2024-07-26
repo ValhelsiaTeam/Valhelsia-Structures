@@ -38,7 +38,7 @@ public class DataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        DataProviderContext context = new DataProviderContext(output, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER);
+        DataProviderContext context = DataProviderContext.of(output, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER, existingFileHelper);
 
         //generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, existingFileHelper));
         //generator.addProvider(event.includeClient(), new ModItemModelProvider(output, existingFileHelper));
@@ -46,7 +46,7 @@ public class DataGenerators {
 
         ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(context);
         generator.addProvider(event.includeServer(), blockTagsProvider);
-        generator.addProvider(event.includeServer(), new ModItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
+        generator.addProvider(event.includeServer(), new ModItemTagsProvider(context, blockTagsProvider.contentsGetter()));
        // generator.addProvider(event.includeServer(), new ModStructureTagsProvider(output, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModBiomeTagsProvider(output, lookupProvider, existingFileHelper));
 
