@@ -1,6 +1,7 @@
 {
   "type": "valhelsia_structures:valhelsia_jigsaw_structure",
   "biomes": "#valhelsia_structures:has_structure/deep_spawner_room",
+  "liquid_settings": "ignore_waterlogging",
   "max_distance_from_center": 80,
   "size": 7,
   "spawn_overrides": {},

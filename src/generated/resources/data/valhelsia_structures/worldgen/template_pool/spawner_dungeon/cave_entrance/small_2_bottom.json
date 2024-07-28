@@ -4,7 +4,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/cave_entrance/small_2_bottom",
-        "processors": "valhelsia_structures:remove_water",
+        "processors": "minecraft:empty",
         "projection": "rigid"
       },
       "weight": 1

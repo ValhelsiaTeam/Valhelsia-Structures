@@ -12,9 +12,6 @@
           "waterlogged": "false"
         }
       }
-    },
-    {
-      "processor_type": "valhelsia_core:remove_water"
     }
   ]
 }

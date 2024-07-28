@@ -4,7 +4,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/entrance/entrance_1",
-        "processors": "valhelsia_structures:remove_water",
+        "processors": "minecraft:empty",
         "projection": "rigid"
       },
       "weight": 1
@@ -13,7 +13,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/entrance/entrance_2",
-        "processors": "valhelsia_structures:remove_water",
+        "processors": "minecraft:empty",
         "projection": "rigid"
       },
       "weight": 1

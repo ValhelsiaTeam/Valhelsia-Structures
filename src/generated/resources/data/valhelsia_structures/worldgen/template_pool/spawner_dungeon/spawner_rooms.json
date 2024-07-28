@@ -4,7 +4,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/spawner_room/zombie_spawner_room",
-        "processors": "valhelsia_structures:remove_water",
+        "processors": "minecraft:empty",
         "projection": "rigid"
       },
       "weight": 1
@@ -13,7 +13,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/spawner_room/skeleton_spawner_room",
-        "processors": "valhelsia_structures:remove_water",
+        "processors": "minecraft:empty",
         "projection": "rigid"
       },
       "weight": 1
@@ -22,7 +22,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/spawner_room/spider_spawner_room",
-        "processors": "valhelsia_structures:remove_water",
+        "processors": "minecraft:empty",
         "projection": "rigid"
       },
       "weight": 1

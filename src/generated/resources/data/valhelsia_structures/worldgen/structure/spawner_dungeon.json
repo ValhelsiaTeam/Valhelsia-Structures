@@ -1,7 +1,9 @@
 {
   "type": "valhelsia_structures:valhelsia_jigsaw_structure",
   "biomes": "#valhelsia_structures:has_structure/spawner_dungeon",
+  "custom_margin": 0,
   "individual_terrain_adjustment": true,
+  "liquid_settings": "ignore_waterlogging",
   "max_distance_from_center": 80,
   "size": 7,
   "spawn_chance": 0.7,

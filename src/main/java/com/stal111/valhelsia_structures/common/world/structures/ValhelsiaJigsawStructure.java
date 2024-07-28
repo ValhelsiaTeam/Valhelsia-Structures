@@ -148,7 +148,7 @@ public class ValhelsiaJigsawStructure extends Structure {
                 this.maxDistanceFromCenter,
                 PoolAliasLookup.create(List.of(), pos, context.seed()),
                 DimensionPadding.ZERO,
-                LiquidSettings.APPLY_WATERLOGGING
+                this.settings.liquidSettings()
         );
     }
 
@@ -193,12 +193,7 @@ public class ValhelsiaJigsawStructure extends Structure {
         @Nullable
         private StructureHeightProvider heightProvider = null;
         private int maxDistanceFromCenter = 80;
-        @Nullable
-        private Double spawnChance = null;
-        @Nullable
-        private Integer customMargin = null;
-        @Nullable
-        private Boolean individualTerrainAdjustment = null;
+        ValhelsiaStructureSettings.Builder structureSettings = ValhelsiaStructureSettings.builder();
 
         private Builder(BootstrapContext<Structure> context, HolderSet<Biome> biomeHolderSet, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
             this.context = context;
@@ -235,28 +230,34 @@ public class ValhelsiaJigsawStructure extends Structure {
         }
 
         public Builder individualTerrainAdjustment() {
-            this.individualTerrainAdjustment = true;
+            this.structureSettings.enableIndividualTerrainAdjustment(true);
 
             return this;
         }
 
         public Builder chance(double spawnChance) {
-            this.spawnChance = spawnChance;
+            this.structureSettings.setSpawnChance(spawnChance);
 
             return this;
         }
 
         public Builder margin(int customMargin) {
-            this.customMargin = customMargin;
+            this.structureSettings.setCustomMargin(customMargin);
+
+            return this;
+        }
+
+        public Builder ignoreWaterLogging() {
+            this.structureSettings.setLiquidSettings(LiquidSettings.IGNORE_WATERLOGGING);
+
 
             return this;
         }
 
         public ValhelsiaJigsawStructure build() {
             StructureSettings settings = new StructureSettings(biomeHolderSet, this.spawnOverrides, this.step, this.terrainAdjustment);
-            ValhelsiaStructureSettings valhelsiaStructureSettings = new ValhelsiaStructureSettings(this.spawnChance, this.customMargin, this.individualTerrainAdjustment);
 
-            return new ValhelsiaJigsawStructure(settings, valhelsiaStructureSettings, StartPoolDecider.of(this.context.lookup(Registries.TEMPLATE_POOL), this.startPool), this.maxDepth, this.heightProvider, this.projectStartToHeightmap, this.maxDistanceFromCenter);
+            return new ValhelsiaJigsawStructure(settings, this.structureSettings.build(), StartPoolDecider.of(this.context.lookup(Registries.TEMPLATE_POOL), this.startPool), this.maxDepth, this.heightProvider, this.projectStartToHeightmap, this.maxDistanceFromCenter);
         }
     }
 }

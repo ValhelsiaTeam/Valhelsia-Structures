@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.core.config;
 
-import com.stal111.valhelsia_structures.common.world.structures.ValhelsiaStructureSettings;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
@@ -22,9 +21,7 @@ public class CommonConfig {
         builder.push("structures");
         this.flatnessDelta = builder.comment("How flat does terrain need to be for surface structures to spawn? (in blocks) [default: 4]").defineInRange("global.flatness_delta", 4, 0, 64);
         this.minStructureDistance = builder.comment("How many chunks need to be at least between two structures? (in chunks) [default: 5]").defineInRange("global.min_structure_distance", 5, 0, 64);
-
-        ValhelsiaStructureSettings.DEFAULT_MARGIN.setConfiguredValue(defaultValue -> builder.comment("The default margin around a valhelsia structure if not otherwise specified in the structure json file. [default: " + defaultValue + "]").define("global.default_margin", defaultValue));
-
+        
 //        for (RegistryObject<Structure> registryObject : ModStructures.HELPER.getRegistryObjects()) {
 //            String name = registryObject.getId().getPath();
 //            ValhelsiaStructureSettings settings = ModStructures.STRUCTURE_SETTINGS_MAP.get(name);

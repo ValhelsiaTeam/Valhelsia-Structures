@@ -4,7 +4,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/cave_entrance/large",
-        "processors": "valhelsia_structures:remove_water",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "terrain_adjustment": "beard_thin"
       },
@@ -14,7 +14,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/cave_entrance/small_1",
-        "processors": "valhelsia_structures:remove_water",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "terrain_adjustment": "beard_thin"
       },
@@ -24,7 +24,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/cave_entrance/small_2",
-        "processors": "valhelsia_structures:remove_water",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "terrain_adjustment": "beard_thin"
       },
@@ -34,7 +34,7 @@
       "element": {
         "element_type": "valhelsia_structures:valhelsia_single",
         "location": "valhelsia_structures:spawner_dungeon/cave_entrance/small_3",
-        "processors": "valhelsia_structures:remove_water",
+        "processors": "minecraft:empty",
         "projection": "rigid",
         "terrain_adjustment": "beard_thin"
       },
