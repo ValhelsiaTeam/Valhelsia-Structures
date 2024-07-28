@@ -11,7 +11,6 @@ import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.BasicItemListing;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import net.valhelsia.valhelsia_core.api.common.helper.neoforge.TradeHelper;
@@ -60,14 +59,5 @@ public class EntityEventListener {
                     return new BasicItemListing(new ItemStack(Items.EMERALD, 12), new ItemStack(Items.COMPASS), stack, 12, 10, 1).getOffer(trader, rand);
                 }
         );
-    }
-
-    @EventBusSubscriber(modid = ValhelsiaStructures.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
-    public static class ModEvents {
-
-        @SubscribeEvent
-        public static void onEntityAttributeCreation(EntityAttributeCreationEvent event) {
-           // event.put(ModEntities.MOSSY_SKELETON.get(), AbstractSkeleton.createAttributes().build());
-        }
     }
 }

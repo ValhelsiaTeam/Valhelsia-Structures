@@ -21,6 +21,5 @@ public class ClientSetup {
 
     @SubscribeEvent
     public void onClientSetup(FMLClientSetupEvent event) {
-//        RenderingRegistry.registerEntityRenderingHandler(ModEntities.MOSSY_SKELETON.get(), MossySkeletonRenderer::new);
     }
 }

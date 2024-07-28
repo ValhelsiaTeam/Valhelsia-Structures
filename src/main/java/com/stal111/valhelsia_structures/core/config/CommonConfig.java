@@ -21,7 +21,7 @@ public class CommonConfig {
         builder.push("structures");
         this.flatnessDelta = builder.comment("How flat does terrain need to be for surface structures to spawn? (in blocks) [default: 4]").defineInRange("global.flatness_delta", 4, 0, 64);
         this.minStructureDistance = builder.comment("How many chunks need to be at least between two structures? (in chunks) [default: 5]").defineInRange("global.min_structure_distance", 5, 0, 64);
-        
+
 //        for (RegistryObject<Structure> registryObject : ModStructures.HELPER.getRegistryObjects()) {
 //            String name = registryObject.getId().getPath();
 //            ValhelsiaStructureSettings settings = ModStructures.STRUCTURE_SETTINGS_MAP.get(name);
