@@ -1,0 +1,7 @@
+{
+  "parent": "valhelsia_structures:block/template_post",
+  "textures": {
+    "end": "valhelsia_structures:block/post/jungle_post_top",
+    "side": "valhelsia_structures:block/post/jungle_post"
+  }
+}

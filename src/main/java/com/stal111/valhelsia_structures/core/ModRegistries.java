@@ -12,7 +12,6 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryCollector;
-import net.valhelsia.valhelsia_core.api.common.registry.helper.EntityRegistryHelper;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.TemplatePoolRegistryHelper;
 
 /**
@@ -30,7 +29,6 @@ public class ModRegistries extends RegistryCollector {
         this.addItemHelper(ModItems.class);
         this.addBlockHelper(ModBlocks.class);
         this.addMappedHelper(Registries.BLOCK_ENTITY_TYPE, ModBlockEntities.class);
-        this.addMappedHelper(Registries.ENTITY_TYPE, EntityRegistryHelper::new, ModEntities.class);
         this.addMappedHelper(Registries.RECIPE_SERIALIZER, ModRecipes.class);
         this.addMappedHelper(Registries.STRUCTURE_TYPE, ModStructureTypes.class);
         this.addMappedHelper(Registries.STRUCTURE_POOL_ELEMENT, ModStructurePoolElementTypes.class);

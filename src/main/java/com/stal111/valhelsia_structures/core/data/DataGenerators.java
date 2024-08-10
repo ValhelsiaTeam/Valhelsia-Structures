@@ -6,6 +6,7 @@ import com.stal111.valhelsia_structures.core.data.server.ModBlockTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.ModItemTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModLootModifierProvider;
 import com.stal111.valhelsia_structures.data.ModSoundsProvider;
+import com.stal111.valhelsia_structures.data.model.ModModelProvider;
 import com.stal111.valhelsia_structures.data.recipes.ModRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -39,6 +40,9 @@ public class DataGenerators {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         DataProviderContext context = DataProviderContext.of(output, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER, existingFileHelper);
+
+
+        generator.addProvider(event.includeClient(), new ModModelProvider(output));
 
         //generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, existingFileHelper));
         //generator.addProvider(event.includeClient(), new ModItemModelProvider(output, existingFileHelper));
