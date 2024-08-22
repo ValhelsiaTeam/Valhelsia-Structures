@@ -1,0 +1,7 @@
+{
+  "parent": "valhelsia_structures:block/template_cut_post_1",
+  "textures": {
+    "end": "valhelsia_structures:block/post/mangrove_post_top",
+    "side": "valhelsia_structures:block/post/mangrove_post"
+  }
+}

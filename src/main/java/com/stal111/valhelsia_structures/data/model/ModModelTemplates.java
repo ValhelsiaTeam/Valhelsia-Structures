@@ -13,7 +13,13 @@ import java.util.Optional;
 public class ModModelTemplates {
 
     public static final ModelTemplate TEMPLATE_POST = create("template_post", TextureSlot.SIDE, TextureSlot.END);
-    public static final ModelTemplate TEMPLATE_ATTACHED_POST = create("template_post_attached", TextureSlot.SIDE, TextureSlot.END);
+    public static final ModelTemplate TEMPLATE_POST_ATTACHED = create("template_post_attached", TextureSlot.SIDE, TextureSlot.END);
+    public static final ModelTemplate TEMPLATE_CUT_POST_1 = create("template_cut_post_1", TextureSlot.SIDE, TextureSlot.END);
+    public static final ModelTemplate TEMPLATE_CUT_POST_1_ATTACHED = create("template_cut_post_1_attached", TextureSlot.SIDE, TextureSlot.END);
+    public static final ModelTemplate TEMPLATE_CUT_POST_2 = create("template_cut_post_2", TextureSlot.SIDE, TextureSlot.END);
+    public static final ModelTemplate TEMPLATE_CUT_POST_2_ATTACHED = create("template_cut_post_2_attached", TextureSlot.SIDE, TextureSlot.END);
+    public static final ModelTemplate TEMPLATE_CUT_POST_3 = create("template_cut_post_3", TextureSlot.SIDE, TextureSlot.END);
+    public static final ModelTemplate TEMPLATE_CUT_POST_3_ATTACHED = create("template_cut_post_3_attached", TextureSlot.SIDE, TextureSlot.END);
 
     public static ModelTemplate create(String name, TextureSlot... textureSlots) {
         return new ModelTemplate(Optional.of(ValhelsiaStructures.location("block/" + name)), Optional.empty(), textureSlots);
