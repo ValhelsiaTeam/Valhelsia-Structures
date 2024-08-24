@@ -25,9 +25,6 @@ public class ModCreativeModeTabs implements RegistryClass {
     public static final MappedRegistryHelper<CreativeModeTab> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.CREATIVE_MODE_TAB);
 
     public static final ImmutableList<Supplier<? extends ItemLike>> HIDDEN_ITEMS = ImmutableList.<Supplier<? extends ItemLike>>builder()
-            .add(ModBlocks.STRIPPED_WOODEN_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
-            .add(ModBlocks.CUT_STRIPPED_WOODEN_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
-            .add(ModBlocks.BUNDLED_STRIPPED_POSTS.get(ModBlocks.WoodType.LAPIDIFIED_JUNGLE))
             //.add(ModBlocks.HIBISCUS)
             .add(ModBlocks.GIANT_FERN)
             .build();

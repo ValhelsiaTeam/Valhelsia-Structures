@@ -9,7 +9,6 @@
     "valhelsia_structures:mangrove_post",
     "valhelsia_structures:crimson_post",
     "valhelsia_structures:warped_post",
-    "valhelsia_structures:lapidified_jungle_post",
     "valhelsia_structures:stripped_oak_post",
     "valhelsia_structures:stripped_spruce_post",
     "valhelsia_structures:stripped_birch_post",
@@ -18,7 +17,6 @@
     "valhelsia_structures:stripped_dark_oak_post",
     "valhelsia_structures:stripped_mangrove_post",
     "valhelsia_structures:stripped_crimson_post",
-    "valhelsia_structures:stripped_warped_post",
-    "valhelsia_structures:stripped_lapidified_jungle_post"
+    "valhelsia_structures:stripped_warped_post"
   ]
 }

@@ -69,22 +69,10 @@ public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
         this.tag(ModTags.Blocks.JARS).add(ModBlocks.GLAZED_JAR.get(), ModBlocks.CRACKED_GLAZED_JAR.get()).addTag(ModTags.Blocks.COLORED_JARS);
         ModBlocks.BIG_COLORED_GLAZED_JARS.values().forEach(registryObject -> this.tag(ModTags.Blocks.BIG_COLORED_JARS).add(registryObject.get()));
         this.tag(ModTags.Blocks.BIG_JARS).add(ModBlocks.BIG_GLAZED_JAR.get(), ModBlocks.CRACKED_BIG_GLAZED_JAR.get()).addTag(ModTags.Blocks.BIG_COLORED_JARS);
-        this.tag(ModTags.Blocks.LAPIDIFIED_JUNGLE_LOGS).add(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get(), ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get());
-        this.tag(BlockTags.LOGS).add(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get(), ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get()).addTag(ModTags.Blocks.LAPIDIFIED_JUNGLE_LOGS);
-        this.tag(BlockTags.PLANKS).add(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get());
-        this.tag(BlockTags.WOODEN_SLABS).add(ModBlocks.LAPIDIFIED_JUNGLE_SLAB.get());
-        this.tag(BlockTags.WOODEN_STAIRS).add(ModBlocks.LAPIDIFIED_JUNGLE_STAIRS.get());
-        this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE.get());
-        this.tag(BlockTags.WOODEN_BUTTONS).add(ModBlocks.LAPIDIFIED_JUNGLE_BUTTON.get());
-        this.tag(BlockTags.WOODEN_FENCES).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE.get());
-        this.tag(Tags.Blocks.FENCES_WOODEN).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE.get());
-        this.tag(BlockTags.FENCE_GATES).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get());
-        this.tag(Tags.Blocks.FENCE_GATES_WOODEN).add(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get());
         //this.tag(BlockTags.FLOWERS).add(ModBlocks.HIBISCUS.get());
 
         this.tag(BlockTags.PIGLIN_REPELLENTS).add(ModBlocks.SOUL_BRAZIER.get());
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(
-                ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE.get(),
                 ModBlocks.DOUSED_TORCH.get(),
                 ModBlocks.DOUSED_SOUL_TORCH.get()
         );

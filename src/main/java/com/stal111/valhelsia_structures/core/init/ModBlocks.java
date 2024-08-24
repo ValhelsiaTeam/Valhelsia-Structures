@@ -1,11 +1,9 @@
 package com.stal111.valhelsia_structures.core.init;
 
 import com.stal111.valhelsia_structures.common.block.*;
-import com.stal111.valhelsia_structures.common.block.properties.BlockProperties;
 import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
 import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.core.init.other.ModWoodTypes;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.BedItem;
@@ -14,7 +12,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.Vec3;
@@ -49,8 +46,6 @@ public class ModBlocks implements RegistryClass {
     private static final MapColorProvider FACING_COLOR_PROVIDER = (state, topColor, barkColor) -> {
         return state.getValue(HorizontalDirectionalBlock.FACING).getAxis() == Direction.Axis.Y ? topColor : barkColor;
     };
-
-    public static final BlockSetType LAPIDIFIED_JUNGLE = new BlockSetType("lapidified_jungle");
 
     public static final BlockRegistryEntry<SpecialSpawnerBlock> SPECIAL_SPAWNER = HELPER.register("special_spawner", () -> new SpecialSpawnerBlock(Block.Properties.ofLegacyCopy(Blocks.SPAWNER).strength(-1.0F, 3600000.0F).noLootTable())).withItem().renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<BrazierBlock> BRAZIER = HELPER.register("brazier", () -> new BrazierBlock(true, 1, Block.Properties.ofLegacyCopy(Blocks.IRON_BARS).noOcclusion().lightLevel(state -> state.getValue(BrazierBlock.LIT) ? 15 : 0)))
@@ -101,7 +96,6 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryEntry<IronBarsBlock> PAPER_WALL = HELPER.register("paper_wall", () -> new IronBarsBlock(Block.Properties.of().strength(0.3F).sound(SoundType.WOOL).noOcclusion())).withItem();
     public static final BlockRegistryEntry<HangingVinesBodyBlock> HANGING_VINES_BODY = HELPER.register("hanging_vines_body", () -> new HangingVinesBodyBlock(Block.Properties.of().noCollission().strength(0.2F).sound(SoundType.VINE))).renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<HangingVinesBlock> HANGING_VINES = HELPER.register("hanging_vines", () -> new HangingVinesBlock(Block.Properties.of().randomTicks().noCollission().strength(0.2F).sound(SoundType.VINE))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
-    //public static final RegistryObject<JungleHeadBlock> JUNGLE_HEAD = HELPER.register("jungle_head", new JungleHeadBlock(Block.Properties.from(Blocks.COBBLESTONE).notSolid()), ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<JarBlock> GLAZED_JAR = HELPER.register("glazed_jar", () -> new JarBlock(Block.Properties.of().mapColor(MapColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.4F).noOcclusion())).withItem();
     public static final BlockRegistryEntry<JarBlock> CRACKED_GLAZED_JAR = HELPER.register("cracked_glazed_jar", () -> new JarBlock(Block.Properties.of().mapColor(MapColor.COLOR_BROWN).requiresCorrectToolForDrops().strength(1.0F).noOcclusion())).withItem();
     public static final BlockEntrySet<JarBlock, DyeColor> COLORED_GLAZED_JARS = HELPER.registerColorEntrySet("glazed_jar",
@@ -116,15 +110,6 @@ public class ModBlocks implements RegistryClass {
             color -> new BigJarBlock(Block.Properties.of().mapColor(color.getMapColor()).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()),
             entry -> entry.withItem(registryObject -> new BigJarBlockItem(registryObject.get(), new Item.Properties())).renderType(ValhelsiaRenderType.CUTOUT)
     );
-    public static final BlockRegistryEntry<RotatedPillarBlock> LAPIDIFIED_JUNGLE_LOG = HELPER.register("lapidified_jungle_log", () -> new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG)).withItem();
-    public static final BlockRegistryEntry<RotatedPillarBlock> LAPIDIFIED_JUNGLE_WOOD = HELPER.register("lapidified_jungle_wood", () -> new RotatedPillarBlock(BlockProperties.LAPIDIFIED_JUNGLE_LOG)).withItem();
-    public static final BlockRegistryEntry<Block> LAPIDIFIED_JUNGLE_PLANKS = HELPER.register("lapidified_jungle_planks", () -> new Block(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
-    public static final BlockRegistryEntry<StairBlock> LAPIDIFIED_JUNGLE_STAIRS = HELPER.register("lapidified_jungle_stairs", () -> new StairBlock(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get().defaultBlockState(), BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
-    public static final BlockRegistryEntry<SlabBlock> LAPIDIFIED_JUNGLE_SLAB = HELPER.register("lapidified_jungle_slab", () -> new SlabBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
-    public static final BlockRegistryEntry<PressurePlateBlock> LAPIDIFIED_JUNGLE_PRESSURE_PLATE = HELPER.register("lapidified_jungle_pressure_plate", () -> new PressurePlateBlock(LAPIDIFIED_JUNGLE, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F))).withItem();
-    public static final BlockRegistryEntry<ButtonBlock> LAPIDIFIED_JUNGLE_BUTTON = HELPER.register("lapidified_jungle_button", () -> new ButtonBlock(LAPIDIFIED_JUNGLE, 30, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.strength(0.5F))).withItem();
-    public static final BlockRegistryEntry<FenceBlock> LAPIDIFIED_JUNGLE_FENCE = HELPER.register("lapidified_jungle_fence", () -> new FenceBlock(BlockProperties.LAPIDIFIED_JUNGLE_PLANKS)).withItem();
-    public static final BlockRegistryEntry<FenceGateBlock> LAPIDIFIED_JUNGLE_FENCE_GATE = HELPER.register("lapidified_jungle_fence_gate", () -> new FenceGateBlock(ModWoodTypes.LAPIDIFIED_JUNGLE, BlockProperties.LAPIDIFIED_JUNGLE_PLANKS.forceSolidOn())).withItem();
     public static final BlockRegistryEntry<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", () -> new ExplorersTentBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.BROWN_WOOL).noOcclusion())).withItem(registryObject -> new DyeableBlockItem(registryObject.get(), new Item.Properties()));
     //public static final BlockRegistryEntry<BushBlock> HIBISCUS = HELPER.register("hibiscus", () -> new BushBlock(Block.Properties.ofLegacyCopy(Blocks.POPPY))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", () -> new GiantFernBlock(Block.Properties.ofLegacyCopy(Blocks.POPPY))).withItem();
@@ -154,9 +139,8 @@ public class ModBlocks implements RegistryClass {
         DARK_OAK("dark_oak", true, MapColor.COLOR_BROWN, MapColor.COLOR_BROWN),
         MANGROVE("mangrove", true, MapColor.COLOR_RED, MapColor.PODZOL),
         CRIMSON("crimson", false, MapColor.CRIMSON_STEM, MapColor.CRIMSON_STEM),
-        WARPED("warped", false, MapColor.WARPED_STEM, MapColor.WARPED_STEM),
-        LAPIDIFIED_JUNGLE("lapidified_jungle", false, MapColor.DIRT, MapColor.DIRT);
-
+        WARPED("warped", false, MapColor.WARPED_STEM, MapColor.WARPED_STEM);
+        
         private final String name;
         private final boolean flammable;
         private final MapColor topColor;

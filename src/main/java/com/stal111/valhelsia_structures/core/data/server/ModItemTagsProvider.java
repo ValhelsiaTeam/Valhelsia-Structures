@@ -39,16 +39,6 @@ public class ModItemTagsProvider extends ValhelsiaItemTagsProvider {
         this.copy(ModTags.Blocks.JARS, ModTags.Items.JARS);
         ModBlocks.BIG_COLORED_GLAZED_JARS.values().forEach(registryObject -> this.tag(ModTags.Items.BIG_COLORED_JARS).add(registryObject.get().asItem()));
         this.tag(ModTags.Items.BIG_JARS).add(ModBlocks.BIG_GLAZED_JAR.get().asItem(), ModBlocks.CRACKED_BIG_GLAZED_JAR.get().asItem()).addTag(ModTags.Items.BIG_COLORED_JARS);
-        this.copy(ModTags.Blocks.LAPIDIFIED_JUNGLE_LOGS, ModTags.Items.LAPIDIFIED_JUNGLE_LOGS);
-        this.copy(BlockTags.LOGS, ItemTags.LOGS);
-        this.copy(BlockTags.PLANKS, ItemTags.PLANKS);
-        this.copy(BlockTags.WOODEN_SLABS, ItemTags.WOODEN_SLABS);
-        this.copy(BlockTags.WOODEN_STAIRS, ItemTags.WOODEN_STAIRS);
-        this.copy(BlockTags.WOODEN_PRESSURE_PLATES, ItemTags.WOODEN_PRESSURE_PLATES);
-        this.copy(BlockTags.WOODEN_BUTTONS, ItemTags.WOODEN_BUTTONS);
-        this.copy(BlockTags.WOODEN_FENCES, ItemTags.WOODEN_FENCES);
-        this.copy(Tags.Blocks.FENCES_WOODEN, Tags.Items.FENCES_WOODEN);
-        this.copy(Tags.Blocks.FENCE_GATES_WOODEN, Tags.Items.FENCE_GATES_WOODEN);
         this.copy(ModTags.Blocks.SLEEPING_BAGS, ModTags.Items.SLEEPING_BAGS);
 
         this.copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS);

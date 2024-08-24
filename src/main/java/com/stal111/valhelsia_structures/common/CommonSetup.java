@@ -16,8 +16,6 @@ public class CommonSetup {
         event.enqueueWork(() -> {
             FlammableRegistry.register();
             CompostableRegistry.register();
-
-            ModWoodTypes.registerWoodTypes();
         });
 
         FlintAndSteelRegistry.register();

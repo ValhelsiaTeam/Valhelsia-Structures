@@ -3,7 +3,6 @@ package com.stal111.valhelsia_structures.data.recipes;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipeBuilder;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
-import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -42,7 +41,6 @@ public class ModRecipeProvider extends RecipeSubProvider {
         map.put(ModBlocks.WoodType.MANGROVE, Blocks.MANGROVE_LOG);
         map.put(ModBlocks.WoodType.CRIMSON, Blocks.CRIMSON_STEM);
         map.put(ModBlocks.WoodType.WARPED, Blocks.WARPED_STEM);
-        map.put(ModBlocks.WoodType.LAPIDIFIED_JUNGLE, ModBlocks.LAPIDIFIED_JUNGLE_LOG.get());
     });
 
     public static final EnumMap<ModBlocks.WoodType, Block> WOOD_TYPE_TO_STRIPPED_LOG = Util.make(new EnumMap<>(ModBlocks.WoodType.class), map -> {
@@ -55,7 +53,6 @@ public class ModRecipeProvider extends RecipeSubProvider {
         map.put(ModBlocks.WoodType.MANGROVE, Blocks.MANGROVE_LOG);
         map.put(ModBlocks.WoodType.CRIMSON, Blocks.STRIPPED_CRIMSON_STEM);
         map.put(ModBlocks.WoodType.WARPED, Blocks.STRIPPED_WARPED_STEM);
-        map.put(ModBlocks.WoodType.LAPIDIFIED_JUNGLE, ModBlocks.LAPIDIFIED_JUNGLE_LOG.get());
     });
 
     public ModRecipeProvider(ValhelsiaRecipeProvider provider) {
@@ -118,16 +115,6 @@ public class ModRecipeProvider extends RecipeSubProvider {
             Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.withDefaultNamespace(name.substring(4, name.length() - 11) + "_terracotta"));
             this.bigGlazedJar(registryObject.get(), block);
         });
-
-        this.surroundingItem(RecipeCategory.BUILDING_BLOCKS, ModBlocks.LAPIDIFIED_JUNGLE_LOG.get(), RecipePart.of(Ingredient.of(Blocks.VINE, ModBlocks.HANGING_VINES.get())), RecipePart.of(Blocks.JUNGLE_LOG), 8);
-        this.wood(ModBlocks.LAPIDIFIED_JUNGLE_WOOD.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_LOG.get()));
-        this.planks(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get(), ModTags.Items.LAPIDIFIED_JUNGLE_LOGS);
-        this.slab(ModBlocks.LAPIDIFIED_JUNGLE_SLAB.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()));
-        this.stairs(ModBlocks.LAPIDIFIED_JUNGLE_STAIRS.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()));
-        this.pressurePlate(ModBlocks.LAPIDIFIED_JUNGLE_PRESSURE_PLATE.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()));
-        this.button(ModBlocks.LAPIDIFIED_JUNGLE_BUTTON.get(), ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get());
-        this.fence(ModBlocks.LAPIDIFIED_JUNGLE_FENCE.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()));
-        this.fenceGate(ModBlocks.LAPIDIFIED_JUNGLE_FENCE_GATE.get(), RecipePart.of(ModBlocks.LAPIDIFIED_JUNGLE_PLANKS.get()));
 
         ModBlocks.BUNDLED_POSTS.forEach((woodType, registryObject) -> {
             this.simple2x2(RecipeCategory.BUILDING_BLOCKS, registryObject.get(), RecipePart.of(ModBlocks.WOODEN_POSTS.get(woodType).get()));
