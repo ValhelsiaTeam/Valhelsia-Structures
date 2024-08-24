@@ -5,7 +5,6 @@ import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.Direction;
-import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.DelegatedModel;
 import net.minecraft.data.models.model.ModelLocationUtils;
@@ -13,6 +12,7 @@ import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.valhelsia.valhelsia_core.datagen.model.BlockModelGenerator;
 
 import java.util.Arrays;
 import java.util.function.BiConsumer;
@@ -23,23 +23,16 @@ import java.util.function.Supplier;
  * @author Vahelsia Team - stal111
  * @since 28.07.2024
  */
-public class ModBlockModels {
+public class ModBlockModels implements BlockModelGenerator {
 
-    private final BlockModelGenerators generators;
-    private final Consumer<BlockStateGenerator> blockStateOutput;
-    private final BiConsumer<ResourceLocation, Supplier<JsonElement>> modelOutput;
+    private Consumer<BlockStateGenerator> blockStateOutput;
+    private BiConsumer<ResourceLocation, Supplier<JsonElement>> modelOutput;
 
-    private ModBlockModels(BlockModelGenerators generators) {
-        this.generators = generators;
-        this.blockStateOutput = generators.blockStateOutput;
-        this.modelOutput = generators.modelOutput;
-    }
+    @Override
+    public void generate(Consumer<BlockStateGenerator> blockStateOutput, BiConsumer<ResourceLocation, Supplier<JsonElement>> modelOutput) {
+        this.blockStateOutput = blockStateOutput;
+        this.modelOutput = modelOutput;
 
-    public static void create(BlockModelGenerators generators) {
-        new ModBlockModels(generators).createModels();
-    }
-
-    public void createModels() {
         for (ModBlocks.WoodType woodType : ModBlocks.WoodType.values()) {
             this.createPostVariants(ModBlocks.WOODEN_POSTS.get(woodType).get(), ModBlocks.CUT_WOODEN_POSTS.get(woodType).get());
             this.createPostVariants(ModBlocks.STRIPPED_WOODEN_POSTS.get(woodType).get(), ModBlocks.CUT_STRIPPED_WOODEN_POSTS.get(woodType).get());

@@ -1,4 +1,4 @@
-// 1.21	2024-07-26T18:02:22.3394743	Tags for minecraft:worldgen/biome mod id valhelsia_structures
+// 1.21.1	2024-08-24T18:14:10.0534484	Tags for minecraft:worldgen/biome mod id valhelsia_structures
 b221ec153f29e62c2cbf6a8c454ed35e266b870a data/minecraft/tags/worldgen/biome/has_structure/swamp_hut.json
 e4d831c2ce02d7a837f880b19d15fa37f7ba49cd data/valhelsia_structures/tags/worldgen/biome/has_structure/big_tree.json
 bd83bf896db29fac0e7a7dc209fc97c3208fb3fb data/valhelsia_structures/tags/worldgen/biome/has_structure/castle.json

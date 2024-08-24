@@ -6,7 +6,7 @@ import com.stal111.valhelsia_structures.core.data.server.ModBlockTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.ModItemTagsProvider;
 import com.stal111.valhelsia_structures.core.data.server.loot.ModLootModifierProvider;
 import com.stal111.valhelsia_structures.data.ModSoundsProvider;
-import com.stal111.valhelsia_structures.data.model.ModModelProvider;
+import com.stal111.valhelsia_structures.data.model.ModBlockModels;
 import com.stal111.valhelsia_structures.data.recipes.ModRecipeProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -17,6 +17,7 @@ import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.valhelsia.valhelsia_core.datagen.DataProviderContext;
+import net.valhelsia.valhelsia_core.datagen.model.ValhelsiaModelProvider;
 import net.valhelsia.valhelsia_core.datagen.recipes.ValhelsiaRecipeProvider;
 
 import java.util.Set;
@@ -42,7 +43,7 @@ public class DataGenerators {
         DataProviderContext context = DataProviderContext.of(output, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER, existingFileHelper);
 
 
-        generator.addProvider(event.includeClient(), new ModModelProvider(output));
+        generator.addProvider(event.includeClient(), new ValhelsiaModelProvider(context, new ModBlockModels(), null));
 
         //generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, existingFileHelper));
         //generator.addProvider(event.includeClient(), new ModItemModelProvider(output, existingFileHelper));
