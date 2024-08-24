@@ -13,7 +13,6 @@ import net.minecraft.world.item.crafting.*;
 import net.neoforged.neoforge.common.ItemAbilities;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Axe Crafting Recipe Maker <br>
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
  */
 public class AxeCraftingRecipeMaker {
 
-    public static List<CraftingRecipe> createAxeCraftingRecipes() {
+    public static List<RecipeHolder<CraftingRecipe>> createAxeCraftingRecipes() {
         String group = ValhelsiaStructures.MOD_ID + ".post";
         ClientLevel level = Minecraft.getInstance().level;
 
@@ -41,8 +40,8 @@ public class AxeCraftingRecipeMaker {
                     ItemStack output = recipe.getOutput();
                     ResourceLocation id = ValhelsiaStructures.location("jei.axe_crafting." + output.getDescriptionId());
 
-                    return new ShapelessRecipe(group, CraftingBookCategory.BUILDING, output, NonNullList.of(Ingredient.EMPTY, axeIngredient, recipe.getInput()));
+                    return new RecipeHolder<CraftingRecipe>(id, new ShapelessRecipe(group, CraftingBookCategory.BUILDING, output, NonNullList.of(Ingredient.EMPTY, axeIngredient, recipe.getInput())));
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 }
