@@ -9,8 +9,10 @@ import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.DelegatedModel;
 import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.valhelsia.valhelsia_core.datagen.model.BlockModelGenerator;
@@ -29,6 +31,10 @@ public class ModBlockModels implements BlockModelGenerator {
     private Consumer<BlockStateGenerator> blockStateOutput;
     private BiConsumer<ResourceLocation, Supplier<JsonElement>> modelOutput;
 
+    static MultiVariantGenerator createSimpleBlock(Block block, ResourceLocation resourceLocation) {
+        return MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourceLocation));
+    }
+
     @Override
     public void generate(Consumer<BlockStateGenerator> blockStateOutput, BiConsumer<ResourceLocation, Supplier<JsonElement>> modelOutput) {
         this.blockStateOutput = blockStateOutput;
@@ -37,6 +43,8 @@ public class ModBlockModels implements BlockModelGenerator {
         for (ModBlocks.WoodType woodType : ModBlocks.WoodType.values()) {
             this.createPostVariants(ModBlocks.WOODEN_POSTS.get(woodType).get(), ModBlocks.CUT_WOODEN_POSTS.get(woodType).get());
             this.createPostVariants(ModBlocks.STRIPPED_WOODEN_POSTS.get(woodType).get(), ModBlocks.CUT_STRIPPED_WOODEN_POSTS.get(woodType).get());
+            this.createBundledPosts(ModBlocks.BUNDLED_POSTS.get(woodType).get());
+            this.createBundledPosts(ModBlocks.BUNDLED_STRIPPED_POSTS.get(woodType).get());
         }
 
         BlockModelGenerators generators = new BlockModelGenerators(this.blockStateOutput, this.modelOutput, item -> {});
@@ -46,6 +54,14 @@ public class ModBlockModels implements BlockModelGenerator {
 
         this.crateBrazier(ModBlocks.BRAZIER.get());
         this.crateBrazier(ModBlocks.SOUL_BRAZIER.get());
+        this.createPaperWall(ModBlocks.PAPER_WALL.get());
+
+        generators.createTrivialCube(ModBlocks.SPECIAL_SPAWNER.get());
+        createMetalFramedGlass(generators, ModBlocks.METAL_FRAMED_GLASS.get(), ModBlocks.METAL_FRAMED_GLASS_PANE.get());
+
+        for (DyeColor color : DyeColor.values()) {
+            createMetalFramedGlass(generators, ModBlocks.COLORED_METAL_FRAMED_GLASS.get(color).get(), ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.get(color).get());
+        }
     }
 
     private void createPostVariants(PostBlock postBlock, CutPostBlock cutPostBlock) {
@@ -115,8 +131,45 @@ public class ModBlockModels implements BlockModelGenerator {
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(litDispatch));
     }
 
-    static MultiVariantGenerator createSimpleBlock(Block block, ResourceLocation resourceLocation) {
-        return MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourceLocation));
+    private void createBundledPosts(Block block) {
+        TextureMapping mapping = ModTextureMapping.bundledPosts(block);
+        ResourceLocation model = ModelTemplates.CUBE_COLUMN.create(block, mapping, this.modelOutput);
+        ResourceLocation modelHorizontal = ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(block, mapping, this.modelOutput);
+        this.blockStateOutput.accept(BlockModelGenerators.createRotatedPillarWithHorizontalVariant(block, model, modelHorizontal));
+    }
+
+    private void createMetalFramedGlass(BlockModelGenerators generators, Block glassBlock, Block paneBlock) {
+        generators.createTrivialCube(glassBlock);
+
+        TextureMapping texturemapping = ModTextureMapping.metalFramedGlassPane(glassBlock);
+        this.createPane(glassBlock, paneBlock, texturemapping);
+    }
+
+    private void createPaperWall(Block block) {
+        TextureMapping texturemapping = TextureMapping.pane(block, block);
+        this.createPane(block, block, texturemapping);
+    }
+
+    private void createPane(Block fullBlock, Block paneBlock, TextureMapping textureMapping) {
+        ResourceLocation postModel = ModelTemplates.STAINED_GLASS_PANE_POST.create(paneBlock, textureMapping, this.modelOutput);
+        ResourceLocation paneSideModel = ModelTemplates.STAINED_GLASS_PANE_SIDE.create(paneBlock, textureMapping, this.modelOutput);
+        ResourceLocation paneSideAltModel = ModelTemplates.STAINED_GLASS_PANE_SIDE_ALT.create(paneBlock, textureMapping, this.modelOutput);
+        ResourceLocation paneNoSideModel = ModelTemplates.STAINED_GLASS_PANE_NOSIDE.create(paneBlock, textureMapping, this.modelOutput);
+        ResourceLocation paneNoSideAltModel = ModelTemplates.STAINED_GLASS_PANE_NOSIDE_ALT.create(paneBlock, textureMapping, this.modelOutput);
+
+        ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(paneBlock), TextureMapping.layer0(fullBlock), this.modelOutput);
+
+        this.blockStateOutput.accept(MultiPartGenerator.multiPart(paneBlock)
+                .with(Variant.variant().with(VariantProperties.MODEL, postModel))
+                .with(Condition.condition().term(BlockStateProperties.NORTH, true), Variant.variant().with(VariantProperties.MODEL, paneSideModel))
+                .with(Condition.condition().term(BlockStateProperties.EAST, true), Variant.variant().with(VariantProperties.MODEL, paneSideModel).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                .with(Condition.condition().term(BlockStateProperties.SOUTH, true), Variant.variant().with(VariantProperties.MODEL, paneSideAltModel))
+                .with(Condition.condition().term(BlockStateProperties.WEST, true), Variant.variant().with(VariantProperties.MODEL, paneSideAltModel).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                .with(Condition.condition().term(BlockStateProperties.NORTH, false), Variant.variant().with(VariantProperties.MODEL, paneNoSideModel))
+                .with(Condition.condition().term(BlockStateProperties.EAST, false), Variant.variant().with(VariantProperties.MODEL, paneNoSideAltModel))
+                .with(Condition.condition().term(BlockStateProperties.SOUTH, false), Variant.variant().with(VariantProperties.MODEL, paneNoSideAltModel).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
+                .with(Condition.condition().term(BlockStateProperties.WEST, false), Variant.variant().with(VariantProperties.MODEL, paneNoSideModel).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
+        );
     }
 
     void delegateItemModel(Block block, ResourceLocation resourceLocation) {
