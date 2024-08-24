@@ -1,3 +1,6 @@
 {
-  "parent": "valhelsia_structures:block/doused_torch"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "valhelsia_structures:block/unlit_torch"
+  }
 }

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "valhelsia_structures:block/unlit_soul_wall_torch"
+    },
+    "facing=north": {
+      "model": "valhelsia_structures:block/unlit_soul_wall_torch",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "valhelsia_structures:block/unlit_soul_wall_torch",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "valhelsia_structures:block/unlit_soul_wall_torch",
+      "y": 180
+    }
+  }
+}

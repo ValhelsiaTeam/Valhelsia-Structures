@@ -73,8 +73,8 @@ public class ModBlockTagsProvider extends ValhelsiaBlockTagsProvider {
 
         this.tag(BlockTags.PIGLIN_REPELLENTS).add(ModBlocks.SOUL_BRAZIER.get());
         this.tag(BlockTags.WALL_POST_OVERRIDE).add(
-                ModBlocks.DOUSED_TORCH.get(),
-                ModBlocks.DOUSED_SOUL_TORCH.get()
+                ModBlocks.UNLIT_TORCH.get(),
+                ModBlocks.UNLIT_SOUL_TORCH.get()
         );
 
         ModBlocks.SLEEPING_BAGS.values().forEach(block -> this.tag(ModTags.Blocks.SLEEPING_BAGS).add(block.get()));

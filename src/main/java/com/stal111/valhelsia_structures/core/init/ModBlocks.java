@@ -113,10 +113,10 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryEntry<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", () -> new ExplorersTentBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.BROWN_WOOL).noOcclusion())).withItem(registryObject -> new DyeableBlockItem(registryObject.get(), new Item.Properties()));
     //public static final BlockRegistryEntry<BushBlock> HIBISCUS = HELPER.register("hibiscus", () -> new BushBlock(Block.Properties.ofLegacyCopy(Blocks.POPPY))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", () -> new GiantFernBlock(Block.Properties.ofLegacyCopy(Blocks.POPPY))).withItem();
-    public static final BlockRegistryEntry<DousedTorchBlock> DOUSED_TORCH = HELPER.register("doused_torch", () -> new DousedTorchBlock((TorchBlock) Blocks.TORCH, Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<DousedWallTorchBlock> DOUSED_WALL_TORCH = HELPER.register("doused_wall_torch", () -> new DousedWallTorchBlock((TorchBlock) Blocks.WALL_TORCH, Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<DousedTorchBlock> DOUSED_SOUL_TORCH = HELPER.register("doused_soul_torch", () -> new DousedTorchBlock((TorchBlock) Blocks.SOUL_TORCH, Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
-    public static final BlockRegistryEntry<DousedWallTorchBlock> DOUSED_SOUL_WALL_TORCH = HELPER.register("doused_soul_wall_torch", () -> new DousedWallTorchBlock((TorchBlock) Blocks.SOUL_WALL_TORCH, Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<UnlitTorchBlock> UNLIT_TORCH = HELPER.register("unlit_torch", () -> new UnlitTorchBlock(Blocks.TORCH.defaultBlockState(), Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<UnlitWallTorchBlock> UNLIT_WALL_TORCH = HELPER.register("unlit_wall_torch", () -> new UnlitWallTorchBlock(Blocks.WALL_TORCH.defaultBlockState(), Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<UnlitTorchBlock> UNLIT_SOUL_TORCH = HELPER.register("unlit_soul_torch", () -> new UnlitTorchBlock(Blocks.SOUL_TORCH.defaultBlockState(), Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
+    public static final BlockRegistryEntry<UnlitWallTorchBlock> UNLIT_SOUL_WALL_TORCH = HELPER.register("unlit_soul_wall_torch", () -> new UnlitWallTorchBlock(Blocks.SOUL_WALL_TORCH.defaultBlockState(), Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<DungeonDoorBlock> DUNGEON_DOOR = HELPER.register("dungeon_door", () -> new DungeonDoorBlock(Block.Properties.of().strength(50.0F, 100.0F).requiresCorrectToolForDrops().noOcclusion())).withItem();
     public static final BlockRegistryEntry<DungeonDoorLeafBlock> DUNGEON_DOOR_LEAF = HELPER.register("dungeon_door_leaf", () -> new DungeonDoorLeafBlock(Block.Properties.of().strength(50.0F, 100.0F).requiresCorrectToolForDrops().noOcclusion().lootFrom(ModBlocks.DUNGEON_DOOR)));
     public static final BlockRegistryEntry<BonePileBlock> BONE_PILE = HELPER.register("bone_pile", () -> new BonePileBlock(ValhelsiaBlockProperties.of().offsetType(BONE_PILE_OFFSET).mapColor(MapColor.SAND).requiresCorrectToolForDrops().strength(2.0F).sound(SoundType.BONE_BLOCK).noOcclusion().dynamicShape())).withItem().renderType(ValhelsiaRenderType.CUTOUT);
@@ -140,7 +140,7 @@ public class ModBlocks implements RegistryClass {
         MANGROVE("mangrove", true, MapColor.COLOR_RED, MapColor.PODZOL),
         CRIMSON("crimson", false, MapColor.CRIMSON_STEM, MapColor.CRIMSON_STEM),
         WARPED("warped", false, MapColor.WARPED_STEM, MapColor.WARPED_STEM);
-        
+
         private final String name;
         private final boolean flammable;
         private final MapColor topColor;

@@ -19,7 +19,7 @@ public class ModItems implements RegistryClass {
 
     public static final MappedRegistryHelper<Item> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getItemHelper();
 
-    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_TORCH = HELPER.register("doused_torch", () -> new StandingAndWallBlockItem(ModBlocks.DOUSED_TORCH.get(), ModBlocks.DOUSED_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
-    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_SOUL_TORCH = HELPER.register("doused_soul_torch", () -> new StandingAndWallBlockItem(ModBlocks.DOUSED_SOUL_TORCH.get(), ModBlocks.DOUSED_SOUL_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_TORCH = HELPER.register("doused_torch", () -> new StandingAndWallBlockItem(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_SOUL_TORCH = HELPER.register("doused_soul_torch", () -> new StandingAndWallBlockItem(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
 
 }

@@ -1,10 +1,6 @@
 package com.stal111.valhelsia_structures.core.init.other;
 
-import com.stal111.valhelsia_structures.common.block.BrazierBlock;
-import com.stal111.valhelsia_structures.common.block.DousedTorchBlock;
-import com.stal111.valhelsia_structures.common.block.DousedWallTorchBlock;
-import com.stal111.valhelsia_structures.common.block.UnlitLanternBlock;
-import com.stal111.valhelsia_structures.utils.TorchTransformationHandler;
+import com.stal111.valhelsia_structures.common.block.*;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
@@ -12,8 +8,6 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.valhelsia.valhelsia_core.api.common.helper.FlintAndSteelHelper;
-
-import java.util.Objects;
 
 /**
  * Flint And Steel Registry <br>
@@ -34,10 +28,10 @@ public class FlintAndSteelRegistry {
         );
 
         FlintAndSteelHelper.addUse(
-                state -> state.getBlock() instanceof DousedTorchBlock && TorchTransformationHandler.getLitVersionFromDoused(state.getBlock()) != null && !state.getValue(BlockStateProperties.WATERLOGGED),
+                state -> state.getBlock() instanceof UnlitTorchBlock,
                 state -> {
-                    BlockState newState = Objects.requireNonNull(TorchTransformationHandler.getLitVersionFromDoused(state.getBlock())).defaultBlockState();
-                    if (state.getBlock() instanceof DousedWallTorchBlock) {
+                    BlockState newState = ((UnlitTorchBlock) state.getBlock()).getLitState();
+                    if (state.getBlock() instanceof UnlitWallTorchBlock) {
                         newState = newState.setValue(HorizontalDirectionalBlock.FACING, state.getValue(HorizontalDirectionalBlock.FACING));
                     }
                     return newState;

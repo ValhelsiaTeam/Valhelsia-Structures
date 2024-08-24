@@ -1,6 +1,6 @@
 {
   "values": [
-    "valhelsia_structures:doused_torch",
-    "valhelsia_structures:doused_soul_torch"
+    "valhelsia_structures:unlit_torch",
+    "valhelsia_structures:unlit_soul_torch"
   ]
 }

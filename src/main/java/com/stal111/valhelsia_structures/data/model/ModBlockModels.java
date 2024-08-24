@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.Direction;
+import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.DelegatedModel;
 import net.minecraft.data.models.model.ModelLocationUtils;
@@ -37,6 +38,11 @@ public class ModBlockModels implements BlockModelGenerator {
             this.createPostVariants(ModBlocks.WOODEN_POSTS.get(woodType).get(), ModBlocks.CUT_WOODEN_POSTS.get(woodType).get());
             this.createPostVariants(ModBlocks.STRIPPED_WOODEN_POSTS.get(woodType).get(), ModBlocks.CUT_STRIPPED_WOODEN_POSTS.get(woodType).get());
         }
+
+        BlockModelGenerators generators = new BlockModelGenerators(this.blockStateOutput, this.modelOutput, item -> {});
+
+        generators.createNormalTorch(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get());
+        generators.createNormalTorch(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get());
     }
 
     private void createPostVariants(PostBlock postBlock, CutPostBlock cutPostBlock) {
