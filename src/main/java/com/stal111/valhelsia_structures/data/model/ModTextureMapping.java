@@ -13,12 +13,23 @@ import net.minecraft.world.level.block.Block;
 public class ModTextureMapping {
 
     private static final String POST = "post";
+    private static final String BRAZIER = "brazier";
 
     public static TextureMapping post(Block block) {
         return new TextureMapping()
                 .put(TextureSlot.SIDE, getBlockTexture(block, POST))
                 .put(TextureSlot.END, getBlockTexture(block, POST, "_top"))
                 .put(TextureSlot.PARTICLE, getBlockTexture(block, POST));
+    }
+
+    public static TextureMapping brazier(Block block, boolean lit) {
+        var mapping = new TextureMapping().put(TextureSlot.TOP, getBlockTexture(block, BRAZIER, "_top"));
+
+        if (lit) {
+            mapping = mapping.put(TextureSlot.FIRE, getBlockTexture(block, BRAZIER, "_fire"));
+        }
+
+        return mapping;
     }
 
     public static ResourceLocation getBlockTexture(Block block) {

@@ -43,6 +43,9 @@ public class ModBlockModels implements BlockModelGenerator {
 
         generators.createNormalTorch(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get());
         generators.createNormalTorch(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get());
+
+        this.crateBrazier(ModBlocks.BRAZIER.get());
+        this.crateBrazier(ModBlocks.SOUL_BRAZIER.get());
     }
 
     private void createPostVariants(PostBlock postBlock, CutPostBlock cutPostBlock) {
@@ -99,6 +102,17 @@ public class ModBlockModels implements BlockModelGenerator {
 
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(attachedDispatch).with(rotationDispatch));
         this.delegateItemModel(block, models.getFirst());
+    }
+
+    private void crateBrazier(Block block) {
+        ResourceLocation model = ModModelTemplates.TEMPLATE_BRAZIER_OFF.create(block, ModTextureMapping.brazier(block, false), this.modelOutput);
+        ResourceLocation litModel = ModModelTemplates.TEMPLATE_BRAZIER.createWithSuffix(block, "_lit", ModTextureMapping.brazier(block, true), this.modelOutput);
+
+        PropertyDispatch litDispatch = PropertyDispatch.property(BlockStateProperties.LIT)
+                .select(true, Variant.variant().with(VariantProperties.MODEL, litModel))
+                .select(false, Variant.variant().with(VariantProperties.MODEL, model));
+
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(litDispatch));
     }
 
     static MultiVariantGenerator createSimpleBlock(Block block, ResourceLocation resourceLocation) {
