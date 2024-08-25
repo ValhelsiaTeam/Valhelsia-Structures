@@ -1,3 +1,7 @@
 {
-  "parent": "valhelsia_structures:block/explorers_tent"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "valhelsia_structures:item/explorers_tent",
+    "layer1": "valhelsia_structures:item/explorers_tent_layer"
+  }
 }

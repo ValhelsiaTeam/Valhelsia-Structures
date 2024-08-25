@@ -2,7 +2,6 @@ package com.stal111.valhelsia_structures.core.init;
 
 import com.stal111.valhelsia_structures.common.block.*;
 import com.stal111.valhelsia_structures.common.item.BigJarBlockItem;
-import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.Direction;
 import net.minecraft.util.StringRepresentable;
@@ -110,7 +109,7 @@ public class ModBlocks implements RegistryClass {
             color -> new BigJarBlock(Block.Properties.of().mapColor(color.getMapColor()).requiresCorrectToolForDrops().strength(1.4F).noOcclusion()),
             entry -> entry.withItem(registryObject -> new BigJarBlockItem(registryObject.get(), new Item.Properties())).renderType(ValhelsiaRenderType.CUTOUT)
     );
-    public static final BlockRegistryEntry<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", () -> new ExplorersTentBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.BROWN_WOOL).noOcclusion())).withItem(registryObject -> new DyeableBlockItem(registryObject.get(), new Item.Properties()));
+    public static final BlockRegistryEntry<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", () -> new ExplorersTentBlock(BlockBehaviour.Properties.ofLegacyCopy(Blocks.BROWN_WOOL).noOcclusion())).withItem();
     //public static final BlockRegistryEntry<BushBlock> HIBISCUS = HELPER.register("hibiscus", () -> new BushBlock(Block.Properties.ofLegacyCopy(Blocks.POPPY))).withItem().renderType(ValhelsiaRenderType.CUTOUT);
     public static final BlockRegistryEntry<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", () -> new GiantFernBlock(Block.Properties.ofLegacyCopy(Blocks.POPPY))).withItem();
     public static final BlockRegistryEntry<UnlitTorchBlock> UNLIT_TORCH = HELPER.register("unlit_torch", () -> new UnlitTorchBlock(Blocks.TORCH.defaultBlockState(), Block.Properties.of().noCollission().instabreak().sound(SoundType.WOOD))).renderType(ValhelsiaRenderType.CUTOUT);

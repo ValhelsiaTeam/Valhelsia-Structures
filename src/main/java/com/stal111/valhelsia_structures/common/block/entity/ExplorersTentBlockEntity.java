@@ -1,12 +1,16 @@
 package com.stal111.valhelsia_structures.common.block.entity;
 
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
+import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +24,7 @@ import javax.annotation.Nullable;
  */
 public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBlockEntity, Clearable {
 
-    private static final int DEFAULT_COLOR = 10511680;
+    public static final int DEFAULT_COLOR = 10511680;
 
     private int color = DEFAULT_COLOR;
 
@@ -49,6 +53,14 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
         return this.sleepingBag;
     }
 
+    public ItemStack getAsItem() {
+        ItemStack stack = new ItemStack(ModBlocks.EXPLORERS_TENT.get());
+
+        stack.applyComponents(this.collectComponents());
+
+        return stack;
+    }
+
     @Override
     public void loadAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
         super.loadAdditional(tag, lookupProvider);
@@ -70,6 +82,30 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
         if (!this.sleepingBag.isEmpty()) {
             tag.put("SleepingBag", this.sleepingBag.save(lookupProvider));
         }
+    }
+
+    @Override
+    protected void applyImplicitComponents(@NotNull DataComponentInput componentInput) {
+        super.applyImplicitComponents(componentInput);
+
+        DyedItemColor color = componentInput.get(DataComponents.DYED_COLOR);
+
+        if (color != null) {
+            this.setColor(color.rgb());
+        }
+    }
+
+    @Override
+    protected void collectImplicitComponents(DataComponentMap.@NotNull Builder components) {
+        super.collectImplicitComponents(components);
+
+        components.set(DataComponents.DYED_COLOR, new DyedItemColor(this.getColor(), true));
+    }
+
+
+    @Override
+    public void removeComponentsFromTag(@NotNull CompoundTag tag) {
+        super.removeComponentsFromTag(tag);
     }
 
     @Nullable

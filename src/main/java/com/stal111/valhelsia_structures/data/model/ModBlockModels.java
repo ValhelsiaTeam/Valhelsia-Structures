@@ -2,8 +2,10 @@ package com.stal111.valhelsia_structures.data.model;
 
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
+import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.models.BlockModelGenerators;
 import net.minecraft.data.models.blockstates.*;
 import net.minecraft.data.models.model.DelegatedModel;
@@ -12,6 +14,8 @@ import net.minecraft.data.models.model.ModelTemplates;
 import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -31,6 +35,8 @@ public class ModBlockModels extends BlockModelGenerator {
 
     @Override
     public void generate() {
+        this.createSimpleFlatItemModel(ModBlocks.DUNGEON_DOOR.get());
+
         for (ModBlocks.WoodType woodType : ModBlocks.WoodType.values()) {
             this.createPostVariants(ModBlocks.WOODEN_POSTS.get(woodType).get(), ModBlocks.CUT_WOODEN_POSTS.get(woodType).get());
             this.createPostVariants(ModBlocks.STRIPPED_WOODEN_POSTS.get(woodType).get(), ModBlocks.CUT_STRIPPED_WOODEN_POSTS.get(woodType).get());
@@ -42,12 +48,21 @@ public class ModBlockModels extends BlockModelGenerator {
 
         generators.createNormalTorch(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get());
         generators.createNormalTorch(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get());
+        generators.createLantern(ModBlocks.UNLIT_LANTERN.get());
+        generators.createLantern(ModBlocks.UNLIT_SOUL_LANTERN.get());
 
         this.crateBrazier(ModBlocks.BRAZIER.get());
         this.crateBrazier(ModBlocks.SOUL_BRAZIER.get());
         this.createPaperWall(ModBlocks.PAPER_WALL.get());
+        this.createHangingVines(ModBlocks.HANGING_VINES.get());
+        this.createHangingVines(ModBlocks.HANGING_VINES_BODY.get());
+        this.createExplorersTent(ModBlocks.EXPLORERS_TENT.get());
 
         generators.createTrivialCube(ModBlocks.SPECIAL_SPAWNER.get());
+        generators.createTrivialCube(ModBlocks.BONE_PILE_BLOCK.get());
+
+        this.createBonePile(ModBlocks.BONE_PILE.get());
+
         createMetalFramedGlass(generators, ModBlocks.METAL_FRAMED_GLASS.get(), ModBlocks.METAL_FRAMED_GLASS_PANE.get());
 
         for (DyeColor color : DyeColor.values()) {
@@ -178,8 +193,36 @@ public class ModBlockModels extends BlockModelGenerator {
         this.delegateItemModel(block, modelInventory);
     }
 
+    private void createHangingVines(Block block) {
+        PropertyDispatch dispatch = PropertyDispatch.property(ModBlockStateProperties.ATTACHED)
+                .select(true, Variant.variant().with(VariantProperties.MODEL, BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/attached_")))
+                .select(false, Variant.variant().with(VariantProperties.MODEL, BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/")));
+
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(dispatch));
+
+        if (block.asItem() != Items.AIR) {
+            ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layer0(block), this.modelOutput);
+        }
+    }
+
+    private void createExplorersTent(Block block) {
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(block))));
+        ModelTemplates.TWO_LAYERED_ITEM.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layered(TextureMapping.getItemTexture(block.asItem()), TextureMapping.getItemTexture(block.asItem(), "_layer")), this.modelOutput);
+    }
+
+    private void createBonePile(Block block) {
+        ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block), TextureMapping.layer0(block), this.modelOutput);
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(block))));
+
+        ModelTemplates.CARPET.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.wool(block), this.modelOutput);
+    }
+
     static MultiVariantGenerator createSimpleBlock(Block block, ResourceLocation resourceLocation) {
         return MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourceLocation));
+    }
+
+    void createSimpleFlatItemModel(ItemLike item) {
+        ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item.asItem()), TextureMapping.layer0(item.asItem()), this.modelOutput);
     }
 
     void delegateItemModel(Block block, ResourceLocation resourceLocation) {

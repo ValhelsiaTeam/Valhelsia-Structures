@@ -1,11 +1,11 @@
 package com.stal111.valhelsia_structures.client.event;
 
-import com.stal111.valhelsia_structures.common.item.DyeableBlockItem;
+import com.stal111.valhelsia_structures.common.block.entity.ExplorersTentBlockEntity;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
@@ -25,8 +25,8 @@ public class ColorEvents {
         BlockColors blockColors = event.getBlockColors();
 
         event.register((stack, tintIndex) -> {
-            if (tintIndex == 0 && stack.getItem() instanceof DyeableBlockItem item) {
-                return stack.get(DataComponents.DYED_COLOR).rgb();
+            if (tintIndex == 0) {
+                return DyedItemColor.getOrDefault(stack, ExplorersTentBlockEntity.DEFAULT_COLOR);
             }
 
             return -1;

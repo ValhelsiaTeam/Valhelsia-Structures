@@ -44,5 +44,6 @@ public class ModItemTagsProvider extends ValhelsiaItemTagsProvider {
         this.copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS);
 
         this.tag(ModTags.Items.JAR_BLACKLISTED).add(Items.CACTUS, Items.CRIMSON_ROOTS, Items.WARPED_ROOTS);
+        this.tag(ItemTags.DYEABLE).add(ModBlocks.EXPLORERS_TENT.get().asItem());
     }
 }
