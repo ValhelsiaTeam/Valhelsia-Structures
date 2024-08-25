@@ -43,7 +43,7 @@ public class DataGenerators {
         DataProviderContext context = DataProviderContext.of(output, lookupProvider, ValhelsiaStructures.REGISTRY_MANAGER, existingFileHelper);
 
 
-        generator.addProvider(event.includeClient(), new ValhelsiaModelProvider(context, new ModBlockModels(), null));
+        generator.addProvider(event.includeClient(), new ValhelsiaModelProvider(context, ModBlockModels::new, null));
 
         //generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, existingFileHelper));
         //generator.addProvider(event.includeClient(), new ModItemModelProvider(output, existingFileHelper));

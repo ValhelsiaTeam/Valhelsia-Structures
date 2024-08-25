@@ -22,6 +22,9 @@ public class ModModelTemplates {
     public static final ModelTemplate TEMPLATE_CUT_POST_3_ATTACHED = create("template_cut_post_3_attached", TextureSlot.SIDE, TextureSlot.END);
     public static final ModelTemplate TEMPLATE_BRAZIER = create("template_brazier", TextureSlot.TOP, TextureSlot.FIRE);
     public static final ModelTemplate TEMPLATE_BRAZIER_OFF = create("template_brazier_off", TextureSlot.TOP);
+    public static final ModelTemplate SLEEPING_BAG_FOOT = create("sleeping_bag_foot", TextureSlot.TEXTURE);
+    public static final ModelTemplate SLEEPING_BAG_HEAD = create("sleeping_bag_head", TextureSlot.TEXTURE);
+    public static final ModelTemplate SLEEPING_BAG_INVENTORY = create("sleeping_bag_inventory", TextureSlot.TEXTURE);
 
     public static ModelTemplate create(String name, TextureSlot... textureSlots) {
         return new ModelTemplate(Optional.of(ValhelsiaStructures.location("block/" + name)), Optional.empty(), textureSlots);

@@ -16,6 +16,7 @@ public class ModTextureMapping {
     private static final String POST = "post";
     private static final String BRAZIER = "brazier";
     private static final String BUNDLED_POSTS = "bundled_posts";
+    private static final String SLEEPING_BAG = "sleeping_bag";
 
     public static TextureMapping post(Block block) {
         return new TextureMapping()
@@ -45,6 +46,10 @@ public class ModTextureMapping {
         return new TextureMapping()
                 .put(TextureSlot.PANE, getBlockTexture(block))
                 .put(TextureSlot.EDGE, ValhelsiaStructures.location("block/metal_framed_glass_pane_top"));
+    }
+
+    public static TextureMapping sleepingBag(Block block) {
+        return new TextureMapping().put(TextureSlot.TEXTURE, getBlockTexture(block, SLEEPING_BAG));
     }
 
     public static ResourceLocation getBlockTexture(Block block) {

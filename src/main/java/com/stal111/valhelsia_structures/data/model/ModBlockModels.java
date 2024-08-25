@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.data.model;
 
-import com.google.gson.JsonElement;
 import com.stal111.valhelsia_structures.common.block.CutPostBlock;
 import com.stal111.valhelsia_structures.common.block.PostBlock;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
@@ -14,32 +13,24 @@ import net.minecraft.data.models.model.TextureMapping;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.valhelsia.valhelsia_core.datagen.model.BlockModelGenerator;
 
 import java.util.Arrays;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 /**
  * @author Vahelsia Team - stal111
  * @since 28.07.2024
  */
-public class ModBlockModels implements BlockModelGenerator {
+public class ModBlockModels extends BlockModelGenerator {
 
-    private Consumer<BlockStateGenerator> blockStateOutput;
-    private BiConsumer<ResourceLocation, Supplier<JsonElement>> modelOutput;
-
-    static MultiVariantGenerator createSimpleBlock(Block block, ResourceLocation resourceLocation) {
-        return MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourceLocation));
+    public ModBlockModels(BlockModelGenerators defaultGenerators) {
+        super(defaultGenerators);
     }
 
     @Override
-    public void generate(Consumer<BlockStateGenerator> blockStateOutput, BiConsumer<ResourceLocation, Supplier<JsonElement>> modelOutput) {
-        this.blockStateOutput = blockStateOutput;
-        this.modelOutput = modelOutput;
-
+    public void generate() {
         for (ModBlocks.WoodType woodType : ModBlocks.WoodType.values()) {
             this.createPostVariants(ModBlocks.WOODEN_POSTS.get(woodType).get(), ModBlocks.CUT_WOODEN_POSTS.get(woodType).get());
             this.createPostVariants(ModBlocks.STRIPPED_WOODEN_POSTS.get(woodType).get(), ModBlocks.CUT_STRIPPED_WOODEN_POSTS.get(woodType).get());
@@ -47,7 +38,7 @@ public class ModBlockModels implements BlockModelGenerator {
             this.createBundledPosts(ModBlocks.BUNDLED_STRIPPED_POSTS.get(woodType).get());
         }
 
-        BlockModelGenerators generators = new BlockModelGenerators(this.blockStateOutput, this.modelOutput, item -> {});
+        var generators = this.getDefaultGenerators();
 
         generators.createNormalTorch(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get());
         generators.createNormalTorch(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get());
@@ -60,7 +51,8 @@ public class ModBlockModels implements BlockModelGenerator {
         createMetalFramedGlass(generators, ModBlocks.METAL_FRAMED_GLASS.get(), ModBlocks.METAL_FRAMED_GLASS_PANE.get());
 
         for (DyeColor color : DyeColor.values()) {
-            createMetalFramedGlass(generators, ModBlocks.COLORED_METAL_FRAMED_GLASS.get(color).get(), ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.get(color).get());
+            this.createMetalFramedGlass(generators, ModBlocks.COLORED_METAL_FRAMED_GLASS.get(color).get(), ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.get(color).get());
+            this.createSleepingBag(ModBlocks.SLEEPING_BAGS.get(color).get());
         }
     }
 
@@ -170,6 +162,24 @@ public class ModBlockModels implements BlockModelGenerator {
                 .with(Condition.condition().term(BlockStateProperties.SOUTH, false), Variant.variant().with(VariantProperties.MODEL, paneNoSideAltModel).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R90))
                 .with(Condition.condition().term(BlockStateProperties.WEST, false), Variant.variant().with(VariantProperties.MODEL, paneNoSideModel).with(VariantProperties.Y_ROT, VariantProperties.Rotation.R270))
         );
+    }
+
+    private void createSleepingBag(Block block) {
+        TextureMapping textureMapping = ModTextureMapping.sleepingBag(block);
+        ResourceLocation modelFoot = ModModelTemplates.SLEEPING_BAG_FOOT.createWithSuffix(block, "_foot", textureMapping, this.modelOutput);
+        ResourceLocation modelHead = ModModelTemplates.SLEEPING_BAG_HEAD.createWithSuffix(block, "_head", textureMapping, this.modelOutput);
+        ResourceLocation modelInventory = ModModelTemplates.SLEEPING_BAG_INVENTORY.createWithSuffix(block, "_inventory", textureMapping, this.modelOutput);
+
+        PropertyDispatch dispatch = PropertyDispatch.property(BlockStateProperties.BED_PART)
+                .select(BedPart.HEAD, Variant.variant().with(VariantProperties.MODEL, modelHead))
+                .select(BedPart.FOOT, Variant.variant().with(VariantProperties.MODEL, modelFoot));
+
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(dispatch).with(BlockModelGenerators.createHorizontalFacingDispatch()));
+        this.delegateItemModel(block, modelInventory);
+    }
+
+    static MultiVariantGenerator createSimpleBlock(Block block, ResourceLocation resourceLocation) {
+        return MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, resourceLocation));
     }
 
     void delegateItemModel(Block block, ResourceLocation resourceLocation) {
