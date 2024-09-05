@@ -15,7 +15,7 @@ import java.util.function.UnaryOperator;
  * @author Valhelsia Team
  * @since 2023-03-12
  */
-public interface StartPoolKeySet {
+public sealed interface StartPoolKeySet permits StartPoolKeySet.Simple, StartPoolKeySet.WithFurnished {
 
     String FURNISHED_PREFIX = "furnished";
 

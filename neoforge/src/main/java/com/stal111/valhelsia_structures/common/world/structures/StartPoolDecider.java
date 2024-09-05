@@ -29,15 +29,10 @@ public record StartPoolDecider(Holder<StructureTemplatePool> defaultStartPool, @
     }));
 
     public static StartPoolDecider of(HolderGetter<StructureTemplatePool> holderGetter, StartPoolKeySet keySet) {
-        if (keySet instanceof StartPoolKeySet.Simple simple) {
-            return new StartPoolDecider(holderGetter.getOrThrow(simple.key()), null);
-        }
-
-        if (keySet instanceof StartPoolKeySet.WithFurnished withFurnished) {
-            return new StartPoolDecider(holderGetter.getOrThrow(withFurnished.defaultKey()), holderGetter.getOrThrow(withFurnished.furnishedKey()));
-        }
-
-        throw new IncompatibleClassChangeError();
+        return switch (keySet) {
+            case StartPoolKeySet.Simple simple -> new StartPoolDecider(holderGetter.getOrThrow(simple.key()), null);
+            case StartPoolKeySet.WithFurnished withFurnished -> new StartPoolDecider(holderGetter.getOrThrow(withFurnished.defaultKey()), holderGetter.getOrThrow(withFurnished.furnishedKey()));
+        };
     }
 
     public Holder<StructureTemplatePool> decide() {
