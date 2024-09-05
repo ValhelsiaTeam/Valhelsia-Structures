@@ -44,8 +44,6 @@ public class DataGenerators {
 
         generator.addProvider(event.includeClient(), new ValhelsiaModelProvider(context, ModBlockModels::new, null));
 
-        //generator.addProvider(event.includeClient(), new ModBlockStateProvider(output, existingFileHelper));
-        //generator.addProvider(event.includeClient(), new ModItemModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModSoundsProvider(output, existingFileHelper));
 
         ModBlockTagsProvider blockTagsProvider = new ModBlockTagsProvider(context);

@@ -3,7 +3,6 @@ package com.stal111.valhelsia_structures.core;
 import com.stal111.valhelsia_structures.core.init.*;
 import com.stal111.valhelsia_structures.core.init.world.*;
 import net.minecraft.core.registries.Registries;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryCollector;
 
 /**
@@ -29,12 +28,5 @@ public class ModRegistries extends RegistryCollector {
         this.addMappedHelper(Registries.SOUND_EVENT, ModSoundEvents.class);
         this.addMappedHelper(Registries.CREATIVE_MODE_TAB, ModCreativeModeTabs.class);
         this.addMappedHelper(ValhelsiaStructures.STRUCTURE_HEIGHT_PROVIDER_TYPES, ModStructureHeightProviderTypes.class);
-
-        this.addDatapackHelper(Registries.STRUCTURE_SET);
-        this.addDatapackHelper(Registries.STRUCTURE);
-
-        this.addDatapackHelper(Registries.TEMPLATE_POOL);
-        this.addDatapackHelper(NeoForgeRegistries.Keys.BIOME_MODIFIERS);
-        this.addDatapackHelper(Registries.PROCESSOR_LIST);
     }
 }
