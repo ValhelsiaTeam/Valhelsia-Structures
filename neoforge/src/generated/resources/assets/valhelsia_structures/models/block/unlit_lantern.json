@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_lantern",
+  "textures": {
+    "lantern": "valhelsia_structures:block/unlit_lantern"
+  }
+}

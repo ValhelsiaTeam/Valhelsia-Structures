@@ -46,10 +46,10 @@ public class ModBlockModels extends BlockModelGenerator {
 
         var generators = this.getDefaultGenerators();
 
-//        generators.createNormalTorch(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get());
-//        generators.createNormalTorch(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get());
-//        generators.createLantern(ModBlocks.UNLIT_LANTERN.get());
-//        generators.createLantern(ModBlocks.UNLIT_SOUL_LANTERN.get());
+        generators.createNormalTorch(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get());
+        generators.createNormalTorch(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get());
+        generators.createLantern(ModBlocks.UNLIT_LANTERN.get());
+        generators.createLantern(ModBlocks.UNLIT_SOUL_LANTERN.get());
 
         this.crateBrazier(ModBlocks.BRAZIER.get());
         this.crateBrazier(ModBlocks.SOUL_BRAZIER.get());
@@ -142,7 +142,7 @@ public class ModBlockModels extends BlockModelGenerator {
         TextureMapping mapping = ModTextureMapping.bundledPosts(block);
         ResourceLocation model = ModelTemplates.CUBE_COLUMN.create(block, mapping, this.modelOutput);
         ResourceLocation modelHorizontal = ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(block, mapping, this.modelOutput);
-//        this.blockStateOutput.accept(BlockModelGenerators.createRotatedPillarWithHorizontalVariant(block, model, modelHorizontal));
+        this.blockStateOutput.accept(BlockModelGenerators.createRotatedPillarWithHorizontalVariant(block, model, modelHorizontal));
     }
 
     private void createMetalFramedGlass(BlockModelGenerators generators, Block glassBlock, Block paneBlock) {
@@ -189,7 +189,7 @@ public class ModBlockModels extends BlockModelGenerator {
                 .select(BedPart.HEAD, Variant.variant().with(VariantProperties.MODEL, modelHead))
                 .select(BedPart.FOOT, Variant.variant().with(VariantProperties.MODEL, modelFoot));
 
-//        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(dispatch).with(BlockModelGenerators.createHorizontalFacingDispatch()));
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(dispatch).with(BlockModelGenerators.createHorizontalFacingDispatch()));
         this.delegateItemModel(block, modelInventory);
     }
 
