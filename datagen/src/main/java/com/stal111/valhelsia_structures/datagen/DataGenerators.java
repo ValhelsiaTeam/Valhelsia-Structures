@@ -1,8 +1,8 @@
 package com.stal111.valhelsia_structures.datagen;
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import com.stal111.valhelsia_structures.core.init.world.ModStructureSets;
-import com.stal111.valhelsia_structures.core.init.world.ModStructures;
+import com.stal111.valhelsia_structures.datagen.worldgen.structure.ModStructureSets;
+import com.stal111.valhelsia_structures.datagen.worldgen.structure.ModStructures;
 import com.stal111.valhelsia_structures.datagen.model.ModBlockModels;
 import com.stal111.valhelsia_structures.datagen.recipes.ModRecipeProvider;
 import com.stal111.valhelsia_structures.datagen.tags.ModBiomeTagsProvider;

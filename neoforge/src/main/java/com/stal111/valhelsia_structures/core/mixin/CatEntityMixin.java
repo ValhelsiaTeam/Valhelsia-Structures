@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.core.mixin;
 
-import com.stal111.valhelsia_structures.core.init.world.ModStructures;
+import com.stal111.valhelsia_structures.common.builtin.BuiltInStructures;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobSpawnType;
@@ -33,7 +33,7 @@ public abstract class CatEntityMixin extends TamableAnimal {
 
     @Inject(at = @At(value = "HEAD"), method = "finalizeSpawn", cancellable = true)
     private void valhelsia_avoidOverridingType(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason, SpawnGroupData spawnData, CallbackInfoReturnable<SpawnGroupData> cir) {
-        if (reason == MobSpawnType.STRUCTURE && level.getLevel().structureManager().getStructureWithPieceAt(this.blockPosition(), structure -> structure.is(ModStructures.WITCH_HUT)).isValid()) {
+        if (reason == MobSpawnType.STRUCTURE && level.getLevel().structureManager().getStructureWithPieceAt(this.blockPosition(), structure -> structure.is(BuiltInStructures.WITCH_HUT)).isValid()) {
             cir.setReturnValue(super.finalizeSpawn(level, difficulty, reason, spawnData));
         }
     }

@@ -1,9 +1,9 @@
-package com.stal111.valhelsia_structures.core.init.world;
+package com.stal111.valhelsia_structures.datagen.worldgen.structure;
 
 import com.stal111.valhelsia_structures.common.builtin.BuiltInStructurePools;
+import com.stal111.valhelsia_structures.common.builtin.BuiltInStructures;
 import com.stal111.valhelsia_structures.common.world.structures.ValhelsiaJigsawStructure;
 import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProvider;
-import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import net.minecraft.core.HolderGetter;
@@ -24,7 +24,6 @@ import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.neoforged.neoforge.registries.holdersets.AndHolderSet;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryClass;
-import net.valhelsia.valhelsia_core.api.common.registry.helper.datapack.DatapackRegistryHelper;
 
 import java.util.List;
 import java.util.function.UnaryOperator;
@@ -34,20 +33,6 @@ import java.util.function.UnaryOperator;
  * @since 2022-06-24
  */
 public class ModStructures extends DatapackRegistryClass<Structure> {
-
-    public static final DatapackRegistryHelper<Structure> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.STRUCTURE);
-
-    public static final ResourceKey<Structure> CASTLE = HELPER.createKey("castle");
-    public static final ResourceKey<Structure> CASTLE_RUIN = HELPER.createKey("castle_ruin");
-    public static final ResourceKey<Structure> DESERT_HOUSE = HELPER.createKey("desert_house");
-    public static final ResourceKey<Structure> FORGE = HELPER.createKey("forge");
-    public static final ResourceKey<Structure> PLAYER_HOUSE = HELPER.createKey("player_house");
-    public static final ResourceKey<Structure> SPAWNER_DUNGEON = HELPER.createKey("spawner_dungeon");
-    public static final ResourceKey<Structure> TOWER_RUIN = HELPER.createKey("tower_ruin");
-    public static final ResourceKey<Structure> WITCH_HUT = HELPER.createKey("witch_hut");
-    public static final ResourceKey<Structure> BIG_TREE = HELPER.createKey("big_tree");
-    public static final ResourceKey<Structure> SPAWNER_ROOM = HELPER.createKey("spawner_room");
-    public static final ResourceKey<Structure> DEEP_SPAWNER_ROOM = HELPER.createKey("deep_spawner_room");
 
     public ModStructures(BootstrapContext<Structure> context) {
         super(context);
@@ -68,21 +53,21 @@ public class ModStructures extends DatapackRegistryClass<Structure> {
         HolderSet<Biome> spawnerRoomBiomes = this.singleTag(biomeHolderGetter, ModTags.Biomes.HAS_SPAWNER_ROOM);
         HolderSet<Biome> deepSpawnerRoomBiomes = this.singleTag(biomeHolderGetter, ModTags.Biomes.HAS_DEEP_SPAWNER_ROOM);
 
-        this.surfaceStructure(context, CASTLE, castleBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.CASTLES, builder -> builder.chance(0.4D));
-        this.surfaceStructure(context, CASTLE_RUIN, castleRuinBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.CASTLE_RUINS, builder -> builder.chance(0.5D));
-        this.surfaceStructure(context, DESERT_HOUSE, desertHouseBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.DESERT_HOUSES, builder -> builder.chance(0.7D));
-        this.surfaceStructure(context, FORGE, forgeBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.FORGES, builder -> builder.chance(0.65D));
-        this.surfaceStructure(context, PLAYER_HOUSE, playerHouseBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.PLAYER_HOUSES, builder -> builder.chance(0.65D));
-        this.surfaceStructure(context, SPAWNER_DUNGEON, spawnerDungeonBiomes, TerrainAdjustment.NONE, BuiltInStructurePools.SPAWNER_DUNGEONS, builder -> builder.chance(0.7D).startHeight(StructureHeightProvider.surfaceBetween(VerticalAnchor.absolute(0), VerticalAnchor.absolute(75))).individualTerrainAdjustment().ignoreWaterLogging());
-        this.surfaceStructure(context, TOWER_RUIN, towerRuinBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.TOWER_RUINS, builder -> builder.chance(0.7D));
-        this.surfaceStructure(context, WITCH_HUT, witchHutBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.WITCH_HUTS, builder -> builder.chance(0.85D).margin(3)
+        this.surfaceStructure(context, BuiltInStructures.CASTLE, castleBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.CASTLES, builder -> builder.chance(0.4D));
+        this.surfaceStructure(context, BuiltInStructures.CASTLE_RUIN, castleRuinBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.CASTLE_RUINS, builder -> builder.chance(0.5D));
+        this.surfaceStructure(context, BuiltInStructures.DESERT_HOUSE, desertHouseBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.DESERT_HOUSES, builder -> builder.chance(0.7D));
+        this.surfaceStructure(context, BuiltInStructures.FORGE, forgeBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.FORGES, builder -> builder.chance(0.65D));
+        this.surfaceStructure(context, BuiltInStructures.PLAYER_HOUSE, playerHouseBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.PLAYER_HOUSES, builder -> builder.chance(0.65D));
+        this.surfaceStructure(context, BuiltInStructures.SPAWNER_DUNGEON, spawnerDungeonBiomes, TerrainAdjustment.NONE, BuiltInStructurePools.SPAWNER_DUNGEONS, builder -> builder.chance(0.7D).startHeight(StructureHeightProvider.surfaceBetween(VerticalAnchor.absolute(0), VerticalAnchor.absolute(75))).individualTerrainAdjustment().ignoreWaterLogging());
+        this.surfaceStructure(context, BuiltInStructures.TOWER_RUIN, towerRuinBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.TOWER_RUINS, builder -> builder.chance(0.7D));
+        this.surfaceStructure(context, BuiltInStructures.WITCH_HUT, witchHutBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.WITCH_HUTS, builder -> builder.chance(0.85D).margin(3)
                 .addSpawnOverride(MobCategory.MONSTER, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.PIECE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(EntityType.WITCH, 1, 1, 1))))
                 .addSpawnOverride(MobCategory.CREATURE, new StructureSpawnOverride(StructureSpawnOverride.BoundingBoxType.PIECE, WeightedRandomList.create(new MobSpawnSettings.SpawnerData(EntityType.CAT, 1, 1, 1))))
         );
-        this.surfaceStructure(context, BIG_TREE, bigTreeBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.BIG_TREES, builder -> builder.chance(0.6D));
+        this.surfaceStructure(context, BuiltInStructures.BIG_TREE, bigTreeBiomes, TerrainAdjustment.BEARD_THIN, BuiltInStructurePools.BIG_TREES, builder -> builder.chance(0.6D));
 
-        this.undergroundStructure(context, SPAWNER_ROOM, spawnerRoomBiomes, TerrainAdjustment.NONE, BuiltInStructurePools.SPAWNER_ROOMS, builder -> builder.chance(0.9D).startHeight(StructureHeightProvider.spawnerRoom(VerticalAnchor.absolute(0))).ignoreWaterLogging());
-        this.undergroundStructure(context, DEEP_SPAWNER_ROOM, deepSpawnerRoomBiomes, TerrainAdjustment.NONE, BuiltInStructurePools.DEEP_SPAWNER_ROOMS, builder -> builder.startHeight(StructureHeightProvider.deepSpawnerRoom(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(-1))).ignoreWaterLogging());
+        this.undergroundStructure(context, BuiltInStructures.SPAWNER_ROOM, spawnerRoomBiomes, TerrainAdjustment.NONE, BuiltInStructurePools.SPAWNER_ROOMS, builder -> builder.chance(0.9D).startHeight(StructureHeightProvider.spawnerRoom(VerticalAnchor.absolute(0))).ignoreWaterLogging());
+        this.undergroundStructure(context, BuiltInStructures.DEEP_SPAWNER_ROOM, deepSpawnerRoomBiomes, TerrainAdjustment.NONE, BuiltInStructurePools.DEEP_SPAWNER_ROOMS, builder -> builder.startHeight(StructureHeightProvider.deepSpawnerRoom(VerticalAnchor.aboveBottom(6), VerticalAnchor.absolute(-1))).ignoreWaterLogging());
     }
 
     protected void surfaceStructure(BootstrapContext<Structure> context, ResourceKey<Structure> key, HolderSet<Biome> biomeHolderSet, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool, UnaryOperator<ValhelsiaJigsawStructure.Builder> builderUnaryOperator) {
