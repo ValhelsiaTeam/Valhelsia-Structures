@@ -1,11 +1,12 @@
 package com.stal111.valhelsia_structures.common.builtin;
 
 import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
-import com.stal111.valhelsia_structures.utils.TemplatePoolHelper;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 
 public class BuiltInStructurePools {
 
-    public static final TemplatePoolHelper HELPER = TemplatePoolHelper.INSTANCE;
+    public static final ResourceKeyHelper<StructureTemplatePool> HELPER = ResourceKeyHelper.create(Registries.TEMPLATE_POOL);
 
     public static final StartPoolKeySet CASTLES = StartPoolKeySet.withFurnishedVariant(HELPER, "castles");
     public static final StartPoolKeySet CASTLE_RUINS = StartPoolKeySet.simple(HELPER, "castle_ruins");

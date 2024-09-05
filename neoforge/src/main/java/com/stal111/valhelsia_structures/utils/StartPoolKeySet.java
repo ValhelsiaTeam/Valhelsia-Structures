@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.utils;
 
+import com.stal111.valhelsia_structures.common.builtin.ResourceKeyHelper;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
@@ -18,11 +19,11 @@ public interface StartPoolKeySet {
 
     String FURNISHED_PREFIX = "furnished";
 
-    static Simple simple(TemplatePoolHelper helper, String key) {
+    static Simple simple(ResourceKeyHelper<StructureTemplatePool> helper, String key) {
         return new Simple(helper.createKey(key));
     }
 
-    static WithFurnished withFurnishedVariant(TemplatePoolHelper helper, String key) {
+    static WithFurnished withFurnishedVariant(ResourceKeyHelper<StructureTemplatePool> helper, String key) {
         return new WithFurnished(helper.createKey(key), helper.createKey(FURNISHED_PREFIX + "/" + key));
     }
 
