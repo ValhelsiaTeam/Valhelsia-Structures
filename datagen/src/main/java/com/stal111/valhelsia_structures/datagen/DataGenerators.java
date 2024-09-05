@@ -34,7 +34,6 @@ public class DataGenerators {
 
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
-        System.out.println("TEST");
         DataGenerator generator = event.getGenerator();
         PackOutput output = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
