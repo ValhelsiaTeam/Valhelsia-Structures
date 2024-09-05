@@ -4,7 +4,6 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
-import net.valhelsia.valhelsia_core.api.common.registry.helper.TemplatePoolRegistryHelper;
 import net.valhelsia.valhelsia_core.api.common.world.structure.jigsaw.JigsawBuilder;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,35 +18,35 @@ public interface StartPoolKeySet {
 
     String FURNISHED_PREFIX = "furnished";
 
-    static Simple simple(TemplatePoolRegistryHelper helper, String key) {
+    static Simple simple(TemplatePoolHelper helper, String key) {
         return new Simple(helper.createKey(key));
     }
 
-    static WithFurnished withFurnishedVariant(TemplatePoolRegistryHelper helper, String key) {
+    static WithFurnished withFurnishedVariant(TemplatePoolHelper helper, String key) {
         return new WithFurnished(helper.createKey(key), helper.createKey(FURNISHED_PREFIX + "/" + key));
     }
 
     void forEachKey(BiConsumer<ResourceKey<StructureTemplatePool>, Boolean> consumer);
 
-    default void create(TemplatePoolRegistryHelper helper, BootstrapContext<StructureTemplatePool> context, String folder, UnaryOperator<JigsawBuilder> builder) {
+    default void create(TemplatePoolHelper helper, BootstrapContext<StructureTemplatePool> context, String folder, UnaryOperator<JigsawBuilder> builder) {
         this.forEachKey((key, furnished) -> {
             helper.create(key, context, furnished ? FURNISHED_PREFIX + "/" + folder : folder, builder);
         });
     }
 
-    default void create(TemplatePoolRegistryHelper helper, BootstrapContext<StructureTemplatePool> context, UnaryOperator<JigsawBuilder> builder) {
+    default void create(TemplatePoolHelper helper, BootstrapContext<StructureTemplatePool> context, UnaryOperator<JigsawBuilder> builder) {
         this.forEachKey((key, furnished) -> {
             helper.create(key, context, furnished ? FURNISHED_PREFIX : null, builder);
         });
     }
 
-    default void create(TemplatePoolRegistryHelper helper, BootstrapContext<StructureTemplatePool> context, String folder, UnaryOperator<JigsawBuilder> builder, @Nullable TerrainAdjustment terrainAdjustment) {
+    default void create(TemplatePoolHelper helper, BootstrapContext<StructureTemplatePool> context, String folder, UnaryOperator<JigsawBuilder> builder, @Nullable TerrainAdjustment terrainAdjustment) {
         this.forEachKey((key, furnished) -> {
             helper.create(key, context, furnished ? FURNISHED_PREFIX + "/" + folder : folder, builder, terrainAdjustment);
         });
     }
 
-    default void create(TemplatePoolRegistryHelper helper, BootstrapContext<StructureTemplatePool> context, UnaryOperator<JigsawBuilder> builder, @Nullable TerrainAdjustment terrainAdjustment) {
+    default void create(TemplatePoolHelper helper, BootstrapContext<StructureTemplatePool> context, UnaryOperator<JigsawBuilder> builder, @Nullable TerrainAdjustment terrainAdjustment) {
         this.forEachKey((key, furnished) -> {
             helper.create(key, context, furnished ? FURNISHED_PREFIX : null, builder, terrainAdjustment);
         });
