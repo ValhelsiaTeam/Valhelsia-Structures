@@ -1,0 +1,23 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:witch_hut/witch_hut_1",
+        "processors": "valhelsia_structures:witch_hut",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:witch_hut/witch_hut_2",
+        "processors": "valhelsia_structures:witch_hut",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}
