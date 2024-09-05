@@ -1,0 +1,36 @@
+modLoader="javafml" #mandatory
+loaderVersion="${loader_version_range}" #mandatory
+license="${mod_license}"
+[[mods]] #mandatory
+modId="${mod_id}" #mandatory
+version="${mod_version}" #mandatory
+# A display name for the mod
+displayName="${mod_name}" #mandatory
+credits="${mod_authors}" #optional
+# The description text for the mod (multi line!) (#mandatory)
+description='''${mod_description}'''
+
+[[dependencies.${mod_id}]]
+modId="neoforge"
+type="required"
+versionRange="${neo_version_range}" #mandatory
+ordering="NONE"
+side="BOTH"
+
+
+[[dependencies.${mod_id}]]
+modId="valhelsia_core"
+type="required"
+versionRange="[1.1.2,)"
+ordering="BEFORE"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
+modId="valhelsia_furniture"
+type="optional"
+versionRange="[1.1.2,)"
+ordering="NONE"
+side="BOTH"
+
+[[mixins]]
+config = "valhelsia_structures.mixins.json"

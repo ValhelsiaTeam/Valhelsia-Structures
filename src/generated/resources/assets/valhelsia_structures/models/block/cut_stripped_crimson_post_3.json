@@ -1,7 +1,0 @@
-{
-  "parent": "valhelsia_structures:block/template_cut_post_3",
-  "textures": {
-    "end": "valhelsia_structures:block/post/stripped_crimson_post_top",
-    "side": "valhelsia_structures:block/post/stripped_crimson_post"
-  }
-}

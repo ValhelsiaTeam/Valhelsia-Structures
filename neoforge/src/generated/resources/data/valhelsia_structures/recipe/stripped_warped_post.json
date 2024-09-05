@@ -1,0 +1,11 @@
+{
+  "type": "valhelsia_structures:axe_crafting",
+  "category": "building",
+  "input": {
+    "item": "minecraft:stripped_warped_stem"
+  },
+  "output": {
+    "count": 2,
+    "id": "valhelsia_structures:stripped_warped_post"
+  }
+}

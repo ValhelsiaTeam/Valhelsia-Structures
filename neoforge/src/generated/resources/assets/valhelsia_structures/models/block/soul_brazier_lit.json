@@ -1,0 +1,7 @@
+{
+  "parent": "valhelsia_structures:block/template_brazier",
+  "textures": {
+    "fire": "valhelsia_structures:block/brazier/soul_brazier_fire",
+    "top": "valhelsia_structures:block/brazier/soul_brazier_top"
+  }
+}

@@ -1,0 +1,65 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "valhelsia_structures:block/hibiscus",
+		"particle": "valhelsia_structures:block/hibiscus"
+	},
+	"elements": [
+		{
+			"from": [8, 0, -3],
+			"to": [8, 16, 19],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"east": {"uv": [0, 8, 11, 16], "texture": "#0"},
+				"west": {"uv": [0, 8, 11, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-3, 0, 8],
+			"to": [19, 16, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 8, 11, 16], "texture": "#0"},
+				"south": {"uv": [0, 8, 11, 16], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 0, -3],
+			"to": [8, 16, 19],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 11, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 11, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-3, 0, 8],
+			"to": [19, 16, 8],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 11, 8], "texture": "#0"},
+				"south": {"uv": [0, 0, 11, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [-3, 0, 8],
+			"to": [19, 16, 8],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 11, 8], "texture": "#0"},
+				"south": {"uv": [0, 0, 11, 8], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 0, -3],
+			"to": [8, 16, 19],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 11, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 11, 8], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "valhelsia_structures:block/bundled_posts/bundled_jungle_posts_top",
-    "side": "valhelsia_structures:block/bundled_posts/bundled_jungle_posts"
-  }
-}

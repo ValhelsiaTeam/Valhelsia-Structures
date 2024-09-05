@@ -1,0 +1,6 @@
+{
+  "parent": "valhelsia_structures:block/sleeping_bag_foot",
+  "textures": {
+    "texture": "valhelsia_structures:block/sleeping_bag/red_sleeping_bag"
+  }
+}

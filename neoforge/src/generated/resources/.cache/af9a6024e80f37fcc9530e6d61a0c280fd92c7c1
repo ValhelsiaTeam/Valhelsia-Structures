@@ -1,0 +1,21 @@
+// 1.21.1	2024-08-29T20:35:15.2134658	Tags for minecraft:block mod id valhelsia_structures
+abdd65528eb416d6d6ad1f020d97714ff861bf25 data/c/tags/block/glass_blocks/colorless.json
+de8f2b642366c58037e09e969a17189974baf99d data/c/tags/block/glass_blocks/tinted.json
+b868b381ccc22076b5df27e945925827c7f5eea6 data/c/tags/block/glass_panes.json
+f0770b509280d280ac69080c30cd3c138c2b18a6 data/c/tags/block/glass_panes/colorless.json
+8782980469a6a7109cdc309bcf141aff18c32ce9 data/minecraft/tags/block/climbable.json
+53e923437441d7ce055b2aa5bc9d0db9e36789c9 data/minecraft/tags/block/impermeable.json
+83324ea407d6fa2675ab2ed1bcf84c753d52015e data/minecraft/tags/block/mineable/axe.json
+c0f5a71884e5879906f8fa701b70f7b597a677ca data/minecraft/tags/block/mineable/pickaxe.json
+0abe479b4726a47b22a4ca2ea68f062d2e9a99f8 data/minecraft/tags/block/needs_diamond_tool.json
+e0c33a67d277ec15494b7d13c29447cfd21a6cc7 data/minecraft/tags/block/piglin_repellents.json
+c5ab4c1b89ae14c659a422982962c65e8b47d920 data/minecraft/tags/block/wall_post_override.json
+11d34fed97be08e27701020eff5d758b6bfc4dfe data/valhelsia_structures/tags/block/big_colored_jars.json
+0b2e72e61cb169cc0abf930cbc5c0ee77ae8bd41 data/valhelsia_structures/tags/block/big_jars.json
+be4770091b89d612dfac964ba86728eb69bad56e data/valhelsia_structures/tags/block/braziers.json
+4cd0419500b9e52f3fe5dfba62f54502d1bcc8b5 data/valhelsia_structures/tags/block/colored_jars.json
+7a7254baae68e751607fd944b22525a52344e941 data/valhelsia_structures/tags/block/cut_posts.json
+48b0c34a9d235a9e0fd153c862e9be18901f1ab3 data/valhelsia_structures/tags/block/jars.json
+01f9a2e4c3b532c1712f60096c8e8781f13bf922 data/valhelsia_structures/tags/block/non_flammable_posts.json
+48f02add2e0589bc1657becf8cad004c6d9b8d0e data/valhelsia_structures/tags/block/posts.json
+5d9ddeaa13e76e44565c8ba94abc98a9ecce26e7 data/valhelsia_structures/tags/block/sleeping_bags.json

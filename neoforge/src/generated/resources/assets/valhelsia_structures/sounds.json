@@ -1,0 +1,16 @@
+{
+  "block.dungeon_door.close": {
+    "sounds": [
+      "valhelsia_structures:dungeon_door_close_1",
+      "valhelsia_structures:dungeon_door_close_2",
+      "valhelsia_structures:dungeon_door_close_3"
+    ]
+  },
+  "block.dungeon_door.open": {
+    "sounds": [
+      "valhelsia_structures:dungeon_door_open_1",
+      "valhelsia_structures:dungeon_door_open_2",
+      "valhelsia_structures:dungeon_door_open_3"
+    ]
+  }
+}

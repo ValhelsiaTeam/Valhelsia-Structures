@@ -1,0 +1,10 @@
+{
+  "values": [
+    "#valhelsia_structures:jars",
+    "#valhelsia_structures:big_jars",
+    "valhelsia_structures:dungeon_door",
+    "valhelsia_structures:dungeon_door_leaf",
+    "valhelsia_structures:bone_pile",
+    "valhelsia_structures:bone_pile_block"
+  ]
+}

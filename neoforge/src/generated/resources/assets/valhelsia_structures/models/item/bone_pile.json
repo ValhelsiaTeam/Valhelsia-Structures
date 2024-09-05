@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/carpet",
+  "textures": {
+    "wool": "valhelsia_structures:block/bone_pile"
+  }
+}
