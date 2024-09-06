@@ -14,9 +14,7 @@ public class CommonConfig {
 
     public final ModConfigSpec.IntValue flatnessDelta;
     public final ModConfigSpec.IntValue minStructureDistance;
-
-    public final ModConfigSpec.BooleanValue disableDousedTorch;
-
+    
     public CommonConfig(ModConfigSpec.Builder builder) {
         builder.push("structures");
         this.flatnessDelta = builder.comment("How flat does terrain need to be for surface structures to spawn? (in blocks) [default: 4]").defineInRange("global.flatness_delta", 4, 0, 64);
@@ -32,12 +30,6 @@ public class CommonConfig {
 //            }
 //            settings.margin().setConfiguredValue(defaultValue -> builder.comment("The margin around the structure [default: " + defaultValue + "].").defineInRange(name + ".margin", defaultValue, 0, 50));
 //        }
-
-        builder.pop();
-
-        builder.push("blocks");
-
-        this.disableDousedTorch = builder.comment("Enable/Disable the Doused Torch Feature. If disabled Water will no longer transform normal Torches into Doused Torches. \n Doused Torches will however still generate in structures. [default: false]").define("doused_torch.disable", false);
 
         builder.pop();
     }
