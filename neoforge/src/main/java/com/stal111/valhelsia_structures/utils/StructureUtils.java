@@ -19,7 +19,7 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 public class StructureUtils {
 
     /**
-     * Checks whether the height difference of the four corners of the structure is smaller than the flatness delta set in the {@link com.stal111.valhelsia_structures.core.config.CommonConfig}.
+     * Checks whether the height difference of the four corners of the structure is smaller than the required flatness delta.
      *
      * @param context the piece generator context
      * @param size    the size of the structure

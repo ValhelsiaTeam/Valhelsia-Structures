@@ -50,7 +50,6 @@ public class ValhelsiaStructures {
         eventBus.addListener(NewRegistryEvent.class, event -> event.register(STRUCTURE_HEIGHT_PROVIDER_TYPES_REGISTRY));
 
         // Config
-        modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.COMMON, ModConfig.COMMON_SPEC);
         modContainer.registerConfig(net.neoforged.fml.config.ModConfig.Type.CLIENT, ModConfig.CLIENT_SPEC);
     }
 
