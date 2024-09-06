@@ -102,18 +102,11 @@ public class ModRecipeProvider extends RecipeSubProvider {
         this.shaped(RecipeCategory.DECORATIONS, ModBlocks.EXPLORERS_TENT.get(), builder -> builder.pattern(" # ").pattern("#X#").pattern("#X#").define('#', Items.LEATHER).define('X', Tags.Items.RODS_WOODEN).unlockedBy(this, Items.LEATHER));
 
         this.glazedJar(ModBlocks.GLAZED_JAR.get(), Blocks.TERRACOTTA);
-        this.bigGlazedJar(ModBlocks.BIG_GLAZED_JAR.get(), Blocks.TERRACOTTA);
 
         ModBlocks.COLORED_GLAZED_JARS.values().forEach(registryObject -> {
             String name = BuiltInRegistries.BLOCK.getKey(registryObject.get()).getPath();
             Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.withDefaultNamespace(name.substring(0, name.length() - 11) + "_terracotta"));
             this.glazedJar(registryObject.get(), block);
-        });
-
-        ModBlocks.BIG_COLORED_GLAZED_JARS.values().forEach(registryObject -> {
-            String name = BuiltInRegistries.BLOCK.getKey(registryObject.get()).getPath();
-            Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.withDefaultNamespace(name.substring(4, name.length() - 11) + "_terracotta"));
-            this.bigGlazedJar(registryObject.get(), block);
         });
 
         ModBlocks.BUNDLED_POSTS.forEach((woodType, registryObject) -> {
@@ -138,7 +131,6 @@ public class ModRecipeProvider extends RecipeSubProvider {
 
         // Smelting Recipes
         this.add(SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.GLAZED_JAR.get()), RecipeCategory.DECORATIONS, ModBlocks.CRACKED_GLAZED_JAR.get(), 0.1F, 200).unlockedBy("has_item", has(ModBlocks.GLAZED_JAR.get())), "smelting/cracked_glazed_jar");
-        this.add(SimpleCookingRecipeBuilder.smelting(Ingredient.of(ModBlocks.BIG_GLAZED_JAR.get()), RecipeCategory.DECORATIONS, ModBlocks.CRACKED_BIG_GLAZED_JAR.get(), 0.1F, 200).unlockedBy("has_item", has(ModBlocks.BIG_GLAZED_JAR.get())), "smelting/cracked_big_glazed_jar");
     }
 
     public void brazier(ItemLike result, TagKey<Item> tagKey) {
@@ -151,9 +143,5 @@ public class ModRecipeProvider extends RecipeSubProvider {
 
     public void glazedJar(ItemLike result, ItemLike terracotta) {
         this.shaped(RecipeCategory.DECORATIONS, result, builder -> builder.pattern("# #").pattern(" # ").define('#', terracotta).group("glazedJar").unlockedBy(this, terracotta));
-    }
-
-    public void bigGlazedJar(ItemLike result, ItemLike terracotta) {
-        this.shaped(RecipeCategory.DECORATIONS, result, builder -> builder.pattern("# #").pattern("# #").pattern(" # ").define('#', terracotta).group("biGlazedJar").unlockedBy(this, terracotta));
     }
 }

@@ -1,11 +1,9 @@
-// 1.21.1	2024-08-29T20:35:15.1785606	Tags for minecraft:item mod id valhelsia_structures
+// 1.21.1	2024-09-06T16:38:17.9455361	Tags for minecraft:item mod id valhelsia_structures
 abdd65528eb416d6d6ad1f020d97714ff861bf25 data/c/tags/item/glass_blocks/colorless.json
 b868b381ccc22076b5df27e945925827c7f5eea6 data/c/tags/item/glass_panes.json
 f0770b509280d280ac69080c30cd3c138c2b18a6 data/c/tags/item/glass_panes/colorless.json
 87f546c97cbea72f6646d51242c1b81cdc36f8a2 data/minecraft/tags/item/dyeable.json
 e0c33a67d277ec15494b7d13c29447cfd21a6cc7 data/minecraft/tags/item/piglin_repellents.json
-11d34fed97be08e27701020eff5d758b6bfc4dfe data/valhelsia_structures/tags/item/big_colored_jars.json
-0b2e72e61cb169cc0abf930cbc5c0ee77ae8bd41 data/valhelsia_structures/tags/item/big_jars.json
 4cd0419500b9e52f3fe5dfba62f54502d1bcc8b5 data/valhelsia_structures/tags/item/colored_jars.json
 7a7254baae68e751607fd944b22525a52344e941 data/valhelsia_structures/tags/item/cut_posts.json
 48b0c34a9d235a9e0fd153c862e9be18901f1ab3 data/valhelsia_structures/tags/item/jars.json

@@ -37,8 +37,6 @@ public class ModItemTagsProvider extends ValhelsiaItemTagsProvider {
         this.copy(Tags.Blocks.GLASS_PANES_COLORLESS, Tags.Items.GLASS_PANES_COLORLESS);
         this.copy(ModTags.Blocks.COLORED_JARS, ModTags.Items.COLORED_JARS);
         this.copy(ModTags.Blocks.JARS, ModTags.Items.JARS);
-        ModBlocks.BIG_COLORED_GLAZED_JARS.values().forEach(registryObject -> this.tag(ModTags.Items.BIG_COLORED_JARS).add(registryObject.get().asItem()));
-        this.tag(ModTags.Items.BIG_JARS).add(ModBlocks.BIG_GLAZED_JAR.get().asItem(), ModBlocks.CRACKED_BIG_GLAZED_JAR.get().asItem()).addTag(ModTags.Items.BIG_COLORED_JARS);
         this.copy(ModTags.Blocks.SLEEPING_BAGS, ModTags.Items.SLEEPING_BAGS);
 
         this.copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS);

@@ -24,8 +24,6 @@ public class ModTags {
         public static final TagKey<Block> NON_FLAMMABLE_POSTS = modTag("non_flammable_posts");
         public static final TagKey<Block> COLORED_JARS = modTag("colored_jars");
         public static final TagKey<Block> JARS = modTag("jars");
-        public static final TagKey<Block> BIG_COLORED_JARS = modTag("big_colored_jars");
-        public static final TagKey<Block> BIG_JARS = modTag("big_jars");
         public static final TagKey<Block> SLEEPING_BAGS = modTag("sleeping_bags");
 
         private static TagKey<Block> modTag(String name) {
@@ -40,8 +38,6 @@ public class ModTags {
         public static final TagKey<Item> COLORED_JARS = modTag("colored_jars");
         public static final TagKey<Item> JARS = modTag("jars");
         public static final TagKey<Item> JAR_BLACKLISTED = modTag("jar_blacklisted");
-        public static final TagKey<Item> BIG_COLORED_JARS = modTag("big_colored_jars");
-        public static final TagKey<Item> BIG_JARS = modTag("big_jars");
         public static final TagKey<Item> SLEEPING_BAGS = modTag("sleeping_bags");
 
         public static final TagKey<Item> AXE_CRAFTING_BLACKLISTED = modTag( "axe_crafting_blacklisted");
