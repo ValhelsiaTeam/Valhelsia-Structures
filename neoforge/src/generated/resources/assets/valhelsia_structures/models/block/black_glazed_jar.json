@@ -1,0 +1,6 @@
+{
+  "parent": "valhelsia_structures:block/template_jar",
+  "textures": {
+    "texture": "valhelsia_structures:block/jar/black_glazed_jar"
+  }
+}

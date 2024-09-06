@@ -65,9 +65,13 @@ public class ModBlockModels extends BlockModelGenerator {
 
         createMetalFramedGlass(generators, ModBlocks.METAL_FRAMED_GLASS.get(), ModBlocks.METAL_FRAMED_GLASS_PANE.get());
 
+        this.createJar(ModBlocks.GLAZED_JAR.get());
+        this.createJar(ModBlocks.CRACKED_GLAZED_JAR.get());
+
         for (DyeColor color : DyeColor.values()) {
             this.createMetalFramedGlass(generators, ModBlocks.COLORED_METAL_FRAMED_GLASS.get(color).get(), ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.get(color).get());
             this.createSleepingBag(ModBlocks.SLEEPING_BAGS.get(color).get());
+            this.createJar(ModBlocks.COLORED_GLAZED_JARS.get(color).get());
         }
     }
 
@@ -211,10 +215,21 @@ public class ModBlockModels extends BlockModelGenerator {
     }
 
     private void createBonePile(Block block) {
-        ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(block), TextureMapping.layer0(block), this.modelOutput);
+        ModelTemplates.FLAT_ITEM.create(block, TextureMapping.layer0(block), this.modelOutput);
         this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block, Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(block))));
 
         ModelTemplates.CARPET.create(ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.wool(block), this.modelOutput);
+    }
+
+    private void createJar(Block block) {
+        var model = ModModelTemplates.TEMPLATE_JAR.create(block, ModTextureMapping.jar(block), this.modelOutput);
+        var rotatedModel = ModModelTemplates.TEMPLATE_JAR_ROTATED.createWithSuffix(block, "_rotated", ModTextureMapping.jar(block), this.modelOutput);
+
+        PropertyDispatch dispatch = PropertyDispatch.property(ModBlockStateProperties.ROTATED)
+                .select(true, Variant.variant().with(VariantProperties.MODEL, rotatedModel))
+                .select(false, Variant.variant().with(VariantProperties.MODEL, model));
+
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(dispatch));
     }
 
     static MultiVariantGenerator createSimpleBlock(Block block, ResourceLocation resourceLocation) {

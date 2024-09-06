@@ -25,6 +25,8 @@ public class ModModelTemplates {
     public static final ModelTemplate SLEEPING_BAG_FOOT = create("sleeping_bag_foot", TextureSlot.TEXTURE);
     public static final ModelTemplate SLEEPING_BAG_HEAD = create("sleeping_bag_head", TextureSlot.TEXTURE);
     public static final ModelTemplate SLEEPING_BAG_INVENTORY = create("sleeping_bag_inventory", TextureSlot.TEXTURE);
+    public static final ModelTemplate TEMPLATE_JAR = create("template_jar", TextureSlot.TEXTURE);
+    public static final ModelTemplate TEMPLATE_JAR_ROTATED = create("template_jar_rotated", TextureSlot.TEXTURE);
 
     public static ModelTemplate create(String name, TextureSlot... textureSlots) {
         return new ModelTemplate(Optional.of(ValhelsiaStructures.location("block/" + name)), Optional.empty(), textureSlots);

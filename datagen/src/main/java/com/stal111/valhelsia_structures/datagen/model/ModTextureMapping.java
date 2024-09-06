@@ -17,6 +17,7 @@ public class ModTextureMapping {
     private static final String BRAZIER = "brazier";
     private static final String BUNDLED_POSTS = "bundled_posts";
     private static final String SLEEPING_BAG = "sleeping_bag";
+    private static final String JAR = "jar";
 
     public static TextureMapping post(Block block) {
         return new TextureMapping()
@@ -50,6 +51,10 @@ public class ModTextureMapping {
 
     public static TextureMapping sleepingBag(Block block) {
         return new TextureMapping().put(TextureSlot.TEXTURE, getBlockTexture(block, SLEEPING_BAG));
+    }
+
+    public static TextureMapping jar(Block block) {
+        return TextureMapping.defaultTexture(getBlockTexture(block, JAR));
     }
 
     public static ResourceLocation getBlockTexture(Block block) {

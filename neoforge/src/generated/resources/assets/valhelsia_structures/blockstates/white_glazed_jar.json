@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "rotated=false": {
+      "model": "valhelsia_structures:block/white_glazed_jar"
+    },
+    "rotated=true": {
+      "model": "valhelsia_structures:block/white_glazed_jar_rotated"
+    }
+  }
+}
