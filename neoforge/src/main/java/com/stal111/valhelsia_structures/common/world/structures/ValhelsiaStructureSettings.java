@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.common.world.structures;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 
 /**
@@ -13,13 +14,15 @@ public record ValhelsiaStructureSettings(
         double spawnChance,
         int customMargin,
         boolean individualTerrainAdjustment,
-        LiquidSettings liquidSettings) {
+        LiquidSettings liquidSettings,
+        int flatnessDelta) {
 
     public static final MapCodec<ValhelsiaStructureSettings> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Codec.DOUBLE.optionalFieldOf("spawn_chance", 1.0D).forGetter(ValhelsiaStructureSettings::spawnChance),
             Codec.INT.optionalFieldOf("custom_margin", 12).forGetter(ValhelsiaStructureSettings::customMargin),
             Codec.BOOL.optionalFieldOf("individual_terrain_adjustment", false).forGetter(ValhelsiaStructureSettings::individualTerrainAdjustment),
-            LiquidSettings.CODEC.optionalFieldOf("liquid_settings", LiquidSettings.APPLY_WATERLOGGING).forGetter(ValhelsiaStructureSettings::liquidSettings)
+            LiquidSettings.CODEC.optionalFieldOf("liquid_settings", LiquidSettings.APPLY_WATERLOGGING).forGetter(ValhelsiaStructureSettings::liquidSettings),
+            ExtraCodecs.intRange(0, 64).optionalFieldOf("flatness_delta", 4).forGetter(ValhelsiaStructureSettings::flatnessDelta)
     ).apply(instance, ValhelsiaStructureSettings::new));
 
     public static Builder builder() {
@@ -32,6 +35,7 @@ public record ValhelsiaStructureSettings(
         private int customMargin = 12;
         private boolean individualTerrainAdjustment = false;
         private LiquidSettings liquidSettings = LiquidSettings.APPLY_WATERLOGGING;
+        private int flatnessDelta = 4;
 
         private Builder() {}
 
@@ -56,7 +60,7 @@ public record ValhelsiaStructureSettings(
         }
 
         public ValhelsiaStructureSettings build() {
-            return new ValhelsiaStructureSettings(this.spawnChance, this.customMargin, this.individualTerrainAdjustment, this.liquidSettings);
+            return new ValhelsiaStructureSettings(this.spawnChance, this.customMargin, this.individualTerrainAdjustment, this.liquidSettings, this.flatnessDelta);
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.utils;
 
-import com.stal111.valhelsia_structures.core.config.ModConfig;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.LevelHeightAccessor;
 import net.minecraft.world.level.chunk.ChunkGenerator;
@@ -26,14 +25,14 @@ public class StructureUtils {
      * @param size    the size of the structure
      * @return <code>true</code> if the surface is flat at the position
      */
-    public static boolean isSurfaceFlat(Structure.GenerationContext context, int size) {
+    public static boolean isSurfaceFlat(Structure.GenerationContext context, int size, int flatnessDelta) {
         ChunkPos pos = context.chunkPos();
         int[] cornerHeights = getCornerHeights(context, pos.getMiddleBlockX(), size, pos.getMiddleBlockZ(), size);
 
         int minHeight = Math.min(Math.min(cornerHeights[0], cornerHeights[1]), Math.min(cornerHeights[2], cornerHeights[3]));
         int maxHeight = Math.max(Math.max(cornerHeights[0], cornerHeights[1]), Math.max(cornerHeights[2], cornerHeights[3]));
 
-        return Math.abs(maxHeight - minHeight) <= ModConfig.COMMON.flatnessDelta.get();
+        return Math.abs(maxHeight - minHeight) <= flatnessDelta;
     }
 
     public static int[] getCornerHeights(Structure.GenerationContext context, int middleBlockX, int xSize, int middleBlockZ, int zSize) {
