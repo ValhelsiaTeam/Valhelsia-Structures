@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "2.0.0"
+    kotlin("jvm") version "2.0.0"
     id("java-library")
     id("eclipse")
     id("idea")
@@ -16,16 +16,10 @@ val minecraft_version: String by project
 val mainProject: Project = project(":neoforge")
 evaluationDependsOn(mainProject.path)
 
-
-
 repositories {
     flatDir {
         dirs("libs")
     }
-}
-
-base {
-    archivesName = "$mod_id-neoforge"
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
@@ -39,8 +33,8 @@ neoForge {
     }
 
     mods.create(mod_id) {
-        modSourceSets.add(sourceSets.main.get())
-        modSourceSets.add(mainProject.sourceSets.main.get())
+        sourceSet(sourceSets.main.get())
+        sourceSet(mainProject.sourceSets.main.get())
     }
 
     runs {
@@ -67,30 +61,3 @@ dependencies {
 
     implementation("net.valhelsia:valhelsia_core-neoforge-${minecraft_version}:${valhelsia_core_version}")
 }
-
-//
-//tasks.withType(ProcessResources).configureEach {
-//    var replaceProperties = [minecraft_version      : minecraft_version,
-//                             minecraft_version_range: minecraft_version_range,
-//                             neo_version            : neo_version,
-//                             neo_version_range      : neo_version_range,
-//                             loader_version_range   : loader_version_range,
-//                             mod_id                 : mod_id,
-//                             mod_name               : mod_name,
-//                             mod_license            : mod_license,
-//                             mod_version            : mod_version,
-//                             mod_authors            : mod_authors,
-//                             mod_description        : mod_description]
-//    inputs.properties replaceProperties
-//
-//    filesMatching(['META-INF/neoforge.mods.toml']) {
-//        expand replaceProperties
-//    }
-//}
-//
-//idea {
-//    module {
-//        downloadSources = true
-//        downloadJavadoc = true
-//    }
-//}
