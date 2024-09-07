@@ -11,7 +11,8 @@
     "PillagerEntityMixin"
   ],
   "client": [
-    "BlockModelRendererMixin"
+    "BlockModelRendererMixin",
+    "ModelBakerImplAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
