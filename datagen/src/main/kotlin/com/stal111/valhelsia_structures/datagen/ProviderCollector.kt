@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.datagen
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures
 import com.stal111.valhelsia_structures.datagen.model.ModBlockModels
+import com.stal111.valhelsia_structures.datagen.recipes.ModRecipeProvider
 import com.stal111.valhelsia_structures.datagen.tags.ModBiomeTagsProvider
 import com.stal111.valhelsia_structures.datagen.tags.ModBlockTagsProvider
 import com.stal111.valhelsia_structures.datagen.tags.ModItemTagsProvider
@@ -9,6 +10,7 @@ import net.valhelsia.dataforge.DataCollector
 import net.valhelsia.dataforge.DataProviderContext
 import net.valhelsia.dataforge.DataTarget
 import net.valhelsia.dataforge.model.DataForgeModelProvider
+import net.valhelsia.dataforge.recipe.DataForgeRecipeProvider
 
 class ProviderCollector : DataCollector() {
     override fun collectData(context: DataProviderContext) {
@@ -24,7 +26,7 @@ class ProviderCollector : DataCollector() {
             addProvider(this, ModItemTagsProvider(context))
             addProvider(this, ModBiomeTagsProvider(context))
           //  addProvider(this, ModStructureTagsProvider(context))
-          //  addProvider(this, ValhelsiaRecipeProvider(context, { ModRecipeProvider(it) }))
+            addProvider(this, DataForgeRecipeProvider(context, { ModRecipeProvider(it) }))
         }
     }
 }

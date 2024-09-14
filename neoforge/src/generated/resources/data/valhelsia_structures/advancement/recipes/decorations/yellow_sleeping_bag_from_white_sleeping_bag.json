@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dyes/yellow": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:dyes/yellow"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "valhelsia_structures:yellow_sleeping_bag_from_white_sleeping_bag"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_white_sleeping_bag": {
+      "conditions": {
+        "items": [
+          {
+            "items": "valhelsia_structures:white_sleeping_bag"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_white_sleeping_bag",
+      "has_dyes/yellow"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "valhelsia_structures:yellow_sleeping_bag_from_white_sleeping_bag"
+    ]
+  }
+}
