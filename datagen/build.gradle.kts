@@ -1,3 +1,4 @@
+
 plugins {
     kotlin("jvm") version "2.0.0"
     id("java-library")
@@ -12,6 +13,7 @@ val parchment_mappings_version: String by project
 val parchment_minecraft_version: String by project
 val valhelsia_core_version: String by project
 val minecraft_version: String by project
+val dataforge_version: String by project
 
 val mainProject: Project = project(":neoforge")
 evaluationDependsOn(mainProject.path)
@@ -20,9 +22,22 @@ repositories {
     flatDir {
         dirs("libs")
     }
+    maven {
+        name = "Kotlin for Forge"
+        setUrl("https://thedarkcolour.github.io/KotlinForForge/")
+    }
+    maven {
+        name = "DataForge"
+        url = uri("https://maven.pkg.github.com/ValhelsiaTeam/DataForge")
+        credentials {
+            username = System.getenv("GITHUB_ACTOR")
+            password = System.getenv("GITHUB_TOKEN")
+        }
+    }
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+kotlin.jvmToolchain(21)
 
 neoForge {
     version = project.property("neo_version") as String
@@ -60,4 +75,7 @@ dependencies {
     compileOnly(mainProject)
 
     implementation("net.valhelsia:valhelsia_core-neoforge-${minecraft_version}:${valhelsia_core_version}")
+    implementation("thedarkcolour:kotlinforforge-neoforge:5.5.0")
+
+    implementation(interfaceInjectionData("net.valhelsia:dataforge:${dataforge_version}")!!)
 }
