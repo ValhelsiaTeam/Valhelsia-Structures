@@ -26,7 +26,7 @@ class ProviderCollector : DataCollector() {
             addProvider(this, ModItemTagsProvider(context))
             addProvider(this, ModBiomeTagsProvider(context))
           //  addProvider(this, ModStructureTagsProvider(context))
-            addProvider(this, DataForgeRecipeProvider(context, { ModRecipeProvider(it) }))
+            addProvider(this, DataForgeRecipeProvider(context, ModRecipeProvider()))
         }
     }
 }

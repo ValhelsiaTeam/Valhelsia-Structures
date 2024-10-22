@@ -114,13 +114,13 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
     }
 
     private fun createCutPost(block: CutPostBlock, textureMapping: TextureMapping) {
-        val models = Arrays.asList(
+        val models = listOf(
             ModModelTemplates.TEMPLATE_CUT_POST_1.createWithSuffix(block, "_1", textureMapping, this.modelOutput),
             ModModelTemplates.TEMPLATE_CUT_POST_2.createWithSuffix(block, "_2", textureMapping, this.modelOutput),
             ModModelTemplates.TEMPLATE_CUT_POST_3.createWithSuffix(block, "_3", textureMapping, this.modelOutput),
             ModModelTemplates.TEMPLATE_POST.create(block, textureMapping, this.modelOutput)
         )
-        val attachedModels = Arrays.asList(
+        val attachedModels = listOf(
             ModModelTemplates.TEMPLATE_CUT_POST_1_ATTACHED.createWithSuffix(
                 block,
                 "_1_attached",

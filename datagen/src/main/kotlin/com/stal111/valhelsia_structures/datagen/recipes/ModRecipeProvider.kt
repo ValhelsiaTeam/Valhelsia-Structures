@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
 import net.valhelsia.dataforge.recipe.*
 
-class ModRecipeProvider(provider: DataForgeRecipeProvider) : RecipeSubProvider(provider) {
+class ModRecipeProvider : RecipeSubProvider() {
     override fun registerRecipes(lookupProvider: HolderLookup.Provider) {
 
         // Crafting Recipes
