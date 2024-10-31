@@ -1,10 +1,7 @@
 plugins {
     id 'java-library'
-    id 'eclipse'
-    id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.17-beta'
-    id 'org.jetbrains.kotlin.jvm' version '2.0.20'
+    id 'net.neoforged.moddev' version '2.0.42-beta'
 }
 
 version = mod_version
@@ -99,7 +96,6 @@ dependencies {
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     // at runtime, use the full JEI jar
     runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 tasks.withType(ProcessResources).configureEach {
@@ -126,7 +122,4 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
-}
-kotlin {
-    jvmToolchain(21)
 }
