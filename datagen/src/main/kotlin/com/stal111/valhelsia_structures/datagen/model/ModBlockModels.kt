@@ -26,7 +26,7 @@ import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.properties.BedPart
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
 import net.valhelsia.dataforge.model.BlockModelGenerator
-import java.util.*
+import net.valhelsia.dataforge.model.createModel
 
 class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : BlockModelGenerator(defaultGenerators) {
     override fun generate() {
@@ -34,11 +34,12 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
 
         for (woodType in ModBlocks.WoodType.entries.toTypedArray()) {
             this.createPostVariants(
-                ModBlocks.WOODEN_POSTS[woodType]!!.get(), ModBlocks.CUT_WOODEN_POSTS[woodType]!!.get()
+                ModBlocks.WOODEN_POSTS[woodType]!!.get(),
+                ModBlocks.CUT_WOODEN_POSTS[woodType]!!.get()
             )
             this.createPostVariants(
-                ModBlocks.STRIPPED_WOODEN_POSTS[woodType]!!
-                    .get(), ModBlocks.CUT_STRIPPED_WOODEN_POSTS[woodType]!!.get()
+                ModBlocks.STRIPPED_WOODEN_POSTS[woodType]!!.get(),
+                ModBlocks.CUT_STRIPPED_WOODEN_POSTS[woodType]!!.get()
             )
             this.createBundledPosts(ModBlocks.BUNDLED_POSTS[woodType]!!.get())
             this.createBundledPosts(ModBlocks.BUNDLED_STRIPPED_POSTS[woodType]!!.get())
@@ -61,17 +62,18 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
 
         this.createBonePile(ModBlocks.BONE_PILE.get())
 
-        createMetalFramedGlass(defaultGenerators, ModBlocks.METAL_FRAMED_GLASS.get(), ModBlocks.METAL_FRAMED_GLASS_PANE.get())
+        createMetalFramedGlass(
+            ModBlocks.METAL_FRAMED_GLASS.get(),
+            ModBlocks.METAL_FRAMED_GLASS_PANE.get()
+        )
 
         this.createJar(ModBlocks.GLAZED_JAR.get())
         this.createJar(ModBlocks.CRACKED_GLAZED_JAR.get())
 
         for (color in DyeColor.entries) {
             this.createMetalFramedGlass(
-                defaultGenerators,
                 ModBlocks.COLORED_METAL_FRAMED_GLASS[color]!!.get(),
-                ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES[color]!!
-                    .get()
+                ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES[color]!!.get()
             )
             this.createSleepingBag(ModBlocks.SLEEPING_BAGS[color]!!.get())
             this.createJar(ModBlocks.COLORED_GLAZED_JARS[color]!!.get())
@@ -86,13 +88,8 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
     }
 
     private fun createPost(block: PostBlock, textureMapping: TextureMapping) {
-        val model = ModModelTemplates.TEMPLATE_POST.create(block, textureMapping, this.modelOutput)
-        val attachedModel = ModModelTemplates.TEMPLATE_POST_ATTACHED.createWithSuffix(
-            block,
-            "_attached",
-            textureMapping,
-            this.modelOutput
-        )
+        val model = ModModelTemplates.TEMPLATE_POST.createModel(block, textureMapping)
+        val attachedModel = ModModelTemplates.TEMPLATE_POST_ATTACHED.createModel(block, textureMapping, "_attached")
 
         val attachedDispatch: PropertyDispatch = PropertyDispatch.property(PostBlock.ATTACHED)
             .select(true, Variant.variant().with(VariantProperties.MODEL, attachedModel))
@@ -115,55 +112,35 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
 
     private fun createCutPost(block: CutPostBlock, textureMapping: TextureMapping) {
         val models = listOf(
-            ModModelTemplates.TEMPLATE_CUT_POST_1.createWithSuffix(block, "_1", textureMapping, this.modelOutput),
-            ModModelTemplates.TEMPLATE_CUT_POST_2.createWithSuffix(block, "_2", textureMapping, this.modelOutput),
-            ModModelTemplates.TEMPLATE_CUT_POST_3.createWithSuffix(block, "_3", textureMapping, this.modelOutput),
-            ModModelTemplates.TEMPLATE_POST.create(block, textureMapping, this.modelOutput)
+            ModModelTemplates.TEMPLATE_CUT_POST_1.createModel(block, textureMapping, "_1"),
+            ModModelTemplates.TEMPLATE_CUT_POST_2.createModel(block, textureMapping, "_2"),
+            ModModelTemplates.TEMPLATE_CUT_POST_3.createModel(block, textureMapping, "_3"),
+            ModModelTemplates.TEMPLATE_POST.createModel(block, textureMapping)
         )
         val attachedModels = listOf(
-            ModModelTemplates.TEMPLATE_CUT_POST_1_ATTACHED.createWithSuffix(
-                block,
-                "_1_attached",
-                textureMapping,
-                this.modelOutput
-            ),
-            ModModelTemplates.TEMPLATE_CUT_POST_2_ATTACHED.createWithSuffix(
-                block,
-                "_2_attached",
-                textureMapping,
-                this.modelOutput
-            ),
-            ModModelTemplates.TEMPLATE_CUT_POST_3_ATTACHED.createWithSuffix(
-                block,
-                "_3_attached",
-                textureMapping,
-                this.modelOutput
-            ),
-            ModModelTemplates.TEMPLATE_POST_ATTACHED.createWithSuffix(
-                block,
-                "_attached",
-                textureMapping,
-                this.modelOutput
-            )
+            ModModelTemplates.TEMPLATE_CUT_POST_1_ATTACHED.createModel(block, textureMapping, "_1_attached"),
+            ModModelTemplates.TEMPLATE_CUT_POST_2_ATTACHED.createModel(block, textureMapping, "_2_attached"),
+            ModModelTemplates.TEMPLATE_CUT_POST_3_ATTACHED.createModel(block, textureMapping, "_3_attached"),
+            ModModelTemplates.TEMPLATE_POST_ATTACHED.createModel(block, textureMapping, "_attached")
         )
 
         val attachedDispatch = PropertyDispatch.properties(CutPostBlock.ATTACHED, CutPostBlock.PARTS)
-            .generate { attached: Boolean, parts: Int ->
+            .generate { attached, parts ->
                 Variant.variant()
                     .with(VariantProperties.MODEL, if (attached) attachedModels[parts - 1] else models[parts - 1])
             }
 
-        val rotationDispatch = PropertyDispatch.property(BlockStateProperties.FACING).generate { facing: Direction? ->
+        val rotationDispatch = PropertyDispatch.property(BlockStateProperties.FACING).generate {
             Variant.variant()
                 .with(
-                    VariantProperties.X_ROT, when (facing) {
+                    VariantProperties.X_ROT, when (it) {
                         Direction.DOWN -> VariantProperties.Rotation.R180
                         Direction.UP -> VariantProperties.Rotation.R0
                         else -> VariantProperties.Rotation.R90
                     }
                 )
                 .with(
-                    VariantProperties.Y_ROT, when (facing) {
+                    VariantProperties.Y_ROT, when (it) {
                         Direction.SOUTH -> VariantProperties.Rotation.R180
                         Direction.WEST -> VariantProperties.Rotation.R270
                         Direction.EAST -> VariantProperties.Rotation.R90
@@ -177,9 +154,8 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
     }
 
     private fun crateBrazier(block: Block) {
-        val model = ModModelTemplates.TEMPLATE_BRAZIER_OFF.create(block, brazier(block, false), this.modelOutput)
-        val litModel =
-            ModModelTemplates.TEMPLATE_BRAZIER.createWithSuffix(block, "_lit", brazier(block, true), this.modelOutput)
+        val model = ModModelTemplates.TEMPLATE_BRAZIER_OFF.createModel(block, brazier(block, false))
+        val litModel = ModModelTemplates.TEMPLATE_BRAZIER.createModel(block, brazier(block, true), "_lit")
 
         val litDispatch: PropertyDispatch = PropertyDispatch.property(BlockStateProperties.LIT)
             .select(true, Variant.variant().with(VariantProperties.MODEL, litModel))
@@ -190,19 +166,15 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
 
     private fun createBundledPosts(block: Block) {
         val mapping = bundledPosts(block)
-        val model = ModelTemplates.CUBE_COLUMN.create(block, mapping, this.modelOutput)
-        val modelHorizontal = ModelTemplates.CUBE_COLUMN_HORIZONTAL.create(block, mapping, this.modelOutput)
+        val model = ModelTemplates.CUBE_COLUMN.createModel(block, mapping)
+        val modelHorizontal = ModelTemplates.CUBE_COLUMN_HORIZONTAL.createModel(block, mapping)
         blockStateOutput.accept(
-            BlockModelGenerators.createRotatedPillarWithHorizontalVariant(
-                block,
-                model,
-                modelHorizontal
-            )
+            BlockModelGenerators.createRotatedPillarWithHorizontalVariant(block, model, modelHorizontal)
         )
     }
 
-    private fun createMetalFramedGlass(generators: BlockModelGenerators, glassBlock: Block, paneBlock: Block) {
-        generators.createTrivialCube(glassBlock)
+    private fun createMetalFramedGlass(glassBlock: Block, paneBlock: Block) {
+        this.defaultGenerators.createTrivialCube(glassBlock)
 
         val texturemapping = metalFramedGlassPane(glassBlock)
         this.createPane(glassBlock, paneBlock, texturemapping)
@@ -214,19 +186,15 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
     }
 
     private fun createPane(fullBlock: Block, paneBlock: Block, textureMapping: TextureMapping) {
-        val postModel = ModelTemplates.STAINED_GLASS_PANE_POST.create(paneBlock, textureMapping, this.modelOutput)
-        val paneSideModel = ModelTemplates.STAINED_GLASS_PANE_SIDE.create(paneBlock, textureMapping, this.modelOutput)
-        val paneSideAltModel =
-            ModelTemplates.STAINED_GLASS_PANE_SIDE_ALT.create(paneBlock, textureMapping, this.modelOutput)
-        val paneNoSideModel =
-            ModelTemplates.STAINED_GLASS_PANE_NOSIDE.create(paneBlock, textureMapping, this.modelOutput)
-        val paneNoSideAltModel =
-            ModelTemplates.STAINED_GLASS_PANE_NOSIDE_ALT.create(paneBlock, textureMapping, this.modelOutput)
+        val postModel = ModelTemplates.STAINED_GLASS_PANE_POST.createModel(paneBlock, textureMapping)
+        val paneSideModel = ModelTemplates.STAINED_GLASS_PANE_SIDE.createModel(paneBlock, textureMapping)
+        val paneSideAltModel = ModelTemplates.STAINED_GLASS_PANE_SIDE_ALT.createModel(paneBlock, textureMapping)
+        val paneNoSideModel = ModelTemplates.STAINED_GLASS_PANE_NOSIDE.createModel(paneBlock, textureMapping)
+        val paneNoSideAltModel = ModelTemplates.STAINED_GLASS_PANE_NOSIDE_ALT.createModel(paneBlock, textureMapping)
 
-        ModelTemplates.FLAT_ITEM.create(
+        ModelTemplates.FLAT_ITEM.createModel(
             ModelLocationUtils.getModelLocation(paneBlock),
-            TextureMapping.layer0(fullBlock),
-            this.modelOutput
+            TextureMapping.layer0(fullBlock)
         )
 
         blockStateOutput.accept(
@@ -277,48 +245,36 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
 
     private fun createSleepingBag(block: Block) {
         val textureMapping = sleepingBag(block)
-        val modelFoot =
-            ModModelTemplates.SLEEPING_BAG_FOOT.createWithSuffix(block, "_foot", textureMapping, this.modelOutput)
-        val modelHead =
-            ModModelTemplates.SLEEPING_BAG_HEAD.createWithSuffix(block, "_head", textureMapping, this.modelOutput)
-        val modelInventory = ModModelTemplates.SLEEPING_BAG_INVENTORY.createWithSuffix(
-            block,
-            "_inventory",
-            textureMapping,
-            this.modelOutput
-        )
+        val modelFoot = ModModelTemplates.SLEEPING_BAG_FOOT.createModel(block, textureMapping, "_foot")
+        val modelHead = ModModelTemplates.SLEEPING_BAG_HEAD.createModel(block, textureMapping, "_head")
+        val modelInventory = ModModelTemplates.SLEEPING_BAG_INVENTORY.createModel(block, textureMapping, "_inventory")
 
-        val dispatch: PropertyDispatch = PropertyDispatch.property(BlockStateProperties.BED_PART)
+        val dispatch = PropertyDispatch.property(BlockStateProperties.BED_PART)
             .select(BedPart.HEAD, Variant.variant().with(VariantProperties.MODEL, modelHead))
             .select(BedPart.FOOT, Variant.variant().with(VariantProperties.MODEL, modelFoot))
 
         blockStateOutput.accept(
-            MultiVariantGenerator.multiVariant(block).with(dispatch)
+            MultiVariantGenerator.multiVariant(block)
+                .with(dispatch)
                 .with(BlockModelGenerators.createHorizontalFacingDispatch())
         )
         this.delegateItemModel(block, modelInventory)
     }
 
     private fun createHangingVines(block: Block) {
-        val dispatch: PropertyDispatch = PropertyDispatch.property(ModBlockStateProperties.ATTACHED)
-            .select(
-                true,
-                Variant.variant()
-                    .with(VariantProperties.MODEL, BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/attached_"))
-            )
-            .select(
-                false,
-                Variant.variant()
-                    .with(VariantProperties.MODEL, BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/"))
-            )
+        val model = BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/")
+        val attachedModel = BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/attached_")
+
+        val dispatch = PropertyDispatch.property(ModBlockStateProperties.ATTACHED)
+            .select(true, Variant.variant().with(VariantProperties.MODEL, attachedModel))
+            .select(false, Variant.variant().with(VariantProperties.MODEL, model))
 
         blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(dispatch))
 
         if (block.asItem() !== Items.AIR) {
-            ModelTemplates.FLAT_ITEM.create(
+            ModelTemplates.FLAT_ITEM.createModel(
                 ModelLocationUtils.getModelLocation(block.asItem()),
-                TextureMapping.layer0(block),
-                this.modelOutput
+                TextureMapping.layer0(block)
             )
         }
     }
@@ -330,15 +286,17 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
                 Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(block))
             )
         )
-        ModelTemplates.TWO_LAYERED_ITEM.create(
-            ModelLocationUtils.getModelLocation(block.asItem()), TextureMapping.layered(
-                TextureMapping.getItemTexture(block.asItem()), TextureMapping.getItemTexture(block.asItem(), "_layer")
-            ), this.modelOutput
+        ModelTemplates.TWO_LAYERED_ITEM.createModel(
+            ModelLocationUtils.getModelLocation(block.asItem()),
+            TextureMapping.layered(
+                TextureMapping.getItemTexture(block.asItem()),
+                TextureMapping.getItemTexture(block.asItem(), "_layer")
+            )
         )
     }
 
     private fun createBonePile(block: Block) {
-        ModelTemplates.FLAT_ITEM.create(block, TextureMapping.layer0(block), this.modelOutput)
+        ModelTemplates.FLAT_ITEM.createModel(block, TextureMapping.layer0(block))
         blockStateOutput.accept(
             MultiVariantGenerator.multiVariant(
                 block,
@@ -346,19 +304,17 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
             )
         )
 
-        ModelTemplates.CARPET.create(
+        ModelTemplates.CARPET.createModel(
             ModelLocationUtils.getModelLocation(block.asItem()),
-            TextureMapping.wool(block),
-            this.modelOutput
+            TextureMapping.wool(block)
         )
     }
 
     private fun createJar(block: Block) {
-        val model = ModModelTemplates.TEMPLATE_JAR.create(block, jar(block), this.modelOutput)
-        val rotatedModel =
-            ModModelTemplates.TEMPLATE_JAR_ROTATED.createWithSuffix(block, "_rotated", jar(block), this.modelOutput)
+        val model = ModModelTemplates.TEMPLATE_JAR.createModel(block, jar(block))
+        val rotatedModel = ModModelTemplates.TEMPLATE_JAR_ROTATED.createModel(block, jar(block), "_rotated")
 
-        val dispatch: PropertyDispatch = PropertyDispatch.property(ModBlockStateProperties.ROTATED)
+        val dispatch = PropertyDispatch.property(ModBlockStateProperties.ROTATED)
             .select(true, Variant.variant().with(VariantProperties.MODEL, rotatedModel))
             .select(false, Variant.variant().with(VariantProperties.MODEL, model))
 
@@ -366,23 +322,13 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
     }
 
     private fun createSimpleFlatItemModel(item: ItemLike) {
-        ModelTemplates.FLAT_ITEM.create(
+        ModelTemplates.FLAT_ITEM.createModel(
             ModelLocationUtils.getModelLocation(item.asItem()),
-            TextureMapping.layer0(item.asItem()),
-            this.modelOutput
+            TextureMapping.layer0(item.asItem())
         )
     }
 
     private fun delegateItemModel(block: Block, resourceLocation: ResourceLocation) {
         modelOutput.accept(ModelLocationUtils.getModelLocation(block.asItem()), DelegatedModel(resourceLocation))
-    }
-
-    companion object {
-        fun createSimpleBlock(block: Block, resourceLocation: ResourceLocation): MultiVariantGenerator {
-            return MultiVariantGenerator.multiVariant(
-                block,
-                Variant.variant().with(VariantProperties.MODEL, resourceLocation)
-            )
-        }
     }
 }
