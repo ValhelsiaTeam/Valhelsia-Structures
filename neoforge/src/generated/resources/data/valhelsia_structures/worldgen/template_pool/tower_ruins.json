@@ -1,0 +1,32 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:ruins/tower_ruin_1",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:ruins/tower_ruin_2",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:ruins/tower_ruin_3",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

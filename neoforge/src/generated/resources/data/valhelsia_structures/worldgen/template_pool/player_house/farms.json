@@ -1,0 +1,50 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:player_house/feature_farm_1",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:player_house/feature_farm_2",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:player_house/feature_farm_3",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:player_house/feature_bee",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:player_house/feature_chicken",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

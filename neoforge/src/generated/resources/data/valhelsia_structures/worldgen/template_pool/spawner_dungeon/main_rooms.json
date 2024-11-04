@@ -1,0 +1,32 @@
+{
+  "elements": [
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:spawner_dungeon/main_room/main_room_1",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:spawner_dungeon/main_room/main_room_2",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "valhelsia_structures:valhelsia_single",
+        "location": "valhelsia_structures:spawner_dungeon/main_room/main_room_3",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ],
+  "fallback": "minecraft:empty"
+}

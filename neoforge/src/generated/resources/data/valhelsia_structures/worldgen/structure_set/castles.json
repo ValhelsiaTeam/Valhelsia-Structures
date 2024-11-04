@@ -1,0 +1,36 @@
+{
+  "placement": {
+    "type": "valhelsia_structures:valhelsia_random_spread",
+    "exclusion_zones": [
+      {
+        "chunk_count": 10,
+        "other_set": "valhelsia_structures:castle_ruins"
+      },
+      {
+        "chunk_count": 10,
+        "other_set": "valhelsia_structures:forges"
+      },
+      {
+        "chunk_count": 10,
+        "other_set": "valhelsia_structures:player_houses"
+      },
+      {
+        "chunk_count": 10,
+        "other_set": "valhelsia_structures:tower_ruins"
+      },
+      {
+        "chunk_count": 10,
+        "other_set": "valhelsia_structures:big_trees"
+      }
+    ],
+    "salt": 16987356,
+    "separation": 7,
+    "spacing": 37
+  },
+  "structures": [
+    {
+      "structure": "valhelsia_structures:castle",
+      "weight": 1
+    }
+  ]
+}
