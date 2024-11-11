@@ -43,9 +43,7 @@ public class ValhelsiaJigsawStructure extends Structure {
     public static final MapCodec<ValhelsiaJigsawStructure> CODEC = RecordCodecBuilder.<ValhelsiaJigsawStructure>mapCodec(instance -> instance.group(
             settingsCodec(instance),
             ValhelsiaStructureSettings.CODEC.forGetter(structure -> structure.settings),
-            StartPoolDecider.CODEC.fieldOf("start_pool").forGetter(structure -> {
-                return structure.startPoolDecider;
-            }),
+            StartPoolDecider.CODEC.fieldOf("start_pool").forGetter(structure -> structure.startPoolDecider),
             Codec.intRange(0, 7).fieldOf("size").forGetter(structure -> structure.maxDepth),
             StructureHeightProvider.CODEC.optionalFieldOf("start_height").forGetter(structure -> Optional.ofNullable(structure.startHeight)),
             Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> Optional.ofNullable(structure.projectStartToHeightmap)),
