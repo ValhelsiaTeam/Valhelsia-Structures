@@ -1,5 +1,5 @@
 {
-  "type": "valhelsia_structures:axe_crafting",
+  "type": "valhelsia_structures:tool_crafting",
   "category": "building",
   "ingredient": {
     "item": "valhelsia_structures:stripped_crimson_post"
@@ -7,5 +7,8 @@
   "result": {
     "count": 4,
     "id": "valhelsia_structures:cut_stripped_crimson_post"
+  },
+  "tool": {
+    "tag": "minecraft:axes"
   }
 }

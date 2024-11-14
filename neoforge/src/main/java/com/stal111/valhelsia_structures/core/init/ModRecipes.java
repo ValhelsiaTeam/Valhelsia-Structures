@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.core.init;
 
-import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipe;
+import com.stal111.valhelsia_structures.common.recipe.ToolCraftingRecipe;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -19,6 +19,6 @@ public class ModRecipes implements RegistryClass {
 
     public static final MappedRegistryHelper<RecipeSerializer<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.RECIPE_SERIALIZER);
 
-    public static final RegistryEntry<RecipeSerializer<?>, RecipeSerializer<AxeCraftingRecipe>> AXE_CRAFTING_SERIALIZER = HELPER.register("axe_crafting", AxeCraftingRecipe.Serializer::new);
+    public static final RegistryEntry<RecipeSerializer<?>, RecipeSerializer<ToolCraftingRecipe>> TOOL_CRAFTING_SERIALIZER = HELPER.register("tool_crafting", ToolCraftingRecipe.Serializer::new);
 
 }

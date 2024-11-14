@@ -1,5 +1,5 @@
 {
-  "type": "valhelsia_structures:axe_crafting",
+  "type": "valhelsia_structures:tool_crafting",
   "category": "building",
   "ingredient": {
     "item": "minecraft:stripped_jungle_log"
@@ -7,5 +7,8 @@
   "result": {
     "count": 2,
     "id": "valhelsia_structures:stripped_jungle_post"
+  },
+  "tool": {
+    "tag": "minecraft:axes"
   }
 }

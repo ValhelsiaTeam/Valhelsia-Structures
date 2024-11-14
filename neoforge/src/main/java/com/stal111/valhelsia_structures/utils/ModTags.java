@@ -40,8 +40,6 @@ public class ModTags {
         public static final TagKey<Item> JAR_BLACKLISTED = modTag("jar_blacklisted");
         public static final TagKey<Item> SLEEPING_BAGS = modTag("sleeping_bags");
 
-        public static final TagKey<Item> AXE_CRAFTING_BLACKLISTED = modTag( "axe_crafting_blacklisted");
-
         private static TagKey<Item> modTag(String name) {
             return TagKey.create(Registries.ITEM, ValhelsiaStructures.location(name));
         }

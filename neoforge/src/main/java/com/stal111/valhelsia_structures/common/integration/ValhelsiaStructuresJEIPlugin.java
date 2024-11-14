@@ -37,6 +37,6 @@ public class ValhelsiaStructuresJEIPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(RecipeTypes.CRAFTING, AxeCraftingRecipeMaker.createAxeCraftingRecipes());
+        registration.addRecipes(RecipeTypes.CRAFTING, ToolCraftingRecipeMaker.createCraftingRecipes());
     }
 }

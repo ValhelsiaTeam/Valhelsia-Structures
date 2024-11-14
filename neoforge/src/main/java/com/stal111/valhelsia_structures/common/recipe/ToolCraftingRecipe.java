@@ -3,7 +3,6 @@ package com.stal111.valhelsia_structures.common.recipe;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
-import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -18,7 +17,7 @@ import javax.annotation.Nonnull;
 
 /**
  * Axe Crafting Recipe <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipe
+ * Valhelsia Structures - com.stal111.valhelsia_structures.common.recipe.ToolCraftingRecipe
  * <p>
  * A crafting recipe that can use any axe (that extends {@link AxeItem}) and a number of other ingredients in a shapeless
  * form. The axe loses one durability per craft but is returned.
@@ -26,9 +25,10 @@ import javax.annotation.Nonnull;
  * @author Valhelsia Team
  * @since 2020-06-01
  */
-public record AxeCraftingRecipe(
+public record ToolCraftingRecipe(
         CraftingBookCategory category,
         Ingredient ingredient,
+        Ingredient tool,
         ItemStack result) implements CraftingRecipe {
 
     @Override
@@ -39,7 +39,7 @@ public record AxeCraftingRecipe(
         for (int slot = 0; slot < input.size(); slot++) {
             ItemStack item = input.getItem(slot);
 
-            if (item.getItem() instanceof AxeItem && !item.is(ModTags.Items.AXE_CRAFTING_BLACKLISTED)) {
+            if (this.tool.test(item)) {
                 axeSlot = slot;
                 break;
             }
@@ -119,34 +119,37 @@ public record AxeCraftingRecipe(
     @Nonnull
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipes.AXE_CRAFTING_SERIALIZER.get();
+        return ModRecipes.TOOL_CRAFTING_SERIALIZER.get();
     }
 
-    public static class Serializer implements RecipeSerializer<AxeCraftingRecipe> {
+    public static class Serializer implements RecipeSerializer<ToolCraftingRecipe> {
 
-        private static final MapCodec<AxeCraftingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                CraftingBookCategory.CODEC.fieldOf("category").forGetter(AxeCraftingRecipe::category),
-                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(AxeCraftingRecipe::ingredient),
-                ItemStack.CODEC.fieldOf("result").forGetter(AxeCraftingRecipe::result)
-        ).apply(instance, AxeCraftingRecipe::new));
+        private static final MapCodec<ToolCraftingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                CraftingBookCategory.CODEC.fieldOf("category").forGetter(ToolCraftingRecipe::category),
+                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(ToolCraftingRecipe::ingredient),
+                Ingredient.CODEC_NONEMPTY.fieldOf("tool").forGetter(ToolCraftingRecipe::tool),
+                net.minecraft.world.item.ItemStack.CODEC.fieldOf("result").forGetter(ToolCraftingRecipe::result)
+        ).apply(instance, ToolCraftingRecipe::new));
 
-        private static final StreamCodec<RegistryFriendlyByteBuf, AxeCraftingRecipe> STREAM_CODEC = StreamCodec.composite(
+        private static final StreamCodec<RegistryFriendlyByteBuf, ToolCraftingRecipe> STREAM_CODEC = StreamCodec.composite(
                 CraftingBookCategory.STREAM_CODEC,
-                AxeCraftingRecipe::category,
+                ToolCraftingRecipe::category,
                 Ingredient.CONTENTS_STREAM_CODEC,
-                AxeCraftingRecipe::ingredient,
-                ItemStack.STREAM_CODEC,
-                AxeCraftingRecipe::result,
-                AxeCraftingRecipe::new
+                ToolCraftingRecipe::ingredient,
+                Ingredient.CONTENTS_STREAM_CODEC,
+                ToolCraftingRecipe::tool,
+                net.minecraft.world.item.ItemStack.STREAM_CODEC,
+                ToolCraftingRecipe::result,
+                ToolCraftingRecipe::new
         );
 
         @Override
-        public @NotNull MapCodec<AxeCraftingRecipe> codec() {
+        public @NotNull MapCodec<ToolCraftingRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public @NotNull StreamCodec<RegistryFriendlyByteBuf, AxeCraftingRecipe> streamCodec() {
+        public @NotNull StreamCodec<RegistryFriendlyByteBuf, ToolCraftingRecipe> streamCodec() {
             return STREAM_CODEC;
         }
     }

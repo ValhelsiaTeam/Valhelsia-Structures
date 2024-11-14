@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.datagen.recipes
 
-import com.stal111.valhelsia_structures.common.recipe.AxeCraftingRecipeBuilder
+import com.stal111.valhelsia_structures.common.recipe.ToolCraftingRecipeBuilder
 import com.stal111.valhelsia_structures.core.init.ModBlocks
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
@@ -34,34 +34,38 @@ class ModRecipeProvider : RecipeSubProvider() {
                 val strippedLogBlock = WOOD_TYPE_TO_STRIPPED_LOG[woodType]!!
 
                 this.add(
-                    AxeCraftingRecipeBuilder(
+                    ToolCraftingRecipeBuilder(
                         RecipeCategory.BUILDING_BLOCKS,
                         Ingredient.of(logBlock),
+                        Ingredient.of(ItemTags.AXES),
                         postBlock,
                         2
                     ).unlockedBy(logBlock)
                 )
                 this.add(
-                    AxeCraftingRecipeBuilder(
+                    ToolCraftingRecipeBuilder(
                         RecipeCategory.BUILDING_BLOCKS,
                         Ingredient.of(strippedLogBlock),
+                        Ingredient.of(ItemTags.AXES),
                         strippedPostBlock,
                         2
                     ).unlockedBy(strippedLogBlock)
                 )
 
                 this.add(
-                    AxeCraftingRecipeBuilder(
+                    ToolCraftingRecipeBuilder(
                         RecipeCategory.BUILDING_BLOCKS,
                         Ingredient.of(postBlock),
+                        Ingredient.of(ItemTags.AXES),
                         ModBlocks.CUT_WOODEN_POSTS[woodType]!!.get(),
                         4
                     ).unlockedBy(postBlock)
                 )
                 this.add(
-                    AxeCraftingRecipeBuilder(
+                    ToolCraftingRecipeBuilder(
                         RecipeCategory.BUILDING_BLOCKS,
                         Ingredient.of(strippedPostBlock),
+                        Ingredient.of(ItemTags.AXES),
                         ModBlocks.CUT_STRIPPED_WOODEN_POSTS[woodType]!!.get(),
                         4
                     ).unlockedBy(strippedPostBlock)

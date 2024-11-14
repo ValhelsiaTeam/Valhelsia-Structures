@@ -25,18 +25,20 @@ import java.util.Map;
  * @author Valhelsia Team
  * @since 2021-01-28
  */
-public class AxeCraftingRecipeBuilder implements RecipeBuilder {
+public class ToolCraftingRecipeBuilder implements RecipeBuilder {
 
     private final RecipeCategory category;
     private final Ingredient input;
+    private final Ingredient tool;
     private final Item result;
     private final int count;
 
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public AxeCraftingRecipeBuilder(RecipeCategory category, Ingredient input, ItemLike result, int count) {
+    public ToolCraftingRecipeBuilder(RecipeCategory category, Ingredient input, Ingredient tool, ItemLike result, int count) {
         this.category = category;
         this.input = input;
+        this.tool = tool;
         this.result = result.asItem();
         this.count = count;
     }
@@ -78,7 +80,7 @@ public class AxeCraftingRecipeBuilder implements RecipeBuilder {
     public void save(RecipeOutput output, @NotNull ResourceLocation id) {
         this.ensureValid(id);
 
-        AxeCraftingRecipe recipe = new AxeCraftingRecipe(RecipeBuilder.determineBookCategory(this.category), this.input, new ItemStack(this.result, this.count));
+        ToolCraftingRecipe recipe = new ToolCraftingRecipe(RecipeBuilder.determineBookCategory(this.category), this.input, this.tool, new ItemStack(this.result, this.count));
 
         Advancement.Builder builder = output.advancement()
                 .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
