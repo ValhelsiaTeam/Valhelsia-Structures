@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.common.world.structures.height;
 
+import com.mojang.serialization.Codec;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -17,7 +18,7 @@ import java.util.OptionalInt;
  */
 public interface StructureHeightProvider {
 
-    DeferredCodec<StructureHeightProvider> CODEC = new DeferredCodec<>(() -> ValhelsiaStructures.STRUCTURE_HEIGHT_PROVIDER_TYPES_REGISTRY.byNameCodec().dispatch(StructureHeightProvider::getType, StructureHeightProviderType::codec));
+    Codec<StructureHeightProvider> CODEC = Codec.lazyInitialized(ValhelsiaStructures.STRUCTURE_HEIGHT_PROVIDER_TYPES_REGISTRY::byNameCodec).dispatch(StructureHeightProvider::getType, StructureHeightProviderType::codec);
 
     OptionalInt sample(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType);
     int minY(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType);
