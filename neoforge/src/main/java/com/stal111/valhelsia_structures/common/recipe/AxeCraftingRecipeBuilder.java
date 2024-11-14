@@ -78,7 +78,7 @@ public class AxeCraftingRecipeBuilder implements RecipeBuilder {
     public void save(RecipeOutput output, @NotNull ResourceLocation id) {
         this.ensureValid(id);
 
-        AxeCraftingRecipe recipe = new AxeCraftingRecipe(this.input, new ItemStack(this.result, this.count), RecipeBuilder.determineBookCategory(this.category));
+        AxeCraftingRecipe recipe = new AxeCraftingRecipe(RecipeBuilder.determineBookCategory(this.category), this.input, new ItemStack(this.result, this.count));
 
         Advancement.Builder builder = output.advancement()
                 .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))

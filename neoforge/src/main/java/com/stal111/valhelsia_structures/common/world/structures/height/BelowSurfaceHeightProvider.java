@@ -49,4 +49,8 @@ public class BelowSurfaceHeightProvider implements StructureHeightProvider {
     public StructureHeightProviderType<?> getType() {
         return ModStructureHeightProviderTypes.BELOW_SURFACE_HEIGHT.get();
     }
+
+    public VerticalAnchor getMinInclusive() {
+        return this.minInclusive;
+    }
 }

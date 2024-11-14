@@ -37,10 +37,10 @@ public class AxeCraftingRecipeMaker {
                 .filter(recipe -> recipe.value() instanceof AxeCraftingRecipe)
                 .map(recipe -> (AxeCraftingRecipe) recipe.value())
                 .map(recipe -> {
-                    ItemStack output = recipe.getOutput();
+                    ItemStack output = recipe.result();
                     ResourceLocation id = ValhelsiaStructures.location("jei.axe_crafting." + output.getDescriptionId());
 
-                    return new RecipeHolder<CraftingRecipe>(id, new ShapelessRecipe(group, CraftingBookCategory.BUILDING, output, NonNullList.of(Ingredient.EMPTY, axeIngredient, recipe.getInput())));
+                    return new RecipeHolder<CraftingRecipe>(id, new ShapelessRecipe(group, CraftingBookCategory.BUILDING, output, NonNullList.of(Ingredient.EMPTY, axeIngredient, recipe.ingredient())));
                 })
                 .toList();
     }

@@ -1,10 +1,10 @@
 {
   "type": "valhelsia_structures:axe_crafting",
   "category": "building",
-  "input": {
+  "ingredient": {
     "item": "minecraft:acacia_log"
   },
-  "output": {
+  "result": {
     "count": 2,
     "id": "valhelsia_structures:acacia_post"
   }
