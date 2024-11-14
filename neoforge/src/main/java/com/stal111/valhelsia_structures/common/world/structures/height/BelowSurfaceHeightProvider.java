@@ -15,13 +15,11 @@ import java.util.OptionalInt;
  * @author Valhelsia Team
  * @since 2022-10-28
  */
-public class BelowSurfaceHeightProvider extends StructureHeightProvider {
+public class BelowSurfaceHeightProvider implements StructureHeightProvider {
 
-    public static final MapCodec<BelowSurfaceHeightProvider> CODEC = RecordCodecBuilder.mapCodec(instance -> {
-        return instance.group(VerticalAnchor.CODEC.fieldOf("min_inclusive").forGetter(provider -> {
-            return provider.minInclusive;
-        })).apply(instance, BelowSurfaceHeightProvider::new);
-    });
+    public static final MapCodec<BelowSurfaceHeightProvider> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            VerticalAnchor.CODEC.fieldOf("min_inclusive").forGetter(provider -> provider.minInclusive)
+    ).apply(instance, BelowSurfaceHeightProvider::new));
 
     private final VerticalAnchor minInclusive;
 
@@ -39,7 +37,7 @@ public class BelowSurfaceHeightProvider extends StructureHeightProvider {
 
     @Override
     public int minY(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
-        return this.minInclusive.resolveY(this.getWorldGenerationContext(context));
+        return this.minInclusive.resolveY(StructureHeightProvider.getWorldGenerationContext(context));
     }
 
     @Override
@@ -50,9 +48,5 @@ public class BelowSurfaceHeightProvider extends StructureHeightProvider {
     @Override
     public StructureHeightProviderType<?> getType() {
         return ModStructureHeightProviderTypes.BELOW_SURFACE_HEIGHT.get();
-    }
-
-    protected VerticalAnchor getMinInclusive() {
-        return this.minInclusive;
     }
 }

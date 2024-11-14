@@ -15,19 +15,11 @@ import java.util.OptionalInt;
  * @author Valhelsia Team
  * @since 2022-10-28
  */
-public class DefaultHeightProvider extends StructureHeightProvider {
+public record DefaultHeightProvider(HeightProvider heightProvider) implements StructureHeightProvider {
 
-    public static final MapCodec<DefaultHeightProvider> CODEC = RecordCodecBuilder.mapCodec(instance -> {
-        return instance.group(HeightProvider.CODEC.fieldOf("height_provider").forGetter(height -> {
-            return height.heightProvider;
-        })).apply(instance, DefaultHeightProvider::new);
-    });
-
-    private final HeightProvider heightProvider;
-
-    public DefaultHeightProvider(HeightProvider provider) {
-        this.heightProvider = provider;
-    }
+    public static final MapCodec<DefaultHeightProvider> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            HeightProvider.CODEC.fieldOf("height_provider").forGetter(DefaultHeightProvider::heightProvider)
+    ).apply(instance, DefaultHeightProvider::new));
 
     @Override
     public OptionalInt sample(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {

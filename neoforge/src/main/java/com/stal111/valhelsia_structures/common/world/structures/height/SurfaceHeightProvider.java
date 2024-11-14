@@ -14,24 +14,12 @@ import java.util.OptionalInt;
  * @author Valhelsia Team
  * @since 2022-12-14
  */
-public class SurfaceHeightProvider extends StructureHeightProvider {
+public record SurfaceHeightProvider(VerticalAnchor minInclusive, VerticalAnchor maxInclusive) implements StructureHeightProvider {
 
     public static final MapCodec<SurfaceHeightProvider> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            VerticalAnchor.CODEC.fieldOf("min_inclusive").forGetter(provider -> {
-                return provider.minInclusive;
-            }),
-            VerticalAnchor.CODEC.fieldOf("max_inclusive").forGetter(provider -> {
-                return provider.maxInclusive;
-            })
+            VerticalAnchor.CODEC.fieldOf("min_inclusive").forGetter(SurfaceHeightProvider::minInclusive),
+            VerticalAnchor.CODEC.fieldOf("max_inclusive").forGetter(SurfaceHeightProvider::maxInclusive)
     ).apply(instance, SurfaceHeightProvider::new));
-
-    private final VerticalAnchor minInclusive;
-    private final VerticalAnchor maxInclusive;
-
-    public SurfaceHeightProvider(VerticalAnchor minInclusive, VerticalAnchor maxInclusive) {
-        this.minInclusive = minInclusive;
-        this.maxInclusive = maxInclusive;
-    }
 
     @Override
     public OptionalInt sample(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
@@ -49,12 +37,12 @@ public class SurfaceHeightProvider extends StructureHeightProvider {
 
     @Override
     public int minY(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
-        return this.minInclusive.resolveY(this.getWorldGenerationContext(context));
+        return this.minInclusive.resolveY(StructureHeightProvider.getWorldGenerationContext(context));
     }
 
     @Override
     public int maxY(BlockPos pos, Structure.GenerationContext context, Heightmap.Types heightmapType) {
-        return this.maxInclusive.resolveY(this.getWorldGenerationContext(context));
+        return this.maxInclusive.resolveY(StructureHeightProvider.getWorldGenerationContext(context));
     }
 
     @Override
