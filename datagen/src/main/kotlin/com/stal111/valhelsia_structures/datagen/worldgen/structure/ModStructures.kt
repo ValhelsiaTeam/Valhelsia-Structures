@@ -2,7 +2,6 @@ package com.stal111.valhelsia_structures.datagen.worldgen.structure
 
 import com.stal111.valhelsia_structures.common.builtin.BuiltInStructurePools
 import com.stal111.valhelsia_structures.common.builtin.BuiltInStructures
-import com.stal111.valhelsia_structures.common.world.structures.ValhelsiaJigsawStructure
 import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProvider
 import com.stal111.valhelsia_structures.utils.ModTags
 import com.stal111.valhelsia_structures.utils.StartPoolKeySet
@@ -17,6 +16,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.MobSpawnSettings
+import net.minecraft.world.level.levelgen.GenerationStep
 import net.minecraft.world.level.levelgen.VerticalAnchor
 import net.minecraft.world.level.levelgen.structure.Structure
 import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride
@@ -49,78 +49,77 @@ object ModStructures : RegistryDataProvider<Structure> {
             castleBiomes,
             TerrainAdjustment.BEARD_THIN,
             BuiltInStructurePools.CASTLES
-        ) { it.chance(0.4) }
+        ) { chance(0.4) }
         surfaceStructure(
             BuiltInStructures.CASTLE_RUIN,
             castleRuinBiomes,
             TerrainAdjustment.BEARD_THIN,
             BuiltInStructurePools.CASTLE_RUINS
-        ) { it.chance(0.5) }
+        ) { chance(0.5) }
         surfaceStructure(
             BuiltInStructures.DESERT_HOUSE,
             desertHouseBiomes,
             TerrainAdjustment.BEARD_THIN,
             BuiltInStructurePools.DESERT_HOUSES
-        ) { it.chance(0.7) }
+        ) { chance(0.7) }
         surfaceStructure(
             BuiltInStructures.FORGE,
             forgeBiomes,
             TerrainAdjustment.BEARD_THIN,
             BuiltInStructurePools.FORGES
-        ) { it.chance(0.65) }
+        ) { chance(0.65) }
         surfaceStructure(
             BuiltInStructures.PLAYER_HOUSE,
             playerHouseBiomes,
             TerrainAdjustment.BEARD_THIN,
             BuiltInStructurePools.PLAYER_HOUSES
-        ) { it.chance(0.65) }
+        ) { chance(0.65) }
         surfaceStructure(
             BuiltInStructures.SPAWNER_DUNGEON,
             spawnerDungeonBiomes,
             TerrainAdjustment.NONE,
             BuiltInStructurePools.SPAWNER_DUNGEONS
         ) {
-            it.chance(0.7).startHeight(
-                StructureHeightProvider.surfaceBetween(
-                    VerticalAnchor.absolute(0),
-                    VerticalAnchor.absolute(75)
-                )
-            ).individualTerrainAdjustment().ignoreWaterLogging()
+            chance(0.7)
+            startHeight(StructureHeightProvider.surfaceBetween(VerticalAnchor.absolute(0), VerticalAnchor.absolute(75)))
+            individualTerrainAdjustment()
+            ignoreWaterLogging()
         }
         surfaceStructure(
             BuiltInStructures.TOWER_RUIN,
             towerRuinBiomes,
             TerrainAdjustment.BEARD_THIN,
             BuiltInStructurePools.TOWER_RUINS
-        ) { it.chance(0.7) }
+        ) { chance(0.7) }
         surfaceStructure(
             BuiltInStructures.WITCH_HUT,
             witchHutBiomes,
             TerrainAdjustment.BEARD_THIN,
             BuiltInStructurePools.WITCH_HUTS
         ) {
-            it.chance(0.85).margin(3)
-                .addSpawnOverride(
-                    MobCategory.MONSTER,
-                    StructureSpawnOverride(
-                        StructureSpawnOverride.BoundingBoxType.PIECE,
-                        WeightedRandomList.create(MobSpawnSettings.SpawnerData(EntityType.WITCH, 1, 1, 1))
-                    )
+            chance(0.85)
+            margin(3)
+            addSpawnOverride(
+                MobCategory.MONSTER,
+                StructureSpawnOverride(
+                    StructureSpawnOverride.BoundingBoxType.PIECE,
+                    WeightedRandomList.create(MobSpawnSettings.SpawnerData(EntityType.WITCH, 1, 1, 1))
                 )
-                .addSpawnOverride(
-                    MobCategory.CREATURE,
-                    StructureSpawnOverride(
-                        StructureSpawnOverride.BoundingBoxType.PIECE,
-                        WeightedRandomList.create(MobSpawnSettings.SpawnerData(EntityType.CAT, 1, 1, 1))
-                    )
+            )
+            addSpawnOverride(
+                MobCategory.CREATURE,
+                StructureSpawnOverride(
+                    StructureSpawnOverride.BoundingBoxType.PIECE,
+                    WeightedRandomList.create(MobSpawnSettings.SpawnerData(EntityType.CAT, 1, 1, 1))
                 )
+            )
         }
         surfaceStructure(
             BuiltInStructures.BIG_TREE,
             bigTreeBiomes,
             TerrainAdjustment.BEARD_THIN,
             BuiltInStructurePools.BIG_TREES
-        ) { it.chance(0.6) }
+        ) { chance(0.6) }
 
         undergroundStructure(
             BuiltInStructures.SPAWNER_ROOM,
@@ -128,8 +127,9 @@ object ModStructures : RegistryDataProvider<Structure> {
             TerrainAdjustment.NONE,
             BuiltInStructurePools.SPAWNER_ROOMS
         ) {
-            it.chance(0.9).startHeight(StructureHeightProvider.spawnerRoom(VerticalAnchor.absolute(0)))
-                .ignoreWaterLogging()
+            chance(0.9)
+            startHeight(StructureHeightProvider.spawnerRoom(VerticalAnchor.absolute(0)))
+            ignoreWaterLogging()
         }
         undergroundStructure(
             BuiltInStructures.DEEP_SPAWNER_ROOM,
@@ -137,13 +137,34 @@ object ModStructures : RegistryDataProvider<Structure> {
             TerrainAdjustment.NONE,
             BuiltInStructurePools.DEEP_SPAWNER_ROOMS
         ) {
-            it.startHeight(
+            startHeight(
                 StructureHeightProvider.deepSpawnerRoom(
                     VerticalAnchor.aboveBottom(6),
                     VerticalAnchor.absolute(-1)
                 )
-            ).ignoreWaterLogging()
+            )
+            ignoreWaterLogging()
         }
+    }
+
+    private fun BootstrapContext<Structure>.structure(
+        key: ResourceKey<Structure>,
+        biomeHolderSet: HolderSet<Biome>,
+        step: GenerationStep.Decoration,
+        terrainAdjustment: TerrainAdjustment,
+        startPool: StartPoolKeySet,
+        init: ValhelsiaStructureBuilder.() -> Unit
+    ) {
+        this.register(
+            key,
+            ValhelsiaStructureBuilder(
+                this,
+                biomeHolderSet,
+                step,
+                terrainAdjustment,
+                startPool
+            ).apply(init).build()
+        )
     }
 
     private fun BootstrapContext<Structure>.surfaceStructure(
@@ -151,40 +172,23 @@ object ModStructures : RegistryDataProvider<Structure> {
         biomeHolderSet: HolderSet<Biome>,
         terrainAdjustment: TerrainAdjustment,
         startPool: StartPoolKeySet,
-        builderLambda: (ValhelsiaJigsawStructure.Builder) -> ValhelsiaJigsawStructure.Builder
-    ) {
-        this.register(
-            key, builderLambda(
-                ValhelsiaJigsawStructure.builder(
-                    this,
-                    biomeHolderSet,
-                    net.minecraft.world.level.levelgen.GenerationStep.Decoration.TOP_LAYER_MODIFICATION,
-                    terrainAdjustment,
-                    startPool
-                )
-            ).build()
-        )
-    }
+        init: ValhelsiaStructureBuilder.() -> Unit
+    ) = structure(key, biomeHolderSet, GenerationStep.Decoration.TOP_LAYER_MODIFICATION, terrainAdjustment, startPool, init)
 
     private fun BootstrapContext<Structure>.undergroundStructure(
         key: ResourceKey<Structure>,
         biomeHolderSet: HolderSet<Biome>,
         terrainAdjustment: TerrainAdjustment,
         startPool: StartPoolKeySet,
-        builderLambda: (ValhelsiaJigsawStructure.Builder) -> ValhelsiaJigsawStructure.Builder
-    ) {
-        this.register(
-            key, builderLambda(
-                ValhelsiaJigsawStructure.builder(
-                    this,
-                    biomeHolderSet,
-                    net.minecraft.world.level.levelgen.GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
-                    terrainAdjustment,
-                    startPool
-                )
-            ).build()
-        )
-    }
+        init: ValhelsiaStructureBuilder.() -> Unit
+    ) = structure(
+        key,
+        biomeHolderSet,
+        GenerationStep.Decoration.UNDERGROUND_STRUCTURES,
+        terrainAdjustment,
+        startPool,
+        init
+    )
 
     private fun singleTag(biomeHolderGetter: HolderGetter<Biome>, tagKey: TagKey<Biome>) =
         biomeHolderGetter.getOrThrow(tagKey)

@@ -6,30 +6,27 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProvider;
 import com.stal111.valhelsia_structures.core.init.world.ModStructureTypes;
-import com.stal111.valhelsia_structures.utils.StartPoolKeySet;
 import com.stal111.valhelsia_structures.utils.StructureUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.NoiseColumn;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import net.minecraft.world.level.levelgen.structure.*;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pools.DimensionPadding;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
 import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup;
-import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.function.Function;
 
 /**
@@ -70,10 +67,6 @@ public class ValhelsiaJigsawStructure extends Structure {
         this.startHeight = startHeight;
         this.projectStartToHeightmap = projectStartToHeightmap;
         this.maxDistanceFromCenter = maxDistanceFromCenter;
-    }
-
-    public static ValhelsiaJigsawStructure.Builder builder(BootstrapContext<Structure> context, HolderSet<Biome> biomeTagKey, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
-        return new Builder(context, biomeTagKey, step, terrainAdjustment, startPool);
     }
 
     private static Function<ValhelsiaJigsawStructure, DataResult<ValhelsiaJigsawStructure>> verifyRange() {
@@ -172,90 +165,5 @@ public class ValhelsiaJigsawStructure extends Structure {
 
     public boolean hasIndividualTerrainAdjustment() {
         return this.settings.individualTerrainAdjustment();
-    }
-
-    public static class Builder {
-
-        private final BootstrapContext<Structure> context;
-        private final HolderSet<Biome> biomeHolderSet;
-
-        private final GenerationStep.Decoration step;
-        private final TerrainAdjustment terrainAdjustment;
-        private final StartPoolKeySet startPool;
-
-        private final Map<MobCategory, StructureSpawnOverride> spawnOverrides = new HashMap<>();
-
-        private int maxDepth = 7;
-        @Nullable
-        private Heightmap.Types projectStartToHeightmap = Heightmap.Types.WORLD_SURFACE_WG;
-        @Nullable
-        private StructureHeightProvider heightProvider = null;
-        private int maxDistanceFromCenter = 80;
-        ValhelsiaStructureSettings.Builder structureSettings = ValhelsiaStructureSettings.builder();
-
-        private Builder(BootstrapContext<Structure> context, HolderSet<Biome> biomeHolderSet, GenerationStep.Decoration step, TerrainAdjustment terrainAdjustment, StartPoolKeySet startPool) {
-            this.context = context;
-            this.biomeHolderSet = biomeHolderSet;
-            this.step = step;
-            this.terrainAdjustment = terrainAdjustment;
-            this.startPool = startPool;
-        }
-
-        public Builder addSpawnOverride(MobCategory category, StructureSpawnOverride override) {
-            this.spawnOverrides.put(category, override);
-
-            return this;
-        }
-
-        public Builder maxDepth(int maxDepth) {
-            this.maxDepth = maxDepth;
-
-            return this;
-        }
-
-        public Builder startHeight(StructureHeightProvider heightProvider) {
-            this.projectStartToHeightmap = null;
-            this.heightProvider = heightProvider;
-
-            return this;
-        }
-
-        public Builder heightmap(Heightmap.Types projectStartToHeightmap) {
-            this.projectStartToHeightmap = projectStartToHeightmap;
-            this.heightProvider = null;
-
-            return this;
-        }
-
-        public Builder individualTerrainAdjustment() {
-            this.structureSettings.enableIndividualTerrainAdjustment(true);
-
-            return this;
-        }
-
-        public Builder chance(double spawnChance) {
-            this.structureSettings.setSpawnChance(spawnChance);
-
-            return this;
-        }
-
-        public Builder margin(int customMargin) {
-            this.structureSettings.setCustomMargin(customMargin);
-
-            return this;
-        }
-
-        public Builder ignoreWaterLogging() {
-            this.structureSettings.setLiquidSettings(LiquidSettings.IGNORE_WATERLOGGING);
-
-
-            return this;
-        }
-
-        public ValhelsiaJigsawStructure build() {
-            StructureSettings settings = new StructureSettings(biomeHolderSet, this.spawnOverrides, this.step, this.terrainAdjustment);
-
-            return new ValhelsiaJigsawStructure(settings, this.structureSettings.build(), StartPoolDecider.of(this.context.lookup(Registries.TEMPLATE_POOL), this.startPool), this.maxDepth, this.heightProvider, this.projectStartToHeightmap, this.maxDistanceFromCenter);
-        }
     }
 }
