@@ -10,6 +10,6 @@
     "default": "valhelsia_structures:big_trees",
     "furnished": "valhelsia_structures:furnished/big_trees"
   },
-  "step": "top_layer_modification",
+  "step": "fluid_springs",
   "terrain_adaptation": "beard_thin"
 }

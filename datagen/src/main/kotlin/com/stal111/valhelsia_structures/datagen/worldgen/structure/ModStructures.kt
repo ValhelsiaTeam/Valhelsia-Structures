@@ -173,7 +173,7 @@ object ModStructures : RegistryDataProvider<Structure> {
         terrainAdjustment: TerrainAdjustment,
         startPool: StartPoolKeySet,
         init: ValhelsiaStructureBuilder.() -> Unit
-    ) = structure(key, biomeHolderSet, GenerationStep.Decoration.TOP_LAYER_MODIFICATION, terrainAdjustment, startPool, init)
+    ) = structure(key, biomeHolderSet, GenerationStep.Decoration.FLUID_SPRINGS, terrainAdjustment, startPool, init)
 
     private fun BootstrapContext<Structure>.undergroundStructure(
         key: ResourceKey<Structure>,

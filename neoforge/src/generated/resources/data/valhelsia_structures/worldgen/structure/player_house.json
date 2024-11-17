@@ -10,6 +10,6 @@
     "default": "valhelsia_structures:player_house/houses",
     "furnished": "valhelsia_structures:furnished/player_house/houses"
   },
-  "step": "top_layer_modification",
+  "step": "fluid_springs",
   "terrain_adaptation": "beard_thin"
 }

@@ -20,5 +20,5 @@
     "default": "valhelsia_structures:spawner_dungeon/cave_entrances",
     "furnished": "valhelsia_structures:furnished/spawner_dungeon/cave_entrances"
   },
-  "step": "top_layer_modification"
+  "step": "fluid_springs"
 }

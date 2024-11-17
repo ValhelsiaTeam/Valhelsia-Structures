@@ -10,6 +10,6 @@
     "default": "valhelsia_structures:forges",
     "furnished": "valhelsia_structures:furnished/forges"
   },
-  "step": "top_layer_modification",
+  "step": "fluid_springs",
   "terrain_adaptation": "beard_thin"
 }
