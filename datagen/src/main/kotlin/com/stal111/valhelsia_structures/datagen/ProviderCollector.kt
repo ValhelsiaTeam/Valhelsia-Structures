@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.datagen
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures
+import com.stal111.valhelsia_structures.datagen.loot.ModBlockLoot
 import com.stal111.valhelsia_structures.datagen.model.ModBlockModels
 import com.stal111.valhelsia_structures.datagen.recipes.ModRecipeProvider
 import com.stal111.valhelsia_structures.datagen.tags.ModBiomeTagsProvider
@@ -17,6 +18,10 @@ import com.stal111.valhelsia_structures.datagen.worldgen.structure.pools.PlayerH
 import com.stal111.valhelsia_structures.datagen.worldgen.structure.pools.SimpleStructurePools
 import com.stal111.valhelsia_structures.datagen.worldgen.structure.pools.SpawnerDungeonPools
 import net.minecraft.core.registries.Registries
+import net.minecraft.data.loot.LootTableProvider
+import net.minecraft.resources.ResourceKey
+import net.minecraft.world.level.storage.loot.LootTable
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.valhelsia.dataforge.DataCollector
 import net.valhelsia.dataforge.DataProviderContext
 import net.valhelsia.dataforge.DataTarget
@@ -38,6 +43,14 @@ class ProviderCollector : DataCollector() {
             addProvider(this, ModBiomeTagsProvider(context))
             addProvider(this, ModStructureTagsProvider(context))
             addProvider(this, DataForgeRecipeProvider(context, ModRecipeProvider()))
+            addProvider(
+                this, LootTableProvider(
+                    context.packOutput, setOf<ResourceKey<LootTable>>(), listOf(
+                        LootTableProvider.SubProviderEntry({ ModBlockLoot(it, blocks) }, LootContextParamSets.BLOCK)
+                    ),
+                    context.lookupProvider
+                )
+            )
         }
     }
 

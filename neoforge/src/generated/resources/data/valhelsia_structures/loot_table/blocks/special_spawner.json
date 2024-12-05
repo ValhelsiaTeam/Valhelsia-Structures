@@ -1,0 +1,4 @@
+{
+  "type": "minecraft:block",
+  "random_sequence": "valhelsia_structures:blocks/special_spawner"
+}
