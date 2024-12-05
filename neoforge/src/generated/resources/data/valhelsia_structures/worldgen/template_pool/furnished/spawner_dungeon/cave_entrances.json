@@ -2,41 +2,53 @@
   "elements": [
     {
       "element": {
-        "element_type": "valhelsia_structures:valhelsia_single",
-        "location": "valhelsia_structures:furnished/spawner_dungeon/cave_entrance/large",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "terrain_adjustment": "beard_thin"
+        "element": {
+          "element_type": "minecraft:single_pool_element",
+          "location": "valhelsia_structures:furnished/spawner_dungeon/cave_entrance/large",
+          "processors": "minecraft:empty",
+          "projection": "rigid"
+        },
+        "element_type": "valhelsia_structures:valhelsia_pool_element_wrapper",
+        "override_terrain_adaptation": "beard_thin"
       },
       "weight": 1
     },
     {
       "element": {
-        "element_type": "valhelsia_structures:valhelsia_single",
-        "location": "valhelsia_structures:furnished/spawner_dungeon/cave_entrance/small_1",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "terrain_adjustment": "beard_thin"
+        "element": {
+          "element_type": "minecraft:single_pool_element",
+          "location": "valhelsia_structures:furnished/spawner_dungeon/cave_entrance/small_1",
+          "processors": "minecraft:empty",
+          "projection": "rigid"
+        },
+        "element_type": "valhelsia_structures:valhelsia_pool_element_wrapper",
+        "override_terrain_adaptation": "beard_thin"
       },
       "weight": 1
     },
     {
       "element": {
-        "element_type": "valhelsia_structures:valhelsia_single",
-        "location": "valhelsia_structures:furnished/spawner_dungeon/cave_entrance/small_2",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "terrain_adjustment": "beard_thin"
+        "element": {
+          "element_type": "minecraft:single_pool_element",
+          "location": "valhelsia_structures:furnished/spawner_dungeon/cave_entrance/small_2",
+          "processors": "minecraft:empty",
+          "projection": "rigid"
+        },
+        "element_type": "valhelsia_structures:valhelsia_pool_element_wrapper",
+        "override_terrain_adaptation": "beard_thin"
       },
       "weight": 1
     },
     {
       "element": {
-        "element_type": "valhelsia_structures:valhelsia_single",
-        "location": "valhelsia_structures:furnished/spawner_dungeon/cave_entrance/small_3",
-        "processors": "minecraft:empty",
-        "projection": "rigid",
-        "terrain_adjustment": "beard_thin"
+        "element": {
+          "element_type": "minecraft:single_pool_element",
+          "location": "valhelsia_structures:furnished/spawner_dungeon/cave_entrance/small_3",
+          "processors": "minecraft:empty",
+          "projection": "rigid"
+        },
+        "element_type": "valhelsia_structures:valhelsia_pool_element_wrapper",
+        "override_terrain_adaptation": "beard_thin"
       },
       "weight": 1
     }

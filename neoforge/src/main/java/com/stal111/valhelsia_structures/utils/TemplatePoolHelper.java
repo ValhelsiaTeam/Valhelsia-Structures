@@ -1,12 +1,12 @@
 package com.stal111.valhelsia_structures.utils;
 
-import com.mojang.datafixers.util.Either;
-import com.stal111.valhelsia_structures.common.world.structures.pools.ValhelsiaSinglePoolElement;
+import com.stal111.valhelsia_structures.common.world.structures.pools.ValhelsiaPoolElementWrapper;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
+import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.valhelsia.valhelsia_core.api.common.world.structure.jigsaw.JigsawBuilder;
 import org.jetbrains.annotations.Nullable;
@@ -20,7 +20,7 @@ public class TemplatePoolHelper {
 
     private final JigsawBuilder.ElementFunction elementFunction = (resourceLocation, holder, projection, terrainAdjustment) -> {
         return projection1 -> {
-            return new ValhelsiaSinglePoolElement(Either.left(resourceLocation), holder, projection, terrainAdjustment);
+            return new ValhelsiaPoolElementWrapper(StructurePoolElement.single(resourceLocation.toString(), holder).apply(projection), terrainAdjustment);
         };
     };
 

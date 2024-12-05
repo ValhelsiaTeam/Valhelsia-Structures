@@ -2,10 +2,13 @@
   "elements": [
     {
       "element": {
-        "element_type": "valhelsia_structures:valhelsia_single",
-        "location": "valhelsia_structures:deep_spawner_room/deep_spawner_room_1",
-        "processors": "valhelsia_structures:deep_spawner_room",
-        "projection": "rigid"
+        "element": {
+          "element_type": "minecraft:single_pool_element",
+          "location": "valhelsia_structures:deep_spawner_room/deep_spawner_room_1",
+          "processors": "valhelsia_structures:deep_spawner_room",
+          "projection": "rigid"
+        },
+        "element_type": "valhelsia_structures:valhelsia_pool_element_wrapper"
       },
       "weight": 1
     }

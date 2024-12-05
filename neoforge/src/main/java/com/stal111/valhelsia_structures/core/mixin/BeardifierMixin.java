@@ -1,7 +1,7 @@
 package com.stal111.valhelsia_structures.core.mixin;
 
 import com.stal111.valhelsia_structures.common.world.structures.ValhelsiaJigsawStructure;
-import com.stal111.valhelsia_structures.common.world.structures.pools.ValhelsiaSinglePoolElement;
+import com.stal111.valhelsia_structures.common.world.structures.pools.ValhelsiaPoolElementWrapper;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.Beardifier;
@@ -40,11 +40,8 @@ public class BeardifierMixin {
                     if (structurePiece instanceof PoolElementStructurePiece piece) {
                         StructureTemplatePool.Projection projection = piece.getElement().getProjection();
                         if (projection == StructureTemplatePool.Projection.RIGID) {
-                            if (piece.getElement() instanceof ValhelsiaSinglePoolElement element) {
-                                rigids.add(new Beardifier.Rigid(piece.getBoundingBox(), element.getTerrainAdjustment(), piece.getGroundLevelDelta()));
-                            } else {
-                                rigids.add(new Beardifier.Rigid(piece.getBoundingBox(), terrainAdjustment, piece.getGroundLevelDelta()));
-                            }
+                            terrainAdjustment = (piece.getElement() instanceof ValhelsiaPoolElementWrapper wrapper && wrapper.getTerrainAdjustment() != null) ? wrapper.getTerrainAdjustment() : terrainAdjustment;
+                            rigids.add(new Beardifier.Rigid(piece.getBoundingBox(), terrainAdjustment, piece.getGroundLevelDelta()));
                         }
 
                         for(JigsawJunction jigsawjunction : piece.getJunctions()) {

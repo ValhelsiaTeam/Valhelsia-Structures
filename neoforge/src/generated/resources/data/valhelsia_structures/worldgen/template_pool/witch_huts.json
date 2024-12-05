@@ -2,19 +2,25 @@
   "elements": [
     {
       "element": {
-        "element_type": "valhelsia_structures:valhelsia_single",
-        "location": "valhelsia_structures:witch_hut/witch_hut_1",
-        "processors": "valhelsia_structures:witch_hut",
-        "projection": "rigid"
+        "element": {
+          "element_type": "minecraft:single_pool_element",
+          "location": "valhelsia_structures:witch_hut/witch_hut_1",
+          "processors": "valhelsia_structures:witch_hut",
+          "projection": "rigid"
+        },
+        "element_type": "valhelsia_structures:valhelsia_pool_element_wrapper"
       },
       "weight": 1
     },
     {
       "element": {
-        "element_type": "valhelsia_structures:valhelsia_single",
-        "location": "valhelsia_structures:witch_hut/witch_hut_2",
-        "processors": "valhelsia_structures:witch_hut",
-        "projection": "rigid"
+        "element": {
+          "element_type": "minecraft:single_pool_element",
+          "location": "valhelsia_structures:witch_hut/witch_hut_2",
+          "processors": "valhelsia_structures:witch_hut",
+          "projection": "rigid"
+        },
+        "element_type": "valhelsia_structures:valhelsia_pool_element_wrapper"
       },
       "weight": 1
     }
