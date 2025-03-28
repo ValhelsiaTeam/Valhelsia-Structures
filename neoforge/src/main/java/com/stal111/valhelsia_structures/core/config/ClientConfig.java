@@ -1,6 +1,6 @@
 package com.stal111.valhelsia_structures.core.config;
 
-import com.stal111.valhelsia_structures.client.event.ScreenEvents;
+import com.stal111.valhelsia_structures.utils.ConfigurableValue;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 /**
@@ -9,7 +9,9 @@ import net.neoforged.neoforge.common.ModConfigSpec;
  */
 public class ClientConfig {
 
+    public static final ConfigurableValue<Boolean> FURNITURE_WARNING_ENABLED = ConfigurableValue.of(true);
+
     public ClientConfig(ModConfigSpec.Builder builder) {
-        ScreenEvents.FURNITURE_WARNING_ENABLED.setConfiguredValue(value -> builder.comment("Show a warning if Valhelsia Furniture is not installed before world creation.").define("furniture_warning", value));
+        FURNITURE_WARNING_ENABLED.setConfiguredValue(value -> builder.comment("Show a warning if Valhelsia Furniture is not installed before world creation.").define("furniture_warning", value));
     }
 }
