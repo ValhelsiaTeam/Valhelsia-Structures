@@ -1,6 +1,6 @@
 
 plugins {
-    kotlin("jvm") version "2.0.21"
+    kotlin("jvm") version "2.1.10"
     id("java-library")
     id("eclipse")
     id("idea")
@@ -75,7 +75,7 @@ dependencies {
     compileOnly(mainProject)
 
     implementation("net.valhelsia:valhelsia_core-neoforge-${minecraft_version}:${valhelsia_core_version}")
-    implementation("thedarkcolour:kotlinforforge-neoforge:5.6.0")
+    implementation("thedarkcolour:kotlinforforge-neoforge:5.7.0")
 
     implementation(interfaceInjectionData("net.valhelsia:dataforge:${dataforge_version}")!!)
 }
