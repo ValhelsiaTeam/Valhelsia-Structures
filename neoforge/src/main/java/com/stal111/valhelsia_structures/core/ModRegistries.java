@@ -17,8 +17,8 @@ public class ModRegistries extends RegistryCollector {
 
     @Override
     protected void collectHelpers() {
-        this.addItemHelper(ModItems.class);
         this.addBlockHelper(ModBlocks.class);
+        this.addItemHelper(ModItems.class);
         this.addMappedHelper(Registries.BLOCK_ENTITY_TYPE, ModBlockEntities.class);
         this.addMappedHelper(Registries.RECIPE_SERIALIZER, ModRecipes.class);
         this.addMappedHelper(Registries.STRUCTURE_TYPE, ModStructureTypes.class);

@@ -18,7 +18,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
  * @version 1.17.1-0.1.0
  * @since 2021-10-03
  */
-@EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class EntityRendererEvents {
 
     @SubscribeEvent

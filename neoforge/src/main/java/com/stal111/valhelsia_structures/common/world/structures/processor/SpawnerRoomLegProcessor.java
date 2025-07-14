@@ -23,12 +23,8 @@ import org.jetbrains.annotations.Nullable;
 public class SpawnerRoomLegProcessor extends StructureProcessor {
 
     public static final MapCodec<SpawnerRoomLegProcessor> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            BlockState.CODEC.fieldOf("block").forGetter(processor -> {
-                return processor.block;
-            }),
-            BlockState.CODEC.fieldOf("slab_block").forGetter(processor -> {
-                return processor.slabBlock;
-            })
+            BlockState.CODEC.fieldOf("block").forGetter(processor -> processor.block),
+            BlockState.CODEC.fieldOf("slab_block").forGetter(processor -> processor.slabBlock)
     ).apply(instance, SpawnerRoomLegProcessor::new));
 
     private final BlockState block;
@@ -51,7 +47,7 @@ public class SpawnerRoomLegProcessor extends StructureProcessor {
                 if (data.startsWith("support_leg")) {
                     BlockPos.MutableBlockPos mutable = relativeBlockInfo.pos().below().mutable();
 
-                    while (mutable.getY() > level.getMinBuildHeight() && mutable.getY() < level.getMaxBuildHeight()) {
+                    while (mutable.getY() > level.getMinY() && mutable.getY() < level.getMaxY()) {
                         if (!this.placeBlock(level, mutable, this.block)) {
                             break;
                         }

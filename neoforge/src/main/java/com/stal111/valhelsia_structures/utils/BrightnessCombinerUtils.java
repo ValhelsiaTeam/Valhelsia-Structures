@@ -7,14 +7,14 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
 public class BrightnessCombinerUtils {
 
-    public static DoubleBlockCombiner.NeighborCombineResult<BlockPos> combineWithNeigbour(Function<BlockState, DoubleBlockCombiner.BlockType> typeFunction, Function<BlockState, Direction> directionFunction, DirectionProperty directionProperty, BlockState state, BlockAndTintGetter levelAccessor, BlockPos pos, BiPredicate<LevelAccessor, BlockPos> predicate) {
+    public static DoubleBlockCombiner.NeighborCombineResult<BlockPos> combineWithNeigbour(Function<BlockState, DoubleBlockCombiner.BlockType> typeFunction, Function<BlockState, Direction> directionFunction, EnumProperty<Direction> directionProperty, BlockState state, BlockAndTintGetter levelAccessor, BlockPos pos, BiPredicate<LevelAccessor, BlockPos> predicate) {
         if (predicate.test(Minecraft.getInstance().level, pos)) {
             return DoubleBlockCombiner.Combiner::acceptNone;
         } else {

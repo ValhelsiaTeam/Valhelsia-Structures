@@ -32,7 +32,7 @@ public class DungeonDoorModel extends Model {
 	private final ModelPart leftDoor;
 
 	public DungeonDoorModel(ModelPart root) {
-		super(RenderType::entityCutout);
+		super(root, RenderType::entityCutout);
 		this.rightDoor = root.getChild("rightDoor");
 		this.leftDoor = root.getChild("leftDoor");
 	}
@@ -57,11 +57,5 @@ public class DungeonDoorModel extends Model {
 
 		this.leftDoor.yRot= -(leafAngle * ((float) Math.PI / 2F));
 		this.rightDoor.yRot = (leafAngle * ((float) Math.PI / 2F));
-	}
-
-	@Override
-	public void renderToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-		rightDoor.render(poseStack, buffer, packedLight, packedOverlay);
-		leftDoor.render(poseStack, buffer, packedLight, packedOverlay);
 	}
 }

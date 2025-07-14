@@ -7,6 +7,7 @@ import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryClass;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryEntry;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.MappedRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.item.ItemRegistryHelper;
 
 /**
  * Items <br>
@@ -17,9 +18,9 @@ import net.valhelsia.valhelsia_core.api.common.registry.helper.MappedRegistryHel
  */
 public class ModItems implements RegistryClass {
 
-    public static final MappedRegistryHelper<Item> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getItemHelper();
+    public static final ItemRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getItemHelper();
 
-    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_TORCH = HELPER.register("doused_torch", () -> new StandingAndWallBlockItem(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
-    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_SOUL_TORCH = HELPER.register("doused_soul_torch", () -> new StandingAndWallBlockItem(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get(), new Item.Properties(), Direction.DOWN));
+    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_TORCH = HELPER.register("doused_torch", (properties) -> new StandingAndWallBlockItem(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get(), Direction.DOWN, properties), Item.Properties::new);
+    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_SOUL_TORCH = HELPER.register("doused_soul_torch", (properties) -> new StandingAndWallBlockItem(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get(), Direction.DOWN, properties), Item.Properties::new);
 
 }

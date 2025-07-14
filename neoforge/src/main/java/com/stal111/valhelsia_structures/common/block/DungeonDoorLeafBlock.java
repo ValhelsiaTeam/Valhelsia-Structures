@@ -5,18 +5,17 @@ import com.stal111.valhelsia_structures.common.block.properties.ModBlockStatePro
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
@@ -39,7 +38,7 @@ import java.util.EnumMap;
  */
 public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBlock {
 
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty MIRRORED = ModBlockStateProperties.MIRRORED;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
@@ -64,11 +63,6 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
         return map;
     }
 
-    @Nonnull
-    @Override
-    public String getDescriptionId() {
-        return ModBlocks.DUNGEON_DOOR.get().getDescriptionId();
-    }
 
     @Nonnull
     @Override
@@ -91,17 +85,16 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
         return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite()).setValue(WATERLOGGED, flag);
     }
 
-    @Nonnull
     @Override
-    public BlockState updateShape(BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
         if (state.getValue(WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+            scheduledTickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        if (!level.getBlockState(currentPos.relative(Direction.fromYRot(state.getValue(FACING).toYRot()).getOpposite())).is(ModBlocks.DUNGEON_DOOR.get())) {
+        if (!level.getBlockState(pos.relative(Direction.fromYRot(state.getValue(FACING).toYRot()).getOpposite())).is(ModBlocks.DUNGEON_DOOR.get())) {
             return Blocks.AIR.defaultBlockState();
         }
-        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+        return super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);
     }
 
     @Nonnull
@@ -112,7 +105,7 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
 
         offsetState.useWithoutItem(level, player, hit);
 
-        return InteractionResult.sidedSuccess(level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override

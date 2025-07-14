@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.common.block.entity;
 
+import com.mojang.datafixers.util.Either;
 import com.stal111.valhelsia_structures.common.block.SpecialBaseSpawner;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -7,8 +8,12 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SpawnData;
+import net.minecraft.world.level.Spawner;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,7 +31,7 @@ import java.util.Objects;
  * @version 1.17.1-0.1.0
  * @since 2021-10-01
  */
-public class SpecialSpawnerBlockEntity extends BlockEntity {
+public class SpecialSpawnerBlockEntity extends BlockEntity implements Spawner {
 
     private final SpecialBaseSpawner spawner = new SpecialBaseSpawner() {
         @Override
@@ -43,9 +48,9 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
             }
         }
 
-        @Nonnull
-        public BlockEntity getSpawnerBlockEntity() {
-            return SpecialSpawnerBlockEntity.this;
+        @Override
+        public Either<BlockEntity, Entity> getOwner() {
+            return Either.left(SpecialSpawnerBlockEntity.this);
         }
     };
 
@@ -98,5 +103,11 @@ public class SpecialSpawnerBlockEntity extends BlockEntity {
 
     public SpecialBaseSpawner getSpawner() {
         return this.spawner;
+    }
+
+    @Override
+    public void setEntityId(@NotNull EntityType<?> entityType, @NotNull RandomSource random) {
+        this.spawner.setEntityId(entityType, this.level, random, this.worldPosition);
+        this.setChanged();
     }
 }

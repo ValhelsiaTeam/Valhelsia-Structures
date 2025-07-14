@@ -4,10 +4,10 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.stal111.valhelsia_structures.common.block.SpecialBaseSpawner;
 import com.stal111.valhelsia_structures.common.block.entity.SpecialSpawnerBlockEntity;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
@@ -23,13 +23,16 @@ import java.util.Objects;
  */
 public class SpecialSpawnerRenderer implements BlockEntityRenderer<SpecialSpawnerBlockEntity> {
 
+    private final EntityRenderDispatcher entityRenderer;
+
     public SpecialSpawnerRenderer(BlockEntityRendererProvider.Context context) {
+        this.entityRenderer = context.getEntityRenderer();
     }
 
     @Override
     public void render(@Nonnull SpecialSpawnerBlockEntity blockEntity, float partialTicks, @Nonnull PoseStack poseStack, @Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         SpecialBaseSpawner spawner = blockEntity.getSpawner();
-        Entity entity = spawner.getOrCreateDisplayEntity(Objects.requireNonNull(blockEntity.getLevel()));
+        Entity entity = spawner.getOrCreateDisplayEntity(Objects.requireNonNull(blockEntity.getLevel()), blockEntity.getBlockPos());
 
         if (entity != null) {
             poseStack.pushPose();
@@ -47,7 +50,7 @@ public class SpecialSpawnerRenderer implements BlockEntityRenderer<SpecialSpawne
             poseStack.translate(0.0D, -0.2F, 0.0D);
             poseStack.mulPose(Axis.XP.rotationDegrees(-30.0F));
             poseStack.scale(f, f, f);
-            Minecraft.getInstance().getEntityRenderDispatcher().render(entity, 0.0D, 0.0D, 0.0D, 0.0F, partialTicks, poseStack, buffer, combinedLight);
+            this.entityRenderer.render(entity, 0.0D, 0.0D, 0.0D, partialTicks, poseStack, buffer, combinedLight);
 
             poseStack.popPose();
         }

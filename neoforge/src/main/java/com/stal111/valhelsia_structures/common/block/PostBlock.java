@@ -5,13 +5,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -74,14 +73,13 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
         return Objects.requireNonNull(super.getStateForPlacement(context)).setValue(WATERLOGGED, flag);
     }
 
-    @Nonnull
     @Override
-    public BlockState updateShape(@Nonnull BlockState state, @Nonnull Direction facing, @Nonnull BlockState facingState, @Nonnull LevelAccessor level, @Nonnull BlockPos currentPos, @Nonnull BlockPos facingPos) {
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess scheduledTickAccess, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
         if (state.getValue(WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+            scheduledTickAccess.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
 
-        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+        return super.updateShape(state, level, scheduledTickAccess, pos, direction, neighborPos, neighborState, random);
     }
 
     private boolean shouldAttach(Level world, BlockPos pos) {
@@ -97,13 +95,14 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
         }
 
         if (itemAbility == ItemAbilities.AXE_STRIP) {
-            return BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "stripped_" + location.getPath())).defaultBlockState()
+            return BuiltInRegistries.BLOCK.getValue(ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "stripped_" + location.getPath())).defaultBlockState()
                     .setValue(AXIS, state.getValue(AXIS))
                     .setValue(ATTACHED, state.getValue(ATTACHED))
                     .setValue(WATERLOGGED, state.getValue(WATERLOGGED));
         }
 
-        return null;    }
+        return null;
+    }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {

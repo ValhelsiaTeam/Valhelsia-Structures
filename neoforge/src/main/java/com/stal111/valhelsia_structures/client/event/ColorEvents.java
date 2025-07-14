@@ -17,7 +17,7 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
  * @author Valhelsia Team
  * @since 2022-10-24
  */
-@EventBusSubscriber(value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT)
 public class ColorEvents {
 
     @SubscribeEvent

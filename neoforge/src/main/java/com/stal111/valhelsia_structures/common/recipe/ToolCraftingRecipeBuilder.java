@@ -5,14 +5,14 @@ import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 
@@ -44,21 +44,6 @@ public class ToolCraftingRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public void save(@NotNull RecipeOutput output) {
-        this.save(output, BuiltInRegistries.ITEM.getKey(this.result));
-    }
-
-    @Override
-    public void save(@NotNull RecipeOutput output, @NotNull String location) {
-        ResourceLocation resourcelocation = BuiltInRegistries.ITEM.getKey(this.result);
-        if (ResourceLocation.parse(location).equals(resourcelocation)) {
-            throw new IllegalStateException("Axe Crafting Recipe " + location + " should remove its 'save' argument");
-        } else {
-            this.save(output, ResourceLocation.parse(location));
-        }
-    }
-
-    @Override
     public @NotNull RecipeBuilder unlockedBy(@NotNull String criterionName, @NotNull Criterion<?> criterion) {
         this.criteria.put(criterionName, criterion);
 
@@ -77,24 +62,25 @@ public class ToolCraftingRecipeBuilder implements RecipeBuilder {
         return this.result;
     }
 
-    public void save(RecipeOutput output, @NotNull ResourceLocation id) {
-        this.ensureValid(id);
-
-        ToolCraftingRecipe recipe = new ToolCraftingRecipe(RecipeBuilder.determineBookCategory(this.category), this.input, this.tool, new ItemStack(this.result, this.count));
+    @Override
+    public void save(RecipeOutput output, ResourceKey<Recipe<?>> resourceKey) {
+        this.ensureValid(resourceKey);
 
         Advancement.Builder builder = output.advancement()
-                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
-                .rewards(AdvancementRewards.Builder.recipe(id))
+                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(resourceKey))
+                .rewards(AdvancementRewards.Builder.recipe(resourceKey))
                 .requirements(AdvancementRequirements.Strategy.OR);
 
         this.criteria.forEach(builder::addCriterion);
 
-        output.accept(id, recipe, builder.build(id.withPrefix("recipes/" + this.category.getFolderName() + "/")));
+        ToolCraftingRecipe recipe = new ToolCraftingRecipe(RecipeBuilder.determineBookCategory(this.category), this.input, this.tool, new ItemStack(this.result, this.count));
+
+        output.accept(resourceKey, recipe, builder.build(resourceKey.location().withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 
-    private void ensureValid(ResourceLocation id) {
+    private void ensureValid(ResourceKey<Recipe<?>> recipe) {
         if (this.criteria.isEmpty()) {
-            throw new IllegalStateException("No way of obtaining recipe " + id);
+            throw new IllegalStateException("No way of obtaining recipe " + recipe.location());
         }
     }
 }

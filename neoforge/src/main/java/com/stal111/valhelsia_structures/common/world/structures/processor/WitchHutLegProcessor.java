@@ -27,9 +27,7 @@ public class WitchHutLegProcessor extends StructureProcessor {
 
     public static final WitchHutLegProcessor INSTANCE = new WitchHutLegProcessor();
 
-    public static final MapCodec<WitchHutLegProcessor> CODEC = MapCodec.unit(() -> {
-        return WitchHutLegProcessor.INSTANCE;
-    });
+    public static final MapCodec<WitchHutLegProcessor> CODEC = MapCodec.unit(() -> WitchHutLegProcessor.INSTANCE);
 
     /**
      * Use {@link WitchHutLegProcessor#INSTANCE} instead of creating a new processor instance.
@@ -51,7 +49,7 @@ public class WitchHutLegProcessor extends StructureProcessor {
                     BlockPos.MutableBlockPos mutable = relativeBlockInfo.pos().below().mutable();
                     BlockState currentState = level.getBlockState(mutable);
 
-                    while (mutable.getY() > level.getMinBuildHeight() && mutable.getY() < level.getMaxBuildHeight() && (currentState.isAir() || !currentState.getFluidState().isEmpty())) {
+                    while (mutable.getY() > level.getMinY() && mutable.getY() < level.getMaxY() && (currentState.isAir() || !currentState.getFluidState().isEmpty())) {
                         level.getChunk(mutable).setBlockState(mutable, ModBlocks.WOODEN_POSTS.get(ModBlocks.WoodType.OAK).get().defaultBlockState()
                                         .setValue(BlockStateProperties.WATERLOGGED, currentState.hasProperty(BlockStateProperties.WATERLOGGED) && currentState.getValue(BlockStateProperties.WATERLOGGED))
                                         .setValue(BlockStateProperties.AXIS, Direction.Axis.Y),
@@ -69,7 +67,7 @@ public class WitchHutLegProcessor extends StructureProcessor {
                     BlockPos.MutableBlockPos mutable = relativeBlockInfo.pos().below().mutable();
                     BlockState currentState = level.getBlockState(mutable);
 
-                    while (mutable.getY() > level.getMinBuildHeight() && mutable.getY() < level.getMaxBuildHeight() && (currentState.isAir() || !currentState.getFluidState().isEmpty())) {
+                    while (mutable.getY() > level.getMinY() && mutable.getY() < level.getMaxY() && (currentState.isAir() || !currentState.getFluidState().isEmpty())) {
                         level.getChunk(mutable).setBlockState(mutable, Blocks.OAK_LOG.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y), false);
 
                         mutable.move(Direction.DOWN);

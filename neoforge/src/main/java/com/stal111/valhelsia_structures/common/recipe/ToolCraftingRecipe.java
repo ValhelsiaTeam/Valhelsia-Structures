@@ -10,10 +10,12 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * Axe Crafting Recipe <br>
@@ -29,7 +31,12 @@ public record ToolCraftingRecipe(
         CraftingBookCategory category,
         Ingredient ingredient,
         Ingredient tool,
-        ItemStack result) implements CraftingRecipe {
+        ItemStack result,
+        PlacementInfo placementInfo) implements CraftingRecipe {
+
+    public ToolCraftingRecipe(CraftingBookCategory category, Ingredient ingredient, Ingredient tool, ItemStack result) {
+        this(category, ingredient, tool, result, PlacementInfo.create(List.of(ingredient, tool)));
+    }
 
     @Override
     public boolean matches(CraftingInput input, @Nonnull Level level) {
@@ -107,28 +114,27 @@ public record ToolCraftingRecipe(
     }
 
     @Override
-    public boolean canCraftInDimensions(int width, int height) {
-        return width * height >= 2;
-    }
-
-    @Override
-    public @NotNull ItemStack getResultItem(HolderLookup.@NotNull Provider registries) {
-        return this.result;
-    }
-
-    @Nonnull
-    @Override
-    public RecipeSerializer<?> getSerializer() {
+    public @NotNull RecipeSerializer<? extends CraftingRecipe> getSerializer() {
         return ModRecipes.TOOL_CRAFTING_SERIALIZER.get();
+    }
+
+    @Override
+    public @NotNull PlacementInfo placementInfo() {
+        return this.placementInfo;
+    }
+
+    @Override
+    public @NotNull List<RecipeDisplay> display() {
+        return CraftingRecipe.super.display();
     }
 
     public static class Serializer implements RecipeSerializer<ToolCraftingRecipe> {
 
         private static final MapCodec<ToolCraftingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                CraftingBookCategory.CODEC.fieldOf("category").forGetter(ToolCraftingRecipe::category),
-                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(ToolCraftingRecipe::ingredient),
-                Ingredient.CODEC_NONEMPTY.fieldOf("tool").forGetter(ToolCraftingRecipe::tool),
-                net.minecraft.world.item.ItemStack.CODEC.fieldOf("result").forGetter(ToolCraftingRecipe::result)
+                CraftingBookCategory.CODEC.optionalFieldOf("category", CraftingBookCategory.MISC).forGetter(ToolCraftingRecipe::category),
+                Ingredient.CODEC.fieldOf("ingredient").forGetter(ToolCraftingRecipe::ingredient),
+                Ingredient.CODEC.fieldOf("tool").forGetter(ToolCraftingRecipe::tool),
+                ItemStack.CODEC.fieldOf("result").forGetter(ToolCraftingRecipe::result)
         ).apply(instance, ToolCraftingRecipe::new));
 
         private static final StreamCodec<RegistryFriendlyByteBuf, ToolCraftingRecipe> STREAM_CODEC = StreamCodec.composite(

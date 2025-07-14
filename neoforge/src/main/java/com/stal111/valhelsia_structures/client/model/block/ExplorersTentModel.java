@@ -36,7 +36,7 @@ public class ExplorersTentModel extends Model {
 	private final ModelPart leftFrontHook;
 
 	public ExplorersTentModel(ModelPart root) {
-		super(RenderType::entityCutoutNoCull);
+		super(root, RenderType::entityCutoutNoCull);
 		this.stick = root.getChild("stick");
 		this.frontStick = root.getChild("frontStick");
 		this.backStick = root.getChild("backStick");
@@ -66,12 +66,6 @@ public class ExplorersTentModel extends Model {
 		partDefinition.addOrReplaceChild("leftFrontHook", leftHook, PartPose.offset(20.0F, 24.0F, -17.0F));
 
 		return LayerDefinition.create(meshDefinition, 128, 128);
-	}
-
-	@Override
-	public void renderToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-		stick.getChild("leftSlope").render(poseStack, buffer, packedLight, packedOverlay, color);
-		stick.getChild("rightSlope").render(poseStack, buffer, packedLight, packedOverlay, color);
 	}
 
 	public void renderSticksToBuffer(@Nonnull PoseStack poseStack, @Nonnull VertexConsumer buffer, int packedLight, int packedOverlay) {

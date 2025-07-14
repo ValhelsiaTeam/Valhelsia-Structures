@@ -24,7 +24,7 @@ public class FlintAndSteelRegistry {
                 state -> state.getBlock() instanceof BrazierBlock && !state.getValue(BlockStateProperties.LIT) && !state.getValue(BlockStateProperties.WATERLOGGED),
                 state -> state.getBlock().defaultBlockState(),
                 (player, level, blockPos) -> level.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F),
-                level -> InteractionResult.sidedSuccess(level.isClientSide())
+                level -> InteractionResult.SUCCESS
         );
 
         FlintAndSteelHelper.addUse(
@@ -37,14 +37,14 @@ public class FlintAndSteelRegistry {
                     return newState;
                 },
                 (player, level, blockPos) -> level.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F),
-                level -> InteractionResult.sidedSuccess(level.isClientSide())
+                level -> InteractionResult.SUCCESS
         );
 
         FlintAndSteelHelper.addUse(
                 state -> state.getBlock() instanceof UnlitLanternBlock,
                 state -> ((UnlitLanternBlock) state.getBlock()).getLitLantern().defaultBlockState().setValue(BlockStateProperties.HANGING, state.getValue(BlockStateProperties.HANGING)).setValue(BlockStateProperties.WATERLOGGED, state.getValue(BlockStateProperties.WATERLOGGED)),
                 (player, level, blockPos) -> level.playSound(player, blockPos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F),
-                level -> InteractionResult.sidedSuccess(level.isClientSide())
+                level -> InteractionResult.SUCCESS
         );
     }
 }

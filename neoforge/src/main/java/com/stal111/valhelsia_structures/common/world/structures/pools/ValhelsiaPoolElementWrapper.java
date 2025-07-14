@@ -53,7 +53,7 @@ public class ValhelsiaPoolElementWrapper extends StructurePoolElement {
     }
 
     @Override
-    public List<StructureTemplate.StructureBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager structureTemplateManager, BlockPos pos, Rotation rotation, RandomSource random) {
+    public List<StructureTemplate.JigsawBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager structureTemplateManager, BlockPos pos, Rotation rotation, RandomSource random) {
         return this.element.getShuffledJigsawBlocks(structureTemplateManager, pos, rotation, random);
     }
 
@@ -102,7 +102,7 @@ public class ValhelsiaPoolElementWrapper extends StructurePoolElement {
                 };
 
                 if (entityType != null) {
-                    blockEntity.getSpawner().setEntityId(entityType);
+                    blockEntity.getSpawner().setEntityId(entityType, null, random, pos);
                 }
             }
         } else if (data.equals("sculk_sensor")) {
