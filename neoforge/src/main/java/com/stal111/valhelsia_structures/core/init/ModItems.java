@@ -20,7 +20,7 @@ public class ModItems implements RegistryClass {
 
     public static final ItemRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getItemHelper();
 
-    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_TORCH = HELPER.register("doused_torch", (properties) -> new StandingAndWallBlockItem(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get(), Direction.DOWN, properties), Item.Properties::new);
-    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_SOUL_TORCH = HELPER.register("doused_soul_torch", (properties) -> new StandingAndWallBlockItem(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get(), Direction.DOWN, properties), Item.Properties::new);
+    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_TORCH = HELPER.register("doused_torch", (properties) -> new StandingAndWallBlockItem(ModBlocks.UNLIT_TORCH.get(), ModBlocks.UNLIT_WALL_TORCH.get(), Direction.DOWN, properties), ()-> new Item.Properties().overrideDescription(ModBlocks.UNLIT_TORCH.get().getDescriptionId()));
+    public static final RegistryEntry<Item, StandingAndWallBlockItem> DOUSED_SOUL_TORCH = HELPER.register("doused_soul_torch", (properties) -> new StandingAndWallBlockItem(ModBlocks.UNLIT_SOUL_TORCH.get(), ModBlocks.UNLIT_SOUL_WALL_TORCH.get(), Direction.DOWN, properties), ()-> new Item.Properties().overrideDescription(ModBlocks.UNLIT_SOUL_TORCH.get().getDescriptionId()));
 
 }

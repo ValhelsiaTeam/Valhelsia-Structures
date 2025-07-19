@@ -163,6 +163,8 @@
     "block.valhelsia_structures.dungeon_door": "Dungeon Door",
     "block.valhelsia_structures.bone_pile": "Bone Pile",
     "block.valhelsia_structures.bone_pile_block": "Bone Pile Block",
+    "block.valhelsia_structures.unlit_torch": "Unlit Torch",
+    "block.valhelsia_structures.unlit_soul_torch": "Unlit Soul Torch",
     "block.valhelsia_structures.unlit_lantern": "Unlit Lantern",
     "block.valhelsia_structures.unlit_soul_lantern": "Unlit Soul Lantern",
 
