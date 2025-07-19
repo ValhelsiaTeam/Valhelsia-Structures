@@ -48,15 +48,11 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
 
         poseStack.pushPose();
 
-        poseStack.translate(0.5D, 1.8D, 0.5D);
-        poseStack.mulPose(Axis.YP.rotationDegrees(rotation));
+        poseStack.translate(0.5D, 1.5D, 0.5D);
+        poseStack.mulPose(Axis.YP.rotationDegrees(rotation + 90));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
         this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TENT_TEXTURE)), combinedLight, combinedOverlay, blockEntity.getColor());
-
-        poseStack.translate(0.0D, 0.3D, 0.0D);
-        poseStack.mulPose(Axis.YP.rotationDegrees(90));
-
         this.model.renderSticksToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TENT_STICKS_TEXTURE)), combinedLight, combinedOverlay);
 
         poseStack.popPose();
