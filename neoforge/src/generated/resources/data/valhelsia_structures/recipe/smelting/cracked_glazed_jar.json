@@ -3,9 +3,7 @@
   "category": "blocks",
   "cookingtime": 200,
   "experience": 0.1,
-  "ingredient": {
-    "item": "valhelsia_structures:glazed_jar"
-  },
+  "ingredient": "valhelsia_structures:glazed_jar",
   "result": {
     "count": 1,
     "id": "valhelsia_structures:cracked_glazed_jar"

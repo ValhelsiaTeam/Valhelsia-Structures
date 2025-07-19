@@ -3,9 +3,7 @@
   "category": "misc",
   "group": "glazedJar",
   "key": {
-    "#": {
-      "item": "minecraft:lime_terracotta"
-    }
+    "#": "minecraft:lime_terracotta"
   },
   "pattern": [
     "# #",

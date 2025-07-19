@@ -1,14 +1,10 @@
 {
   "type": "valhelsia_structures:tool_crafting",
   "category": "building",
-  "ingredient": {
-    "item": "minecraft:stripped_spruce_log"
-  },
+  "ingredient": "minecraft:stripped_spruce_log",
   "result": {
     "count": 2,
     "id": "valhelsia_structures:stripped_spruce_post"
   },
-  "tool": {
-    "tag": "minecraft:axes"
-  }
+  "tool": "#minecraft:axes"
 }

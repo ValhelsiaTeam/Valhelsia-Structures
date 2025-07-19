@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "valhelsia_structures:light_blue_metal_framed_glass"
-    }
+    "#": "valhelsia_structures:light_blue_metal_framed_glass"
   },
   "pattern": [
     "###",

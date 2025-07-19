@@ -1,14 +1,10 @@
 {
   "type": "valhelsia_structures:tool_crafting",
   "category": "building",
-  "ingredient": {
-    "item": "valhelsia_structures:acacia_post"
-  },
+  "ingredient": "valhelsia_structures:acacia_post",
   "result": {
     "count": 4,
     "id": "valhelsia_structures:cut_acacia_post"
   },
-  "tool": {
-    "tag": "minecraft:axes"
-  }
+  "tool": "#minecraft:axes"
 }

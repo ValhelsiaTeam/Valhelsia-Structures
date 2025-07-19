@@ -5,6 +5,7 @@ import com.stal111.valhelsia_structures.core.init.ModBlocks
 import net.minecraft.core.HolderLookup
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.recipes.RecipeCategory
+import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.tags.ItemTags
@@ -18,8 +19,11 @@ import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
 import net.valhelsia.dataforge.recipe.*
 
-class ModRecipeProvider : RecipeSubProvider() {
-    override fun registerRecipes(lookupProvider: HolderLookup.Provider) {
+class ModRecipeProvider(
+    lookupProvider: HolderLookup.Provider,
+    recipeOutput: RecipeOutput
+) : RecipeSubProvider(lookupProvider, recipeOutput) {
+    override fun buildRecipes() {
         // Crafting Recipes
         this.brazier(ModBlocks.BRAZIER.get(), ItemTags.COALS)
         this.brazier(ModBlocks.SOUL_BRAZIER.get(), ItemTags.SOUL_FIRE_BASE_BLOCKS)
@@ -35,7 +39,7 @@ class ModRecipeProvider : RecipeSubProvider() {
                 ToolCraftingRecipeBuilder(
                     RecipeCategory.BUILDING_BLOCKS,
                     Ingredient.of(logBlock),
-                    Ingredient.of(ItemTags.AXES),
+                    Ingredient.of(this.items.getOrThrow(ItemTags.AXES)),
                     postBlock,
                     2
                 ).unlockedBy(logBlock)
@@ -44,7 +48,7 @@ class ModRecipeProvider : RecipeSubProvider() {
                 ToolCraftingRecipeBuilder(
                     RecipeCategory.BUILDING_BLOCKS,
                     Ingredient.of(strippedLogBlock),
-                    Ingredient.of(ItemTags.AXES),
+                    Ingredient.of(this.items.getOrThrow(ItemTags.AXES)),
                     strippedPostBlock,
                     2
                 ).unlockedBy(strippedLogBlock)
@@ -54,7 +58,7 @@ class ModRecipeProvider : RecipeSubProvider() {
                 ToolCraftingRecipeBuilder(
                     RecipeCategory.BUILDING_BLOCKS,
                     Ingredient.of(postBlock),
-                    Ingredient.of(ItemTags.AXES),
+                    Ingredient.of(this.items.getOrThrow(ItemTags.AXES)),
                     ModBlocks.CUT_WOODEN_POSTS[woodType]!!.get(),
                     4
                 ).unlockedBy(postBlock)
@@ -63,7 +67,7 @@ class ModRecipeProvider : RecipeSubProvider() {
                 ToolCraftingRecipeBuilder(
                     RecipeCategory.BUILDING_BLOCKS,
                     Ingredient.of(strippedPostBlock),
-                    Ingredient.of(ItemTags.AXES),
+                    Ingredient.of(this.items.getOrThrow(ItemTags.AXES)),
                     ModBlocks.CUT_STRIPPED_WOODEN_POSTS[woodType]!!.get(),
                     4
                 ).unlockedBy(strippedPostBlock)
@@ -75,7 +79,7 @@ class ModRecipeProvider : RecipeSubProvider() {
 
         ModBlocks.COLORED_METAL_FRAMED_GLASS.forEach { color, entry ->
             val block =
-                BuiltInRegistries.BLOCK[ResourceLocation.withDefaultNamespace(color.serializedName + "_stained_glass")]
+                BuiltInRegistries.BLOCK.getValue(ResourceLocation.withDefaultNamespace(color.serializedName + "_stained_glass"))
             this.metalFramedGlass(entry.get(), block)
         }
 
@@ -118,7 +122,7 @@ class ModRecipeProvider : RecipeSubProvider() {
 
         ModBlocks.COLORED_GLAZED_JARS.values.forEach {
             val name = BuiltInRegistries.BLOCK.getKey(it.get()).path.replace("glazed_jar", "terracotta")
-            val block = BuiltInRegistries.BLOCK[ResourceLocation.withDefaultNamespace(name)]
+            val block = BuiltInRegistries.BLOCK.getValue(ResourceLocation.withDefaultNamespace(name))
             this.glazedJar(it.get(), block)
         }
 
@@ -141,7 +145,7 @@ class ModRecipeProvider : RecipeSubProvider() {
         val whiteSleepingBag = ModBlocks.SLEEPING_BAGS[DyeColor.WHITE]!!.get()
 
         ModBlocks.SLEEPING_BAGS.forEach { color, entry ->
-            val block = BuiltInRegistries.BLOCK[ResourceLocation.withDefaultNamespace(color.serializedName + "_wool")]
+            val block = BuiltInRegistries.BLOCK.getValue(ResourceLocation.withDefaultNamespace(color.serializedName + "_wool"))
             this.singleRow(RecipeCategory.DECORATIONS, entry.get(), block)
             if (color != DyeColor.WHITE) {
                 this.shapeless(

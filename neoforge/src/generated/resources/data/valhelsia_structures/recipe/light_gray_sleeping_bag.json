@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "minecraft:light_gray_wool"
-    }
+    "#": "minecraft:light_gray_wool"
   },
   "pattern": [
     "###"

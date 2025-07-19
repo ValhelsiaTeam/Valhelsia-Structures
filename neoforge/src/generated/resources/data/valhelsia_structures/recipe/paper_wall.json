@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "minecraft:bamboo"
-    },
-    "X": {
-      "item": "minecraft:paper"
-    }
+    "#": "minecraft:bamboo",
+    "X": "minecraft:paper"
   },
   "pattern": [
     "#X#",

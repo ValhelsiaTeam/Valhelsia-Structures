@@ -3,9 +3,7 @@
   "category": "building",
   "group": "bone_pile",
   "key": {
-    "#": {
-      "item": "minecraft:bone"
-    }
+    "#": "minecraft:bone"
   },
   "pattern": [
     "###"

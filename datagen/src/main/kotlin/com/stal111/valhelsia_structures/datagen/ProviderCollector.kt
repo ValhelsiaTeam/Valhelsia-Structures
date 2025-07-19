@@ -11,12 +11,7 @@ import com.stal111.valhelsia_structures.datagen.tags.ModStructureTagsProvider
 import com.stal111.valhelsia_structures.datagen.worldgen.processors.ModProcessorLists
 import com.stal111.valhelsia_structures.datagen.worldgen.structure.ModStructureSets
 import com.stal111.valhelsia_structures.datagen.worldgen.structure.ModStructures
-import com.stal111.valhelsia_structures.datagen.worldgen.structure.pools.BigTreePools
-import com.stal111.valhelsia_structures.datagen.worldgen.structure.pools.DesertHousePools
-import com.stal111.valhelsia_structures.datagen.worldgen.structure.pools.MobPools
-import com.stal111.valhelsia_structures.datagen.worldgen.structure.pools.PlayerHousePools
-import com.stal111.valhelsia_structures.datagen.worldgen.structure.pools.SimpleStructurePools
-import com.stal111.valhelsia_structures.datagen.worldgen.structure.pools.SpawnerDungeonPools
+import com.stal111.valhelsia_structures.datagen.worldgen.structure.pools.*
 import net.minecraft.core.registries.Registries
 import net.minecraft.data.loot.LootTableProvider
 import net.minecraft.resources.ResourceKey
@@ -26,7 +21,7 @@ import net.valhelsia.dataforge.DataCollector
 import net.valhelsia.dataforge.DataProviderContext
 import net.valhelsia.dataforge.DataTarget
 import net.valhelsia.dataforge.model.DataForgeModelProvider
-import net.valhelsia.dataforge.recipe.DataForgeRecipeProvider
+import net.valhelsia.dataforge.recipe.DataForgeRecipeRunner
 
 class ProviderCollector : DataCollector() {
     override fun collectProviders(context: DataProviderContext) {
@@ -42,7 +37,7 @@ class ProviderCollector : DataCollector() {
             addProvider(this, ModItemTagsProvider(context))
             addProvider(this, ModBiomeTagsProvider(context))
             addProvider(this, ModStructureTagsProvider(context))
-            addProvider(this, DataForgeRecipeProvider(context, ModRecipeProvider()))
+            addProvider(this, DataForgeRecipeRunner(context, ::ModRecipeProvider))
             addProvider(
                 this, LootTableProvider(
                     context.packOutput, setOf<ResourceKey<LootTable>>(), listOf(

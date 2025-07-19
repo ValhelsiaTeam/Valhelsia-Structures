@@ -75,7 +75,7 @@ dependencies {
     compileOnly(mainProject)
 
     implementation("net.valhelsia:valhelsia_core-neoforge-${minecraft_version}:${valhelsia_core_version}")
-    implementation("thedarkcolour:kotlinforforge-neoforge:5.7.0")
+    implementation("thedarkcolour:kotlinforforge-neoforge:5.9.0")
 
-    implementation(interfaceInjectionData("net.valhelsia:dataforge:${dataforge_version}")!!)
+    implementation(interfaceInjectionData(accessTransformers("net.valhelsia:dataforge:${dataforge_version}")!!)!!)
 }

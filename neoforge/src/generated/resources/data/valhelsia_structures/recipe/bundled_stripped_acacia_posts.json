@@ -2,9 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "#": {
-      "item": "valhelsia_structures:stripped_acacia_post"
-    }
+    "#": "valhelsia_structures:stripped_acacia_post"
   },
   "pattern": [
     "##",

@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
   "ingredients": [
-    {
-      "item": "valhelsia_structures:white_sleeping_bag"
-    },
-    {
-      "tag": "c:dyes/green"
-    }
+    "valhelsia_structures:white_sleeping_bag",
+    "#c:dyes/green"
   ],
   "result": {
     "count": 1,

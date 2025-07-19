@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.common.recipe;
 
+import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.stal111.valhelsia_structures.core.init.ModRecipes;
@@ -16,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Axe Crafting Recipe <br>
@@ -32,10 +34,10 @@ public record ToolCraftingRecipe(
         Ingredient ingredient,
         Ingredient tool,
         ItemStack result,
-        PlacementInfo placementInfo) implements CraftingRecipe {
+        Supplier<PlacementInfo> placementInfoSupplier) implements CraftingRecipe {
 
     public ToolCraftingRecipe(CraftingBookCategory category, Ingredient ingredient, Ingredient tool, ItemStack result) {
-        this(category, ingredient, tool, result, PlacementInfo.create(List.of(ingredient, tool)));
+        this(category, ingredient, tool, result, Suppliers.memoize(() -> PlacementInfo.create(List.of(ingredient, tool))));
     }
 
     @Override
@@ -120,7 +122,7 @@ public record ToolCraftingRecipe(
 
     @Override
     public @NotNull PlacementInfo placementInfo() {
-        return this.placementInfo;
+        return this.placementInfoSupplier.get();
     }
 
     @Override
