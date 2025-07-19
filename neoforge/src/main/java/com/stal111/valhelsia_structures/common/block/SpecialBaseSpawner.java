@@ -7,7 +7,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.SimpleWeightedRandomList;
@@ -23,7 +22,6 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -61,16 +59,16 @@ public abstract class SpecialBaseSpawner implements IOwnedSpawner {
     }
 
     private boolean isNearPlayer(Level pLevel, BlockPos pPos) {
-        return pLevel.hasNearbyAlivePlayer((double) pPos.getX() + 0.5D, (double) pPos.getY() + 0.5D, (double) pPos.getZ() + 0.5D, this.requiredPlayerRange);
+        return pLevel.hasNearbyAlivePlayer(pPos.getX() + 0.5D,  pPos.getY() + 0.5D, pPos.getZ() + 0.5D, this.requiredPlayerRange);
     }
 
     public void clientTick(Level level, BlockPos pos) {
         if (!this.isNearPlayer(level, pos)) {
             this.oSpin = this.spin;
-        } else {
-            double d0 = (double) pos.getX() + level.random.nextDouble();
-            double d1 = (double) pos.getY() + level.random.nextDouble();
-            double d2 = (double) pos.getZ() + level.random.nextDouble();
+        } else if (this.displayEntity != null) {
+            double d0 = pos.getX() + level.random.nextDouble();
+            double d1 = pos.getY() + level.random.nextDouble();
+            double d2 = pos.getZ() + level.random.nextDouble();
             level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
             level.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
             if (this.spawnDelay > 0) {
