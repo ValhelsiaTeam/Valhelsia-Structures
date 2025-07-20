@@ -3,7 +3,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:furnished/desert_house/desert_house",
           "processors": "minecraft:empty",
           "projection": "rigid"

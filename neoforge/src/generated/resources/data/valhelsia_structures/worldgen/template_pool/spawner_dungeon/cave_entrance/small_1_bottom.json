@@ -3,9 +3,9 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:spawner_dungeon/cave_entrance/small_1_bottom",
-          "processors": "minecraft:empty",
+          "processors": "valhelsia_structures:spawner_dungeon",
           "projection": "rigid"
         },
         "element_type": "valhelsia_structures:valhelsia_pool_element_wrapper"

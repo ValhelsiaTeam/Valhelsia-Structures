@@ -1,6 +1,7 @@
 package com.stal111.valhelsia_structures.core.init.world;
 
 import com.stal111.valhelsia_structures.common.world.structures.processor.SpawnerRoomLegProcessor;
+import com.stal111.valhelsia_structures.common.world.structures.processor.StructureDataProcessor;
 import com.stal111.valhelsia_structures.common.world.structures.processor.WitchHutLegProcessor;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.registries.Registries;
@@ -19,5 +20,6 @@ public class ModStructureProcessors implements RegistryClass {
 
     public static final RegistryEntry<StructureProcessorType<?>, StructureProcessorType<SpawnerRoomLegProcessor>> SPAWNER_ROOM_LEG = HELPER.register("spawner_room_leg", () -> () -> SpawnerRoomLegProcessor.CODEC);
     public static final RegistryEntry<StructureProcessorType<?>, StructureProcessorType<WitchHutLegProcessor>> WITCH_HUT_LEG = HELPER.register("witch_hut_leg", () -> () -> WitchHutLegProcessor.CODEC);
+    public static final RegistryEntry<StructureProcessorType<?>, StructureProcessorType<StructureDataProcessor>> STRUCTURE_DATA = HELPER.register("structure_data", () -> () -> StructureDataProcessor.CODEC);
 
 }

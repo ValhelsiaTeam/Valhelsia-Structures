@@ -12,6 +12,9 @@
           "waterlogged": "false"
         }
       }
+    },
+    {
+      "processor_type": "valhelsia_structures:structure_data"
     }
   ]
 }

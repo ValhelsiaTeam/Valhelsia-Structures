@@ -1,5 +1,6 @@
 package com.stal111.valhelsia_structures.datagen.worldgen.structure.pools
 
+import com.stal111.valhelsia_structures.common.builtin.BuiltInProcessorLists
 import com.stal111.valhelsia_structures.common.builtin.BuiltInStructurePools
 import com.stal111.valhelsia_structures.utils.TemplatePoolHelper
 import net.minecraft.data.worldgen.BootstrapContext
@@ -16,52 +17,58 @@ object SpawnerDungeonPools : RegistryDataProvider<StructureTemplatePool> {
             HELPER,
             context,
             "spawner_dungeon/cave_entrance",
-            { it.element("large").element("small_1").element("small_2").element("small_3") },
+            {
+                it.element("large").element("small_1").element("small_2").element("small_3")
+                    .processors(BuiltInProcessorLists.SPAWNER_DUNGEON)
+            },
             TerrainAdjustment.BEARD_THIN
         )
         HELPER.create(
             "spawner_dungeon/cave_entrance/large_bottom",
             context,
             "spawner_dungeon/cave_entrance"
-        ) { it.element("large_bottom") }
+        ) { it.element("large_bottom").processors(BuiltInProcessorLists.SPAWNER_DUNGEON) }
         HELPER.create(
             "spawner_dungeon/cave_entrance/small_1_bottom",
             context,
             "spawner_dungeon/cave_entrance"
-        ) { it.element("small_1_bottom") }
+        ) { it.element("small_1_bottom").processors(BuiltInProcessorLists.SPAWNER_DUNGEON) }
         HELPER.create(
             "spawner_dungeon/cave_entrance/small_2_bottom",
             context,
             "spawner_dungeon/cave_entrance"
-        ) { it.element("small_2_bottom") }
+        ) { it.element("small_2_bottom").processors(BuiltInProcessorLists.SPAWNER_DUNGEON) }
         HELPER.create(
             "spawner_dungeon/cave_entrance/small_3_bottom",
             context,
             "spawner_dungeon/cave_entrance"
-        ) { it.element("small_3_bottom") }
+        ) { it.element("small_3_bottom").processors(BuiltInProcessorLists.SPAWNER_DUNGEON) }
         HELPER.create("spawner_dungeon/caves", context, "spawner_dungeon/cave") {
-            it.element("cave_1").element("cave_2")
+            it.element("cave_1").element("cave_2").processors(BuiltInProcessorLists.SPAWNER_DUNGEON)
         }
         HELPER.create("spawner_dungeon/entrances", context, "spawner_dungeon/entrance") {
-            it.element("entrance_1").element("entrance_2")
+            it.element("entrance_1").element("entrance_2").processors(BuiltInProcessorLists.SPAWNER_DUNGEON)
         }
         HELPER.create("spawner_dungeon/main_rooms", context, "spawner_dungeon/main_room") {
             it.element("main_room_1").element("main_room_2").element("main_room_3")
+                .processors(BuiltInProcessorLists.SPAWNER_DUNGEON)
         }
         HELPER.create("spawner_dungeon/side_rooms", context, "spawner_dungeon/side_room") {
             it.element("side_room_1").element("side_room_2").element("side_room_3").element("side_room_4")
+                .processors(BuiltInProcessorLists.SPAWNER_DUNGEON)
         }
         HELPER.create("spawner_dungeon/spawner_rooms", context, "spawner_dungeon/spawner_room") {
             it.element("zombie_spawner_room").element("skeleton_spawner_room").element("spider_spawner_room")
+                .processors(BuiltInProcessorLists.SPAWNER_DUNGEON)
         }
 
         HELPER.create("spawner_dungeon/stairs", context, "spawner_dungeon/stairs") {
             it.element("stairs_1").element("stairs_2").element("stairs_3").element("stairs_4").element("stairs_5")
-                .element("stairs_6")
+                .element("stairs_6").processors(BuiltInProcessorLists.SPAWNER_DUNGEON)
         }
         HELPER.create("spawner_dungeon/passages", context, "spawner_dungeon/passage") {
             it.element("passage_1").element("passage_2").element("passage_3").element("passage_4").element("passage_5")
-                .element("passage_6")
+                .element("passage_6").processors(BuiltInProcessorLists.SPAWNER_DUNGEON)
         }
     }
 }

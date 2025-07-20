@@ -3,7 +3,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/spawners/skeleton",
           "processors": "minecraft:empty",
           "projection": "rigid"

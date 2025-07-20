@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.datagen.worldgen.processors
 
 import com.stal111.valhelsia_structures.common.builtin.BuiltInProcessorLists
 import com.stal111.valhelsia_structures.common.world.structures.processor.SpawnerRoomLegProcessor
+import com.stal111.valhelsia_structures.common.world.structures.processor.StructureDataProcessor
 import com.stal111.valhelsia_structures.common.world.structures.processor.WitchHutLegProcessor
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
@@ -16,21 +17,28 @@ object ModProcessorLists : RegistryDataProvider<StructureProcessorList> {
     override fun bootstrap(context: BootstrapContext<StructureProcessorList>): Unit = context.run {
         register(
             BuiltInProcessorLists.WITCH_HUT,
-            WitchHutLegProcessor.INSTANCE
+            WitchHutLegProcessor.INSTANCE,
+            StructureDataProcessor.INSTANCE
         )
         register(
             BuiltInProcessorLists.SPAWNER_ROOM,
             SpawnerRoomLegProcessor(
                 Blocks.COBBLESTONE.defaultBlockState(),
                 Blocks.COBBLESTONE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP)
-            )
+            ),
+            StructureDataProcessor.INSTANCE
         )
         register(
             BuiltInProcessorLists.DEEP_SPAWNER_ROOM,
             SpawnerRoomLegProcessor(
                 Blocks.COBBLED_DEEPSLATE.defaultBlockState(),
                 Blocks.COBBLED_DEEPSLATE_SLAB.defaultBlockState().setValue(SlabBlock.TYPE, SlabType.TOP)
-            )
+            ),
+            StructureDataProcessor.INSTANCE
+        )
+        register(
+            BuiltInProcessorLists.SPAWNER_DUNGEON,
+            StructureDataProcessor.INSTANCE
         )
     }
 

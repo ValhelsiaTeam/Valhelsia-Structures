@@ -1,16 +1,22 @@
 package com.stal111.valhelsia_structures.utils;
 
+import com.mojang.datafixers.util.Either;
 import com.stal111.valhelsia_structures.common.world.structures.pools.ValhelsiaPoolElementWrapper;
+import com.stal111.valhelsia_structures.common.world.structures.pools.ValhelsiaSinglePoolElement;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
-import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
 import net.valhelsia.valhelsia_core.api.common.world.structure.jigsaw.JigsawBuilder;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 //TODO: a bit ugly, find a better approach
@@ -20,9 +26,13 @@ public class TemplatePoolHelper {
 
     private final JigsawBuilder.ElementFunction elementFunction = (resourceLocation, holder, projection, terrainAdjustment) -> {
         return projection1 -> {
-            return new ValhelsiaPoolElementWrapper(StructurePoolElement.single(resourceLocation.toString(), holder).apply(projection), terrainAdjustment);
+            return new ValhelsiaPoolElementWrapper(single(resourceLocation.toString(), holder).apply(projection), terrainAdjustment);
         };
     };
+
+    public static Function<StructureTemplatePool.Projection, ValhelsiaSinglePoolElement> single(String id, Holder<StructureProcessorList> processors) {
+        return projection -> new ValhelsiaSinglePoolElement(Either.left(ResourceLocation.parse(id)), processors, projection, Optional.empty());
+    }
 
     public ResourceKey<StructureTemplatePool> createKey(String name) {
         return ResourceKey.create(Registries.TEMPLATE_POOL, ValhelsiaStructures.location(name));
