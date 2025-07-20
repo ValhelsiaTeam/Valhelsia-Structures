@@ -3,7 +3,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/pillager_with_axe_1",
           "processors": "minecraft:empty",
           "projection": "rigid"

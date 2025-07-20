@@ -11,4 +11,5 @@ public class BuiltInProcessorLists {
     public static final ResourceKey<StructureProcessorList> WITCH_HUT = HELPER.createKey("witch_hut");
     public static final ResourceKey<StructureProcessorList> SPAWNER_ROOM = HELPER.createKey("spawner_room");
     public static final ResourceKey<StructureProcessorList> DEEP_SPAWNER_ROOM = HELPER.createKey("deep_spawner_room");
+    public static final ResourceKey<StructureProcessorList> SPAWNER_DUNGEON = HELPER.createKey("spawner_dungeon");
 }

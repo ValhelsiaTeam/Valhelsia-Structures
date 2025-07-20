@@ -3,7 +3,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/special_spawners/zombie",
           "processors": "minecraft:empty",
           "projection": "rigid"
@@ -15,7 +15,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/special_spawners/skeleton",
           "processors": "minecraft:empty",
           "projection": "rigid"
@@ -27,7 +27,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/special_spawners/spider",
           "processors": "minecraft:empty",
           "projection": "rigid"

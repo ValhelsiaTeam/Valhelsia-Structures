@@ -3,7 +3,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:spawner_room/spawner_room_1",
           "processors": "valhelsia_structures:spawner_room",
           "projection": "rigid"
@@ -15,7 +15,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:spawner_room/spawner_room_2",
           "processors": "valhelsia_structures:spawner_room",
           "projection": "rigid"

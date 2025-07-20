@@ -3,7 +3,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/villagers/villager",
           "processors": "minecraft:empty",
           "projection": "rigid"
@@ -15,7 +15,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/villagers/villager_khytwel",
           "processors": "minecraft:empty",
           "projection": "rigid"
@@ -27,7 +27,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/villagers/villager_vaelzan",
           "processors": "minecraft:empty",
           "projection": "rigid"
@@ -39,7 +39,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/villagers/villager_stal",
           "processors": "minecraft:empty",
           "projection": "rigid"
@@ -51,7 +51,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/villagers/villager_cynthal",
           "processors": "minecraft:empty",
           "projection": "rigid"
@@ -63,7 +63,7 @@
     {
       "element": {
         "element": {
-          "element_type": "minecraft:single_pool_element",
+          "element_type": "valhelsia_structures:valhelsia_single_pool_element",
           "location": "valhelsia_structures:mobs/villagers/villager_kanadet",
           "processors": "minecraft:empty",
           "projection": "rigid"
