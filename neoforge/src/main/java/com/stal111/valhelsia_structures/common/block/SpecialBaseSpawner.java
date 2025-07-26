@@ -172,33 +172,16 @@ public abstract class SpecialBaseSpawner {
         boolean flag = tag.contains("SpawnPotentials", 9);
         boolean flag1 = tag.contains("SpawnData", 10);
 
-        if (!flag) {
-            SpawnData spawndata;
-            if (flag1) {
-                spawndata = SpawnData.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("SpawnData")).resultOrPartial((p_186391_) -> {
-                    LOGGER.warn("Invalid SpawnData: {}", p_186391_);
-                }).orElseGet(SpawnData::new);
-            } else {
-                spawndata = new SpawnData();
-            }
-
-            this.spawnPotentials = SimpleWeightedRandomList.single(spawndata);
+        if (tag.contains("SpawnData", 10)) {
+            SpawnData spawndata = SpawnData.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("SpawnData")).resultOrPartial(spawnData -> LOGGER.warn("Invalid SpawnData: {}", spawnData)).orElseGet(SpawnData::new);
             this.setNextSpawnData(level, pos, spawndata);
-        } else {
+        }
+
+        if (tag.contains("SpawnPotentials", 9)) {
             ListTag listtag = tag.getList("SpawnPotentials", 10);
-            this.spawnPotentials = SpawnData.LIST_CODEC.parse(NbtOps.INSTANCE, listtag).resultOrPartial((p_186388_) -> {
-                LOGGER.warn("Invalid SpawnPotentials list: {}", p_186388_);
-            }).orElseGet(SimpleWeightedRandomList::empty);
-            if (flag1) {
-                SpawnData spawnData = SpawnData.CODEC.parse(NbtOps.INSTANCE, tag.getCompound("SpawnData")).resultOrPartial((p_186380_) -> {
-                    LOGGER.warn("Invalid SpawnData: {}", p_186380_);
-                }).orElseGet(SpawnData::new);
-                this.setNextSpawnData(level, pos, spawnData);
-            } else {
-                this.spawnPotentials.getRandom(Objects.requireNonNull(level).getRandom()).ifPresent(dataWrapper -> {
-                    this.setNextSpawnData(level, pos, dataWrapper.data());
-                });
-            }
+            this.spawnPotentials = SpawnData.LIST_CODEC.parse(NbtOps.INSTANCE, listtag).resultOrPartial(spawnPotentials -> LOGGER.warn("Invalid SpawnPotentials list: {}", spawnPotentials)).orElseGet(SimpleWeightedRandomList::empty);
+        } else {
+            this.spawnPotentials = SimpleWeightedRandomList.single(this.nextSpawnData != null ? this.nextSpawnData : new SpawnData());
         }
 
         if (tag.contains("MinSpawnDelay", 99)) {
