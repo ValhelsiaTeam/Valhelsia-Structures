@@ -11,6 +11,15 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "valhelsia_structures:dungeon_door",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "part": "middle_2"
+              }
+            }
+          ],
           "name": "valhelsia_structures:dungeon_door"
         }
       ],

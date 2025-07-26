@@ -3,6 +3,8 @@ package com.stal111.valhelsia_structures.datagen.loot
 import com.stal111.valhelsia_structures.common.block.BonePileBlock
 import com.stal111.valhelsia_structures.common.block.CutPostBlock
 import com.stal111.valhelsia_structures.common.block.SleepingBagBlock
+import com.stal111.valhelsia_structures.common.block.properties.DungeonDoorPart
+import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties
 import com.stal111.valhelsia_structures.core.init.ModBlocks
 import net.minecraft.advancements.critereon.StatePropertiesPredicate
 import net.minecraft.core.HolderLookup
@@ -62,6 +64,9 @@ class ModBlockLoot(lookupProvider: HolderLookup.Provider, val blocks: List<() ->
         dropSelf(ModBlocks.UNLIT_TORCH.get())
         dropSelf(ModBlocks.UNLIT_SOUL_TORCH.get())
         dropSelf(ModBlocks.DUNGEON_DOOR.get())
+        add(ModBlocks.DUNGEON_DOOR.get()) {
+            createSinglePropConditionTable(it, ModBlockStateProperties.DUNGEON_DOOR_PART, DungeonDoorPart.MIDDLE_2)
+        }
 
         add(ModBlocks.BONE_PILE.get()) { createBonePileDrops(it) }
         dropSelf(ModBlocks.BONE_PILE_BLOCK.get())
