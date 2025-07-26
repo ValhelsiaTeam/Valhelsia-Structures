@@ -6,7 +6,6 @@ import com.stal111.valhelsia_structures.core.init.world.ModStructurePoolElementT
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Rotation;
@@ -45,7 +44,7 @@ public class ValhelsiaPoolElementWrapper extends StructurePoolElement {
     }
 
     @Override
-    public List<StructureTemplate.JigsawBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager structureTemplateManager, BlockPos pos, Rotation rotation, RandomSource random) {
+    public List<StructureTemplate.StructureBlockInfo> getShuffledJigsawBlocks(StructureTemplateManager structureTemplateManager, BlockPos pos, Rotation rotation, RandomSource random) {
         return this.element.getShuffledJigsawBlocks(structureTemplateManager, pos, rotation, random);
     }
 
