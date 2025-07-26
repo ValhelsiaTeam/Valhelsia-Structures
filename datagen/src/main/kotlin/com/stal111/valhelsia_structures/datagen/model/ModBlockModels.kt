@@ -14,10 +14,7 @@ import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.models.BlockModelGenerators
 import net.minecraft.data.models.blockstates.*
-import net.minecraft.data.models.model.DelegatedModel
-import net.minecraft.data.models.model.ModelLocationUtils
-import net.minecraft.data.models.model.ModelTemplates
-import net.minecraft.data.models.model.TextureMapping
+import net.minecraft.data.models.model.*
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Items
@@ -56,6 +53,7 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
         this.createHangingVines(ModBlocks.HANGING_VINES.get())
         this.createHangingVines(ModBlocks.HANGING_VINES_BODY.get())
         this.createExplorersTent(ModBlocks.EXPLORERS_TENT.get())
+        defaultGenerators.createTrivialBlock(ModBlocks.DUNGEON_DOOR.get(), TexturedModel.PARTICLE_ONLY)
 
         defaultGenerators.createTrivialCube(ModBlocks.SPECIAL_SPAWNER.get())
         defaultGenerators.createTrivialCube(ModBlocks.BONE_PILE_BLOCK.get())
