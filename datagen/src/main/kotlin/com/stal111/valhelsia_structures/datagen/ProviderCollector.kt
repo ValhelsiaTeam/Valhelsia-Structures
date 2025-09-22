@@ -8,6 +8,7 @@ import com.stal111.valhelsia_structures.datagen.tags.ModBiomeTagsProvider
 import com.stal111.valhelsia_structures.datagen.tags.ModBlockTagsProvider
 import com.stal111.valhelsia_structures.datagen.tags.ModItemTagsProvider
 import com.stal111.valhelsia_structures.datagen.tags.ModStructureTagsProvider
+import com.stal111.valhelsia_structures.datagen.worldgen.modifier.ModBiomeModifiers
 import com.stal111.valhelsia_structures.datagen.worldgen.processors.ModProcessorLists
 import com.stal111.valhelsia_structures.datagen.worldgen.structure.ModStructureSets
 import com.stal111.valhelsia_structures.datagen.worldgen.structure.ModStructures
@@ -17,6 +18,7 @@ import net.minecraft.data.loot.LootTableProvider
 import net.minecraft.resources.ResourceKey
 import net.minecraft.world.level.storage.loot.LootTable
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
+import net.neoforged.neoforge.registries.NeoForgeRegistries
 import net.valhelsia.dataforge.DataCollector
 import net.valhelsia.dataforge.DataProviderContext
 import net.valhelsia.dataforge.DataTarget
@@ -57,5 +59,6 @@ class ProviderCollector : DataCollector() {
             Registries.TEMPLATE_POOL,
             BigTreePools, DesertHousePools, MobPools, PlayerHousePools, SimpleStructurePools, SpawnerDungeonPools
         )
+        addRegistryProvider(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers)
     }
 }
