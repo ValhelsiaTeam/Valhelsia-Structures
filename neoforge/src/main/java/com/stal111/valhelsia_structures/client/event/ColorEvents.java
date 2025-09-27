@@ -20,28 +20,30 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 @EventBusSubscriber(value = Dist.CLIENT)
 public class ColorEvents {
 
-    @SubscribeEvent
-    public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
-        BlockColors blockColors = event.getBlockColors();
 
-        event.register((stack, tintIndex) -> {
-            if (tintIndex == 0) {
-                return DyedItemColor.getOrDefault(stack, ExplorersTentBlockEntity.DEFAULT_COLOR);
-            }
-
-            return -1;
-        }, ModBlocks.EXPLORERS_TENT.get());
-
-        event.register((stack, tintIndex) -> {
-            if (stack.getItem() instanceof BlockItem item) {
-                BlockState state = item.getBlock().defaultBlockState();
-
-                return blockColors.getColor(state, null, null, tintIndex);
-            }
-
-            return -1;
-        }, ModBlocks.HANGING_VINES.get());
-    }
+    //TODO: item colors
+//    @SubscribeEvent
+//    public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
+//        BlockColors blockColors = event.getBlockColors();
+//
+//        event.register((stack, tintIndex) -> {
+//            if (tintIndex == 0) {
+//                return DyedItemColor.getOrDefault(stack, ExplorersTentBlockEntity.DEFAULT_COLOR);
+//            }
+//
+//            return -1;
+//        }, ModBlocks.EXPLORERS_TENT.get());
+//
+//        event.register((stack, tintIndex) -> {
+//            if (stack.getItem() instanceof BlockItem item) {
+//                BlockState state = item.getBlock().defaultBlockState();
+//
+//                return blockColors.getColor(state, null, null, tintIndex);
+//            }
+//
+//            return -1;
+//        }, ModBlocks.HANGING_VINES.get());
+//    }
 
     @SubscribeEvent
     public static void registerBlockColorHandlers(RegisterColorHandlersEvent.Block event) {
@@ -49,7 +51,7 @@ public class ColorEvents {
             if (level != null && pos != null) {
                 return BiomeColors.getAverageFoliageColor(level, pos);
             }
-            return FoliageColor.getDefaultColor();
+            return FoliageColor.FOLIAGE_DEFAULT;
         }, ModBlocks.HANGING_VINES.get(), ModBlocks.HANGING_VINES_BODY.get());
     }
 }

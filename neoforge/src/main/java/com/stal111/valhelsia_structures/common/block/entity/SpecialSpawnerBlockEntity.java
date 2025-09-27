@@ -96,11 +96,6 @@ public class SpecialSpawnerBlockEntity extends BlockEntity implements Spawner {
         return this.spawner.onEventTriggered(Objects.requireNonNull(this.level), id) || super.triggerEvent(id, type);
     }
 
-    @Override
-    public boolean onlyOpCanSetNbt() {
-        return true;
-    }
-
     public SpecialBaseSpawner getSpawner() {
         return this.spawner;
     }

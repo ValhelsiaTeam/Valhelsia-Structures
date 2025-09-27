@@ -4,11 +4,9 @@ import com.stal111.valhelsia_structures.common.block.entity.SpecialSpawnerBlockE
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -16,7 +14,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.HitResult;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -52,10 +49,5 @@ public class SpecialSpawnerBlock extends Block implements EntityBlock {
             return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.SPECIAL_SPAWNER.get(), SpecialSpawnerBlockEntity::clientTick);
         }
         return BaseEntityBlock.createTickerHelper(blockEntityType, ModBlockEntities.SPECIAL_SPAWNER.get(), SpecialSpawnerBlockEntity::serverTick);
-    }
-
-    @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-        return ItemStack.EMPTY;
     }
 }

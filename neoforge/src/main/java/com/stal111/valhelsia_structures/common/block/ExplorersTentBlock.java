@@ -31,6 +31,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -67,10 +68,10 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+    public @NotNull ItemStack getCloneItemStack(@NotNull LevelReader level, @NotNull BlockPos pos, @NotNull BlockState state, boolean includeData, @NotNull Player player) {
         return level.getBlockEntity(pos) instanceof ExplorersTentBlockEntity blockEntity
                 ? blockEntity.getAsItem()
-                : super.getCloneItemStack(state, target, level, pos, player);
+                : super.getCloneItemStack(level, pos, state, includeData, player);
     }
 
     @Nonnull
