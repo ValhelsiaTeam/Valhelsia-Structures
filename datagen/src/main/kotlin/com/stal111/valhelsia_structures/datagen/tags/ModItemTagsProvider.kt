@@ -10,7 +10,7 @@ import net.neoforged.neoforge.common.Tags
 import net.valhelsia.dataforge.DataProviderContext
 import net.valhelsia.dataforge.tag.DataForgeItemTagsProvider
 
-class ModItemTagsProvider(context: DataProviderContext) : DataForgeItemTagsProvider(context) {
+class ModItemTagsProvider(context: DataProviderContext.Server) : DataForgeItemTagsProvider(context) {
     override fun addTags(provider: HolderLookup.Provider) {
         this.copy(ModTags.Blocks.POSTS, ModTags.Items.POSTS)
         this.copy(ModTags.Blocks.CUT_POSTS, ModTags.Items.CUT_POSTS)

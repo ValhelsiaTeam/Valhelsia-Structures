@@ -2,6 +2,7 @@ package com.stal111.valhelsia_structures.datagen.model
 
 import com.stal111.valhelsia_structures.common.block.CutPostBlock
 import com.stal111.valhelsia_structures.common.block.PostBlock
+import com.stal111.valhelsia_structures.common.block.entity.ExplorersTentBlockEntity
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties
 import com.stal111.valhelsia_structures.core.init.ModBlocks
 import com.stal111.valhelsia_structures.datagen.model.ModTextureMapping.brazier
@@ -10,15 +11,16 @@ import com.stal111.valhelsia_structures.datagen.model.ModTextureMapping.jar
 import com.stal111.valhelsia_structures.datagen.model.ModTextureMapping.metalFramedGlassPane
 import com.stal111.valhelsia_structures.datagen.model.ModTextureMapping.post
 import com.stal111.valhelsia_structures.datagen.model.ModTextureMapping.sleepingBag
+import net.minecraft.client.color.item.Dye
+import net.minecraft.client.data.models.BlockModelGenerators
+import net.minecraft.client.data.models.blockstates.*
+import net.minecraft.client.data.models.model.*
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.data.models.BlockModelGenerators
-import net.minecraft.data.models.blockstates.*
-import net.minecraft.data.models.model.*
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.DyeColor
+import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
-import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Block
 import net.minecraft.world.level.block.state.properties.BedPart
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
@@ -27,7 +29,7 @@ import net.valhelsia.dataforge.model.createModel
 
 class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : BlockModelGenerator(defaultGenerators) {
     override fun generate() {
-        this.createSimpleFlatItemModel(ModBlocks.DUNGEON_DOOR.get())
+        defaultGenerators.registerSimpleFlatItemModel(ModBlocks.DUNGEON_DOOR.get().asItem())
 
         for (woodType in ModBlocks.WoodType.entries.toTypedArray()) {
             this.createPostVariants(
@@ -53,7 +55,15 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
         this.createHangingVines(ModBlocks.HANGING_VINES.get())
         this.createHangingVines(ModBlocks.HANGING_VINES_BODY.get())
         this.createExplorersTent(ModBlocks.EXPLORERS_TENT.get())
-        defaultGenerators.createTrivialBlock(ModBlocks.DUNGEON_DOOR.get(), TexturedModel.PARTICLE_ONLY)
+        defaultGenerators.createParticleOnlyBlock(ModBlocks.DUNGEON_DOOR.get())
+        defaultGenerators.createParticleOnlyBlock(ModBlocks.DUNGEON_DOOR_LEAF.get())
+
+        blockStateOutput.accept(
+            BlockModelGenerators.createSimpleBlock(
+                ModBlocks.GIANT_FERN.get(),
+                ModelLocationUtils.getModelLocation(ModBlocks.GIANT_FERN.get())
+            )
+        )
 
         defaultGenerators.createTrivialCube(ModBlocks.SPECIAL_SPAWNER.get())
         defaultGenerators.createTrivialCube(ModBlocks.BONE_PILE_BLOCK.get())
@@ -256,7 +266,7 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
                 .with(dispatch)
                 .with(BlockModelGenerators.createHorizontalFacingDispatch())
         )
-        this.delegateItemModel(block, modelInventory)
+        defaultGenerators.registerSimpleItemModel(block, modelInventory)
     }
 
     private fun createHangingVines(block: Block) {
@@ -270,9 +280,10 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
         blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(dispatch))
 
         if (block.asItem() !== Items.AIR) {
-            ModelTemplates.FLAT_ITEM.createModel(
-                ModelLocationUtils.getModelLocation(block.asItem()),
-                TextureMapping.layer0(block)
+            defaultGenerators.registerSimpleTintedItemModel(
+                block,
+                defaultGenerators.createFlatItemModelWithBlockTexture(block.asItem(), block),
+                ItemModelUtils.constantTint(-12012264)
             )
         }
     }
@@ -284,11 +295,11 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
                 Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(block))
             )
         )
-        ModelTemplates.TWO_LAYERED_ITEM.createModel(
-            ModelLocationUtils.getModelLocation(block.asItem()),
-            TextureMapping.layered(
-                TextureMapping.getItemTexture(block.asItem()),
-                TextureMapping.getItemTexture(block.asItem(), "_layer")
+        defaultGenerators.itemModelOutput.accept(
+            block.asItem(),
+            ItemModelUtils.tintedModel(
+                createFlatItemModelWithOverlay(block.asItem(), "_layer"),
+                Dye(ExplorersTentBlockEntity.DEFAULT_COLOR)
             )
         )
     }
@@ -319,14 +330,18 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
         blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(dispatch))
     }
 
-    private fun createSimpleFlatItemModel(item: ItemLike) {
-        ModelTemplates.FLAT_ITEM.createModel(
-            ModelLocationUtils.getModelLocation(item.asItem()),
-            TextureMapping.layer0(item.asItem())
-        )
-    }
-
     private fun delegateItemModel(block: Block, resourceLocation: ResourceLocation) {
         modelOutput.accept(ModelLocationUtils.getModelLocation(block.asItem()), DelegatedModel(resourceLocation))
+    }
+
+    fun createFlatItemModelWithOverlay(item: Item, suffix: String): ResourceLocation {
+        val texture = TextureMapping.getItemTexture(item)
+        val overlayTexture = TextureMapping.getItemTexture(item, suffix)
+
+        return ModelTemplates.TWO_LAYERED_ITEM.create(
+            ModelLocationUtils.getModelLocation(item),
+            TextureMapping.layered(texture, overlayTexture),
+            this.modelOutput
+        )
     }
 }

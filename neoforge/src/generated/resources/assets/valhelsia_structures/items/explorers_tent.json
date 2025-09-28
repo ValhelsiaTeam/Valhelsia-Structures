@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "valhelsia_structures:item/explorers_tent",
+    "tints": [
+      {
+        "type": "minecraft:dye",
+        "default": 10511680
+      }
+    ]
+  }
+}

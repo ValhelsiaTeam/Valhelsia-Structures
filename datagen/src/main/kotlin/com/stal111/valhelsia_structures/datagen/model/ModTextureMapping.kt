@@ -1,9 +1,9 @@
 package com.stal111.valhelsia_structures.datagen.model
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures
+import net.minecraft.client.data.models.model.TextureMapping
+import net.minecraft.client.data.models.model.TextureSlot
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.data.models.model.TextureMapping
-import net.minecraft.data.models.model.TextureSlot
 import net.minecraft.world.level.block.Block
 
 object ModTextureMapping {

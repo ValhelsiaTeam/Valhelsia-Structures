@@ -6,7 +6,7 @@ import net.minecraft.core.HolderLookup
 import net.valhelsia.dataforge.DataProviderContext
 import net.valhelsia.dataforge.tag.DataForgeStructureTagsProvider
 
-class ModStructureTagsProvider(context: DataProviderContext) : DataForgeStructureTagsProvider(context) {
+class ModStructureTagsProvider(context: DataProviderContext.Server) : DataForgeStructureTagsProvider(context) {
     override fun addTags(provider: HolderLookup.Provider) {
         this.tag(ModTags.Structures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS).add(BuiltInStructures.SPAWNER_DUNGEON)
         this.tag(ModTags.Structures.ON_CASTLE_EXPLORER_MAPS).add(BuiltInStructures.CASTLE)

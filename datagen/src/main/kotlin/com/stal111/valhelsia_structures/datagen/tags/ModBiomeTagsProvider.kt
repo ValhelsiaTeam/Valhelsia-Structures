@@ -8,7 +8,7 @@ import net.neoforged.neoforge.common.Tags
 import net.valhelsia.dataforge.DataProviderContext
 import net.valhelsia.dataforge.tag.DataForgeBiomeTagsProvider
 
-class ModBiomeTagsProvider(context: DataProviderContext) : DataForgeBiomeTagsProvider(context) {
+class ModBiomeTagsProvider(context: DataProviderContext.Server) : DataForgeBiomeTagsProvider(context) {
     override fun addTags(provider: HolderLookup.Provider) {
         tag(ModTags.Biomes.HAS_CASTLE).addTags(Tags.Biomes.IS_PLAINS, BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA)
         tag(ModTags.Biomes.HAS_CASTLE_RUIN).addTags(Tags.Biomes.IS_PLAINS, BiomeTags.IS_FOREST, BiomeTags.IS_TAIGA)

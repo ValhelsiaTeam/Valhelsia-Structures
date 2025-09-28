@@ -21,34 +21,31 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets
 import net.neoforged.neoforge.registries.NeoForgeRegistries
 import net.valhelsia.dataforge.DataCollector
 import net.valhelsia.dataforge.DataProviderContext
-import net.valhelsia.dataforge.DataTarget
 import net.valhelsia.dataforge.model.DataForgeModelProvider
 import net.valhelsia.dataforge.recipe.DataForgeRecipeRunner
 
 class ProviderCollector : DataCollector() {
-    override fun collectProviders(context: DataProviderContext) {
+    override fun collectClientProviders(context: DataProviderContext.Client) {
+        addClientProvider(ModSoundsProvider(context))
+        addClientProvider(DataForgeModelProvider(context, { ModBlockModels(it) }, null))
+    }
+
+    override fun collectServerProviders(context: DataProviderContext.Server) {
         val blocks = ValhelsiaStructures.REGISTRY_MANAGER.blockHelper.registryEntries.map { { it.value() } }
 
-        with(DataTarget.CLIENT) {
-            addProvider(this, ModSoundsProvider(context))
-            addProvider(this, DataForgeModelProvider(context, blocks, { ModBlockModels(it) }, null))
-        }
-
-        with(DataTarget.SERVER) {
-            addProvider(this, ModBlockTagsProvider(context))
-            addProvider(this, ModItemTagsProvider(context))
-            addProvider(this, ModBiomeTagsProvider(context))
-            addProvider(this, ModStructureTagsProvider(context))
-            addProvider(this, DataForgeRecipeRunner(context, ::ModRecipeProvider))
-            addProvider(
-                this, LootTableProvider(
-                    context.packOutput, setOf<ResourceKey<LootTable>>(), listOf(
-                        LootTableProvider.SubProviderEntry({ ModBlockLoot(it, blocks) }, LootContextParamSets.BLOCK)
-                    ),
-                    context.lookupProvider
-                )
+        addServerProvider(ModBlockTagsProvider(context))
+        addServerProvider(ModItemTagsProvider(context))
+        addServerProvider(ModBiomeTagsProvider(context))
+        addServerProvider(ModStructureTagsProvider(context))
+        addServerProvider(DataForgeRecipeRunner(context, ::ModRecipeProvider))
+        addServerProvider(
+            LootTableProvider(
+                context.packOutput, setOf<ResourceKey<LootTable>>(), listOf(
+                    LootTableProvider.SubProviderEntry({ ModBlockLoot(it, blocks) }, LootContextParamSets.BLOCK)
+                ),
+                context.lookupProvider
             )
-        }
+        )
     }
 
     override fun collectRegistryProviders() {

@@ -1,8 +1,8 @@
 package com.stal111.valhelsia_structures.datagen.model
 
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures
-import net.minecraft.data.models.model.ModelTemplate
-import net.minecraft.data.models.model.TextureSlot
+import net.minecraft.client.data.models.model.ModelTemplate
+import net.minecraft.client.data.models.model.TextureSlot
 import java.util.*
 
 object ModModelTemplates {
