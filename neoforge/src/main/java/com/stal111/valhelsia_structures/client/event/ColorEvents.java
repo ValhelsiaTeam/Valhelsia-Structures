@@ -1,13 +1,8 @@
 package com.stal111.valhelsia_structures.client.event;
 
-import com.stal111.valhelsia_structures.common.block.entity.ExplorersTentBlockEntity;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.renderer.BiomeColors;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.FoliageColor;
-import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -19,31 +14,6 @@ import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
  */
 @EventBusSubscriber(value = Dist.CLIENT)
 public class ColorEvents {
-
-
-    //TODO: item colors
-//    @SubscribeEvent
-//    public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
-//        BlockColors blockColors = event.getBlockColors();
-//
-//        event.register((stack, tintIndex) -> {
-//            if (tintIndex == 0) {
-//                return DyedItemColor.getOrDefault(stack, ExplorersTentBlockEntity.DEFAULT_COLOR);
-//            }
-//
-//            return -1;
-//        }, ModBlocks.EXPLORERS_TENT.get());
-//
-//        event.register((stack, tintIndex) -> {
-//            if (stack.getItem() instanceof BlockItem item) {
-//                BlockState state = item.getBlock().defaultBlockState();
-//
-//                return blockColors.getColor(state, null, null, tintIndex);
-//            }
-//
-//            return -1;
-//        }, ModBlocks.HANGING_VINES.get());
-//    }
 
     @SubscribeEvent
     public static void registerBlockColorHandlers(RegisterColorHandlersEvent.Block event) {
