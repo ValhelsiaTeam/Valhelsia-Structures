@@ -1,23 +1,7 @@
 package com.stal111.valhelsia_structures.core.mixin;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.stal111.valhelsia_structures.utils.BrightnessCombinerUtils;
-import com.stal111.valhelsia_structures.utils.ModTags;
-import com.stal111.valhelsia_structures.utils.PosBasedBrightnessCombiner;
 import net.minecraft.client.renderer.block.ModelBlockRenderer;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.core.BlockPos;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.block.BedBlock;
-import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.DoubleBlockCombiner;
-import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 /**
  * Block Model Renderer Mixin <br>
@@ -29,9 +13,9 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 @Mixin(ModelBlockRenderer.class)
 public abstract class BlockModelRendererMixin {
 
-    @Shadow public abstract void tesselateWithAO(BlockAndTintGetter p_111079_, BakedModel p_111080_, BlockState p_111081_, BlockPos p_111082_, PoseStack p_111083_, VertexConsumer p_111084_, boolean p_111085_, RandomSource p_111086_, long p_111087_, int p_111088_);
-
-    @Shadow public abstract void tesselateWithoutAO(BlockAndTintGetter p_111091_, BakedModel p_111092_, BlockState p_111093_, BlockPos p_111094_, PoseStack p_111095_, VertexConsumer p_111096_, boolean p_111097_, RandomSource p_111098_, long p_111099_, int p_111100_);
+//    @Shadow public abstract void tesselateWithAO(BlockAndTintGetter p_111079_, BakedModel p_111080_, BlockState p_111081_, BlockPos p_111082_, PoseStack p_111083_, VertexConsumer p_111084_, boolean p_111085_, RandomSource p_111086_, long p_111087_, int p_111088_);
+//
+//    @Shadow public abstract void tesselateWithoutAO(BlockAndTintGetter p_111091_, BakedModel p_111092_, BlockState p_111093_, BlockPos p_111094_, PoseStack p_111095_, VertexConsumer p_111096_, boolean p_111097_, RandomSource p_111098_, long p_111099_, int p_111100_);
 
     //TODO
 //    @Inject(at = @At(value = "HEAD"), method = "tesselateBlock(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZLnet/minecraft/util/RandomSource;JILnet/neoforged/neoforge/client/model/data/ModelData;Lnet/minecraft/client/renderer/RenderType;)V", remap = false, cancellable = true)
@@ -72,14 +56,14 @@ public abstract class BlockModelRendererMixin {
 //        }
 //    }
 
-    @ModifyVariable(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/ModelBlockRenderer;putQuadData(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/block/model/BakedQuad;FFFFIIIII)V"), method = "renderModelFaceFlat", ordinal = 0, argsOnly = true)
-    private int valhelsia_renderModelFaceFlat(int value, BlockAndTintGetter level, BlockState state, BlockPos pos) {
-        if (state.is(ModTags.Blocks.SLEEPING_BAGS)) {
-            DoubleBlockCombiner.NeighborCombineResult<BlockPos> neighborCombineResult = BrightnessCombinerUtils.combineWithNeigbour(BedBlock::getBlockType, BedBlock::getConnectedDirection, ChestBlock.FACING, state, level, pos, (p_112202_, p_112203_) -> false);
-
-            return neighborCombineResult.apply(new PosBasedBrightnessCombiner()).get(value);
-        }
-
-        return value;
-    }
+//    @ModifyVariable(at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/block/ModelBlockRenderer;putQuadData(Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/block/model/BakedQuad;FFFFIIIII)V"), method = "renderModelFaceFlat", ordinal = 0, argsOnly = true)
+//    private int valhelsia_renderModelFaceFlat(int value, BlockAndTintGetter level, BlockState state, BlockPos pos) {
+//        if (state.is(ModTags.Blocks.SLEEPING_BAGS)) {
+//            DoubleBlockCombiner.NeighborCombineResult<BlockPos> neighborCombineResult = BrightnessCombinerUtils.combineWithNeigbour(BedBlock::getBlockType, BedBlock::getConnectedDirection, ChestBlock.FACING, state, level, pos, (p_112202_, p_112203_) -> false);
+//
+//            return neighborCombineResult.apply(new PosBasedBrightnessCombiner()).get(value);
+//        }
+//
+//        return value;
+//    }
 }

@@ -40,10 +40,10 @@ public class WitchHutLegProcessor extends StructureProcessor {
     @Override
     public StructureTemplate.StructureBlockInfo process(@NotNull LevelReader level, @NotNull BlockPos piecePos, @NotNull BlockPos pieceBottomCenterPos, @NotNull StructureTemplate.StructureBlockInfo blockInfo, @NotNull StructureTemplate.StructureBlockInfo relativeBlockInfo, @NotNull StructurePlaceSettings placeSettings, @Nullable StructureTemplate template) {
         if (relativeBlockInfo.state().is(Blocks.STRUCTURE_BLOCK)) {
-            StructureMode mode = StructureMode.valueOf(relativeBlockInfo.nbt().getString("mode"));
+            StructureMode mode = relativeBlockInfo.nbt().read("mode", StructureMode.LEGACY_CODEC).orElseThrow();
 
             if (mode == StructureMode.DATA) {
-                String data = relativeBlockInfo.nbt().getString("metadata");
+                String data = relativeBlockInfo.nbt().getString("metadata").orElseThrow();
 
                 if (data.equals("support_leg")) {
                     BlockPos.MutableBlockPos mutable = relativeBlockInfo.pos().below().mutable();
@@ -53,7 +53,7 @@ public class WitchHutLegProcessor extends StructureProcessor {
                         level.getChunk(mutable).setBlockState(mutable, ModBlocks.WOODEN_POSTS.get(ModBlocks.WoodType.OAK).get().defaultBlockState()
                                         .setValue(BlockStateProperties.WATERLOGGED, currentState.hasProperty(BlockStateProperties.WATERLOGGED) && currentState.getValue(BlockStateProperties.WATERLOGGED))
                                         .setValue(BlockStateProperties.AXIS, Direction.Axis.Y),
-                                false);
+                                3);
 
                         mutable.move(Direction.DOWN);
                         currentState = level.getBlockState(mutable);
@@ -68,7 +68,7 @@ public class WitchHutLegProcessor extends StructureProcessor {
                     BlockState currentState = level.getBlockState(mutable);
 
                     while (mutable.getY() > level.getMinY() && mutable.getY() < level.getMaxY() && (currentState.isAir() || !currentState.getFluidState().isEmpty())) {
-                        level.getChunk(mutable).setBlockState(mutable, Blocks.OAK_LOG.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y), false);
+                        level.getChunk(mutable).setBlockState(mutable, Blocks.OAK_LOG.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y), 3);
 
                         mutable.move(Direction.DOWN);
                         currentState = level.getBlockState(mutable);

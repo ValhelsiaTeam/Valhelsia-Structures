@@ -6,14 +6,11 @@
       "y": 90
     },
     "attached=false,axis=y": {
-      "model": "valhelsia_structures:block/stripped_oak_post",
-      "x": 0,
-      "y": 0
+      "model": "valhelsia_structures:block/stripped_oak_post"
     },
     "attached=false,axis=z": {
       "model": "valhelsia_structures:block/stripped_oak_post",
-      "x": 90,
-      "y": 0
+      "x": 90
     },
     "attached=true,axis=x": {
       "model": "valhelsia_structures:block/stripped_oak_post_attached",
@@ -21,14 +18,11 @@
       "y": 90
     },
     "attached=true,axis=y": {
-      "model": "valhelsia_structures:block/stripped_oak_post_attached",
-      "x": 0,
-      "y": 0
+      "model": "valhelsia_structures:block/stripped_oak_post_attached"
     },
     "attached=true,axis=z": {
       "model": "valhelsia_structures:block/stripped_oak_post_attached",
-      "x": 90,
-      "y": 0
+      "x": 90
     }
   }
 }

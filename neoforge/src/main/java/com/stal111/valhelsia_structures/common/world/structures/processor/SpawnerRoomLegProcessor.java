@@ -39,10 +39,10 @@ public class SpawnerRoomLegProcessor extends StructureProcessor {
     @Override
     public StructureTemplate.StructureBlockInfo process(@NotNull LevelReader level, @NotNull BlockPos piecePos, @NotNull BlockPos pieceBottomCenterPos, @NotNull StructureTemplate.StructureBlockInfo blockInfo, @NotNull StructureTemplate.StructureBlockInfo relativeBlockInfo, @NotNull StructurePlaceSettings placeSettings, @Nullable StructureTemplate template) {
         if (relativeBlockInfo.state().is(Blocks.STRUCTURE_BLOCK)) {
-            StructureMode mode = StructureMode.valueOf(relativeBlockInfo.nbt().getString("mode"));
+            StructureMode mode = relativeBlockInfo.nbt().read("mode", StructureMode.LEGACY_CODEC).orElseThrow();
 
             if (mode == StructureMode.DATA) {
-                String data = relativeBlockInfo.nbt().getString("metadata");
+                String data = relativeBlockInfo.nbt().getString("metadata").orElseThrow();
 
                 if (data.startsWith("support_leg")) {
                     BlockPos.MutableBlockPos mutable = relativeBlockInfo.pos().below().mutable();
@@ -83,7 +83,7 @@ public class SpawnerRoomLegProcessor extends StructureProcessor {
         BlockState currentState = level.getBlockState(pos);
 
         if (currentState.isAir() || !currentState.getFluidState().isEmpty()) {
-            level.getChunk(pos).setBlockState(pos, state, false);
+            level.getChunk(pos).setBlockState(pos, state, 3);
 
             return true;
         }

@@ -11,13 +11,15 @@ import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
@@ -125,25 +127,6 @@ public class JarBlock extends Block implements SimpleWaterloggedBlock, EntityBlo
         boolean flag = context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER;
 
         return this.defaultBlockState().setValue(WATERLOGGED, flag).setValue(ROTATED, (Mth.floor((double) ((180.0F + context.getRotation()) * 8.0F / 360.0F) + 0.5D) & 7) % 2 != 0);
-    }
-
-    private void dropPlant(Level level, BlockPos pos) {
-        if (level.isClientSide()) {
-            return;
-        }
-        BlockEntity blockEntity = level.getBlockEntity(pos);
-
-        if (blockEntity instanceof JarBlockEntity jarBlockEntity && jarBlockEntity.hasPlant()) {
-            Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), jarBlockEntity.getPlant());
-        }
-    }
-
-    @Override
-    public void onRemove(BlockState state, @Nonnull Level level, @Nonnull BlockPos pos, BlockState newState, boolean isMoving) {
-        if (!state.is(newState.getBlock())) {
-            this.dropPlant(level, pos);
-            super.onRemove(state, level, pos, newState, isMoving);
-        }
     }
 
     @Override

@@ -10,8 +10,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-
-import javax.annotation.Nonnull;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Giant Fern Renderer <br>
@@ -31,7 +30,7 @@ public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEnti
     }
 
     @Override
-    public void render(@Nonnull GiantFernBlockEntity blockEntity, float partialTicks, @Nonnull PoseStack poseStack, @Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(GiantFernBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Vec3 cameraPos) {
         poseStack.pushPose();
 
         poseStack.translate(0.5D, 0.0D, 0.5D);
@@ -41,7 +40,7 @@ public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEnti
             poseStack.mulPose(Axis.YP.rotationDegrees(45));
         }
 
-        this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TEXTURE)), combinedLight, combinedOverlay);
+        this.model.renderToBuffer(poseStack, bufferSource.getBuffer(this.model.renderType(TEXTURE)), packedLight, packedOverlay);
 
         poseStack.popPose();
     }

@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -34,7 +35,7 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
     }
 
     @Override
-    public void render(@Nonnull DungeonDoorBlockEntity blockEntity, float partialTicks, @Nonnull PoseStack poseStack, @Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(DungeonDoorBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Vec3 cameraPos) {
         BlockState state = blockEntity.getBlockState();
         poseStack.pushPose();
 
@@ -42,8 +43,8 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
         poseStack.mulPose(Axis.YP.rotationDegrees(-state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
-        this.model.setupAnim(blockEntity, partialTicks);
-        this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TEXTURE)), combinedLight, combinedOverlay);
+        this.model.setupAnim(blockEntity, partialTick);
+        this.model.renderToBuffer(poseStack, bufferSource.getBuffer(this.model.renderType(TEXTURE)), packedLight, packedOverlay);
 
         poseStack.popPose();
     }

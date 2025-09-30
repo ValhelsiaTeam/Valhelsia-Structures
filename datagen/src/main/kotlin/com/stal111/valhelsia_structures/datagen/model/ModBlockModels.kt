@@ -13,8 +13,13 @@ import com.stal111.valhelsia_structures.datagen.model.ModTextureMapping.post
 import com.stal111.valhelsia_structures.datagen.model.ModTextureMapping.sleepingBag
 import net.minecraft.client.color.item.Dye
 import net.minecraft.client.data.models.BlockModelGenerators
-import net.minecraft.client.data.models.blockstates.*
+import net.minecraft.client.data.models.BlockModelGenerators.plainVariant
+import net.minecraft.client.data.models.MultiVariant
+import net.minecraft.client.data.models.blockstates.MultiPartGenerator
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator
+import net.minecraft.client.data.models.blockstates.PropertyDispatch
 import net.minecraft.client.data.models.model.*
+import net.minecraft.client.renderer.block.model.VariantMutator
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
@@ -59,9 +64,9 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
         defaultGenerators.createParticleOnlyBlock(ModBlocks.DUNGEON_DOOR_LEAF.get())
 
         blockStateOutput.accept(
-            BlockModelGenerators.createSimpleBlock(
+            MultiVariantGenerator.dispatch(
                 ModBlocks.GIANT_FERN.get(),
-                ModelLocationUtils.getModelLocation(ModBlocks.GIANT_FERN.get())
+                BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.GIANT_FERN.get()))
             )
         )
 
@@ -96,26 +101,22 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
     }
 
     private fun createPost(block: PostBlock, textureMapping: TextureMapping) {
-        val model = ModModelTemplates.TEMPLATE_POST.createModel(block, textureMapping)
-        val attachedModel = ModModelTemplates.TEMPLATE_POST_ATTACHED.createModel(block, textureMapping, "_attached")
+        val model = plainVariant(ModModelTemplates.TEMPLATE_POST.createModel(block, textureMapping))
+        val attachedModel = plainVariant(ModModelTemplates.TEMPLATE_POST_ATTACHED.createModel(block, textureMapping, "_attached"))
 
-        val attachedDispatch: PropertyDispatch = PropertyDispatch.property(PostBlock.ATTACHED)
-            .select(true, Variant.variant().with(VariantProperties.MODEL, attachedModel))
-            .select(false, Variant.variant().with(VariantProperties.MODEL, model))
+        val attachedDispatch: PropertyDispatch<MultiVariant> = PropertyDispatch.initial(PostBlock.ATTACHED)
+            .select(true, attachedModel)
+            .select(false, model)
 
-        val rotationDispatch = PropertyDispatch.property(PostBlock.AXIS).generate { axis: Direction.Axis ->
-            Variant.variant()
-                .with(
-                    VariantProperties.X_ROT,
-                    if (axis === Direction.Axis.Y) VariantProperties.Rotation.R0 else VariantProperties.Rotation.R90
-                )
-                .with(
-                    VariantProperties.Y_ROT,
-                    if (axis === Direction.Axis.X) VariantProperties.Rotation.R90 else VariantProperties.Rotation.R0
-                )
+        val rotationDispatch = PropertyDispatch.modify(PostBlock.AXIS).generate { axis: Direction.Axis ->
+            when (axis) {
+                Direction.Axis.X -> BlockModelGenerators.X_ROT_90.then(BlockModelGenerators.Y_ROT_90)
+                Direction.Axis.Z -> BlockModelGenerators.X_ROT_90
+                else -> BlockModelGenerators.NOP
+            }
         }
 
-        blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(attachedDispatch).with(rotationDispatch))
+        blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(attachedDispatch).with(rotationDispatch))
     }
 
     private fun createCutPost(block: CutPostBlock, textureMapping: TextureMapping) {
@@ -132,50 +133,41 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
             ModModelTemplates.TEMPLATE_POST_ATTACHED.createModel(block, textureMapping, "_attached")
         )
 
-        val attachedDispatch = PropertyDispatch.properties(CutPostBlock.ATTACHED, CutPostBlock.PARTS)
+        val attachedDispatch = PropertyDispatch.initial(CutPostBlock.ATTACHED, CutPostBlock.PARTS)
             .generate { attached, parts ->
-                Variant.variant()
-                    .with(VariantProperties.MODEL, if (attached) attachedModels[parts - 1] else models[parts - 1])
+                plainVariant(if (attached) attachedModels[parts - 1] else models[parts - 1])
             }
 
-        val rotationDispatch = PropertyDispatch.property(BlockStateProperties.FACING).generate {
-            Variant.variant()
-                .with(
-                    VariantProperties.X_ROT, when (it) {
-                        Direction.DOWN -> VariantProperties.Rotation.R180
-                        Direction.UP -> VariantProperties.Rotation.R0
-                        else -> VariantProperties.Rotation.R90
-                    }
-                )
-                .with(
-                    VariantProperties.Y_ROT, when (it) {
-                        Direction.SOUTH -> VariantProperties.Rotation.R180
-                        Direction.WEST -> VariantProperties.Rotation.R270
-                        Direction.EAST -> VariantProperties.Rotation.R90
-                        else -> VariantProperties.Rotation.R0
-                    }
-                )
+        val rotationDispatch = PropertyDispatch.modify(BlockStateProperties.FACING).generate {
+            when (it) {
+                Direction.DOWN -> BlockModelGenerators.X_ROT_180
+                Direction.SOUTH -> BlockModelGenerators.Y_ROT_180.then(BlockModelGenerators.X_ROT_90)
+                Direction.WEST -> BlockModelGenerators.Y_ROT_270.then(BlockModelGenerators.X_ROT_90)
+                Direction.EAST -> BlockModelGenerators.Y_ROT_90.then(BlockModelGenerators.X_ROT_90)
+                Direction.NORTH -> BlockModelGenerators.X_ROT_90
+                else -> BlockModelGenerators.NOP
+            }
         }
 
-        blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(attachedDispatch).with(rotationDispatch))
+        blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(attachedDispatch).with(rotationDispatch))
         this.delegateItemModel(block, models.first())
     }
 
     private fun crateBrazier(block: Block) {
-        val model = ModModelTemplates.TEMPLATE_BRAZIER_OFF.createModel(block, brazier(block, false))
-        val litModel = ModModelTemplates.TEMPLATE_BRAZIER.createModel(block, brazier(block, true), "_lit")
+        val model = BlockModelGenerators.plainVariant(ModModelTemplates.TEMPLATE_BRAZIER_OFF.createModel(block, brazier(block, false)))
+        val litModel = BlockModelGenerators.plainVariant(ModModelTemplates.TEMPLATE_BRAZIER.createModel(block, brazier(block, true), "_lit"))
 
-        val litDispatch: PropertyDispatch = PropertyDispatch.property(BlockStateProperties.LIT)
-            .select(true, Variant.variant().with(VariantProperties.MODEL, litModel))
-            .select(false, Variant.variant().with(VariantProperties.MODEL, model))
+        val litDispatch: PropertyDispatch<MultiVariant> = PropertyDispatch.initial(BlockStateProperties.LIT)
+            .select(true, litModel)
+            .select(false, model)
 
-        blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(litDispatch))
+        blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(litDispatch))
     }
 
     private fun createBundledPosts(block: Block) {
         val mapping = bundledPosts(block)
-        val model = ModelTemplates.CUBE_COLUMN.createModel(block, mapping)
-        val modelHorizontal = ModelTemplates.CUBE_COLUMN_HORIZONTAL.createModel(block, mapping)
+        val model = BlockModelGenerators.plainVariant(ModelTemplates.CUBE_COLUMN.createModel(block, mapping))
+        val modelHorizontal = BlockModelGenerators.plainVariant(ModelTemplates.CUBE_COLUMN_HORIZONTAL.createModel(block, mapping))
         blockStateOutput.accept(
             BlockModelGenerators.createRotatedPillarWithHorizontalVariant(block, model, modelHorizontal)
         )
@@ -194,90 +186,84 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
     }
 
     private fun createPane(fullBlock: Block, paneBlock: Block, textureMapping: TextureMapping) {
-        val postModel = ModelTemplates.STAINED_GLASS_PANE_POST.createModel(paneBlock, textureMapping)
-        val paneSideModel = ModelTemplates.STAINED_GLASS_PANE_SIDE.createModel(paneBlock, textureMapping)
-        val paneSideAltModel = ModelTemplates.STAINED_GLASS_PANE_SIDE_ALT.createModel(paneBlock, textureMapping)
-        val paneNoSideModel = ModelTemplates.STAINED_GLASS_PANE_NOSIDE.createModel(paneBlock, textureMapping)
-        val paneNoSideAltModel = ModelTemplates.STAINED_GLASS_PANE_NOSIDE_ALT.createModel(paneBlock, textureMapping)
+        val postModel = plainVariant(ModelTemplates.STAINED_GLASS_PANE_POST.createModel(paneBlock, textureMapping))
+        val paneSideModel = plainVariant(ModelTemplates.STAINED_GLASS_PANE_SIDE.createModel(paneBlock, textureMapping))
+        val paneSideAltModel = plainVariant(ModelTemplates.STAINED_GLASS_PANE_SIDE_ALT.createModel(paneBlock, textureMapping))
+        val paneNoSideModel = plainVariant(ModelTemplates.STAINED_GLASS_PANE_NOSIDE.createModel(paneBlock, textureMapping))
+        val paneNoSideAltModel = plainVariant(ModelTemplates.STAINED_GLASS_PANE_NOSIDE_ALT.createModel(paneBlock, textureMapping))
 
         ModelTemplates.FLAT_ITEM.createModel(
             ModelLocationUtils.getModelLocation(paneBlock),
             TextureMapping.layer0(fullBlock)
         )
 
-        blockStateOutput.accept(
-            MultiPartGenerator.multiPart(paneBlock)
-                .with(Variant.variant().with(VariantProperties.MODEL, postModel))
-                .with(
-                    Condition.condition().term(BlockStateProperties.NORTH, true),
-                    Variant.variant().with(VariantProperties.MODEL, paneSideModel)
-                )
-                .with(
-                    Condition.condition().term(BlockStateProperties.EAST, true),
-                    Variant.variant().with(VariantProperties.MODEL, paneSideModel).with(
-                        VariantProperties.Y_ROT, VariantProperties.Rotation.R90
+        this.blockStateOutput
+            .accept(
+                MultiPartGenerator.multiPart(paneBlock)
+                    .with(postModel)
+                    .with(
+                        BlockModelGenerators.condition().term(BlockStateProperties.NORTH, true),
+                        paneSideModel
                     )
-                )
-                .with(
-                    Condition.condition().term(BlockStateProperties.SOUTH, true),
-                    Variant.variant().with(VariantProperties.MODEL, paneSideAltModel)
-                )
-                .with(
-                    Condition.condition().term(BlockStateProperties.WEST, true),
-                    Variant.variant().with(VariantProperties.MODEL, paneSideAltModel).with(
-                        VariantProperties.Y_ROT, VariantProperties.Rotation.R90
+                    .with(
+                        BlockModelGenerators.condition().term(BlockStateProperties.EAST, true),
+                        paneSideModel.with(BlockModelGenerators.Y_ROT_90)
                     )
-                )
-                .with(
-                    Condition.condition().term(BlockStateProperties.NORTH, false),
-                    Variant.variant().with(VariantProperties.MODEL, paneNoSideModel)
-                )
-                .with(
-                    Condition.condition().term(BlockStateProperties.EAST, false),
-                    Variant.variant().with(VariantProperties.MODEL, paneNoSideAltModel)
-                )
-                .with(
-                    Condition.condition().term(BlockStateProperties.SOUTH, false),
-                    Variant.variant().with(VariantProperties.MODEL, paneNoSideAltModel).with(
-                        VariantProperties.Y_ROT, VariantProperties.Rotation.R90
+                    .with(
+                        BlockModelGenerators.condition().term(BlockStateProperties.SOUTH, true),
+                        paneSideAltModel
                     )
-                )
-                .with(
-                    Condition.condition().term(BlockStateProperties.WEST, false),
-                    Variant.variant().with(VariantProperties.MODEL, paneNoSideModel).with(
-                        VariantProperties.Y_ROT, VariantProperties.Rotation.R270
+                    .with(
+                        BlockModelGenerators.condition().term(BlockStateProperties.WEST, true),
+                        paneSideAltModel.with(BlockModelGenerators.Y_ROT_90)
                     )
-                )
-        )
+                    .with(
+                        BlockModelGenerators.condition().term(BlockStateProperties.NORTH, false),
+                        paneNoSideModel
+                    )
+                    .with(
+                        BlockModelGenerators.condition().term(BlockStateProperties.EAST, false),
+                        paneNoSideAltModel
+                    )
+                    .with(
+                        BlockModelGenerators.condition().term(BlockStateProperties.SOUTH, false),
+                        paneNoSideAltModel.with(BlockModelGenerators.Y_ROT_90)
+                    )
+                    .with(
+                        BlockModelGenerators.condition().term(BlockStateProperties.WEST, false),
+                        paneNoSideModel.with(BlockModelGenerators.Y_ROT_270)
+                    )
+            )
     }
 
     private fun createSleepingBag(block: Block) {
         val textureMapping = sleepingBag(block)
-        val modelFoot = ModModelTemplates.SLEEPING_BAG_FOOT.createModel(block, textureMapping, "_foot")
-        val modelHead = ModModelTemplates.SLEEPING_BAG_HEAD.createModel(block, textureMapping, "_head")
+        val modelFoot = plainVariant(ModModelTemplates.SLEEPING_BAG_FOOT.createModel(block, textureMapping, "_foot"))
+        val modelHead = plainVariant(ModModelTemplates.SLEEPING_BAG_HEAD.createModel(block, textureMapping, "_head"))
         val modelInventory = ModModelTemplates.SLEEPING_BAG_INVENTORY.createModel(block, textureMapping, "_inventory")
 
-        val dispatch = PropertyDispatch.property(BlockStateProperties.BED_PART)
-            .select(BedPart.HEAD, Variant.variant().with(VariantProperties.MODEL, modelHead))
-            .select(BedPart.FOOT, Variant.variant().with(VariantProperties.MODEL, modelFoot))
+        val dispatch = PropertyDispatch.initial(BlockStateProperties.BED_PART)
+            .select(BedPart.HEAD,  modelHead)
+            .select(BedPart.FOOT, modelFoot)
+
 
         blockStateOutput.accept(
-            MultiVariantGenerator.multiVariant(block)
+            MultiVariantGenerator.dispatch(block)
                 .with(dispatch)
-                .with(BlockModelGenerators.createHorizontalFacingDispatch())
+                .with(ROTATION_HORIZONTAL_FACING)
         )
         defaultGenerators.registerSimpleItemModel(block, modelInventory)
     }
 
     private fun createHangingVines(block: Block) {
-        val model = BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/")
-        val attachedModel = BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/attached_")
+        val model = plainVariant(BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/"))
+        val attachedModel = plainVariant(BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/attached_"))
 
-        val dispatch = PropertyDispatch.property(ModBlockStateProperties.ATTACHED)
-            .select(true, Variant.variant().with(VariantProperties.MODEL, attachedModel))
-            .select(false, Variant.variant().with(VariantProperties.MODEL, model))
+        val dispatch = PropertyDispatch.initial(ModBlockStateProperties.ATTACHED)
+            .select(true,  attachedModel)
+            .select(false, model)
 
-        blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(dispatch))
+        blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(dispatch))
 
         if (block.asItem() !== Items.AIR) {
             defaultGenerators.registerSimpleTintedItemModel(
@@ -290,9 +276,9 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
 
     private fun createExplorersTent(block: Block) {
         blockStateOutput.accept(
-            MultiVariantGenerator.multiVariant(
+            MultiVariantGenerator.dispatch(
                 block,
-                Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(block))
+                plainVariant(ModelLocationUtils.getModelLocation(block))
             )
         )
         defaultGenerators.itemModelOutput.accept(
@@ -307,9 +293,9 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
     private fun createBonePile(block: Block) {
         ModelTemplates.FLAT_ITEM.createModel(block, TextureMapping.layer0(block))
         blockStateOutput.accept(
-            MultiVariantGenerator.multiVariant(
+            MultiVariantGenerator.dispatch(
                 block,
-                Variant.variant().with(VariantProperties.MODEL, ModelLocationUtils.getModelLocation(block))
+                plainVariant(ModelLocationUtils.getModelLocation(block))
             )
         )
 
@@ -320,14 +306,14 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
     }
 
     private fun createJar(block: Block) {
-        val model = ModModelTemplates.TEMPLATE_JAR.createModel(block, jar(block))
-        val rotatedModel = ModModelTemplates.TEMPLATE_JAR_ROTATED.createModel(block, jar(block), "_rotated")
+        val model = plainVariant(ModModelTemplates.TEMPLATE_JAR.createModel(block, jar(block)))
+        val rotatedModel = plainVariant(ModModelTemplates.TEMPLATE_JAR_ROTATED.createModel(block, jar(block), "_rotated"))
 
-        val dispatch = PropertyDispatch.property(ModBlockStateProperties.ROTATED)
-            .select(true, Variant.variant().with(VariantProperties.MODEL, rotatedModel))
-            .select(false, Variant.variant().with(VariantProperties.MODEL, model))
+        val dispatch = PropertyDispatch.initial(ModBlockStateProperties.ROTATED)
+            .select(true, rotatedModel)
+            .select(false, model)
 
-        blockStateOutput.accept(MultiVariantGenerator.multiVariant(block).with(dispatch))
+        blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(dispatch))
     }
 
     private fun delegateItemModel(block: Block, resourceLocation: ResourceLocation) {
@@ -343,5 +329,14 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
             TextureMapping.layered(texture, overlayTexture),
             this.modelOutput
         )
+    }
+
+    companion object {
+        val ROTATION_HORIZONTAL_FACING: PropertyDispatch<VariantMutator> =
+            PropertyDispatch.modify(BlockStateProperties.HORIZONTAL_FACING)
+                .select(Direction.EAST, BlockModelGenerators.Y_ROT_90)
+                .select(Direction.SOUTH, BlockModelGenerators.Y_ROT_180)
+                .select(Direction.WEST, BlockModelGenerators.Y_ROT_270)
+                .select(Direction.NORTH, BlockModelGenerators.NOP)
     }
 }

@@ -74,7 +74,7 @@ public class SpecialSpawnerBlockEntity extends BlockEntity implements Spawner {
 
     @Override
     public void saveAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
-        this.spawner.save(this.level, this.worldPosition, tag);
+        this.spawner.save(tag);
     }
 
     @Nullable

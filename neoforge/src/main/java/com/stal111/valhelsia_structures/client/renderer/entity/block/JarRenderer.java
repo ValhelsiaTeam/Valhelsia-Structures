@@ -8,8 +8,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.level.block.Block;
-
-import javax.annotation.Nonnull;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Jar Renderer <br>
@@ -25,12 +24,12 @@ public class JarRenderer implements BlockEntityRenderer<JarBlockEntity> {
     }
 
     @Override
-    public void render(@Nonnull JarBlockEntity blockEntity, float partialTicks, @Nonnull PoseStack poseStack, @Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(JarBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Vec3 cameraPos) {
         if (blockEntity.hasPlant()) {
             poseStack.pushPose();
             poseStack.translate(0.2, 0.45, 0.2);
             poseStack.scale(0.6F, 0.6F, 0.6F);
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Block.byItem(blockEntity.getPlant().getItem()).defaultBlockState(), poseStack, buffer, combinedLight, OverlayTexture.NO_OVERLAY);
+            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(Block.byItem(blockEntity.getPlant().getItem()).defaultBlockState(), poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY);
             poseStack.popPose();
         }
     }

@@ -4,8 +4,10 @@ import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Clearable;
+import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -44,17 +46,25 @@ public class JarBlockEntity extends BlockEntity implements Clearable {
     }
 
     @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        if (!this.plant.isEmpty()) {
+            Containers.dropItemStack(this.level, pos.getX(), pos.getY(), pos.getZ(), this.plant);
+        }
+
+        super.preRemoveSideEffects(pos, state);
+    }
+
+    @Override
     public void loadAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
         super.loadAdditional(tag, lookupProvider);
-        if (tag.contains("Plant", 10)) {
-            this.setPlant(ItemStack.parseOptional(lookupProvider, tag.getCompound("Plant")));
-        }
+
+        tag.read("plant", ItemStack.CODEC, lookupProvider.createSerializationContext(NbtOps.INSTANCE)).ifPresent(this::setPlant);
     }
 
     @Override
     public void saveAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
         if (this.hasPlant()) {
-            tag.put("Plant", this.getPlant().save(lookupProvider));
+            tag.store("plant", ItemStack.CODEC, lookupProvider.createSerializationContext(NbtOps.INSTANCE), this.getPlant());
         }
     }
 

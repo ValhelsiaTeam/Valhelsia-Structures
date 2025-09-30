@@ -10,8 +10,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nonnull;
 import java.util.Objects;
 
 /**
@@ -30,7 +30,7 @@ public class SpecialSpawnerRenderer implements BlockEntityRenderer<SpecialSpawne
     }
 
     @Override
-    public void render(@Nonnull SpecialSpawnerBlockEntity blockEntity, float partialTicks, @Nonnull PoseStack poseStack, @Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(SpecialSpawnerBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Vec3 cameraPos) {
         SpecialBaseSpawner spawner = blockEntity.getSpawner();
         Entity entity = spawner.getOrCreateDisplayEntity(Objects.requireNonNull(blockEntity.getLevel()), blockEntity.getBlockPos());
 
@@ -46,11 +46,11 @@ public class SpecialSpawnerRenderer implements BlockEntityRenderer<SpecialSpawne
             }
 
             poseStack.translate(0.0D, 0.4F, 0.0D);
-            poseStack.mulPose(Axis.YP.rotationDegrees((float) Mth.lerp(partialTicks, spawner.getOSpin(), spawner.getSpin()) * 10.0F));
+            poseStack.mulPose(Axis.YP.rotationDegrees((float) Mth.lerp(partialTick, spawner.getOSpin(), spawner.getSpin()) * 10.0F));
             poseStack.translate(0.0D, -0.2F, 0.0D);
             poseStack.mulPose(Axis.XP.rotationDegrees(-30.0F));
             poseStack.scale(f, f, f);
-            this.entityRenderer.render(entity, 0.0D, 0.0D, 0.0D, partialTicks, poseStack, buffer, combinedLight);
+            this.entityRenderer.render(entity, 0.0D, 0.0D, 0.0D, partialTick, poseStack, bufferSource, packedLight);
 
             poseStack.popPose();
         }

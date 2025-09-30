@@ -131,8 +131,8 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
     }
 
     @Override
-    public void fallOn(@Nonnull Level level, @Nonnull BlockState state, @Nonnull BlockPos pos, @Nonnull Entity entity, float height) {
-        super.fallOn(level, state, pos, entity, height * 0.7F);
+    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+        super.fallOn(level, state, pos, entity, fallDistance * 0.7F);
     }
 
     @Override
@@ -211,7 +211,7 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
             BlockPos facingPos = pos.relative(state.getValue(FACING));
 
             level.setBlockAndUpdate(facingPos, state.setValue(PART, BedPart.HEAD).setValue(WATERLOGGED, level.getFluidState(facingPos).is(Fluids.WATER)));
-            level.blockUpdated(pos, Blocks.AIR);
+            level.updateNeighborsAt(pos, Blocks.AIR);
 
             state.updateNeighbourShapes(level, pos, 3);
         }

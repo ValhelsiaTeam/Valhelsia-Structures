@@ -4,11 +4,14 @@ import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.Clearable;
+import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -64,31 +67,27 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
     @Override
     public void loadAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
         super.loadAdditional(tag, lookupProvider);
-        if (tag.contains("Color")) {
-            this.setColor(tag.getInt("Color"));
-        }
 
-        if (tag.contains("SleepingBag", 10)) {
-            this.setSleepingBag(ItemStack.parseOptional(lookupProvider, tag.getCompound("SleepingBag")));
-        }
+        tag.read("color", ExtraCodecs.RGB_COLOR_CODEC).ifPresent(this::setColor);
+        tag.read("sleeping_bag", ItemStack.CODEC).ifPresent(this::setSleepingBag);
     }
 
     @Override
     public void saveAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
         if (this.color != DEFAULT_COLOR) {
-            tag.putInt("Color", this.getColor());
+            tag.store("color", ExtraCodecs.RGB_COLOR_CODEC, this.getColor());
         }
 
         if (!this.sleepingBag.isEmpty()) {
-            tag.put("SleepingBag", this.sleepingBag.save(lookupProvider));
+            tag.put("sleeping_bag", this.sleepingBag.save(lookupProvider));
         }
     }
 
     @Override
-    protected void applyImplicitComponents(@NotNull DataComponentInput componentInput) {
-        super.applyImplicitComponents(componentInput);
+    protected void applyImplicitComponents(DataComponentGetter componentGetter) {
+        super.applyImplicitComponents(componentGetter);
 
-        DyedItemColor color = componentInput.get(DataComponents.DYED_COLOR);
+        DyedItemColor color = componentGetter.get(DataComponents.DYED_COLOR);
 
         if (color != null) {
             this.setColor(color.rgb());
@@ -96,10 +95,19 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
     }
 
     @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state) {
+        if (!this.sleepingBag.isEmpty()) {
+            Containers.dropItemStack(this.level, pos.getX(), pos.getY(), pos.getZ(), this.getSleepingBag());
+        }
+
+        super.preRemoveSideEffects(pos, state);
+    }
+
+    @Override
     protected void collectImplicitComponents(DataComponentMap.@NotNull Builder components) {
         super.collectImplicitComponents(components);
 
-        components.set(DataComponents.DYED_COLOR, new DyedItemColor(this.getColor(), true));
+        components.set(DataComponents.DYED_COLOR, new DyedItemColor(this.getColor()));
     }
 
 

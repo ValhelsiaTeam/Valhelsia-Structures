@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -42,7 +43,7 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
     }
 
     @Override
-    public void render(@Nonnull ExplorersTentBlockEntity blockEntity, float partialTicks, @Nonnull PoseStack poseStack, @Nonnull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    public void render(ExplorersTentBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay, Vec3 cameraPos) {
         Direction direction = blockEntity.getBlockState().getValue(ExplorersTentBlock.FACING).getClockWise();
         float rotation = -direction.toYRot();
 
@@ -52,8 +53,8 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
         poseStack.mulPose(Axis.YP.rotationDegrees(rotation + 90));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
-        this.model.renderToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TENT_TEXTURE)), combinedLight, combinedOverlay, blockEntity.getColor());
-        this.model.renderSticksToBuffer(poseStack, buffer.getBuffer(this.model.renderType(TENT_STICKS_TEXTURE)), combinedLight, combinedOverlay);
+        this.model.renderToBuffer(poseStack, bufferSource.getBuffer(this.model.renderType(TENT_TEXTURE)), packedLight, packedOverlay, blockEntity.getColor());
+        this.model.renderSticksToBuffer(poseStack, bufferSource.getBuffer(this.model.renderType(TENT_STICKS_TEXTURE)), packedLight, packedOverlay);
 
         poseStack.popPose();
 
@@ -75,10 +76,10 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
 
             BlockState block = Block.byItem(blockEntity.getSleepingBag().getItem()).defaultBlockState().setValue(SleepingBagBlock.FACING, bagDirection.getClockWise());
 
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(block, poseStack, buffer, combinedLight, OverlayTexture.NO_OVERLAY);
+            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(block, poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY);
 
             poseStack.translate(1.0D, 0.0D, 0.0D);
-            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(block.setValue(SleepingBagBlock.PART, BedPart.HEAD), poseStack, buffer, combinedLight, OverlayTexture.NO_OVERLAY);
+            Minecraft.getInstance().getBlockRenderer().renderSingleBlock(block.setValue(SleepingBagBlock.PART, BedPart.HEAD), poseStack, bufferSource, packedLight, OverlayTexture.NO_OVERLAY);
 
             poseStack.popPose();
         }
