@@ -4,16 +4,16 @@ import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.Containers;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -55,16 +55,18 @@ public class JarBlockEntity extends BlockEntity implements Clearable {
     }
 
     @Override
-    public void loadAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
-        super.loadAdditional(tag, lookupProvider);
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
 
-        tag.read("plant", ItemStack.CODEC, lookupProvider.createSerializationContext(NbtOps.INSTANCE)).ifPresent(this::setPlant);
+        input.read("plant", ItemStack.CODEC).ifPresent(this::setPlant);
     }
 
     @Override
-    public void saveAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+
         if (this.hasPlant()) {
-            tag.store("plant", ItemStack.CODEC, lookupProvider.createSerializationContext(NbtOps.INSTANCE), this.getPlant());
+            output.store("plant", ItemStack.CODEC, this.getPlant());
         }
     }
 

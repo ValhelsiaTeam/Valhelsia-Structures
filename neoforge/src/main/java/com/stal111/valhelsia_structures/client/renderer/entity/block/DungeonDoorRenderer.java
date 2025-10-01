@@ -15,8 +15,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-
 /**
  * Dungeon Door Renderer <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.client.renderer.entity.block.DungeonDoorRenderer
@@ -50,7 +48,7 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
     }
 
     @Override
-    public boolean shouldRenderOffScreen(@Nonnull DungeonDoorBlockEntity blockEntity) {
+    public boolean shouldRenderOffScreen() {
         return true;
     }
 

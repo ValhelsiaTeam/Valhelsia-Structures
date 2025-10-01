@@ -16,9 +16,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
@@ -65,23 +66,24 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
     }
 
     @Override
-    public void loadAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
-        super.loadAdditional(tag, lookupProvider);
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
 
-        tag.read("color", ExtraCodecs.RGB_COLOR_CODEC).ifPresent(this::setColor);
-        tag.read("sleeping_bag", ItemStack.CODEC).ifPresent(this::setSleepingBag);
+        input.read("color", ExtraCodecs.RGB_COLOR_CODEC).ifPresent(this::setColor);
+        input.read("sleeping_bag", ItemStack.CODEC).ifPresent(this::setSleepingBag);
     }
 
     @Override
-    public void saveAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
+    protected void saveAdditional(ValueOutput output) {
         if (this.color != DEFAULT_COLOR) {
-            tag.store("color", ExtraCodecs.RGB_COLOR_CODEC, this.getColor());
+            output.store("color", ExtraCodecs.RGB_COLOR_CODEC, this.getColor());
         }
 
         if (!this.sleepingBag.isEmpty()) {
-            tag.put("sleeping_bag", this.sleepingBag.save(lookupProvider));
+            output.store("sleeping_bag", ItemStack.CODEC, this.getSleepingBag());
         }
     }
+
 
     @Override
     protected void applyImplicitComponents(DataComponentGetter componentGetter) {
@@ -108,12 +110,6 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
         super.collectImplicitComponents(components);
 
         components.set(DataComponents.DYED_COLOR, new DyedItemColor(this.getColor()));
-    }
-
-
-    @Override
-    public void removeComponentsFromTag(@NotNull CompoundTag tag) {
-        super.removeComponentsFromTag(tag);
     }
 
     @Nullable

@@ -17,6 +17,8 @@ import net.minecraft.world.level.Spawner;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -67,14 +69,15 @@ public class SpecialSpawnerBlockEntity extends BlockEntity implements Spawner {
     }
 
     @Override
-    public void loadAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
-        super.loadAdditional(tag, lookupProvider);
-        this.spawner.load(this.level, this.worldPosition, tag);
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        this.spawner.load(this.level, this.worldPosition, input);
     }
 
     @Override
-    public void saveAdditional(@Nonnull CompoundTag tag, HolderLookup.@NotNull Provider lookupProvider) {
-        this.spawner.save(tag);
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        this.spawner.save(output);
     }
 
     @Nullable

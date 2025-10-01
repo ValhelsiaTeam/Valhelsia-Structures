@@ -86,7 +86,7 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
     }
 
     @Override
-    public boolean shouldRenderOffScreen(@Nonnull ExplorersTentBlockEntity blockEntity) {
+    public boolean shouldRenderOffScreen() {
         return true;
     }
 
