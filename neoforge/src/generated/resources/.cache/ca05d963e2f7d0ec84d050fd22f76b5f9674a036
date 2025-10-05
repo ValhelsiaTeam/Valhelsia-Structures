@@ -1,4 +1,4 @@
-// 1.21.9	2025-10-05T14:36:24.3004466	Model Definitions - valhelsia_structures
+// 1.21.9	2025-10-05T14:56:29.1636751	Model Definitions - valhelsia_structures
 3c114ddf3c36e431b633b8a1d29b870fbe9915ba assets/valhelsia_structures/blockstates/acacia_post.json
 a6dfd453c050d12985cf5eff22a6bc118af9b0dd assets/valhelsia_structures/blockstates/birch_post.json
 eba52f7f4120e77e525f5d3705596ffe5b63151c assets/valhelsia_structures/blockstates/black_glazed_jar.json
@@ -202,7 +202,7 @@ f20e4ff865ed7198382d391ce60ae5bca48048d9 assets/valhelsia_structures/items/cyan_
 fbbc8c5e7539bacfc8583aa6ff38261fd56072d3 assets/valhelsia_structures/items/doused_soul_torch.json
 76d3f1c6dd32150d8f5e0e0dfa7a7ca7170d43eb assets/valhelsia_structures/items/doused_torch.json
 7d340633b181d03eb401a523055b26973c18fe03 assets/valhelsia_structures/items/dungeon_door.json
-12e503bbc2bcd6908f7bd3eacd3633f706c198aa assets/valhelsia_structures/items/explorers_tent.json
+728bd225ca6e4b1189685f38361c2b9e82810750 assets/valhelsia_structures/items/explorers_tent.json
 8ae23f4f7958404ed13bff002765e15a412d077d assets/valhelsia_structures/items/giant_fern.json
 81538783d8c73f229cf08ad1b7a825bd62d7dd1e assets/valhelsia_structures/items/glazed_jar.json
 d1a9e22aec3a765fd160df293593cabad1db9855 assets/valhelsia_structures/items/gray_glazed_jar.json

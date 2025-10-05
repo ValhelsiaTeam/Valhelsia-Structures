@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
  */
 public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBlockEntity, Clearable {
 
-    public static final int DEFAULT_COLOR = 10511680;
+    public static final int DEFAULT_COLOR = -6265536;
 
     private int color = DEFAULT_COLOR;
 
@@ -109,7 +109,9 @@ public class ExplorersTentBlockEntity extends BlockEntity implements DyeableBloc
     protected void collectImplicitComponents(DataComponentMap.@NotNull Builder components) {
         super.collectImplicitComponents(components);
 
-        components.set(DataComponents.DYED_COLOR, new DyedItemColor(this.getColor()));
+        if (this.color != DEFAULT_COLOR) {
+            components.set(DataComponents.DYED_COLOR, new DyedItemColor(this.getColor()));
+        }
     }
 
     @Nullable
