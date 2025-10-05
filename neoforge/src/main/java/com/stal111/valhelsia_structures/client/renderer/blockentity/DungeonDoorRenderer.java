@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlockEntity, DungeonDoorRenderState> {
 
-    public static final Material TEXTURE_MATERIAL = Sheets.BLOCK_ENTITIES_MAPPER.apply(ValhelsiaStructures.location("dungeon_door"));
+    public static final Material TEXTURE_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.location("dungeon_door"));
 
     private final MaterialSet materials;
     private final DungeonDoorModel model;

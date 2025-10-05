@@ -37,8 +37,8 @@ import net.minecraft.world.phys.AABB;
  */
 public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentBlockEntity, ExplorersTentRenderState> {
 
-    public static final Material TENT_MATERIAL = Sheets.BLOCK_ENTITIES_MAPPER.apply(ValhelsiaStructures.location("explorers_tent/explorers_tent"));
-    public static final Material TENT_STICKS_MATERIAL = Sheets.BLOCK_ENTITIES_MAPPER.apply(ValhelsiaStructures.location("explorers_tent/explorers_tent_sticks"));
+    public static final Material TENT_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.location("explorers_tent/explorers_tent"));
+    public static final Material TENT_STICKS_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.location("explorers_tent/explorers_tent_sticks"));
 
     private final MaterialSet materials;
     private final Model.Simple model;
@@ -87,8 +87,8 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
         poseStack.mulPose(Axis.YP.rotationDegrees(rotation + 90));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
-        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_MATERIAL.renderType(RenderType::entityCutoutNoCull), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TENT_MATERIAL), 0, renderState.breakProgress);
-        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_STICKS_MATERIAL.renderType(RenderType::entityCutoutNoCull), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TENT_STICKS_MATERIAL), 0, renderState.breakProgress);
+        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_MATERIAL.renderType(this.model::renderType), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TENT_MATERIAL), 0, renderState.breakProgress);
+        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_STICKS_MATERIAL.renderType(this.model::renderType), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TENT_STICKS_MATERIAL), 0, renderState.breakProgress);
 
 //        this.model.renderToBuffer(poseStack, bufferSource.getBuffer(this.model.renderType(TENT_TEXTURE)), packedLight, packedOverlay, blockEntity.getColor());
 //        this.model.renderSticksToBuffer(poseStack, bufferSource.getBuffer(this.model.renderType(TENT_STICKS_TEXTURE)), packedLight, packedOverlay);

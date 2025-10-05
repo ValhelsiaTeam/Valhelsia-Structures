@@ -33,7 +33,7 @@ import net.minecraft.util.Unit;
  */
 public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEntity, BlockEntityRenderState> {
 
-    public static final Material TEXTURE_MATERIAL = Sheets.BLOCK_ENTITIES_MAPPER.apply(ValhelsiaStructures.location("giant_fern"));
+    public static final Material TEXTURE_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.location("giant_fern"));
 
     private final MaterialSet materials;
     private final Model.Simple model;
