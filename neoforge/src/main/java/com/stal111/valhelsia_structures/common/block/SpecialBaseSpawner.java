@@ -236,7 +236,7 @@ public abstract class SpecialBaseSpawner implements IOwnedSpawner {
 
     public boolean onEventTriggered(Level level, int i) {
         if (i == 1) {
-            if (level.isClientSide) {
+            if (level.isClientSide()) {
                 this.spawnDelay = this.minSpawnDelay;
             }
 

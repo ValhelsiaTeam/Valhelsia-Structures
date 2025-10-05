@@ -1,30 +1,46 @@
-package com.stal111.valhelsia_structures.client.model.block;
+package com.stal111.valhelsia_structures.client.renderer.blockentity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import com.stal111.valhelsia_structures.client.model.ModModelLayers;
+import com.stal111.valhelsia_structures.common.block.entity.GiantFernBlockEntity;
+import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.util.Unit;
 
 /**
- * Giant Fern Model <br>
- * Valhelsia Structures - com.stal111.valhelsia_structures.client.model.block.GiantFernModel
+ * Giant Fern Renderer <br>
+ * Valhelsia Structures - com.stal111.valhelsia_structures.client.renderer.entity.block.GiantFernRenderer
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2021-10-03
  */
-public class GiantFernModel extends Model {
+public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEntity, BlockEntityRenderState> {
 
-    public static final ModelLayerLocation GIANT_FERN = new ModelLayerLocation(ValhelsiaStructures.location("giant_fern"), "main");
+    public static final Material TEXTURE_MATERIAL = Sheets.BLOCK_ENTITIES_MAPPER.apply(ValhelsiaStructures.location("giant_fern"));
 
-    public GiantFernModel(ModelPart root) {
-        super(root, RenderType::entityCutoutNoCull);
+    private final MaterialSet materials;
+    private final Model.Simple model;
+
+    public GiantFernRenderer(BlockEntityRendererProvider.Context context) {
+        this.materials = context.materials();
+        this.model = new Model.Simple(context.bakeLayer(ModModelLayers.GIANT_FERN), RenderType::entityCutoutNoCull);
     }
 
     public static LayerDefinition createLayer() {
@@ -54,5 +70,26 @@ public class GiantFernModel extends Model {
         partDefinition.addOrReplaceChild("stem2", stem, PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.7854F, 0.0F));
 
         return LayerDefinition.create(meshDefinition, 48, 32);
+    }
+
+    @Override
+    public BlockEntityRenderState createRenderState() {
+        return new BlockEntityRenderState();
+    }
+
+    @Override
+    public void submit(BlockEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState cameraRenderState) {
+        poseStack.pushPose();
+
+        poseStack.translate(0.5D, 0.0D, 0.5D);
+        poseStack.mulPose(Axis.ZP.rotationDegrees(180));
+
+        if (renderState.blockState.getValue(ModBlockStateProperties.ROTATED)) {
+            poseStack.mulPose(Axis.YP.rotationDegrees(45));
+        }
+
+        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TEXTURE_MATERIAL.renderType(RenderType::entityCutoutNoCull), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TEXTURE_MATERIAL), 0, renderState.breakProgress);
+
+        poseStack.popPose();
     }
 }

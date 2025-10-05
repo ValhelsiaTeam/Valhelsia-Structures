@@ -21,6 +21,7 @@ import net.minecraft.world.level.levelgen.structure.StructureType;
 import net.minecraft.world.level.levelgen.structure.pools.DimensionPadding;
 import net.minecraft.world.level.levelgen.structure.pools.JigsawPlacement;
 import net.minecraft.world.level.levelgen.structure.pools.alias.PoolAliasLookup;
+import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
@@ -44,7 +45,7 @@ public class ValhelsiaJigsawStructure extends Structure {
             Codec.intRange(0, 7).fieldOf("size").forGetter(structure -> structure.maxDepth),
             StructureHeightProvider.CODEC.optionalFieldOf("start_height").forGetter(structure -> Optional.ofNullable(structure.startHeight)),
             Heightmap.Types.CODEC.optionalFieldOf("project_start_to_heightmap").forGetter(structure -> Optional.ofNullable(structure.projectStartToHeightmap)),
-            Codec.intRange(1, 128).fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter)
+            JigsawStructure.MaxDistance.CODEC.fieldOf("max_distance_from_center").forGetter(structure -> structure.maxDistanceFromCenter)
     ).apply(instance, (structureSettings, valhelsiaStructureSettings, startPoolDecider, integer, structureHeightProvider, types, integer2) -> {
         return new ValhelsiaJigsawStructure(structureSettings, valhelsiaStructureSettings, startPoolDecider, integer, structureHeightProvider.orElse(null), types.orElse(null), integer2);
     })).flatXmap(verifyRange(), verifyRange());
@@ -57,9 +58,9 @@ public class ValhelsiaJigsawStructure extends Structure {
     private final StructureHeightProvider startHeight;
     @Nullable
     private final Heightmap.Types projectStartToHeightmap;
-    private final int maxDistanceFromCenter;
+    private final JigsawStructure.MaxDistance maxDistanceFromCenter;
 
-    public ValhelsiaJigsawStructure(StructureSettings settings, ValhelsiaStructureSettings valhelsiaStructureSettings, StartPoolDecider startPoolDecider, int maxDepth, @Nullable StructureHeightProvider startHeight, @Nullable Heightmap.Types projectStartToHeightmap, int maxDistanceFromCenter) {
+    public ValhelsiaJigsawStructure(StructureSettings settings, ValhelsiaStructureSettings valhelsiaStructureSettings, StartPoolDecider startPoolDecider, int maxDepth, @Nullable StructureHeightProvider startHeight, @Nullable Heightmap.Types projectStartToHeightmap, JigsawStructure.MaxDistance maxDistanceFromCenter) {
         super(settings);
         this.settings = valhelsiaStructureSettings;
         this.startPoolDecider = startPoolDecider;
@@ -75,7 +76,7 @@ public class ValhelsiaJigsawStructure extends Structure {
                 case NONE -> 0;
                 case BURY, BEARD_THIN, BEARD_BOX, ENCAPSULATE -> 12;
             };
-            return structure.maxDistanceFromCenter + i > 128 ? DataResult.error(() -> "Structure size including terrain adaptation must not exceed 128") : DataResult.success(structure);
+            return structure.maxDistanceFromCenter.horizontal() + i > 128 ? DataResult.error(() -> "Structure size including terrain adaptation must not exceed 128") : DataResult.success(structure);
         };
     }
 

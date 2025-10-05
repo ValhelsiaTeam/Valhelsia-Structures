@@ -1,8 +1,5 @@
 package com.stal111.valhelsia_structures.client.model.block;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.stal111.valhelsia_structures.common.block.entity.DungeonDoorBlockEntity;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -14,17 +11,14 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 
-import javax.annotation.Nonnull;
-
 /**
  * Dungeon Door Model <br>
  * Valhelsia Structures - com.stal111.valhelsia_structures.client.model.block.DungeonDoorModel
  *
  * @author Valhelsia Team
- * @version 1.17.1-0.1.0
  * @since 2021-10-03
  */
-public class DungeonDoorModel extends Model {
+public class DungeonDoorModel extends Model<DungeonDoorModel.State> {
 
 	public static final ModelLayerLocation DUNGEON_DOOR = new ModelLayerLocation(ValhelsiaStructures.location("dungeon_door"), "main");
 
@@ -52,10 +46,15 @@ public class DungeonDoorModel extends Model {
 		return LayerDefinition.create(meshDefinition, 128, 96);
 	}
 
-	public void setupAnim(DungeonDoorBlockEntity blockEntity, float partialTicks) {
-		float leafAngle = blockEntity.getOpenNess(partialTicks);
+    @Override
+    public void setupAnim(State state) {
+        super.setupAnim(state);
 
-		this.leftDoor.yRot= -(leafAngle * ((float) Math.PI / 2F));
-		this.rightDoor.yRot = (leafAngle * ((float) Math.PI / 2F));
-	}
+        this.leftDoor.yRot= -(state.openness * ((float) Math.PI / 2F));
+        this.rightDoor.yRot = (state.openness * ((float) Math.PI / 2F));
+    }
+
+    public record State(float openness) {
+
+    }
 }

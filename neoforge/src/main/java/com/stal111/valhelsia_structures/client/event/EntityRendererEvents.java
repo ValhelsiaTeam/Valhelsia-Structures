@@ -1,9 +1,8 @@
 package com.stal111.valhelsia_structures.client.event;
 
+import com.stal111.valhelsia_structures.client.model.ModModelLayers;
 import com.stal111.valhelsia_structures.client.model.block.DungeonDoorModel;
-import com.stal111.valhelsia_structures.client.model.block.ExplorersTentModel;
-import com.stal111.valhelsia_structures.client.model.block.GiantFernModel;
-import com.stal111.valhelsia_structures.client.renderer.entity.block.*;
+import com.stal111.valhelsia_structures.client.renderer.blockentity.*;
 import com.stal111.valhelsia_structures.core.init.ModBlockEntities;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -23,9 +22,9 @@ public class EntityRendererEvents {
 
     @SubscribeEvent
     public static void onRegisterLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(GiantFernModel.GIANT_FERN, GiantFernModel::createLayer);
+        event.registerLayerDefinition(ModModelLayers.GIANT_FERN, GiantFernRenderer::createLayer);
         event.registerLayerDefinition(DungeonDoorModel.DUNGEON_DOOR, DungeonDoorModel::createLayer);
-        event.registerLayerDefinition(ExplorersTentModel.EXPLORERS_TENT, ExplorersTentModel::createLayer);
+        event.registerLayerDefinition(ModModelLayers.EXPLORERS_TENT, ExplorersTentRenderer::createLayer);
     }
 
     @SubscribeEvent

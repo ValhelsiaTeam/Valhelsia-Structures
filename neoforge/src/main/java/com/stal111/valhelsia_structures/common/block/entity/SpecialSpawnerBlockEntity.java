@@ -23,7 +23,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Objects;
 
 /**
  * Special Spawner Block Entity <br>
@@ -96,7 +95,7 @@ public class SpecialSpawnerBlockEntity extends BlockEntity implements Spawner {
 
     @Override
     public boolean triggerEvent(int id, int type) {
-        return this.spawner.onEventTriggered(Objects.requireNonNull(this.level), id) || super.triggerEvent(id, type);
+        return this.spawner.onEventTriggered(this.level, id) || super.triggerEvent(id, type);
     }
 
     public SpecialBaseSpawner getSpawner() {

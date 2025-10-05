@@ -15,6 +15,7 @@ import net.minecraft.world.level.levelgen.Heightmap
 import net.minecraft.world.level.levelgen.structure.Structure
 import net.minecraft.world.level.levelgen.structure.StructureSpawnOverride
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment
+import net.minecraft.world.level.levelgen.structure.structures.JigsawStructure
 import net.minecraft.world.level.levelgen.structure.templatesystem.LiquidSettings
 
 @DslMarker
@@ -32,7 +33,7 @@ class ValhelsiaStructureBuilder(
     private var maxDepth: Int = 7
     private var projectStartToHeightmap: Heightmap.Types? = Heightmap.Types.WORLD_SURFACE_WG
     private var heightProvider: StructureHeightProvider? = null
-    private var maxDistanceFromCenter: Int = 80
+    private var maxDistanceFromCenter: JigsawStructure.MaxDistance = JigsawStructure.MaxDistance(80)
     private val structureSettings = ValhelsiaStructureSettings.builder()
 
     fun addSpawnOverride(category: MobCategory, override: StructureSpawnOverride) = apply {

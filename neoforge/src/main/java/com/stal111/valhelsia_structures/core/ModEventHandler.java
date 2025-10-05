@@ -22,7 +22,7 @@ public class ModEventHandler extends ValhelsiaForgeEventHandler {
 
     @Override
     public void registerForgeEvents(IEventBus eventBus) {
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.getDist() == Dist.CLIENT) {
             eventBus.register(new ScreenEvents());
         }
     }
