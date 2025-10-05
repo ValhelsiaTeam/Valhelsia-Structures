@@ -18,7 +18,10 @@ import net.minecraft.client.data.models.MultiVariant
 import net.minecraft.client.data.models.blockstates.MultiPartGenerator
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator
 import net.minecraft.client.data.models.blockstates.PropertyDispatch
-import net.minecraft.client.data.models.model.*
+import net.minecraft.client.data.models.model.ItemModelUtils
+import net.minecraft.client.data.models.model.ModelLocationUtils
+import net.minecraft.client.data.models.model.ModelTemplates
+import net.minecraft.client.data.models.model.TextureMapping
 import net.minecraft.client.renderer.block.model.VariantMutator
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
@@ -66,7 +69,7 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
         blockStateOutput.accept(
             MultiVariantGenerator.dispatch(
                 ModBlocks.GIANT_FERN.get(),
-                BlockModelGenerators.plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.GIANT_FERN.get()))
+                plainVariant(ModelLocationUtils.getModelLocation(ModBlocks.GIANT_FERN.get()))
             )
         )
 
@@ -150,12 +153,12 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
         }
 
         blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(attachedDispatch).with(rotationDispatch))
-        this.delegateItemModel(block, models.first())
+        defaultGenerators.registerSimpleItemModel(block, models.first())
     }
 
     private fun crateBrazier(block: Block) {
-        val model = BlockModelGenerators.plainVariant(ModModelTemplates.TEMPLATE_BRAZIER_OFF.createModel(block, brazier(block, false)))
-        val litModel = BlockModelGenerators.plainVariant(ModModelTemplates.TEMPLATE_BRAZIER.createModel(block, brazier(block, true), "_lit"))
+        val model = plainVariant(ModModelTemplates.TEMPLATE_BRAZIER_OFF.createModel(block, brazier(block, false)))
+        val litModel = plainVariant(ModModelTemplates.TEMPLATE_BRAZIER.createModel(block, brazier(block, true), "_lit"))
 
         val litDispatch: PropertyDispatch<MultiVariant> = PropertyDispatch.initial(BlockStateProperties.LIT)
             .select(true, litModel)
@@ -166,8 +169,8 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
 
     private fun createBundledPosts(block: Block) {
         val mapping = bundledPosts(block)
-        val model = BlockModelGenerators.plainVariant(ModelTemplates.CUBE_COLUMN.createModel(block, mapping))
-        val modelHorizontal = BlockModelGenerators.plainVariant(ModelTemplates.CUBE_COLUMN_HORIZONTAL.createModel(block, mapping))
+        val model = plainVariant(ModelTemplates.CUBE_COLUMN.createModel(block, mapping))
+        val modelHorizontal = plainVariant(ModelTemplates.CUBE_COLUMN_HORIZONTAL.createModel(block, mapping))
         blockStateOutput.accept(
             BlockModelGenerators.createRotatedPillarWithHorizontalVariant(block, model, modelHorizontal)
         )
@@ -314,10 +317,6 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
             .select(false, model)
 
         blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(dispatch))
-    }
-
-    private fun delegateItemModel(block: Block, resourceLocation: ResourceLocation) {
-        modelOutput.accept(ModelLocationUtils.getModelLocation(block.asItem()), DelegatedModel(resourceLocation))
     }
 
     fun createFlatItemModelWithOverlay(item: Item, suffix: String): ResourceLocation {
