@@ -8,9 +8,9 @@ import net.minecraft.tags.ItemTags
 import net.minecraft.world.item.Items
 import net.neoforged.neoforge.common.Tags
 import net.valhelsia.dataforge.DataProviderContext
-import net.valhelsia.dataforge.tag.DataForgeCopyItemTagsProvider
+import net.valhelsia.dataforge.tag.DataForgeItemTagsProvider
 
-class ModItemTagsProvider(context: DataProviderContext.Server) : DataForgeCopyItemTagsProvider(context) {
+class ModItemTagsProvider(context: DataProviderContext.Server) : DataForgeItemTagsProvider(context) {
     override fun addTags(provider: HolderLookup.Provider) {
         copy(ModTags.Blocks.POSTS, ModTags.Items.POSTS)
         copy(ModTags.Blocks.CUT_POSTS, ModTags.Items.CUT_POSTS)
