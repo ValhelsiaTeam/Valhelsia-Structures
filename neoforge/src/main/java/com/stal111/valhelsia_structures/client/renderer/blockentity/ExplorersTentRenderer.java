@@ -18,6 +18,7 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.Material;
@@ -26,6 +27,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.util.Unit;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Explorers Tent Renderer <br>
@@ -76,6 +79,13 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
     }
 
     @Override
+    public void extractRenderState(ExplorersTentBlockEntity blockEntity, ExplorersTentRenderState renderState, float partialTick, Vec3 vec3, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, renderState, partialTick, vec3, crumblingOverlay);
+
+        renderState.color = blockEntity.getColor();
+    }
+
+    @Override
     public void submit(ExplorersTentRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState cameraRenderState) {
         BlockState blockState = renderState.blockState;
         Direction direction = blockState.getValue(ExplorersTentBlock.FACING).getClockWise();
@@ -87,7 +97,7 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
         poseStack.mulPose(Axis.YP.rotationDegrees(rotation + 90));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
-        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_MATERIAL.renderType(this.model::renderType), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TENT_MATERIAL), 0, renderState.breakProgress);
+        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_MATERIAL.renderType(this.model::renderType), renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.color, this.materials.get(TENT_MATERIAL), 0, renderState.breakProgress);
         nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_STICKS_MATERIAL.renderType(this.model::renderType), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TENT_STICKS_MATERIAL), 0, renderState.breakProgress);
 
 //        this.model.renderToBuffer(poseStack, bufferSource.getBuffer(this.model.renderType(TENT_TEXTURE)), packedLight, packedOverlay, blockEntity.getColor());
