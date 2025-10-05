@@ -10,8 +10,11 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -127,7 +130,11 @@ public record ToolCraftingRecipe(
 
     @Override
     public @NotNull List<RecipeDisplay> display() {
-        return CraftingRecipe.super.display();
+        return List.of(new ShapelessCraftingRecipeDisplay(
+                List.of(this.ingredient.display(), this.tool.display()),
+                new SlotDisplay.ItemStackSlotDisplay(this.result),
+                new SlotDisplay.ItemSlotDisplay(Items.CRAFTING_TABLE)
+        ));
     }
 
     public static class Serializer implements RecipeSerializer<ToolCraftingRecipe> {
