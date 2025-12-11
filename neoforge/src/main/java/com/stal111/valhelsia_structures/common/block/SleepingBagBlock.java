@@ -7,13 +7,18 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.attribute.BedRule;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.villager.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -86,7 +91,9 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
             }
         }
 
-        if (!BedBlock.canSetSpawn(level)) {
+        BedRule bedRule = level.environmentAttributes().getValue(EnvironmentAttributes.BED_RULE, pos);
+
+        if (bedRule.explodes()) {
             level.removeBlock(pos, false);
 
             pos = pos.relative(state.getValue(FACING).getOpposite());
@@ -108,8 +115,8 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
             return InteractionResult.SUCCESS;
         }
 
-        player.startSleepInBed(pos).ifLeft((problem) -> {
-            if (problem != null && problem.getMessage().getContents() instanceof TranslatableContents contents) {
+        player.startSleepInBed(pos).ifLeft(problem -> {
+            if (problem.message() != null && problem.message().getContents() instanceof TranslatableContents contents) {
                 player.displayClientMessage(Component.translatable("block.valhelsia_structures.sleeping_bag." + contents.getKey().split("\\.")[3]), true);
             }
         });

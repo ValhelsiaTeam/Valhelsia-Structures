@@ -33,7 +33,7 @@ object ModTextureMapping {
 
     fun metalFramedGlassPane(block: Block) = TextureMapping()
         .put(TextureSlot.PANE, getBlockTexture(block))
-        .put(TextureSlot.EDGE, ValhelsiaStructures.location("block/metal_framed_glass_pane_top"))
+        .put(TextureSlot.EDGE, ValhelsiaStructures.identifier("block/metal_framed_glass_pane_top"))
 
     fun sleepingBag(block: Block) = TextureMapping().put(TextureSlot.TEXTURE, getBlockTexture(block, SLEEPING_BAG))
 

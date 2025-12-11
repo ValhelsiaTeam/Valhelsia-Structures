@@ -5,7 +5,7 @@ plugins {
     id("eclipse")
     id("idea")
     id("maven-publish")
-    id("net.neoforged.moddev") version "2.0.112"
+    id("net.neoforged.moddev") version "2.0.123"
 }
 
 val mod_id: String by project

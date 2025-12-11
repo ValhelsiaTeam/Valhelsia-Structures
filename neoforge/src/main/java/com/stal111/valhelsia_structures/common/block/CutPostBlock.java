@@ -5,13 +5,16 @@ import com.stal111.valhelsia_structures.common.block.properties.ModBlockStatePro
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.*;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.ScheduledTickAccess;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -117,14 +120,14 @@ public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility itemAbility, boolean simulate) {
-        ResourceLocation location = BuiltInRegistries.BLOCK.getKey(this);
+        Identifier location = BuiltInRegistries.BLOCK.getKey(this);
 
         if (!context.getItemInHand().canPerformAction(itemAbility) || Objects.requireNonNull(location).getPath().contains("stripped")) {
             return null;
         }
 
         if (itemAbility == ItemAbilities.AXE_STRIP) {
-            return BuiltInRegistries.BLOCK.getValue(ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "cut_stripped_" + location.getPath().substring(4))).defaultBlockState()
+            return BuiltInRegistries.BLOCK.getValue(Identifier.fromNamespaceAndPath(location.getNamespace(), "cut_stripped_" + location.getPath().substring(4))).defaultBlockState()
                     .setValue(FACING, state.getValue(FACING))
                     .setValue(ATTACHED, state.getValue(ATTACHED))
                     .setValue(PARTS, state.getValue(PARTS))

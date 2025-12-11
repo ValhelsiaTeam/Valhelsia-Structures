@@ -25,7 +25,7 @@ import net.minecraft.client.data.models.model.TextureMapping
 import net.minecraft.client.renderer.block.model.VariantMutator
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
@@ -319,7 +319,7 @@ class ModBlockModels(private val defaultGenerators: BlockModelGenerators) : Bloc
         blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(dispatch))
     }
 
-    fun createFlatItemModelWithOverlay(item: Item, suffix: String): ResourceLocation {
+    fun createFlatItemModelWithOverlay(item: Item, suffix: String): Identifier {
         val texture = TextureMapping.getItemTexture(item)
         val overlayTexture = TextureMapping.getItemTexture(item, suffix)
 

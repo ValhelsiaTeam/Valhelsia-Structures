@@ -23,7 +23,7 @@ object ModModelTemplates {
     val TEMPLATE_JAR_ROTATED: ModelTemplate = create("template_jar_rotated", TextureSlot.TEXTURE)
 
     private fun create(name: String, vararg textureSlots: TextureSlot) = ModelTemplate(
-        Optional.of(ValhelsiaStructures.location("block/$name")),
+        Optional.of(ValhelsiaStructures.identifier("block/$name")),
         Optional.empty(),
         *textureSlots
     )

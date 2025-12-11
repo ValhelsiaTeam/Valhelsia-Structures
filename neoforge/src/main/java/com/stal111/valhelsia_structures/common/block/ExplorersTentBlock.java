@@ -10,6 +10,8 @@ import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.attribute.BedRule;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -140,7 +142,9 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
                 return InteractionResult.CONSUME;
             }
 
-            if (!BedBlock.canSetSpawn(level)) {
+            BedRule bedRule = level.environmentAttributes().getValue(EnvironmentAttributes.BED_RULE, pos);
+
+            if (bedRule.explodes()) {
                 level.removeBlock(pos, false);
 
                 pos = pos.relative(state.getValue(FACING).getOpposite());
@@ -163,7 +167,7 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
             }
 
             player.startSleepInBed(pos).ifLeft((problem) -> {
-                if (problem != null && problem.getMessage().getContents() instanceof TranslatableContents contents) {
+                if (problem.message() != null && problem.message().getContents() instanceof TranslatableContents contents) {
                     player.displayClientMessage(Component.translatable("block.valhelsia_structures.sleeping_bag." + contents.getKey().split("\\.")[3]), true);
                 }
             });

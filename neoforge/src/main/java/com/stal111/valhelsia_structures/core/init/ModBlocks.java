@@ -123,7 +123,7 @@ public class ModBlocks implements RegistryClass {
     public static final BlockEntrySet<SleepingBagBlock, DyeColor> SLEEPING_BAGS = HELPER.registerColorEntrySet("sleeping_bag",
             color -> SleepingBagBlock::new,
             color -> Block.Properties.of().mapColor(color.getMapColor()).strength(0.2F).noOcclusion().sound(SoundType.WOOL),
-            blockRegistryObject -> blockRegistryObject.withItem(registryObject -> new BedItem(registryObject.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, blockRegistryObject.getKey().location())).overrideDescription(blockRegistryObject.get().getDescriptionId())))
+            blockRegistryObject -> blockRegistryObject.withItem(registryObject -> new BedItem(registryObject.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, blockRegistryObject.getKey().identifier())).overrideDescription(blockRegistryObject.get().getDescriptionId())))
     );
 
     public enum WoodType implements StringRepresentable {

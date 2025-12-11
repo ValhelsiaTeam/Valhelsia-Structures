@@ -13,12 +13,12 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.Material;
@@ -40,15 +40,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentBlockEntity, ExplorersTentRenderState> {
 
-    public static final Material TENT_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.location("explorers_tent/explorers_tent"));
-    public static final Material TENT_STICKS_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.location("explorers_tent/explorers_tent_sticks"));
+    public static final Material TENT_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("explorers_tent/explorers_tent"));
+    public static final Material TENT_STICKS_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("explorers_tent/explorers_tent_sticks"));
 
     private final MaterialSet materials;
     private final Model.Simple model;
 
     public ExplorersTentRenderer(BlockEntityRendererProvider.Context context) {
         this.materials = context.materials();
-        this.model = new Model.Simple(context.bakeLayer(ModModelLayers.EXPLORERS_TENT), RenderType::entityCutoutNoCull);
+        this.model = new Model.Simple(context.bakeLayer(ModModelLayers.EXPLORERS_TENT), RenderTypes::entityCutoutNoCull);
     }
 
     public static LayerDefinition createLayer() {

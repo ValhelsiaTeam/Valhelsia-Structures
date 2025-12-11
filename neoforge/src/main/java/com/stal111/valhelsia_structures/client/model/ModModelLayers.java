@@ -5,7 +5,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 
 public class ModModelLayers {
 
-    public static final ModelLayerLocation EXPLORERS_TENT = new ModelLayerLocation(ValhelsiaStructures.location("explorers_tent"), "main");
-    public static final ModelLayerLocation GIANT_FERN = new ModelLayerLocation(ValhelsiaStructures.location("giant_fern"), "main");
+    public static final ModelLayerLocation EXPLORERS_TENT = new ModelLayerLocation(ValhelsiaStructures.identifier("explorers_tent"), "main");
+    public static final ModelLayerLocation GIANT_FERN = new ModelLayerLocation(ValhelsiaStructures.identifier("giant_fern"), "main");
 
 }

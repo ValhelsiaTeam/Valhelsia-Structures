@@ -15,7 +15,7 @@ public class ModSoundEvents implements RegistryClass {
 
     public static final MappedRegistryHelper<SoundEvent> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.SOUND_EVENT);
 
-    public static final RegistryEntry<SoundEvent, SoundEvent> DUNGEON_DOOR_OPEN = HELPER.register("block.dungeon_door.open", () -> SoundEvent.createVariableRangeEvent(ValhelsiaStructures.location("block.dungeon_door.open")));
-    public static final RegistryEntry<SoundEvent, SoundEvent> DUNGEON_DOOR_CLOSE = HELPER.register("block.dungeon_door.close", () -> SoundEvent.createVariableRangeEvent(ValhelsiaStructures.location("block.dungeon_door.close")));
+    public static final RegistryEntry<SoundEvent, SoundEvent> DUNGEON_DOOR_OPEN = HELPER.register("block.dungeon_door.open", () -> SoundEvent.createVariableRangeEvent(ValhelsiaStructures.identifier("block.dungeon_door.open")));
+    public static final RegistryEntry<SoundEvent, SoundEvent> DUNGEON_DOOR_CLOSE = HELPER.register("block.dungeon_door.close", () -> SoundEvent.createVariableRangeEvent(ValhelsiaStructures.identifier("block.dungeon_door.close")));
 
 }

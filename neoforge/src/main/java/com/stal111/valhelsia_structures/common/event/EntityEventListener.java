@@ -3,8 +3,8 @@ package com.stal111.valhelsia_structures.common.event;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.monster.Pillager;
-import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.monster.illager.Pillager;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.saveddata.maps.MapDecorationTypes;
@@ -40,23 +40,23 @@ public class EntityEventListener {
         TradeHelper.addVillagerTrade(event,
                 VillagerProfession.CARTOGRAPHER,
                 1,
-                (trader, rand) -> {
+                (level, trader, rand) -> {
                     ItemStack stack = ItemStackUtils.getFilledMap(trader.level(), trader.blockPosition(), ModTags.Structures.ON_SPAWNER_DUNGEON_EXPLORER_MAPS, MapDecorationTypes.RED_X, "filled_map.valhelsia_structures.spawner_dungeon");
                     if (stack == null) {
                         return null;
                     }
-                    return new BasicItemListing(new ItemStack(Items.EMERALD, 10), new ItemStack(Items.COMPASS), stack, 12, 5, 1).getOffer(trader, rand);
+                    return new BasicItemListing(new ItemStack(Items.EMERALD, 10), new ItemStack(Items.COMPASS), stack, 12, 5, 1).getOffer(level, trader, rand);
                 }
         );
         TradeHelper.addVillagerTrade(event,
                 VillagerProfession.CARTOGRAPHER,
                 2,
-                (trader, rand) -> {
+                (level, trader, rand) -> {
                     ItemStack stack = ItemStackUtils.getFilledMap(trader.level(), trader.blockPosition(), ModTags.Structures.ON_CASTLE_EXPLORER_MAPS, MapDecorationTypes.RED_X, "filled_map.valhelsia_structures.castle");
                     if (stack == null) {
                         return null;
                     }
-                    return new BasicItemListing(new ItemStack(Items.EMERALD, 12), new ItemStack(Items.COMPASS), stack, 12, 10, 1).getOffer(trader, rand);
+                    return new BasicItemListing(new ItemStack(Items.EMERALD, 12), new ItemStack(Items.COMPASS), stack, 12, 10, 1).getOffer(level, trader, rand);
                 }
         );
     }

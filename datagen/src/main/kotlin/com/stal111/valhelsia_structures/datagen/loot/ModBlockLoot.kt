@@ -6,7 +6,7 @@ import com.stal111.valhelsia_structures.common.block.SleepingBagBlock
 import com.stal111.valhelsia_structures.common.block.properties.DungeonDoorPart
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties
 import com.stal111.valhelsia_structures.core.init.ModBlocks
-import net.minecraft.advancements.critereon.StatePropertiesPredicate
+import net.minecraft.advancements.criterion.StatePropertiesPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.loot.BlockLootSubProvider
 import net.minecraft.world.flag.FeatureFlags

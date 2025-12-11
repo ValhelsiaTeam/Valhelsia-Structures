@@ -6,8 +6,8 @@ import com.stal111.valhelsia_structures.common.CommonSetup;
 import com.stal111.valhelsia_structures.common.world.structures.height.StructureHeightProviderType;
 import com.stal111.valhelsia_structures.core.config.ModConfig;
 import net.minecraft.core.Registry;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
@@ -33,7 +33,7 @@ public class ValhelsiaStructures {
 
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final ResourceKey<Registry<StructureHeightProviderType<?>>> STRUCTURE_HEIGHT_PROVIDER_TYPES = ResourceKey.createRegistryKey(ValhelsiaStructures.location("structure_height_provider_types"));
+    public static final ResourceKey<Registry<StructureHeightProviderType<?>>> STRUCTURE_HEIGHT_PROVIDER_TYPES = ResourceKey.createRegistryKey(ValhelsiaStructures.identifier("structure_height_provider_types"));
     public static final Registry<StructureHeightProviderType<?>> STRUCTURE_HEIGHT_PROVIDER_TYPES_REGISTRY = new RegistryBuilder<>(STRUCTURE_HEIGHT_PROVIDER_TYPES).create();
 
     public static final RegistryManager REGISTRY_MANAGER = new RegistryManager(new ModRegistries(ValhelsiaStructures.MOD_ID));
@@ -57,7 +57,7 @@ public class ValhelsiaStructures {
         return ModList.get().isLoaded("valhelsia_furniture");
     }
 
-    public static ResourceLocation location(String path) {
-        return ResourceLocation.fromNamespaceAndPath(ValhelsiaStructures.MOD_ID, path);
+    public static Identifier identifier(String path) {
+        return Identifier.fromNamespaceAndPath(ValhelsiaStructures.MOD_ID, path);
     }
 }

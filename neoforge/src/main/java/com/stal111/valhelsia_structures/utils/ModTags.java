@@ -27,7 +27,7 @@ public class ModTags {
         public static final TagKey<Block> SLEEPING_BAGS = modTag("sleeping_bags");
 
         private static TagKey<Block> modTag(String name) {
-            return TagKey.create(Registries.BLOCK, ValhelsiaStructures.location(name));
+            return TagKey.create(Registries.BLOCK, ValhelsiaStructures.identifier(name));
         }
     }
 
@@ -41,7 +41,7 @@ public class ModTags {
         public static final TagKey<Item> SLEEPING_BAGS = modTag("sleeping_bags");
 
         private static TagKey<Item> modTag(String name) {
-            return TagKey.create(Registries.ITEM, ValhelsiaStructures.location(name));
+            return TagKey.create(Registries.ITEM, ValhelsiaStructures.identifier(name));
         }
     }
 
@@ -50,7 +50,7 @@ public class ModTags {
         public static final TagKey<Structure> ON_CASTLE_EXPLORER_MAPS = modTag("on_castle_explorer_maps");
 
         private static TagKey<Structure> modTag(String name) {
-            return TagKey.create(Registries.STRUCTURE, ValhelsiaStructures.location(name));
+            return TagKey.create(Registries.STRUCTURE, ValhelsiaStructures.identifier(name));
         }
     }
 
@@ -69,7 +69,7 @@ public class ModTags {
         public static final TagKey<Biome> HAS_DEEP_SPAWNER_ROOM = modTag("has_structure/deep_spawner_room");
 
         private static TagKey<Biome> modTag(String name) {
-            return TagKey.create(Registries.BIOME, ValhelsiaStructures.location(name));
+            return TagKey.create(Registries.BIOME, ValhelsiaStructures.identifier(name));
         }
     }
 }

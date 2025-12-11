@@ -4,7 +4,7 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
@@ -75,12 +75,12 @@ public class ToolCraftingRecipeBuilder implements RecipeBuilder {
 
         ToolCraftingRecipe recipe = new ToolCraftingRecipe(RecipeBuilder.determineBookCategory(this.category), this.input, this.tool, new ItemStack(this.result, this.count));
 
-        output.accept(resourceKey, recipe, builder.build(resourceKey.location().withPrefix("recipes/" + this.category.getFolderName() + "/")));
+        output.accept(resourceKey, recipe, builder.build(resourceKey.identifier().withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 
     private void ensureValid(ResourceKey<Recipe<?>> recipe) {
         if (this.criteria.isEmpty()) {
-            throw new IllegalStateException("No way of obtaining recipe " + recipe.location());
+            throw new IllegalStateException("No way of obtaining recipe " + recipe.identifier());
         }
     }
 }

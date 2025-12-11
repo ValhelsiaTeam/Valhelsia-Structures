@@ -6,7 +6,7 @@ import com.stal111.valhelsia_structures.utils.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
@@ -109,8 +109,8 @@ public class JarBlock extends Block implements SimpleWaterloggedBlock, EntityBlo
     }
 
     private boolean canBePotted(Block block) {
-        ResourceLocation registryName = BuiltInRegistries.BLOCK.getKey(block);
-        ResourceLocation pottedName = ResourceLocation.fromNamespaceAndPath(registryName.getNamespace(), "potted_" + registryName.getPath());
+        Identifier registryName = BuiltInRegistries.BLOCK.getKey(block);
+        Identifier pottedName = Identifier.fromNamespaceAndPath(registryName.getNamespace(), "potted_" + registryName.getPath());
 
         if (!BuiltInRegistries.BLOCK.containsKey(pottedName)) {
             return false;

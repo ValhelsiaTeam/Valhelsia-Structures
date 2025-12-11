@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 
 /**
  * Dungeon Door Model <br>
@@ -20,13 +20,13 @@ import net.minecraft.client.renderer.RenderType;
  */
 public class DungeonDoorModel extends Model<DungeonDoorModel.State> {
 
-	public static final ModelLayerLocation DUNGEON_DOOR = new ModelLayerLocation(ValhelsiaStructures.location("dungeon_door"), "main");
+	public static final ModelLayerLocation DUNGEON_DOOR = new ModelLayerLocation(ValhelsiaStructures.identifier("dungeon_door"), "main");
 
 	private final ModelPart rightDoor;
 	private final ModelPart leftDoor;
 
 	public DungeonDoorModel(ModelPart root) {
-		super(root, RenderType::entityCutout);
+		super(root, RenderTypes::entityCutout);
 		this.rightDoor = root.getChild("rightDoor");
 		this.leftDoor = root.getChild("leftDoor");
 	}

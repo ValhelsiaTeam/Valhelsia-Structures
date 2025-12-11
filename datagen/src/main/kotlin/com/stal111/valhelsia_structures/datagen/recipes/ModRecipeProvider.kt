@@ -7,7 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.data.recipes.RecipeCategory
 import net.minecraft.data.recipes.RecipeOutput
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder
-import net.minecraft.resources.ResourceLocation
+import net.minecraft.resources.Identifier
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.DyeColor
@@ -17,7 +17,10 @@ import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Blocks
 import net.neoforged.neoforge.common.Tags
-import net.valhelsia.dataforge.recipe.*
+import net.valhelsia.dataforge.recipe.DataForgeRecipePart
+import net.valhelsia.dataforge.recipe.RecipeSubProvider
+import net.valhelsia.dataforge.recipe.define
+import net.valhelsia.dataforge.recipe.pattern
 
 class ModRecipeProvider(
     lookupProvider: HolderLookup.Provider,
@@ -79,7 +82,7 @@ class ModRecipeProvider(
 
         ModBlocks.COLORED_METAL_FRAMED_GLASS.forEach { color, entry ->
             val block =
-                BuiltInRegistries.BLOCK.getValue(ResourceLocation.withDefaultNamespace(color.serializedName + "_stained_glass"))
+                BuiltInRegistries.BLOCK.getValue(Identifier.withDefaultNamespace(color.serializedName + "_stained_glass"))
             this.metalFramedGlass(entry.get(), block)
         }
 
@@ -122,11 +125,11 @@ class ModRecipeProvider(
 
         ModBlocks.COLORED_GLAZED_JARS.values.forEach {
             val name = BuiltInRegistries.BLOCK.getKey(it.get()).path.replace("glazed_jar", "terracotta")
-            val block = BuiltInRegistries.BLOCK.getValue(ResourceLocation.withDefaultNamespace(name))
+            val block = BuiltInRegistries.BLOCK.getValue(Identifier.withDefaultNamespace(name))
             this.glazedJar(it.get(), block)
         }
 
-        ModBlocks.BUNDLED_POSTS.forEach { woodType, entry ->
+        ModBlocks.BUNDLED_POSTS.forEach { (woodType, entry) ->
             this.simple2x2(
                 RecipeCategory.BUILDING_BLOCKS,
                 entry.get(),
@@ -134,7 +137,7 @@ class ModRecipeProvider(
             )
         }
 
-        ModBlocks.BUNDLED_STRIPPED_POSTS.forEach { woodType, entry ->
+        ModBlocks.BUNDLED_STRIPPED_POSTS.forEach { (woodType, entry) ->
             this.simple2x2(
                 RecipeCategory.BUILDING_BLOCKS,
                 entry.get(),
@@ -144,8 +147,8 @@ class ModRecipeProvider(
 
         val whiteSleepingBag = ModBlocks.SLEEPING_BAGS[DyeColor.WHITE]!!.get()
 
-        ModBlocks.SLEEPING_BAGS.forEach { color, entry ->
-            val block = BuiltInRegistries.BLOCK.getValue(ResourceLocation.withDefaultNamespace(color.serializedName + "_wool"))
+        ModBlocks.SLEEPING_BAGS.forEach { (color, entry) ->
+            val block = BuiltInRegistries.BLOCK.getValue(Identifier.withDefaultNamespace(color.serializedName + "_wool"))
             this.singleRow(RecipeCategory.DECORATIONS, entry.get(), block)
             if (color != DyeColor.WHITE) {
                 this.shapeless(

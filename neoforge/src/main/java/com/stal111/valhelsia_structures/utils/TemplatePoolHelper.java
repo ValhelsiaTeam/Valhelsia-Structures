@@ -7,8 +7,8 @@ import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.levelgen.structure.TerrainAdjustment;
 import net.minecraft.world.level.levelgen.structure.pools.StructureTemplatePool;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorList;
@@ -31,11 +31,11 @@ public class TemplatePoolHelper {
     };
 
     public static Function<StructureTemplatePool.Projection, ValhelsiaSinglePoolElement> single(String id, Holder<StructureProcessorList> processors) {
-        return projection -> new ValhelsiaSinglePoolElement(Either.left(ResourceLocation.parse(id)), processors, projection, Optional.empty());
+        return projection -> new ValhelsiaSinglePoolElement(Either.left(Identifier.parse(id)), processors, projection, Optional.empty());
     }
 
     public ResourceKey<StructureTemplatePool> createKey(String name) {
-        return ResourceKey.create(Registries.TEMPLATE_POOL, ValhelsiaStructures.location(name));
+        return ResourceKey.create(Registries.TEMPLATE_POOL, ValhelsiaStructures.identifier(name));
     }
 
     public void create(String name, BootstrapContext<StructureTemplatePool> context, String folder, UnaryOperator<JigsawBuilder> builder) {

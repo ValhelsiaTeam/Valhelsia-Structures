@@ -24,6 +24,6 @@ class ModSoundsProvider(context: DataProviderContext) : SoundDefinitionsProvider
     }
 
     private fun simpleSound(name: String): SoundDefinition.Sound {
-        return SoundDefinition.Sound.sound(ValhelsiaStructures.location(name), SoundDefinition.SoundType.SOUND)
+        return SoundDefinition.Sound.sound(ValhelsiaStructures.identifier(name), SoundDefinition.SoundType.SOUND)
     }
 }

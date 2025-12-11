@@ -13,7 +13,7 @@ import net.valhelsia.dataforge.RegistryDataProvider
 
 object ModStructureSets : RegistryDataProvider<StructureSet> {
     override fun bootstrap(context: BootstrapContext<StructureSet>): Unit = context.run {
-        context.lookup<Structure?>(Registries.STRUCTURE)
+        context.lookup(Registries.STRUCTURE)
 
         register(
             BuiltInStructureSets.CASTLES,

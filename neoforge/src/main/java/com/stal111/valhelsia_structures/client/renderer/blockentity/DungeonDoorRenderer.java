@@ -6,12 +6,12 @@ import com.stal111.valhelsia_structures.client.model.block.DungeonDoorModel;
 import com.stal111.valhelsia_structures.client.renderer.blockentity.state.DungeonDoorRenderState;
 import com.stal111.valhelsia_structures.common.block.entity.DungeonDoorBlockEntity;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.Material;
@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlockEntity, DungeonDoorRenderState> {
 
-    public static final Material TEXTURE_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.location("dungeon_door"));
+    public static final Material TEXTURE_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("dungeon_door"));
 
     private final MaterialSet materials;
     private final DungeonDoorModel model;
@@ -64,7 +64,7 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
         DungeonDoorModel.State state = new DungeonDoorModel.State(renderState.openness);
 
         this.model.setupAnim(state);
-        nodeCollector.submitModel(this.model, state, poseStack, TEXTURE_MATERIAL.renderType(RenderType::entityCutout), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TEXTURE_MATERIAL), 0, renderState.breakProgress);
+        nodeCollector.submitModel(this.model, state, poseStack, TEXTURE_MATERIAL.renderType(RenderTypes::entityCutout), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TEXTURE_MATERIAL), 0, renderState.breakProgress);
 
         poseStack.popPose();
     }

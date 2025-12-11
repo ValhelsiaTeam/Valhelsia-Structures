@@ -25,7 +25,6 @@ import org.slf4j.Logger;
 
 import javax.annotation.Nonnull;
 import java.util.Optional;
-import java.util.function.Function;
 
 /**
  * Special Base Spawner <br>
@@ -228,7 +227,7 @@ public abstract class SpecialBaseSpawner implements IOwnedSpawner {
                 return null;
             }
 
-            this.displayEntity = EntityType.loadEntityRecursive(tag, level, EntitySpawnReason.SPAWNER, Function.identity());
+            this.displayEntity = EntityType.loadEntityRecursive(tag, level, EntitySpawnReason.SPAWNER, EntityProcessor.NOP);
         }
 
         return this.displayEntity;

@@ -12,12 +12,12 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.Material;
@@ -33,14 +33,14 @@ import net.minecraft.util.Unit;
  */
 public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEntity, BlockEntityRenderState> {
 
-    public static final Material TEXTURE_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.location("giant_fern"));
+    public static final Material TEXTURE_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("giant_fern"));
 
     private final MaterialSet materials;
     private final Model.Simple model;
 
     public GiantFernRenderer(BlockEntityRendererProvider.Context context) {
         this.materials = context.materials();
-        this.model = new Model.Simple(context.bakeLayer(ModModelLayers.GIANT_FERN), RenderType::entityCutoutNoCull);
+        this.model = new Model.Simple(context.bakeLayer(ModModelLayers.GIANT_FERN), RenderTypes::entityCutoutNoCull);
     }
 
     public static LayerDefinition createLayer() {
@@ -88,7 +88,7 @@ public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEnti
             poseStack.mulPose(Axis.YP.rotationDegrees(45));
         }
 
-        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TEXTURE_MATERIAL.renderType(RenderType::entityCutoutNoCull), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TEXTURE_MATERIAL), 0, renderState.breakProgress);
+        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TEXTURE_MATERIAL.renderType(RenderTypes::entityCutoutNoCull), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TEXTURE_MATERIAL), 0, renderState.breakProgress);
 
         poseStack.popPose();
     }

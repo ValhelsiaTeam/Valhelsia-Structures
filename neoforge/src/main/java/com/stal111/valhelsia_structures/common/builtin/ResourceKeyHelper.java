@@ -16,6 +16,6 @@ public class ResourceKeyHelper<T> {
     }
 
     public ResourceKey<T> createKey(String name) {
-        return ResourceKey.create(this.registry, ValhelsiaStructures.location(name));
+        return ResourceKey.create(this.registry, ValhelsiaStructures.identifier(name));
     }
 }

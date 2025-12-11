@@ -25,7 +25,7 @@ public class ScreenEvents {
     @SubscribeEvent
     public void onScreenRender(ScreenEvent.Init.Pre event) {
         if (event.getScreen() instanceof CreateWorldScreen screen && screen.height >= 260 && !ValhelsiaStructures.isFurnitureInstalled() && ClientConfig.FURNITURE_WARNING_ENABLED.get()) {
-            FocusableTextWidget widget = new FocusableTextWidget(screen.width, FURNITURE_WARNING, screen.getMinecraft().font, 12);
+            FocusableTextWidget widget = FocusableTextWidget.builder(FURNITURE_WARNING, screen.getMinecraft().font, 12).textWidth(screen.getMinecraft().font.width(FURNITURE_WARNING)).build();
             widget.setPosition(screen.width / 2 - widget.getWidth() / 2, 190);
 
             event.addListener(widget);
