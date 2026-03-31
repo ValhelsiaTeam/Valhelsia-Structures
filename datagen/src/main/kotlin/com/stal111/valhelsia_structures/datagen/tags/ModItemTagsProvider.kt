@@ -25,6 +25,6 @@ class ModItemTagsProvider(context: DataProviderContext.Server) : DataForgeItemTa
         copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS)
 
         tag(ModTags.Items.JAR_BLACKLISTED).add(Items.CACTUS, Items.CRIMSON_ROOTS, Items.WARPED_ROOTS)
-        tag(ItemTags.DYEABLE).add(ModBlocks.EXPLORERS_TENT.get().asItem())
+        tag(ItemTags.CAULDRON_CAN_REMOVE_DYE).add(ModBlocks.EXPLORERS_TENT.get().asItem())
     }
 }

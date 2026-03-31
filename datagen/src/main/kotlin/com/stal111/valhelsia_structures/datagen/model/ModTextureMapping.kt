@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.datagen.model
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures
 import net.minecraft.client.data.models.model.TextureMapping
 import net.minecraft.client.data.models.model.TextureSlot
+import net.minecraft.client.resources.model.sprite.Material
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.level.block.Block
 
@@ -33,18 +34,18 @@ object ModTextureMapping {
 
     fun metalFramedGlassPane(block: Block) = TextureMapping()
         .put(TextureSlot.PANE, getBlockTexture(block))
-        .put(TextureSlot.EDGE, ValhelsiaStructures.identifier("block/metal_framed_glass_pane_top"))
+        .put(TextureSlot.EDGE, Material(ValhelsiaStructures.identifier("block/metal_framed_glass_pane_top")))
 
     fun sleepingBag(block: Block) = TextureMapping().put(TextureSlot.TEXTURE, getBlockTexture(block, SLEEPING_BAG))
 
     fun jar(block: Block) = TextureMapping.defaultTexture(getBlockTexture(block, JAR))
 
     private fun getBlockTexture(block: Block) =
-        BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/")
+        Material(BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/"))
 
     fun getBlockTexture(block: Block, folder: String) =
-        BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/$folder/")
+        Material(BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/$folder/"))
 
     fun getBlockTexture(block: Block, folder: String, suffix: String) =
-        BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/$folder/").withSuffix(suffix)
+        Material(BuiltInRegistries.BLOCK.getKey(block).withPrefix("block/$folder/").withSuffix(suffix))
 }

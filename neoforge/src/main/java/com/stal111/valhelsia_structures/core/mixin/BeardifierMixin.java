@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public class BeardifierMixin {
 
     @WrapOperation(
-            method = "lambda$forStructuresInChunk$1",
+            method = "lambda$forStructuresInChunk$0",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/levelgen/structure/Structure;terrainAdaptation()Lnet/minecraft/world/level/levelgen/structure/TerrainAdjustment;"))
     private static TerrainAdjustment valhelsia_forStructuresInChunk(Structure structure, Operation<TerrainAdjustment> original) {
         if (structure instanceof ValhelsiaJigsawStructure valhelsiaJigsawStructure && valhelsiaJigsawStructure.hasIndividualTerrainAdjustment()) {

@@ -26,15 +26,14 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -54,12 +53,12 @@ public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     protected static final Map<Direction, List<VoxelShape>> SHAPES = new ImmutableMap.Builder<Direction, List<VoxelShape>>()
-            .put(Direction.UP, Arrays.asList(Block.box(3.0D, 0.0D, 3.0D, 13.0D, 4.0D, 13.0D), Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D), Block.box(3.0D, 0.0D, 3.0D, 13.0D, 12.0D, 13.0D)))
-            .put(Direction.DOWN, Arrays.asList(Block.box(3.0D, 12.0D, 3.0D, 13.0D, 16.0D, 13.0D), Block.box(3.0D, 8.0D, 3.0D, 13.0D, 16.0D, 13.0D), Block.box(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D)))
-            .put(Direction.SOUTH, Arrays.asList(Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 4.0D), Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 8.0D), Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 12.0D)))
-            .put(Direction.NORTH, Arrays.asList(Block.box(3.0D, 3.0D, 12.0D, 13.0D, 13.0D, 16.0D), Block.box(3.0D, 3.0D, 8.0D, 13.0D, 13.0D, 16.0D), Block.box(3.0D, 3.0D, 4.0D, 13.0D, 13.0D, 16.0D)))
-            .put(Direction.EAST, Arrays.asList(Block.box(0.0D, 3.0D, 3.0D, 4.0D, 13.0D, 13.0D), Block.box(0.0D, 3.0D, 3.0D, 8.0D, 13.0D, 13.0D), Block.box(0.0D, 3.0D, 3.0D, 12.0D, 13.0D, 13.0D)))
-            .put(Direction.WEST, Arrays.asList(Block.box(12.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D), Block.box(8.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D), Block.box(4.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D)))
+            .put(Direction.UP, List.of(Block.box(3.0D, 0.0D, 3.0D, 13.0D, 4.0D, 13.0D), Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D), Block.box(3.0D, 0.0D, 3.0D, 13.0D, 12.0D, 13.0D)))
+            .put(Direction.DOWN, List.of(Block.box(3.0D, 12.0D, 3.0D, 13.0D, 16.0D, 13.0D), Block.box(3.0D, 8.0D, 3.0D, 13.0D, 16.0D, 13.0D), Block.box(3.0D, 4.0D, 3.0D, 13.0D, 16.0D, 13.0D)))
+            .put(Direction.SOUTH, List.of(Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 4.0D), Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 8.0D), Block.box(3.0D, 3.0D, 0.0D, 13.0D, 13.0D, 12.0D)))
+            .put(Direction.NORTH, List.of(Block.box(3.0D, 3.0D, 12.0D, 13.0D, 13.0D, 16.0D), Block.box(3.0D, 3.0D, 8.0D, 13.0D, 13.0D, 16.0D), Block.box(3.0D, 3.0D, 4.0D, 13.0D, 13.0D, 16.0D)))
+            .put(Direction.EAST, List.of(Block.box(0.0D, 3.0D, 3.0D, 4.0D, 13.0D, 13.0D), Block.box(0.0D, 3.0D, 3.0D, 8.0D, 13.0D, 13.0D), Block.box(0.0D, 3.0D, 3.0D, 12.0D, 13.0D, 13.0D)))
+            .put(Direction.WEST, List.of(Block.box(12.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D), Block.box(8.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D), Block.box(4.0D, 3.0D, 3.0D, 16.0D, 13.0D, 13.0D)))
             .build();
 
 
@@ -76,7 +75,7 @@ public class CutPostBlock extends Block implements SimpleWaterloggedBlock {
 
         VoxelShape shape = parts == 4 ? PostBlock.SHAPES.get(facing.getAxis()) : SHAPES.get(facing).get(parts - 1);
 
-        return state.getValue(ATTACHED) ? VoxelShapeHelper.add(0, -3, 0, 0, -3, 0, shape) : shape;
+        return state.getValue(ATTACHED) ? Shapes.box(shape.min(Direction.Axis.X), shape.min(Direction.Axis.Y) - 3, shape.min(Direction.Axis.Z), shape.max(Direction.Axis.X), shape.max(Direction.Axis.Y) - 3, shape.max(Direction.Axis.Z)) : shape;
     }
 
     @Override

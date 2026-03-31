@@ -19,6 +19,6 @@ public class ModRecipes implements RegistryClass {
 
     public static final MappedRegistryHelper<RecipeSerializer<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.RECIPE_SERIALIZER);
 
-    public static final RegistryEntry<RecipeSerializer<?>, RecipeSerializer<ToolCraftingRecipe>> TOOL_CRAFTING_SERIALIZER = HELPER.register("tool_crafting", ToolCraftingRecipe.Serializer::new);
+    public static final RegistryEntry<RecipeSerializer<?>, RecipeSerializer<ToolCraftingRecipe>> TOOL_CRAFTING_SERIALIZER = HELPER.register("tool_crafting", () -> ToolCraftingRecipe.SERIALIZER);
 
 }

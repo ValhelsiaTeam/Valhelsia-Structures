@@ -12,10 +12,10 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -31,13 +31,13 @@ import org.jetbrains.annotations.Nullable;
  */
 public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlockEntity, DungeonDoorRenderState> {
 
-    public static final Material TEXTURE_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("dungeon_door"));
+    public static final SpriteId TEXTURE_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("dungeon_door"));
 
-    private final MaterialSet materials;
+    private final SpriteGetter sprites;
     private final DungeonDoorModel model;
 
     public DungeonDoorRenderer(BlockEntityRendererProvider.Context context) {
-        this.materials = context.materials();
+        this.sprites = context.sprites();
         this.model = new DungeonDoorModel(context.bakeLayer(DungeonDoorModel.DUNGEON_DOOR));
     }
 
@@ -50,6 +50,7 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
     public void extractRenderState(DungeonDoorBlockEntity blockEntity, DungeonDoorRenderState renderState, float partialTick, Vec3 vec3, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, renderState, partialTick, vec3, crumblingOverlay);
 
+        renderState.facing = blockEntity.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
         renderState.openness = blockEntity.getOpenNess(partialTick);
     }
 
@@ -58,13 +59,13 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
         poseStack.pushPose();
 
         poseStack.translate(0.5D, 1.5D, 0.5D);
-        poseStack.mulPose(Axis.YP.rotationDegrees(-renderState.blockState.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180));
+        poseStack.mulPose(Axis.YP.rotationDegrees(-renderState.facing.toYRot() + 180));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
         DungeonDoorModel.State state = new DungeonDoorModel.State(renderState.openness);
 
         this.model.setupAnim(state);
-        nodeCollector.submitModel(this.model, state, poseStack, TEXTURE_MATERIAL.renderType(RenderTypes::entityCutout), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TEXTURE_MATERIAL), 0, renderState.breakProgress);
+        nodeCollector.submitModel(this.model, state, poseStack, TEXTURE_MATERIAL.renderType(RenderTypes::entityCutout), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.sprites.get(TEXTURE_MATERIAL), 0, renderState.breakProgress);
 
         poseStack.popPose();
     }

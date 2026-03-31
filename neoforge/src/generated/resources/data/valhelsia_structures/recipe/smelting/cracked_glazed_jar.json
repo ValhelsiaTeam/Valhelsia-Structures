@@ -5,7 +5,6 @@
   "experience": 0.1,
   "ingredient": "valhelsia_structures:glazed_jar",
   "result": {
-    "count": 1,
     "id": "valhelsia_structures:cracked_glazed_jar"
   }
 }

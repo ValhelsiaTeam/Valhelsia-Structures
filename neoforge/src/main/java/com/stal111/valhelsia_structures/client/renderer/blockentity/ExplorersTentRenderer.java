@@ -19,13 +19,12 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Unit;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -40,15 +39,15 @@ import org.jetbrains.annotations.Nullable;
  */
 public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentBlockEntity, ExplorersTentRenderState> {
 
-    public static final Material TENT_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("explorers_tent/explorers_tent"));
-    public static final Material TENT_STICKS_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("explorers_tent/explorers_tent_sticks"));
+    public static final SpriteId TENT_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("explorers_tent/explorers_tent"));
+    public static final SpriteId TENT_STICKS_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("explorers_tent/explorers_tent_sticks"));
 
-    private final MaterialSet materials;
+    private final SpriteGetter sprites;
     private final Model.Simple model;
 
     public ExplorersTentRenderer(BlockEntityRendererProvider.Context context) {
-        this.materials = context.materials();
-        this.model = new Model.Simple(context.bakeLayer(ModModelLayers.EXPLORERS_TENT), RenderTypes::entityCutoutNoCull);
+        this.sprites = context.sprites();
+        this.model = new Model.Simple(context.bakeLayer(ModModelLayers.EXPLORERS_TENT), RenderTypes::entityCutout);
     }
 
     public static LayerDefinition createLayer() {
@@ -82,13 +81,13 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
     public void extractRenderState(ExplorersTentBlockEntity blockEntity, ExplorersTentRenderState renderState, float partialTick, Vec3 vec3, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
         BlockEntityRenderer.super.extractRenderState(blockEntity, renderState, partialTick, vec3, crumblingOverlay);
 
+        renderState.facing = blockEntity.getBlockState().getValue(ExplorersTentBlock.FACING);
         renderState.color = blockEntity.getColor();
     }
 
     @Override
     public void submit(ExplorersTentRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState cameraRenderState) {
-        BlockState blockState = renderState.blockState;
-        Direction direction = blockState.getValue(ExplorersTentBlock.FACING).getClockWise();
+        Direction direction = renderState.facing.getClockWise();
         float rotation = -direction.toYRot();
 
         poseStack.pushPose();
@@ -97,8 +96,8 @@ public class ExplorersTentRenderer implements BlockEntityRenderer<ExplorersTentB
         poseStack.mulPose(Axis.YP.rotationDegrees(rotation + 90));
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
-        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_MATERIAL.renderType(this.model::renderType), renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.color, this.materials.get(TENT_MATERIAL), 0, renderState.breakProgress);
-        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_STICKS_MATERIAL.renderType(this.model::renderType), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TENT_STICKS_MATERIAL), 0, renderState.breakProgress);
+        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_MATERIAL.renderType(this.model::renderType), renderState.lightCoords, OverlayTexture.NO_OVERLAY, renderState.color, this.sprites.get(TENT_MATERIAL), 0, renderState.breakProgress);
+        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TENT_STICKS_MATERIAL.renderType(this.model::renderType), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.sprites.get(TENT_STICKS_MATERIAL), 0, renderState.breakProgress);
 
 //        this.model.renderToBuffer(poseStack, bufferSource.getBuffer(this.model.renderType(TENT_TEXTURE)), packedLight, packedOverlay, blockEntity.getColor());
 //        this.model.renderSticksToBuffer(poseStack, bufferSource.getBuffer(this.model.renderType(TENT_STICKS_TEXTURE)), packedLight, packedOverlay);

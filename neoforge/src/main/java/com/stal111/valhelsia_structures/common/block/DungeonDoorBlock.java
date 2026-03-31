@@ -36,7 +36,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -64,7 +63,7 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
     private static final VoxelShape OPEN_SHAPE = Block.box(12.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
     private static final VoxelShape OPEN_SHAPE_MIRRORED = Block.box(0.0D, 0.0D, 0.0D, 4.0D, 16.0D, 8.0D);
 
-    private final Map<Direction, VoxelShape> shapesCache = VoxelShapeHelper.getHorizontalRotatedShapes(SHAPE);
+    private final Map<Direction, VoxelShape> shapesCache = Shapes.rotateHorizontal(SHAPE);
     private final EnumMap<Direction, Pair<VoxelShape, VoxelShape>> openShapesCache;
 
     public DungeonDoorBlock(Properties properties) {
@@ -76,8 +75,8 @@ public class DungeonDoorBlock extends Block implements SimpleWaterloggedBlock, E
     private EnumMap<Direction, Pair<VoxelShape, VoxelShape>> buildOpenShapes() {
         EnumMap<Direction, Pair<VoxelShape, VoxelShape>> map = new EnumMap<>(Direction.class);
 
-        VoxelShapeHelper.getHorizontalRotatedShapes(OPEN_SHAPE).forEach((direction, shape) -> {
-            map.put(direction, Pair.of(shape, VoxelShapeHelper.rotateShapeHorizontal(OPEN_SHAPE_MIRRORED, direction)));
+        Shapes.rotateHorizontal(OPEN_SHAPE).forEach((direction, shape) -> {
+            map.put(direction, Pair.of(shape, Shapes.rotateHorizontal(OPEN_SHAPE_MIRRORED).get(direction)));
         });
 
         return map;

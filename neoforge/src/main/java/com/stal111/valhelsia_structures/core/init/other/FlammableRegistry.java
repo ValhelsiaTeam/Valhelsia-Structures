@@ -1,6 +1,5 @@
 package com.stal111.valhelsia_structures.core.init.other;
 
-import com.stal111.valhelsia_structures.core.init.ModBlocks;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.block.FlammableHelper;
 
 /**
@@ -15,34 +14,35 @@ public class FlammableRegistry {
     private static final FlammableHelper HELPER = FlammableHelper.get();
 
     public static void register() {
-        ModBlocks.WOODEN_POSTS.forEach((woodType, registryObject) -> {
-            if (woodType.isFlammable()) {
-                HELPER.registerLog(registryObject.get());
-            }
-        });
-
-        ModBlocks.STRIPPED_WOODEN_POSTS.forEach((woodType, registryObject) -> {
-            if (woodType.isFlammable()) {
-                HELPER.registerLog(registryObject.get());
-            }
-        });
-
-        ModBlocks.CUT_WOODEN_POSTS.forEach((woodType, registryObject) -> {
-            if (woodType.isFlammable()) {
-                HELPER.registerLog(registryObject.get());
-            }
-        });
-
-        ModBlocks.CUT_STRIPPED_WOODEN_POSTS.forEach((woodType, registryObject) -> {
-            if (woodType.isFlammable()) {
-                HELPER.registerLog(registryObject.get());
-            }
-        });
-
-        HELPER.register(ModBlocks.PAPER_WALL.get(), 60, 60);
-        HELPER.register(ModBlocks.HANGING_VINES_BODY.get(), 15, 100);
-        HELPER.register(ModBlocks.HANGING_VINES.get(), 15, 100);
-        //HELPER.registerPlant(ModBlocks.HIBISCUS.get());
-        HELPER.registerPlant(ModBlocks.GIANT_FERN.get());
+        //TODO
+//        ModBlocks.WOODEN_POSTS.forEach((woodType, registryObject) -> {
+//            if (woodType.isFlammable()) {
+//                HELPER.registerLog(registryObject.get());
+//            }
+//        });
+//
+//        ModBlocks.STRIPPED_WOODEN_POSTS.forEach((woodType, registryObject) -> {
+//            if (woodType.isFlammable()) {
+//                HELPER.registerLog(registryObject.get());
+//            }
+//        });
+//
+//        ModBlocks.CUT_WOODEN_POSTS.forEach((woodType, registryObject) -> {
+//            if (woodType.isFlammable()) {
+//                HELPER.registerLog(registryObject.get());
+//            }
+//        });
+//
+//        ModBlocks.CUT_STRIPPED_WOODEN_POSTS.forEach((woodType, registryObject) -> {
+//            if (woodType.isFlammable()) {
+//                HELPER.registerLog(registryObject.get());
+//            }
+//        });
+//
+//        HELPER.register(ModBlocks.PAPER_WALL.get(), 60, 60);
+//        HELPER.register(ModBlocks.HANGING_VINES_BODY.get(), 15, 100);
+//        HELPER.register(ModBlocks.HANGING_VINES.get(), 15, 100);
+//        //HELPER.registerPlant(ModBlocks.HIBISCUS.get());
+//        HELPER.registerPlant(ModBlocks.GIANT_FERN.get());
     }
 }

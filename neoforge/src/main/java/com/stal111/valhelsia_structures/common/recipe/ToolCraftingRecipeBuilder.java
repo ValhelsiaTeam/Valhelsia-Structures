@@ -9,11 +9,9 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -30,17 +28,17 @@ public class ToolCraftingRecipeBuilder implements RecipeBuilder {
     private final RecipeCategory category;
     private final Ingredient input;
     private final Ingredient tool;
-    private final Item result;
-    private final int count;
+    private final ItemStackTemplate result;
+
+    private @Nullable String group;
 
     private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
 
-    public ToolCraftingRecipeBuilder(RecipeCategory category, Ingredient input, Ingredient tool, ItemLike result, int count) {
+    public ToolCraftingRecipeBuilder(RecipeCategory category, Ingredient input, Ingredient tool, ItemStackTemplate result) {
         this.category = category;
         this.input = input;
         this.tool = tool;
-        this.result = result.asItem();
-        this.count = count;
+        this.result = result;
     }
 
     @Override
@@ -53,13 +51,13 @@ public class ToolCraftingRecipeBuilder implements RecipeBuilder {
     @Nonnull
     @Override
     public RecipeBuilder group(@Nullable String groupName) {
+        this.group = groupName;
         return this;
     }
 
-    @Nonnull
     @Override
-    public Item getResult() {
-        return this.result;
+    public ResourceKey<Recipe<?>> defaultId() {
+        return RecipeBuilder.getDefaultRecipeId(this.result);
     }
 
     @Override
@@ -73,7 +71,13 @@ public class ToolCraftingRecipeBuilder implements RecipeBuilder {
 
         this.criteria.forEach(builder::addCriterion);
 
-        ToolCraftingRecipe recipe = new ToolCraftingRecipe(RecipeBuilder.determineBookCategory(this.category), this.input, this.tool, new ItemStack(this.result, this.count));
+        ToolCraftingRecipe recipe = new ToolCraftingRecipe(
+                RecipeBuilder.createCraftingCommonInfo(true),
+                RecipeBuilder.createCraftingBookInfo(this.category, this.group),
+                this.input,
+                this.tool,
+                this.result
+        );
 
         output.accept(resourceKey, recipe, builder.build(resourceKey.identifier().withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }

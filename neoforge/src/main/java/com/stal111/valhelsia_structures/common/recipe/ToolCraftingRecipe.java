@@ -1,15 +1,13 @@
 package com.stal111.valhelsia_structures.common.recipe;
 
-import com.google.common.base.Suppliers;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.stal111.valhelsia_structures.core.init.ModRecipes;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
@@ -20,7 +18,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * Axe Crafting Recipe <br>
@@ -32,15 +29,41 @@ import java.util.function.Supplier;
  * @author Valhelsia Team
  * @since 2020-06-01
  */
-public record ToolCraftingRecipe(
-        CraftingBookCategory category,
-        Ingredient ingredient,
-        Ingredient tool,
-        ItemStack result,
-        Supplier<PlacementInfo> placementInfoSupplier) implements CraftingRecipe {
+public class ToolCraftingRecipe extends NormalCraftingRecipe {
 
-    public ToolCraftingRecipe(CraftingBookCategory category, Ingredient ingredient, Ingredient tool, ItemStack result) {
-        this(category, ingredient, tool, result, Suppliers.memoize(() -> PlacementInfo.create(List.of(ingredient, tool))));
+    private static final MapCodec<ToolCraftingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Recipe.CommonInfo.MAP_CODEC.forGetter(o -> o.commonInfo),
+            CraftingRecipe.CraftingBookInfo.MAP_CODEC.forGetter(o -> o.bookInfo),
+            Ingredient.CODEC.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
+            Ingredient.CODEC.fieldOf("tool").forGetter(recipe -> recipe.tool),
+            ItemStackTemplate.CODEC.fieldOf("result").forGetter(recipe -> recipe.result)
+    ).apply(instance, ToolCraftingRecipe::new));
+
+    private static final StreamCodec<RegistryFriendlyByteBuf, ToolCraftingRecipe> STREAM_CODEC = StreamCodec.composite(
+            Recipe.CommonInfo.STREAM_CODEC,
+            recipe -> recipe.commonInfo,
+            CraftingRecipe.CraftingBookInfo.STREAM_CODEC,
+            recipe -> recipe.bookInfo,
+            Ingredient.CONTENTS_STREAM_CODEC,
+            recipe -> recipe.ingredient,
+            Ingredient.CONTENTS_STREAM_CODEC,
+            recipe -> recipe.tool,
+            ItemStackTemplate.STREAM_CODEC,
+            recipe -> recipe.result,
+            ToolCraftingRecipe::new
+    );
+
+    public static final RecipeSerializer<ToolCraftingRecipe> SERIALIZER = new RecipeSerializer<>(CODEC, STREAM_CODEC);
+
+    private final Ingredient ingredient;
+    private final Ingredient tool;
+    private final ItemStackTemplate result;
+
+    public ToolCraftingRecipe(Recipe.CommonInfo commonInfo, CraftingRecipe.CraftingBookInfo bookInfo, Ingredient ingredient, Ingredient tool, ItemStackTemplate result) {
+        super(commonInfo, bookInfo);
+        this.ingredient = ingredient;
+        this.tool = tool;
+        this.result = result;
     }
 
     @Override
@@ -77,7 +100,7 @@ public record ToolCraftingRecipe(
 
     @Nonnull
     @Override
-    public ItemStack assemble(CraftingInput input, @NotNull HolderLookup.Provider lookupProvider) {
+    public ItemStack assemble(CraftingInput input) {
         int logCount = 0;
 
         for (int i = 0; i < input.size(); i++) {
@@ -87,7 +110,7 @@ public record ToolCraftingRecipe(
             }
         }
 
-        return this.result.copyWithCount(logCount * this.result.getCount());
+        return this.result.withCount(logCount * this.result.count()).create();
     }
 
     @Nonnull
@@ -119,13 +142,13 @@ public record ToolCraftingRecipe(
     }
 
     @Override
-    public @NotNull RecipeSerializer<? extends CraftingRecipe> getSerializer() {
-        return ModRecipes.TOOL_CRAFTING_SERIALIZER.get();
+    public RecipeSerializer<? extends NormalCraftingRecipe> getSerializer() {
+        return SERIALIZER;
     }
 
     @Override
-    public @NotNull PlacementInfo placementInfo() {
-        return this.placementInfoSupplier.get();
+    protected PlacementInfo createPlacementInfo() {
+        return PlacementInfo.create(List.of(this.ingredient, this.tool));
     }
 
     @Override
@@ -135,37 +158,5 @@ public record ToolCraftingRecipe(
                 new SlotDisplay.ItemStackSlotDisplay(this.result),
                 new SlotDisplay.ItemSlotDisplay(Items.CRAFTING_TABLE)
         ));
-    }
-
-    public static class Serializer implements RecipeSerializer<ToolCraftingRecipe> {
-
-        private static final MapCodec<ToolCraftingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                CraftingBookCategory.CODEC.optionalFieldOf("category", CraftingBookCategory.MISC).forGetter(ToolCraftingRecipe::category),
-                Ingredient.CODEC.fieldOf("ingredient").forGetter(ToolCraftingRecipe::ingredient),
-                Ingredient.CODEC.fieldOf("tool").forGetter(ToolCraftingRecipe::tool),
-                ItemStack.CODEC.fieldOf("result").forGetter(ToolCraftingRecipe::result)
-        ).apply(instance, ToolCraftingRecipe::new));
-
-        private static final StreamCodec<RegistryFriendlyByteBuf, ToolCraftingRecipe> STREAM_CODEC = StreamCodec.composite(
-                CraftingBookCategory.STREAM_CODEC,
-                ToolCraftingRecipe::category,
-                Ingredient.CONTENTS_STREAM_CODEC,
-                ToolCraftingRecipe::ingredient,
-                Ingredient.CONTENTS_STREAM_CODEC,
-                ToolCraftingRecipe::tool,
-                net.minecraft.world.item.ItemStack.STREAM_CODEC,
-                ToolCraftingRecipe::result,
-                ToolCraftingRecipe::new
-        );
-
-        @Override
-        public @NotNull MapCodec<ToolCraftingRecipe> codec() {
-            return CODEC;
-        }
-
-        @Override
-        public @NotNull StreamCodec<RegistryFriendlyByteBuf, ToolCraftingRecipe> streamCodec() {
-            return STREAM_CODEC;
-        }
     }
 }

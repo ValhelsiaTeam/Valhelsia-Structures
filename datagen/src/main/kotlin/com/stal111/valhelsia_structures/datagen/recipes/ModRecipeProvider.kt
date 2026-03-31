@@ -12,7 +12,9 @@ import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
 import net.minecraft.world.item.DyeColor
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.ItemStackTemplate
 import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.CookingBookCategory
 import net.minecraft.world.item.crafting.Ingredient
 import net.minecraft.world.level.ItemLike
 import net.minecraft.world.level.block.Blocks
@@ -43,8 +45,7 @@ class ModRecipeProvider(
                     RecipeCategory.BUILDING_BLOCKS,
                     Ingredient.of(logBlock),
                     Ingredient.of(this.items.getOrThrow(ItemTags.AXES)),
-                    postBlock,
-                    2
+                    ItemStackTemplate(postBlock.asItem(), 2),
                 ).unlockedBy(logBlock)
             )
             this.add(
@@ -52,8 +53,7 @@ class ModRecipeProvider(
                     RecipeCategory.BUILDING_BLOCKS,
                     Ingredient.of(strippedLogBlock),
                     Ingredient.of(this.items.getOrThrow(ItemTags.AXES)),
-                    strippedPostBlock,
-                    2
+                    ItemStackTemplate(strippedPostBlock.asItem(), 2),
                 ).unlockedBy(strippedLogBlock)
             )
 
@@ -62,8 +62,7 @@ class ModRecipeProvider(
                     RecipeCategory.BUILDING_BLOCKS,
                     Ingredient.of(postBlock),
                     Ingredient.of(this.items.getOrThrow(ItemTags.AXES)),
-                    ModBlocks.CUT_WOODEN_POSTS[woodType]!!.get(),
-                    4
+                    ItemStackTemplate(ModBlocks.CUT_WOODEN_POSTS[woodType]!!.get().asItem(), 4),
                 ).unlockedBy(postBlock)
             )
             this.add(
@@ -71,8 +70,7 @@ class ModRecipeProvider(
                     RecipeCategory.BUILDING_BLOCKS,
                     Ingredient.of(strippedPostBlock),
                     Ingredient.of(this.items.getOrThrow(ItemTags.AXES)),
-                    ModBlocks.CUT_STRIPPED_WOODEN_POSTS[woodType]!!.get(),
-                    4
+                    ItemStackTemplate(ModBlocks.CUT_STRIPPED_WOODEN_POSTS[woodType]!!.get().asItem(), 4),
                 ).unlockedBy(strippedPostBlock)
             )
         }
@@ -148,7 +146,8 @@ class ModRecipeProvider(
         val whiteSleepingBag = ModBlocks.SLEEPING_BAGS[DyeColor.WHITE]!!.get()
 
         ModBlocks.SLEEPING_BAGS.forEach { (color, entry) ->
-            val block = BuiltInRegistries.BLOCK.getValue(Identifier.withDefaultNamespace(color.serializedName + "_wool"))
+            val block =
+                BuiltInRegistries.BLOCK.getValue(Identifier.withDefaultNamespace(color.serializedName + "_wool"))
             this.singleRow(RecipeCategory.DECORATIONS, entry.get(), block)
             if (color != DyeColor.WHITE) {
                 this.shapeless(
@@ -168,6 +167,7 @@ class ModRecipeProvider(
             SimpleCookingRecipeBuilder.smelting(
                 Ingredient.of(ModBlocks.GLAZED_JAR.get()),
                 RecipeCategory.DECORATIONS,
+                CookingBookCategory.BLOCKS,
                 ModBlocks.CRACKED_GLAZED_JAR.get(),
                 0.1f,
                 200

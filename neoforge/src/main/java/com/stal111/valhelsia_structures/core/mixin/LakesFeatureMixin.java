@@ -22,10 +22,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LakeFeature.class)
 public class LakesFeatureMixin {
 
-    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/core/BlockPos;below(I)Lnet/minecraft/core/BlockPos;"), method = "place", cancellable = true)
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/core/BlockPos;offset(III)Lnet/minecraft/core/BlockPos;"), method = "place", cancellable = true)
     private void valhelsia_checkForStructures(FeaturePlaceContext<BlockStateConfiguration> context, CallbackInfoReturnable<Boolean> cir) {
         if (context.level() instanceof ServerLevel serverLevel) {
-            if (!serverLevel.structureManager().startsForStructure(new ChunkPos(context.origin()), structure -> {
+            if (!serverLevel.structureManager().startsForStructure(ChunkPos.containing(context.origin()), structure -> {
                 return structure instanceof ValhelsiaJigsawStructure && structure.step() == GenerationStep.Decoration.SURFACE_STRUCTURES;
             }).isEmpty()) {
                 cir.setReturnValue(false);

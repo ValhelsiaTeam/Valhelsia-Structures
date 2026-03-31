@@ -33,7 +33,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -57,7 +56,7 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
 
     protected static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 
-    protected static final Map<Direction, VoxelShape> SLEEPING_BAG_SHAPES = VoxelShapeHelper.getHorizontalRotatedShapes(Block.box(1.0D, 0.0D, 0.0D, 15.0D, 4.0D, 16.0D));
+    protected static final Map<Direction, VoxelShape> SLEEPING_BAG_SHAPES = Shapes.rotateHorizontal(Block.box(1.0D, 0.0D, 0.0D, 15.0D, 4.0D, 16.0D));
 
     public ExplorersTentBlock(Properties properties) {
         super(properties);
@@ -160,7 +159,7 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
 
             if (state.getValue(OCCUPIED)) {
                 if (!SleepingBagBlock.kickVillagerOutOfBed(level, pos)) {
-                    player.displayClientMessage(Component.translatable("block.minecraft.sleeping_bag.occupied"), true);
+                    player.sendOverlayMessage(Component.translatable("block.minecraft.sleeping_bag.occupied"));
                 }
 
                 return InteractionResult.SUCCESS;
@@ -168,7 +167,7 @@ public class ExplorersTentBlock extends Block implements SimpleWaterloggedBlock,
 
             player.startSleepInBed(pos).ifLeft((problem) -> {
                 if (problem.message() != null && problem.message().getContents() instanceof TranslatableContents contents) {
-                    player.displayClientMessage(Component.translatable("block.valhelsia_structures.sleeping_bag." + contents.getKey().split("\\.")[3]), true);
+                    player.sendOverlayMessage(Component.translatable("block.valhelsia_structures.sleeping_bag." + contents.getKey().split("\\.")[3]));
                 }
             });
 

@@ -22,7 +22,7 @@ import net.minecraft.client.data.models.model.ItemModelUtils
 import net.minecraft.client.data.models.model.ModelLocationUtils
 import net.minecraft.client.data.models.model.ModelTemplates
 import net.minecraft.client.data.models.model.TextureMapping
-import net.minecraft.client.renderer.block.model.VariantMutator
+import net.minecraft.client.renderer.block.dispatch.VariantMutator
 import net.minecraft.core.Direction
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.Identifier

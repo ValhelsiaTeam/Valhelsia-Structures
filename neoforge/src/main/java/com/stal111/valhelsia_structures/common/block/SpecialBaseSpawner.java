@@ -67,9 +67,9 @@ public abstract class SpecialBaseSpawner implements IOwnedSpawner {
         if (!this.isNearPlayer(level, pos)) {
             this.oSpin = this.spin;
         } else if (this.displayEntity != null) {
-            double d0 = pos.getX() + level.random.nextDouble();
-            double d1 = pos.getY() + level.random.nextDouble();
-            double d2 = pos.getZ() + level.random.nextDouble();
+            double d0 = pos.getX() + level.getRandom().nextDouble();
+            double d1 = pos.getY() + level.getRandom().nextDouble();
+            double d2 = pos.getZ() + level.getRandom().nextDouble();
             level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
             level.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0D, 0.0D, 0.0D);
             if (this.spawnDelay > 0) {
@@ -137,7 +137,7 @@ public abstract class SpecialBaseSpawner implements IOwnedSpawner {
                                 return;
                             }
 
-                            entity.snapTo(entity.getX(), entity.getY(), entity.getZ(), serverLevel.random.nextFloat() * 360.0F, 0.0F);
+                            entity.snapTo(entity.getX(), entity.getY(), entity.getZ(), serverLevel.getRandom().nextFloat() * 360.0F, 0.0F);
 
                             if (entity instanceof Mob mob) {
                                 boolean flag1 = spawnData.getEntityToSpawn().size() == 1 && spawnData.getEntityToSpawn().getString("id").isPresent();

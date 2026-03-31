@@ -25,10 +25,10 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
-import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
@@ -48,7 +48,7 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
     public static final BooleanProperty ATTACHED = ModBlockStateProperties.ATTACHED;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    public static final Map<Direction.Axis, VoxelShape> SHAPES = VoxelShapeHelper.rotateAxis(Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D));
+    public static final Map<Direction.Axis, VoxelShape> SHAPES = Shapes.rotateAllAxis(Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D));
 
     public PostBlock(Properties properties) {
         super(properties);
@@ -59,7 +59,7 @@ public class PostBlock extends RotatedPillarBlock implements SimpleWaterloggedBl
     @Override
     public VoxelShape getShape(@Nonnull BlockState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull CollisionContext context) {
         VoxelShape shape = SHAPES.get(state.getValue(AXIS));
-        return state.getValue(ATTACHED) ? VoxelShapeHelper.add(0, -3, 0, 0, -3, 0, shape) : shape;
+        return state.getValue(ATTACHED) ? Shapes.box(shape.min(Direction.Axis.X), shape.min(Direction.Axis.Y) - 3, shape.min(Direction.Axis.Z), shape.max(Direction.Axis.X), shape.max(Direction.Axis.Y) - 3, shape.max(Direction.Axis.Z)) : shape;
     }
 
     @Override

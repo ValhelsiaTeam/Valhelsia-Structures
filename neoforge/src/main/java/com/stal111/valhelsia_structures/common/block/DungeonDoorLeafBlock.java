@@ -21,8 +21,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -56,8 +56,8 @@ public class DungeonDoorLeafBlock extends Block implements SimpleWaterloggedBloc
     private EnumMap<Direction, Pair<VoxelShape, VoxelShape>> buildShapes() {
         EnumMap<Direction, Pair<VoxelShape, VoxelShape>> map = new EnumMap<>(Direction.class);
 
-        VoxelShapeHelper.getHorizontalRotatedShapes(SHAPE).forEach((direction, voxelShape) -> {
-            map.put(direction, Pair.of(voxelShape, VoxelShapeHelper.rotateShapeHorizontal(MIRRORED_SHAPE, direction)));
+        Shapes.rotateHorizontal(SHAPE).forEach((direction, voxelShape) -> {
+            map.put(direction, Pair.of(voxelShape, Shapes.rotateHorizontal(MIRRORED_SHAPE).get(direction)));
         });
 
         return map;

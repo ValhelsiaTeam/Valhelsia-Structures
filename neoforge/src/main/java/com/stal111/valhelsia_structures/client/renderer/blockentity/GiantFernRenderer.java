@@ -3,6 +3,7 @@ package com.stal111.valhelsia_structures.client.renderer.blockentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.stal111.valhelsia_structures.client.model.ModModelLayers;
+import com.stal111.valhelsia_structures.client.renderer.blockentity.state.GiantFernRenderState;
 import com.stal111.valhelsia_structures.common.block.entity.GiantFernBlockEntity;
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
@@ -16,13 +17,15 @@ import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.Material;
-import net.minecraft.client.resources.model.MaterialSet;
+import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.util.Unit;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Giant Fern Renderer <br>
@@ -31,16 +34,16 @@ import net.minecraft.util.Unit;
  * @author Valhelsia Team
  * @since 2021-10-03
  */
-public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEntity, BlockEntityRenderState> {
+public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEntity, GiantFernRenderState> {
 
-    public static final Material TEXTURE_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("giant_fern"));
+    public static final SpriteId TEXTURE_MATERIAL = Sheets.BLOCKS_MAPPER.apply(ValhelsiaStructures.identifier("giant_fern"));
 
-    private final MaterialSet materials;
+    private final SpriteGetter sprites;
     private final Model.Simple model;
 
     public GiantFernRenderer(BlockEntityRendererProvider.Context context) {
-        this.materials = context.materials();
-        this.model = new Model.Simple(context.bakeLayer(ModModelLayers.GIANT_FERN), RenderTypes::entityCutoutNoCull);
+        this.sprites = context.sprites();
+        this.model = new Model.Simple(context.bakeLayer(ModModelLayers.GIANT_FERN), RenderTypes::entityCutout);
     }
 
     public static LayerDefinition createLayer() {
@@ -73,22 +76,29 @@ public class GiantFernRenderer implements BlockEntityRenderer<GiantFernBlockEnti
     }
 
     @Override
-    public BlockEntityRenderState createRenderState() {
-        return new BlockEntityRenderState();
+    public GiantFernRenderState createRenderState() {
+        return new GiantFernRenderState();
     }
 
     @Override
-    public void submit(BlockEntityRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState cameraRenderState) {
+    public void extractRenderState(GiantFernBlockEntity blockEntity, GiantFernRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress) {
+        BlockEntityRenderer.super.extractRenderState(blockEntity, state, partialTicks, cameraPosition, breakProgress);
+
+        state.rotated = blockEntity.getBlockState().getValue(ModBlockStateProperties.ROTATED);
+    }
+
+    @Override
+    public void submit(GiantFernRenderState renderState, PoseStack poseStack, SubmitNodeCollector nodeCollector, CameraRenderState cameraRenderState) {
         poseStack.pushPose();
 
         poseStack.translate(0.5D, 0.0D, 0.5D);
         poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
-        if (renderState.blockState.getValue(ModBlockStateProperties.ROTATED)) {
+        if (renderState.rotated) {
             poseStack.mulPose(Axis.YP.rotationDegrees(45));
         }
 
-        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TEXTURE_MATERIAL.renderType(RenderTypes::entityCutoutNoCull), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.materials.get(TEXTURE_MATERIAL), 0, renderState.breakProgress);
+        nodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, TEXTURE_MATERIAL.renderType(RenderTypes::entityCutout), renderState.lightCoords, OverlayTexture.NO_OVERLAY, -1, this.sprites.get(TEXTURE_MATERIAL), 0, renderState.breakProgress);
 
         poseStack.popPose();
     }

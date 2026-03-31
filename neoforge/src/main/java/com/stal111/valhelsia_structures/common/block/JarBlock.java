@@ -32,8 +32,8 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.valhelsia.valhelsia_core.api.common.helper.VoxelShapeHelper;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -52,7 +52,7 @@ public class JarBlock extends Block implements SimpleWaterloggedBlock, EntityBlo
     public static final BooleanProperty ROTATED = ModBlockStateProperties.ROTATED;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    private static final VoxelShape SHAPE = VoxelShapeHelper.combineAll(
+    private static final VoxelShape SHAPE = Shapes.or(
             Block.box(5.0D, 0.0D, 5.0D, 11.0D, 4.0D, 11.0D),
             Block.box(7.0D, 4.0D, 7.0D, 9.0D, 7.0D, 9.0D),
             Block.box(6.0D, 7.0D, 6.0D, 10.0D, 8.0D, 10.0D)
