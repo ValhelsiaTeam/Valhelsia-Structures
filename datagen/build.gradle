@@ -1,0 +1,70 @@
+plugins {
+    id("org.jetbrains.kotlin.jvm")
+    id("net.neoforged.moddev")
+}
+
+def neoforgeProject = project(":neoforge")
+
+evaluationDependsOn(neoforgeProject.path)
+
+repositories {
+    maven {
+        name = "DataForge"
+        url = uri("https://maven.pkg.github.com/ValhelsiaTeam/DataForge")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+        }
+        content {
+            includeGroup "net.valhelsia"
+        }
+    }
+    flatDir {
+        dirs "libs"
+    }
+}
+
+kotlin {
+    jvmToolchain(25)
+}
+
+neoForge {
+    version = neo_version
+
+    accessTransformers.from(neoforgeProject.file("src/main/resources/META-INF/accesstransformer.cfg"))
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+            sourceSet(neoforgeProject.sourceSets.main)
+        }
+    }
+
+    runs {
+        data {
+            clientData()
+
+            programArguments.addAll(
+                    "--mod", mod_id,
+                    "--all",
+                    "--output", neoforgeProject.file("src/generated/resources/").absolutePath,
+                    "--existing", neoforgeProject.file("src/main/resources/").absolutePath
+            )
+        }
+
+        configureEach {
+            systemProperty "forge.logging.markers", "REGISTRIES"
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+}
+
+dependencies {
+    compileOnly(neoforgeProject)
+
+    if (valhelsia_core_version?.trim()) {
+        implementation "net.valhelsia:valhelsia_core-neoforge:${valhelsia_core_version}"
+    }
+
+    implementation interfaceInjectionData(accessTransformers("net.valhelsia:dataforge:${dataforge_version}"))
+}
