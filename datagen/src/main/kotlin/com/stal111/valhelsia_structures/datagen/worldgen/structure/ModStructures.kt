@@ -12,7 +12,7 @@ import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.TagKey
 import net.minecraft.util.random.WeightedList
-import net.minecraft.world.entity.EntityType
+import net.minecraft.world.entity.EntityTypes
 import net.minecraft.world.entity.MobCategory
 import net.minecraft.world.level.biome.Biome
 import net.minecraft.world.level.biome.MobSpawnSettings
@@ -103,14 +103,14 @@ object ModStructures : RegistryDataProvider<Structure> {
                 MobCategory.MONSTER,
                 StructureSpawnOverride(
                     StructureSpawnOverride.BoundingBoxType.PIECE,
-                    WeightedList.of(MobSpawnSettings.SpawnerData(EntityType.WITCH, 1, 1))
+                    WeightedList.of(MobSpawnSettings.SpawnerData(EntityTypes.WITCH, 1, 1))
                 )
             )
             addSpawnOverride(
                 MobCategory.CREATURE,
                 StructureSpawnOverride(
                     StructureSpawnOverride.BoundingBoxType.PIECE,
-                    WeightedList.of(MobSpawnSettings.SpawnerData(EntityType.CAT, 1, 1))
+                    WeightedList.of(MobSpawnSettings.SpawnerData(EntityTypes.CAT, 1, 1))
                 )
             )
         }

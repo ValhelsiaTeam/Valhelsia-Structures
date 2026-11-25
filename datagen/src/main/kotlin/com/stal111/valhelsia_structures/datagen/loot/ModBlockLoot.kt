@@ -6,7 +6,7 @@ import com.stal111.valhelsia_structures.common.block.SleepingBagBlock
 import com.stal111.valhelsia_structures.common.block.properties.DungeonDoorPart
 import com.stal111.valhelsia_structures.common.block.properties.ModBlockStateProperties
 import com.stal111.valhelsia_structures.core.init.ModBlocks
-import net.minecraft.advancements.criterion.StatePropertiesPredicate
+import net.minecraft.advancements.predicates.StatePropertiesPredicate
 import net.minecraft.core.HolderLookup
 import net.minecraft.data.loot.BlockLootSubProvider
 import net.minecraft.world.flag.FeatureFlags
@@ -42,11 +42,11 @@ class ModBlockLoot(lookupProvider: HolderLookup.Provider, val blocks: List<() ->
         dropWhenSilkTouch(ModBlocks.METAL_FRAMED_GLASS.get())
         dropWhenSilkTouch(ModBlocks.METAL_FRAMED_GLASS_PANE.get())
 
-        ModBlocks.COLORED_METAL_FRAMED_GLASS.forEach { (_, block) ->
+        ModBlocks.COLORED_METAL_FRAMED_GLASS.forEach { _, block ->
             dropWhenSilkTouch(block.get())
         }
 
-        ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.forEach { (_, block) ->
+        ModBlocks.COLORED_METAL_FRAMED_GLASS_PANES.forEach { _, block ->
             dropWhenSilkTouch(block.get())
         }
 
@@ -55,7 +55,7 @@ class ModBlockLoot(lookupProvider: HolderLookup.Provider, val blocks: List<() ->
         dropSelf(ModBlocks.GLAZED_JAR.get())
         dropSelf(ModBlocks.CRACKED_GLAZED_JAR.get())
 
-        ModBlocks.COLORED_GLAZED_JARS.forEach { (_, block) ->
+        ModBlocks.COLORED_GLAZED_JARS.forEach { _, block ->
             dropSelf(block.get())
         }
 
@@ -73,7 +73,7 @@ class ModBlockLoot(lookupProvider: HolderLookup.Provider, val blocks: List<() ->
         dropSelf(ModBlocks.UNLIT_LANTERN.get())
         dropSelf(ModBlocks.UNLIT_SOUL_LANTERN.get())
 
-        ModBlocks.SLEEPING_BAGS.forEach { (_, block) ->
+        ModBlocks.SLEEPING_BAGS.forEach { _, block ->
             add(block.get()) { createSinglePropConditionTable(it, SleepingBagBlock.PART, BedPart.HEAD) }
         }
     }

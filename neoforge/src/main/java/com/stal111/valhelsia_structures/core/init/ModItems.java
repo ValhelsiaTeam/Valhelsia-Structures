@@ -4,9 +4,7 @@ import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.StandingAndWallBlockItem;
-import net.valhelsia.valhelsia_core.api.common.registry.RegistryClass;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryEntry;
-import net.valhelsia.valhelsia_core.api.common.registry.helper.MappedRegistryHelper;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.item.ItemRegistryHelper;
 
 /**
@@ -16,7 +14,7 @@ import net.valhelsia.valhelsia_core.api.common.registry.helper.item.ItemRegistry
  * @author Valhelsia Team
  * @version 1.19 - 0.2.0
  */
-public class ModItems implements RegistryClass {
+public class ModItems {
 
     public static final ItemRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getItemHelper();
 

@@ -2,7 +2,6 @@ package com.stal111.valhelsia_structures.common.world.structures.processor;
 
 import com.mojang.serialization.MapCodec;
 import com.stal111.valhelsia_structures.core.init.ModBlocks;
-import com.stal111.valhelsia_structures.core.init.world.ModStructureProcessors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.LevelReader;
@@ -12,18 +11,14 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.StructureMode;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessor;
-import net.minecraft.world.level.levelgen.structure.templatesystem.StructureProcessorType;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.annotation.Nonnull;
 
 /**
  * @author Valhelsia Team
  * @since 2022-12-12
  */
-public class WitchHutLegProcessor extends StructureProcessor {
+public class WitchHutLegProcessor implements StructureProcessor {
 
     public static final WitchHutLegProcessor INSTANCE = new WitchHutLegProcessor();
 
@@ -38,15 +33,15 @@ public class WitchHutLegProcessor extends StructureProcessor {
 
     @Nullable
     @Override
-    public StructureTemplate.StructureBlockInfo process(@NotNull LevelReader level, @NotNull BlockPos piecePos, @NotNull BlockPos pieceBottomCenterPos, @NotNull StructureTemplate.StructureBlockInfo blockInfo, @NotNull StructureTemplate.StructureBlockInfo relativeBlockInfo, @NotNull StructurePlaceSettings placeSettings, @Nullable StructureTemplate template) {
-        if (relativeBlockInfo.state().is(Blocks.STRUCTURE_BLOCK)) {
-            StructureMode mode = relativeBlockInfo.nbt().read("mode", StructureMode.LEGACY_CODEC).orElseThrow();
+    public StructureTemplate.StructureBlockInfo processBlock(LevelReader level, BlockPos targetPosition, BlockPos referencePos, BlockPos templateRelativePos, StructureTemplate.StructureBlockInfo processedBlockInfo, StructurePlaceSettings settings) {
+        if (processedBlockInfo.state().is(Blocks.STRUCTURE_BLOCK)) {
+            StructureMode mode = processedBlockInfo.nbt().read("mode", StructureMode.LEGACY_CODEC).orElseThrow();
 
             if (mode == StructureMode.DATA) {
-                String data = relativeBlockInfo.nbt().getString("metadata").orElseThrow();
+                String data = processedBlockInfo.nbt().getString("metadata").orElseThrow();
 
                 if (data.equals("support_leg")) {
-                    BlockPos.MutableBlockPos mutable = relativeBlockInfo.pos().below().mutable();
+                    BlockPos.MutableBlockPos mutable = processedBlockInfo.pos().below().mutable();
                     BlockState currentState = level.getBlockState(mutable);
 
                     while (mutable.getY() > level.getMinY() && mutable.getY() < level.getMaxY() && (currentState.isAir() || !currentState.getFluidState().isEmpty())) {
@@ -59,12 +54,12 @@ public class WitchHutLegProcessor extends StructureProcessor {
                         currentState = level.getBlockState(mutable);
                     }
 
-                    return new StructureTemplate.StructureBlockInfo(relativeBlockInfo.pos(), ModBlocks.WOODEN_POSTS.get(ModBlocks.WoodType.OAK).get().defaultBlockState()
-                            .setValue(BlockStateProperties.WATERLOGGED, level.getBlockState(relativeBlockInfo.pos()).hasProperty(BlockStateProperties.WATERLOGGED) && level.getBlockState(relativeBlockInfo.pos()).getValue(BlockStateProperties.WATERLOGGED))
+                    return new StructureTemplate.StructureBlockInfo(processedBlockInfo.pos(), ModBlocks.WOODEN_POSTS.get(ModBlocks.WoodType.OAK).get().defaultBlockState()
+                            .setValue(BlockStateProperties.WATERLOGGED, level.getBlockState(processedBlockInfo.pos()).hasProperty(BlockStateProperties.WATERLOGGED) && level.getBlockState(processedBlockInfo.pos()).getValue(BlockStateProperties.WATERLOGGED))
                             .setValue(BlockStateProperties.AXIS, Direction.Axis.Y),
                             null);
                 } else if (data.equals("support_leg:log")) {
-                    BlockPos.MutableBlockPos mutable = relativeBlockInfo.pos().below().mutable();
+                    BlockPos.MutableBlockPos mutable = processedBlockInfo.pos().below().mutable();
                     BlockState currentState = level.getBlockState(mutable);
 
                     while (mutable.getY() > level.getMinY() && mutable.getY() < level.getMaxY() && (currentState.isAir() || !currentState.getFluidState().isEmpty())) {
@@ -74,17 +69,16 @@ public class WitchHutLegProcessor extends StructureProcessor {
                         currentState = level.getBlockState(mutable);
                     }
 
-                    return new StructureTemplate.StructureBlockInfo(relativeBlockInfo.pos(), Blocks.OAK_LOG.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y), null);
+                    return new StructureTemplate.StructureBlockInfo(processedBlockInfo.pos(), Blocks.OAK_LOG.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y), null);
                 }
             }
         }
 
-        return super.process(level, piecePos, pieceBottomCenterPos, blockInfo, relativeBlockInfo, placeSettings, template);
+        return processedBlockInfo;
     }
 
-    @Nonnull
     @Override
-    protected StructureProcessorType<?> getType() {
-        return ModStructureProcessors.WITCH_HUT_LEG.get();
+    public MapCodec<? extends StructureProcessor> codec() {
+        return CODEC;
     }
 }

@@ -9,9 +9,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.valhelsia.valhelsia_core.ValhelsiaCore;
-import net.valhelsia.valhelsia_core.api.common.registry.RegistryClass;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryEntry;
-import net.valhelsia.valhelsia_core.api.common.registry.helper.MappedRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.RegistryHelper;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -20,9 +19,9 @@ import java.util.function.Supplier;
  * @author Valhelsia Team - stal111
  * @since 2023-08-19
  */
-public class ModCreativeModeTabs implements RegistryClass {
+public class ModCreativeModeTabs {
 
-    public static final MappedRegistryHelper<CreativeModeTab> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.CREATIVE_MODE_TAB);
+    public static final RegistryHelper<CreativeModeTab> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(Registries.CREATIVE_MODE_TAB);
 
     public static final ImmutableList<Supplier<? extends ItemLike>> HIDDEN_ITEMS = ImmutableList.<Supplier<? extends ItemLike>>builder()
             //.add(ModBlocks.HIBISCUS)

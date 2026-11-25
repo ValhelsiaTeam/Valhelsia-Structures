@@ -3,7 +3,6 @@ package com.stal111.valhelsia_structures.utils;
 import it.unimi.dsi.fastutil.ints.Int2IntFunction;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.level.block.DoubleBlockCombiner;
@@ -17,8 +16,8 @@ public class PosBasedBrightnessCombiner implements DoubleBlockCombiner.Combiner<
         return (_) -> {
             ClientLevel level = Minecraft.getInstance().level;
 
-            int i = LevelRenderer.getLightCoords(level, first);
-            int j = LevelRenderer.getLightCoords(level, second);
+            int i = LightCoordsUtil.getLightCoords(level, first);
+            int j = LightCoordsUtil.getLightCoords(level, second);
             int k = LightCoordsUtil.block(i);
             int l = LightCoordsUtil.block(j);
             int i1 = LightCoordsUtil.sky(i);

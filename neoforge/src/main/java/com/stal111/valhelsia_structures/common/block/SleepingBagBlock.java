@@ -105,7 +105,7 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
                 level.removeBlock(pos, false);
             }
 
-            level.explode(null, level.damageSources().badRespawnPointExplosion(pos.getCenter()), null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 5.0F, true, Level.ExplosionInteraction.BLOCK);
+            level.explode(null, level.damageSources().badRespawnPointExplosion(Vec3.atCenterOf(pos)), null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 5.0F, true, Level.ExplosionInteraction.BLOCK);
 
             return InteractionResult.SUCCESS;
         }
@@ -143,24 +143,6 @@ public class SleepingBagBlock extends HorizontalDirectionalBlock implements Simp
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         super.fallOn(level, state, pos, entity, fallDistance * 0.7F);
-    }
-
-    @Override
-    public void updateEntityMovementAfterFallOn(BlockGetter level, Entity entity) {
-        if (entity.isSuppressingBounce()) {
-            super.updateEntityMovementAfterFallOn(level, entity);
-        } else {
-            this.bounceUp(entity);
-        }
-    }
-
-    private void bounceUp(Entity entity) {
-        Vec3 vec3 = entity.getDeltaMovement();
-
-        if (vec3.y < 0.0D) {
-            double d0 = entity instanceof LivingEntity ? 1.0D : 0.8D;
-            entity.setDeltaMovement(vec3.x, -vec3.y * 0.33F * d0, vec3.z);
-        }
     }
 
     @Override

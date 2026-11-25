@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "ingredients": [
     "valhelsia_structures:white_sleeping_bag",
     "#c:dyes/purple"

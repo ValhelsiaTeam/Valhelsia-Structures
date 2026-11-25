@@ -3,19 +3,14 @@ package com.stal111.valhelsia_structures.core.init;
 import com.stal111.valhelsia_structures.common.block.*;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.item.BedItem;
 import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.valhelsia.valhelsia_core.api.common.block.StrippableRotatedPillarBlock;
-import net.valhelsia.valhelsia_core.api.common.registry.RegistryClass;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.block.BlockEntrySet;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.block.BlockRegistryEntry;
 import net.valhelsia.valhelsia_core.api.common.registry.helper.block.BlockRegistryHelper;
@@ -28,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Valhelsia Team
  */
-public class ModBlocks implements RegistryClass {
+public class ModBlocks {
 
     public static final BlockRegistryHelper HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getBlockHelper();
 
@@ -85,12 +80,12 @@ public class ModBlocks implements RegistryClass {
     public static final BlockRegistryEntry<IronBarsBlock> METAL_FRAMED_GLASS_PANE = HELPER.register("metal_framed_glass_pane", IronBarsBlock::new, () -> Block.Properties.ofLegacyCopy(Blocks.GLASS_PANE)).withItem();
     public static final BlockEntrySet<StainedGlassBlock, DyeColor> COLORED_METAL_FRAMED_GLASS = HELPER.registerColorEntrySet("metal_framed_glass",
             color -> properties -> new StainedGlassBlock(color, properties),
-            color -> Block.Properties.ofLegacyCopy(Blocks.RED_STAINED_GLASS),
+            color -> Block.Properties.ofLegacyCopy(Blocks.STAINED_GLASS.red()),
             entry -> entry.withItem()
     );
     public static final BlockEntrySet<StainedGlassPaneBlock, DyeColor> COLORED_METAL_FRAMED_GLASS_PANES = HELPER.registerColorEntrySet("metal_framed_glass_pane",
             color -> properties -> new StainedGlassPaneBlock(color, properties),
-            color -> Block.Properties.ofLegacyCopy(Blocks.RED_STAINED_GLASS_PANE),
+            color -> Block.Properties.ofLegacyCopy(Blocks.STAINED_GLASS_PANE.red()),
             entry -> entry.withItem()
     );
 
@@ -104,7 +99,7 @@ public class ModBlocks implements RegistryClass {
             color-> Block.Properties.of().mapColor(color.getMapColor()).requiresCorrectToolForDrops().strength(1.4F).noOcclusion(),
             BlockRegistryEntry::withItem
     );
-    public static final BlockRegistryEntry<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", ExplorersTentBlock::new, () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.BROWN_WOOL).noOcclusion()).withItem();
+    public static final BlockRegistryEntry<ExplorersTentBlock> EXPLORERS_TENT = HELPER.register("explorers_tent", ExplorersTentBlock::new, () -> BlockBehaviour.Properties.ofLegacyCopy(Blocks.WOOL.brown()).noOcclusion()).withItem();
     //public static final BlockRegistryEntry<BushBlock> HIBISCUS = HELPER.register("hibiscus", () -> new BushBlock(Block.Properties.ofLegacyCopy(Blocks.POPPY))).withItem();
     public static final BlockRegistryEntry<GiantFernBlock> GIANT_FERN = HELPER.register("giant_fern", GiantFernBlock::new, ()-> Block.Properties.ofLegacyCopy(Blocks.POPPY)).withItem();
     public static final BlockRegistryEntry<UnlitTorchBlock> UNLIT_TORCH = HELPER.register("unlit_torch", (properties) -> new UnlitTorchBlock(Blocks.TORCH.defaultBlockState(), properties), () -> Block.Properties.of().noCollision().instabreak().sound(SoundType.WOOD));
@@ -121,8 +116,8 @@ public class ModBlocks implements RegistryClass {
     //Sleeping Bags
     public static final BlockEntrySet<SleepingBagBlock, DyeColor> SLEEPING_BAGS = HELPER.registerColorEntrySet("sleeping_bag",
             color -> SleepingBagBlock::new,
-            color -> Block.Properties.of().mapColor(color.getMapColor()).strength(0.2F).noOcclusion().sound(SoundType.WOOL),
-            blockRegistryObject -> blockRegistryObject.withItem(registryObject -> new BedItem(registryObject.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, blockRegistryObject.getKey().identifier())).overrideDescription(blockRegistryObject.get().getDescriptionId())))
+            color -> Block.Properties.of().mapColor(color.getMapColor()).strength(0.2F).bounceRestitution(0.4F).noOcclusion().sound(SoundType.WOOL),
+            BlockRegistryEntry::withItem
     );
 
     public enum WoodType implements StringRepresentable {

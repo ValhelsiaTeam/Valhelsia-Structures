@@ -3,17 +3,16 @@ package com.stal111.valhelsia_structures.core.init.world;
 import com.mojang.serialization.MapCodec;
 import com.stal111.valhelsia_structures.common.world.structures.height.*;
 import com.stal111.valhelsia_structures.core.ValhelsiaStructures;
-import net.valhelsia.valhelsia_core.api.common.registry.RegistryClass;
 import net.valhelsia.valhelsia_core.api.common.registry.RegistryEntry;
-import net.valhelsia.valhelsia_core.api.common.registry.helper.MappedRegistryHelper;
+import net.valhelsia.valhelsia_core.api.common.registry.helper.RegistryHelper;
 
 /**
  * @author Valhelsia Team
  * @since 2022-10-28
  */
-public class ModStructureHeightProviderTypes implements RegistryClass {
+public class ModStructureHeightProviderTypes {
 
-    public static final MappedRegistryHelper<StructureHeightProviderType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(ValhelsiaStructures.STRUCTURE_HEIGHT_PROVIDER_TYPES);
+    public static final RegistryHelper<StructureHeightProviderType<?>> HELPER = ValhelsiaStructures.REGISTRY_MANAGER.getHelper(ValhelsiaStructures.STRUCTURE_HEIGHT_PROVIDER_TYPES);
 
     public static final RegistryEntry<StructureHeightProviderType<?>, StructureHeightProviderType<DefaultHeightProvider>> DEFAULT_HEIGHT = register("default_height", DefaultHeightProvider.CODEC);
     public static final RegistryEntry<StructureHeightProviderType<?>, StructureHeightProviderType<BelowSurfaceHeightProvider>> BELOW_SURFACE_HEIGHT = register("below_surface_height", BelowSurfaceHeightProvider.CODEC);

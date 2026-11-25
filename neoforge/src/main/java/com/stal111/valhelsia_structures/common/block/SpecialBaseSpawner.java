@@ -11,6 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.level.BaseSpawner;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SpawnData;
 import net.minecraft.world.level.storage.TagValueInput;
@@ -227,7 +228,7 @@ public abstract class SpecialBaseSpawner implements IOwnedSpawner {
                 return null;
             }
 
-            this.displayEntity = EntityType.loadEntityRecursive(tag, level, EntitySpawnReason.SPAWNER, EntityProcessor.NOP);
+            this.displayEntity = EntityType.loadEntityRecursive(tag, level, new EntitySpawnRequest(EntitySpawnReason.SPAWNER, true), BaseSpawner.SET_DISPLAY_ENTITY_ID);
         }
 
         return this.displayEntity;

@@ -19,14 +19,14 @@ public class ModRegistries extends RegistryCollector {
     protected void collectHelpers() {
         this.addBlockHelper(ModBlocks.class);
         this.addItemHelper(ModItems.class);
-        this.addMappedHelper(Registries.BLOCK_ENTITY_TYPE, ModBlockEntities.class);
-        this.addMappedHelper(Registries.RECIPE_SERIALIZER, ModRecipes.class);
-        this.addMappedHelper(Registries.STRUCTURE_TYPE, ModStructureTypes.class);
-        this.addMappedHelper(Registries.STRUCTURE_POOL_ELEMENT, ModStructurePoolElementTypes.class);
-        this.addMappedHelper(Registries.STRUCTURE_PLACEMENT, ModStructurePlacementTypes.class);
-        this.addMappedHelper(Registries.STRUCTURE_PROCESSOR, ModStructureProcessors.class);
-        this.addMappedHelper(Registries.SOUND_EVENT, ModSoundEvents.class);
-        this.addMappedHelper(Registries.CREATIVE_MODE_TAB, ModCreativeModeTabs.class);
-        this.addMappedHelper(ValhelsiaStructures.STRUCTURE_HEIGHT_PROVIDER_TYPES, ModStructureHeightProviderTypes.class);
+        this.addHelper(Registries.BLOCK_ENTITY_TYPE, ModBlockEntities.class);
+        this.addHelper(Registries.RECIPE_SERIALIZER, ModRecipes.class);
+        this.addHelper(Registries.STRUCTURE_TYPE, ModStructureTypes.class);
+        this.addHelper(Registries.STRUCTURE_POOL_ELEMENT, ModStructurePoolElementTypes.class);
+        this.addHelper(Registries.STRUCTURE_PLACEMENT, ModStructurePlacementTypes.class);
+        this.addHelper(Registries.STRUCTURE_PROCESSOR, ModStructureProcessors.class);
+        this.addHelper(Registries.SOUND_EVENT, ModSoundEvents.class);
+        this.addHelper(Registries.CREATIVE_MODE_TAB, ModCreativeModeTabs.class);
+        this.addHelper(ValhelsiaStructures.STRUCTURE_HEIGHT_PROVIDER_TYPES, ModStructureHeightProviderTypes.class);
     }
 }

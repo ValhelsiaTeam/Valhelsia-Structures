@@ -3,9 +3,9 @@ package com.stal111.valhelsia_structures.datagen.tags
 import com.stal111.valhelsia_structures.core.init.ModBlocks
 import com.stal111.valhelsia_structures.utils.ModTags
 import net.minecraft.core.HolderLookup
+import net.minecraft.references.BlockItemIds
 import net.minecraft.tags.BlockTags
 import net.minecraft.tags.ItemTags
-import net.minecraft.world.item.Items
 import net.neoforged.neoforge.common.Tags
 import net.valhelsia.dataforge.DataProviderContext
 import net.valhelsia.dataforge.tag.DataForgeItemTagsProvider
@@ -24,7 +24,7 @@ class ModItemTagsProvider(context: DataProviderContext.Server) : DataForgeItemTa
 
         copy(BlockTags.PIGLIN_REPELLENTS, ItemTags.PIGLIN_REPELLENTS)
 
-        tag(ModTags.Items.JAR_BLACKLISTED).add(Items.CACTUS, Items.CRIMSON_ROOTS, Items.WARPED_ROOTS)
-        tag(ItemTags.CAULDRON_CAN_REMOVE_DYE).add(ModBlocks.EXPLORERS_TENT.get().asItem())
+        tag(ModTags.Items.JAR_BLACKLISTED).add(BlockItemIds.CACTUS.item, BlockItemIds.CRIMSON_ROOTS.item, BlockItemIds.WARPED_ROOTS.item)
+        tag(ItemTags.CAULDRON_CAN_REMOVE_DYE).add(ModBlocks.EXPLORERS_TENT.itemEntry!!.key())
     }
 }

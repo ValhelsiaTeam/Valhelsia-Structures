@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
 import net.minecraft.client.resources.model.sprite.SpriteId;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -77,6 +78,7 @@ public class DungeonDoorRenderer implements BlockEntityRenderer<DungeonDoorBlock
 
     @Override
     public @NotNull AABB getRenderBoundingBox(DungeonDoorBlockEntity blockEntity) {
-        return new AABB(blockEntity.getBlockPos().offset(-5, -5, -5).getCenter(), blockEntity.getBlockPos().offset(5, 5, 5).getCenter());
+        BlockPos pos = blockEntity.getBlockPos();
+        return AABB.encapsulatingFullBlocks(pos.offset(-5, -5, -5), pos.offset(5, 5, 5));
     }
 }
